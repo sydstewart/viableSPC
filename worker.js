@@ -6,7 +6,6 @@ let pyodide;
 
 async function setupPython() {
     try {
-        // Load Pyodide and the Pandas/NumPy packages
         pyodide = await loadPyodide();
         await pyodide.loadPackage(['pandas', 'numpy']);
         self.postMessage({ status: "ready" });
@@ -22,6 +21,15 @@ self.onmessage = async function(event) {
         try {
             const rawJsData = event.data.data;
             pyodide.globals.set("js_data", rawJsData);
+
+            // Inject the parameters from JS directly into Python's global memory
+            pyodide.globals.set("js_turn_length", event.data.params.turn_length);
+            pyodide.globals.set("js_boot_num", event.data.params.boot_num);
+            pyodide.globals.set("js_conf_limit", event.data.params.conf_limit);
+
+            // Inject the chosen column names
+            pyodide.globals.set("js_date_col", event.data.params.x_col);
+            pyodide.globals.set("js_name_col", event.data.params.y_col);
 
             // ==========================================
             // THE PYTHON ENGINE
@@ -160,7 +168,6 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
     df['meandiff'] = df[name_col] - df['mean']
     df['cusum'] = df['meandiff'].cumsum()
     
-    # We return a simple dictionary that Javascript can read perfectly!
     return {
         "dates": df[date_col].tolist(),
         "raw_values": df[name_col].tolist(),
@@ -175,18 +182,29 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
 python_data = js_data.to_py()
 df = pd.DataFrame(python_data)
 
-# 2. Dynamically grab column names (Assumes Col 0 is Date, Col 1 is Value)
-date_col = df.columns[0]
-name_col = df.columns[1]
+# 2. Use the explicit column names chosen by the user
+date_col = js_date_col
+name_col = js_name_col
 
-# 3. Convert the value column to numeric (in case JS passed strings)
+# 3. Clean the data
 df[name_col] = pd.to_numeric(df[name_col], errors='coerce')
-df = df.dropna(subset=[name_col]).reset_index(drop=True) # Clean bad rows
+df = df.dropna(subset=[name_col]).reset_index(drop=True) 
 
-# 4. RUN THE ENGINE! (Setting standard defaults for Turn Length, Boot Num, Conf Limit)
-results = manhatten_clean(df, name_col=name_col, date_col=date_col, turn_length=5, boot_num=1000, conf_limit=95)
+# --- THE NEW TRAP ---
+# If dropping non-numbers resulted in an empty dataset, stop and warn the user safely!
+if len(df) == 0:
+    raise ValueError(f"The column '{name_col}' does not contain any valid numbers. Please select a different Y-Axis.")
+if len(df) < 5:
+    raise ValueError("Not enough valid data points to run the analysis.")
+# --------------------
 
-# Convert the python dictionary output natively back to JS
+# 4. RUN THE ENGINE! 
+results = manhatten_clean(df, name_col=name_col, date_col=date_col, 
+                          turn_length=js_turn_length, 
+                          boot_num=js_boot_num, 
+                          conf_limit=js_conf_limit)
+
+# Convert output back to JS
 import pyodide.ffi
 pyodide.ffi.to_js(results, dict_converter=pyodide.ffi.create_proxy)
             `;
@@ -194,7 +212,6 @@ pyodide.ffi.to_js(results, dict_converter=pyodide.ffi.create_proxy)
 
             const pythonResult = await pyodide.runPythonAsync(pythonCode);
 
-            // Convert Pyodide proxy back to native JS object
             const finalJsData = Object.fromEntries(pythonResult.toJs());
 
             self.postMessage({ status: "result", data: finalJsData });

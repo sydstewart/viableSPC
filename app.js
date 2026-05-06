@@ -5,110 +5,137 @@ const csvInput = document.getElementById('csvInput');
 const statusText = document.getElementById('statusText');
 const chartContainer = document.getElementById('chart-container');
 const statsDiv = document.getElementById('stats');
+const controlsDiv = document.getElementById('controls');
+const recalcBtn = document.getElementById('recalcBtn');
 
-// THE FIX: Force the browser to clear the file input on page load.
-// This prevents the browser from silently holding onto the file after a page refresh.
+// New Dropdown elements
+const xColSelect = document.getElementById('xColSelect');
+const yColSelect = document.getElementById('yColSelect');
+
+let cachedCsvData = null;
+
 csvInput.value = "";
 
-// 1. Listen for messages from the background worker
 pythonWorker.onmessage = function(event) {
     const message = event.data;
 
     if (message.status === "ready") {
         statusText.innerText = "Python Engine is ready! Select a CSV.";
-        csvInput.disabled = false; // Enable the file upload
+        csvInput.disabled = false;
     }
     else if (message.status === "result") {
-        // Python finished the math!
         const chartData = message.data;
         statusText.innerText = "Analysis Complete!";
-
-        // Draw the chart
+        recalcBtn.innerText = "Recalculate Chart";
+        recalcBtn.disabled = false;
         drawPlotlyChart(chartData);
     }
     else if (message.status === "error") {
-        statusText.innerText = "Error: " + message.data;
+        statusText.innerText = "Error: \n" + message.data;
+        recalcBtn.innerText = "Recalculate Chart";
+        recalcBtn.disabled = false;
         console.error("Worker Error:", message.data);
     }
 };
 
-// 2. Listen for a file upload
+// Listen for a file upload
 csvInput.addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (!file) return;
 
+    // --- THE TRAP: File Format Validation ---
+    if (!file.name.toLowerCase().endsWith('.csv')) {
+        alert("Invalid format! Please upload a .csv file (Excel .xlsx files are not supported).");
+        statusText.innerText = "Upload blocked. Awaiting valid CSV file.";
+        csvInput.value = ""; // Reset the input box
+        return;
+    }
+
     statusText.innerText = "Parsing CSV locally...";
 
-    // 3. Use PapaParse to read the file locally
     Papa.parse(file, {
         header: true,
         skipEmptyLines: true,
         complete: function(results) {
-            statusText.innerText = "Crunching numbers in Python (this may take a few seconds)...";
+            cachedCsvData = results.data;
 
-            // Send the parsed array to the Python worker
-            pythonWorker.postMessage({
-                command: "process_csv",
-                data: results.data
+            // --- NEW: Populate Column Dropdowns ---
+            const headers = results.meta.fields; // PapaParse extracts the column headers
+            xColSelect.innerHTML = '';
+            yColSelect.innerHTML = '';
+
+            headers.forEach(header => {
+                xColSelect.innerHTML += `<option value="${header}">${header}</option>`;
+                yColSelect.innerHTML += `<option value="${header}">${header}</option>`;
             });
+
+            // Set sensible defaults (assume Col 0 is Date, Col 1 is Value)
+            if (headers.length >= 2) {
+                xColSelect.selectedIndex = 0;
+                yColSelect.selectedIndex = 1;
+            }
+
+            controlsDiv.style.display = "flex";
+            runPythonAnalysis();
         }
     });
 });
 
-// 4. Draw the Plotly Chart
+recalcBtn.addEventListener('click', function() {
+    if (!cachedCsvData) return;
+    runPythonAnalysis();
+});
+
+function runPythonAnalysis() {
+    statusText.innerText = "Crunching numbers in Python...";
+    recalcBtn.innerText = "Calculating...";
+    recalcBtn.disabled = true;
+
+    const tLength = parseInt(document.getElementById('paramTurnLength').value);
+    const bNum = parseInt(document.getElementById('paramBootNum').value);
+    const cLimit = parseFloat(document.getElementById('paramConfLimit').value);
+
+    // Grab the user's selected column names
+    const xCol = xColSelect.value;
+    const yCol = yColSelect.value;
+
+    pythonWorker.postMessage({
+        command: "process_csv",
+        data: cachedCsvData,
+        params: {
+            turn_length: tLength,
+            boot_num: bNum,
+            conf_limit: cLimit,
+            x_col: xCol, // Send selected columns to Python
+            y_col: yCol
+        }
+    });
+}
+
 function drawPlotlyChart(data) {
-    // Update the UI with the number of steps found
     statsDiv.innerText = `Analysis Complete: Found ${data.step_count} distinct stages.`;
 
-    // Trace 1: The Raw Data Points
     const rawTrace = {
-        x: data.dates,
-        y: data.raw_values,
-        mode: 'lines+markers',
-        name: 'All Points',
-        line: { color: 'firebrick', width: 1 },
-        marker: { size: 4 }
+        x: data.dates, y: data.raw_values, mode: 'lines+markers',
+        name: 'All Points', line: { color: 'firebrick', width: 1 }, marker: { size: 4 }
     };
-
-    // Trace 2: The CUSUM Line (Mapped to a secondary right-side axis)
     const cusumTrace = {
-        x: data.dates,
-        y: data.cusum_values,
-        mode: 'lines',
-        name: 'Cusum',
-        yaxis: 'y2', // This tells Plotly to use the secondary axis
-        line: { color: 'green', width: 1 }
+        x: data.dates, y: data.cusum_values, mode: 'lines',
+        name: 'Cusum', yaxis: 'y2', line: { color: 'green', width: 1 }
     };
-
-    // Trace 3: The Manhatten Step Chart
     const stepTrace = {
-        x: data.stage_dates,
-        y: data.stage_means,
-        mode: 'lines+markers',
-        name: 'SM - Stage Mean %CL',
-        text: data.confleveltext, // Hover text from Python
-        hoverinfo: 'text+x',
-        line: { color: 'blue', width: 3 },
-        marker: { color: 'blue', size: 6 }
+        x: data.stage_dates, y: data.stage_means, mode: 'lines+markers',
+        name: 'SM - Stage Mean %CL', text: data.confleveltext, hoverinfo: 'text+x',
+        line: { color: 'blue', width: 3 }, marker: { color: 'blue', size: 6 }
     };
 
-    // Layout configuration
     const layout = {
         title: 'Step Change Analysis',
         xaxis: { title: 'Date / Observation' },
-        yaxis: {
-            title: 'Value',
-            side: 'left'
-        },
-        yaxis2: {
-            title: 'Cusum',
-            overlaying: 'y',
-            side: 'right', // Put CUSUM on the right side
-            showgrid: false
-        },
+        yaxis: { title: 'Value', side: 'left' },
+        yaxis2: { title: 'Cusum', overlaying: 'y', side: 'right', showgrid: false },
         hovermode: 'closest'
     };
 
-    // Render the chart!
     Plotly.newPlot(chartContainer, [rawTrace, cusumTrace, stepTrace], layout);
 }

@@ -13,6 +13,19 @@
         .upload-box { border: 2px dashed #ccc; padding: 30px; text-align: center; margin-bottom: 20px; border-radius: 8px;}
         #stats { font-weight: bold; font-size: 1.2em; color: #333; margin-bottom: 10px; }
         #chart-container { width: 100%; height: 600px; }
+
+        /* The CSS that makes the Control Panel look good */
+        #controls {
+            display: none; /* Hidden until data is loaded */
+            background: #f0f4f8; padding: 15px; border-radius: 8px; margin-bottom: 20px;
+            gap: 20px; align-items: center; flex-wrap: wrap; border: 1px solid #cce5ff;
+        }
+        .control-group { display: flex; flex-direction: column; font-size: 0.9em; font-weight: bold;}
+        .control-group input, .control-group select { padding: 5px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;}
+        .control-group input { width: 80px; }
+        .control-group select { min-width: 120px; background: white; }
+        #recalcBtn { padding: 10px 20px; background: #0056b3; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;}
+        #recalcBtn:hover { background: #003d82; }
     </style>
 </head>
 <body>
@@ -20,14 +33,42 @@
     <h1>Browser-Based SPC Analyzer</h1>
     <p>100% Secure. Your data never leaves your computer.</p>
 
+    <!-- The File Upload Box -->
     <div class="upload-box">
         <input type="file" id="csvInput" accept=".csv" disabled />
         <p id="statusText">Waiting for Python engine to boot...</p>
     </div>
 
+    <!-- The Control Panel -->
+    <div id="controls">
+        <div class="control-group">
+            <label>X-Axis (Date):</label>
+            <select id="xColSelect"></select>
+        </div>
+        <div class="control-group">
+            <label>Y-Axis (Value):</label>
+            <select id="yColSelect"></select>
+        </div>
+        <div class="control-group">
+            <label>Turn Length:</label>
+            <input type="number" id="paramTurnLength" value="5">
+        </div>
+        <div class="control-group">
+            <label>Bootstrap Loops:</label>
+            <input type="number" id="paramBootNum" value="1000" step="100">
+        </div>
+        <div class="control-group">
+            <label>Confidence Limit (%):</label>
+            <input type="number" id="paramConfLimit" value="95" step="0.5">
+        </div>
+        <button id="recalcBtn">Recalculate Chart</button>
+    </div>
+
+    <!-- Chart Outputs -->
     <div id="stats"></div>
     <div id="chart-container"></div>
 
+    <!-- Connect our JavaScript file -->
     <script src="app.js"></script>
 </body>
 </html>
