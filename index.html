@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local SPC Analyzer</title>
+    <!-- Load PapaParse for CSV reading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <!-- Load Plotly for Charting -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 20px; max-width: 1000px; margin: auto; }
+        .upload-box { border: 2px dashed #ccc; padding: 30px; text-align: center; margin-bottom: 20px; border-radius: 8px;}
+        #stats { font-weight: bold; font-size: 1.2em; color: #333; margin-bottom: 10px; }
+        #chart-container { width: 100%; height: 600px; }
+    </style>
+</head>
+<body>
+
+    <h1>Browser-Based SPC Analyzer</h1>
+    <p>100% Secure. Your data never leaves your computer.</p>
+
+    <div class="upload-box">
+        <input type="file" id="csvInput" accept=".csv" disabled />
+        <p id="statusText">Waiting for Python engine to boot...</p>
+    </div>
+
+    <div id="stats"></div>
+    <div id="chart-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
