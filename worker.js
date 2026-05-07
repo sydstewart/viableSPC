@@ -105,14 +105,19 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
     global_mean = round(df[name_col].mean(), 2)
     global_sd = round(df[name_col].std(ddof=1), 2)
 
-    # --- NEW: X-mR Chart Calculations ---
-    # Calculate moving range (absolute difference between consecutive points)
+    # --- UPDATED: X-mR Chart Calculations ---
     mr_vals = [np.nan] + [abs(raw_vals[j] - raw_vals[j-1]) for j in range(1, len(raw_vals))]
     mean_mr = np.nanmean(mr_vals)
     
     # Standard Shewhart Limits for X chart (2.66 * MR_bar)
     xmr_unpl = global_mean + (2.66 * mean_mr)
     xmr_lnpl = global_mean - (2.66 * mean_mr)
+    
+    # Upper Range Limit for the mR chart (3.267 * MR_bar)
+    mr_url = 3.267 * mean_mr
+
+    # Replace NaN with None so JS Plotly doesn't crash on the first point
+    mr_vals_clean = [None if pd.isna(x) else x for x in mr_vals]
 
     return {
         "dates": dates, 
@@ -132,8 +137,11 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
         "shift_above_values": [raw_vals[x] for x in above_idx],
         "shift_below_dates": [dates[x] for x in below_idx],
         "shift_below_values": [raw_vals[x] for x in below_idx],
-        "xmr_unpl": round(xmr_unpl, 2), # NEW
-        "xmr_lnpl": round(xmr_lnpl, 2)  # NEW
+        "xmr_unpl": round(xmr_unpl, 2), 
+        "xmr_lnpl": round(xmr_lnpl, 2),
+        "mr_values": mr_vals_clean,         # NEW
+        "mr_mean": round(mean_mr, 2),       # NEW
+        "mr_url": round(mr_url, 2)          # NEW
     }
 
 df = pd.DataFrame(js_data.to_py())

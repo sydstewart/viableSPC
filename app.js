@@ -24,7 +24,7 @@ const chartTitleInput = document.getElementById('chartTitleInput');
 let cachedCsvData = null;
 let currentChartData = null;
 let currentView = 'step';
-let activeFilename = "Data"; // Stores the uploaded filename for dynamic titles
+let activeFilename = "Data";
 
 csvInput.value = "";
 
@@ -52,7 +52,6 @@ pythonWorker.onmessage = function(event) {
 };
 
 // --- Drag & Drop Functionality ---
-// Clicking the dashed box triggers the hidden file input
 dropZone.addEventListener('click', () => csvInput.click());
 
 dropZone.addEventListener('dragover', (e) => {
@@ -60,9 +59,7 @@ dropZone.addEventListener('dragover', (e) => {
     dropZone.classList.add('dragover');
 });
 
-dropZone.addEventListener('dragleave', () => {
-    dropZone.classList.remove('dragover');
-});
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
 
 dropZone.addEventListener('drop', (e) => {
     e.preventDefault();
@@ -84,7 +81,6 @@ function handleFileUpload(file) {
         return;
     }
 
-    // Save filename (stripping the .csv extension) for our dynamic title
     activeFilename = file.name.replace(/\.[^/.]+$/, "");
 
     Papa.parse(file, {
@@ -116,10 +112,8 @@ function handleFileUpload(file) {
 // --- Dynamic Title Generator ---
 function generateDynamicTitle() {
     const now = new Date();
-    // Format date nicely (e.g. "07/05/2026 15:30")
     const dateStr = now.toLocaleDateString() + " " + now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
-    // Map internal view names to nice display names
     const viewNames = {
         'step': 'Step Change Analysis',
         'run': 'Run Chart',
@@ -129,8 +123,6 @@ function generateDynamicTitle() {
     };
 
     const activeTabName = viewNames[currentView] || 'Analysis';
-
-    // Construct the string: "FileName - TabName - Date"
     chartTitleInput.value = `${activeFilename} - ${activeTabName} - ${dateStr}`;
 }
 
@@ -148,7 +140,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
         currentView = this.getAttribute('data-view');
 
         if (currentChartData) {
-            generateDynamicTitle(); // Update title when tab changes
+            generateDynamicTitle();
             drawPlotlyChart();
         }
     });
@@ -183,16 +175,15 @@ function drawPlotlyChart() {
     const title = chartTitleInput.value;
     const confLimit = document.getElementById('paramConfLimit').value;
 
-    // Global Stats UI String
     const globalStatsBox = `<span style="display:inline-block; margin-left: 15px; padding: 3px 10px; background: #e2e8f0; border-radius: 4px; font-size: 0.9em; font-weight: normal; color: #333;">N = <b>${data.global_count}</b> &nbsp;|&nbsp; Mean = <b>${data.global_mean}</b> &nbsp;|&nbsp; SD = <b>${data.global_sd}</b></span>`;
 
-    // Update Contextual Headers based on active view
     if (currentView === 'step') {
         statsDiv.innerHTML = `Found ${data.step_count} distinct stages <b>(${confLimit}% Confidence)</b>. ${globalStatsBox} <span style="font-size: 0.85em; font-weight: normal; margin-left: 15px; color: #666;">💡 <b>CUSUM:</b> ↗️ Above Avg | ↘️ Below Avg | ➡️ On Avg</span>`;
     } else if (currentView === 'run') {
         statsDiv.innerHTML = `Run Chart Analysis: Median = ${data.run_median.toFixed(2)} ${globalStatsBox}`;
     } else if (currentView === 'xmr') {
-        statsDiv.innerHTML = `X-mR Process Limits: UNPL = <b>${data.xmr_unpl}</b> &nbsp;|&nbsp; LNPL = <b>${data.xmr_lnpl}</b> ${globalStatsBox}`;
+        // UPDATED: Now shows the stats for both the X chart and the mR chart in the info bar!
+        statsDiv.innerHTML = `<b>X-mR Chart</b>: UNPL = <b>${data.xmr_unpl}</b> | LNPL = <b>${data.xmr_lnpl}</b> &nbsp;&nbsp;///&nbsp;&nbsp; <b>mR Chart</b>: URL = <b>${data.mr_url}</b> ${globalStatsBox}`;
     } else if (currentView === 'cusum') {
         statsDiv.innerHTML = `💡 <b>CUSUM Guide:</b> ↗️ Upward Slope = Above Average &nbsp;|&nbsp; ↘️ Downward Slope = Below Average &nbsp;|&nbsp; ➡️ Flat = On Average`;
     } else {
@@ -213,12 +204,18 @@ function drawPlotlyChart() {
     const shiftAboveTrace = { x: data.shift_above_dates, y: data.shift_above_values, mode: 'markers', name: 'Shift (6+ Above)', marker: { color: 'red', size: 10, symbol: 'circle' } };
     const shiftBelowTrace = { x: data.shift_below_dates, y: data.shift_below_values, mode: 'markers', name: 'Shift (6+ Below)', marker: { color: 'blue', size: 10, symbol: 'circle' } };
 
-    // 4. X-mR Traces
+    // 4. X-mR Traces (Individuals - assigned to default yaxis 1)
+    const xRawTrace = { ...rawTrace, name: 'Individuals (X)' };
     const globalMeanTrace = { x: [data.dates[0], data.dates[data.dates.length - 1]], y: [data.global_mean, data.global_mean], mode: 'lines', name: 'Process Mean', line: { color: '#2ca02c', width: 2 } };
     const unplTrace = { x: [data.dates[0], data.dates[data.dates.length - 1]], y: [data.xmr_unpl, data.xmr_unpl], mode: 'lines', name: 'UNPL (+2.66 mR)', line: { color: 'black', width: 1.5, dash: 'dash' } };
     const lnplTrace = { x: [data.dates[0], data.dates[data.dates.length - 1]], y: [data.xmr_lnpl, data.xmr_lnpl], mode: 'lines', name: 'LNPL (-2.66 mR)', line: { color: 'black', width: 1.5, dash: 'dash' } };
 
-    // 5. Isolated CUSUM Traces
+    // 4b. NEW X-mR Traces (Moving Range - explicitly assigned to yaxis 2)
+    const mrTrace = { x: data.dates, y: data.mr_values, mode: 'lines+markers', name: 'Moving Range (mR)', line: { color: '#17becf', width: 1 }, marker: { size: 4 }, yaxis: 'y2' };
+    const mrMeanTrace = { x: [data.dates[0], data.dates[data.dates.length - 1]], y: [data.mr_mean, data.mr_mean], mode: 'lines', name: 'Mean mR', line: { color: '#2ca02c', width: 2, dash: 'dash' }, yaxis: 'y2' };
+    const mrUrlTrace = { x: [data.dates[0], data.dates[data.dates.length - 1]], y: [data.mr_url, data.mr_url], mode: 'lines', name: 'URL (3.267 mR)', line: { color: 'black', width: 1.5, dash: 'dash' }, yaxis: 'y2' };
+
+    // 5. CUSUM Traces
     const isolatedCusumTrace = { x: data.dates, y: data.cusum_values, mode: 'lines', name: 'Cumulative Sum', line: { color: 'green', width: 2 } };
     const zeroLineTrace = { x: [data.dates[0], data.dates[data.dates.length - 1]], y: [0, 0], mode: 'lines', name: 'Zero Baseline', line: { color: 'black', width: 1, dash: 'dash' } };
 
@@ -230,7 +227,8 @@ function drawPlotlyChart() {
     } else if (currentView === 'run') {
         activeTraces = [rawTrace, medianTrace, shiftAboveTrace, shiftBelowTrace];
     } else if (currentView === 'xmr') {
-        activeTraces = [rawTrace, globalMeanTrace, unplTrace, lnplTrace];
+        // Stack all the X traces and the mR traces into one render
+        activeTraces = [xRawTrace, globalMeanTrace, unplTrace, lnplTrace, mrTrace, mrMeanTrace, mrUrlTrace];
     } else if (currentView === 'cusum') {
         activeTraces = [isolatedCusumTrace, zeroLineTrace];
     } else if (currentView === 'raw') {
@@ -249,8 +247,20 @@ function drawPlotlyChart() {
         legend: { orientation: "h", y: -0.2 }
     };
 
+    // Subplot Layout Logic
     if (currentView === 'step') {
+        // For Step Change: CUSUM gets overlaid on the right
         layout.yaxis2 = { title: 'Cusum', overlaying: 'y', side: 'right', showgrid: false };
+    } else if (currentView === 'xmr') {
+        // For X-mR: Split the screen horizontally into two stacked charts!
+        layout.yaxis.domain = [0.35, 1]; // Top 65% of screen
+        layout.yaxis.title = 'Individual Value (X)';
+
+        layout.yaxis2 = {
+            title: 'Moving Range (mR)',
+            domain: [0, 0.25], // Bottom 25% of screen
+            anchor: 'x'
+        };
     }
 
     Plotly.newPlot(chartContainer, activeTraces, layout);
