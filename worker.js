@@ -24,6 +24,8 @@ self.onmessage = async function(event) {
             pyodide.globals.set("js_date_col", event.data.params.x_col);
             pyodide.globals.set("js_name_col", event.data.params.y_col);
             pyodide.globals.set("js_date_format", event.data.params.date_format);
+            pyodide.globals.set("js_start_date", event.data.params.start_date); // NEW
+            pyodide.globals.set("js_end_date", event.data.params.end_date);     // NEW
 
             const pythonCode = `
 import pandas as pd
@@ -60,7 +62,6 @@ def stagemeans_clean(cusum_control, df, pointname, pointdate):
         f_idx, l_idx = int(cc.iloc[i]['firstindex']), int(cc.iloc[i]['lastindex'])
         stage_data = df[pointname].iloc[f_idx:l_idx+1]
         
-        # Calculate local mean and local SD
         s_mean = round(stage_data.mean(), 2)
         s_sd = round(stage_data.std(ddof=1), 2) if len(stage_data) > 1 else 0.0
         
@@ -68,7 +69,6 @@ def stagemeans_clean(cusum_control, df, pointname, pointdate):
         lcl = round(s_mean - (3 * s_sd), 2)
         conf = round(float(cc.iloc[i]['conflevel']), 2) if not pd.isna(cc.iloc[i]['conflevel']) else 100.0
         
-        # Build hover text
         txt = f'Mean: {s_mean}<br>SD: {s_sd}' if i == 0 else f'Mean: {s_mean}<br>SD: {s_sd}<br>Conf: {conf}%'
         
         m_rows.extend([{pointdate: df[pointdate].iloc[f_idx], 'StageMean': s_mean, 'UCL': ucl, 'LCL': lcl, 'confleveltext': txt},
@@ -109,7 +109,6 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
         if curr_sign == 1: above_idx.extend(run_inds)
         elif curr_sign == -1: below_idx.extend(run_inds)
 
-    # Calculate Global Stats
     global_count = len(df)
     global_mean = round(df[name_col].mean(), 2)
     global_sd = round(df[name_col].std(ddof=1), 2)
@@ -120,14 +119,14 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
         "cusum_values": df['cusum'].tolist(),
         "stage_dates": m_df[date_col].tolist(), 
         "stage_means": m_df['StageMean'].tolist(), 
-        "stage_ucl": m_df['UCL'].tolist(), # NEW
-        "stage_lcl": m_df['LCL'].tolist(), # NEW
+        "stage_ucl": m_df['UCL'].tolist(), 
+        "stage_lcl": m_df['LCL'].tolist(), 
         "confleveltext": m_df['confleveltext'].tolist(), 
         "step_count": len(cc_final),
         "run_median": median_val,
-        "global_count": global_count, # NEW
-        "global_mean": global_mean,   # NEW
-        "global_sd": global_sd,       # NEW
+        "global_count": global_count, 
+        "global_mean": global_mean,   
+        "global_sd": global_sd,       
         "shift_above_dates": [dates[x] for x in above_idx],
         "shift_above_values": [raw_vals[x] for x in above_idx],
         "shift_below_dates": [dates[x] for x in below_idx],
@@ -137,14 +136,24 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
 df = pd.DataFrame(js_data.to_py())
 df[js_name_col] = pd.to_numeric(df[js_name_col], errors='coerce')
 
+# Date Parsing
 if js_date_format == 'dd/mm/yyyy': df[js_date_col] = pd.to_datetime(df[js_date_col], dayfirst=True, errors='coerce')
 elif js_date_format == 'mm/dd/yyyy': df[js_date_col] = pd.to_datetime(df[js_date_col], dayfirst=False, errors='coerce')
 else: df[js_date_col] = pd.to_datetime(df[js_date_col], errors='ignore')
 
-if pd.api.types.is_datetime64_any_dtype(df[js_date_col]): df[js_date_col] = df[js_date_col].dt.strftime('%Y-%m-%d %H:%M:%S')
+# NEW: Date Filtering Logic (Slice before converting back to string)
+if pd.api.types.is_datetime64_any_dtype(df[js_date_col]):
+    if js_start_date and str(js_start_date).strip() != "":
+        df = df[df[js_date_col] >= pd.to_datetime(js_start_date)]
+    if js_end_date and str(js_end_date).strip() != "":
+        df = df[df[js_date_col] <= pd.to_datetime(js_end_date)]
+    
+    # Convert back to string for Javascript compatibility
+    df[js_date_col] = df[js_date_col].dt.strftime('%Y-%m-%d %H:%M:%S')
+
 df = df.dropna(subset=[js_name_col]).reset_index(drop=True)
 
-if len(df) < 5: raise ValueError("Dataset too small after cleaning.")
+if len(df) < 5: raise ValueError("Dataset too small after cleaning or filtering (Need at least 5 points).")
 
 res = manhatten_clean(df, js_name_col, js_date_col, js_turn_length, js_boot_num, js_conf_limit)
 import pyodide.ffi
