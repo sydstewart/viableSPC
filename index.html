@@ -13,8 +13,7 @@
 
         /* Control Panel Layout */
         #controls {
-            display: none; /* Hidden until file upload */
-            background: #f0f4f8; padding: 20px; border-radius: 8px;
+            display: none; background: #f0f4f8; padding: 20px; border-radius: 8px;
             margin-bottom: 20px; border: 1px solid #cce5ff; flex-direction: column; gap: 20px;
         }
         .title-row { width: 100%; border-bottom: 1px solid #d0dae5; padding-bottom: 15px; }
@@ -23,12 +22,17 @@
 
         /* Inputs & Buttons */
         .control-group { display: flex; flex-direction: column; font-size: 0.85em; font-weight: bold; color: #444; }
-        .control-group input, .control-group select { padding: 6px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; background: white; }
+        .control-group input[type="number"], .control-group select { padding: 6px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; background: white; }
         .num-input { width: 80px; }
         .select-input { min-width: 130px; }
+
         #recalcBtn { padding: 10px 25px; background: #0056b3; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; height: 38px;}
         #recalcBtn:hover { background: #003d82; }
         #recalcBtn:disabled { background: #ccc; cursor: not-allowed; }
+
+        #exportBtn { padding: 10px 25px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; height: 38px;}
+        #exportBtn:hover { background: #218838; }
+        #exportBtn:disabled { background: #ccc; cursor: not-allowed; }
 
         /* Text Outputs */
         #stats { font-weight: bold; font-size: 1.1em; color: #2c3e50; margin-bottom: 15px; }
@@ -78,7 +82,16 @@
             <div class="control-group"><label>Turn Length:</label><input type="number" id="paramTurnLength" class="num-input" value="5"></div>
             <div class="control-group"><label>Loops:</label><input type="number" id="paramBootNum" class="num-input" value="1000"></div>
             <div class="control-group"><label>Conf %:</label><input type="number" id="paramConfLimit" class="num-input" value="95"></div>
+
+            <div class="control-group" style="margin-right: 15px;">
+                <label>Options:</label>
+                <label style="font-weight: normal; margin-top: 10px; cursor: pointer;">
+                    <input type="checkbox" id="showSDCheckbox"> Show 3SD Limits
+                </label>
+            </div>
+
             <button id="recalcBtn">Recalculate Chart</button>
+            <button id="exportBtn" disabled>Export Data</button>
         </div>
     </div>
 

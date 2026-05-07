@@ -58,11 +58,21 @@ def stagemeans_clean(cusum_control, df, pointname, pointdate):
     m_rows = []
     for i in range(len(cc)):
         f_idx, l_idx = int(cc.iloc[i]['firstindex']), int(cc.iloc[i]['lastindex'])
-        s_mean = round(df[pointname].iloc[f_idx:l_idx+1].mean(), 2)
+        stage_data = df[pointname].iloc[f_idx:l_idx+1]
+        
+        # Calculate local mean and local SD
+        s_mean = round(stage_data.mean(), 2)
+        s_sd = round(stage_data.std(ddof=1), 2) if len(stage_data) > 1 else 0.0
+        
+        ucl = round(s_mean + (3 * s_sd), 2)
+        lcl = round(s_mean - (3 * s_sd), 2)
         conf = round(float(cc.iloc[i]['conflevel']), 2) if not pd.isna(cc.iloc[i]['conflevel']) else 100.0
-        txt = f'SM={s_mean}' if i == 0 else f'SM={s_mean}<br>%C={conf}'
-        m_rows.extend([{pointdate: df[pointdate].iloc[f_idx], 'StageMean': s_mean, 'confleveltext': txt},
-                       {pointdate: df[pointdate].iloc[l_idx], 'StageMean': s_mean, 'confleveltext': ' '}])
+        
+        # Build hover text
+        txt = f'Mean: {s_mean}<br>SD: {s_sd}' if i == 0 else f'Mean: {s_mean}<br>SD: {s_sd}<br>Conf: {conf}%'
+        
+        m_rows.extend([{pointdate: df[pointdate].iloc[f_idx], 'StageMean': s_mean, 'UCL': ucl, 'LCL': lcl, 'confleveltext': txt},
+                       {pointdate: df[pointdate].iloc[l_idx], 'StageMean': s_mean, 'UCL': ucl, 'LCL': lcl, 'confleveltext': ' '}])
     return cc, pd.DataFrame(m_rows)
 
 def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
@@ -76,7 +86,6 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
     cc_final, m_df = stagemeans_clean(cc, df, name_col, date_col)
     df['cusum'] = (df[name_col] - df[name_col].mean()).cumsum()
     
-    # --- UPDATED: STRICT RUN CHART CALCULATIONS ---
     median_val = df[name_col].median()
     raw_vals = df[name_col].tolist()
     dates = df[date_col].tolist()
@@ -86,30 +95,24 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
     curr_sign = 0
 
     for idx, val in enumerate(raw_vals):
-        # 1. Ignore points exactly on the median
-        if val == median_val:
-            continue 
-            
-        # 2. Determine sign
+        if val == median_val: continue 
         s = 1 if val > median_val else -1
-        
-        # 3. Check if run continues
-        if s == curr_sign:
-            run_inds.append(idx)
+        if s == curr_sign: run_inds.append(idx)
         else:
-            # Run broke. Did it reach 6 before breaking?
             if len(run_inds) >= 6:
                 if curr_sign == 1: above_idx.extend(run_inds)
                 elif curr_sign == -1: below_idx.extend(run_inds)
-            
-            # Start new run
             curr_sign = s
             run_inds = [idx]
             
-    # 4. Check the very last run in the dataset
     if len(run_inds) >= 6:
         if curr_sign == 1: above_idx.extend(run_inds)
         elif curr_sign == -1: below_idx.extend(run_inds)
+
+    # Calculate Global Stats
+    global_count = len(df)
+    global_mean = round(df[name_col].mean(), 2)
+    global_sd = round(df[name_col].std(ddof=1), 2)
 
     return {
         "dates": dates, 
@@ -117,9 +120,14 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
         "cusum_values": df['cusum'].tolist(),
         "stage_dates": m_df[date_col].tolist(), 
         "stage_means": m_df['StageMean'].tolist(), 
+        "stage_ucl": m_df['UCL'].tolist(), # NEW
+        "stage_lcl": m_df['LCL'].tolist(), # NEW
         "confleveltext": m_df['confleveltext'].tolist(), 
         "step_count": len(cc_final),
         "run_median": median_val,
+        "global_count": global_count, # NEW
+        "global_mean": global_mean,   # NEW
+        "global_sd": global_sd,       # NEW
         "shift_above_dates": [dates[x] for x in above_idx],
         "shift_above_values": [raw_vals[x] for x in above_idx],
         "shift_below_dates": [dates[x] for x in below_idx],

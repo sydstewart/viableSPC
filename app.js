@@ -9,6 +9,8 @@ const statsDiv = document.getElementById('stats');
 const controlsDiv = document.getElementById('controls');
 const tabContainer = document.getElementById('tab-container');
 const recalcBtn = document.getElementById('recalcBtn');
+const exportBtn = document.getElementById('exportBtn');
+const showSDCheckbox = document.getElementById('showSDCheckbox'); // NEW
 
 // Selectors & Parameters
 const xColSelect = document.getElementById('xColSelect');
@@ -17,32 +19,26 @@ const dateFormatSelect = document.getElementById('dateFormatSelect');
 
 // --- Application State ---
 let cachedCsvData = null;
-let currentChartData = null; // Holds the latest Python results in memory
-let currentView = 'step';    // Tracks the active tab
+let currentChartData = null;
+let currentView = 'step';
 
-// Reset input on load
 csvInput.value = "";
 
 // --- Worker Communication ---
 pythonWorker.onmessage = function(event) {
     const message = event.data;
-
     if (message.status === "ready") {
         statusText.innerText = "Python Engine is ready! Select a CSV.";
         csvInput.disabled = false;
-
     } else if (message.status === "result") {
         statusText.innerText = "Analysis Complete!";
         recalcBtn.innerText = "Recalculate Chart";
         recalcBtn.disabled = false;
+        exportBtn.disabled = false;
 
-        // Save the math to memory
         currentChartData = message.data;
-
-        // Reveal tabs and draw the initial chart
         tabContainer.style.display = "block";
         drawPlotlyChart();
-
     } else if (message.status === "error") {
         statusText.innerText = "Error: " + message.data;
         recalcBtn.disabled = false;
@@ -67,21 +63,16 @@ csvInput.addEventListener('change', function(e) {
         complete: function(results) {
             cachedCsvData = results.data;
             const headers = results.meta.fields;
-
             xColSelect.innerHTML = '';
             yColSelect.innerHTML = '';
-
             headers.forEach(h => {
                 xColSelect.innerHTML += `<option value="${h}">${h}</option>`;
                 yColSelect.innerHTML += `<option value="${h}">${h}</option>`;
             });
-
-            // Auto-select defaults
             if (headers.length >= 2) {
                 xColSelect.selectedIndex = 0;
                 yColSelect.selectedIndex = 1;
             }
-
             controlsDiv.style.display = "flex";
             runPythonAnalysis();
         }
@@ -91,25 +82,23 @@ csvInput.addEventListener('change', function(e) {
 // --- Event Listeners ---
 recalcBtn.addEventListener('click', runPythonAnalysis);
 
-// Tab Switching Logic
+// Redraw chart instantly if the checkbox is toggled
+showSDCheckbox.addEventListener('change', function() {
+    if (currentChartData) drawPlotlyChart();
+});
+
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', function() {
-        // Update active class styling
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
-
-        // Update view state and redraw instantly
         currentView = this.getAttribute('data-view');
-        if (currentChartData) {
-            drawPlotlyChart();
-        }
+        if (currentChartData) drawPlotlyChart();
     });
 });
 
 // --- Core Execution ---
 function runPythonAnalysis() {
     if (!cachedCsvData) return;
-
     statusText.innerText = "Crunching numbers in Python...";
     recalcBtn.innerText = "Calculating...";
     recalcBtn.disabled = true;
@@ -133,35 +122,47 @@ function drawPlotlyChart() {
     const data = currentChartData;
     const title = document.getElementById('chartTitleInput').value;
 
-    // Update Contextual Headers
+    // NEW: Global Stats String formatting
+    const globalStatsBox = `<span style="display:inline-block; margin-left: 15px; padding: 3px 10px; background: #e2e8f0; border-radius: 4px; font-size: 0.9em; font-weight: normal; color: #333;">N = <b>${data.global_count}</b> &nbsp;|&nbsp; Mean = <b>${data.global_mean}</b> &nbsp;|&nbsp; SD = <b>${data.global_sd}</b></span>`;
+
     if (currentView === 'step') {
-        statsDiv.innerText = `Found ${data.step_count} distinct stages.`;
+        statsDiv.innerHTML = `Found ${data.step_count} distinct stages. ${globalStatsBox} <span style="font-size: 0.85em; font-weight: normal; margin-left: 15px; color: #666;">💡 <b>CUSUM:</b> ↗️ Above Avg | ↘️ Below Avg | ➡️ On Avg</span>`;
     } else if (currentView === 'run') {
-        statsDiv.innerText = `Run Chart Analysis: Median = ${data.run_median.toFixed(2)}`;
+        statsDiv.innerHTML = `Run Chart Analysis: Median = ${data.run_median.toFixed(2)} ${globalStatsBox}`;
     } else if (currentView === 'cusum') {
-        statsDiv.innerText = `CUSUM Guide: ↗️ Upward Slope = Above Average | ↘️ Downward Slope = Below Average | ➡️ Flat = On Average`;
+        statsDiv.innerHTML = `💡 <b>CUSUM Guide:</b> ↗️ Upward Slope = Above Average &nbsp;|&nbsp; ↘️ Downward Slope = Below Average &nbsp;|&nbsp; ➡️ Flat = On Average`;
     } else {
-        statsDiv.innerText = `Displaying raw data points.`;
+        statsDiv.innerHTML = `Displaying raw data points. ${globalStatsBox}`;
     }
 
-    // 1. Base Trace
+    // Trace 1: Base Data
     const rawTrace = {
         x: data.dates, y: data.raw_values, mode: 'lines+markers',
         name: 'All Points', line: { color: '#d62728', width: 1 }, marker: { size: 4 }
     };
 
-    // 2. Step Change Traces
+    // Trace 2: Step Change / CUSUM
     const cusumOverlayTrace = {
         x: data.dates, y: data.cusum_values, mode: 'lines',
         name: 'Cusum', yaxis: 'y2', line: { color: 'green', width: 1 }
     };
     const stepTrace = {
         x: data.stage_dates, y: data.stage_means, mode: 'lines+markers',
-        name: 'SM - Stage Mean', text: data.confleveltext, hoverinfo: 'text+x',
+        name: 'Stage Mean', text: data.confleveltext, hoverinfo: 'text+x',
         line: { color: 'blue', width: 3 }, marker: { size: 6 }
     };
 
-    // 3. Run Chart Traces
+    // Trace 3: NEW 3SD Limits
+    const uclTrace = {
+        x: data.stage_dates, y: data.stage_ucl, mode: 'lines',
+        name: '+3 SD (UCL)', line: { color: 'rgba(0,0,255,0.4)', width: 2, dash: 'dash' }, hoverinfo: 'none'
+    };
+    const lclTrace = {
+        x: data.stage_dates, y: data.stage_lcl, mode: 'lines',
+        name: '-3 SD (LCL)', line: { color: 'rgba(0,0,255,0.4)', width: 2, dash: 'dash' }, hoverinfo: 'none'
+    };
+
+    // Trace 4: Run Chart
     const medianTrace = {
         x: [data.dates[0], data.dates[data.dates.length - 1]],
         y: [data.run_median, data.run_median],
@@ -176,7 +177,7 @@ function drawPlotlyChart() {
         name: 'Shift (6+ Below)', marker: { color: 'blue', size: 10, symbol: 'circle' }
     };
 
-    // 4. Isolated CUSUM Traces
+    // Trace 5: Isolated CUSUM
     const isolatedCusumTrace = {
         x: data.dates, y: data.cusum_values, mode: 'lines',
         name: 'Cumulative Sum', line: { color: 'green', width: 2 }
@@ -190,6 +191,10 @@ function drawPlotlyChart() {
     let activeTraces = [];
     if (currentView === 'step') {
         activeTraces = [rawTrace, cusumOverlayTrace, stepTrace];
+        // If checkbox is ticked, inject the SD lines!
+        if (showSDCheckbox.checked) {
+            activeTraces.push(uclTrace, lclTrace);
+        }
     } else if (currentView === 'run') {
         activeTraces = [rawTrace, medianTrace, shiftAboveTrace, shiftBelowTrace];
     } else if (currentView === 'cusum') {
@@ -210,10 +215,29 @@ function drawPlotlyChart() {
         legend: { orientation: "h", y: -0.2 }
     };
 
-    // Attach secondary axis only if looking at the hybrid Step view
     if (currentView === 'step') {
         layout.yaxis2 = { title: 'Cusum', overlaying: 'y', side: 'right', showgrid: false };
     }
 
     Plotly.newPlot(chartContainer, activeTraces, layout);
 }
+
+// --- Export Data Logic ---
+exportBtn.addEventListener('click', function() {
+    if (!currentChartData) return;
+    let csvContent = "Date,Raw Value,CUSUM Value\n";
+    for(let i = 0; i < currentChartData.dates.length; i++) {
+        let date = currentChartData.dates[i];
+        let val = currentChartData.raw_values[i];
+        let cusum = currentChartData.cusum_values[i].toFixed(4);
+        csvContent += `${date},${val},${cusum}\n`;
+    }
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    link.setAttribute("href", URL.createObjectURL(blob));
+    link.setAttribute("download", "SPC_Analysis_Export.csv");
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
