@@ -75,8 +75,56 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
         i += 1
     cc_final, m_df = stagemeans_clean(cc, df, name_col, date_col)
     df['cusum'] = (df[name_col] - df[name_col].mean()).cumsum()
-    return {"dates": df[date_col].tolist(), "raw_values": df[name_col].tolist(), "cusum_values": df['cusum'].tolist(),
-            "stage_dates": m_df[date_col].tolist(), "stage_means": m_df['StageMean'].tolist(), "confleveltext": m_df['confleveltext'].tolist(), "step_count": len(cc_final)}
+    
+    # --- UPDATED: STRICT RUN CHART CALCULATIONS ---
+    median_val = df[name_col].median()
+    raw_vals = df[name_col].tolist()
+    dates = df[date_col].tolist()
+
+    above_idx, below_idx = [], []
+    run_inds = []
+    curr_sign = 0
+
+    for idx, val in enumerate(raw_vals):
+        # 1. Ignore points exactly on the median
+        if val == median_val:
+            continue 
+            
+        # 2. Determine sign
+        s = 1 if val > median_val else -1
+        
+        # 3. Check if run continues
+        if s == curr_sign:
+            run_inds.append(idx)
+        else:
+            # Run broke. Did it reach 6 before breaking?
+            if len(run_inds) >= 6:
+                if curr_sign == 1: above_idx.extend(run_inds)
+                elif curr_sign == -1: below_idx.extend(run_inds)
+            
+            # Start new run
+            curr_sign = s
+            run_inds = [idx]
+            
+    # 4. Check the very last run in the dataset
+    if len(run_inds) >= 6:
+        if curr_sign == 1: above_idx.extend(run_inds)
+        elif curr_sign == -1: below_idx.extend(run_inds)
+
+    return {
+        "dates": dates, 
+        "raw_values": raw_vals, 
+        "cusum_values": df['cusum'].tolist(),
+        "stage_dates": m_df[date_col].tolist(), 
+        "stage_means": m_df['StageMean'].tolist(), 
+        "confleveltext": m_df['confleveltext'].tolist(), 
+        "step_count": len(cc_final),
+        "run_median": median_val,
+        "shift_above_dates": [dates[x] for x in above_idx],
+        "shift_above_values": [raw_vals[x] for x in above_idx],
+        "shift_below_dates": [dates[x] for x in below_idx],
+        "shift_below_values": [raw_vals[x] for x in below_idx]
+    }
 
 df = pd.DataFrame(js_data.to_py())
 df[js_name_col] = pd.to_numeric(df[js_name_col], errors='coerce')
