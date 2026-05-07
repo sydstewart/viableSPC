@@ -24,8 +24,8 @@ self.onmessage = async function(event) {
             pyodide.globals.set("js_date_col", event.data.params.x_col);
             pyodide.globals.set("js_name_col", event.data.params.y_col);
             pyodide.globals.set("js_date_format", event.data.params.date_format);
-            pyodide.globals.set("js_start_date", event.data.params.start_date); // NEW
-            pyodide.globals.set("js_end_date", event.data.params.end_date);     // NEW
+            pyodide.globals.set("js_start_date", event.data.params.start_date);
+            pyodide.globals.set("js_end_date", event.data.params.end_date);
 
             const pythonCode = `
 import pandas as pd
@@ -61,16 +61,12 @@ def stagemeans_clean(cusum_control, df, pointname, pointdate):
     for i in range(len(cc)):
         f_idx, l_idx = int(cc.iloc[i]['firstindex']), int(cc.iloc[i]['lastindex'])
         stage_data = df[pointname].iloc[f_idx:l_idx+1]
-        
         s_mean = round(stage_data.mean(), 2)
         s_sd = round(stage_data.std(ddof=1), 2) if len(stage_data) > 1 else 0.0
-        
         ucl = round(s_mean + (3 * s_sd), 2)
         lcl = round(s_mean - (3 * s_sd), 2)
         conf = round(float(cc.iloc[i]['conflevel']), 2) if not pd.isna(cc.iloc[i]['conflevel']) else 100.0
-        
         txt = f'Mean: {s_mean}<br>SD: {s_sd}' if i == 0 else f'Mean: {s_mean}<br>SD: {s_sd}<br>Conf: {conf}%'
-        
         m_rows.extend([{pointdate: df[pointdate].iloc[f_idx], 'StageMean': s_mean, 'UCL': ucl, 'LCL': lcl, 'confleveltext': txt},
                        {pointdate: df[pointdate].iloc[l_idx], 'StageMean': s_mean, 'UCL': ucl, 'LCL': lcl, 'confleveltext': ' '}])
     return cc, pd.DataFrame(m_rows)
@@ -90,10 +86,7 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
     raw_vals = df[name_col].tolist()
     dates = df[date_col].tolist()
 
-    above_idx, below_idx = [], []
-    run_inds = []
-    curr_sign = 0
-
+    above_idx, below_idx, run_inds, curr_sign = [], [], [], 0
     for idx, val in enumerate(raw_vals):
         if val == median_val: continue 
         s = 1 if val > median_val else -1
@@ -104,7 +97,6 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
                 elif curr_sign == -1: below_idx.extend(run_inds)
             curr_sign = s
             run_inds = [idx]
-            
     if len(run_inds) >= 6:
         if curr_sign == 1: above_idx.extend(run_inds)
         elif curr_sign == -1: below_idx.extend(run_inds)
@@ -112,6 +104,15 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
     global_count = len(df)
     global_mean = round(df[name_col].mean(), 2)
     global_sd = round(df[name_col].std(ddof=1), 2)
+
+    # --- NEW: X-mR Chart Calculations ---
+    # Calculate moving range (absolute difference between consecutive points)
+    mr_vals = [np.nan] + [abs(raw_vals[j] - raw_vals[j-1]) for j in range(1, len(raw_vals))]
+    mean_mr = np.nanmean(mr_vals)
+    
+    # Standard Shewhart Limits for X chart (2.66 * MR_bar)
+    xmr_unpl = global_mean + (2.66 * mean_mr)
+    xmr_lnpl = global_mean - (2.66 * mean_mr)
 
     return {
         "dates": dates, 
@@ -130,25 +131,21 @@ def manhatten_clean(df, name_col, date_col, turn_length, boot_num, conf_limit):
         "shift_above_dates": [dates[x] for x in above_idx],
         "shift_above_values": [raw_vals[x] for x in above_idx],
         "shift_below_dates": [dates[x] for x in below_idx],
-        "shift_below_values": [raw_vals[x] for x in below_idx]
+        "shift_below_values": [raw_vals[x] for x in below_idx],
+        "xmr_unpl": round(xmr_unpl, 2), # NEW
+        "xmr_lnpl": round(xmr_lnpl, 2)  # NEW
     }
 
 df = pd.DataFrame(js_data.to_py())
 df[js_name_col] = pd.to_numeric(df[js_name_col], errors='coerce')
 
-# Date Parsing
 if js_date_format == 'dd/mm/yyyy': df[js_date_col] = pd.to_datetime(df[js_date_col], dayfirst=True, errors='coerce')
 elif js_date_format == 'mm/dd/yyyy': df[js_date_col] = pd.to_datetime(df[js_date_col], dayfirst=False, errors='coerce')
 else: df[js_date_col] = pd.to_datetime(df[js_date_col], errors='ignore')
 
-# NEW: Date Filtering Logic (Slice before converting back to string)
 if pd.api.types.is_datetime64_any_dtype(df[js_date_col]):
-    if js_start_date and str(js_start_date).strip() != "":
-        df = df[df[js_date_col] >= pd.to_datetime(js_start_date)]
-    if js_end_date and str(js_end_date).strip() != "":
-        df = df[df[js_date_col] <= pd.to_datetime(js_end_date)]
-    
-    # Convert back to string for Javascript compatibility
+    if js_start_date and str(js_start_date).strip() != "": df = df[df[js_date_col] >= pd.to_datetime(js_start_date)]
+    if js_end_date and str(js_end_date).strip() != "": df = df[df[js_date_col] <= pd.to_datetime(js_end_date)]
     df[js_date_col] = df[js_date_col].dt.strftime('%Y-%m-%d %H:%M:%S')
 
 df = df.dropna(subset=[js_name_col]).reset_index(drop=True)

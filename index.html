@@ -9,7 +9,15 @@
     <style>
         /* General Page Styling */
         body { font-family: system-ui, sans-serif; padding: 20px; max-width: 1200px; margin: auto; background-color: #f8f9fa; }
-        .upload-box { border: 2px dashed #ccc; padding: 30px; text-align: center; margin-bottom: 20px; border-radius: 8px; background-color: white; }
+
+        /* UPDATED: Drag and Drop Upload Box */
+        .upload-box {
+            border: 3px dashed #ccc; padding: 40px; text-align: center;
+            margin-bottom: 20px; border-radius: 8px; background-color: white;
+            transition: all 0.3s ease; cursor: pointer;
+        }
+        .upload-box.dragover { border-color: #0056b3; background-color: #e9f2ff; }
+        .upload-box p { font-size: 1.1em; color: #555; pointer-events: none;}
 
         /* Control Panel Layout */
         #controls {
@@ -17,7 +25,7 @@
             margin-bottom: 20px; border: 1px solid #cce5ff; flex-direction: column; gap: 20px;
         }
         .title-row { width: 100%; border-bottom: 1px solid #d0dae5; padding-bottom: 15px; }
-        #chartTitleInput { width: 100%; max-width: 800px; font-size: 1.1em; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        #chartTitleInput { width: 100%; max-width: 900px; font-size: 1.1em; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
         .settings-row { display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; }
 
         /* Inputs & Buttons */
@@ -36,7 +44,7 @@
 
         /* Interactive Tabs */
         #tab-container { display: none; margin-bottom: -1px; }
-        .tabs { display: flex; gap: 5px; border-bottom: 2px solid #0056b3; }
+        .tabs { display: flex; gap: 5px; border-bottom: 2px solid #0056b3; flex-wrap: wrap;}
         .tab-btn {
             padding: 10px 20px; background: #e9ecef; border: 1px solid #ccc; border-bottom: none;
             border-radius: 8px 8px 0 0; cursor: pointer; font-weight: bold; color: #555; transition: 0.2s;
@@ -53,9 +61,10 @@
     <h1>Browser-Based SPC Analyzer</h1>
     <p>100% Secure. Your data never leaves your computer.</p>
 
-    <div class="upload-box">
-        <input type="file" id="csvInput" accept=".csv" disabled />
-        <p id="statusText">Waiting for Python engine to boot...</p>
+    <div class="upload-box" id="dropZone">
+        <input type="file" id="csvInput" accept=".csv" disabled style="display: none;" />
+        <p id="statusText">⏳ Waiting for Python engine to boot...</p>
+        <p style="font-size: 0.9em; font-weight: normal; color: #888; margin-top: 5px;">(Click to browse or Drag & Drop a CSV here)</p>
     </div>
 
     <div id="controls">
@@ -77,14 +86,8 @@
                 </select>
             </div>
 
-            <div class="control-group">
-                <label>Start Date:</label>
-                <input type="date" id="paramStartDate" class="date-input">
-            </div>
-            <div class="control-group">
-                <label>End Date:</label>
-                <input type="date" id="paramEndDate" class="date-input">
-            </div>
+            <div class="control-group"><label>Start Date:</label><input type="date" id="paramStartDate" class="date-input"></div>
+            <div class="control-group"><label>End Date:</label><input type="date" id="paramEndDate" class="date-input"></div>
 
             <div class="control-group"><label>Turn Length:</label><input type="number" id="paramTurnLength" class="num-input" value="5"></div>
             <div class="control-group"><label>Loops:</label><input type="number" id="paramBootNum" class="num-input" value="1000"></div>
@@ -106,7 +109,7 @@
     <div id="tab-container">
         <div class="tabs">
             <button class="tab-btn active" data-view="step">Step Change Analysis</button>
-            <button class="tab-btn" data-view="run">Run Chart</button>
+            <button class="tab-btn" data-view="xmr">X-mR Chart (Individuals)</button> <button class="tab-btn" data-view="run">Run Chart</button>
             <button class="tab-btn" data-view="cusum">CUSUM Chart</button>
             <button class="tab-btn" data-view="raw">Raw Data</button>
         </div>
