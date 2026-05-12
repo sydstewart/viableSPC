@@ -3,32 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecureSPC | Surgical Auditor v2.6</title>
+    <title>SecureSPC | Surgical Auditor v2.7</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <style>
-        :root { --surgical-red: #dc3545; --clinical-blue: #0d6efd; }
+        :root { --surgical-red: #dc3545; --clinical-blue: #0d6efd; --terminal-bg: #0f172a; }
         body { background-color: #f1f5f9; font-family: 'Segoe UI', system-ui, sans-serif; color: #1e293b; }
+
+        /* UI Component: Modern shadow cards for audit sections */
         .scanner-card { border: none; border-radius: 15px; background: white; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        #drop-zone { border: 3px dashed #cbd5e1; border-radius: 15px; padding: 40px; text-align: center; cursor: pointer; background: #f8fafc; }
+
+        /* Interactive: Drag and Drop Drop-Zone Styling */
+        #drop-zone {
+            border: 3px dashed #cbd5e1;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            background: #f8fafc;
+        }
         #drop-zone.dragover { border-color: var(--clinical-blue); background: #f0f7ff; border-style: solid; }
-        .summary-box { background: #fff5f5; border-left: 5px solid var(--surgical-red); padding: 20px; border-radius: 10px; margin-bottom: 25px; }
-        .log-container { max-height: 550px; overflow-y: auto; background: #0f172a; color: #38bdf8; font-family: 'Cascadia Code', 'Courier New', monospace; padding: 25px; border-radius: 10px; border: 1px solid #334155; white-space: pre-wrap; }
-        .error-text { color: #f87171; font-weight: bold; }
-        .warning-text { color: #fbbf24; font-weight: bold; margin-bottom: 8px; display: block; }
+
+        /* Alert Styling: Red box for failing data audits */
+        .summary-box {
+            background: #fff5f5;
+            border-left: 5px solid var(--surgical-red);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* Diagnostic Log: Dark terminal-style output for row coordinates */
+        .log-container {
+            max-height: 550px;
+            overflow-y: auto;
+            background: var(--terminal-bg);
+            color: #38bdf8;
+            font-family: 'Cascadia Code', 'Courier New', monospace;
+            padding: 25px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            border: 1px solid #334155;
+            white-space: pre-wrap;
+        }
+
+        .error-text { color: #f87171; font-weight: bold; display: block; margin-bottom: 2px; }
+        .warning-text { color: #fbbf24; font-weight: bold; display: block; margin-top: 8px; }
+        .suggestion-tip { color: #a5f3fc; font-size: 0.85rem; display: block; margin-left: 20px; font-family: sans-serif; }
         .success-text { color: #4ade80; font-weight: bold; }
-        .suggestion-tip { color: #a5f3fc; font-size: 0.85rem; font-family: 'Segoe UI', sans-serif; display: block; margin-top: 2px; margin-left: 20px; }
+
+        .stat-badge { font-weight: bold; padding: 2px 8px; border-radius: 5px; background: #e2e8f0; margin-right: 10px; }
     </style>
 </head>
 <body>
 
 <nav class="navbar navbar-dark bg-dark py-3 shadow-sm">
     <div class="container">
-        <span class="navbar-brand fw-bold">🩺 SecureSPC <span class="text-info">Surgical Auditor v2.6</span></span>
+        <span class="navbar-brand fw-bold">🩺 SecureSPC <span class="text-info">Surgical Auditor v2.7</span></span>
         <div class="d-flex gap-2">
-            <button onclick="location.reload()" class="btn btn-outline-light btn-sm">Reset</button>
+            <button onclick="location.reload()" class="btn btn-outline-light btn-sm">Reset Scanner</button>
             <a href="index.html" class="btn btn-info btn-sm fw-bold">Open Analyzer</a>
         </div>
     </div>
@@ -39,15 +75,15 @@
         <div class="col-lg-10">
 
             <div class="mb-4 text-center">
-                <h2 class="fw-bold text-dark">Data Integrity Audit</h2>
-                <p class="text-muted">Detecting sequence breaks and guiding date-time formatting.</p>
+                <h2 class="fw-bold text-dark">Data Integrity Deep Scan</h2>
+                <p class="text-muted">Auditing for Merged Gaps, Timestamp Consistency, and Chronological Order.</p>
             </div>
 
             <div class="scanner-card p-4 mb-4">
                 <div id="drop-zone">
                     <div id="drop-text">
-                        <h5 class="fw-bold">Drop CSV here to Audit</h5>
-                        <p class="mb-0 text-secondary small">Scroll down for instructional feedback on errors.</p>
+                        <h5 class="fw-bold">Drop Spreadsheet (CSV) Here</h5>
+                        <p class="mb-0 text-secondary small">Your file stays local. We audit row coordinates for repair.</p>
                     </div>
                     <input type="file" id="csv-input" style="display: none;" accept=".csv">
                 </div>
@@ -57,16 +93,16 @@
                 <div class="row align-items-center g-3">
                     <div class="col-md-4">
                         <label class="form-label fw-bold small text-muted">TIMELINE COLUMN (X)</label>
-                        <select id="x-col" class="form-select border-primary"></select>
+                        <select id="x-col" class="form-select border-primary shadow-sm"></select>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label fw-bold small text-muted">MEASURE COLUMN (Y)</label>
-                        <select id="y-col" class="form-select border-primary"></select>
+                        <select id="y-col" class="form-select border-primary shadow-sm"></select>
                     </div>
                     <div class="col-md-4 d-flex align-items-end pt-2">
                         <div class="form-check form-switch me-3">
                             <input class="form-check-input" type="checkbox" id="euro-mode">
-                            <label class="form-check-label small fw-bold" for="euro-mode">Euro Decimals</label>
+                            <label class="form-check-label small fw-bold" for="euro-mode">Euro Decimals (12,5)</label>
                         </div>
                         <button id="run-scan" class="btn btn-danger btn-lg flex-grow-1 fw-bold shadow">AUDIT DATA</button>
                     </div>
@@ -75,13 +111,15 @@
 
             <div id="results-section" style="display: none;">
                 <div id="summary-area" class="summary-box shadow-sm"></div>
-                <div id="audit-log" class="log-container">Initializing...</div>
+                <div id="audit-log" class="log-container">Initializing audit...</div>
             </div>
+
         </div>
     </div>
 </div>
 
 <script>
+    // Global Data Store
     let rawData = [];
     const dropZone = document.getElementById('drop-zone');
     const csvInput = document.getElementById('csv-input');
@@ -90,9 +128,11 @@
     const auditLog = document.getElementById('audit-log');
     const summaryArea = document.getElementById('summary-area');
 
+    // Drag & Drop Listener: Disables default browser download/open behavior
     window.addEventListener("dragover", e => e.preventDefault(), false);
     window.addEventListener("drop", e => e.preventDefault(), false);
 
+    // Drop Zone Visual Feedback
     ['dragenter', 'dragover'].forEach(n => dropZone.addEventListener(n, (e) => {
         e.preventDefault(); e.stopPropagation(); dropZone.classList.add('dragover');
     }, false));
@@ -101,6 +141,7 @@
         e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('dragover');
     }, false));
 
+    // File Processing Handler
     dropZone.addEventListener('drop', e => {
         const files = e.dataTransfer.files;
         if (files.length) handleFile(files[0]);
@@ -109,6 +150,11 @@
     dropZone.onclick = () => csvInput.click();
     csvInput.onchange = (e) => { if (e.target.files.length) handleFile(e.target.files[0]); };
 
+    /**
+     * STAGE 5: CSV Parsing
+     * Uses PapaParse to convert CSV into JSON objects.
+     * Extracts headers and populates selection dropdowns.
+     */
     function handleFile(file) {
         Papa.parse(file, {
             header: true, skipEmptyLines: 'greedy',
@@ -117,96 +163,133 @@
                 const headers = results.meta.fields;
                 const xS = document.getElementById('x-col');
                 const yS = document.getElementById('y-col');
+
                 xS.innerHTML = ''; yS.innerHTML = '';
                 headers.forEach(h => {
                     if(h && h.trim() !== "") {
-                        let opt = document.createElement('option'); opt.value = h; opt.innerText = h;
+                        let opt = document.createElement('option');
+                        opt.value = h; opt.innerText = h;
                         xS.appendChild(opt.cloneNode(true)); yS.appendChild(opt);
                     }
                 });
+
                 mappingSection.style.display = 'block';
-                document.getElementById('drop-text').innerHTML = `<h5 class="fw-bold text-success">✔ File Ready</h5><p class="mb-0 text-secondary">${file.name}</p>`;
+                document.getElementById('drop-text').innerHTML = `
+                    <h5 class="fw-bold text-success">✔ File Ready</h5>
+                    <p class="mb-0 text-secondary">${file.name}</p>
+                `;
             }
         });
     }
 
+    /**
+     * STAGE 6: THE AUDIT ENGINE
+     * Runs when 'AUDIT DATA' is clicked.
+     * Iterates through every row to check for:
+     * 1. Empty timeline gaps (Merged cells)
+     * 2. Non-standard Date/Time formats (Regex)
+     * 3. Numerical validity (Measure audit)
+     * 4. Chronological order (Sequence check)
+     */
     document.getElementById('run-scan').onclick = function() {
         const x = document.getElementById('x-col').value;
         const y = document.getElementById('y-col').value;
         const isEuro = document.getElementById('euro-mode').checked;
+
         resultsSection.style.display = 'block';
 
         let stats = { blanks: 0, badFormats: 0, badNumbers: 0, clean: 0 };
-        let sequenceBreaks = 0; let duplicateX = 0;
-        let lastTimeValue = 0; let seenDates = new Set();
+        let sequenceBreaks = 0;
+        let lastTimeValue = 0;
         let logHtml = "";
 
         rawData.forEach((row, index) => {
-            const rowNum = index + 2;
-            let rowHasHardError = false;
+            const rowNum = index + 2; // Offset for CSV header and 0-indexing
+            let rowHasError = false;
 
-            // 1. Timeline Audit
+            // Audit Part A: Timeline (X-Axis)
             const dVal = row[x] ? row[x].toString().trim() : "";
+
+            // Detection: Blank cells (The common "Merged Cell" issue)
             if (dVal === "" || dVal === "-") {
                 stats.blanks++;
-                rowHasHardError = true;
-                logHtml += `<div class="error-text">[ROW ${rowNum}] Gap Detected: Timeline is empty.</div>`;
+                rowHasError = true;
+                logHtml += `<span class="error-text">[ROW ${rowNum}] Timeline is empty (Merged cell suspected).</span>`;
             } else {
+                // Regex Validation: Accepts standard dates, financial years, and timestamps with seconds
                 const isDate = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}$/.test(dVal);
-                const isYear = /^\d{4}$/.test(dVal);
-                const isDateTime = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}\s\d{1,2}:\d{2}$/.test(dVal);
+                const isDateTime = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}\s\d{1,2}:\d{2}(:\d{2})?$/.test(dVal);
+                const isYearOnly = /^\d{4}$/.test(dVal);
 
-                if (!isDate && !isYear && !isDateTime) {
+                if (!isDate && !isDateTime && !isYearOnly) {
                     stats.badFormats++;
-                    logHtml += `<span class="warning-text">[ROW ${rowNum}] Format Error: "${dVal}" is not a valid date.</span>`;
-                    logHtml += `<span class="suggestion-tip">💡 Suggestion: Use "DD/MM/YYYY HH:MM" (e.g., 10/05/2026 14:30) or standard "DD/MM/YYYY"</span>`;
+                    logHtml += `<span class="warning-text">[ROW ${rowNum}] Format Error: "${dVal}" is non-standard.</span>`;
+                    logHtml += `<span class="suggestion-tip">💡 Suggestion: Use "DD/MM/YYYY HH:MM" (e.g., 10/05/2026 14:30)</span>`;
                 }
 
-                // Sequence Check (Simple reverse parse)
-                const currentTS = new Date(dVal.split(/[\/\-\.\s:]/)[2], dVal.split(/[\/\-\.\s:]/)[1]-1, dVal.split(/[\/\-\.\s:]/)[0]).getTime();
+                // CHRONOLOGICAL AUDIT: Compares current timestamp to previous row
+                const parts = dVal.split(/[\/\-\.\s:]/);
+                // JS Date Map: Year=parts[2], Month=parts[1]-1, Day=parts[0]
+                const currentTS = new Date(parts[2], parts[1]-1, parts[0], parts[3]||0, parts[4]||0, parts[5]||0).getTime();
+
                 if (!isNaN(currentTS)) {
-                    if (lastTimeValue > 0 && currentTS < lastTimeValue) sequenceBreaks++;
-                    if (seenDates.has(dVal)) duplicateX++;
-                    seenDates.add(dVal);
+                    if (lastTimeValue > 0 && currentTS < lastTimeValue) {
+                        sequenceBreaks++; // Detected data moving "backwards"
+                    }
                     lastTimeValue = currentTS;
                 }
             }
 
-            // 2. Measure Audit
+            // Audit Part B: Measures (Y-Axis)
             const rawM = row[y] ? row[y].toString().trim() : "";
             if (rawM === "") {
                 stats.badNumbers++;
-                rowHasHardError = true;
+                rowHasError = true;
+                logHtml += `<span class="error-text">[ROW ${rowNum}] Measure value is missing.</span>`;
             } else {
+                // Handling thousands commas and Euro decimal commas
                 let cleanM = rawM.replace(/\s+/g, '');
                 if (cleanM.includes(',')) {
-                    if (!isEuro) cleanM = cleanM.replace(/,/g, '');
-                    else cleanM = cleanM.replace(',', '.');
+                    cleanM = isEuro ? cleanM.replace(',', '.') : cleanM.replace(/,/g, '');
                 }
+
                 if (isNaN(parseFloat(cleanM))) {
                     stats.badNumbers++;
-                    rowHasHardError = true;
-                    logHtml += `<div class="error-text">[ROW ${rowNum}] Value Error: "${rawM}" is not numeric.</div>`;
+                    rowHasError = true;
+                    logHtml += `<span class="error-text">[ROW ${rowNum}] Value Error: "${rawM}" is not a valid number.</span>`;
                 }
             }
-            if (!rowHasHardError) stats.clean++;
+
+            if (!rowHasError) stats.clean++;
         });
 
+        /**
+         * STAGE 7: Summary & Feedback
+         * Compiles the audit results into a readable summary.
+         * Triggers the "Spider-Web" warning if sequence breaks are detected.
+         */
         let coachAdvice = "";
-        if (sequenceBreaks > 0) coachAdvice += `<div class="alert alert-warning mb-2">⚠️ <strong>Sequence Break:</strong> Data is out of chronological order. Sort your file in Excel!</div>`;
-        if (duplicateX > 0) coachAdvice += `<div class="alert alert-info mb-0">💡 <strong>Multiple entries per date:</strong> For higher accuracy, combine Date + Time into one column.</div>`;
+        if (sequenceBreaks > 0) {
+            coachAdvice = `<div class="alert alert-warning shadow-sm">⚠️ <strong>Chronological Error:</strong> ${sequenceBreaks} rows are out of order. This will cause a "Spider-Web" chart. Please sort your file by Date & Time in Excel.</div>`;
+        }
 
         summaryArea.innerHTML = `
-            <h5 class="fw-bold text-danger mb-3">Audit Summary</h5>
+            <h5 class="fw-bold text-danger mb-3">Surgical Audit Summary</h5>
             ${coachAdvice}
+            <div class="d-flex flex-wrap gap-2 mt-3">
+                <span class="stat-badge">🔴 ${stats.blanks} Gaps</span>
+                <span class="stat-badge">🟡 ${stats.badFormats} Format Errors</span>
+                <span class="stat-badge">🔴 ${stats.badNumbers} Non-Numeric</span>
+            </div>
             <hr>
-            <ul class="list-unstyled mb-0">
-                <li>🔴 <strong>${stats.blanks}</strong> Gaps | 🟡 <strong>${stats.badFormats}</strong> Formats | 🔴 <strong>${stats.badNumbers}</strong> Non-Numeric</li>
-            </ul>
+            <div class="success-text fs-5">ESTIMATED PASSABLE ROWS: ${stats.clean} / ${rawData.length}</div>
         `;
-        auditLog.innerHTML = logHtml || `<div class="success-text">SCAN COMPLETE: DATA IS READY FOR ANALYSIS.</div>`;
+
+        // Output results to terminal
+        auditLog.innerHTML = logHtml || `<div class="success-text">SCAN COMPLETE: NO ISSUES FOUND. DATA IS CLINICALLY CLEAN.</div>`;
         resultsSection.scrollIntoView({ behavior: 'smooth' });
     };
 </script>
+
 </body>
 </html>

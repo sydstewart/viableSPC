@@ -3,119 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local SPC Analyzer</title>
+    <title>SecureSPC Analyzer v2.8</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
     <style>
-        /* General Page Styling */
         body { font-family: system-ui, sans-serif; padding: 20px; max-width: 1200px; margin: auto; background-color: #f8f9fa; }
-
-        /* UPDATED: Drag and Drop Upload Box */
-        .upload-box {
-            border: 3px dashed #ccc; padding: 40px; text-align: center;
-            margin-bottom: 20px; border-radius: 8px; background-color: white;
-            transition: all 0.3s ease; cursor: pointer;
-        }
+        .upload-box { border: 3px dashed #ccc; padding: 40px; text-align: center; margin-bottom: 20px; border-radius: 8px; background-color: white; cursor: pointer; }
         .upload-box.dragover { border-color: #0056b3; background-color: #e9f2ff; }
-        .upload-box p { font-size: 1.1em; color: #555; pointer-events: none;}
 
-        /* Control Panel Layout */
-        #controls {
-            display: none; background: #f0f4f8; padding: 20px; border-radius: 8px;
-            margin-bottom: 20px; border: 1px solid #cce5ff; flex-direction: column; gap: 20px;
-        }
-        .title-row { width: 100%; border-bottom: 1px solid #d0dae5; padding-bottom: 15px; }
-        #chartTitleInput { width: 100%; max-width: 900px; font-size: 1.1em; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        #controls { display: none; background: #f0f4f8; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #cce5ff; flex-direction: column; gap: 20px; }
         .settings-row { display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; }
-
-        /* Inputs & Buttons */
         .control-group { display: flex; flex-direction: column; font-size: 0.85em; font-weight: bold; color: #444; }
         .control-group input, .control-group select { padding: 6px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; background: white; }
         .num-input { width: 80px; }
-        .date-input { width: 115px; }
-        .select-input { min-width: 130px; }
-
         #recalcBtn { padding: 10px 25px; background: #0056b3; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; height: 38px;}
-        #recalcBtn:hover { background: #003d82; }
-        #recalcBtn:disabled { background: #ccc; cursor: not-allowed; }
 
-        /* Text Outputs */
-        #stats { font-weight: bold; font-size: 1.1em; color: #2c3e50; margin-bottom: 15px; }
+        /* Summary Bar Styling */
+        #summary-bar { display: none; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .summary-main-text { font-weight: bold; font-size: 1.1em; color: #002d5b; }
+        .badge-group { display: flex; background: #e9f2ff; border-radius: 6px; padding: 6px 14px; border: 1px solid #cce5ff; font-size: 0.95em; color: #333; gap: 10px; }
+        .badge-group b { color: #000; }
+        .cusum-guide { font-size: 0.85em; color: #666; }
+        .cusum-icon { color: #007bff; font-weight: bold; }
 
-        /* Interactive Tabs */
-        #tab-container { display: none; margin-bottom: -1px; }
-        .tabs { display: flex; gap: 5px; border-bottom: 2px solid #0056b3; flex-wrap: wrap;}
-        .tab-btn {
-            padding: 10px 20px; background: #e9ecef; border: 1px solid #ccc; border-bottom: none;
-            border-radius: 8px 8px 0 0; cursor: pointer; font-weight: bold; color: #555; transition: 0.2s;
-        }
-        .tab-btn:hover { background: #dee2e6; }
+        /* Tab Styling */
+        .tabs { display: flex; gap: 5px; border-bottom: 2px solid #0056b3; flex-wrap: wrap; margin-top: 10px;}
+        .tab-btn { padding: 10px 20px; background: #e9ecef; border: 1px solid #ccc; border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: bold; color: #555; }
         .tab-btn.active { background: #0056b3; color: white; border-color: #0056b3; }
 
-        /* Chart Area */
-        #chart-container { width: 100%; height: 650px; background-color: white; border-radius: 0 8px 8px 8px; border: 1px solid #eee; padding-top: 10px;}
+        #display-wrapper { width: 100%; min-height: 600px; background-color: white; border-radius: 0 8px 8px 8px; border: 1px solid #eee; }
+        #chart-container { width: 100%; height: 600px; }
+
+        #table-view { display: none; padding: 30px; overflow-y: auto; box-sizing: border-box; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f0f4f8; padding: 12px; border-bottom: 2px solid #0056b3; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #eee; }
     </style>
 </head>
 <body>
 
     <h1>Browser-Based SPC Analyzer</h1>
-    <p>100% Secure. Your data never leaves your computer.</p>
-
     <div class="upload-box" id="dropZone">
         <input type="file" id="csvInput" accept=".csv" disabled style="display: none;" />
         <p id="statusText">⏳ Waiting for Python engine to boot...</p>
-        <p style="font-size: 0.9em; font-weight: normal; color: #888; margin-top: 5px;">(Click to browse or Drag & Drop a CSV here)</p>
     </div>
 
     <div id="controls">
-        <div class="title-row">
-            <div class="control-group">
-                <label>Chart Title:</label>
-                <input type="text" id="chartTitleInput" value="Step Change Analysis" placeholder="Enter chart name here...">
-            </div>
-        </div>
         <div class="settings-row">
-            <div class="control-group"><label>X-Axis (Date):</label><select id="xColSelect" class="select-input"></select></div>
-            <div class="control-group"><label>Y-Axis (Value):</label><select id="yColSelect" class="select-input"></select></div>
+            <div class="control-group"><label>X-Axis:</label><select id="xColSelect"></select></div>
+            <div class="control-group"><label>Y-Axis:</label><select id="yColSelect"></select></div>
             <div class="control-group">
                 <label>Date Style:</label>
-                <select id="dateFormatSelect" class="select-input">
+                <select id="dateFormatSelect">
                     <option value="auto">Auto-detect</option>
                     <option value="dd/mm/yyyy">DD/MM/YYYY (UK/EU)</option>
                     <option value="mm/dd/yyyy">MM/DD/YYYY (US)</option>
                 </select>
             </div>
-
-            <div class="control-group"><label>Start Date:</label><input type="date" id="paramStartDate" class="date-input"></div>
-            <div class="control-group"><label>End Date:</label><input type="date" id="paramEndDate" class="date-input"></div>
-
             <div class="control-group"><label>Turn Length:</label><input type="number" id="paramTurnLength" class="num-input" value="5"></div>
-            <div class="control-group"><label>Loops:</label><input type="number" id="paramBootNum" class="num-input" value="1000"></div>
-            <div class="control-group"><label>Conf %:</label><input type="number" id="paramConfLimit" class="num-input" value="95"></div>
-
-            <div class="control-group" style="margin-right: 15px;">
+            <div class="control-group"><label>Loops:</label><input type="number" id="paramBootNum" class="num-input" value="5000"></div>
+            <div class="control-group"><label>Conf %:</label><input type="number" id="paramConfLimit" class="num-input" value="99.7"></div>
+            <div class="control-group">
                 <label>Options:</label>
-                <label style="font-weight: normal; margin-top: 10px; cursor: pointer;">
-                    <input type="checkbox" id="showSDCheckbox"> Show 3SD Limits
-                </label>
+                <label style="font-weight: normal; margin-top: 10px;"><input type="checkbox" id="showSDCheckbox"> Show 3SD</label>
             </div>
-
             <button id="recalcBtn">Recalculate Chart</button>
         </div>
     </div>
 
-    <div id="stats"></div>
+    <div id="summary-bar">
+        <div id="stageCountText" class="summary-main-text"></div>
+        <div class="badge-group">
+            <span>N = <b id="statN">0</b></span> <span>|</span>
+            <span>Mean = <b id="statMean">0</b></span> <span>|</span>
+            <span>SD = <b id="statSD">0</b></span>
+        </div>
+        <div class="cusum-guide">
+            💡 <b>CUSUM:</b> <span class="cusum-icon">↗️</span> Above Avg | <span class="cusum-icon">↘️</span> Below Avg | <span class="cusum-icon">➡️</span> On Avg
+        </div>
+    </div>
 
-    <div id="tab-container">
+    <div id="tab-container" style="display:none;">
         <div class="tabs">
             <button class="tab-btn active" data-view="step">Step Change Analysis</button>
-            <button class="tab-btn" data-view="xmr">X-mR Chart (Individuals)</button> <button class="tab-btn" data-view="run">Run Chart</button>
+            <button class="tab-btn" data-view="stages">Stage Summary</button>
+            <button class="tab-btn" data-view="xmr">X-mR Chart</button>
+            <button class="tab-btn" data-view="run">Run Chart</button>
             <button class="tab-btn" data-view="cusum">CUSUM Chart</button>
             <button class="tab-btn" data-view="raw">Raw Data</button>
         </div>
     </div>
 
-    <div id="chart-container"></div>
+    <div id="display-wrapper">
+        <div id="chart-container"></div>
+        <div id="table-view"><table id="stageSummaryTable"></table></div>
+    </div>
 
     <script src="app.js"></script>
 </body>
