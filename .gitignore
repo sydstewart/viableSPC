@@ -1,0 +1,24 @@
+# PyCharm IDE files — never commit these
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Old/backup JS files — keep working files only
+workerold.js
+appold.js
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules (if ever added)
+node_modules/
+
+# Build output (if minification added later)
+dist/
