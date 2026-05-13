@@ -223,6 +223,18 @@ if (csvInput) csvInput.onchange = (e) => {
 };
 
 function handleFileUpload(file) {
+    // Check file type — only CSV files are supported.
+    // Excel (.xlsx, .xls), JSON, and other formats will not parse correctly.
+    const ext = file.name.split('.').pop().toLowerCase();
+    if (ext !== 'csv') {
+        showError(
+            'Only CSV files are supported. "' + file.name + '" appears to be a ' + ext.toUpperCase() + ' file. ' +
+            'To convert: in Excel go to File → Save As → CSV (Comma delimited) (.csv). ' +
+            'If your Excel file has multiple sheets, save each sheet separately as its own CSV file.'
+        );
+        return;
+    }
+
     // Strip file extension for a clean chart title and settings key
     activeFilename = file.name.replace(/\.[^/.]+$/, "");
     hideError();
@@ -351,6 +363,15 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 function updateSummaryBars() {
     if (!currentChartData) return;
+
+    // CUSUM guide only makes sense on Step Change Analysis view
+    // Hide it on Run Chart, X-mR, CUSUM, and Raw Data tabs
+    const cusumGuide = document.getElementById('cusum-guide');
+    // Show CUSUM guide on Step Change and CUSUM Chart tabs only
+    if (cusumGuide) {
+        cusumGuide.style.display = (currentView === 'step' || currentView === 'cusum') ? 'block' : 'none';
+    }
+
     if (currentView === 'xmr') {
         if (summaryBar)    summaryBar.style.display    = "none";
         if (xmrSummaryBar) xmrSummaryBar.style.display = "flex";
@@ -369,6 +390,10 @@ function updateSummaryBars() {
 // ── Button wiring ──
 if (recalcBtn)      recalcBtn.onclick      = runPythonAnalysis;
 if (showSDCheckbox) showSDCheckbox.onchange = () => { if (currentChartData) drawPlotlyChart(); };
+
+// Live chart title update — when user edits the title input field,
+// redraw the chart immediately so the new title shows in the chart itself
+if (chartTitleInput) chartTitleInput.oninput = () => { if (currentChartData) drawPlotlyChart(); };
 
 // ── Export PNG ──
 // Uses Plotly's built-in downloadImage at high resolution
