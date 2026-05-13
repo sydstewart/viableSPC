@@ -87,7 +87,7 @@ pythonWorker.onmessage = function(event) {
 
 // ── Error banner helpers ──
 function showError(msg) {
-    statusText.innerText = "❌ Error — see details below.";
+    statusText.innerText = "❌ Error — see details above.";
     if (errorBanner)  errorBanner.style.display = "block";
     if (errorMessage) errorMessage.innerText = msg;
 }

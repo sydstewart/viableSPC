@@ -206,6 +206,15 @@
             <button class="modal-close" onclick="document.getElementById('helpModal').classList.remove('active')">✕</button>
             <h2>📊 StepChangeAnalysis.com — Help</h2>
 
+            <h3>Preparing your CSV file</h3>
+            <p>Your CSV must have at least two columns: a date column and a numeric value column. A few common issues to avoid:</p>
+            <ul>
+                <li><b>Numeric values with comma separators</b> (e.g. 1,234,567) — these can break the CSV structure if not properly quoted. Before saving as CSV from Excel, format your value column as a plain number with no thousands separator, or ensure values are wrapped in quotes. Run the Data Validator to check for this.</li>
+                <li><b>Merged cells in Excel</b> — merged date cells leave blank rows in the CSV. Unmerge all cells and fill each row with its own date before saving.</li>
+                <li><b>Mixed date formats</b> — ensure all dates in the date column use the same format throughout. The Data Validator will flag inconsistencies.</li>
+                <li><b>Unsupported date formats</b> — financial year formats like "2004-05" are not supported. Convert to a proper date (e.g. 01/04/2004) before uploading.</li>
+            </ul>
+
             <h3>Getting Started</h3>
             <p>Prepare your data as a CSV file with at least two columns: a <b>date column</b> and a <b>numeric value column</b>. Then drag and drop the file onto the upload area, or click to browse.</p>
 

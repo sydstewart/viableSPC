@@ -3,69 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecureSPC | Surgical Auditor v2.7</title>
+    <title>StepChangeAnalysis.com — Data Validator</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <style>
-        :root { --surgical-red: #dc3545; --clinical-blue: #0d6efd; --terminal-bg: #0f172a; }
+        :root { --brand-blue: #002d5b; --brand-mid: #0056b3; --terminal-bg: #0f172a; }
         body { background-color: #f1f5f9; font-family: 'Segoe UI', system-ui, sans-serif; color: #1e293b; }
-
-        /* UI Component: Modern shadow cards for audit sections */
-        .scanner-card { border: none; border-radius: 15px; background: white; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-
-        /* Interactive: Drag and Drop Drop-Zone Styling */
-        #drop-zone {
-            border: 3px dashed #cbd5e1;
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            background: #f8fafc;
-        }
-        #drop-zone.dragover { border-color: var(--clinical-blue); background: #f0f7ff; border-style: solid; }
-
-        /* Alert Styling: Red box for failing data audits */
-        .summary-box {
-            background: #fff5f5;
-            border-left: 5px solid var(--surgical-red);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-        }
-
-        /* Diagnostic Log: Dark terminal-style output for row coordinates */
-        .log-container {
-            max-height: 550px;
-            overflow-y: auto;
-            background: var(--terminal-bg);
-            color: #38bdf8;
-            font-family: 'Cascadia Code', 'Courier New', monospace;
-            padding: 25px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            border: 1px solid #334155;
-            white-space: pre-wrap;
-        }
-
+        .navbar { background-color: var(--brand-blue) !important; }
+        .navbar-brand { font-size: 1.1em; }
+        .scanner-card { border: none; border-radius: 12px; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+        #drop-zone { border: 3px dashed #cbd5e1; border-radius: 12px; padding: 40px; text-align: center; transition: all 0.2s ease; cursor: pointer; background: #f8fafc; }
+        #drop-zone.dragover { border-color: var(--brand-mid); background: #f0f7ff; border-style: solid; }
+        .summary-box { padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #dc3545; background: #fff5f5; }
+        .summary-box.clean { border-left-color: #198754; background: #f0fff4; }
+        .log-container { max-height: 550px; overflow-y: auto; background: var(--terminal-bg); color: #38bdf8; font-family: 'Cascadia Code', 'Courier New', monospace; padding: 25px; border-radius: 10px; font-size: 0.9rem; border: 1px solid #334155; white-space: pre-wrap; }
         .error-text { color: #f87171; font-weight: bold; display: block; margin-bottom: 2px; }
         .warning-text { color: #fbbf24; font-weight: bold; display: block; margin-top: 8px; }
         .suggestion-tip { color: #a5f3fc; font-size: 0.85rem; display: block; margin-left: 20px; font-family: sans-serif; }
         .success-text { color: #4ade80; font-weight: bold; }
-
-        .stat-badge { font-weight: bold; padding: 2px 8px; border-radius: 5px; background: #e2e8f0; margin-right: 10px; }
+        .info-text { color: #94a3b8; display: block; margin-top: 4px; }
+        .stat-badge { font-weight: bold; padding: 3px 10px; border-radius: 5px; background: #e2e8f0; margin-right: 8px; font-size: 0.9em; }
+        #print-log-btn { display: none; margin-top: 12px; }
+        @media print {
+            nav, #drop-zone, #mapping-section, #print-log-btn, .btn { display: none !important; }
+            body { background: white; font-size: 11pt; }
+            .log-container { max-height: none; background: white; color: black; border: 1px solid #ccc; font-size: 10pt; }
+            .error-text { color: #cc0000; } .warning-text { color: #996600; }
+            .success-text { color: #006600; } .suggestion-tip { color: #333; }
+            .info-text { color: #555; } .summary-box { border: 1px solid #ccc; background: white !important; }
+            h2, h5 { color: black !important; }
+        }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-dark bg-dark py-3 shadow-sm">
+<nav class="navbar navbar-dark py-3 shadow-sm">
     <div class="container">
-        <span class="navbar-brand fw-bold">🩺 SecureSPC <span class="text-info">Surgical Auditor v2.7</span></span>
+        <span class="navbar-brand fw-bold">
+            &#128202; StepChangeAnalysis.com
+            <span class="text-info ms-2" style="font-size:0.85em;font-weight:normal;">Data Validator</span>
+        </span>
         <div class="d-flex gap-2">
-            <button onclick="location.reload()" class="btn btn-outline-light btn-sm">Reset Scanner</button>
-            <a href="index.html" class="btn btn-info btn-sm fw-bold">Open Analyzer</a>
+            <button onclick="location.reload()" class="btn btn-outline-light btn-sm">&#8635; Reset</button>
+            <a href="index.html" class="btn btn-info btn-sm fw-bold">&#8592; Back to Analyzer</a>
         </div>
     </div>
 </nav>
@@ -75,43 +57,53 @@
         <div class="col-lg-10">
 
             <div class="mb-4 text-center">
-                <h2 class="fw-bold text-dark">Data Integrity Deep Scan</h2>
-                <p class="text-muted">Auditing for Merged Gaps, Timestamp Consistency, and Chronological Order.</p>
+                <h2 class="fw-bold" style="color:var(--brand-blue);">CSV Data Validator</h2>
+                <p class="text-muted">Checks your CSV for date issues, missing values, column errors, and out-of-order rows. Your file never leaves your browser.</p>
             </div>
 
             <div class="scanner-card p-4 mb-4">
                 <div id="drop-zone">
                     <div id="drop-text">
-                        <h5 class="fw-bold">Drop Spreadsheet (CSV) Here</h5>
-                        <p class="mb-0 text-secondary small">Your file stays local. We audit row coordinates for repair.</p>
+                        <h5 class="fw-bold" style="color:var(--brand-blue);">Drop CSV File Here</h5>
+                        <p class="mb-0 text-secondary small">&#128274; Your file stays on your computer — nothing is uploaded.</p>
                     </div>
-                    <input type="file" id="csv-input" style="display: none;" accept=".csv">
+                    <input type="file" id="csv-input" style="display:none;" accept=".csv">
                 </div>
             </div>
 
-            <div id="mapping-section" class="scanner-card p-4 mb-4" style="display: none;">
+            <div id="mapping-section" class="scanner-card p-4 mb-4" style="display:none;">
                 <div class="row align-items-center g-3">
-                    <div class="col-md-4">
-                        <label class="form-label fw-bold small text-muted">TIMELINE COLUMN (X)</label>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold small text-muted">DATE COLUMN (X-AXIS)</label>
                         <select id="x-col" class="form-select border-primary shadow-sm"></select>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label fw-bold small text-muted">MEASURE COLUMN (Y)</label>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold small text-muted">VALUE COLUMN (Y-AXIS)</label>
                         <select id="y-col" class="form-select border-primary shadow-sm"></select>
                     </div>
-                    <div class="col-md-4 d-flex align-items-end pt-2">
-                        <div class="form-check form-switch me-3">
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold small text-muted">DATE FORMAT</label>
+                        <select id="date-format" class="form-select border-primary shadow-sm">
+                            <option value="auto">Auto-detect</option>
+                            <option value="dmy">DD/MM/YYYY (UK/EU)</option>
+                            <option value="mdy">MM/DD/YYYY (US)</option>
+                            <option value="iso">YYYY-MM-DD (ISO)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end flex-column gap-2 pt-2">
+                        <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="euro-mode">
-                            <label class="form-check-label small fw-bold" for="euro-mode">Euro Decimals (12,5)</label>
+                            <label class="form-check-label small fw-bold" for="euro-mode">Euro Decimals (1,5 = 1.5)</label>
                         </div>
-                        <button id="run-scan" class="btn btn-danger btn-lg flex-grow-1 fw-bold shadow">AUDIT DATA</button>
+                        <button id="run-scan" class="btn btn-danger btn-lg w-100 fw-bold shadow">&#128269; Validate Data</button>
                     </div>
                 </div>
             </div>
 
-            <div id="results-section" style="display: none;">
+            <div id="results-section" style="display:none;">
                 <div id="summary-area" class="summary-box shadow-sm"></div>
-                <div id="audit-log" class="log-container">Initializing audit...</div>
+                <div id="audit-log" class="log-container">Running validation...</div>
+                <button id="print-log-btn" class="btn btn-secondary" onclick="printLog()">&#128424; Print Validation Report</button>
             </div>
 
         </div>
@@ -119,41 +111,26 @@
 </div>
 
 <script>
-    // Global Data Store
     let rawData = [];
-    const dropZone = document.getElementById('drop-zone');
-    const csvInput = document.getElementById('csv-input');
+    const dropZone       = document.getElementById('drop-zone');
+    const csvInput       = document.getElementById('csv-input');
     const mappingSection = document.getElementById('mapping-section');
     const resultsSection = document.getElementById('results-section');
-    const auditLog = document.getElementById('audit-log');
-    const summaryArea = document.getElementById('summary-area');
+    const auditLog       = document.getElementById('audit-log');
+    const summaryArea    = document.getElementById('summary-area');
 
-    // Drag & Drop Listener: Disables default browser download/open behavior
     window.addEventListener("dragover", e => e.preventDefault(), false);
-    window.addEventListener("drop", e => e.preventDefault(), false);
-
-    // Drop Zone Visual Feedback
-    ['dragenter', 'dragover'].forEach(n => dropZone.addEventListener(n, (e) => {
-        e.preventDefault(); e.stopPropagation(); dropZone.classList.add('dragover');
-    }, false));
-
-    ['dragleave', 'drop'].forEach(n => dropZone.addEventListener(n, (e) => {
-        e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('dragover');
-    }, false));
-
-    // File Processing Handler
-    dropZone.addEventListener('drop', e => {
-        const files = e.dataTransfer.files;
-        if (files.length) handleFile(files[0]);
-    }, false);
-
-    dropZone.onclick = () => csvInput.click();
-    csvInput.onchange = (e) => { if (e.target.files.length) handleFile(e.target.files[0]); };
+    window.addEventListener("drop",     e => e.preventDefault(), false);
+    ['dragenter','dragover'].forEach(n => dropZone.addEventListener(n, e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.add('dragover'); }, false));
+    ['dragleave','drop'].forEach(n => dropZone.addEventListener(n, e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('dragover'); }, false));
+    dropZone.addEventListener('drop', e => { if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]); }, false);
+    dropZone.onclick  = () => csvInput.click();
+    csvInput.onchange = e => { if (e.target.files.length) handleFile(e.target.files[0]); };
 
     /**
-     * STAGE 5: CSV Parsing
-     * Uses PapaParse to convert CSV into JSON objects.
-     * Extracts headers and populates selection dropdowns.
+     * FILE HANDLER
+     * Parses CSV with PapaParse. __parsed_extra field is populated by PapaParse
+     * when a row has more fields than the header — used in Check F below.
      */
     function handleFile(file) {
         Papa.parse(file, {
@@ -163,132 +140,273 @@
                 const headers = results.meta.fields;
                 const xS = document.getElementById('x-col');
                 const yS = document.getElementById('y-col');
-
                 xS.innerHTML = ''; yS.innerHTML = '';
                 headers.forEach(h => {
-                    if(h && h.trim() !== "") {
-                        let opt = document.createElement('option');
-                        opt.value = h; opt.innerText = h;
-                        xS.appendChild(opt.cloneNode(true)); yS.appendChild(opt);
+                    if (h && h.trim() !== "") {
+                        const o = document.createElement('option');
+                        o.value = h; o.innerText = h;
+                        xS.appendChild(o.cloneNode(true)); yS.appendChild(o);
                     }
                 });
-
+                if (yS.options.length >= 2) yS.selectedIndex = 1;
                 mappingSection.style.display = 'block';
-                document.getElementById('drop-text').innerHTML = `
-                    <h5 class="fw-bold text-success">✔ File Ready</h5>
-                    <p class="mb-0 text-secondary">${file.name}</p>
-                `;
+                document.getElementById('drop-text').innerHTML =
+                    '<h5 class="fw-bold text-success">&#10004; File Loaded</h5>' +
+                    '<p class="mb-0 text-secondary">' + file.name + ' &mdash; ' + rawData.length + ' rows detected</p>';
             }
         });
     }
 
     /**
-     * STAGE 6: THE AUDIT ENGINE
-     * Runs when 'AUDIT DATA' is clicked.
-     * Iterates through every row to check for:
-     * 1. Empty timeline gaps (Merged cells)
-     * 2. Non-standard Date/Time formats (Regex)
-     * 3. Numerical validity (Measure audit)
-     * 4. Chronological order (Sequence check)
+     * DATE PARSER
+     * Converts a date string to a millisecond timestamp for chronological comparison.
+     * Handles UK (DD/MM/YYYY), US (MM/DD/YYYY), ISO (YYYY-MM-DD), and auto-detect.
+     * Returns NaN if the string cannot be parsed as a date.
+     */
+    function parseRowDate(str, format) {
+        if (!str || str.trim() === "") return NaN;
+        str = str.trim();
+        if (/^\d{4}-\d{2}-\d{2}/.test(str)) return new Date(str).getTime();
+        const parts = str.split(/[\/\-\.\s]/);
+        if (parts.length < 3) return NaN;
+        let day, month, year;
+        if (format === 'dmy') {
+            day = parseInt(parts[0],10); month = parseInt(parts[1],10)-1; year = parseInt(parts[2],10);
+        } else if (format === 'mdy') {
+            month = parseInt(parts[0],10)-1; day = parseInt(parts[1],10); year = parseInt(parts[2],10);
+        } else {
+            const p0 = parseInt(parts[0],10), p1 = parseInt(parts[1],10);
+            if (p0 > 12)      { day = p0; month = p1-1; }
+            else if (p1 > 12) { month = p0-1; day = p1; }
+            else               { day = p0; month = p1-1; }
+            year = parseInt(parts[2],10);
+        }
+        if (year < 100) year += year < 50 ? 2000 : 1900;
+        return new Date(year, month, day).getTime();
+    }
+
+    /**
+     * AUDIT ENGINE
+     * Iterates every row checking for six types of data problem:
+     *   A. Empty date (merged cell)
+     *   B. Unrecognised date format
+     *   C. Out-of-chronological-order date (causes spider-web chart)
+     *   D. Missing numeric value
+     *   E. Non-numeric value
+     *   F. Too many columns (unquoted commas in numeric values corrupting CSV structure)
      */
     document.getElementById('run-scan').onclick = function() {
-        const x = document.getElementById('x-col').value;
-        const y = document.getElementById('y-col').value;
-        const isEuro = document.getElementById('euro-mode').checked;
+        const x       = document.getElementById('x-col').value;
+        const y       = document.getElementById('y-col').value;
+        const isEuro  = document.getElementById('euro-mode').checked;
+        const dateFmt = document.getElementById('date-format').value;
 
         resultsSection.style.display = 'block';
+        let stats = { blanks:0, badFormats:0, badNumbers:0, outOfOrder:0, columnErrors:0, clean:0 };
+        let lastTS = 0, logHtml = "";
 
-        let stats = { blanks: 0, badFormats: 0, badNumbers: 0, clean: 0 };
-        let sequenceBreaks = 0;
-        let lastTimeValue = 0;
-        let logHtml = "";
+        // ── PRE-CHECK: Column type sanity check ──
+        // Sample the first 5 non-empty rows to detect likely wrong column selections.
+        // Warns the user before the row-by-row audit runs.
+        let preCheckWarnings = "";
 
-        rawData.forEach((row, index) => {
-            const rowNum = index + 2; // Offset for CSV header and 0-indexing
+        const sampleRows = rawData.filter(r => r[x] || r[y]).slice(0, 5);
+
+        // Check 1: Is the X column (date) actually full of plain numbers?
+        // Plain numbers as dates suggest the user selected the value column as X.
+        const xLooksNumeric = sampleRows.filter(r => {
+            const v = r[x] ? r[x].toString().trim() : "";
+            return v !== "" && !isNaN(parseFloat(v)) && !/[\/\-\.]/.test(v);
+        }).length;
+        if (xLooksNumeric >= 3) {
+            preCheckWarnings += '<div class="alert alert-warning mt-2">' +
+                '&#9888; <strong>Warning: Date column may be wrong.</strong> ' +
+                'The X-Axis column "' + x + '" appears to contain plain numbers, not dates. ' +
+                'Did you select the wrong column? Dates should look like 01/04/2024 or 2024-04-01.' +
+                '</div>';
+        }
+
+        // Check 2: Is the X column full of text that looks like dates?
+        // If so and Y also looks like dates, columns may be swapped.
+        const yLooksLikeDate = sampleRows.filter(r => {
+            const v = r[y] ? r[y].toString().trim() : "";
+            return /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}/.test(v) || /^\d{4}-\d{2}-\d{2}/.test(v);
+        }).length;
+        if (yLooksLikeDate >= 3) {
+            preCheckWarnings += '<div class="alert alert-warning mt-2">' +
+                '&#9888; <strong>Warning: Value column may contain dates.</strong> ' +
+                'The Y-Axis column "' + y + '" appears to contain dates, not numbers. ' +
+                'Did you select the date column as your value? Check your column selection above.' +
+                '</div>';
+        }
+
+        // Check 3: Is the X column (date) all text with no date-like pattern?
+        const xLooksLikeText = sampleRows.filter(r => {
+            const v = r[x] ? r[x].toString().trim() : "";
+            if (v === "") return false;
+            const isDate = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}/.test(v) || /^\d{4}-\d{2}-\d{2}/.test(v) || /^\d{4}$/.test(v);
+            const isNum  = !isNaN(parseFloat(v)) && !/[\/\-\.]/.test(v);
+            return !isDate && !isNum; // pure text — neither date nor number
+        }).length;
+        if (xLooksLikeText >= 3) {
+            preCheckWarnings += '<div class="alert alert-danger mt-2">' +
+                '&#10060; <strong>Error: Date column appears to contain text.</strong> ' +
+                'The X-Axis column "' + x + '" contains text values (e.g. "' +
+                (sampleRows[0] ? sampleRows[0][x] : '') + '"). ' +
+                'The Analyser requires a proper date column. Select a different X-Axis column, or convert this column to dates in Excel.' +
+                '</div>';
+        }
+
+        // Check 4: Same column selected for both X and Y
+        if (x === y) {
+            preCheckWarnings += '<div class="alert alert-danger mt-2">' +
+                '&#10060; <strong>Error: Same column selected for Date and Value.</strong> ' +
+                'X-Axis and Y-Axis are both set to "' + x + '". ' +
+                'Please select different columns.' +
+                '</div>';
+        }
+
+        // Show pre-check warnings at the top of the log if any were found
+        if (preCheckWarnings) {
+            logHtml += '<span class="warning-text">&#9888; COLUMN SELECTION WARNINGS &mdash; check these before fixing row errors:</span>';
+            // We insert these into the summary instead (see below)
+        }
+
+        rawData.forEach(function(row, index) {
+            const rowNum = index + 2;
             let rowHasError = false;
 
-            // Audit Part A: Timeline (X-Axis)
+            // Check A & B: Date column
             const dVal = row[x] ? row[x].toString().trim() : "";
-
-            // Detection: Blank cells (The common "Merged Cell" issue)
             if (dVal === "" || dVal === "-") {
-                stats.blanks++;
-                rowHasError = true;
-                logHtml += `<span class="error-text">[ROW ${rowNum}] Timeline is empty (Merged cell suspected).</span>`;
+                stats.blanks++; rowHasError = true;
+                logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Date is empty &mdash; merged cell suspected.</span>';
+                logHtml += '<span class="suggestion-tip">&#128161; In Excel: unmerge cells and fill each row with its own date.</span>';
             } else {
-                // Regex Validation: Accepts standard dates, financial years, and timestamps with seconds
-                const isDate = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}$/.test(dVal);
-                const isDateTime = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}\s\d{1,2}:\d{2}(:\d{2})?$/.test(dVal);
+                const isStdDate = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}/.test(dVal);
+                const isISO     = /^\d{4}-\d{2}-\d{2}/.test(dVal);
                 const isYearOnly = /^\d{4}$/.test(dVal);
-
-                if (!isDate && !isDateTime && !isYearOnly) {
-                    stats.badFormats++;
-                    logHtml += `<span class="warning-text">[ROW ${rowNum}] Format Error: "${dVal}" is non-standard.</span>`;
-                    logHtml += `<span class="suggestion-tip">💡 Suggestion: Use "DD/MM/YYYY HH:MM" (e.g., 10/05/2026 14:30)</span>`;
+                if (!isStdDate && !isISO && !isYearOnly) {
+                    stats.badFormats++; rowHasError = true;
+                    logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Unrecognised date format: "' + dVal + '"</span>';
+                    logHtml += '<span class="suggestion-tip">&#128161; Use DD/MM/YYYY (UK), MM/DD/YYYY (US), or YYYY-MM-DD (ISO)</span>';
                 }
-
-                // CHRONOLOGICAL AUDIT: Compares current timestamp to previous row
-                const parts = dVal.split(/[\/\-\.\s:]/);
-                // JS Date Map: Year=parts[2], Month=parts[1]-1, Day=parts[0]
-                const currentTS = new Date(parts[2], parts[1]-1, parts[0], parts[3]||0, parts[4]||0, parts[5]||0).getTime();
-
-                if (!isNaN(currentTS)) {
-                    if (lastTimeValue > 0 && currentTS < lastTimeValue) {
-                        sequenceBreaks++; // Detected data moving "backwards"
+                // Check C: Chronological order
+                const ts = parseRowDate(dVal, dateFmt);
+                if (!isNaN(ts)) {
+                    if (lastTS > 0 && ts < lastTS) {
+                        stats.outOfOrder++; rowHasError = true;
+                        logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date is out of chronological order.</span>';
+                        logHtml += '<span class="suggestion-tip">&#128161; Sort data by date ascending in Excel before saving as CSV.</span>';
                     }
-                    lastTimeValue = currentTS;
+                    lastTS = ts;
                 }
             }
 
-            // Audit Part B: Measures (Y-Axis)
+            // Check D & E: Value column
             const rawM = row[y] ? row[y].toString().trim() : "";
             if (rawM === "") {
-                stats.badNumbers++;
-                rowHasError = true;
-                logHtml += `<span class="error-text">[ROW ${rowNum}] Measure value is missing.</span>`;
+                stats.badNumbers++; rowHasError = true;
+                logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Value is missing.</span>';
             } else {
-                // Handling thousands commas and Euro decimal commas
-                let cleanM = rawM.replace(/\s+/g, '');
-                if (cleanM.includes(',')) {
-                    cleanM = isEuro ? cleanM.replace(',', '.') : cleanM.replace(/,/g, '');
-                }
-
+                let cleanM = rawM.replace(/\s+/g,'');
+                if (cleanM.includes(',')) cleanM = isEuro ? cleanM.replace(/\./,'').replace(',','.') : cleanM.replace(/,/g,'');
                 if (isNaN(parseFloat(cleanM))) {
-                    stats.badNumbers++;
-                    rowHasError = true;
-                    logHtml += `<span class="error-text">[ROW ${rowNum}] Value Error: "${rawM}" is not a valid number.</span>`;
+                    stats.badNumbers++; rowHasError = true;
+                    logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; "' + rawM + '" is not a valid number.</span>';
+                    logHtml += '<span class="suggestion-tip">&#128161; Remove units, symbols, or text from the value column.</span>';
                 }
+            }
+
+            // Check F: Column count
+            // PapaParse sets __parsed_extra when a row has more fields than the header.
+            // This happens when numeric values contain unquoted commas (e.g. 1,234,567)
+            // which get treated as column separators, corrupting the CSV structure.
+            // The Analyser would silently use only the first fragment (e.g. "1") — wrong results.
+            if (row['__parsed_extra']) {
+                stats.columnErrors++; rowHasError = true;
+                logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Too many columns &mdash; commas in numeric values may be unquoted.</span>';
+                logHtml += '<span class="suggestion-tip">&#128161; In Excel: remove comma separators from numbers (format as plain number) before saving as CSV.</span>';
             }
 
             if (!rowHasError) stats.clean++;
         });
 
-        /**
-         * STAGE 7: Summary & Feedback
-         * Compiles the audit results into a readable summary.
-         * Triggers the "Spider-Web" warning if sequence breaks are detected.
-         */
-        let coachAdvice = "";
-        if (sequenceBreaks > 0) {
-            coachAdvice = `<div class="alert alert-warning shadow-sm">⚠️ <strong>Chronological Error:</strong> ${sequenceBreaks} rows are out of order. This will cause a "Spider-Web" chart. Please sort your file by Date & Time in Excel.</div>`;
-        }
+        // Build summary
+        const totalErrors = stats.blanks + stats.badFormats + stats.badNumbers + stats.outOfOrder + stats.columnErrors;
+        const isClean = totalErrors === 0;
 
-        summaryArea.innerHTML = `
-            <h5 class="fw-bold text-danger mb-3">Surgical Audit Summary</h5>
-            ${coachAdvice}
-            <div class="d-flex flex-wrap gap-2 mt-3">
-                <span class="stat-badge">🔴 ${stats.blanks} Gaps</span>
-                <span class="stat-badge">🟡 ${stats.badFormats} Format Errors</span>
-                <span class="stat-badge">🔴 ${stats.badNumbers} Non-Numeric</span>
-            </div>
-            <hr>
-            <div class="success-text fs-5">ESTIMATED PASSABLE ROWS: ${stats.clean} / ${rawData.length}</div>
-        `;
+        let warnings = "";
+        if (stats.outOfOrder > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.outOfOrder + ' out-of-order rows</strong> — this causes a spider-web chart. Sort by date ascending in Excel.</div>';
+        if (stats.columnErrors > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.columnErrors + ' column structure errors</strong> — unquoted commas in numeric values. Remove thousands separators from numbers in Excel.</div>';
 
-        // Output results to terminal
-        auditLog.innerHTML = logHtml || `<div class="success-text">SCAN COMPLETE: NO ISSUES FOUND. DATA IS CLINICALLY CLEAN.</div>`;
+        summaryArea.className = 'summary-box shadow-sm' + (isClean && !preCheckWarnings ? ' clean' : '');
+        summaryArea.innerHTML =
+            '<h5 class="fw-bold mb-3" style="color:' + (isClean && !preCheckWarnings ? '#198754' : '#dc3545') + '">' +
+            (isClean && !preCheckWarnings ? '&#9989; Validation Summary &mdash; No Issues Found' : '&#10060; Validation Summary &mdash; Issues Detected') + '</h5>' +
+            preCheckWarnings +
+            warnings +
+            '<div class="d-flex flex-wrap gap-2 mt-3">' +
+            '<span class="stat-badge">&#128308; ' + stats.blanks + ' Missing Dates</span>' +
+            '<span class="stat-badge">&#128993; ' + stats.badFormats + ' Format Warnings</span>' +
+            '<span class="stat-badge">&#128308; ' + stats.badNumbers + ' Invalid Values</span>' +
+            '<span class="stat-badge">&#128993; ' + stats.outOfOrder + ' Out-of-Order Rows</span>' +
+            '<span class="stat-badge">&#128308; ' + stats.columnErrors + ' Column Errors</span>' +
+            '</div><hr>' +
+            '<div class="fw-bold fs-5" style="color:' + (isClean ? '#198754' : '#444') + '">' +
+            (isClean && !preCheckWarnings ? '&#9989; All ' + rawData.length + ' rows passed &mdash; ready for analysis.' :
+                stats.clean + ' / ' + rawData.length + ' rows are clean. Fix the issues above before analysing.') +
+            '</div>' +
+            (isClean ? '' : '<div class="mt-3"><a href="index.html" class="btn btn-primary btn-sm">&#8592; Return to Analyzer</a></div>');
+
+        auditLog.innerHTML = logHtml ||
+            '<span class="success-text">&#9989; VALIDATION COMPLETE &mdash; NO ISSUES FOUND.</span>' +
+            '<span class="info-text">Your CSV is ready for the StepChangeAnalysis.com Analyzer.</span>' +
+            '<span class="info-text">Total rows scanned: ' + rawData.length + '</span>';
+
         resultsSection.scrollIntoView({ behavior: 'smooth' });
+
+        // Show print button
+        const printBtn = document.getElementById('print-log-btn');
+        if (printBtn) printBtn.style.display = 'inline-block';
     };
+
+    /**
+     * PRINT LOG
+     * Opens a clean print-ready page with the full validation report.
+     * Intended for users with long correction lists — print and work
+     * through the fixes in Excel row by row while referencing the report.
+     */
+    function printLog() {
+        const fileInfo = document.querySelector('#drop-text p') ? document.querySelector('#drop-text p').innerText : 'CSV Validation Report';
+        const summary  = document.getElementById('summary-area').innerHTML;
+        const logText  = document.getElementById('audit-log').innerHTML;
+        const now      = new Date();
+        const dateStr  = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+        const win = window.open('', '_blank');
+        win.document.write(
+            '<!DOCTYPE html><html><head><title>Validation Report</title><style>' +
+            'body{font-family:Segoe UI,sans-serif;margin:30px;font-size:11pt;color:#1e293b}' +
+            'h2{color:#002d5b;margin-bottom:4px}.meta{font-size:.85em;color:#666;margin-bottom:20px}' +
+            '.summary{padding:15px;border-radius:8px;margin-bottom:20px;border-left:5px solid #dc3545;background:#fff5f5}' +
+            '.log{font-family:Courier New,monospace;font-size:9.5pt;line-height:1.6;padding:15px;border:1px solid #ccc;border-radius:6px;background:#f8f9fa}' +
+            '.error-text{color:#cc0000;font-weight:bold;display:block}' +
+            '.warning-text{color:#996600;font-weight:bold;display:block;margin-top:6px}' +
+            '.suggestion-tip{color:#444;font-size:9pt;display:block;margin-left:20px}' +
+            '.success-text{color:#006600;font-weight:bold}.info-text{color:#555;display:block}' +
+            '.stat-badge{display:inline-block;padding:2px 8px;background:#e2e8f0;border-radius:4px;margin-right:6px;font-weight:bold;font-size:9.5pt}' +
+            'hr{border:none;border-top:1px solid #ddd;margin:12px 0}.btn{display:none}' +
+            '@media print{body{margin:15px}}' +
+            '</style></head><body>' +
+            '<h2>&#128202; StepChangeAnalysis.com &#8212; Validation Report</h2>' +
+            '<div class="meta">Generated: ' + dateStr + ' &nbsp;|&nbsp; ' + fileInfo + '</div>' +
+            '<div class="summary">' + summary + '</div>' +
+            '<div class="log">' + logText + '</div>' +
+            '<script>window.onload=function(){window.print();}<\/script>' +
+            '</body></html>'
+        );
+        win.document.close();
+    }
 </script>
 
 </body>
