@@ -124,13 +124,37 @@ function parseDate(str, format) {
     if (!str || str.trim() === "") return null;
     str = str.trim();
 
-    // ISO format YYYY-MM-DD (always unambiguous)
+    // ── Year only: "1949", "2024" ──
+    // Treat as 1st January of that year
+    if (/^\d{4}$/.test(str) && (format === "yyyy" || format === "auto")) {
+        const y = parseInt(str, 10);
+        const d = new Date(y, 0, 1);
+        return isNaN(d.getTime()) ? null : d;
+    }
+
+    // ── Year-Month ISO: "2024-04" ──
+    // Treat as 1st day of that month
+    if (/^\d{4}-\d{2}$/.test(str) && (format === "yyyy-mm" || format === "auto")) {
+        const parts = str.split('-');
+        const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, 1);
+        return isNaN(d.getTime()) ? null : d;
+    }
+
+    // ── Year-Month UK: "04/2024" or "04-2024" ──
+    // Treat as 1st day of that month
+    if (/^\d{1,2}[\/\-]\d{4}$/.test(str) && (format === "mm/yyyy" || format === "auto")) {
+        const parts = str.split(/[\/\-]/);
+        const d = new Date(parseInt(parts[1], 10), parseInt(parts[0], 10) - 1, 1);
+        return isNaN(d.getTime()) ? null : d;
+    }
+
+    // ── ISO format YYYY-MM-DD (always unambiguous) ──
     if (/^\d{4}-\d{2}-\d{2}/.test(str)) {
         const d = new Date(str);
         return isNaN(d) ? null : d;
     }
 
-    // Split on common separators
+    // ── Full date: DD/MM/YYYY, MM/DD/YYYY, or auto-detect ──
     const parts = str.split(/[\/\-\.\s]/);
     if (parts.length < 3) return null;
 
@@ -144,6 +168,10 @@ function parseDate(str, format) {
         month = parseInt(parts[0], 10) - 1;
         day   = parseInt(parts[1], 10);
         year  = parseInt(parts[2], 10);
+    } else if (format === "yyyy-mm-dd") {
+        year  = parseInt(parts[0], 10);
+        month = parseInt(parts[1], 10) - 1;
+        day   = parseInt(parts[2], 10);
     } else {
         // Auto-detect: if first part > 12 it must be day (DD/MM)
         const p0 = parseInt(parts[0], 10);

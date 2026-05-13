@@ -88,6 +88,9 @@
                             <option value="dmy">DD/MM/YYYY (UK/EU)</option>
                             <option value="mdy">MM/DD/YYYY (US)</option>
                             <option value="iso">YYYY-MM-DD (ISO)</option>
+                            <option value="ym-iso">YYYY-MM (Year-Month ISO)</option>
+                            <option value="ym-uk">MM/YYYY (Year-Month UK)</option>
+                            <option value="yyyy">YYYY (Year only)</option>
                         </select>
                     </div>
                     <div class="col-md-3 d-flex align-items-end flex-column gap-2 pt-2">
@@ -166,7 +169,28 @@
     function parseRowDate(str, format) {
         if (!str || str.trim() === "") return NaN;
         str = str.trim();
+
+        // Year only: "1949", "2024" — treat as 1st January of that year
+        if (/^\d{4}$/.test(str) && (format === 'yyyy' || format === 'auto')) {
+            return new Date(parseInt(str, 10), 0, 1).getTime();
+        }
+
+        // Year-Month ISO: "2024-04" — treat as 1st of that month
+        if (/^\d{4}-\d{2}$/.test(str) && (format === 'ym-iso' || format === 'auto')) {
+            const p = str.split('-');
+            return new Date(parseInt(p[0],10), parseInt(p[1],10)-1, 1).getTime();
+        }
+
+        // Year-Month UK: "04/2024" — treat as 1st of that month
+        if (/^\d{1,2}[\/\-]\d{4}$/.test(str) && (format === 'ym-uk' || format === 'auto')) {
+            const p = str.split(/[\/\-]/);
+            return new Date(parseInt(p[1],10), parseInt(p[0],10)-1, 1).getTime();
+        }
+
+        // ISO full date YYYY-MM-DD
         if (/^\d{4}-\d{2}-\d{2}/.test(str)) return new Date(str).getTime();
+
+        // Full date DD/MM/YYYY, MM/DD/YYYY etc.
         const parts = str.split(/[\/\-\.\s]/);
         if (parts.length < 3) return NaN;
         let day, month, year;
@@ -174,6 +198,8 @@
             day = parseInt(parts[0],10); month = parseInt(parts[1],10)-1; year = parseInt(parts[2],10);
         } else if (format === 'mdy') {
             month = parseInt(parts[0],10)-1; day = parseInt(parts[1],10); year = parseInt(parts[2],10);
+        } else if (format === 'iso') {
+            year = parseInt(parts[0],10); month = parseInt(parts[1],10)-1; day = parseInt(parts[2],10);
         } else {
             const p0 = parseInt(parts[0],10), p1 = parseInt(parts[1],10);
             if (p0 > 12)      { day = p0; month = p1-1; }
@@ -214,15 +240,18 @@
 
         // Check 1: Is the X column (date) actually full of plain numbers?
         // Plain numbers as dates suggest the user selected the value column as X.
+        // Exception: 4-digit numbers (1949, 2024) are valid year-only dates.
         const xLooksNumeric = sampleRows.filter(r => {
             const v = r[x] ? r[x].toString().trim() : "";
-            return v !== "" && !isNaN(parseFloat(v)) && !/[\/\-\.]/.test(v);
+            const is4DigitYear = /^\d{4}$/.test(v);
+            return v !== "" && !isNaN(parseFloat(v)) && !/[\/\-\.]/.test(v) && !is4DigitYear;
         }).length;
         if (xLooksNumeric >= 3) {
             preCheckWarnings += '<div class="alert alert-warning mt-2">' +
                 '&#9888; <strong>Warning: Date column may be wrong.</strong> ' +
                 'The X-Axis column "' + x + '" appears to contain plain numbers, not dates. ' +
-                'Did you select the wrong column? Dates should look like 01/04/2024 or 2024-04-01.' +
+                'Did you select the wrong column? Dates should look like 01/04/2024 or 2024-04-01. ' +
+                'If your data uses year-only dates (e.g. 1949), select "YYYY (Year only)" in the Date Format dropdown.' +
                 '</div>';
         }
 
@@ -283,13 +312,14 @@
                 logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Date is empty &mdash; merged cell suspected.</span>';
                 logHtml += '<span class="suggestion-tip">&#128161; In Excel: unmerge cells and fill each row with its own date.</span>';
             } else {
-                const isStdDate = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}/.test(dVal);
-                const isISO     = /^\d{4}-\d{2}-\d{2}/.test(dVal);
+                const isStdDate  = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}/.test(dVal);
+                const isISO      = /^\d{4}-\d{2}-\d{2}/.test(dVal);
+                const isYearMonth = /^\d{4}-\d{2}$/.test(dVal) || /^\d{1,2}[\/\-]\d{4}$/.test(dVal);
                 const isYearOnly = /^\d{4}$/.test(dVal);
-                if (!isStdDate && !isISO && !isYearOnly) {
+                if (!isStdDate && !isISO && !isYearMonth && !isYearOnly) {
                     stats.badFormats++; rowHasError = true;
                     logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Unrecognised date format: "' + dVal + '"</span>';
-                    logHtml += '<span class="suggestion-tip">&#128161; Use DD/MM/YYYY (UK), MM/DD/YYYY (US), or YYYY-MM-DD (ISO)</span>';
+                    logHtml += '<span class="suggestion-tip">&#128161; Supported: DD/MM/YYYY, MM/DD/YYYY, YYYY-MM-DD, YYYY-MM, MM/YYYY, YYYY</span>';
                 }
                 // Check C: Chronological order
                 const ts = parseRowDate(dVal, dateFmt);

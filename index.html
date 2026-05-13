@@ -130,6 +130,10 @@
                     <option value="auto">Auto-detect</option>
                     <option value="dd/mm/yyyy">DD/MM/YYYY (UK/EU)</option>
                     <option value="mm/dd/yyyy">MM/DD/YYYY (US)</option>
+                    <option value="yyyy-mm-dd">YYYY-MM-DD (ISO)</option>
+                    <option value="yyyy-mm">YYYY-MM (Year-Month ISO)</option>
+                    <option value="mm/yyyy">MM/YYYY (Year-Month UK)</option>
+                    <option value="yyyy">YYYY (Year only)</option>
                 </select>
             </div>
             <div class="control-group"><label>Start Date:</label><input type="date" id="startDate"></div>
@@ -222,7 +226,7 @@
             <ul>
                 <li><b>X-Axis (Date):</b> Select the column containing your dates.</li>
                 <li><b>Y-Axis (Value):</b> Select the column containing your numeric data.</li>
-                <li><b>Date Style:</b> Choose UK (DD/MM/YYYY), US (MM/DD/YYYY), or Auto-detect. Auto-detect works for most files but set this manually if dates parse incorrectly.</li>
+                <li><b>Date Style:</b> Choose the format that matches your date column. Options: UK (DD/MM/YYYY), US (MM/DD/YYYY), ISO (YYYY-MM-DD), Year-Month ISO (YYYY-MM), Year-Month UK (MM/YYYY), or Year only (YYYY). Auto-detect works for most full-date formats but set this manually for year-only or year-month data.</li>
                 <li><b>Start / End Date:</b> Optionally filter your data to a specific date range.</li>
                 <li><b>Turn Length:</b> Minimum number of points required in a segment before a change point can be detected. Default 5. Increase for smoother results on noisy data.</li>
                 <li><b>Loops:</b> Number of bootstrap resamples. Higher values give more stable confidence levels. 1,000 is fast; use 5,000–10,000 for governance reports.</li>
@@ -251,6 +255,29 @@
 
             <h3>About the method</h3>
             <p>Bootstrap CUSUM step-change analysis is a distribution-free method for detecting structural changes in time series data. It does not assume normality, making it particularly suited to healthcare safety data, incident counts, and other right-skewed metrics. The confidence level is earned from your data by resampling — not assumed from a statistical formula.</p>
+
+            <h3>When Bootstrap CUSUM works best</h3>
+            <p>Bootstrap CUSUM answers a specific question: <b>"has the underlying mean level of this process permanently shifted?"</b> It is designed for processes that undergo genuine structural change — where something intervenes and the process moves to a new sustained level.</p>
+            <p>It works best on:</p>
+            <ul>
+                <li><b>Support or incident counts</b> — where training, system improvements, or policy changes produce lasting reductions</li>
+                <li><b>Prescribing volumes or error rates</b> — where a clinical intervention permanently shifts the baseline</li>
+                <li><b>Process metrics after a known change</b> — manufacturing defects, call volumes, complaints</li>
+                <li><b>Any data where improvements are expected to be sustained</b>, not temporary</li>
+            </ul>
+
+            <h3>When you may see "1 distinct stage"</h3>
+            <p>If the analysis returns only 1 stage (no change detected), this is not necessarily wrong — it may be the correct answer. This typically happens when:</p>
+            <ul>
+                <li><b>The data is cyclical or mean-reverting</b> — for example, annual GDP growth rates naturally oscillate around a long-run mean. Recessions cause temporary dips but growth rates recover. Bootstrap CUSUM correctly finds no permanent step-change because there isn't one.</li>
+                <li><b>The confidence threshold is too high</b> — try lowering Conf % from 99.7% to 95% or 90% to detect smaller or less certain changes.</li>
+                <li><b>The dataset is too short</b> — fewer than 20-30 observations make it harder to distinguish genuine change from random variation. Increase the data range if possible.</li>
+                <li><b>The Turn Length is too high</b> — reducing Turn Length from 5 to 3 allows detection of changes in shorter segments.</li>
+                <li><b>Genuine stability</b> — the process may simply not have changed in a sustained way during the period analysed.</li>
+            </ul>
+            <p>For cyclical economic or environmental data, consider plotting the cumulative <i>level</i> rather than the periodic <i>growth rate</i> — permanent structural shifts are more visible in level data.</p>
+            <p><b>To create cumulative level data in Excel:</b> Add a new column, set the first row to <code>100</code> (your baseline), then in each subsequent row use the formula <code>=previous_row * (1 + (growth_rate/100))</code>. For example if 1949 = 100 and 1950 growth was 3.3%: <code>=100*(1+0.033) = 103.3</code>. Drag the formula down for all rows, save as CSV, and re-upload. The resulting series will show permanent structural shifts that are invisible in the raw growth rate data.</p>
+
             <p style="font-size:0.85em; color:#888; margin-top:20px;">Based on Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). Implemented at StepChangeAnalysis.com.</p>
         </div>
     </div>
