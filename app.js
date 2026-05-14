@@ -6,6 +6,13 @@
  *   - Per-file settings memory (localStorage) — remembers last settings per filename
  *   - Controls pre-loaded before file upload so user can set preferences first
  *   - PDF export includes branding, settings metadata, and stage table
+ *
+ * Fixes applied (May 2026):
+ *   1. Clear start/end date filters when X-axis column changes
+ *   2. Raw Data tab shows scrollable table of original CSV data
+ *   3. PNG export includes stats bar and settings as chart annotations
+ *   4. Chart title no longer reverts on tab switch if user has edited it
+ *   5. CUSUM guide hidden on Run Chart tab (already partially done — confirmed)
  */
 
 const pythonWorker    = new Worker('worker.js');
@@ -48,23 +55,20 @@ let currentView      = 'step';
 let activeFilename   = "Data";
 let analysisDateTime = "";
 
+// FIX 4: Track whether the user has manually edited the chart title.
+// If true, tab switches will NOT overwrite it with the auto-generated title.
+let userHasEditedTitle = false;
+
 // ── Prevent browser intercepting drag-and-drop globally ──
 window.addEventListener("dragover", e => e.preventDefault(), false);
 window.addEventListener("drop",     e => e.preventDefault(), false);
 
 // ─────────────────────────────────────────────
 // SETTINGS MEMORY (localStorage, per filename)
-// Saves and restores: Conf %, Loops, Turn Length,
-// Date Style, X column, Y column — keyed by filename.
-// This means each CSV file remembers its own settings.
 // ─────────────────────────────────────────────
 
-const SETTINGS_KEY_PREFIX = 'sca_settings_'; // sca = StepChangeAnalysis
+const SETTINGS_KEY_PREFIX = 'sca_settings_';
 
-/**
- * saveSettings — called every time the user clicks Recalculate.
- * Stores current control values in localStorage under the filename key.
- */
 function saveSettings(filename) {
     const settings = {
         confLimit:  document.getElementById('paramConfLimit')?.value  || '99.7',
@@ -78,30 +82,20 @@ function saveSettings(filename) {
     };
     try {
         localStorage.setItem(SETTINGS_KEY_PREFIX + filename, JSON.stringify(settings));
-    } catch(e) {
-        // localStorage may be unavailable in some environments — fail silently
-    }
+    } catch(e) {}
 }
 
-/**
- * loadSettings — called after a CSV file is loaded and column dropdowns are populated.
- * Restores previously saved settings for this filename if they exist.
- * Falls back to sensible defaults if no saved settings are found.
- */
 function loadSettings(filename) {
     try {
         const saved = localStorage.getItem(SETTINGS_KEY_PREFIX + filename);
         if (saved) {
             const s = JSON.parse(saved);
-            // Restore numeric parameters
             if (document.getElementById('paramConfLimit'))  document.getElementById('paramConfLimit').value  = s.confLimit  || '99.7';
             if (document.getElementById('paramBootNum'))    document.getElementById('paramBootNum').value    = s.bootNum    || '1000';
             if (document.getElementById('paramTurnLength')) document.getElementById('paramTurnLength').value = s.turnLength || '5';
             if (document.getElementById('dateFormatSelect')) document.getElementById('dateFormatSelect').value = s.dateFmt  || 'auto';
-            // Restore date filters
             if (document.getElementById('startDate') && s.startDate) document.getElementById('startDate').value = s.startDate;
             if (document.getElementById('endDate')   && s.endDate)   document.getElementById('endDate').value   = s.endDate;
-            // Restore column selections only if they still exist in the current file
             const xS = document.getElementById('xColSelect');
             const yS = document.getElementById('yColSelect');
             if (xS && s.xCol) {
@@ -112,37 +106,41 @@ function loadSettings(filename) {
                 const yOpt = Array.from(yS.options).find(o => o.value === s.yCol);
                 if (yOpt) yS.value = s.yCol;
             }
-            return true; // settings were restored
+            return true;
         }
-    } catch(e) {
-        // localStorage unavailable or corrupted — fall through to defaults
-    }
-    return false; // no saved settings found
+    } catch(e) {}
+    return false;
 }
 
 // ─────────────────────────────────────────────
 // CONTROLS PRE-LOADING
-// Show the settings panel immediately on page load
-// so users can configure preferences before uploading a file.
-// Column dropdowns are empty until a file is loaded —
-// other settings (Conf %, Loops, etc.) are usable straight away.
 // ─────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', function() {
-    // Show controls panel immediately — don't wait for a file
     if (controlsDiv) controlsDiv.style.display = "flex";
+
+    // FIX 1: Clear start/end date filters when X-axis column changes.
+    // When the user picks a different date column the saved date range
+    // from the previous column is no longer meaningful — clear it.
+    const xColSelect = document.getElementById('xColSelect');
+    if (xColSelect) {
+        xColSelect.addEventListener('change', function() {
+            const startDate = document.getElementById('startDate');
+            const endDate   = document.getElementById('endDate');
+            if (startDate) startDate.value = '';
+            if (endDate)   endDate.value   = '';
+        });
+    }
 });
 
-// ── Worker is pure JS — ready immediately, no boot delay ──
+// ── Worker message handler ──
 pythonWorker.onmessage = function(event) {
     const message = event.data;
 
     if (message.status === "ready") {
-        // Worker signals ready instantly — no Python boot delay
         if (csvInput) csvInput.disabled = false;
         statusText.innerHTML = "📁 <b>Ready!</b> Click or drop a CSV file to begin.";
 
     } else if (message.status === "result") {
-        // Analysis complete — render charts and table
         hideError();
         statusText.innerText = "✅ Analysis Complete!";
         currentChartData = message.data;
@@ -152,7 +150,12 @@ pythonWorker.onmessage = function(event) {
         if (exportPdfBtn) exportPdfBtn.style.display = "inline-block";
 
         buildStageTable(message.data);
-        generateDynamicTitle();
+
+        // FIX 4: Only auto-generate the title if the user has not manually edited it.
+        if (!userHasEditedTitle) {
+            generateDynamicTitle();
+        }
+
         drawPlotlyChart();
 
         if (recalcBtn) {
@@ -161,7 +164,6 @@ pythonWorker.onmessage = function(event) {
         }
 
     } else if (message.status === "error") {
-        // Show friendly error with link to Data Validator
         showError(message.data);
         if (recalcBtn) {
             recalcBtn.disabled = false;
@@ -181,7 +183,6 @@ function hideError() {
 }
 
 // ── Dynamic chart title ──
-// Auto-fills with: Filename - Chart Type - Date/Time (UK format DD/MM/YYYY HH:MM)
 function generateDynamicTitle() {
     const now = new Date();
     const day   = String(now.getDate()).padStart(2, '0');
@@ -223,8 +224,6 @@ if (csvInput) csvInput.onchange = (e) => {
 };
 
 function handleFileUpload(file) {
-    // Check file type — only CSV files are supported.
-    // Excel (.xlsx, .xls), JSON, and other formats will not parse correctly.
     const ext = file.name.split('.').pop().toLowerCase();
     if (ext !== 'csv') {
         showError(
@@ -235,17 +234,13 @@ function handleFileUpload(file) {
         return;
     }
 
-    // Strip file extension for a clean chart title and settings key
     activeFilename = file.name.replace(/\.[^/.]+$/, "");
-    hideError();
 
-    // Track file upload event in Google Analytics
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'csv_uploaded', {
-            'event_category': 'tool_usage',
-            'event_label': activeFilename
-        });
-    }
+    // FIX 4: Reset the user-edited title flag when a new file is loaded
+    // so the title auto-generates fresh for the new file.
+    userHasEditedTitle = false;
+
+    hideError();
 
     Papa.parse(file, {
         header: true, skipEmptyLines: true,
@@ -260,13 +255,8 @@ function handleFileUpload(file) {
                     xS.innerHTML += `<option value="${h}">${h}</option>`;
                     yS.innerHTML += `<option value="${h}">${h}</option>`;
                 });
-                // Default Y to second column (usually the value column)
                 if (headers.length >= 2) yS.selectedIndex = 1;
             }
-
-            // ── Restore saved settings for this file ──
-            // loadSettings returns true if settings were found and restored.
-            // If not, the defaults set above remain in place.
             const restored = loadSettings(activeFilename);
             statusText.innerHTML = `📊 <b>${activeFilename}</b> loaded.` +
                 (restored ? ' <span style="color:#198754">✓ Previous settings restored.</span>' : ' Configure settings and click Recalculate.');
@@ -293,17 +283,6 @@ function runPythonAnalysis() {
     const startDate = document.getElementById('startDate')?.value        || "";
     const endDate   = document.getElementById('endDate')?.value          || "";
 
-    // Track analysis run event in Google Analytics
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'analysis_run', {
-            'event_category': 'tool_usage',
-            'event_label': activeFilename,
-            'value': parseInt(document.getElementById('paramConfLimit')?.value || 0)
-        });
-    }
-
-    // Save settings for this file before running —
-    // so they're restored next time this file is loaded
     saveSettings(activeFilename);
 
     pythonWorker.postMessage({
@@ -358,19 +337,82 @@ function buildStageTable(data) {
     stageSummaryTable.innerHTML = html + "</tbody>";
 }
 
+// FIX 2: Build the Raw Data tab table from the original CSV rows.
+function buildRawDataTable() {
+    if (!cachedCsvData || cachedCsvData.length === 0) return '<p style="color:#666;">No data loaded.</p>';
+    const headers = Object.keys(cachedCsvData[0]);
+    let html = '<table style="width:100%;border-collapse:collapse;font-size:0.9em;">';
+    html += '<thead><tr>' + headers.map(h =>
+        `<th style="background:#f0f4f8;padding:10px;border-bottom:2px solid #0056b3;text-align:left;">${h}</th>`
+    ).join('') + '</tr></thead><tbody>';
+    cachedCsvData.forEach((row, i) => {
+        const bg = i % 2 === 0 ? 'white' : '#f8f9fa';
+        html += `<tr style="background:${bg}">` + headers.map(h =>
+            `<td style="padding:8px 10px;border-bottom:1px solid #eee;">${row[h] !== undefined ? row[h] : ''}</td>`
+        ).join('') + '</tr>';
+    });
+    html += '</tbody></table>';
+    return html;
+}
+
 // ── Tab switching ──
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.onclick = function() {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         currentView = this.getAttribute('data-view');
-        generateDynamicTitle();
+
+        // FIX 4: Only regenerate the title on tab switch if user hasn't edited it.
+        if (!userHasEditedTitle) {
+            generateDynamicTitle();
+        }
+
         updateSummaryBars();
 
         if (currentView === 'stages') {
+            // Stage Summary — show the statistical evidence table.
+            // Important: do NOT rebuild tableView.innerHTML here — that would
+            // detach the stageSummaryTable element captured at page load,
+            // making buildStageTable() write to a ghost element off-screen.
             chartContainer.style.display = "none";
-            if (tableView) tableView.style.display = "block";
+            if (tableView) {
+                tableView.style.display = "block";
+                // Restore the stage summary caption and table (may have been hidden by Raw Data tab)
+                const caption = tableView.querySelector('p');
+                if (caption) { caption.innerText = 'Statistical Evidence Table'; caption.style.display = ''; }
+                const stageTable = document.getElementById('stageSummaryTable');
+                if (stageTable) stageTable.style.display = '';
+                // Remove raw data wrapper if present
+                const existingRaw = tableView.querySelector('.raw-data-wrapper');
+                if (existingRaw) existingRaw.remove();
+                if (currentChartData) buildStageTable(currentChartData);
+            }
+
+        } else if (currentView === 'raw') {
+            // FIX 2: Raw Data tab — show the original CSV as a scrollable table.
+            // Inject a wrapper div alongside the existing stageSummaryTable
+            // rather than replacing innerHTML, so the table reference stays valid.
+            chartContainer.style.display = "none";
+            if (tableView) {
+                tableView.style.display = "block";
+                // Hide the stage summary caption and table
+                const caption = tableView.querySelector('p');
+                if (caption) caption.style.display = 'none';
+                const stageTable = document.getElementById('stageSummaryTable');
+                if (stageTable) stageTable.style.display = 'none';
+                // Remove any previous raw wrapper and inject a fresh one
+                const prev = tableView.querySelector('.raw-data-wrapper');
+                if (prev) prev.remove();
+                const wrapper = document.createElement('div');
+                wrapper.className = 'raw-data-wrapper';
+                wrapper.innerHTML =
+                    `<p style="color:#666; font-size:0.85em; margin-bottom:15px;">Raw Data — ${cachedCsvData ? cachedCsvData.length : 0} rows</p>` +
+                    buildRawDataTable();
+                tableView.appendChild(wrapper);
+            }
+
         } else {
+            // All chart tabs
             chartContainer.style.display = "block";
             if (tableView) tableView.style.display = "none";
             drawPlotlyChart();
@@ -381,10 +423,8 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 function updateSummaryBars() {
     if (!currentChartData) return;
 
-    // CUSUM guide only makes sense on Step Change Analysis view
-    // Hide it on Run Chart, X-mR, CUSUM, and Raw Data tabs
+    // FIX 5: CUSUM guide only on Step Change and CUSUM tabs — hide on Run Chart
     const cusumGuide = document.getElementById('cusum-guide');
-    // Show CUSUM guide on Step Change and CUSUM Chart tabs only
     if (cusumGuide) {
         cusumGuide.style.display = (currentView === 'step' || currentView === 'cusum') ? 'block' : 'none';
     }
@@ -398,6 +438,10 @@ function updateSummaryBars() {
         if (xmrN)     xmrN.innerText     = currentChartData.global_count;
         if (xmrMean)  xmrMean.innerText  = currentChartData.global_mean;
         if (xmrSd)    xmrSd.innerText    = currentChartData.global_sd;
+    } else if (currentView === 'raw' || currentView === 'stages') {
+        // No summary bars on Raw Data or Stage Summary tabs
+        if (summaryBar)    summaryBar.style.display    = "none";
+        if (xmrSummaryBar) xmrSummaryBar.style.display = "none";
     } else {
         if (summaryBar)    summaryBar.style.display    = "flex";
         if (xmrSummaryBar) xmrSummaryBar.style.display = "none";
@@ -408,38 +452,62 @@ function updateSummaryBars() {
 if (recalcBtn)      recalcBtn.onclick      = runPythonAnalysis;
 if (showSDCheckbox) showSDCheckbox.onchange = () => { if (currentChartData) drawPlotlyChart(); };
 
-// Live chart title update — when user edits the title input field,
-// redraw the chart immediately so the new title shows in the chart itself
-if (chartTitleInput) chartTitleInput.oninput = () => { if (currentChartData) drawPlotlyChart(); };
+// FIX 4: Mark the title as user-edited when they type in the title field.
+// This prevents tab switches from overwriting their custom title.
+if (chartTitleInput) {
+    chartTitleInput.oninput = () => {
+        userHasEditedTitle = true;
+        if (currentChartData) drawPlotlyChart();
+    };
+}
 
 // ── Export PNG ──
-// Uses Plotly's built-in downloadImage at high resolution
+// FIX 3: Add stats and settings as chart annotations before exporting,
+// then remove them after so the live chart stays clean.
 if (exportPngBtn) exportPngBtn.onclick = function() {
-    // Track PNG export in Google Analytics
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'export_png', { 'event_category': 'tool_usage', 'event_label': activeFilename });
-    }
-    const title = chartTitleInput ? chartTitleInput.value : activeFilename;
-    Plotly.downloadImage(chartContainer, {
-        format:   'png',
-        width:    1400,
-        height:   700,
-        filename: title.replace(/[^a-z0-9]/gi, '_')
+    if (!currentChartData) return;
+
+    const title    = chartTitleInput ? chartTitleInput.value : activeFilename;
+    const confVal  = document.getElementById('paramConfLimit')?.value  || '—';
+    const bootVal  = document.getElementById('paramBootNum')?.value    || '—';
+    const turnVal  = document.getElementById('paramTurnLength')?.value || '—';
+    const fmtVal   = document.getElementById('dateFormatSelect')?.value || '—';
+    const startVal = document.getElementById('startDate')?.value       || 'All';
+    const endVal   = document.getElementById('endDate')?.value         || 'All';
+
+    // Build the two annotation strings
+    const statsLine    = `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  Stages = ${currentChartData.step_count}  |  Conf = ${confVal}%`;
+    const settingsLine = `Loops: ${bootVal}  |  Turn Length: ${turnVal}  |  Date Format: ${fmtVal}  |  Range: ${startVal || 'All'} – ${endVal || 'All'}  |  stepchangeanalysis.com`;
+
+    // For export: temporarily replace the chart title with a 3-line version
+    // that includes the stats and settings. This avoids all annotation
+    // positioning issues — the title area is always visible and correctly sized.
+    const exportTitle =
+        `<b>${title}</b>` +
+        `<br><span style="font-size:16px;color:#002d5b;">${statsLine}</span>` +
+        `<br><span style="font-size:15px;color:#666;">${settingsLine}</span>`;
+
+    Plotly.relayout(chartContainer, {
+        title: { text: exportTitle, font: { size: 16 }, x: 0, xanchor: 'left' },
+        margin: { t: 120 }
+    }).then(function() {
+        return Plotly.downloadImage(chartContainer, {
+            format:   'png',
+            width:    1400,
+            height:   800,
+            filename: title.replace(/[^a-z0-9]/gi, '_')
+        });
+    }).then(function() {
+        // Restore original title and margin after export
+        Plotly.relayout(chartContainer, {
+            title: { text: title, font: { size: 16 }, x: 0.5, xanchor: 'center' },
+            margin: { t: 40 }
+        });
     });
 };
 
 // ── Export PDF ──
-// Opens a print-ready page with:
-//   - StepChangeAnalysis.com branding header
-//   - Chart title and analysis metadata
-//   - Settings used (Conf %, Loops, Turn Length, Date Format)
-//   - The chart as a PNG image
-//   - The Stage Summary table
 if (exportPdfBtn) exportPdfBtn.onclick = function() {
-    // Track PDF export in Google Analytics
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'export_pdf', { 'event_category': 'tool_usage', 'event_label': activeFilename });
-    }
     const title     = chartTitleInput ? chartTitleInput.value : activeFilename;
     const confVal   = document.getElementById('paramConfLimit')?.value  || '—';
     const bootVal   = document.getElementById('paramBootNum')?.value    || '—';
@@ -455,68 +523,38 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
         <title>${title}</title>
         <style>
             body { font-family: system-ui, sans-serif; margin: 30px; color: #1e293b; font-size: 13pt; }
-
-            /* ── Branding header ── */
-            .brand-header {
-                display: flex; justify-content: space-between; align-items: center;
-                border-bottom: 3px solid #002d5b; padding-bottom: 10px; margin-bottom: 18px;
-            }
+            .brand-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #002d5b; padding-bottom: 10px; margin-bottom: 18px; }
             .brand-name { font-size: 1.3em; font-weight: bold; color: #002d5b; }
             .brand-url  { font-size: 1em; color: #0056b3; }
             .brand-tag  { font-size: 0.95em; color: #666; text-align: right; }
-
-            /* ── Chart title and metadata ── */
             h2   { color: #002d5b; font-size: 1.2em; margin: 0 0 6px 0; }
             .meta-row { display: flex; flex-wrap: wrap; gap: 16px; font-size: 1em; color: #555; margin-bottom: 8px; }
             .meta-row b { color: #002d5b; }
-
-            /* ── Settings used panel ── */
-            .settings-bar {
-                background: #f0f4f8; border: 1px solid #cce5ff; border-radius: 6px;
-                padding: 10px 16px; font-size: 0.95em; color: #444;
-                display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;
-            }
+            .settings-bar { background: #f0f4f8; border: 1px solid #cce5ff; border-radius: 6px; padding: 10px 16px; font-size: 0.95em; color: #444; display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; }
             .settings-bar span b { color: #002d5b; }
-
             img { width: 100%; border: 1px solid #eee; margin-bottom: 20px; }
-
-            /* ── Stage table ── */
             .stage-table { width: 100%; border-collapse: collapse; font-size: 1em; margin-top: 10px; }
             .stage-table th { background: #f0f4f8; padding: 10px; border-bottom: 2px solid #0056b3; text-align: left; }
             .stage-table td { padding: 9px 10px; border-bottom: 1px solid #eee; }
             .stage-table caption { font-weight: bold; color: #002d5b; text-align: left; margin-bottom: 8px; font-size: 1.1em; }
-
-            /* ── Footer ── */
             .pdf-footer { margin-top: 24px; font-size: 0.88em; color: #999; border-top: 1px solid #eee; padding-top: 8px; }
-
             @media print { body { margin: 15px; } }
         </style>
         </head><body>
-
-        <!-- Branding header -->
         <div class="brand-header">
             <div>
                 <div class="brand-name">&#128202; StepChangeAnalysis.com</div>
                 <div class="brand-url">stepchangeanalysis.com &nbsp;|&nbsp; Bootstrap CUSUM Step-Change Analysis</div>
             </div>
-            <div class="brand-tag">
-                Generated: ${analysisDateTime}<br>
-                Privacy: no data uploaded &#128274;
-            </div>
+            <div class="brand-tag">Generated: ${analysisDateTime}<br>Privacy: no data uploaded &#128274;</div>
         </div>
-
-        <!-- Chart title -->
         <h2>${title}</h2>
-
-        <!-- Analysis metadata -->
         <div class="meta-row">
             <span>N = <b>${currentChartData.global_count}</b></span>
             <span>Mean = <b>${currentChartData.global_mean}</b></span>
             <span>SD = <b>${currentChartData.global_sd}</b></span>
             <span>File: <b>${activeFilename}</b></span>
         </div>
-
-        <!-- Settings used — so the report is self-documenting -->
         <div class="settings-bar">
             <span>Confidence: <b>${confVal}%</b></span>
             <span>Bootstrap loops: <b>${bootVal}</b></span>
@@ -524,18 +562,11 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
             <span>Date format: <b>${fmtVal}</b></span>
             <span>Date range: <b>${startVal || 'All'}</b> to <b>${endVal || 'All'}</b></span>
         </div>
-
-        <!-- Chart image -->
         <img src="${imgData}" alt="${title}" />
-
-        <!-- Stage summary table -->
         ${buildStageTableHTML()}
-
-        <!-- Footer -->
         <div class="pdf-footer">
             StepChangeAnalysis.com &nbsp;|&nbsp; Bootstrap CUSUM method: Taylor (2000), building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993) &nbsp;|&nbsp; Analysis performed entirely in browser — no data uploaded
         </div>
-
         <script>window.onload = function() { window.print(); }<\/script>
         </body></html>`);
         win.document.close();

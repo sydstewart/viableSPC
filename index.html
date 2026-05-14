@@ -23,6 +23,11 @@
         .upload-box { border: 3px dashed #ccc; padding: 40px; text-align: center; margin-bottom: 20px; border-radius: 8px; background-color: white; cursor: pointer; }
         .upload-box.dragover { border-color: #0056b3; background-color: #e9f2ff; }
 
+        /* ── Sample data links ── */
+        .sample-links { margin-top: 14px; font-size: 0.85em; color: #555; }
+        .sample-links a { color: #0056b3; text-decoration: none; margin: 0 8px; }
+        .sample-links a:hover { text-decoration: underline; }
+
         /* ── Controls panel ── */
         #controls { display: none; background: #f0f4f8; padding: 20px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #cce5ff; flex-direction: column; gap: 12px; }
 
@@ -108,6 +113,11 @@
     <div class="upload-box" id="dropZone">
         <input type="file" id="csvInput" accept=".csv" style="display: none;" />
         <p id="statusText">📁 <b>Ready!</b> Click or drop a CSV file to begin.</p>
+        <div class="sample-links" onclick="event.stopPropagation()">
+            Don't have a CSV yet? Try a sample dataset:
+            <a href="sample-data-uk.csv" download>⬇ Sample Data (UK)</a> |
+            <a href="sample-data-us.csv" download>⬇ Sample Data (US)</a>
+        </div>
     </div>
 
     <!-- ── Controls Panel ── -->
@@ -220,7 +230,7 @@
             </ul>
 
             <h3>Getting Started</h3>
-            <p>Prepare your data as a CSV file with at least two columns: a <b>date column</b> and a <b>numeric value column</b>. Then drag and drop the file onto the upload area, or click to browse.</p>
+            <p>Prepare your data as a CSV file with at least two columns: a <b>date column</b> and a <b>numeric value column</b>. Then drag and drop the file onto the upload area, or click to browse. If you don't have a CSV ready, download one of the sample datasets from the upload area to try the tool straight away.</p>
 
             <h3>Settings</h3>
             <ul>
