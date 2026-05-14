@@ -239,6 +239,14 @@ function handleFileUpload(file) {
     activeFilename = file.name.replace(/\.[^/.]+$/, "");
     hideError();
 
+    // Track file upload event in Google Analytics
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'csv_uploaded', {
+            'event_category': 'tool_usage',
+            'event_label': activeFilename
+        });
+    }
+
     Papa.parse(file, {
         header: true, skipEmptyLines: true,
         complete: function(results) {
@@ -284,6 +292,15 @@ function runPythonAnalysis() {
     const dateFmt   = document.getElementById('dateFormatSelect')?.value || "auto";
     const startDate = document.getElementById('startDate')?.value        || "";
     const endDate   = document.getElementById('endDate')?.value          || "";
+
+    // Track analysis run event in Google Analytics
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'analysis_run', {
+            'event_category': 'tool_usage',
+            'event_label': activeFilename,
+            'value': parseInt(document.getElementById('paramConfLimit')?.value || 0)
+        });
+    }
 
     // Save settings for this file before running —
     // so they're restored next time this file is loaded
@@ -398,6 +415,10 @@ if (chartTitleInput) chartTitleInput.oninput = () => { if (currentChartData) dra
 // ── Export PNG ──
 // Uses Plotly's built-in downloadImage at high resolution
 if (exportPngBtn) exportPngBtn.onclick = function() {
+    // Track PNG export in Google Analytics
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'export_png', { 'event_category': 'tool_usage', 'event_label': activeFilename });
+    }
     const title = chartTitleInput ? chartTitleInput.value : activeFilename;
     Plotly.downloadImage(chartContainer, {
         format:   'png',
@@ -415,6 +436,10 @@ if (exportPngBtn) exportPngBtn.onclick = function() {
 //   - The chart as a PNG image
 //   - The Stage Summary table
 if (exportPdfBtn) exportPdfBtn.onclick = function() {
+    // Track PDF export in Google Analytics
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'export_pdf', { 'event_category': 'tool_usage', 'event_label': activeFilename });
+    }
     const title     = chartTitleInput ? chartTitleInput.value : activeFilename;
     const confVal   = document.getElementById('paramConfLimit')?.value  || '—';
     const bootVal   = document.getElementById('paramBootNum')?.value    || '—';
