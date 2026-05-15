@@ -25,6 +25,21 @@ Bootstrap CUSUM solves this by:
 - Detecting **multiple sequential step-changes** in a single analysis
 - Producing results that hold up under scrutiny in board papers and CQC submissions
 
+### Three charts. Same data. Radically different conclusions.
+
+|  | Run Chart | X-mR Shewhart | Bootstrap CUSUM |
+|--|-----------|---------------|-----------------|
+| Detects that *something* changed | Yes — broadly | No | Yes — precisely |
+| Identifies *how many* changes | No | No | Yes |
+| Dates each change point | No | No | Yes — with confidence interval |
+| Quantifies each change | No | No | Yes — stage means & % change |
+| Provides a confidence level | No | No | Yes — derived from your own data |
+| Handles non-normal data reliably | Partially | No | Yes — distribution-free |
+| Defensible under governance challenge | Partially | Unlikely | Yes |
+| Suitable for board papers and CQC | Limited | Limited | Yes |
+
+Read the full analysis: [Same Data, Three Charts, Three Very Different Stories](https://lnkd.in/eK5Ydmfh)
+
 ---
 
 ## Chart Types
