@@ -182,6 +182,26 @@ function hideError() {
     if (errorBanner) errorBanner.style.display = "none";
 }
 
+// ── Warning banner helpers (Free Edition notices) ──
+// Reuses the error banner with a different style so warnings persist
+// until the user loads a new file or changes settings.
+let warningBanner = null;
+function showWarning(msg) {
+    if (!warningBanner) {
+        warningBanner = document.createElement('div');
+        warningBanner.id = 'warning-banner';
+        warningBanner.style.cssText = 'display:none;background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:12px 16px;margin-bottom:15px;font-size:0.9em;color:#664d03;';
+        // Insert after error banner
+        const eb = document.getElementById('error-banner');
+        if (eb && eb.parentNode) eb.parentNode.insertBefore(warningBanner, eb.nextSibling);
+    }
+    warningBanner.innerHTML = `⚠️ <b>Free Edition Notice:</b> ${msg}`;
+    warningBanner.style.display = 'block';
+}
+function hideWarning() {
+    if (warningBanner) warningBanner.style.display = 'none';
+}
+
 // ── Dynamic chart title ──
 function generateDynamicTitle() {
     const now = new Date();
@@ -260,6 +280,12 @@ function handleFileUpload(file) {
             const restored = loadSettings(activeFilename);
             statusText.innerHTML = `📊 <b>${activeFilename}</b> loaded.` +
                 (restored ? ' <span style="color:#198754">✓ Previous settings restored.</span>' : ' Configure settings and click Recalculate.');
+            // Free Edition: warn if CSV exceeds 500 rows — shown persistently
+            if (cachedCsvData.length > 500) {
+                showWarning(`This file has ${cachedCsvData.length} rows. Free Edition is optimised for up to 500 rows. Results may be slower. Pro Edition will support unlimited rows.`);
+            } else {
+                hideWarning();
+            }
         }
     });
 }
@@ -275,8 +301,15 @@ function runPythonAnalysis() {
     }
 
     const turnLen   = document.getElementById('paramTurnLength')?.value  || 5;
-    const bootNum   = document.getElementById('paramBootNum')?.value     || 1000;
+    let   bootNum   = parseInt(document.getElementById('paramBootNum')?.value || 1000);
     const confLim   = document.getElementById('paramConfLimit')?.value   || 95;
+
+    // Free Edition: warn if bootstrap iterations exceed 1,000 but don't block
+    if (bootNum > 1000) {
+        showWarning(`Bootstrap loops set to ${bootNum}. Free Edition is optimised for up to 1,000 loops. Higher values may be slow. Pro Edition will support up to 10,000.`);
+    } else {
+        hideWarning();
+    }
     const xCol      = document.getElementById('xColSelect')?.value;
     const yCol      = document.getElementById('yColSelect')?.value;
     const dateFmt   = document.getElementById('dateFormatSelect')?.value || "auto";
@@ -477,7 +510,8 @@ if (exportPngBtn) exportPngBtn.onclick = function() {
 
     // Build the two annotation strings
     const statsLine    = `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  Stages = ${currentChartData.step_count}  |  Conf = ${confVal}%`;
-    const settingsLine = `Loops: ${bootVal}  |  Turn Length: ${turnVal}  |  Date Format: ${fmtVal}  |  Range: ${startVal || 'All'} – ${endVal || 'All'}  |  stepchangeanalysis.com`;
+    const settingsLine = `Loops: ${bootVal}  |  Turn Length: ${turnVal}  |  Date Format: ${fmtVal}  |  Range: ${startVal || 'All'} – ${endVal || 'All'}`;
+    const brandLine    = `📊 stepchangeanalysis.com — Bootstrap CUSUM SPC Tool — Free Edition`;
 
     // For export: temporarily replace the chart title with a 3-line version
     // that includes the stats and settings. This avoids all annotation
@@ -485,11 +519,12 @@ if (exportPngBtn) exportPngBtn.onclick = function() {
     const exportTitle =
         `<b>${title}</b>` +
         `<br><span style="font-size:16px;color:#002d5b;">${statsLine}</span>` +
-        `<br><span style="font-size:15px;color:#666;">${settingsLine}</span>`;
+        `<br><span style="font-size:15px;color:#666;">${settingsLine}</span>` +
+        `<br><span style="font-size:15px;color:#0056b3;font-weight:bold;">${brandLine}</span>`;
 
     Plotly.relayout(chartContainer, {
         title: { text: exportTitle, font: { size: 16 }, x: 0, xanchor: 'left' },
-        margin: { t: 120 }
+        margin: { t: 150 }
     }).then(function() {
         return Plotly.downloadImage(chartContainer, {
             format:   'png',
@@ -565,7 +600,8 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
         <img src="${imgData}" alt="${title}" />
         ${buildStageTableHTML()}
         <div class="pdf-footer">
-            StepChangeAnalysis.com &nbsp;|&nbsp; Bootstrap CUSUM method: Taylor (2000), building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993) &nbsp;|&nbsp; Analysis performed entirely in browser — no data uploaded
+            <b style="color:#002d5b;">📊 StepChangeAnalysis.com — Free Edition</b> &nbsp;|&nbsp; <a href="https://stepchangeanalysis.com" style="color:#0056b3;">stepchangeanalysis.com</a> &nbsp;|&nbsp; Analysis performed entirely in browser — no data uploaded<br>
+            <span style="color:#aaa;font-size:0.85em;">Bootstrap CUSUM method: Taylor (2000), building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993)</span>
         </div>
         <script>window.onload = function() { window.print(); }<\/script>
         </body></html>`);
