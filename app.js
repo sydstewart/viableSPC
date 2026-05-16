@@ -1,774 +1,329 @@
-/**
- * app.js — StepChangeAnalysis.com SPC Analyzer
- * Wires up all UI elements to the pure-JS worker engine.
- *
- * Features:
- *   - Per-file settings memory (localStorage) — remembers last settings per filename
- *   - Controls pre-loaded before file upload so user can set preferences first
- *   - PDF export includes branding, settings metadata, and stage table
- *
- * Fixes applied (May 2026):
- *   1. Clear start/end date filters when X-axis column changes
- *   2. Raw Data tab shows scrollable table of original CSV data
- *   3. PNG export includes stats bar and settings as chart annotations
- *   4. Chart title no longer reverts on tab switch if user has edited it
- *   5. CUSUM guide hidden on Run Chart tab (already partially done — confirmed)
- */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StepChangeAnalysis.com — SPC Analyzer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 
-const pythonWorker    = new Worker('worker.js');
-const csvInput        = document.getElementById('csvInput');
-const dropZone        = document.getElementById('dropZone');
-const statusText      = document.getElementById('statusText');
-const chartContainer  = document.getElementById('chart-container');
-const tableView       = document.getElementById('table-view');
-const stageSummaryTable = document.getElementById('stageSummaryTable');
-const controlsDiv     = document.getElementById('controls');
-const tabContainer    = document.getElementById('tab-container');
-const recalcBtn       = document.getElementById('recalcBtn');
-const exportPngBtn    = document.getElementById('exportPngBtn');
-const exportPdfBtn    = document.getElementById('exportPdfBtn');
-const showSDCheckbox  = document.getElementById('showSDCheckbox');
-const chartTitleInput = document.getElementById('chartTitleInput');
-const chartFileInfo   = document.getElementById('chartFileInfo');
-const errorBanner     = document.getElementById('error-banner');
-const errorMessage    = document.getElementById('error-message');
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 20px; max-width: 1200px; margin: auto; background-color: #f8f9fa; }
 
-// Summary bar elements
-const summaryBar     = document.getElementById('summary-bar');
-const xmrSummaryBar  = document.getElementById('xmr-summary-bar');
-const stageCountText = document.getElementById('stageCountText');
-const statN          = document.getElementById('statN');
-const statMean       = document.getElementById('statMean');
-const statSD         = document.getElementById('statSD');
+        /* ── Header bar ── */
+        .app-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        .app-header h1 { margin: 0; font-size: 1.4em; color: #002d5b; }
+        .header-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn-scanner { padding: 8px 16px; background: #198754; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.9em; }
+        .btn-scanner:hover { background: #146c43; }
+        .btn-help { padding: 8px 16px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.9em; }
+        .btn-help:hover { background: #5a6268; }
+        .btn-feedback { padding: 8px 16px; background: #e67e22; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.9em; }
+        .btn-feedback:hover { background: #ca6f1e; }
 
-// X-mR specific summary elements
-const xmrUnpl = document.getElementById('xmrUnpl');
-const xmrLnpl = document.getElementById('xmrLnpl');
-const xmrUrl  = document.getElementById('xmrUrl');
-const xmrN    = document.getElementById('xmrN');
-const xmrMean = document.getElementById('xmrMean');
-const xmrSd   = document.getElementById('xmrSd');
+        /* ── Upload box ── */
+        .upload-box { border: 3px dashed #ccc; padding: 40px; text-align: center; margin-bottom: 20px; border-radius: 8px; background-color: white; cursor: pointer; }
+        .upload-box.dragover { border-color: #0056b3; background-color: #e9f2ff; }
 
-let cachedCsvData    = null;
-let currentChartData = null;
-let currentView      = 'step';
-let activeFilename   = "Data";
-let analysisDateTime = "";
+        /* ── Sample data links ── */
+        .sample-links { margin-top: 14px; font-size: 0.85em; color: #555; }
+        .sample-links a { color: #0056b3; text-decoration: none; margin: 0 8px; }
+        .sample-links a:hover { text-decoration: underline; }
 
-// FIX 4: Track whether the user has manually edited the chart title.
-// If true, tab switches will NOT overwrite it with the auto-generated title.
-let userHasEditedTitle = false;
+        /* ── Controls panel ── */
+        #controls { display: none; background: #f0f4f8; padding: 20px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #cce5ff; flex-direction: column; gap: 12px; }
 
-// ── Prevent browser intercepting drag-and-drop globally ──
-window.addEventListener("dragover", e => e.preventDefault(), false);
-window.addEventListener("drop",     e => e.preventDefault(), false);
+        /* Chart title row */
+        .title-row { display: flex; flex-direction: column; gap: 4px; }
+        .title-row label { font-size: 0.85em; font-weight: bold; color: #444; }
+        #chartTitleInput { padding: 7px 10px; border: 1px solid #ccc; border-radius: 4px; background: white; font-size: 1em; width: 100%; box-sizing: border-box; }
+        #chartFileInfo { font-size: 0.78em; color: #777; margin-top: 2px; }
 
-// ─────────────────────────────────────────────
-// SETTINGS MEMORY (localStorage, per filename)
-// ─────────────────────────────────────────────
+        /* Settings row */
+        .settings-row { display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; }
+        .control-group { display: flex; flex-direction: column; font-size: 0.85em; font-weight: bold; color: #444; }
+        .control-group input, .control-group select { padding: 6px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; background: white; }
+        .num-input { width: 80px; }
 
-const SETTINGS_KEY_PREFIX = 'sca_settings_';
+        /* Button row */
+        .button-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+        #recalcBtn { padding: 10px 25px; background: #0056b3; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; height: 38px; }
+        #recalcBtn:hover { background: #004494; }
+        #exportPngBtn { padding: 10px 18px; background: #0e7490; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; height: 38px; }
+        #exportPngBtn:hover { background: #0a5f73; }
+        #exportPdfBtn { padding: 10px 18px; background: #7c3aed; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; height: 38px; }
+        #exportPdfBtn:hover { background: #6d28d9; }
 
-function saveSettings(filename) {
-    const settings = {
-        confLimit:  document.getElementById('paramConfLimit')?.value  || '99.7',
-        bootNum:    document.getElementById('paramBootNum')?.value    || '1000',
-        turnLength: document.getElementById('paramTurnLength')?.value || '5',
-        dateFmt:    document.getElementById('dateFormatSelect')?.value || 'auto',
-        xCol:       document.getElementById('xColSelect')?.value      || '',
-        yCol:       document.getElementById('yColSelect')?.value      || '',
-        startDate:  document.getElementById('startDate')?.value       || '',
-        endDate:    document.getElementById('endDate')?.value         || ''
-    };
-    try {
-        localStorage.setItem(SETTINGS_KEY_PREFIX + filename, JSON.stringify(settings));
-    } catch(e) {}
-}
+        /* ── Summary Bar ── */
+        #summary-bar { display: none; align-items: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
+        .summary-main-text { font-weight: bold; font-size: 1.1em; color: #002d5b; }
+        .badge-group { display: flex; background: #e9f2ff; border-radius: 6px; padding: 6px 14px; border: 1px solid #cce5ff; font-size: 0.95em; color: #333; gap: 10px; flex-wrap: wrap; }
+        .badge-group b { color: #000; }
+        .cusum-guide { font-size: 0.85em; color: #666; }
+        .cusum-icon { color: #007bff; font-weight: bold; }
 
-function loadSettings(filename) {
-    try {
-        const saved = localStorage.getItem(SETTINGS_KEY_PREFIX + filename);
-        if (saved) {
-            const s = JSON.parse(saved);
-            if (document.getElementById('paramConfLimit'))  document.getElementById('paramConfLimit').value  = s.confLimit  || '99.7';
-            if (document.getElementById('paramBootNum'))    document.getElementById('paramBootNum').value    = s.bootNum    || '1000';
-            if (document.getElementById('paramTurnLength')) document.getElementById('paramTurnLength').value = s.turnLength || '5';
-            if (document.getElementById('dateFormatSelect')) document.getElementById('dateFormatSelect').value = s.dateFmt  || 'auto';
-            if (document.getElementById('startDate') && s.startDate) document.getElementById('startDate').value = s.startDate;
-            if (document.getElementById('endDate')   && s.endDate)   document.getElementById('endDate').value   = s.endDate;
-            const xS = document.getElementById('xColSelect');
-            const yS = document.getElementById('yColSelect');
-            if (xS && s.xCol) {
-                const xOpt = Array.from(xS.options).find(o => o.value === s.xCol);
-                if (xOpt) xS.value = s.xCol;
-            }
-            if (yS && s.yCol) {
-                const yOpt = Array.from(yS.options).find(o => o.value === s.yCol);
-                if (yOpt) yS.value = s.yCol;
-            }
-            return true;
-        }
-    } catch(e) {}
-    return false;
-}
+        /* XmR specific summary bar */
+        #xmr-summary-bar { display: none; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; background: #f0f4f8; padding: 8px 14px; border-radius: 6px; border: 1px solid #cce5ff; font-size: 0.9em; }
+        #xmr-summary-bar b { color: #002d5b; }
 
-// ─────────────────────────────────────────────
-// CONTROLS PRE-LOADING
-// ─────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', function() {
-    if (controlsDiv) controlsDiv.style.display = "flex";
+        /* ── Tabs ── */
+        .tabs { display: flex; gap: 5px; border-bottom: 2px solid #0056b3; flex-wrap: wrap; margin-top: 10px; }
+        .tab-btn { padding: 10px 20px; background: #e9ecef; border: 1px solid #ccc; border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: bold; color: #555; }
+        .tab-btn.active { background: #0056b3; color: white; border-color: #0056b3; }
 
-    // FIX 1: Clear start/end date filters when X-axis column changes.
-    // When the user picks a different date column the saved date range
-    // from the previous column is no longer meaningful — clear it.
-    const xColSelect = document.getElementById('xColSelect');
-    if (xColSelect) {
-        xColSelect.addEventListener('change', function() {
-            const startDate = document.getElementById('startDate');
-            const endDate   = document.getElementById('endDate');
-            if (startDate) startDate.value = '';
-            if (endDate)   endDate.value   = '';
-        });
-    }
-});
+        /* ── Display area ── */
+        #display-wrapper { width: 100%; min-height: 600px; background-color: white; border-radius: 0 8px 8px 8px; border: 1px solid #eee; }
+        #chart-container { width: 100%; height: 600px; }
+        #table-view { display: none; padding: 30px; overflow-y: auto; box-sizing: border-box; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f0f4f8; padding: 12px; border-bottom: 2px solid #0056b3; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #eee; }
 
-// ── Worker message handler ──
-pythonWorker.onmessage = function(event) {
-    const message = event.data;
+        /* ── Help modal ── */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal-overlay.active { display: flex; align-items: center; justify-content: center; }
+        .modal-box { background: white; border-radius: 10px; padding: 30px; max-width: 700px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
+        .modal-close { position: absolute; top: 15px; right: 20px; font-size: 1.5em; cursor: pointer; background: none; border: none; color: #666; }
+        .modal-box h2 { margin-top: 0; color: #002d5b; }
+        .modal-box h3 { color: #0056b3; margin-top: 20px; }
+        .modal-box p, .modal-box li { font-size: 0.95em; line-height: 1.6; color: #333; }
 
-    if (message.status === "ready") {
-        if (csvInput) csvInput.disabled = false;
-        statusText.innerHTML = "📁 <b>Ready!</b> Click or drop a CSV file to begin.";
+        /* ── Error banner ── */
+        #error-banner { display: none; background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 12px 16px; margin-bottom: 15px; font-size: 0.9em; color: #664d03; }
+        #error-banner a { color: #0056b3; cursor: pointer; text-decoration: underline; }
+    </style>
+</head>
+<body>
 
-    } else if (message.status === "result") {
-        hideError();
-        statusText.innerText = "✅ Analysis Complete!";
-        currentChartData = message.data;
+    <!-- ── App Header ── -->
+    <div class="app-header">
+        <h1>📊 StepChangeAnalysis.com — SPC Analyzer</h1>
+        <div class="header-buttons">
+            <button class="btn-scanner" onclick="window.open('scanner.html', '_blank')">🔍 Data Validator</button>
+            <button class="btn-feedback" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeM9hZ75140SEKR0Mex4JvLEEdp9E8hq9w5Ug5ItDH9Qx5fkg/viewform?usp=publish-editor', '_blank')">💬 Feedback</button>
+            <button class="btn-help" onclick="document.getElementById('helpModal').classList.add('active')">❓ Help</button>
+        </div>
+    </div>
 
-        if (tabContainer) tabContainer.style.display = "block";
-        if (exportPngBtn) exportPngBtn.style.display = "inline-block";
-        if (exportPdfBtn) exportPdfBtn.style.display = "inline-block";
+    <!-- ── Error Banner (shown on data errors) ── -->
+    <div id="error-banner">
+        ⚠️ <b>Analysis Error:</b> <span id="error-message"></span>
+        <br><br>
+        💡 <b>Tip:</b> Run the <a onclick="window.open('scanner.html', '_blank')">Data Validator</a> on your CSV file to check for date format issues, missing values, or out-of-order rows before re-analysing.
+    </div>
 
-        buildStageTable(message.data);
+    <!-- ── Upload Box ── -->
+    <div class="upload-box" id="dropZone">
+        <input type="file" id="csvInput" accept=".csv" style="display: none;" />
+        <p id="statusText">📁 <b>Ready!</b> Click or drop a CSV file to begin.</p>
+        <div class="sample-links" onclick="event.stopPropagation()">
+            Don't have a CSV yet? Try a sample dataset:
+            <a href="sample-data-uk.csv" download>⬇ Sample Data (UK)</a> |
+            <a href="sample-data-us.csv" download>⬇ Sample Data (US)</a>
+        </div>
+    </div>
 
-        // FIX 4: Only auto-generate the title if the user has not manually edited it.
-        if (!userHasEditedTitle) {
-            generateDynamicTitle();
-        }
+    <!-- ── Controls Panel ── -->
+    <div id="controls">
 
-        drawPlotlyChart();
+        <!-- Chart title — editable, auto-filled from filename + view + date -->
+        <div class="title-row">
+            <label>Chart Title:</label>
+            <input type="text" id="chartTitleInput" placeholder="Title will appear here after analysis..." />
+            <div id="chartFileInfo"></div>
+        </div>
 
-        if (recalcBtn) {
-            recalcBtn.disabled = false;
-            recalcBtn.innerText = "Recalculate Chart";
-        }
-
-    } else if (message.status === "error") {
-        showError(message.data);
-        if (recalcBtn) {
-            recalcBtn.disabled = false;
-            recalcBtn.innerText = "Recalculate Chart";
-        }
-    }
-};
-
-// ── Error banner helpers ──
-function showError(msg) {
-    statusText.innerText = "❌ Error — see details above.";
-    if (errorBanner)  errorBanner.style.display = "block";
-    if (errorMessage) errorMessage.innerText = msg;
-}
-function hideError() {
-    if (errorBanner) errorBanner.style.display = "none";
-}
-
-// ── Warning banner helpers (Free Edition notices) ──
-// Reuses the error banner with a different style so warnings persist
-// until the user loads a new file or changes settings.
-let warningBanner = null;
-function showWarning(msg) {
-    if (!warningBanner) {
-        warningBanner = document.createElement('div');
-        warningBanner.id = 'warning-banner';
-        warningBanner.style.cssText = 'display:none;background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:12px 16px;margin-bottom:15px;font-size:0.9em;color:#664d03;';
-        // Insert after error banner
-        const eb = document.getElementById('error-banner');
-        if (eb && eb.parentNode) eb.parentNode.insertBefore(warningBanner, eb.nextSibling);
-    }
-    warningBanner.innerHTML = `⚠️ <b>Free Edition Notice:</b> ${msg}`;
-    warningBanner.style.display = 'block';
-}
-function hideWarning() {
-    if (warningBanner) warningBanner.style.display = 'none';
-}
-
-// ── Dynamic chart title ──
-function generateDynamicTitle() {
-    const now = new Date();
-    const day   = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const year  = now.getFullYear();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const mins  = String(now.getMinutes()).padStart(2, '0');
-    analysisDateTime = `${day}/${month}/${year} ${hours}:${mins}`;
-
-    const viewNames = {
-        'step':   'Step Change Analysis',
-        'stages': 'Stage Summary',
-        'xmr':    'X-mR Control Chart',
-        'run':    'Run Chart',
-        'cusum':  'CUSUM Chart',
-        'raw':    'Raw Data'
-    };
-    const viewName    = viewNames[currentView] || 'Analysis';
-    const titleString = `${activeFilename} - ${viewName} - ${analysisDateTime}`;
-
-    if (chartTitleInput) chartTitleInput.value = titleString;
-    if (chartFileInfo)   chartFileInfo.innerText = `File: ${activeFilename}   |   Generated: ${analysisDateTime}`;
-    return titleString;
-}
-
-// ── File upload — drag and drop or click ──
-if (dropZone) {
-    dropZone.onclick = () => csvInput.click();
-    dropZone.addEventListener('dragover', () => dropZone.classList.add('dragover'));
-    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('dragover');
-        if (e.dataTransfer.files.length) handleFileUpload(e.dataTransfer.files[0]);
-    });
-}
-if (csvInput) csvInput.onchange = (e) => {
-    if (e.target.files.length) handleFileUpload(e.target.files[0]);
-};
-
-function handleFileUpload(file) {
-    const ext = file.name.split('.').pop().toLowerCase();
-    if (ext !== 'csv') {
-        showError(
-            'Only CSV files are supported. "' + file.name + '" appears to be a ' + ext.toUpperCase() + ' file. ' +
-            'To convert: in Excel go to File → Save As → CSV (Comma delimited) (.csv). ' +
-            'If your Excel file has multiple sheets, save each sheet separately as its own CSV file.'
-        );
-        return;
-    }
-
-    activeFilename = file.name.replace(/\.[^/.]+$/, "");
-
-    // FIX 4: Reset the user-edited title flag when a new file is loaded
-    // so the title auto-generates fresh for the new file.
-    userHasEditedTitle = false;
-
-    hideError();
-
-    Papa.parse(file, {
-        header: true, skipEmptyLines: true,
-        complete: function(results) {
-            cachedCsvData = results.data;
-            const headers = results.meta.fields;
-            const xS = document.getElementById('xColSelect');
-            const yS = document.getElementById('yColSelect');
-            if (xS && yS) {
-                xS.innerHTML = ''; yS.innerHTML = '';
-                headers.forEach(h => {
-                    xS.innerHTML += `<option value="${h}">${h}</option>`;
-                    yS.innerHTML += `<option value="${h}">${h}</option>`;
-                });
-                if (headers.length >= 2) yS.selectedIndex = 1;
-            }
-            const restored = loadSettings(activeFilename);
-            statusText.innerHTML = `📊 <b>${activeFilename}</b> loaded.` +
-                (restored ? ' <span style="color:#198754">✓ Previous settings restored.</span>' : ' Configure settings and click Recalculate.');
-            // Free Edition: warn if CSV exceeds 500 rows — shown persistently
-            if (cachedCsvData.length > 500) {
-                showWarning(`This file has ${cachedCsvData.length} rows. Free Edition is optimised for up to 500 rows. Results may be slower. Pro Edition will support unlimited rows.`);
-            } else {
-                hideWarning();
-            }
-        }
-    });
-}
-
-// ── Run analysis ──
-function runPythonAnalysis() {
-    if (!cachedCsvData) return;
-    hideError();
-    statusText.innerText = "⚙️ Calculating...";
-    if (recalcBtn) {
-        recalcBtn.disabled = true;
-        recalcBtn.innerText = "Calculating...";
-    }
-
-    const turnLen   = document.getElementById('paramTurnLength')?.value  || 5;
-    let   bootNum   = parseInt(document.getElementById('paramBootNum')?.value || 1000);
-    const confLim   = document.getElementById('paramConfLimit')?.value   || 95;
-
-    // Free Edition: warn if bootstrap iterations exceed 1,000 but don't block
-    if (bootNum > 1000) {
-        showWarning(`Bootstrap loops set to ${bootNum}. Free Edition is optimised for up to 1,000 loops. Higher values may be slow. Pro Edition will support up to 10,000.`);
-    } else {
-        hideWarning();
-    }
-    const xCol      = document.getElementById('xColSelect')?.value;
-    const yCol      = document.getElementById('yColSelect')?.value;
-    const dateFmt   = document.getElementById('dateFormatSelect')?.value || "auto";
-    const startDate = document.getElementById('startDate')?.value        || "";
-    const endDate   = document.getElementById('endDate')?.value          || "";
-
-    saveSettings(activeFilename);
-
-    pythonWorker.postMessage({
-        command: "process_csv",
-        data: cachedCsvData,
-        params: {
-            turn_length: parseInt(turnLen),
-            boot_num:    parseInt(bootNum),
-            conf_limit:  parseFloat(confLim),
-            x_col:       xCol,
-            y_col:       yCol,
-            date_format: dateFmt,
-            start_date:  startDate,
-            end_date:    endDate
-        }
-    });
-}
-
-// ── Build Stage Summary table ──
-function buildStageTable(data) {
-    if (!stageSummaryTable) return;
-    let html = `<thead><tr>
-        <th>Stage</th><th>From</th><th>To</th>
-        <th style="text-align:right;">Mean</th>
-        <th style="text-align:right;">SD</th>
-        <th style="text-align:right;">Conf %</th>
-        <th style="text-align:right;">Change %</th>
-    </tr></thead><tbody>`;
-
-    let count = 1;
-    for (let i = 0; i < data.stage_means.length; i += 2) {
-        const mean  = data.stage_means[i];
-        const start = data.stage_dates[i].split(' ')[0];
-        const end   = data.stage_dates[i + 1].split(' ')[0];
-        const confText  = data.confleveltext[i] || "";
-        const confMatch = confText.match(/Conf: ([\d.]+)%/);
-        const confVal   = confMatch ? confMatch[1] + "%" : (i === 0 ? "Baseline" : "---");
-        let change = "Baseline";
-        if (i > 0) {
-            const prev = data.stage_means[i - 2];
-            change = (((mean - prev) / prev) * 100).toFixed(1) + "%";
-        }
-        html += `<tr>
-            <td>${count++}</td>
-            <td>${start}</td><td>${end}</td>
-            <td style="text-align:right;">${mean.toFixed(2)}</td>
-            <td style="text-align:right;">${data.global_sd}</td>
-            <td style="text-align:right;">${confVal}</td>
-            <td style="text-align:right;"><b>${change}</b></td>
-        </tr>`;
-    }
-    stageSummaryTable.innerHTML = html + "</tbody>";
-}
-
-// FIX 2: Build the Raw Data tab table from the original CSV rows.
-function buildRawDataTable() {
-    if (!cachedCsvData || cachedCsvData.length === 0) return '<p style="color:#666;">No data loaded.</p>';
-    const headers = Object.keys(cachedCsvData[0]);
-    let html = '<table style="width:100%;border-collapse:collapse;font-size:0.9em;">';
-    html += '<thead><tr>' + headers.map(h =>
-        `<th style="background:#f0f4f8;padding:10px;border-bottom:2px solid #0056b3;text-align:left;">${h}</th>`
-    ).join('') + '</tr></thead><tbody>';
-    cachedCsvData.forEach((row, i) => {
-        const bg = i % 2 === 0 ? 'white' : '#f8f9fa';
-        html += `<tr style="background:${bg}">` + headers.map(h =>
-            `<td style="padding:8px 10px;border-bottom:1px solid #eee;">${row[h] !== undefined ? row[h] : ''}</td>`
-        ).join('') + '</tr>';
-    });
-    html += '</tbody></table>';
-    return html;
-}
-
-// ── Tab switching ──
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.onclick = function() {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        currentView = this.getAttribute('data-view');
-
-        // FIX 4: Only regenerate the title on tab switch if user hasn't edited it.
-        if (!userHasEditedTitle) {
-            generateDynamicTitle();
-        }
-
-        updateSummaryBars();
-
-        if (currentView === 'stages') {
-            // Stage Summary — show the statistical evidence table.
-            // Important: do NOT rebuild tableView.innerHTML here — that would
-            // detach the stageSummaryTable element captured at page load,
-            // making buildStageTable() write to a ghost element off-screen.
-            chartContainer.style.display = "none";
-            if (tableView) {
-                tableView.style.display = "block";
-                // Restore the stage summary caption and table (may have been hidden by Raw Data tab)
-                const caption = tableView.querySelector('p');
-                if (caption) { caption.innerText = 'Statistical Evidence Table'; caption.style.display = ''; }
-                const stageTable = document.getElementById('stageSummaryTable');
-                if (stageTable) stageTable.style.display = '';
-                // Remove raw data wrapper if present
-                const existingRaw = tableView.querySelector('.raw-data-wrapper');
-                if (existingRaw) existingRaw.remove();
-                if (currentChartData) buildStageTable(currentChartData);
-            }
-
-        } else if (currentView === 'raw') {
-            // FIX 2: Raw Data tab — show the original CSV as a scrollable table.
-            // Inject a wrapper div alongside the existing stageSummaryTable
-            // rather than replacing innerHTML, so the table reference stays valid.
-            chartContainer.style.display = "none";
-            if (tableView) {
-                tableView.style.display = "block";
-                // Hide the stage summary caption and table
-                const caption = tableView.querySelector('p');
-                if (caption) caption.style.display = 'none';
-                const stageTable = document.getElementById('stageSummaryTable');
-                if (stageTable) stageTable.style.display = 'none';
-                // Remove any previous raw wrapper and inject a fresh one
-                const prev = tableView.querySelector('.raw-data-wrapper');
-                if (prev) prev.remove();
-                const wrapper = document.createElement('div');
-                wrapper.className = 'raw-data-wrapper';
-                wrapper.innerHTML =
-                    `<p style="color:#666; font-size:0.85em; margin-bottom:15px;">Raw Data — ${cachedCsvData ? cachedCsvData.length : 0} rows</p>` +
-                    buildRawDataTable();
-                tableView.appendChild(wrapper);
-            }
-
-        } else {
-            // All chart tabs
-            chartContainer.style.display = "block";
-            if (tableView) tableView.style.display = "none";
-            drawPlotlyChart();
-        }
-    };
-});
-
-function updateSummaryBars() {
-    if (!currentChartData) return;
-
-    // FIX 5: CUSUM guide only on Step Change and CUSUM tabs — hide on Run Chart
-    const cusumGuide = document.getElementById('cusum-guide');
-    if (cusumGuide) {
-        cusumGuide.style.display = (currentView === 'step' || currentView === 'cusum') ? 'block' : 'none';
-    }
-
-    if (currentView === 'xmr') {
-        if (summaryBar)    summaryBar.style.display    = "none";
-        if (xmrSummaryBar) xmrSummaryBar.style.display = "flex";
-        if (xmrUnpl)  xmrUnpl.innerText  = currentChartData.xmr_unpl;
-        if (xmrLnpl)  xmrLnpl.innerText  = currentChartData.xmr_lnpl;
-        if (xmrUrl)   xmrUrl.innerText   = currentChartData.mr_url;
-        if (xmrN)     xmrN.innerText     = currentChartData.global_count;
-        if (xmrMean)  xmrMean.innerText  = currentChartData.global_mean;
-        if (xmrSd)    xmrSd.innerText    = currentChartData.global_sd;
-    } else if (currentView === 'raw' || currentView === 'stages') {
-        // No summary bars on Raw Data or Stage Summary tabs
-        if (summaryBar)    summaryBar.style.display    = "none";
-        if (xmrSummaryBar) xmrSummaryBar.style.display = "none";
-    } else {
-        if (summaryBar)    summaryBar.style.display    = "flex";
-        if (xmrSummaryBar) xmrSummaryBar.style.display = "none";
-    }
-}
-
-// ── Button wiring ──
-if (recalcBtn)      recalcBtn.onclick      = runPythonAnalysis;
-if (showSDCheckbox) showSDCheckbox.onchange = () => { if (currentChartData) drawPlotlyChart(); };
-
-// FIX 4: Mark the title as user-edited when they type in the title field.
-// This prevents tab switches from overwriting their custom title.
-if (chartTitleInput) {
-    chartTitleInput.oninput = () => {
-        userHasEditedTitle = true;
-        if (currentChartData) drawPlotlyChart();
-    };
-}
-
-// ── Export PNG ──
-// FIX 3: Add stats and settings as chart annotations before exporting,
-// then remove them after so the live chart stays clean.
-if (exportPngBtn) exportPngBtn.onclick = function() {
-    if (!currentChartData) return;
-
-    const title    = chartTitleInput ? chartTitleInput.value : activeFilename;
-    const confVal  = document.getElementById('paramConfLimit')?.value  || '—';
-    const bootVal  = document.getElementById('paramBootNum')?.value    || '—';
-    const turnVal  = document.getElementById('paramTurnLength')?.value || '—';
-    const fmtVal   = document.getElementById('dateFormatSelect')?.value || '—';
-    const startVal = document.getElementById('startDate')?.value       || 'All';
-    const endVal   = document.getElementById('endDate')?.value         || 'All';
-
-    // Build the two annotation strings
-    const statsLine    = `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  Stages = ${currentChartData.step_count}  |  Conf = ${confVal}%`;
-    const settingsLine = `Loops: ${bootVal}  |  Turn Length: ${turnVal}  |  Date Format: ${fmtVal}  |  Range: ${startVal || 'All'} – ${endVal || 'All'}`;
-    const brandLine    = `📊 stepchangeanalysis.com — Bootstrap CUSUM SPC Tool — Free Edition`;
-
-    // For export: temporarily replace the chart title with a 3-line version
-    // that includes the stats and settings. This avoids all annotation
-    // positioning issues — the title area is always visible and correctly sized.
-    const exportTitle =
-        `<b>${title}</b>` +
-        `<br><span style="font-size:16px;color:#002d5b;">${statsLine}</span>` +
-        `<br><span style="font-size:15px;color:#666;">${settingsLine}</span>` +
-        `<br><span style="font-size:15px;color:#0056b3;font-weight:bold;">${brandLine}</span>`;
-
-    Plotly.relayout(chartContainer, {
-        title: { text: exportTitle, font: { size: 16 }, x: 0, xanchor: 'left' },
-        margin: { t: 150 }
-    }).then(function() {
-        return Plotly.downloadImage(chartContainer, {
-            format:   'png',
-            width:    1400,
-            height:   800,
-            filename: title.replace(/[^a-z0-9]/gi, '_')
-        });
-    }).then(function() {
-        // Restore original title and margin after export
-        Plotly.relayout(chartContainer, {
-            title: { text: title, font: { size: 16 }, x: 0.5, xanchor: 'center' },
-            margin: { t: 40 }
-        });
-    });
-};
-
-// ── Export PDF ──
-if (exportPdfBtn) exportPdfBtn.onclick = function() {
-    const title     = chartTitleInput ? chartTitleInput.value : activeFilename;
-    const confVal   = document.getElementById('paramConfLimit')?.value  || '—';
-    const bootVal   = document.getElementById('paramBootNum')?.value    || '—';
-    const turnVal   = document.getElementById('paramTurnLength')?.value || '—';
-    const fmtVal    = document.getElementById('dateFormatSelect')?.value || '—';
-    const startVal  = document.getElementById('startDate')?.value       || 'All';
-    const endVal    = document.getElementById('endDate')?.value         || 'All';
-
-    Plotly.toImage(document.getElementById('chart-container'), { format: 'png', width: 1200, height: 600 })
-    .then(function(imgData) {
-        const win = window.open('', '_blank');
-        win.document.write(`<!DOCTYPE html><html><head>
-        <title>${title}</title>
-        <style>
-            body { font-family: system-ui, sans-serif; margin: 30px; color: #1e293b; font-size: 13pt; }
-            .brand-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #002d5b; padding-bottom: 10px; margin-bottom: 18px; }
-            .brand-name { font-size: 1.3em; font-weight: bold; color: #002d5b; }
-            .brand-url  { font-size: 1em; color: #0056b3; }
-            .brand-tag  { font-size: 0.95em; color: #666; text-align: right; }
-            h2   { color: #002d5b; font-size: 1.2em; margin: 0 0 6px 0; }
-            .meta-row { display: flex; flex-wrap: wrap; gap: 16px; font-size: 1em; color: #555; margin-bottom: 8px; }
-            .meta-row b { color: #002d5b; }
-            .settings-bar { background: #f0f4f8; border: 1px solid #cce5ff; border-radius: 6px; padding: 10px 16px; font-size: 0.95em; color: #444; display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; }
-            .settings-bar span b { color: #002d5b; }
-            img { width: 100%; border: 1px solid #eee; margin-bottom: 20px; }
-            .stage-table { width: 100%; border-collapse: collapse; font-size: 1em; margin-top: 10px; }
-            .stage-table th { background: #f0f4f8; padding: 10px; border-bottom: 2px solid #0056b3; text-align: left; }
-            .stage-table td { padding: 9px 10px; border-bottom: 1px solid #eee; }
-            .stage-table caption { font-weight: bold; color: #002d5b; text-align: left; margin-bottom: 8px; font-size: 1.1em; }
-            .pdf-footer { margin-top: 24px; font-size: 0.88em; color: #999; border-top: 1px solid #eee; padding-top: 8px; }
-            @media print { body { margin: 15px; } }
-        </style>
-        </head><body>
-        <div class="brand-header">
-            <div>
-                <div class="brand-name">&#128202; StepChangeAnalysis.com</div>
-                <div class="brand-url">stepchangeanalysis.com &nbsp;|&nbsp; Bootstrap CUSUM Step-Change Analysis</div>
+        <!-- Analysis settings -->
+        <div class="settings-row">
+            <div class="control-group"><label>X-Axis (Date):</label><select id="xColSelect"></select></div>
+            <div class="control-group"><label>Y-Axis (Value):</label><select id="yColSelect"></select></div>
+            <div class="control-group">
+                <label>Date Style:</label>
+                <select id="dateFormatSelect">
+                    <option value="auto">Auto-detect</option>
+                    <option value="dd/mm/yyyy">DD/MM/YYYY (UK/EU)</option>
+                    <option value="mm/dd/yyyy">MM/DD/YYYY (US)</option>
+                    <option value="yyyy-mm-dd">YYYY-MM-DD (ISO)</option>
+                    <option value="yyyy-mm">YYYY-MM (Year-Month ISO)</option>
+                    <option value="mm/yyyy">MM/YYYY (Year-Month UK)</option>
+                    <option value="yyyy">YYYY (Year only)</option>
+                </select>
             </div>
-            <div class="brand-tag">Generated: ${analysisDateTime}<br>Privacy: no data uploaded &#128274;</div>
+            <div class="control-group"><label>Start Date:</label><input type="date" id="startDate"></div>
+            <div class="control-group"><label>End Date:</label><input type="date" id="endDate"></div>
+            <div class="control-group"><label>Turn Length:</label><input type="number" id="paramTurnLength" class="num-input" value="5"></div>
+            <div class="control-group"><label>Loops:</label><input type="number" id="paramBootNum" class="num-input" value="1000"></div>
+            <div class="control-group"><label>Conf %:</label><input type="number" id="paramConfLimit" class="num-input" value="99.7"></div>
+            <div class="control-group">
+                <label>Options:</label>
+                <label style="font-weight: normal; margin-top: 10px;"><input type="checkbox" id="showSDCheckbox"> Show 3SD Limits</label>
+            </div>
         </div>
-        <h2>${title}</h2>
-        <div class="meta-row">
-            <span>N = <b>${currentChartData.global_count}</b></span>
-            <span>Mean = <b>${currentChartData.global_mean}</b></span>
-            <span>SD = <b>${currentChartData.global_sd}</b></span>
-            <span>File: <b>${activeFilename}</b></span>
+
+        <!-- Action buttons -->
+        <div class="button-row">
+            <button id="recalcBtn">Recalculate Chart</button>
+            <button id="exportPngBtn" style="display:none;">⬇ Export PNG</button>
+            <button id="exportPdfBtn" style="display:none;">⬇ Export PDF</button>
         </div>
-        <div class="settings-bar">
-            <span>Confidence: <b>${confVal}%</b></span>
-            <span>Bootstrap loops: <b>${bootVal}</b></span>
-            <span>Turn length: <b>${turnVal}</b></span>
-            <span>Date format: <b>${fmtVal}</b></span>
-            <span>Date range: <b>${startVal || 'All'}</b> to <b>${endVal || 'All'}</b></span>
+
+    </div>
+
+    <!-- ── Summary Bar (Step/Run/CUSUM views) ── -->
+    <div id="summary-bar">
+        <div id="stageCountText" class="summary-main-text"></div>
+        <div class="badge-group">
+            <span>N = <b id="statN">0</b></span> <span>|</span>
+            <span>Mean = <b id="statMean">0</b></span> <span>|</span>
+            <span>SD = <b id="statSD">0</b></span>
         </div>
-        <img src="${imgData}" alt="${title}" />
-        ${buildStageTableHTML()}
-        <div class="pdf-footer">
-            <b style="color:#002d5b;">📊 StepChangeAnalysis.com — Free Edition</b> &nbsp;|&nbsp; <a href="https://stepchangeanalysis.com" style="color:#0056b3;">stepchangeanalysis.com</a> &nbsp;|&nbsp; Analysis performed entirely in browser — no data uploaded<br>
-            <span style="color:#aaa;font-size:0.85em;">Bootstrap CUSUM method: Taylor (2000), building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993)</span>
+        <div class="cusum-guide" id="cusum-guide">
+            💡 <b>CUSUM:</b> <span class="cusum-icon">↗️</span> Above Avg | <span class="cusum-icon">↘️</span> Below Avg | <span class="cusum-icon">➡️</span> On Avg
         </div>
-        <script>window.onload = function() { window.print(); }<\/script>
-        </body></html>`);
-        win.document.close();
-    });
-};
+    </div>
 
-// Build stage table as HTML string — used in PDF export
-function buildStageTableHTML() {
-    if (!currentChartData) return '';
-    const data = currentChartData;
-    let html = `<table class="stage-table">
-        <caption>Statistical Evidence Table</caption>
-        <thead><tr>
-            <th>Stage</th><th>From</th><th>To</th>
-            <th>Mean</th><th>SD</th><th>Conf %</th><th>Change %</th>
-        </tr></thead><tbody>`;
-    let count = 1;
-    for (let i = 0; i < data.stage_means.length; i += 2) {
-        const mean  = data.stage_means[i];
-        const start = data.stage_dates[i].split(' ')[0];
-        const end   = data.stage_dates[i + 1].split(' ')[0];
-        const confText  = data.confleveltext[i] || "";
-        const confMatch = confText.match(/Conf: ([\d.]+)%/);
-        const confVal   = confMatch ? confMatch[1] + "%" : (i === 0 ? "Baseline" : "---");
-        let change = "Baseline";
-        if (i > 0) {
-            const prev = data.stage_means[i - 2];
-            change = (((mean - prev) / prev) * 100).toFixed(1) + "%";
-        }
-        html += `<tr>
-            <td>${count++}</td><td>${start}</td><td>${end}</td>
-            <td>${mean.toFixed(2)}</td><td>${data.global_sd}</td>
-            <td>${confVal}</td><td><b>${change}</b></td>
-        </tr>`;
-    }
-    return html + "</tbody></table>";
-}
+    <!-- ── X-mR Specific Summary Bar ── -->
+    <div id="xmr-summary-bar">
+        <span><b>X-mR Chart:</b></span>
+        <span>UNPL = <b id="xmrUnpl">—</b></span> <span>|</span>
+        <span>LNPL = <b id="xmrLnpl">—</b></span>
+        <span>&nbsp;&nbsp;///&nbsp;&nbsp;</span>
+        <span>mR Chart:</span>
+        <span>URL = <b id="xmrUrl">—</b></span>
+        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        <span>N = <b id="xmrN">—</b></span> <span>|</span>
+        <span>Mean = <b id="xmrMean">—</b></span> <span>|</span>
+        <span>SD = <b id="xmrSd">—</b></span>
+    </div>
 
-// ── Main chart drawing function ──
-function drawPlotlyChart() {
-    if (!currentChartData) return;
-    const data   = currentChartData;
-    const showSD = showSDCheckbox?.checked;
+    <!-- ── Tabs ── -->
+    <div id="tab-container" style="display:none;">
+        <div class="tabs">
+            <button class="tab-btn active" data-view="step">Step Change Analysis</button>
+            <button class="tab-btn" data-view="stages">Stage Summary</button>
+            <button class="tab-btn" data-view="xmr">X-mR Chart (Individuals)</button>
+            <button class="tab-btn" data-view="run">Run Chart</button>
+            <button class="tab-btn" data-view="cusum">CUSUM Chart</button>
+            <button class="tab-btn" data-view="raw">Raw Data</button>
+        </div>
+    </div>
 
-    if (summaryBar) summaryBar.style.display = "flex";
-    if (stageCountText) {
-        const confVal = document.getElementById('paramConfLimit')?.value || "??";
-        stageCountText.innerHTML = `Found ${data.step_count} distinct stages (${confVal}% Confidence).`;
-    }
-    if (statN)    statN.innerText    = data.global_count;
-    if (statMean) statMean.innerText = data.global_mean;
-    if (statSD)   statSD.innerText   = data.global_sd;
+    <!-- ── Chart / Table Display ── -->
+    <div id="display-wrapper">
+        <div id="chart-container"></div>
+        <div id="table-view">
+            <p style="color:#666; font-size:0.85em; margin-bottom:15px;">Statistical Evidence Table</p>
+            <table id="stageSummaryTable"></table>
+        </div>
+    </div>
 
-    updateSummaryBars();
+    <!-- ── Help Modal ── -->
+    <div class="modal-overlay" id="helpModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="document.getElementById('helpModal').classList.remove('active')">✕</button>
+            <h2>📊 StepChangeAnalysis.com — Help</h2>
 
-    // ── Trace definitions ──
-    const rawTrace = {
-        x: data.dates, y: data.raw_values,
-        mode: 'lines+markers', name: 'All Points',
-        line: { color: '#d62728', width: 1 }, marker: { size: 4 }
-    };
-    const xTrace     = { ...rawTrace, name: 'Individuals (X)' };
-    const xMeanTrace = {
-        x: [data.dates[0], data.dates[data.dates.length-1]],
-        y: [data.global_mean, data.global_mean],
-        mode: 'lines', name: 'Process Mean', line: { color: '#2ca02c', width: 2 }
-    };
-    const unplTrace = {
-        x: [data.dates[0], data.dates[data.dates.length-1]],
-        y: [data.xmr_unpl, data.xmr_unpl],
-        mode: 'lines', name: 'UNPL (+2.66 mR)', line: { color: 'black', width: 1.5, dash: 'dash' }
-    };
-    const lnplTrace = {
-        x: [data.dates[0], data.dates[data.dates.length-1]],
-        y: [data.xmr_lnpl, data.xmr_lnpl],
-        mode: 'lines', name: 'LNPL (-2.66 mR)', line: { color: 'black', width: 1.5, dash: 'dash' }
-    };
-    const mrTrace = {
-        x: data.dates, y: data.mr_values,
-        mode: 'lines+markers', name: 'Moving Range (mR)',
-        yaxis: 'y2', line: { color: '#17becf', width: 1 }, marker: { size: 4 }
-    };
-    const mrMeanTrace = {
-        x: [data.dates[0], data.dates[data.dates.length-1]],
-        y: [data.mr_mean, data.mr_mean],
-        mode: 'lines', name: 'Mean mR', yaxis: 'y2', line: { color: '#2ca02c', dash: 'dash' }
-    };
-    const mrUrlTrace = {
-        x: [data.dates[0], data.dates[data.dates.length-1]],
-        y: [data.mr_url, data.mr_url],
-        mode: 'lines', name: 'URL (3.267 mR)', yaxis: 'y2', line: { color: 'black', dash: 'dash' }
-    };
-    const stepTrace = {
-        x: data.stage_dates, y: data.stage_means,
-        mode: 'lines+markers', name: 'Stage Mean',
-        text: data.confleveltext, hoverinfo: 'text+x',
-        line: { color: 'blue', width: 3 }, marker: { size: 6 }
-    };
-    const uclTrace = {
-        x: data.stage_dates, y: data.stage_ucl,
-        mode: 'lines', name: '+3 SD (UCL)',
-        line: { color: 'rgba(0,0,255,0.2)', dash: 'dash' }, hoverinfo: 'skip'
-    };
-    const lclTrace = {
-        x: data.stage_dates, y: data.stage_lcl,
-        mode: 'lines', name: '-3 SD (LCL)',
-        line: { color: 'rgba(0,0,255,0.2)', dash: 'dash' }, hoverinfo: 'skip'
-    };
-    const cusumOverlayTrace = {
-        x: data.dates, y: data.cusum_values,
-        mode: 'lines', name: 'Cusum', yaxis: 'y2', line: { color: 'green', width: 1 }
-    };
-    const medianTrace = {
-        x: [data.dates[0], data.dates[data.dates.length-1]],
-        y: [data.run_median, data.run_median],
-        mode: 'lines', name: 'Median', line: { color: '#2ca02c', width: 2 }
-    };
-    const shiftAboveTrace = {
-        x: data.shift_above_dates, y: data.shift_above_values,
-        mode: 'markers', name: 'Shift (6+ Above)', marker: { color: 'red', size: 10 }
-    };
-    const shiftBelowTrace = {
-        x: data.shift_below_dates, y: data.shift_below_values,
-        mode: 'markers', name: 'Shift (6+ Below)', marker: { color: 'blue', size: 10 }
-    };
-    const isolatedCusumTrace = {
-        x: data.dates, y: data.cusum_values,
-        mode: 'lines', name: 'Cumulative Sum', line: { color: 'green', width: 2 }
-    };
-    const zeroBaselineTrace = {
-        x: [data.dates[0], data.dates[data.dates.length-1]],
-        y: [0, 0], mode: 'lines', name: 'Zero Baseline',
-        line: { color: 'black', width: 1, dash: 'dash' }
-    };
+            <h3>Preparing your CSV file</h3>
+            <p>Your CSV must have at least two columns: a date column and a numeric value column. A few common issues to avoid:</p>
+            <ul>
+                <li><b>Numeric values with comma separators</b> (e.g. 1,234,567) — these can break the CSV structure if not properly quoted. Before saving as CSV from Excel, format your value column as a plain number with no thousands separator, or ensure values are wrapped in quotes. Run the Data Validator to check for this.</li>
+                <li><b>Merged cells in Excel</b> — merged date cells leave blank rows in the CSV. Unmerge all cells and fill each row with its own date before saving.</li>
+                <li><b>Mixed date formats</b> — ensure all dates in the date column use the same format throughout. The Data Validator will flag inconsistencies.</li>
+                <li><b>Unsupported date formats</b> — financial year formats like "2004-05" are not supported. Convert to a proper date (e.g. 01/04/2004) before uploading.</li>
+            </ul>
 
-    // ── Assemble traces and layout per view ──
-    let activeTraces = [];
-    const layout = {
-        title:    chartTitleInput ? chartTitleInput.value : generateDynamicTitle(),
-        xaxis:    { title: 'Date / Observation' },
-        yaxis:    { title: 'Value' },
-        hovermode: 'closest',
-        legend:   { orientation: 'h', y: -0.2 }
-    };
+            <h3>Getting Started</h3>
+            <p>Prepare your data as a CSV file with at least two columns: a <b>date column</b> and a <b>numeric value column</b>. Then drag and drop the file onto the upload area, or click to browse. If you don't have a CSV ready, download one of the sample datasets from the upload area to try the tool straight away.</p>
 
-    if (currentView === 'step') {
-        activeTraces = [rawTrace, cusumOverlayTrace, stepTrace];
-        if (showSD) activeTraces.push(uclTrace, lclTrace);
-        layout.yaxis2 = { overlaying: 'y', side: 'right', showgrid: false, title: 'Cusum' };
+            <h3>Settings</h3>
+            <ul>
+                <li><b>X-Axis (Date):</b> Select the column containing your dates.</li>
+                <li><b>Y-Axis (Value):</b> Select the column containing your numeric data.</li>
+                <li><b>Date Style:</b> Choose the format that matches your date column. Options: UK (DD/MM/YYYY), US (MM/DD/YYYY), ISO (YYYY-MM-DD), Year-Month ISO (YYYY-MM), Year-Month UK (MM/YYYY), or Year only (YYYY). Auto-detect works for most full-date formats but set this manually for year-only or year-month data.</li>
+                <li><b>Start / End Date:</b> Optionally filter your data to a specific date range.</li>
+                <li><b>Turn Length:</b> Minimum number of points required in a segment before a change point can be detected. Default 5. Increase for smoother results on noisy data.</li>
+                <li><b>Loops:</b> Number of bootstrap resamples. Higher values give more stable confidence levels. 1,000 is fast; use 5,000–10,000 for governance reports.</li>
+                <li><b>Conf %:</b> Minimum confidence level required to declare a change point. 90% = sensitive; 95% = standard; 99.7% = conservative (board/CQC reports).</li>
+                <li><b>Show 3SD Limits:</b> Adds ±3 standard deviation bands to the Step Change chart.</li>
+            </ul>
 
-    } else if (currentView === 'xmr') {
-        activeTraces = [xTrace, xMeanTrace, unplTrace, lnplTrace, mrTrace, mrMeanTrace, mrUrlTrace];
-        layout.yaxis.domain = [0.35, 1];
-        layout.yaxis.title  = 'Individual Value (X)';
-        layout.yaxis2 = { domain: [0, 0.25], anchor: 'x', title: 'Moving Range (mR)' };
+            <h3>Chart Types</h3>
+            <ul>
+                <li><b>Step Change Analysis:</b> Bootstrap CUSUM — detects multiple sequential step-changes with confidence levels. Main governance chart.</li>
+                <li><b>Stage Summary:</b> Table showing each stage with start date, end date, mean, SD, confidence level, and % change from previous stage.</li>
+                <li><b>X-mR Chart:</b> Shewhart Individuals and Moving Range chart. Shows UNPL, LNPL, and URL control limits.</li>
+                <li><b>Run Chart:</b> Plots data against the median. Highlights runs of 6+ consecutive points above or below the median.</li>
+                <li><b>CUSUM Chart:</b> The raw cumulative sum of deviations from the overall mean.</li>
+                <li><b>Raw Data:</b> The original data points with no analysis overlay.</li>
+            </ul>
 
-    } else if (currentView === 'run') {
-        activeTraces = [rawTrace, medianTrace, shiftAboveTrace, shiftBelowTrace];
+            <h3>Interactive Chart Controls</h3>
+            <p>All charts are fully interactive. Here's what you can do:</p>
+            <ul>
+                <li><b>Hide / show a trace:</b> Click any item in the chart legend (below the chart) to hide that line or series. Click it again to bring it back. This is useful for decluttering the Step Change chart — for example, clicking "All Points" hides the raw data line and leaves just the stage means and CUSUM overlay.</li>
+                <li><b>Zoom in:</b> Click and drag on the chart area to zoom into a date range. Double-click to zoom back out to full view.</li>
+                <li><b>Pan:</b> Click the pan icon (crossed arrows) in the toolbar, then drag the chart left or right.</li>
+                <li><b>Hover for values:</b> Hover your mouse over any point to see the exact date and value in a tooltip.</li>
+            </ul>
+            <p><b>Toolbar icons</b> (top right of the chart):</p>
+            <ul>
+                <li><b>📷 Camera</b> — Download the current chart view as a PNG image (quick screenshot, no stats metadata).</li>
+                <li><b>🔍 Zoom</b> — Draw a rectangle to zoom into a specific area.</li>
+                <li><b>✋ Pan</b> — Click and drag to pan across the chart.</li>
+                <li><b>⬜ Box Select / Lasso Select</b> — Select a group of data points.</li>
+                <li><b>➕ / ➖ Zoom In / Zoom Out</b> — Step zoom in or out.</li>
+                <li><b>🏠 Reset Axes</b> — Return to the full default view after zooming or panning.</li>
+                <li><b>🖱️ Hover Mode</b> — Toggle between showing the closest single point or comparing all traces at the same x position.</li>
+            </ul>
+            <p><i>Note: The <b>Export PNG</b> button (in the controls panel above the chart) produces a higher quality, wider image with stats and settings metadata included — use this for reports and governance submissions rather than the camera icon.</i></p>
 
-    } else if (currentView === 'cusum') {
-        activeTraces = [isolatedCusumTrace, zeroBaselineTrace];
-        layout.yaxis.title = 'Cumulative Sum of Deviations';
+            <h3>Exporting</h3>
+            <p>Use <b>Export PNG</b> to save the current chart as an image. Use <b>Export PDF</b> to generate a formatted report suitable for board papers and governance submissions. Both buttons appear after analysis is complete.</p>
 
-    } else if (currentView === 'raw') {
-        activeTraces = [rawTrace];
-    }
+            <h3>Data Validator</h3>
+            <p>If your analysis produces unexpected results or an error, click <b>Data Validator</b> to run a diagnostic scan on your CSV. It checks for out-of-order dates, missing values, blank cells, and format errors.</p>
 
-    Plotly.newPlot(chartContainer, activeTraces, layout);
-}
+            <h3>Privacy</h3>
+            <p>Your CSV file never leaves your computer. All analysis runs entirely in your browser. No data is uploaded to any server. No login required. Works offline once loaded.</p>
+
+            <h3>About the method</h3>
+            <p>Bootstrap CUSUM step-change analysis is a distribution-free method for detecting structural changes in time series data. It does not assume normality, making it particularly suited to healthcare safety data, incident counts, and other right-skewed metrics. The confidence level is earned from your data by resampling — not assumed from a statistical formula.</p>
+
+            <h3>When Bootstrap CUSUM works best</h3>
+            <p>Bootstrap CUSUM answers a specific question: <b>"has the underlying mean level of this process permanently shifted?"</b> It is designed for processes that undergo genuine structural change — where something intervenes and the process moves to a new sustained level.</p>
+            <p>It works best on:</p>
+            <ul>
+                <li><b>Support or incident counts</b> — where training, system improvements, or policy changes produce lasting reductions</li>
+                <li><b>Prescribing volumes or error rates</b> — where a clinical intervention permanently shifts the baseline</li>
+                <li><b>Process metrics after a known change</b> — manufacturing defects, call volumes, complaints</li>
+                <li><b>Any data where improvements are expected to be sustained</b>, not temporary</li>
+            </ul>
+
+            <h3>When you may see "1 distinct stage"</h3>
+            <p>If the analysis returns only 1 stage (no change detected), this is not necessarily wrong — it may be the correct answer. This typically happens when:</p>
+            <ul>
+                <li><b>The data is cyclical or mean-reverting</b> — for example, annual GDP growth rates naturally oscillate around a long-run mean. Recessions cause temporary dips but growth rates recover. Bootstrap CUSUM correctly finds no permanent step-change because there isn't one.</li>
+                <li><b>The confidence threshold is too high</b> — try lowering Conf % from 99.7% to 95% or 90% to detect smaller or less certain changes.</li>
+                <li><b>The dataset is too short</b> — fewer than 20-30 observations make it harder to distinguish genuine change from random variation. Increase the data range if possible.</li>
+                <li><b>The Turn Length is too high</b> — reducing Turn Length from 5 to 3 allows detection of changes in shorter segments.</li>
+                <li><b>Genuine stability</b> — the process may simply not have changed in a sustained way during the period analysed.</li>
+            </ul>
+            <p>For cyclical economic or environmental data, consider plotting the cumulative <i>level</i> rather than the periodic <i>growth rate</i> — permanent structural shifts are more visible in level data.</p>
+            <p><b>To create cumulative level data in Excel:</b> Add a new column, set the first row to <code>100</code> (your baseline), then in each subsequent row use the formula <code>=previous_row * (1 + (growth_rate/100))</code>. For example if 1949 = 100 and 1950 growth was 3.3%: <code>=100*(1+0.033) = 103.3</code>. Drag the formula down for all rows, save as CSV, and re-upload. The resulting series will show permanent structural shifts that are invisible in the raw growth rate data.</p>
+
+            <p style="font-size:0.85em; color:#888; margin-top:20px;">Based on Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). Implemented at StepChangeAnalysis.com.</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-NZLMMS3ZGG');
+    </script>
+</body>
+</html>
