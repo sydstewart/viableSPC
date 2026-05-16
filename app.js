@@ -12,7 +12,7 @@
  *   2. Raw Data tab shows scrollable table of original CSV data
  *   3. PNG export includes stats bar and settings as chart annotations
  *   4. Chart title no longer reverts on tab switch if user has edited it
- *   5. CUSUM guide hidden on Run Chart tab (already partially done —   confirmed)
+ *   5. CUSUM guide hidden on Run Chart tab (already partially done — confirmed)
  */
 
 const pythonWorker    = new Worker('worker.js');
@@ -483,16 +483,6 @@ function updateSummaryBars() {
     } else {
         if (summaryBar)    summaryBar.style.display    = "flex";
         if (xmrSummaryBar) xmrSummaryBar.style.display = "none";
-        // FIX: On Run Chart tab show median instead of stage count
-        if (currentView === 'run') {
-            if (stageCountText) stageCountText.innerHTML =
-                `Median = <b>${currentChartData.run_median !== undefined ? currentChartData.run_median.toFixed(2) : '—'}</b> &nbsp;|&nbsp; Run Chart (6+ consecutive points above/below median flagged)`;
-        } else {
-            if (stageCountText) {
-                const confVal = document.getElementById('paramConfLimit')?.value || "??";
-                stageCountText.innerHTML = `Found <b>${currentChartData.step_count}</b> distinct stages &nbsp;|&nbsp; CUSUM (${confVal}% Confidence)`;
-            }
-        }
     }
 }
 
@@ -665,6 +655,10 @@ function drawPlotlyChart() {
     const showSD = showSDCheckbox?.checked;
 
     if (summaryBar) summaryBar.style.display = "flex";
+    if (stageCountText) {
+        const confVal = document.getElementById('paramConfLimit')?.value || "??";
+        stageCountText.innerHTML = `Found ${data.step_count} distinct stages (${confVal}% Confidence).`;
+    }
     if (statN)    statN.innerText    = data.global_count;
     if (statMean) statMean.innerText = data.global_mean;
     if (statSD)   statSD.innerText   = data.global_sd;
