@@ -490,7 +490,7 @@ function updateSummaryBars() {
         } else {
             if (stageCountText) {
                 const confVal = document.getElementById('paramConfLimit')?.value || "??";
-                stageCountText.innerHTML = `Found ${data.step_count} distinct stages (${confVal}% Confidence).`;
+                stageCountText.innerHTML = `Found <b>${currentChartData.step_count}</b> distinct stages &nbsp;|&nbsp; CUSUM (${confVal}% Confidence)`;
             }
         }
     }
