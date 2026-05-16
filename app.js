@@ -10,7 +10,7 @@
     <style>
         body { font-family: system-ui, sans-serif; padding: 20px; max-width: 1200px; margin: auto; background-color: #f8f9fa; }
 
-        /* ── Header bar ── */
+        /* ── Header bar  ── */
         .app-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
         .app-header h1 { margin: 0; font-size: 1.4em; color: #002d5b; }
         .header-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
