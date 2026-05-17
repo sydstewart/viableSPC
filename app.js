@@ -10,9 +10,12 @@
  * Fixes applied (May 2026):
  *   1. Clear start/end date filters when X-axis column changes
  *   2. Raw Data tab shows scrollable table of original CSV data
- *   3. PNG export includes stats bar and settings as chart annotations
+ *   3. PNG export includes tab-specific stats as chart annotations
  *   4. Chart title no longer reverts on tab switch if user has edited it
- *   5. CUSUM guide hidden on Run Chart tab (already partially done — confirmed)
+ *   5. CUSUM guide hidden on Run Chart tab
+ *   6. Summary bar correct per tab
+ *   7. Export PNG/PDF show tab-specific stats
+ *   8. Stage Summary + Raw Data: PNG disabled with visible message; PDF only
  */
 
 const pythonWorker    = new Worker('worker.js');
@@ -54,12 +57,28 @@ let currentChartData = null;
 let currentView      = 'step';
 let activeFilename   = "Data";
 let analysisDateTime = "";
-
-// FIX 4: Track whether the user has manually edited the chart title.
-// If true, tab switches will NOT overwrite it with the auto-generated title.
 let userHasEditedTitle = false;
 
-// ── Prevent browser intercepting drag-and-drop globally ──
+// Export notice banner — shown below buttons on Stage Summary and Raw Data tabs
+let exportNoticeBanner = null;
+function showExportNotice(msg) {
+    if (!exportNoticeBanner) {
+        exportNoticeBanner = document.createElement('div');
+        exportNoticeBanner.id = 'export-notice-banner';
+        exportNoticeBanner.style.cssText = 'display:none;background:#e8f4fd;border:1px solid #0056b3;border-radius:6px;padding:10px 16px;margin-top:8px;font-size:0.9em;color:#002d5b;';
+        // Insert after the export buttons row
+        if (exportPdfBtn && exportPdfBtn.parentNode) {
+            exportPdfBtn.parentNode.insertBefore(exportNoticeBanner, exportPdfBtn.nextSibling);
+        }
+    }
+    exportNoticeBanner.innerHTML = `ℹ️ ${msg}`;
+    exportNoticeBanner.style.display = 'block';
+}
+function hideExportNotice() {
+    if (exportNoticeBanner) exportNoticeBanner.style.display = 'none';
+}
+
+// Prevent browser intercepting drag-and-drop globally
 window.addEventListener("dragover", e => e.preventDefault(), false);
 window.addEventListener("drop",     e => e.preventDefault(), false);
 
@@ -118,9 +137,6 @@ function loadSettings(filename) {
 window.addEventListener('DOMContentLoaded', function() {
     if (controlsDiv) controlsDiv.style.display = "flex";
 
-    // FIX 1: Clear start/end date filters when X-axis column changes.
-    // When the user picks a different date column the saved date range
-    // from the previous column is no longer meaningful — clear it.
     const xColSelect = document.getElementById('xColSelect');
     if (xColSelect) {
         xColSelect.addEventListener('change', function() {
@@ -151,7 +167,6 @@ pythonWorker.onmessage = function(event) {
 
         buildStageTable(message.data);
 
-        // FIX 4: Only auto-generate the title if the user has not manually edited it.
         if (!userHasEditedTitle) {
             generateDynamicTitle();
         }
@@ -182,16 +197,13 @@ function hideError() {
     if (errorBanner) errorBanner.style.display = "none";
 }
 
-// ── Warning banner helpers (Free Edition notices) ──
-// Reuses the error banner with a different style so warnings persist
-// until the user loads a new file or changes settings.
+// ── Warning banner helpers ──
 let warningBanner = null;
 function showWarning(msg) {
     if (!warningBanner) {
         warningBanner = document.createElement('div');
         warningBanner.id = 'warning-banner';
         warningBanner.style.cssText = 'display:none;background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:12px 16px;margin-bottom:15px;font-size:0.9em;color:#664d03;';
-        // Insert after error banner
         const eb = document.getElementById('error-banner');
         if (eb && eb.parentNode) eb.parentNode.insertBefore(warningBanner, eb.nextSibling);
     }
@@ -200,6 +212,34 @@ function showWarning(msg) {
 }
 function hideWarning() {
     if (warningBanner) warningBanner.style.display = 'none';
+}
+
+// ── Export button state — update per tab ──
+function updateExportButtons() {
+    if (!exportPngBtn || !exportPdfBtn) return;
+    const tableOnlyView = (currentView === 'stages' || currentView === 'raw');
+    if (tableOnlyView) {
+        exportPngBtn.disabled = true;
+        exportPngBtn.style.opacity = '0.45';
+        exportPngBtn.style.cursor = 'not-allowed';
+        exportPngBtn.title = 'PNG export is not available for this tab — use Export PDF instead';
+        exportPdfBtn.disabled = false;
+        exportPdfBtn.style.opacity = '1';
+        exportPdfBtn.style.cursor = 'pointer';
+        exportPdfBtn.title = '';
+        const tabLabel = currentView === 'stages' ? 'Stage Summary' : 'Raw Data';
+        showExportNotice(`<b>${tabLabel}</b> tab — PNG export is not available. Use <b>Export PDF</b> to save this table.`);
+    } else {
+        exportPngBtn.disabled = false;
+        exportPngBtn.style.opacity = '1';
+        exportPngBtn.style.cursor = 'pointer';
+        exportPngBtn.title = '';
+        exportPdfBtn.disabled = false;
+        exportPdfBtn.style.opacity = '1';
+        exportPdfBtn.style.cursor = 'pointer';
+        exportPdfBtn.title = '';
+        hideExportNotice();
+    }
 }
 
 let currentChartTitle = '';
@@ -233,6 +273,48 @@ function generateDynamicTitle() {
     return fullTitle;
 }
 
+// ── Build tab-specific stats line for PNG export annotation ──
+function buildExportStatsLine() {
+    if (!currentChartData) return '';
+    const confVal = document.getElementById('paramConfLimit')?.value || '—';
+    if (currentView === 'step' || currentView === 'stages') {
+        return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  Stages = ${currentChartData.step_count}  |  Conf = ${confVal}%`;
+    } else if (currentView === 'cusum') {
+        return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}`;
+    } else if (currentView === 'run') {
+        const med = currentChartData.run_median !== undefined ? currentChartData.run_median.toFixed(2) : '—';
+        return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  Median = ${med}`;
+    } else if (currentView === 'xmr') {
+        return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  UNPL = ${currentChartData.xmr_unpl}  |  LNPL = ${currentChartData.xmr_lnpl}  |  URL = ${currentChartData.mr_url}`;
+    } else {
+        return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}`;
+    }
+}
+
+// ── Build tab-specific meta row HTML for PDF ──
+function buildExportMetaHTML() {
+    if (!currentChartData) return '';
+    const yCol    = document.getElementById('yColSelect')?.value || '';
+    const confVal = document.getElementById('paramConfLimit')?.value || '—';
+    let html = `<span>N = <b>${currentChartData.global_count}</b></span>
+                <span>Mean = <b>${currentChartData.global_mean}</b></span>
+                <span>SD = <b>${currentChartData.global_sd}</b></span>`;
+    if (currentView === 'step' || currentView === 'stages') {
+        html += `<span>Stages = <b>${currentChartData.step_count}</b></span>
+                 <span>Conf = <b>${confVal}%</b></span>`;
+    } else if (currentView === 'run') {
+        const med = currentChartData.run_median !== undefined ? currentChartData.run_median.toFixed(2) : '—';
+        html += `<span>Median = <b>${med}</b></span>`;
+    } else if (currentView === 'xmr') {
+        html += `<span>UNPL = <b>${currentChartData.xmr_unpl}</b></span>
+                 <span>LNPL = <b>${currentChartData.xmr_lnpl}</b></span>
+                 <span>URL = <b>${currentChartData.mr_url}</b></span>`;
+    }
+    html += `<span>Y-Axis: <b>${yCol || activeFilename}</b></span>
+             <span>File: <b>${activeFilename}</b></span>`;
+    return html;
+}
+
 // ── File upload — drag and drop or click ──
 if (dropZone) {
     dropZone.onclick = () => csvInput.click();
@@ -260,11 +342,7 @@ function handleFileUpload(file) {
     }
 
     activeFilename = file.name.replace(/\.[^/.]+$/, "");
-
-    // FIX 4: Reset the user-edited title flag when a new file is loaded
-    // so the title auto-generates fresh for the new file.
     userHasEditedTitle = false;
-
     hideError();
 
     Papa.parse(file, {
@@ -285,7 +363,6 @@ function handleFileUpload(file) {
             const restored = loadSettings(activeFilename);
             statusText.innerHTML = `📊 <b>${activeFilename}</b> loaded.` +
                 (restored ? ' <span style="color:#198754">✓ Previous settings restored.</span>' : ' Configure settings and click Recalculate.');
-            // Free Edition: warn if CSV exceeds 500 rows — shown persistently
             if (cachedCsvData.length > 500) {
                 showWarning(`This file has ${cachedCsvData.length} rows. Free Edition is optimised for up to 500 rows. Results may be slower. Pro Edition will support unlimited rows.`);
             } else {
@@ -305,16 +382,16 @@ function runPythonAnalysis() {
         recalcBtn.innerText = "Calculating...";
     }
 
-    const turnLen   = document.getElementById('paramTurnLength')?.value  || 5;
-    let   bootNum   = parseInt(document.getElementById('paramBootNum')?.value || 1000);
-    const confLim   = document.getElementById('paramConfLimit')?.value   || 95;
+    const turnLen = document.getElementById('paramTurnLength')?.value  || 5;
+    let   bootNum = parseInt(document.getElementById('paramBootNum')?.value || 1000);
+    const confLim = document.getElementById('paramConfLimit')?.value   || 95;
 
-    // Free Edition: warn if bootstrap iterations exceed 1,000 but don't block
     if (bootNum > 1000) {
         showWarning(`Bootstrap loops set to ${bootNum}. Free Edition is optimised for up to 1,000 loops. Higher values may be slow. Pro Edition will support up to 10,000.`);
     } else {
         hideWarning();
     }
+
     const xCol      = document.getElementById('xColSelect')?.value;
     const yCol      = document.getElementById('yColSelect')?.value;
     const dateFmt   = document.getElementById('dateFormatSelect')?.value || "auto";
@@ -375,7 +452,7 @@ function buildStageTable(data) {
     stageSummaryTable.innerHTML = html + "</tbody>";
 }
 
-// FIX 2: Build the Raw Data tab table from the original CSV rows.
+// Build Raw Data tab table from original CSV rows
 function buildRawDataTable() {
     if (!cachedCsvData || cachedCsvData.length === 0) return '<p style="color:#666;">No data loaded.</p>';
     const headers = Object.keys(cachedCsvData[0]);
@@ -400,45 +477,34 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
         this.classList.add('active');
         currentView = this.getAttribute('data-view');
 
-        // FIX 4: Only regenerate the title on tab switch if user hasn't edited it.
         if (!userHasEditedTitle) {
             generateDynamicTitle();
         }
 
         updateSummaryBars();
+        updateExportButtons();
 
         if (currentView === 'stages') {
-            // Stage Summary — show the statistical evidence table.
-            // Important: do NOT rebuild tableView.innerHTML here — that would
-            // detach the stageSummaryTable element captured at page load,
-            // making buildStageTable() write to a ghost element off-screen.
             chartContainer.style.display = "none";
             if (tableView) {
                 tableView.style.display = "block";
-                // Restore the stage summary caption and table (may have been hidden by Raw Data tab)
                 const caption = tableView.querySelector('p');
                 if (caption) { caption.innerText = 'Statistical Evidence Table'; caption.style.display = ''; }
                 const stageTable = document.getElementById('stageSummaryTable');
                 if (stageTable) stageTable.style.display = '';
-                // Remove raw data wrapper if present
                 const existingRaw = tableView.querySelector('.raw-data-wrapper');
                 if (existingRaw) existingRaw.remove();
                 if (currentChartData) buildStageTable(currentChartData);
             }
 
         } else if (currentView === 'raw') {
-            // FIX 2: Raw Data tab — show the original CSV as a scrollable table.
-            // Inject a wrapper div alongside the existing stageSummaryTable
-            // rather than replacing innerHTML, so the table reference stays valid.
             chartContainer.style.display = "none";
             if (tableView) {
                 tableView.style.display = "block";
-                // Hide the stage summary caption and table
                 const caption = tableView.querySelector('p');
                 if (caption) caption.style.display = 'none';
                 const stageTable = document.getElementById('stageSummaryTable');
                 if (stageTable) stageTable.style.display = 'none';
-                // Remove any previous raw wrapper and inject a fresh one
                 const prev = tableView.querySelector('.raw-data-wrapper');
                 if (prev) prev.remove();
                 const wrapper = document.createElement('div');
@@ -450,7 +516,6 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
             }
 
         } else {
-            // All chart tabs
             chartContainer.style.display = "block";
             if (tableView) tableView.style.display = "none";
             drawPlotlyChart();
@@ -458,10 +523,10 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     };
 });
 
+// ── Update summary bars ──
 function updateSummaryBars() {
     if (!currentChartData) return;
 
-    // FIX 5: CUSUM guide only on Step Change and CUSUM tabs — hide on Run Chart
     const cusumGuide = document.getElementById('cusum-guide');
     if (cusumGuide) {
         cusumGuide.style.display = (currentView === 'step' || currentView === 'cusum') ? 'block' : 'none';
@@ -476,22 +541,37 @@ function updateSummaryBars() {
         if (xmrN)     xmrN.innerText     = currentChartData.global_count;
         if (xmrMean)  xmrMean.innerText  = currentChartData.global_mean;
         if (xmrSd)    xmrSd.innerText    = currentChartData.global_sd;
+
     } else if (currentView === 'raw' || currentView === 'stages') {
-        // No summary bars on Raw Data or Stage Summary tabs
         if (summaryBar)    summaryBar.style.display    = "none";
         if (xmrSummaryBar) xmrSummaryBar.style.display = "none";
+
     } else {
         if (summaryBar)    summaryBar.style.display    = "flex";
         if (xmrSummaryBar) xmrSummaryBar.style.display = "none";
+
+        if (statN)    statN.innerText    = currentChartData.global_count;
+        if (statMean) statMean.innerText = currentChartData.global_mean;
+        if (statSD)   statSD.innerText   = currentChartData.global_sd;
+
+        if (currentView === 'step') {
+            if (stageCountText) {
+                const confVal = document.getElementById('paramConfLimit')?.value || "??";
+                stageCountText.innerHTML = `Found <b>${currentChartData.step_count}</b> distinct stages &nbsp;|&nbsp; CUSUM (${confVal}% Confidence)`;
+            }
+        } else if (currentView === 'run') {
+            if (stageCountText) stageCountText.innerHTML =
+                `Median = <b>${currentChartData.run_median !== undefined ? currentChartData.run_median.toFixed(2) : '—'}</b> &nbsp;|&nbsp; Run Chart (6+ consecutive points above/below median flagged)`;
+        } else if (currentView === 'cusum') {
+            if (stageCountText) stageCountText.innerHTML = '';
+        }
     }
 }
 
 // ── Button wiring ──
-if (recalcBtn)      recalcBtn.onclick      = runPythonAnalysis;
+if (recalcBtn)      recalcBtn.onclick       = runPythonAnalysis;
 if (showSDCheckbox) showSDCheckbox.onchange = () => { if (currentChartData) drawPlotlyChart(); };
 
-// FIX 4: Mark the title as user-edited when they type in the title field.
-// This prevents tab switches from overwriting their custom title.
 if (chartTitleInput) {
     chartTitleInput.oninput = () => {
         userHasEditedTitle = true;
@@ -500,22 +580,21 @@ if (chartTitleInput) {
 }
 
 // ── Export PNG ──
-// FIX 3: Add stats and settings as chart annotations before exporting,
-// then remove them after so the live chart stays clean.
 if (exportPngBtn) exportPngBtn.onclick = function() {
     if (!currentChartData) return;
+    if (currentView === 'stages' || currentView === 'raw') {
+        alert('PNG export is not available for this tab. Please use Export PDF to save this table.');
+        return;
+    }
 
-    const title    = chartTitleInput ? chartTitleInput.value : activeFilename;
-    const yCol     = document.getElementById('yColSelect')?.value || '';
-    const confVal  = document.getElementById('paramConfLimit')?.value  || '—';
-    const bootVal  = document.getElementById('paramBootNum')?.value    || '—';
-    const turnVal  = document.getElementById('paramTurnLength')?.value || '—';
-    const fmtVal   = document.getElementById('dateFormatSelect')?.value || '—';
-    const startVal = document.getElementById('startDate')?.value       || 'All';
-    const endVal   = document.getElementById('endDate')?.value         || 'All';
-
-    // Build the annotation strings
-    const statsLine    = `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  Stages = ${currentChartData.step_count}  |  Conf = ${confVal}%`;
+    const title      = chartTitleInput ? chartTitleInput.value : activeFilename;
+    const yCol       = document.getElementById('yColSelect')?.value || '';
+    const bootVal    = document.getElementById('paramBootNum')?.value    || '—';
+    const turnVal    = document.getElementById('paramTurnLength')?.value || '—';
+    const fmtVal     = document.getElementById('dateFormatSelect')?.value || '—';
+    const startVal   = document.getElementById('startDate')?.value       || 'All';
+    const endVal     = document.getElementById('endDate')?.value         || 'All';
+    const statsLine    = buildExportStatsLine();
     const settingsLine = `Loops: ${bootVal}  |  Turn Length: ${turnVal}  |  Date Format: ${fmtVal}  |  Range: ${startVal || 'All'} – ${endVal || 'All'}`;
     const brandLine    = `📊 stepchangeanalysis.com — Bootstrap CUSUM SPC Tool — Free Edition`;
 
@@ -537,7 +616,6 @@ if (exportPngBtn) exportPngBtn.onclick = function() {
             filename: (title + (yCol ? ' - ' + yCol : '')).replace(/[^a-z0-9]/gi, '_')
         });
     }).then(function() {
-        // Restore original title and margin after export
         Plotly.relayout(chartContainer, {
             title: { text: title, font: { size: 16 }, x: 0.5, xanchor: 'center' },
             margin: { t: 40 }
@@ -557,10 +635,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
     const endVal    = document.getElementById('endDate')?.value         || 'All';
     const fullTitle = title + (yCol ? ` — ${yCol}` : '');
 
-    Plotly.toImage(document.getElementById('chart-container'), { format: 'png', width: 1200, height: 600 })
-    .then(function(imgData) {
-        const win = window.open('', '_blank');
-        win.document.write(`<!DOCTYPE html><html><head>
+    const pdfHeader = `<!DOCTYPE html><html><head>
         <title>${fullTitle}</title>
         <style>
             body { font-family: system-ui, sans-serif; margin: 30px; color: #1e293b; font-size: 13pt; }
@@ -590,28 +665,39 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
             <div class="brand-tag">Generated: ${analysisDateTime}<br>Privacy: no data uploaded &#128274;</div>
         </div>
         <h2>${fullTitle}</h2>
-        <div class="meta-row">
-            <span>N = <b>${currentChartData.global_count}</b></span>
-            <span>Mean = <b>${currentChartData.global_mean}</b></span>
-            <span>SD = <b>${currentChartData.global_sd}</b></span>
-            <span>Y-Axis: <b>${yCol || activeFilename}</b></span>
-            <span>File: <b>${activeFilename}</b></span>
-        </div>
+        <div class="meta-row">${buildExportMetaHTML()}</div>
         <div class="settings-bar">
             <span>Confidence: <b>${confVal}%</b></span>
             <span>Bootstrap loops: <b>${bootVal}</b></span>
             <span>Turn length: <b>${turnVal}</b></span>
             <span>Date format: <b>${fmtVal}</b></span>
             <span>Date range: <b>${startVal || 'All'}</b> to <b>${endVal || 'All'}</b></span>
-        </div>
-        <img src="${imgData}" alt="${title}" />
-        ${buildStageTableHTML()}
-        <div class="pdf-footer">
+        </div>`;
+
+    const pdfFooter = `<div class="pdf-footer">
             <b style="color:#002d5b;">📊 StepChangeAnalysis.com — Free Edition</b> &nbsp;|&nbsp; <a href="https://stepchangeanalysis.com" style="color:#0056b3;">stepchangeanalysis.com</a> &nbsp;|&nbsp; Analysis performed entirely in browser — no data uploaded<br>
             <span style="color:#aaa;font-size:0.85em;">Bootstrap CUSUM method: Taylor (2000), building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993)</span>
         </div>
         <script>window.onload = function() { window.print(); }<\/script>
-        </body></html>`);
+        </body></html>`;
+
+    // Stage Summary or Raw Data: table only, no chart image
+    if (currentView === 'stages' || currentView === 'raw') {
+        const win = window.open('', '_blank');
+        const tableContent = currentView === 'stages'
+            ? buildStageTableHTML()
+            : `<p style="color:#666;font-size:0.9em;margin-bottom:12px;">Raw Data — ${cachedCsvData ? cachedCsvData.length : 0} rows </p>` + buildRawDataTableHTML(null);
+        win.document.write(pdfHeader + tableContent + pdfFooter);
+        win.document.close();
+        return;
+    }
+
+    // All chart tabs: chart image + optional stage table
+    Plotly.toImage(document.getElementById('chart-container'), { format: 'png', width: 1200, height: 600 })
+    .then(function(imgData) {
+        const win = window.open('', '_blank');
+        const stageTable = currentView === 'step' ? buildStageTableHTML() : '';
+        win.document.write(pdfHeader + `<img src="${imgData}" alt="${title}" />` + stageTable + pdfFooter);
         win.document.close();
     });
 };
@@ -648,30 +734,34 @@ function buildStageTableHTML() {
     return html + "</tbody></table>";
 }
 
+// Build raw data as HTML table for PDF (limited rows to keep PDF manageable)
+function buildRawDataTableHTML(maxRows) {
+    if (!cachedCsvData || cachedCsvData.length === 0) return '<p>No data.</p>';
+    const headers = Object.keys(cachedCsvData[0]);
+    const rows = maxRows ? cachedCsvData.slice(0, maxRows) : cachedCsvData;
+    let html = `<table class="stage-table"><thead><tr>` +
+        headers.map(h => `<th>${h}</th>`).join('') +
+        `</tr></thead><tbody>`;
+    rows.forEach((row, i) => {
+        html += `<tr>` + headers.map(h => `<td>${row[h] !== undefined ? row[h] : ''}</td>`).join('') + `</tr>`;
+    });
+    return html + `</tbody></table>`;
+}
+
 // ── Main chart drawing function ──
 function drawPlotlyChart() {
     if (!currentChartData) return;
     const data   = currentChartData;
     const showSD = showSDCheckbox?.checked;
 
-    if (summaryBar) summaryBar.style.display = "flex";
-    if (stageCountText) {
-        const confVal = document.getElementById('paramConfLimit')?.value || "??";
-        stageCountText.innerHTML = `Found ${data.step_count} distinct stages (${confVal}% Confidence).`;
-    }
-    if (statN)    statN.innerText    = data.global_count;
-    if (statMean) statMean.innerText = data.global_mean;
-    if (statSD)   statSD.innerText   = data.global_sd;
-
     updateSummaryBars();
 
-    // ── Trace definitions ──
     const rawTrace = {
         x: data.dates, y: data.raw_values,
         mode: 'lines+markers', name: 'All Points',
         line: { color: '#d62728', width: 1 }, marker: { size: 4 }
     };
-    const xTrace     = { ...rawTrace, name: 'Individuals (X)' };
+    const xTrace = { ...rawTrace, name: 'Individuals (X)' };
     const xMeanTrace = {
         x: [data.dates[0], data.dates[data.dates.length-1]],
         y: [data.global_mean, data.global_mean],
@@ -745,7 +835,6 @@ function drawPlotlyChart() {
         line: { color: 'black', width: 1, dash: 'dash' }
     };
 
-    // ── Assemble traces and layout per view ──
     let activeTraces = [];
     const layout = {
         title:    currentChartTitle || (chartTitleInput ? chartTitleInput.value : generateDynamicTitle()),
