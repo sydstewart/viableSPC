@@ -20,6 +20,8 @@
         .btn-help:hover { background: #5a6268; }
         .btn-feedback { padding: 8px 16px; background: #e67e22; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.9em; }
         .btn-feedback:hover { background: #ca6f1e; }
+        .btn-articles { padding: 8px 16px; background: #002d5b; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.9em; }
+        .btn-articles:hover { background: #0056b3; }
 
         /* ── Upload box ── */
         .upload-box { border: 3px dashed #ccc; padding: 40px; text-align: center; margin-bottom: 20px; border-radius: 8px; background-color: white; cursor: pointer; }
@@ -79,6 +81,26 @@
         th { background: #f0f4f8; padding: 12px; border-bottom: 2px solid #0056b3; text-align: left; }
         td { padding: 10px; border-bottom: 1px solid #eee; }
 
+        /* ── Articles section ── */
+        .articles-section { margin-top: 40px; padding-top: 24px; border-top: 2px solid #e2e8f0; }
+        .articles-section h2 { color: #002d5b; font-size: 1.15em; margin-bottom: 16px; }
+        .articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+        .article-card { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; text-decoration: none; display: block; transition: box-shadow 0.2s; }
+        .article-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+        .article-card-tag { font-size: 0.75em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+        .article-card h3 { color: #002d5b; font-size: 1.0em; margin-bottom: 8px; line-height: 1.3; }
+        .article-card p { color: #64748b; font-size: 0.87em; line-height: 1.5; margin: 0; }
+
+        /* ── Articles dropdown modal ── */
+        .articles-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .articles-modal-overlay.active { display: flex; align-items: flex-start; justify-content: flex-end; padding: 70px 20px 0 0; }
+        .articles-modal-box { background: white; border-radius: 10px; padding: 20px; max-width: 420px; width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+        .articles-modal-box h3 { color: #002d5b; font-size: 1em; margin-bottom: 14px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+        .articles-modal-box a { display: block; padding: 12px 14px; border-radius: 6px; text-decoration: none; margin-bottom: 8px; border: 1px solid #e2e8f0; transition: background 0.15s; }
+        .articles-modal-box a:hover { background: #f0f4f8; }
+        .articles-modal-box a .tag { font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+        .articles-modal-box a .title { color: #002d5b; font-size: 0.92em; font-weight: 600; line-height: 1.3; }
+
         /* ── Help modal ── */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
         .modal-overlay.active { display: flex; align-items: center; justify-content: center; }
@@ -95,45 +117,44 @@
 </head>
 <body>
 
-    <!-- ── App Header  ── -->
+    <!-- ── App Header ── -->
     <div class="app-header">
-        <h1>📊 StepChangeAnalysis.com — SPC Analyzer</h1>
+        <h1>&#128202; StepChangeAnalysis.com — SPC Analyzer</h1>
         <div class="header-buttons">
-            <button class="btn-scanner" onclick="window.open('scanner.html', '_blank')">🔍 Data Validator</button>
-            <button class="btn-feedback" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeM9hZ75140SEKR0Mex4JvLEEdp9E8hq9w5Ug5ItDH9Qx5fkg/viewform?usp=publish-editor', '_blank')">💬 Feedback</button>
-            <button class="btn-help" onclick="document.getElementById('helpModal').classList.add('active')">❓ Help</button>
+            <button class="btn-scanner" onclick="window.open('scanner.html', '_blank')">&#128269; Data Validator</button>
+            <button class="btn-articles" onclick="document.getElementById('articlesModal').classList.add('active')">&#128240; Articles</button>
+            <button class="btn-feedback" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeM9hZ75140SEKR0Mex4JvLEEdp9E8hq9w5Ug5ItDH9Qx5fkg/viewform?usp=publish-editor', '_blank')">&#128172; Feedback</button>
+            <button class="btn-help" onclick="document.getElementById('helpModal').classList.add('active')">&#10067; Help</button>
         </div>
     </div>
 
-    <!-- ── Error Banner (shown on data errors) ── -->
+    <!-- ── Error Banner ── -->
     <div id="error-banner">
-        ⚠️ <b>Analysis Error:</b> <span id="error-message"></span>
+        &#9888;&#65039; <b>Analysis Error:</b> <span id="error-message"></span>
         <br><br>
-        💡 <b>Tip:</b> Run the <a onclick="window.open('scanner.html', '_blank')">Data Validator</a> on your CSV file to check for date format issues, missing values, or out-of-order rows before re-analysing.
+        &#128161; <b>Tip:</b> Run the <a onclick="window.open('scanner.html', '_blank')">Data Validator</a> on your CSV file to check for date format issues, missing values, or out-of-order rows before re-analysing.
     </div>
 
     <!-- ── Upload Box ── -->
     <div class="upload-box" id="dropZone">
         <input type="file" id="csvInput" accept=".csv" style="display: none;" />
-        <p id="statusText">📁 <b>Ready!</b> Click or drop a CSV file to begin.</p>
+        <p id="statusText">&#128193; <b>Ready!</b> Click or drop a CSV file to begin.</p>
         <div class="sample-links" onclick="event.stopPropagation()">
             Don't have a CSV yet? Try a sample dataset:
-            <a href="sample-data-uk.csv" download>⬇ Sample Data (UK)</a> |
-            <a href="sample-data-us.csv" download>⬇ Sample Data (US)</a>
+            <a href="sample-data-uk.csv" download>&#8675; Sample Data (UK)</a> |
+            <a href="sample-data-us.csv" download>&#8675; Sample Data (US)</a>
         </div>
     </div>
 
     <!-- ── Controls Panel ── -->
     <div id="controls">
 
-        <!-- Chart title — editable, auto-filled from filename + view + date -->
         <div class="title-row">
             <label>Chart Title:</label>
             <input type="text" id="chartTitleInput" placeholder="Title will appear here after analysis..." />
             <div id="chartFileInfo"></div>
         </div>
 
-        <!-- Analysis settings -->
         <div class="settings-row">
             <div class="control-group"><label>X-Axis (Date):</label><select id="xColSelect"></select></div>
             <div class="control-group"><label>Y-Axis (Value):</label><select id="yColSelect"></select></div>
@@ -160,16 +181,15 @@
             </div>
         </div>
 
-        <!-- Action buttons -->
         <div class="button-row">
             <button id="recalcBtn">Recalculate Chart</button>
-            <button id="exportPngBtn" style="display:none;">⬇ Export PNG</button>
-            <button id="exportPdfBtn" style="display:none;">⬇ Export PDF</button>
+            <button id="exportPngBtn" style="display:none;">&#8675; Export PNG</button>
+            <button id="exportPdfBtn" style="display:none;">&#8675; Export PDF</button>
         </div>
 
     </div>
 
-    <!-- ── Summary Bar (Step/Run/CUSUM views) ── -->
+    <!-- ── Summary Bar ── -->
     <div id="summary-bar">
         <div id="stageCountText" class="summary-main-text"></div>
         <div class="badge-group">
@@ -178,7 +198,7 @@
             <span>SD = <b id="statSD">0</b></span>
         </div>
         <div class="cusum-guide" id="cusum-guide">
-            💡 <b>CUSUM:</b> <span class="cusum-icon">↗️</span> Above Avg | <span class="cusum-icon">↘️</span> Below Avg | <span class="cusum-icon">➡️</span> On Avg
+            &#128161; <b>CUSUM:</b> <span class="cusum-icon">&#8599;&#65039;</span> Above Avg | <span class="cusum-icon">&#8600;&#65039;</span> Below Avg | <span class="cusum-icon">&#10145;&#65039;</span> On Avg
         </div>
     </div>
 
@@ -217,11 +237,49 @@
         </div>
     </div>
 
+    <!-- ── Articles Section (bottom) ── -->
+    <div class="articles-section">
+        <h2>&#128240; Articles &amp; Case Studies</h2>
+        <div class="articles-grid">
+
+            <a href="three-charts-three-stories.html" class="article-card">
+                <div class="article-card-tag" style="color:#0056b3;">Healthcare Quality Improvement</div>
+                <h3>Same Data, Three Charts, Three Very Different Stories</h3>
+                <p>How X-mR, Run Chart, and Bootstrap CUSUM tell radically different stories from 488 weeks of clinical data — and why it matters for governance reporting.</p>
+            </a>
+
+            <a href="uk-gdp-analysis.html" class="article-card">
+                <div class="article-card-tag" style="color:#c0392b;">&#127468;&#127463; Economic Analysis</div>
+                <h3>The Chart That Changes How You See 77 Years of UK Economic History</h3>
+                <p>What Bootstrap CUSUM reveals about the long deceleration of UK GDP — and why conventional analysis has been telling us the wrong story.</p>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- ── Articles Modal (header button) ── -->
+    <div class="articles-modal-overlay" id="articlesModal" onclick="if(event.target===this)this.classList.remove('active')">
+        <div class="articles-modal-box">
+            <h3>&#128240; Articles &amp; Case Studies</h3>
+
+            <a href="three-charts-three-stories.html">
+                <span class="tag" style="color:#0056b3;">Healthcare Quality Improvement</span>
+                <span class="title">Same Data, Three Charts, Three Very Different Stories</span>
+            </a>
+
+            <a href="uk-gdp-analysis.html">
+                <span class="tag" style="color:#c0392b;">&#127468;&#127463; Economic Analysis</span>
+                <span class="title">The Chart That Changes How You See 77 Years of UK Economic History</span>
+            </a>
+
+        </div>
+    </div>
+
     <!-- ── Help Modal ── -->
     <div class="modal-overlay" id="helpModal">
         <div class="modal-box">
-            <button class="modal-close" onclick="document.getElementById('helpModal').classList.remove('active')">✕</button>
-            <h2>📊 StepChangeAnalysis.com — Help</h2>
+            <button class="modal-close" onclick="document.getElementById('helpModal').classList.remove('active')">&#10005;</button>
+            <h2>&#128202; StepChangeAnalysis.com — Help</h2>
 
             <h3>Preparing your CSV file</h3>
             <p>Your CSV must have at least two columns: a date column and a numeric value column. A few common issues to avoid:</p>
@@ -239,12 +297,12 @@
             <ul>
                 <li><b>X-Axis (Date):</b> Select the column containing your dates.</li>
                 <li><b>Y-Axis (Value):</b> Select the column containing your numeric data.</li>
-                <li><b>Date Style:</b> Choose the format that matches your date column. Options: UK (DD/MM/YYYY), US (MM/DD/YYYY), ISO (YYYY-MM-DD), Year-Month ISO (YYYY-MM), Year-Month UK (MM/YYYY), or Year only (YYYY). Auto-detect works for most full-date formats but set this manually for year-only or year-month data.</li>
+                <li><b>Date Style:</b> Choose the format that matches your date column.</li>
                 <li><b>Start / End Date:</b> Optionally filter your data to a specific date range.</li>
-                <li><b>Turn Length:</b> Minimum number of points required in a segment before a change point can be detected. Default 5. Increase for smoother results on noisy data.</li>
-                <li><b>Loops:</b> Number of bootstrap resamples. Higher values give more stable confidence levels. 1,000 is fast; use 5,000–10,000 for governance reports.</li>
-                <li><b>Conf %:</b> Minimum confidence level required to declare a change point. 90% = sensitive; 95% = standard; 99.7% = conservative (board/CQC reports).</li>
-                <li><b>Show 3SD Limits:</b> Adds ±3 standard deviation bands to the Step Change chart.</li>
+                <li><b>Turn Length:</b> Minimum number of points required in a segment before a change point can be detected. Default 5.</li>
+                <li><b>Loops:</b> Number of bootstrap resamples. 1,000 is fast; use 5,000–10,000 for governance reports.</li>
+                <li><b>Conf %:</b> Minimum confidence level required to declare a change point. 90% = sensitive; 95% = standard; 99.7% = conservative.</li>
+                <li><b>Show 3SD Limits:</b> Adds &#177;3 standard deviation bands to the Step Change chart.</li>
             </ul>
 
             <h3>Chart Types</h3>
@@ -260,56 +318,41 @@
             <h3>Interactive Chart Controls</h3>
             <p>All charts are fully interactive. Here's what you can do:</p>
             <ul>
-                <li><b>Hide / show a trace:</b> Click any item in the chart legend (below the chart) to hide that line or series. Click it again to bring it back. This is useful for decluttering the Step Change chart — for example, clicking "All Points" hides the raw data line and leaves just the stage means and CUSUM overlay.</li>
-                <li><b>Zoom in:</b> Click and drag on the chart area to zoom into a date range. Double-click to zoom back out to full view.</li>
-                <li><b>Pan:</b> Click the pan icon (crossed arrows) in the toolbar, then drag the chart left or right.</li>
-                <li><b>Hover for values:</b> Hover your mouse over any point to see the exact date and value in a tooltip.</li>
+                <li><b>Hide / show a trace:</b> Click any item in the chart legend to hide or show that line.</li>
+                <li><b>Zoom in:</b> Click and drag on the chart area. Double-click to zoom back out.</li>
+                <li><b>Pan:</b> Click the pan icon in the toolbar, then drag the chart left or right.</li>
+                <li><b>Hover for values:</b> Hover over any point to see the exact date and value.</li>
             </ul>
-            <p><b>Toolbar icons</b> (top right of the chart):</p>
-            <ul>
-                <li><b>📷 Camera</b> — Download the current chart view as a PNG image (quick screenshot, no stats metadata).</li>
-                <li><b>🔍 Zoom</b> — Draw a rectangle to zoom into a specific area.</li>
-                <li><b>✋ Pan</b> — Click and drag to pan across the chart.</li>
-                <li><b>⬜ Box Select / Lasso Select</b> — Select a group of data points.</li>
-                <li><b>➕ / ➖ Zoom In / Zoom Out</b> — Step zoom in or out.</li>
-                <li><b>🏠 Reset Axes</b> — Return to the full default view after zooming or panning.</li>
-                <li><b>🖱️ Hover Mode</b> — Toggle between showing the closest single point or comparing all traces at the same x position.</li>
-            </ul>
-            <p><i>Note: The <b>Export PNG</b> button (in the controls panel above the chart) produces a higher quality, wider image with stats and settings metadata included — use this for reports and governance submissions rather than the camera icon.</i></p>
+            <p><i>Note: The <b>Export PNG</b> button produces a higher quality image with stats and settings metadata — use this for reports rather than the camera icon.</i></p>
 
             <h3>Exporting</h3>
-            <p>Use <b>Export PNG</b> to save the current chart as an image. Use <b>Export PDF</b> to generate a formatted report suitable for board papers and governance submissions. Both buttons appear after analysis is complete.</p>
+            <p>Use <b>Export PNG</b> to save the current chart as an image. Use <b>Export PDF</b> to generate a formatted report suitable for board papers and governance submissions.</p>
 
             <h3>Data Validator</h3>
-            <p>If your analysis produces unexpected results or an error, click <b>Data Validator</b> to run a diagnostic scan on your CSV. It checks for out-of-order dates, missing values, blank cells, and format errors.</p>
+            <p>If your analysis produces unexpected results or an error, click <b>Data Validator</b> to run a diagnostic scan on your CSV.</p>
 
             <h3>Privacy</h3>
-            <p>Your CSV file never leaves your computer. All analysis runs entirely in your browser. No data is uploaded to any server. No login required. Works offline once loaded.</p>
+            <p>Your CSV file never leaves your computer. All analysis runs entirely in your browser. No data is uploaded to any server. No login required.</p>
 
             <h3>About the method</h3>
-            <p>Bootstrap CUSUM step-change analysis is a distribution-free method for detecting structural changes in time series data. It does not assume normality, making it particularly suited to healthcare safety data, incident counts, and other right-skewed metrics. The confidence level is earned from your data by resampling — not assumed from a statistical formula.</p>
+            <p>Bootstrap CUSUM step-change analysis is a distribution-free method for detecting structural changes in time series data. It does not assume normality, making it particularly suited to healthcare safety data, incident counts, and other right-skewed metrics.</p>
 
             <h3>When Bootstrap CUSUM works best</h3>
-            <p>Bootstrap CUSUM answers a specific question: <b>"has the underlying mean level of this process permanently shifted?"</b> It is designed for processes that undergo genuine structural change — where something intervenes and the process moves to a new sustained level.</p>
-            <p>It works best on:</p>
+            <p>Bootstrap CUSUM answers: <b>"has the underlying mean level of this process permanently shifted?"</b> It works best on:</p>
             <ul>
-                <li><b>Support or incident counts</b> — where training, system improvements, or policy changes produce lasting reductions</li>
+                <li><b>Support or incident counts</b> — where training or system improvements produce lasting reductions</li>
                 <li><b>Prescribing volumes or error rates</b> — where a clinical intervention permanently shifts the baseline</li>
-                <li><b>Process metrics after a known change</b> — manufacturing defects, call volumes, complaints</li>
                 <li><b>Any data where improvements are expected to be sustained</b>, not temporary</li>
             </ul>
 
             <h3>When you may see "1 distinct stage"</h3>
-            <p>If the analysis returns only 1 stage (no change detected), this is not necessarily wrong — it may be the correct answer. This typically happens when:</p>
             <ul>
-                <li><b>The data is cyclical or mean-reverting</b> — for example, annual GDP growth rates naturally oscillate around a long-run mean. Recessions cause temporary dips but growth rates recover. Bootstrap CUSUM correctly finds no permanent step-change because there isn't one.</li>
-                <li><b>The confidence threshold is too high</b> — try lowering Conf % from 99.7% to 95% or 90% to detect smaller or less certain changes.</li>
-                <li><b>The dataset is too short</b> — fewer than 20-30 observations make it harder to distinguish genuine change from random variation. Increase the data range if possible.</li>
-                <li><b>The Turn Length is too high</b> — reducing Turn Length from 5 to 3 allows detection of changes in shorter segments.</li>
-                <li><b>Genuine stability</b> — the process may simply not have changed in a sustained way during the period analysed.</li>
+                <li><b>The data is cyclical or mean-reverting</b> — e.g. annual GDP growth rates naturally oscillate around a long-run mean.</li>
+                <li><b>The confidence threshold is too high</b> — try lowering Conf % to 95% or 90%.</li>
+                <li><b>The dataset is too short</b> — fewer than 20–30 observations.</li>
+                <li><b>The Turn Length is too high</b> — try reducing from 5 to 3.</li>
+                <li><b>Genuine stability</b> — the process may simply not have changed.</li>
             </ul>
-            <p>For cyclical economic or environmental data, consider plotting the cumulative <i>level</i> rather than the periodic <i>growth rate</i> — permanent structural shifts are more visible in level data.</p>
-            <p><b>To create cumulative level data in Excel:</b> Add a new column, set the first row to <code>100</code> (your baseline), then in each subsequent row use the formula <code>=previous_row * (1 + (growth_rate/100))</code>. For example if 1949 = 100 and 1950 growth was 3.3%: <code>=100*(1+0.033) = 103.3</code>. Drag the formula down for all rows, save as CSV, and re-upload. The resulting series will show permanent structural shifts that are invisible in the raw growth rate data.</p>
 
             <p style="font-size:0.85em; color:#888; margin-top:20px;">Based on Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). Implemented at StepChangeAnalysis.com.</p>
         </div>
