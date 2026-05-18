@@ -16,6 +16,7 @@
  *   6. Summary bar correct per tab
  *   7. Export PNG/PDF show tab-specific stats
  *   8. Stage Summary + Raw Data: PNG disabled with visible message; PDF only
+ *   9. Step Change tab header shows Loops and Turn Length parameters
  */
 
 const pythonWorker    = new Worker('worker.js');
@@ -190,8 +191,14 @@ pythonWorker.onmessage = function(event) {
 // ── Error banner helpers ──
 function showError(msg) {
     statusText.innerText = "❌ Error — see details above.";
-    if (errorBanner)  errorBanner.style.display = "block";
-    if (errorMessage) errorMessage.innerText = msg;
+    if (errorBanner) errorBanner.style.display = "block";
+    if (errorMessage) {
+        let hint = '';
+        if (msg && msg.toLowerCase().includes('too small after cleaning')) {
+            hint = ' 💡 <b>Tip:</b> Check that you have selected the correct <b>Y-Axis (Value)</b> column — choosing a text or date column instead of a numeric one will cause this error.';
+        }
+        errorMessage.innerHTML = msg + hint;
+    }
 }
 function hideError() {
     if (errorBanner) errorBanner.style.display = "none";
@@ -556,8 +563,14 @@ function updateSummaryBars() {
 
         if (currentView === 'step') {
             if (stageCountText) {
-                const confVal = document.getElementById('paramConfLimit')?.value || "??";
-                stageCountText.innerHTML = `Found <b>${currentChartData.step_count}</b> distinct stages &nbsp;|&nbsp; CUSUM (${confVal}% Confidence)`;
+                const confVal  = document.getElementById('paramConfLimit')?.value  || '??';
+                const bootVal  = document.getElementById('paramBootNum')?.value    || '??';
+                const turnVal  = document.getElementById('paramTurnLength')?.value || '??';
+                stageCountText.innerHTML =
+                    `Found <b>${currentChartData.step_count}</b> distinct stages` +
+                    ` &nbsp;|&nbsp; CUSUM (${confVal}% Confidence)` +
+                    ` &nbsp;|&nbsp; Loops = ${bootVal}` +
+                    ` &nbsp;|&nbsp; Turn Length = ${turnVal}`;
             }
         } else if (currentView === 'run') {
             if (stageCountText) stageCountText.innerHTML =
@@ -575,6 +588,7 @@ if (showSDCheckbox) showSDCheckbox.onchange = () => { if (currentChartData) draw
 if (chartTitleInput) {
     chartTitleInput.oninput = () => {
         userHasEditedTitle = true;
+        currentChartTitle = chartTitleInput.value;
         if (currentChartData) drawPlotlyChart();
     };
 }
@@ -837,7 +851,9 @@ function drawPlotlyChart() {
 
     let activeTraces = [];
     const layout = {
-        title:    currentChartTitle || (chartTitleInput ? chartTitleInput.value : generateDynamicTitle()),
+        title:    (userHasEditedTitle && chartTitleInput)
+                    ? chartTitleInput.value
+                    : (currentChartTitle || (chartTitleInput ? chartTitleInput.value : generateDynamicTitle())),
         xaxis:    { title: 'Date / Observation' },
         yaxis:    { title: 'Value' },
         hovermode: 'closest',
