@@ -442,6 +442,40 @@
 
     <p>The CSV files are available for download below and can be uploaded directly to StepChangeAnalysis.com to reproduce the analyses shown. Use Y = <code>Residual_pct</code> as the monitored variable, with the settings described for each scenario.</p>
 
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>File</th><th>Scenario</th><th>Rows</th><th>Download</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><code>hp-baseline.csv</code></td>
+                    <td>Healthy catalyst baseline — Jan 2020 to Jan 2021</td>
+                    <td>1,095</td>
+                    <td><a href="https://raw.githubusercontent.com/sydstewart/viableSPC/master/hp-baseline.csv" download>&#8675; Download</a></td>
+                </tr>
+                <tr>
+                    <td><code>hp-stepchange.csv</code></td>
+                    <td>Sudden steam failure at Day 180</td>
+                    <td>1,095</td>
+                    <td><a href="https://raw.githubusercontent.com/sydstewart/viableSPC/master/hp-stepchange.csv" download>&#8675; Download</a></td>
+                </tr>
+                <tr>
+                    <td><code>hp-slowdrift.csv</code></td>
+                    <td>Slow catalyst degradation over 3 years</td>
+                    <td>3,285</td>
+                    <td><a href="https://raw.githubusercontent.com/sydstewart/viableSPC/master/hp-slowdrift.csv" download>&#8675; Download</a></td>
+                </tr>
+                <tr>
+                    <td><code>hp-combined.csv</code></td>
+                    <td>Slow drift followed by steam failure</td>
+                    <td>3,285</td>
+                    <td><a href="https://raw.githubusercontent.com/sydstewart/viableSPC/master/hp-combined.csv" download>&#8675; Download</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <h2>Try it on your own process data</h2>
 
     <p>If you have historical process data — even monthly averages from a pen-and-paper log — you can apply Bootstrap CUSUM step-change analysis using StepChangeAnalysis.com. For a residual-based analysis, calculate the residual in a spreadsheet first (actual minus expected at current operating conditions), save as CSV, and upload the residual column as your Y-axis variable.</p>
