@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULEZ or COVID? What the London Air Quality Data Actually Shows — StepChangeAnalysis.com</title>
+    <meta name="description" content="Bootstrap CUSUM applied to 10 years of London NO2 monitoring data finds one structural change point: May 2020. Not April 2019. The data is clear — and what it tells us about ULEZ is more nuanced than either side of the political debate admits.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:  #002d5b;
+            --brand-mid:   #0056b3;
+            --brand-light: #e9f2ff;
+            --text:        #1e293b;
+            --muted:       #64748b;
+            --border:      #e2e8f0;
+            --bg:          #f8f9fa;
+            --green:       #198754;
+            --orange:      #e67e22;
+            --red:         #c0392b;
+            --teal:        #0e7490;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        .article-wrap { max-width: 820px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .article-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+        h1 { font-size: clamp(1.7em, 4vw, 2.5em); line-height: 1.2; color: var(--brand-blue); margin-bottom: 16px; font-weight: bold; }
+        .article-subtitle { font-size: 1.1em; color: var(--muted); font-style: italic; margin-bottom: 24px; border-left: 4px solid var(--teal); padding-left: 16px; line-height: 1.6; }
+        .article-meta { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
+        h2 { font-size: 1.35em; color: var(--brand-blue); margin: 40px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.1em; color: var(--brand-blue); margin: 28px 0 10px; font-style: italic; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        ul, ol { margin: 0 0 1.2em 1.5em; }
+        li { margin-bottom: 0.5em; font-size: 1.0em; }
+        strong { color: var(--brand-blue); }
+        .chart-figure { margin: 28px 0 32px; }
+        .chart-figure img { width: 100%; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); display: block; }
+        .chart-figure figcaption { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-top: 10px; font-style: italic; padding: 0 4px; }
+        .finding { background: var(--brand-light); border-left: 5px solid var(--brand-mid); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; }
+        .finding strong { display: block; margin-bottom: 6px; font-size: 1em; color: var(--brand-blue); }
+        .callout-box { background: #f0fdfa; border: 2px solid var(--teal); border-radius: 8px; padding: 20px 24px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .callout-box h3 { color: var(--teal); margin: 0 0 10px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
+        .callout-box p { font-size: 0.95em; color: #134e4a; margin-bottom: 10px; }
+        .callout-box p:last-child { margin-bottom: 0; }
+        .method-box { background: #f0fff4; border: 1px solid var(--green); border-radius: 8px; padding: 20px 24px; margin: 24px 0; font-family: system-ui, sans-serif; }
+        .method-box h3 { color: var(--green); margin-bottom: 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
+        .method-box p { font-size: 0.95em; margin-bottom: 10px; }
+        .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; }
+        .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
+        .numbers-box th { background: var(--brand-blue); color: white; padding: 8px 12px; text-align: left; }
+        .numbers-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .numbers-box tr:last-child td { border-bottom: none; }
+        .alert-red { background: #fff5f5; border-left: 5px solid var(--red); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #7f1d1d; }
+        .alert-red strong { color: var(--red); display: block; margin-bottom: 6px; }
+        .alert-green { background: #f0fdf4; border-left: 5px solid var(--green); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #14532d; }
+        .alert-green strong { color: var(--green); display: block; margin-bottom: 6px; }
+        .dark-box { background: #1e293b; border-radius: 8px; padding: 24px 28px; margin: 28px 0; color: white; }
+        .dark-box h3 { color: #93c5fd; margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; font-family: system-ui, sans-serif; }
+        .dark-box p { font-size: 0.97em; color: #e2e8f0; margin-bottom: 10px; line-height: 1.7; }
+        .dark-box p:last-child { margin-bottom: 0; }
+        .dark-box strong { color: #ffffff; }
+        .dark-box .quote { font-size: 1.1em; font-style: italic; color: #bfdbfe; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 14px 0; }
+        .ulez-timeline { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin: 24px 0; font-family: system-ui, sans-serif; }
+        .ulez-timeline h3 { color: var(--teal); margin-bottom: 16px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 14px; align-items: flex-start; }
+        .timeline-date { background: var(--teal); color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.82em; font-weight: bold; white-space: nowrap; min-width: 90px; text-align: center; font-family: system-ui, sans-serif; }
+        .timeline-date.covid { background: var(--red); }
+        .timeline-text { font-size: 0.95em; color: var(--text); }
+        blockquote { background: #f8fafc; border-left: 4px solid var(--brand-mid); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-style: italic; color: #334155; }
+        hr { border: none; border-top: 3px solid var(--brand-light); margin: 48px 0; }
+        .cta-box { background: var(--brand-blue); border-radius: 12px; padding: 32px; text-align: center; margin: 48px 0 32px; color: white; }
+        .cta-box h2 { color: white; border: none; margin-top: 0; font-size: 1.4em; }
+        .cta-box p { color: rgba(255,255,255,0.88); font-family: system-ui, sans-serif; font-size: 0.95em; margin-bottom: 20px; }
+        .cta-btn { display: inline-block; background: white; color: var(--brand-blue); font-weight: bold; font-size: 1em; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-family: system-ui, sans-serif; }
+        .cta-btn:hover { background: var(--brand-light); }
+        .related-box { background: #f0f4f8; border: 1px solid #cce5ff; border-radius: 8px; padding: 20px 24px; margin: 20px 0; font-family: system-ui, sans-serif; }
+        .related-box .related-tag { font-size: 0.8em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 10px; }
+        .related-box h3 { font-style: normal; margin-bottom: 6px; }
+        .related-box h3 a { color: var(--brand-blue); text-decoration: none; font-size: 1.0em; }
+        .related-box h3 a:hover { text-decoration: underline; }
+        .related-box p { color: var(--muted); font-size: 0.9em; margin: 0 0 12px; }
+        .related-box a.btn { display: inline-block; background: var(--brand-mid); color: white; padding: 8px 18px; border-radius: 6px; font-size: 0.88em; font-weight: 700; text-decoration: none; }
+        .related-box a.btn:hover { background: #004494; }
+        .article-footer { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .article-footer a { color: var(--brand-mid); }
+        .note { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); font-style: italic; background: #f8f9fa; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin: 16px 0; }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the Free Tool</a>
+</header>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Articles &rsaquo; Environment &amp; Policy</div>
+    <div class="article-flag">&#127807; Environment &amp; Policy &middot; London Air Quality Analysis</div>
+
+    <h1>ULEZ or COVID?</h1>
+    <p class="article-subtitle">Bootstrap CUSUM applied to 10 years of London NO2 monitoring data finds one structural change point in roadside air quality: <strong>May 2020</strong>. Not April 2019. The data is unambiguous &mdash; and what it tells us about ULEZ is more nuanced than either side of the political debate admits.</p>
+    <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; May 2026 &nbsp;&middot;&nbsp; Data: Defra AURN Automatic London Network, London Mean Roadside NO2 monthly averages 2015&ndash;2026</div>
+
+    <h2>The most contested policy in recent London history</h2>
+
+    <p>Few policies have generated as much political heat as the Ultra Low Emission Zone. Supporters cite dramatic reductions in roadside nitrogen dioxide, falling rates of respiratory disease, and a 58% reduction in non-compliant vehicles detected on London roads. Critics argue it unfairly targets lower-income drivers with older vehicles, that the economic impact on outer London businesses is severe, and that the air quality improvements were already happening before the scheme launched.</p>
+
+    <p>Both sides produce data. Both sides produce models. Neither side has asked the most important question in a rigorous way: <strong>when did London&rsquo;s roadside air quality actually, structurally change &mdash; and is that date consistent with ULEZ causing it?</strong></p>
+
+    <p>Bootstrap CUSUM is designed to answer exactly that question. It applies a model-free, assumption-free statistical algorithm directly to the measured NO2 data and identifies structural change points with a confidence level and a date. It does not model counterfactuals. It does not estimate what would have happened without ULEZ. It reports what the data actually shows &mdash; and when.</p>
+
+    <div class="ulez-timeline">
+        <h3>&#128337; Key dates in the ULEZ story</h3>
+        <div class="timeline-item">
+            <span class="timeline-date">Apr 2019</span>
+            <span class="timeline-text"><strong>Central London ULEZ launched.</strong> Covering the Congestion Charge Zone. Vehicles must meet Euro 4 petrol or Euro 6 diesel standards or pay &pound;12.50 per day.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date covid">Mar 2020</span>
+            <span class="timeline-text"><strong>COVID-19 lockdown.</strong> Traffic falls to record lows. NO2 across London collapses. The question is whether the subsequent lower levels reflect COVID or ULEZ.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">Oct 2021</span>
+            <span class="timeline-text"><strong>Inner London expansion.</strong> Zone extended to the North and South Circular roads &mdash; from 8 km&sup2; to approximately 177 km&sup2;.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">Aug 2023</span>
+            <span class="timeline-text"><strong>London-wide expansion.</strong> Zone expanded to all 33 London boroughs &mdash; 1,500 km&sup2; covering 9 million people. Introduced amid significant political controversy.</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>What Bootstrap CUSUM brings to the debate</h2>
+
+    <p>The ULEZ debate has been conducted almost entirely in the language of counterfactual modelling &mdash; estimates of what NO2 levels would have been without the scheme, compared to what they actually are. The GLA&rsquo;s one-year report estimates that in 2024, roadside NO2 is 27% lower across London than it would have been without ULEZ and its expansions. These are carefully produced estimates using peer-reviewed methodology &mdash; but they are estimates of a hypothetical, not measurements of reality.</p>
+
+    <p>Bootstrap CUSUM offers something different and complementary: a direct interrogation of the measured data itself. It asks: at what point did London roadside NO2 move to a structurally different level, and is that change statistically distinguishable from the normal month-to-month variation of the data? No counterfactual modelling. No assumption about what would have happened. Just the measured data, a statistical algorithm, and a date.</p>
+
+    <div class="dark-box">
+        <h3>&#128200; What Bootstrap CUSUM can and cannot tell us</h3>
+        <p><strong>It can tell you:</strong> when the NO2 data structurally changed, by how much, and with what confidence. The change point is dated to within a month. The confidence level tells you how certain the evidence is that this is a genuine structural shift rather than normal variation.</p>
+        <p style="margin-top:10px;"><strong>It cannot tell you:</strong> why the change occurred. A change point coinciding with a ULEZ expansion date would be consistent with ULEZ causing it &mdash; but other factors (COVID, fleet turnover, working from home, bus electrification) may have contributed or dominated. What it can say with precision is whether any given intervention produced a change large enough and sustained enough to be statistically distinguishable from the noise of the system.</p>
+        <p style="margin-top:10px;"><strong>Why this matters for the debate:</strong> both sides of the ULEZ argument are currently fighting over models. Bootstrap CUSUM bypasses the models entirely and goes directly to the data. If the data shows a change point in April 2019, that is consistent with ULEZ causing the improvement. If it shows a change point in May 2020, the data is pointing at COVID. If neither 2019 nor 2020 produces a change point, the improvement has been gradual and continuous &mdash; consistent with long-term fleet turnover rather than any discrete policy intervention.</p>
+    </div>
+
+    <hr>
+
+    <h2>The data: London mean roadside NO2, 2015&ndash;2026</h2>
+
+    <p>The data used in this analysis is the London mean roadside nitrogen dioxide monthly average from the Defra Automatic Urban and Rural Network (AURN) Automatic London Network &mdash; the average of automatic monitoring stations across London measuring roadside NO2 continuously. Monthly averages from April 2015 to April 2026 give 127 observations. Settings: 95% confidence, Turn Length 5, Loops 5000.</p>
+
+    <p class="note">&#128202; <strong>Reproducing this analysis:</strong> Download the London Average Air Quality CSV from <a href="https://data.london.gov.uk/dataset/london-average-air-quality-levels-ep8rw/" target="_blank">data.london.gov.uk</a>. Open in Excel, keep the Month column and &ldquo;London Mean Roadside:Nitrogen Dioxide (ug/m3)&rdquo; column, convert dates to YYYY-MM format, save as CSV, upload to StepChangeAnalysis.com with Y = NO2 column. The analysis in this article reproduces exactly.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>File</th><th>Description</th><th>Rows</th><th>Download</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><code>ulez-no2-monthly.csv</code></td>
+                    <td>London Mean Roadside NO2 monthly averages, Apr 2015&ndash;Apr 2026, ready to upload</td>
+                    <td>127</td>
+                    <td><a href="https://stepchangeanalysis.com/ulez-no2-monthly.csv" download="ulez-no2-monthly.csv">&#8675; Download</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <figure class="chart-figure">
+        <img src="images/ulez-chart1-overview.png" alt="Bootstrap CUSUM — London Mean Roadside NO2 2015-2026 — 2 structural stages">
+        <figcaption>London Mean Roadside NO2 (µg/m³), monthly averages April 2015&ndash;April 2026. Bootstrap CUSUM, 99.7% confidence, N=127 monthly observations, Loops=5000. 3SD limits shown. Two structural stages. The single change point is dated to May 2020 &mdash; the first COVID lockdown. The April 2019 ULEZ launch, October 2021 expansion, and August 2023 London-wide expansion all fall within Stage 1 or Stage 2 without producing a detectable additional change point.</figcaption>
+    </figure>
+
+    <hr>
+
+    <h2>The finding: one change point, May 2020, 100% confidence</h2>
+
+    <div class="alert-red">
+        <strong>The Bootstrap CUSUM result:</strong>
+        Two stages. One change point. Dated to <strong>May 2020</strong>. Confidence: <strong>100%</strong> &mdash; the algorithm has no statistical doubt that something structurally changed at this point. The change is -34.7%: from a mean of 33.43 µg/m³ (April 2015&ndash;April 2020) to 21.82 µg/m³ (May 2020&ndash;April 2026).
+        <br><br>
+        The April 2019 ULEZ launch falls inside Stage 1 &mdash; the period of no structural change. The October 2021 inner London expansion and the August 2023 London-wide expansion both fall inside Stage 2 &mdash; after the structural change had already occurred. Neither the initial ULEZ launch nor either subsequent expansion appears as a detectable change point in the London-wide roadside NO2 data.
+    </div>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Stage</th><th>Period</th><th>Mean NO2 (µg/m³)</th><th>Change</th><th>Confidence</th><th>Key events during stage</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td>Apr 2015&ndash;Apr 2020</td>
+                    <td>33.43</td>
+                    <td>Baseline</td>
+                    <td>Baseline</td>
+                    <td>T-charge introduced Oct 2017. ULEZ launched Apr 2019. No structural change detected at either date.</td>
+                </tr>
+                <tr>
+                    <td><strong>2</strong></td>
+                    <td>May 2020&ndash;Apr 2026</td>
+                    <td>21.82</td>
+                    <td>&minus;34.7%</td>
+                    <td>100%</td>
+                    <td>COVID lockdown begins Mar 2020. Inner London ULEZ expansion Oct 2021. London-wide expansion Aug 2023. All fall within Stage 2 — after the structural change.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>The WHO annual mean guideline for NO2 is 10 µg/m³. The UK legal limit is 40 µg/m³. Stage 1 mean of 33.43 µg/m³ was below the legal limit but well above the WHO guideline. Stage 2 mean of 21.82 µg/m³ remains above the WHO guideline but represents a substantial improvement. The improvement is real, large, and statistically certain. The question is what caused it.</p>
+
+    <hr>
+
+    <h2>COVID as the structural trigger &mdash; but not the whole story</h2>
+
+    <p>The change point of May 2020 coincides precisely with the first COVID-19 national lockdown. Traffic fell to record lows across London in April&ndash;May 2020 &mdash; some estimates suggest 60&ndash;70% reductions in vehicle movements at peak lockdown. NO2, which is produced primarily by vehicle combustion, fell correspondingly. This is not surprising and is not contested by anyone.</p>
+
+    <p>It is worth pausing on what that change point represents. The largest single structural improvement in London air quality since records began was a byproduct of a global catastrophe that killed hundreds of thousands in the UK alone and caused economic damage on a scale not seen since the Second World War. The fact that cleaner air required a crisis to produce &mdash; rather than a decade of policy &mdash; is itself a comment on how difficult structural change is to achieve through normal means. The data shows the benefit. The cost was incalculable.</p>
+
+    <p>What is significant &mdash; and what the Bootstrap CUSUM reveals with clarity &mdash; is that <strong>the lower NO2 level held after traffic returned.</strong> By mid-2021 London traffic volumes had broadly recovered to pre-pandemic levels. NO2 did not. Stage 2 mean (21.82 µg/m³) from May 2020 through to April 2026 is structurally and consistently lower than Stage 1, even as the city returned to normal activity. This is the genuinely interesting finding, and it demands explanation.</p>
+
+    <h3>Why did the improvement hold?</h3>
+
+    <p>Several structural changes occurred simultaneously during and after COVID that collectively explain why lower NO2 levels were maintained after traffic recovered:</p>
+
+    <ul>
+        <li><strong>Fleet turnover accelerated.</strong> The pandemic coincided with a wave of vehicle renewal &mdash; partly driven by ULEZ compliance pressure that had been building since 2019, partly by the normal replacement cycle accelerating as people changed their transport habits. Vehicles purchased in 2020&ndash;2022 were substantially cleaner than those they replaced. Once cleaner vehicles replace older ones, the older emissions don&rsquo;t come back.</li>
+        <li><strong>Working from home became structural, not temporary.</strong> A significant proportion of London office workers never returned to five-day commuting. Hybrid working reduced peak-hour vehicle movements permanently &mdash; not because of any policy intervention, but because employers and employees discovered that full-time office attendance was not necessary. Fewer peak-hour vehicles means lower peak-hour NO2, and the rush-hour contribution to annual mean is substantial.</li>
+        <li><strong>Bus fleet electrification continued through and after COVID.</strong> TfL&rsquo;s programme of replacing diesel buses with electric and hybrid vehicles continued regardless of the pandemic. Buses are among the highest NO2 emitters per vehicle in urban environments. Each diesel bus replaced is a permanent, not temporary, reduction.</li>
+        <li><strong>ULEZ compliance pressure maintained fleet standards.</strong> Even though the ULEZ launch in 2019 did not produce a detectable structural change in city-wide NO2 at that time, it created a continuing incentive for the vehicle fleet to upgrade. By 2021&ndash;2023, compliance rates in the expanded ULEZ zones were high &mdash; meaning the vehicles still on London roads were, on average, significantly cleaner than the pre-ULEZ fleet.</li>
+    </ul>
+
+    <p>The honest interpretation of the Bootstrap CUSUM result is therefore not &ldquo;ULEZ had no effect.&rdquo; It is more precise: <strong>ULEZ did not produce a structural change large enough to be detected in city-wide NO2 data at its launch date.</strong> COVID produced the detectable structural break. But the improvement held because of a combination of factors &mdash; of which ULEZ compliance pressure was one &mdash; that collectively prevented NO2 from rebounding when traffic returned.</p>
+
+    <hr>
+
+    <h2>The long-term trend: what was already happening</h2>
+
+    <p>Looking at the green CUSUM line in Stage 1, it is rising continuously from 2015 to 2019 &mdash; meaning NO2 was consistently <em>above</em> its overall mean throughout that period. There is no visible kink or slope change at April 2019. The CUSUM does not begin to fall until 2020. This is consistent with the Imperial College London finding that changes in NO2 around the initial ULEZ introduction in 2019 were less than 3% overall and statistically insignificant &mdash; small relative to the 6% per year long-term improvement already underway from other causes.</p>
+
+    <p>London&rsquo;s NO2 has been falling for decades &mdash; driven by Euro emissions standards tightening with each vehicle generation, cleaner fuels, catalytic converter improvements, and successive low emission zones dating back to 2008. Between 2016 and 2020, the number of Londoners living in areas with illegally high NO2 fell by 94%. Most of that improvement predates April 2019. Bootstrap CUSUM confirms this: the data was still in Stage 1 &mdash; structurally unchanged &mdash; a full year after ULEZ launched.</p>
+
+    <hr>
+
+    <h2>What this means for the political debate</h2>
+
+    <p>The GLA and TfL are correct that London&rsquo;s air quality has dramatically improved and that ULEZ has contributed to that improvement. The Bootstrap CUSUM does not contradict this. What it adds is precision about timing and causation that the counterfactual modelling approach cannot provide.</p>
+
+    <p>The critics who argue that &ldquo;COVID did it, not ULEZ&rdquo; are correct about the timing of the structural change point &mdash; but incorrect if they conclude that ULEZ therefore had no role. ULEZ created the compliance pressure that prevented the fleet from reverting to older, more polluting vehicles. The maintenance of lower NO2 levels after traffic recovered is partly a ULEZ effect, even if the initial structural break was COVID-driven.</p>
+
+    <div class="callout-box">
+        <h3>&#128200; The honest summary</h3>
+        <p><strong>What Bootstrap CUSUM shows:</strong> One structural change in London roadside NO2 since 2015. Dated to May 2020. Confidence 100%. The April 2019 ULEZ launch, the October 2021 expansion, and the August 2023 London-wide expansion do not appear as detectable structural change points in the city-wide data.</p>
+        <p style="margin-top:10px;"><strong>What this means:</strong> COVID was the trigger for the structural break. The improvement held because of a combination of fleet turnover, permanent working-from-home behaviour change, bus electrification, and ULEZ compliance pressure. ULEZ was a necessary component of the sustained improvement &mdash; but it was not the discrete structural cause the GLA implies in its counterfactual modelling.</p>
+        <p style="margin-top:10px;"><strong>What the debate should focus on:</strong> Not &ldquo;did ULEZ work?&rdquo; but &ldquo;what combination of factors produced the sustained improvement &mdash; and which of those factors is most scalable, most cost-effective, and most equitable?&rdquo; Bootstrap CUSUM has found the structural change and dated it. The policy question is what caused it to hold.</p>
+    </div>
+
+    <hr>
+
+    <h2>What this means for other cities</h2>
+
+    <p>London is the most cited example of a large-scale urban ULEZ. Cities around the world &mdash; from Paris to Seoul to New York &mdash; are considering similar schemes. The Bootstrap CUSUM finding has a direct implication for how those cities should design and evaluate their own programmes.</p>
+
+    <p>A ULEZ alone, applied to a subset of the city, does not appear to produce a detectable city-wide structural change in NO2 at launch. What produces structural change &mdash; at least in the London data &mdash; is a combination of demand shock (COVID reduced traffic dramatically), compliance-driven fleet turnover (ULEZ created the incentive), behaviour change (working from home reduced commuting permanently), and infrastructure investment (bus electrification, EV charging). Any city expecting a clean before/after signal from a ULEZ launch should recalibrate that expectation. The signal, if it comes, will be gradual, multi-causal, and may only become statistically detectable years after the scheme launches.</p>
+
+    <p>This is not an argument against ULEZ. It is an argument for evaluating it honestly, with tools that can distinguish a genuine structural change from common cause variation &mdash; and for setting realistic expectations about what a single policy instrument can deliver in a complex urban air quality system.</p>
+
+    <div class="cta-box">
+        <h2>Reproduce this analysis on your own data</h2>
+        <p>The London air quality CSV is freely available from the London Datastore. Upload to StepChangeAnalysis.com and run the Bootstrap CUSUM yourself. Free, browser-based, no data leaves your computer.</p>
+        <a href="index.html" class="cta-btn">&#128202; Open the Free Tool</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E Performance 2010&ndash;2026</a></h3>
+        <p>The same Bootstrap CUSUM methodology applied to NHS A&amp;E monthly data &mdash; four structural stages of decline, no policy intervention detectable as an improvement.</p>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="uk-gdp-analysis.html">The Chart That Changes How You See 77 Years of UK Economic History</a></h3>
+        <p>Bootstrap CUSUM applied to UK GDP data &mdash; finding structural stages of deceleration that conventional analysis misses.</p>
+        <a href="uk-gdp-analysis.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <p class="note">&#128202; <strong>Data note:</strong> London Mean Roadside Nitrogen Dioxide monthly averages, Defra AURN Automatic London Network, April 2015&ndash;April 2026, N=127. Source: <a href="https://data.london.gov.uk/dataset/london-average-air-quality-levels-ep8rw/" target="_blank">London Datastore</a>. Some months have missing data due to monitoring site maintenance. Bootstrap CUSUM is robust to missing values in the date series provided the gaps are not systematic.</p>
+
+    <footer class="article-footer">
+        <p><strong>Data source:</strong> London Datastore, London Average Air Quality Levels, Defra AURN Automatic London Network, Monthly Roadside NO2 averages. <a href="https://data.london.gov.uk/dataset/london-average-air-quality-levels-ep8rw/" target="_blank">data.london.gov.uk</a></p>
+        <p style="margin-top:8px;"><strong>GLA one-year report:</strong> Transport for London / GLA, <em>London-wide ULEZ One Year Report</em>, March 2025. <a href="https://www.london.gov.uk/programmes-strategies/environment-and-climate-change/environment-and-climate-change-publications/london-wide-ultra-low-emission-zone-one-year-report" target="_blank">london.gov.uk</a></p>
+        <p style="margin-top:8px;"><strong>Imperial College study:</strong> Dajnak et al., &ldquo;London pollution has improved with evidence for small initial ULEZ effect.&rdquo; <em>Environmental Research Letters</em>, 2021. <a href="https://imperial.ac.uk/news/231894/london-pollution-improved-with-evidence-small/" target="_blank">imperial.ac.uk</a></p>
+        <p style="margin-top:8px;"><strong>GLA Air Quality Report:</strong> Greater London Authority, <em>Air Quality in London 2016&ndash;2024</em>, March 2024. <a href="https://www.london.gov.uk/media/105046/download" target="_blank">london.gov.uk</a></p>
+        <p style="margin-top:8px;"><strong>Method:</strong> Bootstrap CUSUM step-change analysis. Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><strong>Analysis tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded.</p>
+        <p style="margin-top:16px; color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; May 2026</p>
+    </footer>
+
+</main>
+</body>
+</html>
