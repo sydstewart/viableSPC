@@ -167,7 +167,7 @@
 
     <p>The data used in this analysis is the London mean roadside nitrogen dioxide monthly average from the Defra Automatic Urban and Rural Network (AURN) Automatic London Network &mdash; the average of automatic monitoring stations across London measuring roadside NO2 continuously. Monthly averages from April 2015 to April 2026 give 127 observations. Settings: 95% confidence, Turn Length 5, Loops 5000.</p>
 
-    <p class="note">&#128202; <strong>Reproducing this analysis:</strong> Download the London Average Air Quality CSV from <a href="https://data.london.gov.uk/dataset/london-average-air-quality-levels-ep8rw/" target="_blank">data.london.gov.uk</a>. Open in Excel, keep the Month column and &ldquo;London Mean Roadside:Nitrogen Dioxide (ug/m3)&rdquo; column, convert dates to YYYY-MM format, save as CSV, upload to StepChangeAnalysis.com with Y = NO2 column. The analysis in this article reproduces exactly.</p>
+    <p class="note">&#128202; <strong>Reproducing this analysis:</strong> Data downloaded from the Defra UK AIR Data Selector. Go to <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a>, select Search Hourly Networks, pollutant NO2, Automatic London Network, monthly means, 2015&ndash;2026. Open in Excel, keep the date and NO2 columns, convert dates to YYYY-MM format, save as CSV, upload to StepChangeAnalysis.com. The analysis in this article reproduces exactly.</p>
 
     <div class="numbers-box">
         <table>
@@ -305,10 +305,10 @@
         <a href="uk-gdp-analysis.html" class="btn">Read the article &rarr;</a>
     </div>
 
-    <p class="note">&#128202; <strong>Data note:</strong> London Mean Roadside Nitrogen Dioxide monthly averages, Defra AURN Automatic London Network, April 2015&ndash;April 2026, N=127. Source: <a href="https://data.london.gov.uk/dataset/london-average-air-quality-levels-ep8rw/" target="_blank">London Datastore</a>. Some months have missing data due to monitoring site maintenance. Bootstrap CUSUM is robust to missing values in the date series provided the gaps are not systematic.</p>
+    <p class="note">&#128202; <strong>Data note:</strong> London Mean Roadside Nitrogen Dioxide monthly averages, Defra AURN Automatic London Network, April 2015&ndash;April 2026, N=127. Source: <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a>. Some months have missing data due to monitoring site maintenance. Bootstrap CUSUM is robust to missing values in the date series provided the gaps are not systematic.</p>
 
     <footer class="article-footer">
-        <p><strong>Data source:</strong> London Datastore, London Average Air Quality Levels, Defra AURN Automatic London Network, Monthly Roadside NO2 averages. <a href="https://data.london.gov.uk/dataset/london-average-air-quality-levels-ep8rw/" target="_blank">data.london.gov.uk</a></p>
+        <p><strong>Data source:</strong> Defra UK AIR Data Selector, Automatic London Network, London Mean Roadside NO2 monthly averages, April 2015&ndash;April 2026. <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a></p>
         <p style="margin-top:8px;"><strong>GLA one-year report:</strong> Transport for London / GLA, <em>London-wide ULEZ One Year Report</em>, March 2025. <a href="https://www.london.gov.uk/programmes-strategies/environment-and-climate-change/environment-and-climate-change-publications/london-wide-ultra-low-emission-zone-one-year-report" target="_blank">london.gov.uk</a></p>
         <p style="margin-top:8px;"><strong>Imperial College study:</strong> Dajnak et al., &ldquo;London pollution has improved with evidence for small initial ULEZ effect.&rdquo; <em>Environmental Research Letters</em>, 2021. <a href="https://imperial.ac.uk/news/231894/london-pollution-improved-with-evidence-small/" target="_blank">imperial.ac.uk</a></p>
         <p style="margin-top:8px;"><strong>GLA Air Quality Report:</strong> Greater London Authority, <em>Air Quality in London 2016&ndash;2024</em>, March 2024. <a href="https://www.london.gov.uk/media/105046/download" target="_blank">london.gov.uk</a></p>
