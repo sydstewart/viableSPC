@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ULEZ or COVID? What the London Air Quality Data Actually Shows — StepChangeAnalysis.com</title>
-    <meta name="description" content="Bootstrap CUSUM applied to 10 years of London NO2 monitoring data finds one structural change point: May 2020. Not April 2019. The data is clear — and what it tells us about ULEZ is more nuanced than either side of the political debate admits.">
+    <title>ULEZ or COVID? What the Air Quality Data Actually Shows — StepChangeAnalysis.com</title>
+    <meta name="description" content="Bootstrap CUSUM applied to Marylebone Road NO2 data finds four structural stages — including a detectable ULEZ effect. But the biggest single improvement was COVID. What the data actually shows about London air quality policy.">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
     <script>
@@ -66,6 +66,8 @@
         .numbers-box th { background: var(--brand-blue); color: white; padding: 8px 12px; text-align: left; }
         .numbers-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
         .numbers-box tr:last-child td { border-bottom: none; }
+        .stage-badge { display: inline-block; background: var(--teal); color: white; font-size: 0.75em; font-weight: bold; padding: 2px 8px; border-radius: 3px; font-family: system-ui, sans-serif; }
+        .stage-badge.positive { background: var(--green); }
         .alert-red { background: #fff5f5; border-left: 5px solid var(--red); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #7f1d1d; }
         .alert-red strong { color: var(--red); display: block; margin-bottom: 6px; }
         .alert-green { background: #f0fdf4; border-left: 5px solid var(--green); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #14532d; }
@@ -81,8 +83,8 @@
         .timeline-item { display: flex; gap: 16px; margin-bottom: 14px; align-items: flex-start; }
         .timeline-date { background: var(--teal); color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.82em; font-weight: bold; white-space: nowrap; min-width: 90px; text-align: center; font-family: system-ui, sans-serif; }
         .timeline-date.covid { background: var(--red); }
+        .timeline-date.cusum { background: var(--green); }
         .timeline-text { font-size: 0.95em; color: var(--text); }
-        blockquote { background: #f8fafc; border-left: 4px solid var(--brand-mid); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-style: italic; color: #334155; }
         hr { border: none; border-top: 3px solid var(--brand-light); margin: 48px 0; }
         .cta-box { background: var(--brand-blue); border-radius: 12px; padding: 32px; text-align: center; margin: 48px 0 32px; color: white; }
         .cta-box h2 { color: white; border: none; margin-top: 0; font-size: 1.4em; }
@@ -115,8 +117,8 @@
     <div class="article-flag">&#127807; Environment &amp; Policy &middot; London Air Quality Analysis</div>
 
     <h1>ULEZ or COVID?</h1>
-    <p class="article-subtitle">Bootstrap CUSUM applied to 10 years of London NO2 monitoring data finds one structural change point in roadside air quality: <strong>May 2020</strong>. Not April 2019. The data is unambiguous &mdash; and what it tells us about ULEZ is more nuanced than either side of the political debate admits.</p>
-    <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; May 2026 &nbsp;&middot;&nbsp; Data: Defra AURN Automatic London Network, London Mean Roadside NO2 monthly averages 2015&ndash;2026</div>
+    <p class="article-subtitle">Bootstrap CUSUM applied to a decade of Marylebone Road NO2 monitoring data finds four structural stages of improvement &mdash; including a detectable ULEZ policy effect. But the biggest single change was COVID. What the measured data actually shows about London air quality policy is more nuanced &mdash; and more interesting &mdash; than either side of the political debate admits.</p>
+    <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; May 2026 &nbsp;&middot;&nbsp; Data: Defra AURN, Marylebone Road (MY1), Monthly Mean NO2, 2015&ndash;2026</div>
 
     <h2>The most contested policy in recent London history</h2>
 
@@ -124,50 +126,224 @@
 
     <p>Both sides produce data. Both sides produce models. Neither side has asked the most important question in a rigorous way: <strong>when did London&rsquo;s roadside air quality actually, structurally change &mdash; and is that date consistent with ULEZ causing it?</strong></p>
 
-    <p>Bootstrap CUSUM is designed to answer exactly that question. It applies a model-free, assumption-free statistical algorithm directly to the measured NO2 data and identifies structural change points with a confidence level and a date. It does not model counterfactuals. It does not estimate what would have happened without ULEZ. It reports what the data actually shows &mdash; and when.</p>
+    <p>Bootstrap CUSUM is designed to answer exactly that question. It applies a model-free, assumption-free statistical algorithm directly to the measured NO2 data and asks: when did the process structurally change? The answer comes with a confidence level and a precise date. No counterfactual modelling. No assumptions about what would have happened. Just the measured data and a statistical verdict.</p>
 
     <div class="ulez-timeline">
-        <h3>&#128337; Key dates in the ULEZ story</h3>
+        <h3>&#128337; Key dates: policy and CUSUM change points</h3>
         <div class="timeline-item">
-            <span class="timeline-date">Apr 2019</span>
-            <span class="timeline-text"><strong>Central London ULEZ launched.</strong> Covering the Congestion Charge Zone. Vehicles must meet Euro 4 petrol or Euro 6 diesel standards or pay &pound;12.50 per day.</span>
+            <span class="timeline-date">Oct 2017</span>
+            <span class="timeline-text"><strong>T-charge launched.</strong> &pound;10 daily charge for the most polluting vehicles in central London. First significant vehicle emission charge.</span>
         </div>
         <div class="timeline-item">
-            <span class="timeline-date covid">Mar 2020</span>
-            <span class="timeline-text"><strong>COVID-19 lockdown.</strong> Traffic falls to record lows. NO2 across London collapses. The question is whether the subsequent lower levels reflect COVID or ULEZ.</span>
+            <span class="timeline-date cusum">Oct 2018</span>
+            <span class="timeline-text"><strong>CUSUM Stage 2 change point.</strong> NO2 drops -24.7% at 99.9% confidence. Anticipatory ULEZ compliance &mdash; drivers upgrading vehicles 18 months before the April 2019 launch.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">Apr 2019</span>
+            <span class="timeline-text"><strong>Central London ULEZ launched.</strong> Euro 4 petrol / Euro 6 diesel standard or &pound;12.50 per day. The CUSUM change point predates this by 18 months.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date covid">Feb 2020</span>
+            <span class="timeline-text"><strong>CUSUM Stage 3 change point.</strong> COVID begins reducing traffic. NO2 drops -34.6% at 100% confidence &mdash; the largest single structural change in the dataset.</span>
         </div>
         <div class="timeline-item">
             <span class="timeline-date">Oct 2021</span>
-            <span class="timeline-text"><strong>Inner London expansion.</strong> Zone extended to the North and South Circular roads &mdash; from 8 km&sup2; to approximately 177 km&sup2;.</span>
+            <span class="timeline-text"><strong>Inner London ULEZ expansion.</strong> Zone extended to North and South Circular roads. No additional CUSUM change point detected at this date.</span>
         </div>
         <div class="timeline-item">
             <span class="timeline-date">Aug 2023</span>
-            <span class="timeline-text"><strong>London-wide expansion.</strong> Zone expanded to all 33 London boroughs &mdash; 1,500 km&sup2; covering 9 million people. Introduced amid significant political controversy.</span>
+            <span class="timeline-text"><strong>London-wide ULEZ expansion.</strong> All 33 boroughs. The most politically contested phase.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date cusum">Mar 2024</span>
+            <span class="timeline-text"><strong>CUSUM Stage 4 change point.</strong> NO2 drops -26.1% at 100% confidence. Seven months after the London-wide expansion &mdash; within the expected policy lag window.</span>
         </div>
     </div>
 
     <hr>
 
-    <h2>What Bootstrap CUSUM brings to the debate</h2>
+    <h2>The data: Marylebone Road, 2015&ndash;2026</h2>
 
-    <p>The ULEZ debate has been conducted almost entirely in the language of counterfactual modelling &mdash; estimates of what NO2 levels would have been without the scheme, compared to what they actually are. The GLA&rsquo;s one-year report estimates that in 2024, roadside NO2 is 27% lower across London than it would have been without ULEZ and its expansions. These are carefully produced estimates using peer-reviewed methodology &mdash; but they are estimates of a hypothetical, not measurements of reality.</p>
+    <p>Marylebone Road is one of the most heavily monitored air quality sites in the UK. It sits in the heart of the original central London ULEZ zone, carries some of the highest traffic volumes in London, and has been continuously monitored by the Defra Automatic Urban and Rural Network since the 1990s. It is the site most directly affected by the April 2019 ULEZ launch &mdash; and the site where any ULEZ signal should be most clearly visible.</p>
 
-    <p>Bootstrap CUSUM offers something different and complementary: a direct interrogation of the measured data itself. It asks: at what point did London roadside NO2 move to a structurally different level, and is that change statistically distinguishable from the normal month-to-month variation of the data? No counterfactual modelling. No assumption about what would have happened. Just the measured data, a statistical algorithm, and a date.</p>
+    <p>Monthly mean NO2 readings from April 2015 to May 2026 give 134 observations. Settings: 99.7% confidence, Turn Length 5, Loops 1000. Blank days (monitoring outages) were removed before aggregating to monthly means.</p>
 
-    <div class="dark-box">
-        <h3>&#128200; What Bootstrap CUSUM can and cannot tell us</h3>
-        <p><strong>It can tell you:</strong> when the NO2 data structurally changed, by how much, and with what confidence. The change point is dated to within a month. The confidence level tells you how certain the evidence is that this is a genuine structural shift rather than normal variation.</p>
-        <p style="margin-top:10px;"><strong>It cannot tell you:</strong> why the change occurred. A change point coinciding with a ULEZ expansion date would be consistent with ULEZ causing it &mdash; but other factors (COVID, fleet turnover, working from home, bus electrification) may have contributed or dominated. What it can say with precision is whether any given intervention produced a change large enough and sustained enough to be statistically distinguishable from the noise of the system.</p>
-        <p style="margin-top:10px;"><strong>Why this matters for the debate:</strong> both sides of the ULEZ argument are currently fighting over models. Bootstrap CUSUM bypasses the models entirely and goes directly to the data. If the data shows a change point in April 2019, that is consistent with ULEZ causing the improvement. If it shows a change point in May 2020, the data is pointing at COVID. If neither 2019 nor 2020 produces a change point, the improvement has been gradual and continuous &mdash; consistent with long-term fleet turnover rather than any discrete policy intervention.</p>
+    <p class="note">&#128202; <strong>Reproducing this analysis:</strong> Data downloaded from the Defra UK AIR Data Selector. Go to <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a>, select Search Hourly Networks, site: London Marylebone Road (MY1), pollutant: NO2, statistics: daily mean, 2015&ndash;2026. Aggregate to monthly means in Excel, removing blank days. Upload to StepChangeAnalysis.com with Y = NO2 column.</p>
+
+    <p class="note">&#128202; <strong>A note on missing readings:</strong> Automatic monitoring stations occasionally go offline for maintenance, calibration, or technical failure, leaving days with no recorded value. Before calculating monthly means, the daily data was filtered in Excel to exclude all blank days — only days with valid NO2 readings were included in the pivot table that calculated each monthly average. This means each monthly mean reflects only verified measurements, with no zeros or blanks distorting the average. The CUSUM result is robust: the four stages and their confidence levels are consistent across the dataset.</p>
+
+    <figure class="chart-figure">
+        <img src="images/ulez-chart1-marylebone.png" alt="Bootstrap CUSUM — Marylebone Road NO2 2015-2026 — 4 structural stages">
+        <figcaption>Marylebone Road monthly mean NO2 (µg/m³), April 2015&ndash;May 2026. Bootstrap CUSUM, 99.7% confidence, N=134 monthly observations, Loops=1000. Four structural stages. Stage 2 (Oct 2018): pre-ULEZ compliance. Stage 3 (Feb 2020): COVID. Stage 4 (Mar 2024): London-wide ULEZ effect.</figcaption>
+    </figure>
+
+    <hr>
+
+    <h2>Four stages: what the CUSUM actually shows</h2>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Stage</th><th>Period</th><th>Mean NO2</th><th>Change</th><th>Conf</th><th>Interpretation</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><span class="stage-badge">1</span></td>
+                    <td>Apr 2015&ndash;Oct 2018</td>
+                    <td>87.21 µg/m³</td>
+                    <td>Baseline</td>
+                    <td>Baseline</td>
+                    <td>Pre-policy baseline. More than double the 40 µg/m³ legal limit. The T-charge launched Oct 2017 but its effect does not yet appear as a structural change.</td>
+                </tr>
+                <tr>
+                    <td><span class="stage-badge positive">2</span></td>
+                    <td>Oct 2018&ndash;Feb 2020</td>
+                    <td>65.71 µg/m³</td>
+                    <td>&minus;24.7%</td>
+                    <td>99.9%</td>
+                    <td><strong>Anticipatory ULEZ compliance.</strong> The change point is 18 months before the April 2019 ULEZ launch. Rational actors responded to the announced future policy by upgrading vehicles in advance. This is the policy lag in reverse — the signal appearing before the official start date.</td>
+                </tr>
+                <tr>
+                    <td><span class="stage-badge">3</span></td>
+                    <td>Feb 2020&ndash;Mar 2024</td>
+                    <td>43.00 µg/m³</td>
+                    <td>&minus;34.6%</td>
+                    <td>100%</td>
+                    <td><strong>COVID structural break.</strong> The largest single change in the dataset. Traffic collapsed; NO2 followed. Still above the 40 µg/m³ legal limit. The inner London expansion (Oct 2021) falls within this stage — no additional change point detected.</td>
+                </tr>
+                <tr>
+                    <td><span class="stage-badge positive">4</span></td>
+                    <td>Mar 2024&ndash;present</td>
+                    <td>31.78 µg/m³</td>
+                    <td>&minus;26.1%</td>
+                    <td>100%</td>
+                    <td><strong>London-wide ULEZ expansion effect.</strong> Change point March 2024 — seven months after the August 2023 London-wide expansion. Within the expected 6&ndash;12 month policy lag. First time Marylebone Road mean falls below the 40 µg/m³ legal limit. Still above the WHO guideline of 10 µg/m³.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <figure class="chart-figure">
+        <img src="images/ulez-chart2-stagetable.png" alt="Stage summary table — Marylebone Road NO2 4 stages">
+        <figcaption>Stage summary: four structural stages with precise dates, means, confidence levels and percentage changes. Two stages are negative (deterioration prevented or noise). Two are positive structural improvements attributable to policy and COVID respectively.</figcaption>
+    </figure>
+
+    <hr>
+
+    <h2>The three findings that matter</h2>
+
+    <div class="alert-green">
+        <strong>Finding 1: ULEZ produced a detectable effect — but it appeared 18 months before launch.</strong>
+        The Stage 2 change point is October 2018, not April 2019. This is the anticipatory compliance effect — drivers and fleet operators responding to an announced future policy by upgrading vehicles in advance. This is rational behaviour and a genuine ULEZ signal. It also means that evaluating ULEZ solely by comparing before and after April 2019 misses the effect entirely.
+    </div>
+
+    <div class="alert-red">
+        <strong>Finding 2: COVID was the largest single structural change — by a significant margin.</strong>
+        The Stage 3 change point (February 2020, -34.6%, 100% confidence) dwarfs every other structural change in the dataset. It is worth pausing on what that represents. The largest single improvement in Marylebone Road air quality in a decade was a byproduct of a global catastrophe that killed hundreds of thousands in the UK alone and caused economic damage on a scale not seen since the Second World War. The data shows the benefit. The cost was incalculable.
+    </div>
+
+    <div class="alert-green">
+        <strong>Finding 3: The London-wide ULEZ expansion (Aug 2023) produced a genuine detectable structural change.</strong>
+        Stage 4 change point is March 2024 — seven months after the London-wide expansion. This is within the 6&ndash;12 month policy lag we would expect. At 100% confidence, this is not a marginal finding. The mean fell from 43.00 to 31.78 µg/m³ &mdash; the first time Marylebone Road has been below the 40 µg/m³ legal limit as a stage mean. The London-wide expansion worked, at this site, within the expected timeframe.
+    </div>
+
+    <h3>How did a London-wide expansion reduce NO2 at a central London site already in the zone?</h3>
+
+    <p>This is the right question to ask. Marylebone Road has been inside the original ULEZ zone since April 2019. By August 2023, virtually every vehicle passing through it was already compliant. So how did expanding the zone to outer London reduce NO2 at Marylebone four years later?</p>
+
+    <p>The answer is <strong>traffic composition and origin.</strong> Marylebone Road is part of the A501 inner ring road &mdash; a major arterial route used by vehicles travelling across London from all directions. Before August 2023, a driver from Croydon, Bromley, or Enfield could drive a non-compliant vehicle right up to and through central London. After August 2023, every vehicle entering London from any direction had to be compliant or pay the charge. Four specific mechanisms explain the Stage 4 improvement:</p>
+
+    <ul>
+        <li><strong>Through-traffic from outer London became compliant.</strong> Drivers making cross-London journeys through Marylebone from non-ULEZ outer boroughs either upgraded their vehicles, paid the daily charge, or stopped making those journeys. The composition of traffic on the A501 shifted measurably cleaner.</li>
+        <li><strong>Delivery and logistics fleets serving central London upgraded.</strong> Couriers and delivery vans operating across London could previously use non-compliant vehicles on outer London legs of their routes. The London-wide expansion meant their entire operational area became ULEZ &mdash; forcing whole-fleet upgrades rather than just route adjustments.</li>
+        <li><strong>The non-compliant vehicle pool across London shrank dramatically.</strong> The expansion covered 9 million people and 1,500 km². The total number of non-compliant vehicles anywhere in London fell sharply &mdash; reducing the probability of any non-compliant vehicle appearing on any given road, including Marylebone.</li>
+        <li><strong>Anticipatory compliance before the August 2023 launch.</strong> Just as Stage 2 showed pre-ULEZ compliance 18 months before April 2019, the announced London-wide expansion triggered vehicle upgrades in the months before it launched. Those upgraded vehicles were already driving through Marylebone from early 2023, contributing to the Stage 4 improvement that the CUSUM dates to March 2024.</li>
+    </ul>
+
+    <div class="callout-box">
+        <h3>&#128200; What Bootstrap CUSUM adds that counterfactual modelling cannot</h3>
+        <p>The GLA and TfL use counterfactual modelling to estimate ULEZ&rsquo;s contribution &mdash; comparing measured NO2 with modelled estimates of what NO2 would have been without the scheme. These are carefully produced estimates, but they are estimates of a hypothetical.</p>
+        <p style="margin-top:10px;">Bootstrap CUSUM does something different: it interrogates the measured data directly, with no model of what might have happened. It asks only: did the process structurally change, when, and how confident are we? The Marylebone analysis finds three structural changes, with high confidence, at dates consistent with the policy timeline. The two approaches are complementary &mdash; counterfactual modelling estimates the size of the ULEZ contribution, Bootstrap CUSUM confirms that structural changes occurred and dates them precisely.</p>
     </div>
 
     <hr>
 
-    <h2>The data: London mean roadside NO2, 2015&ndash;2026</h2>
+    <h2>Why did the improvement hold after COVID?</h2>
 
-    <p>The data used in this analysis is the London mean roadside nitrogen dioxide monthly average from the Defra Automatic Urban and Rural Network (AURN) Automatic London Network &mdash; the average of automatic monitoring stations across London measuring roadside NO2 continuously. Monthly averages from April 2015 to April 2026 give 127 observations. Settings: 95% confidence, Turn Length 5, Loops 5000.</p>
+    <p>Stage 3 runs from February 2020 to March 2024 &mdash; a period of four years during which London traffic broadly recovered to pre-pandemic levels. NO2 did not recover. The stage mean of 43.00 µg/m³ is structurally lower than the Stage 2 mean of 65.71 µg/m³, even as traffic returned. Several factors combined to maintain the improvement:</p>
 
-    <p class="note">&#128202; <strong>Reproducing this analysis:</strong> Data downloaded from the Defra UK AIR Data Selector. Go to <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a>, select Search Hourly Networks, pollutant NO2, Automatic London Network, monthly means, 2015&ndash;2026. Open in Excel, keep the date and NO2 columns, convert dates to YYYY-MM format, save as CSV, upload to StepChangeAnalysis.com. The analysis in this article reproduces exactly.</p>
+    <ul>
+        <li><strong>Fleet turnover accelerated.</strong> The pandemic coincided with a wave of vehicle renewal driven partly by ULEZ compliance pressure and partly by the normal replacement cycle. Vehicles purchased in 2020&ndash;2022 were substantially cleaner than those they replaced. Once cleaner vehicles replace older ones, the older emissions do not return.</li>
+        <li><strong>Working from home became structural.</strong> A significant proportion of London office workers never returned to five-day commuting. Hybrid working permanently reduced peak-hour vehicle movements &mdash; and the rush-hour contribution to annual mean NO2 at a roadside site like Marylebone is substantial.</li>
+        <li><strong>Bus fleet electrification continued.</strong> TfL&rsquo;s programme of replacing diesel buses with electric and hybrid vehicles continued through and after COVID. Each diesel bus replaced is a permanent, not temporary, reduction in roadside emissions.</li>
+        <li><strong>ULEZ compliance pressure maintained standards.</strong> Even during the COVID period, the compliance incentive remained. By 2021&ndash;2022, the non-compliant vehicle rate in the ULEZ zone was already very low, meaning the vehicle fleet on central London roads was structurally cleaner than before 2019.</li>
+    </ul>
+
+    <hr>
+
+    <h2>What does the NO2 reduction mean for health?</h2>
+
+    <p>NO2 is not merely a regulatory metric. It is a respiratory irritant that inflames the airways, reduces lung function, and increases susceptibility to respiratory infections. Long-term exposure is associated with increased risk of cardiovascular disease, asthma, and premature death. In Greater London in 2019, between 3,600 and 4,100 deaths per year were estimated to be associated with exposure to fine particulate matter and nitrogen dioxide combined.</p>
+
+    <p>The UK legal annual mean limit of 40 µg/m³ was set in 2000, based on World Health Organisation guidelines at the time. Stage 1 mean at Marylebone Road was 87.21 µg/m³ &mdash; more than double the legal limit. Stage 4 mean is 31.78 µg/m³ &mdash; the first stage to fall below the legal limit. That is a significant milestone for a site that has been in breach of legal air quality standards for decades.</p>
+
+    <p>However the WHO revised its guidelines in 2021, tightening the annual mean NO2 guideline from 40 µg/m³ to just <strong>10 µg/m³</strong> &mdash; reflecting accumulated evidence that health effects occur at much lower concentrations than previously thought. The Stage 4 mean of 31.78 µg/m³ is still more than three times the current WHO guideline. The legal limit has been met. The health standard has not.</p>
+
+    <div class="callout-box">
+        <h3>&#127775; How was the legal limit set?</h3>
+        <p>The UK legal annual mean limit of 40 µg/m³ derives from the EU Air Quality Directive (1999/30/EC), which was based on WHO guidelines as they stood in the late 1990s. The limit was adopted into UK law and has not been updated since, despite the WHO revising its guideline downward to 10 µg/m³ in 2021. This means the UK legal limit is now four times higher than the level the WHO considers safe based on current evidence. Meeting the legal standard &mdash; as Marylebone Road's Stage 4 mean now does &mdash; is a genuine achievement. It is not the same as meeting the health standard.</p>
+    </div>
+
+    <hr>
+
+    <h2>What this means for other cities</h2>
+
+    <p>London is the most cited example of a large-scale urban ULEZ. Cities around the world &mdash; from Paris to Seoul to New York &mdash; are considering similar schemes. The Marylebone Bootstrap CUSUM analysis has several specific implications for how those cities should design and evaluate their programmes.</p>
+
+    <p>First, <strong>the anticipatory compliance effect is real and substantial.</strong> A 24.7% improvement appeared 18 months before the scheme launched. Cities should begin monitoring immediately on announcement &mdash; the pre-launch period contains a genuine policy signal that post-launch analysis will miss if the baseline is set at the launch date.</p>
+
+    <p>Second, <strong>the policy lag for city-wide schemes is 6&ndash;12 months</strong>. The London-wide expansion of August 2023 produced a detectable change point in March 2024 &mdash; seven months later. This lag is not a failure of the scheme; it is the time required for the vehicle fleet to turn over and for the new compliance standard to work through normal driving patterns. Bootstrap CUSUM provides an objective way to measure this lag precisely: rather than declaring a policy successful or failed at launch, you set a minimum observation period of 12 months and let the CUSUM tell you when &mdash; and if &mdash; a structural change has occurred. Cities expecting an immediate signal from a ULEZ launch should recalibrate that expectation accordingly.</p>
+
+    <p>Third, <strong>evaluate at the monitoring site level, not just at the city-wide average level</strong>. Bootstrap CUSUM applied to monitoring sites within the affected zone gives a more sensitive and accurate assessment of policy impact than averaging across the whole city.</p>
+
+    <hr>
+
+    <h2>Three charts, three perspectives on the same data</h2>
+
+    <p>The Bootstrap CUSUM step-change analysis is the primary tool in this article — but the same Marylebone Road dataset produces three different and complementary perspectives when viewed through different chart types. This mirrors the theme explored in the <a href="three-charts-three-stories.html">Three Charts article</a> elsewhere on this site.</p>
+
+    <h3>The Run Chart: confirming the shift below the median</h3>
+
+    <figure class="chart-figure">
+        <img src="images/ulez-chart3-runchart.png" alt="Marylebone Road NO2 Run Chart 2015-2026">
+        <figcaption>Run Chart showing sustained shifts above and below the overall median (48.5 µg/m³). Red dots indicate 6 or more consecutive months above the median &mdash; the pre-2020 baseline. Blue dots indicate 6 or more consecutive months below the median &mdash; the post-COVID sustained improvement. The run chart confirms the Bootstrap CUSUM finding visually without any statistical modelling.</figcaption>
+    </figure>
+
+    <p>The run chart is the simplest of the three. It plots each monthly reading against the overall median and flags runs of 6 or more consecutive points on the same side &mdash; a signal that the process has shifted. The sustained red run pre-2020 and the sustained blue run post-2020 visually confirm what the Bootstrap CUSUM found statistically: the process shifted structurally around 2020 and has not returned.</p>
+
+    <h3>The X-mR Control Chart: why a single process mean is misleading</h3>
+
+    <figure class="chart-figure">
+        <img src="images/ulez-chart4-xmr.png" alt="Marylebone Road NO2 X-mR Control Chart 2015-2026">
+        <figcaption>Shewhart X-mR control chart. Control limits (UNPL 73.9, LNPL 40.8 µg/m³) are calculated from the overall process mean across all 134 observations. The upper and lower charts show individual values and moving ranges respectively. Most pre-2020 readings breach the upper natural process limit &mdash; confirming those observations are not common cause variation around the overall mean but a structurally different process.</figcaption>
+    </figure>
+
+    <p>The X-mR chart applies a single set of control limits calculated from the overall mean of all 134 observations. The result reveals why a single process mean is inappropriate for this data: nearly all pre-2020 readings breach the upper natural process limit (73.9 µg/m³), and many post-2020 readings approach the lower limit (40.8 µg/m³). This is not a process in statistical control &mdash; it is a process that has changed fundamentally. The X-mR chart signals that something is wrong with treating this as a single stable process. The Bootstrap CUSUM answers the follow-up question: when did it change, by how much, and how confident are we?</p>
+
+    <h3>The Bootstrap CUSUM Step Change Analysis: dating the changes precisely</h3>
+
+    <figure class="chart-figure">
+        <img src="images/ulez-chart1-marylebone.png" alt="Bootstrap CUSUM — Marylebone Road NO2 2015-2026 — 4 structural stages">
+        <figcaption>Bootstrap CUSUM step-change analysis. Four structural stages at 99.7% confidence with 3SD limits shown. The stage boundaries are dated precisely and each carries a confidence level. This is the only chart of the three that can answer: when exactly did the process change, is that change statistically distinguishable from normal variation, and how large was it?</figcaption>
+    </figure>
+
+    <p>The three charts answer three different questions. The run chart asks: has the process shifted above or below its median? The X-mR chart asks: are individual observations within the expected range of a stable process? The Bootstrap CUSUM asks: when did the process structurally change, by how much, and with what confidence? For policy evaluation &mdash; where the question is whether a specific intervention at a specific date produced a genuine structural change &mdash; Bootstrap CUSUM is the right tool. The other two charts provide confirmation and context.</p>
+
+    <hr>
+
+    <h2>Try it yourself: the data is public, the tool is free</h2>
+
+    <p>The Defra UK AIR Data Selector contains daily NO2 data for every automatic monitoring site in England going back decades. Marylebone Road (site code MY1) is one of the most complete and longest-running series. Downloading the daily data, aggregating to monthly means, removing blank monitoring days, and uploading to StepChangeAnalysis.com reproduces this analysis exactly in approximately twenty minutes.</p>
 
     <div class="numbers-box">
         <table>
@@ -177,117 +353,19 @@
             <tbody>
                 <tr>
                     <td><code>ulez-no2-monthly.csv</code></td>
-                    <td>London Mean Roadside NO2 monthly averages, Apr 2015&ndash;Apr 2026, ready to upload</td>
-                    <td>127</td>
+                    <td>Marylebone Road monthly mean NO2 (µg/m³), Apr 2015&ndash;May 2026, blank days removed</td>
+                    <td>134</td>
                     <td><a href="https://stepchangeanalysis.com/ulez-no2-monthly.csv" download="ulez-no2-monthly.csv">&#8675; Download</a></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <figure class="chart-figure">
-        <img src="images/ulez-chart1-overview.png" alt="Bootstrap CUSUM — London Mean Roadside NO2 2015-2026 — 2 structural stages">
-        <figcaption>London Mean Roadside NO2 (µg/m³), monthly averages April 2015&ndash;April 2026. Bootstrap CUSUM, 99.7% confidence, N=127 monthly observations, Loops=5000. 3SD limits shown. Two structural stages. The single change point is dated to May 2020 &mdash; the first COVID lockdown. The April 2019 ULEZ launch, October 2021 expansion, and August 2023 London-wide expansion all fall within Stage 1 or Stage 2 without producing a detectable additional change point.</figcaption>
-    </figure>
-
-    <hr>
-
-    <h2>The finding: one change point, May 2020, 100% confidence</h2>
-
-    <div class="alert-red">
-        <strong>The Bootstrap CUSUM result:</strong>
-        Two stages. One change point. Dated to <strong>May 2020</strong>. Confidence: <strong>100%</strong> &mdash; the algorithm has no statistical doubt that something structurally changed at this point. The change is -34.7%: from a mean of 33.43 µg/m³ (April 2015&ndash;April 2020) to 21.82 µg/m³ (May 2020&ndash;April 2026).
-        <br><br>
-        The April 2019 ULEZ launch falls inside Stage 1 &mdash; the period of no structural change. The October 2021 inner London expansion and the August 2023 London-wide expansion both fall inside Stage 2 &mdash; after the structural change had already occurred. Neither the initial ULEZ launch nor either subsequent expansion appears as a detectable change point in the London-wide roadside NO2 data.
-    </div>
-
-    <div class="numbers-box">
-        <table>
-            <thead><tr>
-                <th>Stage</th><th>Period</th><th>Mean NO2 (µg/m³)</th><th>Change</th><th>Confidence</th><th>Key events during stage</th>
-            </tr></thead>
-            <tbody>
-                <tr>
-                    <td><strong>1</strong></td>
-                    <td>Apr 2015&ndash;Apr 2020</td>
-                    <td>33.43</td>
-                    <td>Baseline</td>
-                    <td>Baseline</td>
-                    <td>T-charge introduced Oct 2017. ULEZ launched Apr 2019. No structural change detected at either date.</td>
-                </tr>
-                <tr>
-                    <td><strong>2</strong></td>
-                    <td>May 2020&ndash;Apr 2026</td>
-                    <td>21.82</td>
-                    <td>&minus;34.7%</td>
-                    <td>100%</td>
-                    <td>COVID lockdown begins Mar 2020. Inner London ULEZ expansion Oct 2021. London-wide expansion Aug 2023. All fall within Stage 2 — after the structural change.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <p>The WHO annual mean guideline for NO2 is 10 µg/m³. The UK legal limit is 40 µg/m³. Stage 1 mean of 33.43 µg/m³ was below the legal limit but well above the WHO guideline. Stage 2 mean of 21.82 µg/m³ remains above the WHO guideline but represents a substantial improvement. The improvement is real, large, and statistically certain. The question is what caused it.</p>
-
-    <hr>
-
-    <h2>COVID as the structural trigger &mdash; but not the whole story</h2>
-
-    <p>The change point of May 2020 coincides precisely with the first COVID-19 national lockdown. Traffic fell to record lows across London in April&ndash;May 2020 &mdash; some estimates suggest 60&ndash;70% reductions in vehicle movements at peak lockdown. NO2, which is produced primarily by vehicle combustion, fell correspondingly. This is not surprising and is not contested by anyone.</p>
-
-    <p>It is worth pausing on what that change point represents. The largest single structural improvement in London air quality since records began was a byproduct of a global catastrophe that killed hundreds of thousands in the UK alone and caused economic damage on a scale not seen since the Second World War. The fact that cleaner air required a crisis to produce &mdash; rather than a decade of policy &mdash; is itself a comment on how difficult structural change is to achieve through normal means. The data shows the benefit. The cost was incalculable.</p>
-
-    <p>What is significant &mdash; and what the Bootstrap CUSUM reveals with clarity &mdash; is that <strong>the lower NO2 level held after traffic returned.</strong> By mid-2021 London traffic volumes had broadly recovered to pre-pandemic levels. NO2 did not. Stage 2 mean (21.82 µg/m³) from May 2020 through to April 2026 is structurally and consistently lower than Stage 1, even as the city returned to normal activity. This is the genuinely interesting finding, and it demands explanation.</p>
-
-    <h3>Why did the improvement hold?</h3>
-
-    <p>Several structural changes occurred simultaneously during and after COVID that collectively explain why lower NO2 levels were maintained after traffic recovered:</p>
-
-    <ul>
-        <li><strong>Fleet turnover accelerated.</strong> The pandemic coincided with a wave of vehicle renewal &mdash; partly driven by ULEZ compliance pressure that had been building since 2019, partly by the normal replacement cycle accelerating as people changed their transport habits. Vehicles purchased in 2020&ndash;2022 were substantially cleaner than those they replaced. Once cleaner vehicles replace older ones, the older emissions don&rsquo;t come back.</li>
-        <li><strong>Working from home became structural, not temporary.</strong> A significant proportion of London office workers never returned to five-day commuting. Hybrid working reduced peak-hour vehicle movements permanently &mdash; not because of any policy intervention, but because employers and employees discovered that full-time office attendance was not necessary. Fewer peak-hour vehicles means lower peak-hour NO2, and the rush-hour contribution to annual mean is substantial.</li>
-        <li><strong>Bus fleet electrification continued through and after COVID.</strong> TfL&rsquo;s programme of replacing diesel buses with electric and hybrid vehicles continued regardless of the pandemic. Buses are among the highest NO2 emitters per vehicle in urban environments. Each diesel bus replaced is a permanent, not temporary, reduction.</li>
-        <li><strong>ULEZ compliance pressure maintained fleet standards.</strong> Even though the ULEZ launch in 2019 did not produce a detectable structural change in city-wide NO2 at that time, it created a continuing incentive for the vehicle fleet to upgrade. By 2021&ndash;2023, compliance rates in the expanded ULEZ zones were high &mdash; meaning the vehicles still on London roads were, on average, significantly cleaner than the pre-ULEZ fleet.</li>
-    </ul>
-
-    <p>The honest interpretation of the Bootstrap CUSUM result is therefore not &ldquo;ULEZ had no effect.&rdquo; It is more precise: <strong>ULEZ did not produce a structural change large enough to be detected in city-wide NO2 data at its launch date.</strong> COVID produced the detectable structural break. But the improvement held because of a combination of factors &mdash; of which ULEZ compliance pressure was one &mdash; that collectively prevented NO2 from rebounding when traffic returned.</p>
-
-    <hr>
-
-    <h2>The long-term trend: what was already happening</h2>
-
-    <p>Looking at the green CUSUM line in Stage 1, it is rising continuously from 2015 to 2019 &mdash; meaning NO2 was consistently <em>above</em> its overall mean throughout that period. There is no visible kink or slope change at April 2019. The CUSUM does not begin to fall until 2020. This is consistent with the Imperial College London finding that changes in NO2 around the initial ULEZ introduction in 2019 were less than 3% overall and statistically insignificant &mdash; small relative to the 6% per year long-term improvement already underway from other causes.</p>
-
-    <p>London&rsquo;s NO2 has been falling for decades &mdash; driven by Euro emissions standards tightening with each vehicle generation, cleaner fuels, catalytic converter improvements, and successive low emission zones dating back to 2008. Between 2016 and 2020, the number of Londoners living in areas with illegally high NO2 fell by 94%. Most of that improvement predates April 2019. Bootstrap CUSUM confirms this: the data was still in Stage 1 &mdash; structurally unchanged &mdash; a full year after ULEZ launched.</p>
-
-    <hr>
-
-    <h2>What this means for the political debate</h2>
-
-    <p>The GLA and TfL are correct that London&rsquo;s air quality has dramatically improved and that ULEZ has contributed to that improvement. The Bootstrap CUSUM does not contradict this. What it adds is precision about timing and causation that the counterfactual modelling approach cannot provide.</p>
-
-    <p>The critics who argue that &ldquo;COVID did it, not ULEZ&rdquo; are correct about the timing of the structural change point &mdash; but incorrect if they conclude that ULEZ therefore had no role. ULEZ created the compliance pressure that prevented the fleet from reverting to older, more polluting vehicles. The maintenance of lower NO2 levels after traffic recovered is partly a ULEZ effect, even if the initial structural break was COVID-driven.</p>
-
-    <div class="callout-box">
-        <h3>&#128200; The honest summary</h3>
-        <p><strong>What Bootstrap CUSUM shows:</strong> One structural change in London roadside NO2 since 2015. Dated to May 2020. Confidence 100%. The April 2019 ULEZ launch, the October 2021 expansion, and the August 2023 London-wide expansion do not appear as detectable structural change points in the city-wide data.</p>
-        <p style="margin-top:10px;"><strong>What this means:</strong> COVID was the trigger for the structural break. The improvement held because of a combination of fleet turnover, permanent working-from-home behaviour change, bus electrification, and ULEZ compliance pressure. ULEZ was a necessary component of the sustained improvement &mdash; but it was not the discrete structural cause the GLA implies in its counterfactual modelling.</p>
-        <p style="margin-top:10px;"><strong>What the debate should focus on:</strong> Not &ldquo;did ULEZ work?&rdquo; but &ldquo;what combination of factors produced the sustained improvement &mdash; and which of those factors is most scalable, most cost-effective, and most equitable?&rdquo; Bootstrap CUSUM has found the structural change and dated it. The policy question is what caused it to hold.</p>
-    </div>
-
-    <hr>
-
-    <h2>What this means for other cities</h2>
-
-    <p>London is the most cited example of a large-scale urban ULEZ. Cities around the world &mdash; from Paris to Seoul to New York &mdash; are considering similar schemes. The Bootstrap CUSUM finding has a direct implication for how those cities should design and evaluate their own programmes.</p>
-
-    <p>A ULEZ alone, applied to a subset of the city, does not appear to produce a detectable city-wide structural change in NO2 at launch. What produces structural change &mdash; at least in the London data &mdash; is a combination of demand shock (COVID reduced traffic dramatically), compliance-driven fleet turnover (ULEZ created the incentive), behaviour change (working from home reduced commuting permanently), and infrastructure investment (bus electrification, EV charging). Any city expecting a clean before/after signal from a ULEZ launch should recalibrate that expectation. The signal, if it comes, will be gradual, multi-causal, and may only become statistically detectable years after the scheme launches.</p>
-
-    <p>This is not an argument against ULEZ. It is an argument for evaluating it honestly, with tools that can distinguish a genuine structural change from common cause variation &mdash; and for setting realistic expectations about what a single policy instrument can deliver in a complex urban air quality system.</p>
+    <p class="note">&#128202; <strong>Data note:</strong> Marylebone Road (site MY1), Defra AURN Automatic London Network, daily mean NO2 aggregated to monthly means, April 2015&ndash;May 2026, N=134. Blank monitoring days removed before aggregation. Source: <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a>. WHO annual mean guideline: 10 µg/m³. UK legal limit: 40 µg/m³.</p>
 
     <div class="cta-box">
         <h2>Reproduce this analysis on your own data</h2>
-        <p>The London air quality CSV is freely available from the London Datastore. Upload to StepChangeAnalysis.com and run the Bootstrap CUSUM yourself. Free, browser-based, no data leaves your computer.</p>
+        <p>Upload any environmental or policy time series as a CSV and apply Bootstrap CUSUM step-change analysis. Free, browser-based, no data leaves your computer.</p>
         <a href="index.html" class="cta-btn">&#128202; Open the Free Tool</a>
     </div>
 
@@ -301,14 +379,12 @@
     <div class="related-box">
         <div class="related-tag">Related Article</div>
         <h3><a href="uk-gdp-analysis.html">The Chart That Changes How You See 77 Years of UK Economic History</a></h3>
-        <p>Bootstrap CUSUM applied to UK GDP data &mdash; finding structural stages of deceleration that conventional analysis misses.</p>
+        <p>Bootstrap CUSUM applied to UK GDP data &mdash; finding structural stages of deceleration that conventional analysis misses entirely.</p>
         <a href="uk-gdp-analysis.html" class="btn">Read the article &rarr;</a>
     </div>
 
-    <p class="note">&#128202; <strong>Data note:</strong> London Mean Roadside Nitrogen Dioxide monthly averages, Defra AURN Automatic London Network, April 2015&ndash;April 2026, N=127. Source: <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a>. Some months have missing data due to monitoring site maintenance. Bootstrap CUSUM is robust to missing values in the date series provided the gaps are not systematic.</p>
-
     <footer class="article-footer">
-        <p><strong>Data source:</strong> Defra UK AIR Data Selector, Automatic London Network, London Mean Roadside NO2 monthly averages, April 2015&ndash;April 2026. <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a></p>
+        <p><strong>Data source:</strong> Defra UK AIR Data Selector, Marylebone Road (MY1), AURN Automatic London Network, daily mean NO2 aggregated to monthly averages, blank monitoring days removed. April 2015&ndash;May 2026, N=134. <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a></p>
         <p style="margin-top:8px;"><strong>GLA one-year report:</strong> Transport for London / GLA, <em>London-wide ULEZ One Year Report</em>, March 2025. <a href="https://www.london.gov.uk/programmes-strategies/environment-and-climate-change/environment-and-climate-change-publications/london-wide-ultra-low-emission-zone-one-year-report" target="_blank">london.gov.uk</a></p>
         <p style="margin-top:8px;"><strong>Imperial College study:</strong> Dajnak et al., &ldquo;London pollution has improved with evidence for small initial ULEZ effect.&rdquo; <em>Environmental Research Letters</em>, 2021. <a href="https://imperial.ac.uk/news/231894/london-pollution-improved-with-evidence-small/" target="_blank">imperial.ac.uk</a></p>
         <p style="margin-top:8px;"><strong>GLA Air Quality Report:</strong> Greater London Authority, <em>Air Quality in London 2016&ndash;2024</em>, March 2024. <a href="https://www.london.gov.uk/media/105046/download" target="_blank">london.gov.uk</a></p>
