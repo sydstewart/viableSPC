@@ -58,7 +58,7 @@
 
             <div class="mb-4 text-center">
                 <h2 class="fw-bold" style="color:var(--brand-blue);">CSV Data Validator</h2>
-                <p class="text-muted">Checks your CSV for date issues, missing values, column errors, and out-of-order rows. Your file never leaves your browser.</p>
+                <p class="text-muted">Checks your CSV for date issues, missing values, zeros, column errors, and out-of-order rows. Your file never leaves your browser.</p>
             </div>
 
             <div class="scanner-card p-4 mb-4">
@@ -130,11 +130,6 @@
     dropZone.onclick  = () => csvInput.click();
     csvInput.onchange = e => { if (e.target.files.length) handleFile(e.target.files[0]); };
 
-    /**
-     * FILE HANDLER
-     * Parses CSV with PapaParse. __parsed_extra field is populated by PapaParse
-     * when a row has more fields than the header — used in Check F below.
-     */
     function handleFile(file) {
         Papa.parse(file, {
             header: true, skipEmptyLines: 'greedy',
@@ -160,37 +155,21 @@
         });
     }
 
-    /**
-     * DATE PARSER
-     * Converts a date string to a millisecond timestamp for chronological comparison.
-     * Handles UK (DD/MM/YYYY), US (MM/DD/YYYY), ISO (YYYY-MM-DD), and auto-detect.
-     * Returns NaN if the string cannot be parsed as a date.
-     */
     function parseRowDate(str, format) {
         if (!str || str.trim() === "") return NaN;
         str = str.trim();
-
-        // Year only: "1949", "2024" — treat as 1st January of that year
         if (/^\d{4}$/.test(str) && (format === 'yyyy' || format === 'auto')) {
             return new Date(parseInt(str, 10), 0, 1).getTime();
         }
-
-        // Year-Month ISO: "2024-04" — treat as 1st of that month
         if (/^\d{4}-\d{2}$/.test(str) && (format === 'ym-iso' || format === 'auto')) {
             const p = str.split('-');
             return new Date(parseInt(p[0],10), parseInt(p[1],10)-1, 1).getTime();
         }
-
-        // Year-Month UK: "04/2024" — treat as 1st of that month
         if (/^\d{1,2}[\/\-]\d{4}$/.test(str) && (format === 'ym-uk' || format === 'auto')) {
             const p = str.split(/[\/\-]/);
             return new Date(parseInt(p[1],10), parseInt(p[0],10)-1, 1).getTime();
         }
-
-        // ISO full date YYYY-MM-DD
         if (/^\d{4}-\d{2}-\d{2}/.test(str)) return new Date(str).getTime();
-
-        // Full date DD/MM/YYYY, MM/DD/YYYY etc.
         const parts = str.split(/[\/\-\.\s]/);
         if (parts.length < 3) return NaN;
         let day, month, year;
@@ -211,16 +190,6 @@
         return new Date(year, month, day).getTime();
     }
 
-    /**
-     * AUDIT ENGINE
-     * Iterates every row checking for six types of data problem:
-     *   A. Empty date (merged cell)
-     *   B. Unrecognised date format
-     *   C. Out-of-chronological-order date (causes spider-web chart)
-     *   D. Missing numeric value
-     *   E. Non-numeric value
-     *   F. Too many columns (unquoted commas in numeric values corrupting CSV structure)
-     */
     document.getElementById('run-scan').onclick = function() {
         const x       = document.getElementById('x-col').value;
         const y       = document.getElementById('y-col').value;
@@ -228,77 +197,42 @@
         const dateFmt = document.getElementById('date-format').value;
 
         resultsSection.style.display = 'block';
-        let stats = { blanks:0, badFormats:0, badNumbers:0, outOfOrder:0, columnErrors:0, clean:0 };
-        let lastTS = 0, logHtml = "";
-
-        // ── PRE-CHECK: Column type sanity check ──
-        // Sample the first 5 non-empty rows to detect likely wrong column selections.
-        // Warns the user before the row-by-row audit runs.
+        let stats = { blanks:0, badFormats:0, badNumbers:0, zeroValues:0, outOfOrder:0, missingDates:0, columnErrors:0, clean:0 };
+        let lastTS = 0, lastDateStr = "", detectedFreqMs = 0, logHtml = "";
         let preCheckWarnings = "";
 
         const sampleRows = rawData.filter(r => r[x] || r[y]).slice(0, 5);
 
-        // Check 1: Is the X column (date) actually full of plain numbers?
-        // Plain numbers as dates suggest the user selected the value column as X.
-        // Exception: 4-digit numbers (1949, 2024) are valid year-only dates.
         const xLooksNumeric = sampleRows.filter(r => {
             const v = r[x] ? r[x].toString().trim() : "";
             const is4DigitYear = /^\d{4}$/.test(v);
             return v !== "" && !isNaN(parseFloat(v)) && !/[\/\-\.]/.test(v) && !is4DigitYear;
         }).length;
         if (xLooksNumeric >= 3) {
-            preCheckWarnings += '<div class="alert alert-warning mt-2">' +
-                '&#9888; <strong>Warning: Date column may be wrong.</strong> ' +
-                'The X-Axis column "' + x + '" appears to contain plain numbers, not dates. ' +
-                'Did you select the wrong column? Dates should look like 01/04/2024 or 2024-04-01. ' +
-                'If your data uses year-only dates (e.g. 1949), select "YYYY (Year only)" in the Date Format dropdown.' +
-                '</div>';
+            preCheckWarnings += '<div class="alert alert-warning mt-2">&#9888; <strong>Warning: Date column may be wrong.</strong> The X-Axis column "' + x + '" appears to contain plain numbers, not dates. Did you select the wrong column?</div>';
         }
 
-        // Check 2: Is the X column full of text that looks like dates?
-        // If so and Y also looks like dates, columns may be swapped.
         const yLooksLikeDate = sampleRows.filter(r => {
             const v = r[y] ? r[y].toString().trim() : "";
             return /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}/.test(v) || /^\d{4}-\d{2}-\d{2}/.test(v);
         }).length;
         if (yLooksLikeDate >= 3) {
-            preCheckWarnings += '<div class="alert alert-warning mt-2">' +
-                '&#9888; <strong>Warning: Value column may contain dates.</strong> ' +
-                'The Y-Axis column "' + y + '" appears to contain dates, not numbers. ' +
-                'Did you select the date column as your value? Check your column selection above.' +
-                '</div>';
+            preCheckWarnings += '<div class="alert alert-warning mt-2">&#9888; <strong>Warning: Value column may contain dates.</strong> The Y-Axis column "' + y + '" appears to contain dates, not numbers.</div>';
         }
 
-        // Check 3: Is the X column (date) all text with no date-like pattern?
         const xLooksLikeText = sampleRows.filter(r => {
             const v = r[x] ? r[x].toString().trim() : "";
             if (v === "") return false;
             const isDate = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}/.test(v) || /^\d{4}-\d{2}-\d{2}/.test(v) || /^\d{4}$/.test(v);
             const isNum  = !isNaN(parseFloat(v)) && !/[\/\-\.]/.test(v);
-            return !isDate && !isNum; // pure text — neither date nor number
+            return !isDate && !isNum;
         }).length;
         if (xLooksLikeText >= 3) {
-            preCheckWarnings += '<div class="alert alert-danger mt-2">' +
-                '&#10060; <strong>Error: Date column appears to contain text.</strong> ' +
-                'The X-Axis column "' + x + '" contains text values (e.g. "' +
-                (sampleRows[0] ? sampleRows[0][x] : '') + '"). ' +
-                'The Analyser requires a proper date column. Select a different X-Axis column, or convert this column to dates in Excel.' +
-                '</div>';
+            preCheckWarnings += '<div class="alert alert-danger mt-2">&#10060; <strong>Error: Date column appears to contain text.</strong> The X-Axis column "' + x + '" contains text values. Select a different X-Axis column or convert to dates in Excel.</div>';
         }
 
-        // Check 4: Same column selected for both X and Y
         if (x === y) {
-            preCheckWarnings += '<div class="alert alert-danger mt-2">' +
-                '&#10060; <strong>Error: Same column selected for Date and Value.</strong> ' +
-                'X-Axis and Y-Axis are both set to "' + x + '". ' +
-                'Please select different columns.' +
-                '</div>';
-        }
-
-        // Show pre-check warnings at the top of the log if any were found
-        if (preCheckWarnings) {
-            logHtml += '<span class="warning-text">&#9888; COLUMN SELECTION WARNINGS &mdash; check these before fixing row errors:</span>';
-            // We insert these into the summary instead (see below)
+            preCheckWarnings += '<div class="alert alert-danger mt-2">&#10060; <strong>Error: Same column selected for Date and Value.</strong> X-Axis and Y-Axis are both set to "' + x + '". Please select different columns.</div>';
         }
 
         rawData.forEach(function(row, index) {
@@ -321,23 +255,41 @@
                     logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Unrecognised date format: "' + dVal + '"</span>';
                     logHtml += '<span class="suggestion-tip">&#128161; Supported: DD/MM/YYYY, MM/DD/YYYY, YYYY-MM-DD, YYYY-MM, MM/YYYY, YYYY</span>';
                 }
-                // Check C: Chronological order
                 const ts = parseRowDate(dVal, dateFmt);
                 if (!isNaN(ts)) {
                     if (lastTS > 0 && ts < lastTS) {
                         stats.outOfOrder++; rowHasError = true;
                         logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date is out of chronological order.</span>';
                         logHtml += '<span class="suggestion-tip">&#128161; Sort data by date ascending in Excel before saving as CSV.</span>';
+                    } else if (lastTS > 0) {
+                        // Detect frequency from first two valid timestamps
+                        const gap = ts - lastTS;
+                        if (detectedFreqMs === 0 && gap > 0) {
+                            detectedFreqMs = gap;
+                        } else if (detectedFreqMs > 0 && gap > 0) {
+                            // Allow ±10% tolerance for month length variation
+                            const tolerance = detectedFreqMs * 0.4;
+                            if (gap > detectedFreqMs + tolerance) {
+                                // Gap is larger than expected — missing dates
+                                const expectedCount = Math.round(gap / detectedFreqMs) - 1;
+                                stats.missingDates += expectedCount; rowHasError = true;
+                                logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date gap detected: ' + expectedCount + ' expected period' + (expectedCount > 1 ? 's' : '') + ' missing between "' + lastDateStr + '" and "' + dVal + '".</span>';
+                                logHtml += '<span class="suggestion-tip">&#128161; Missing periods in the sequence cause change points to be dated incorrectly. If these are genuine gaps (monitoring outage), add rows with the missing dates and a value of N/A then remove them, or note the gap in your analysis.</span>';
+                            }
+                        }
                     }
                     lastTS = ts;
+                    lastDateStr = dVal;
                 }
             }
 
-            // Check D & E: Value column
+            // Check D, E & G: Value column — blank, non-numeric, and zero
             const rawM = row[y] ? row[y].toString().trim() : "";
             if (rawM === "") {
+                // Case 2: blank cell — may be read as zero by the analyser
                 stats.badNumbers++; rowHasError = true;
-                logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Value is missing.</span>';
+                logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Value is blank (missing reading).</span>';
+                logHtml += '<span class="suggestion-tip">&#128161; Delete this row entirely. A blank value may be treated as zero by the analyser, depressing the stage mean and creating false change points.</span>';
             } else {
                 let cleanM = rawM.replace(/\s+/g,'');
                 if (cleanM.includes(',')) cleanM = isEuro ? cleanM.replace(/\./,'').replace(',','.') : cleanM.replace(/,/g,'');
@@ -345,14 +297,15 @@
                     stats.badNumbers++; rowHasError = true;
                     logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; "' + rawM + '" is not a valid number.</span>';
                     logHtml += '<span class="suggestion-tip">&#128161; Remove units, symbols, or text from the value column.</span>';
+                } else if (parseFloat(cleanM) === 0) {
+                    // Check G: Zero value — warn unless zero is a plausible measurement
+                    stats.zeroValues++; rowHasError = true;
+                    logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Value is zero &mdash; possible missing reading recorded as 0.</span>';
+                    logHtml += '<span class="suggestion-tip">&#128161; If this is a monitoring station outage (e.g. air quality, sensor data), delete this row. A genuine zero is rare for most measured metrics. Zero values depress the stage mean and may create false change points.</span>';
                 }
             }
 
             // Check F: Column count
-            // PapaParse sets __parsed_extra when a row has more fields than the header.
-            // This happens when numeric values contain unquoted commas (e.g. 1,234,567)
-            // which get treated as column separators, corrupting the CSV structure.
-            // The Analyser would silently use only the first fragment (e.g. "1") — wrong results.
             if (row['__parsed_extra']) {
                 stats.columnErrors++; rowHasError = true;
                 logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Too many columns &mdash; commas in numeric values may be unquoted.</span>';
@@ -362,13 +315,14 @@
             if (!rowHasError) stats.clean++;
         });
 
-        // Build summary
-        const totalErrors = stats.blanks + stats.badFormats + stats.badNumbers + stats.outOfOrder + stats.columnErrors;
+        const totalErrors = stats.blanks + stats.badFormats + stats.badNumbers + stats.zeroValues + stats.outOfOrder + stats.missingDates + stats.columnErrors;
         const isClean = totalErrors === 0;
 
         let warnings = "";
-        if (stats.outOfOrder > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.outOfOrder + ' out-of-order rows</strong> — this causes a spider-web chart. Sort by date ascending in Excel.</div>';
+        if (stats.outOfOrder > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.outOfOrder + ' out-of-order rows</strong> — sort by date ascending in Excel.</div>';
+        if (stats.missingDates > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.missingDates + ' missing period' + (stats.missingDates > 1 ? 's' : '') + ' detected in date sequence</strong> — gaps in the date sequence cause change points to be dated incorrectly. The CUSUM treats each row as the next consecutive observation regardless of the actual date gap. Check the audit log below for the exact missing dates.</div>';
         if (stats.columnErrors > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.columnErrors + ' column structure errors</strong> — unquoted commas in numeric values. Remove thousands separators from numbers in Excel.</div>';
+        if (stats.zeroValues > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.zeroValues + ' zero values detected</strong> — these may be missing readings recorded as 0. Zero values depress stage means and can create false change points. Delete rows where zero means "no data".</div>';
 
         summaryArea.className = 'summary-box shadow-sm' + (isClean && !preCheckWarnings ? ' clean' : '');
         summaryArea.innerHTML =
@@ -377,7 +331,9 @@
             preCheckWarnings +
             warnings +
             '<div class="d-flex flex-wrap gap-2 mt-3">' +
-            '<span class="stat-badge">&#128308; ' + stats.blanks + ' Missing Dates</span>' +
+            '<span class="stat-badge">&#128308; ' + stats.blanks + ' Blank Values</span>' +
+            '<span class="stat-badge">&#128993; ' + stats.zeroValues + ' Zero Values</span>' +
+            '<span class="stat-badge">&#128308; ' + stats.missingDates + ' Missing Periods</span>' +
             '<span class="stat-badge">&#128993; ' + stats.badFormats + ' Format Warnings</span>' +
             '<span class="stat-badge">&#128308; ' + stats.badNumbers + ' Invalid Values</span>' +
             '<span class="stat-badge">&#128993; ' + stats.outOfOrder + ' Out-of-Order Rows</span>' +
@@ -395,18 +351,10 @@
             '<span class="info-text">Total rows scanned: ' + rawData.length + '</span>';
 
         resultsSection.scrollIntoView({ behavior: 'smooth' });
-
-        // Show print button
         const printBtn = document.getElementById('print-log-btn');
         if (printBtn) printBtn.style.display = 'inline-block';
     };
 
-    /**
-     * PRINT LOG
-     * Opens a clean print-ready page with the full validation report.
-     * Intended for users with long correction lists — print and work
-     * through the fixes in Excel row by row while referencing the report.
-     */
     function printLog() {
         const fileInfo = document.querySelector('#drop-text p') ? document.querySelector('#drop-text p').innerText : 'CSV Validation Report';
         const summary  = document.getElementById('summary-area').innerHTML;

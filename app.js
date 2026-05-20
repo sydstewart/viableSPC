@@ -145,9 +145,107 @@ window.addEventListener('DOMContentLoaded', function() {
             const endDate   = document.getElementById('endDate');
             if (startDate) startDate.value = '';
             if (endDate)   endDate.value   = '';
+            runDataQualityCheck(); // re-check when X column changes
+        });
+    }
+
+    const yColSelect = document.getElementById('yColSelect');
+    if (yColSelect) {
+        yColSelect.addEventListener('change', function() {
+            runDataQualityCheck(); // re-check when Y column changes
         });
     }
 });
+
+/**
+ * DATA QUALITY PRE-FLIGHT CHECK
+ * Runs after upload and whenever X or Y column selection changes.
+ * Checks for:
+ *   1. Blank values in Y column — may be read as zero, depressing stage means
+ *   2. Zero values in Y column — may be missing readings recorded as 0
+ *   3. Date sequence gaps in X column — missing periods cause change points to be mis-dated
+ * Does not block analysis. Shows a yellow warning banner with a link to the Data Validator.
+ */
+function runDataQualityCheck() {
+    if (!cachedCsvData || cachedCsvData.length === 0) return;
+
+    const xColSelect = document.getElementById('xColSelect');
+    const yColSelect = document.getElementById('yColSelect');
+    const xCol = xColSelect ? xColSelect.value : null;
+    const yCol = yColSelect ? yColSelect.value : null;
+
+    if (!xCol || !yCol) return;
+
+    // Check Y column for blanks and zeros
+    let blankCount = 0, zeroCount = 0;
+    cachedCsvData.forEach(row => {
+        const v = row[yCol] !== undefined ? row[yCol].toString().trim() : "";
+        if (v === "") blankCount++;
+        else if (!isNaN(parseFloat(v)) && parseFloat(v) === 0) zeroCount++;
+    });
+
+    // Check X column for date sequence gaps
+    // Detect frequency from first two parseable timestamps, then flag gaps > 1.4x expected
+    let missingPeriods = 0;
+    let lastTS = 0, detectedFreqMs = 0;
+    cachedCsvData.forEach(row => {
+        const dVal = row[xCol] ? row[xCol].toString().trim() : "";
+        if (!dVal) return;
+        const ts = parseDateForCheck(dVal);
+        if (isNaN(ts)) return;
+        if (lastTS > 0) {
+            const gap = ts - lastTS;
+            if (gap > 0) {
+                if (detectedFreqMs === 0) {
+                    detectedFreqMs = gap;
+                } else {
+                    const tolerance = detectedFreqMs * 0.4;
+                    if (gap > detectedFreqMs + tolerance) {
+                        missingPeriods += Math.round(gap / detectedFreqMs) - 1;
+                    }
+                }
+            }
+        }
+        lastTS = ts;
+    });
+
+    // Build warning message if any issues found
+    const issues = blankCount + zeroCount + missingPeriods;
+    if (issues > 0) {
+        let msg = `⚠️ <b>Data quality warning</b> &mdash; `;
+        const parts = [];
+        if (blankCount > 0) parts.push(`<b>${blankCount} blank value${blankCount > 1 ? 's' : ''}</b> in value column (may be read as zero)`);
+        if (zeroCount > 0) parts.push(`<b>${zeroCount} zero value${zeroCount > 1 ? 's' : ''}</b> in value column (may be missing readings)`);
+        if (missingPeriods > 0) parts.push(`<b>${missingPeriods} missing period${missingPeriods > 1 ? 's' : ''}</b> in date sequence (change points will be mis-dated)`);
+        msg += parts.join('; ') + '. ';
+        msg += `<a href="scanner.html" target="_blank" style="color:#0056b3;font-weight:bold;">Run the Data Validator</a> to identify and fix these issues before analysing.`;
+        showWarning(msg);
+    } else if (cachedCsvData.length > 500) {
+        showWarning(`This file has ${cachedCsvData.length} rows. Free Edition is optimised for up to 500 rows. Results may be slower.`);
+    } else {
+        hideWarning();
+    }
+}
+
+/**
+ * Simple date parser for the pre-flight check.
+ * Handles the most common formats: ISO, UK/EU, US, year-month, year-only.
+ */
+function parseDateForCheck(str) {
+    if (!str) return NaN;
+    str = str.trim();
+    if (/^\d{4}$/.test(str)) return new Date(parseInt(str), 0, 1).getTime();
+    if (/^\d{4}-\d{2}$/.test(str)) { const p = str.split('-'); return new Date(parseInt(p[0]), parseInt(p[1])-1, 1).getTime(); }
+    if (/^\d{4}-\d{2}-\d{2}/.test(str)) return new Date(str).getTime();
+    const parts = str.split(/[\/\-\.]/);
+    if (parts.length >= 3) {
+        const p0 = parseInt(parts[0]), p1 = parseInt(parts[1]), p2 = parseInt(parts[2]);
+        if (parts[0].length === 4) return new Date(p0, p1-1, p2).getTime(); // YYYY-MM-DD
+        if (p0 > 12) return new Date(p2 < 100 ? p2 + 2000 : p2, p1-1, p0).getTime(); // DD/MM
+        return new Date(p2 < 100 ? p2 + 2000 : p2, p0-1, p1).getTime(); // MM/DD fallback
+    }
+    return NaN;
+}
 
 // ── Worker message handler ──
 pythonWorker.onmessage = function(event) {
@@ -370,11 +468,9 @@ function handleFileUpload(file) {
             const restored = loadSettings(activeFilename);
             statusText.innerHTML = `📊 <b>${activeFilename}</b> loaded.` +
                 (restored ? ' <span style="color:#198754">✓ Previous settings restored.</span>' : ' Configure settings and click Recalculate.');
-            if (cachedCsvData.length > 500) {
-                showWarning(`This file has ${cachedCsvData.length} rows. Free Edition is optimised for up to 500 rows. Results may be slower. Pro Edition will support unlimited rows.`);
-            } else {
-                hideWarning();
-            }
+
+            // Run data quality pre-flight check on the selected columns
+            runDataQualityCheck();
         }
     });
 }

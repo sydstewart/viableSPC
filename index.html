@@ -266,8 +266,11 @@
                 <p>Bootstrap CUSUM applied to 15 years of monthly data reveals four structural stages of decline. Not one policy intervention is detectable as an improvement. Deming and Goldratt explain why.</p>
             </a>
 
-        </div>
-    </div>
+            <a href="ulez-london-air-quality.html" class="article-card">
+                <div class="article-card-tag" style="color:#0e7490;">&#127807; Environment &amp; Policy</div>
+                <h3>ULEZ or COVID? What the London Air Quality Data Actually Shows</h3>
+                <p>Bootstrap CUSUM applied to Marylebone Road NO2 data finds four structural stages — including a detectable ULEZ effect. But the biggest single change was COVID. The data is more nuanced than either side of the debate admits.</p>
+            </a>
 
     <!-- ── Articles Modal (header button) ── -->
     <div class="articles-modal-overlay" id="articlesModal" onclick="if(event.target===this)this.classList.remove('active')">
@@ -294,6 +297,11 @@
                 <span class="title">Why Nothing Has Worked: NHS A&amp;E Performance 2010&ndash;2026</span>
             </a>
 
+            <a href="ulez-london-air-quality.html">
+                <span class="tag" style="color:#0e7490;">&#127807; Environment &amp; Policy</span>
+                <span class="title">ULEZ or COVID? What the London Air Quality Data Actually Shows</span>
+            </a>
+
         </div>
     </div>
 
@@ -304,13 +312,21 @@
             <h2>&#128202; StepChangeAnalysis.com — Help</h2>
 
             <h3>Preparing your CSV file</h3>
-            <p>Your CSV must have at least two columns: a date column and a numeric value column. A few common issues to avoid:</p>
+            <p>Your CSV must have at least two columns: a date column and a numeric value column. The analyser runs an automatic data quality check when you upload — if it detects blanks, zeros, or missing date periods it will show a yellow warning banner. A few common issues to avoid:</p>
             <ul>
                 <li><b>Numeric values with comma separators</b> (e.g. 1,234,567) — these can break the CSV structure if not properly quoted. Before saving as CSV from Excel, format your value column as a plain number with no thousands separator, or ensure values are wrapped in quotes. Run the Data Validator to check for this.</li>
                 <li><b>Merged cells in Excel</b> — merged date cells leave blank rows in the CSV. Unmerge all cells and fill each row with its own date before saving.</li>
                 <li><b>Mixed date formats</b> — ensure all dates in the date column use the same format throughout. The Data Validator will flag inconsistencies.</li>
                 <li><b>Unsupported date formats</b> — financial year formats like "2004-05" are not supported. Convert to a proper date (e.g. 01/04/2004) before uploading.</li>
             </ul>
+
+            <h3>&#9888;&#65039; Missing data: zeros and blanks</h3>
+            <p>Missing values in your data can significantly affect stage means and confidence levels. There are two distinct cases to be aware of:</p>
+            <ul>
+                <li><b>Case 1 — The row is omitted entirely from the CSV.</b> If a monitoring station, sensor, or recording system simply produces no entry for a period, the CSV will skip that date. The tool treats each row as the next observation in sequence. A small number of omitted rows has minimal effect. A large number of omitted rows compresses the time axis and may cause change points to be dated incorrectly. Check that your data has no unexpected date gaps before uploading.</li>
+                <li><b>Case 2 — A blank cell is present in the value column.</b> This is the more dangerous case. When a monitoring station is offline or a value is unavailable, some data sources record the period but leave the value blank. Depending on how the CSV was saved, a blank cell may be read by the tool as zero. A zero in a value column — particularly for a metric that should never reach zero, such as NO2 concentration, temperature, or a count — will severely depress the stage mean and may create false change points. <b>Before uploading, filter your data in Excel and delete any rows where the value column is blank or zero when zero is not a valid measurement.</b></li>
+            </ul>
+            <p><b>Best practice:</b> Before uploading any CSV, open it in Excel, sort by the value column, and check the lowest values. Any unexpected zeros or blanks should be investigated and removed if they represent missing readings rather than genuine zero measurements.</p>
 
             <h3>Getting Started</h3>
             <p>Prepare your data as a CSV file with at least two columns: a <b>date column</b> and a <b>numeric value column</b>. Then drag and drop the file onto the upload area, or click to browse. If you don't have a CSV ready, download one of the sample datasets from the upload area to try the tool straight away.</p>
@@ -351,7 +367,16 @@
             <p>Use <b>Export PNG</b> to save the current chart as an image. Use <b>Export PDF</b> to generate a formatted report suitable for board papers and governance submissions.</p>
 
             <h3>Data Validator</h3>
-            <p>If your analysis produces unexpected results or an error, click <b>Data Validator</b> to run a diagnostic scan on your CSV.</p>
+            <p>If your analysis produces unexpected results, or if you see a data quality warning after uploading, click <b>Data Validator</b> to run a full diagnostic scan on your CSV. The validator checks for:</p>
+            <ul>
+                <li><b>Blank values</b> — missing readings that may be interpreted as zero, depressing stage means and creating false change points.</li>
+                <li><b>Zero values</b> — readings recorded as 0 that may represent monitoring outages rather than genuine zero measurements.</li>
+                <li><b>Missing periods in the date sequence</b> — gaps in the sequence cause change points to be dated incorrectly, because the CUSUM treats each row as the next consecutive observation regardless of the actual time gap.</li>
+                <li><b>Out-of-order dates</b> — rows not in chronological sequence, which cause a spider-web chart pattern.</li>
+                <li><b>Unrecognised date formats</b> — dates the analyser cannot parse.</li>
+                <li><b>Column structure errors</b> — unquoted commas in numeric values corrupting the CSV structure.</li>
+            </ul>
+            <p><b>Note:</b> The analyser also runs an automatic pre-flight check when you upload a CSV and when you change the X or Y column selection. If blanks, zeros, or date gaps are detected, a yellow warning banner will appear with a link to the Data Validator.</p>
 
             <h3>Privacy</h3>
             <p>Your CSV file never leaves your computer. All analysis runs entirely in your browser. No data is uploaded to any server. No login required.</p>
