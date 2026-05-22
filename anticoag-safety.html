@@ -199,7 +199,7 @@
 
     <p>The analysis uses two data sources: NHS BSA Prescription Cost Analysis (annual total anticoagulant prescription items, 2005&ndash;2025) as the denominator, and MHRA Yellow Card serious and fatal adverse drug reaction reports for anticoagulant drugs (annual totals, 2005&ndash;2025) as the numerator. The rate is calculated as serious adverse events per million prescription items.</p>
 
-    <p class="note">&#128202; <strong>A note on Bootstrap loops:</strong> As with other analyses on this site, 5000 loops is recommended for datasets where stage boundaries may be marginal. Annual data with N=21 observations requires careful interpretation &mdash; confidence levels and the number of stages should be verified at both 1000 and 5000 loops.</p>
+    <p class="note">&#9888;&#65039; <strong>These are indicators, not absolute figures.</strong> The adverse event rates calculated in this analysis are surrogate indicators of anticoagulation safety — not precise measurements of true harm rates. The numerator (MHRA Yellow Card serious and fatal reports) captures only a fraction of actual adverse events — the MHRA estimates 10% of serious reactions are reported nationally, and one NHS Trust study found a 0.56% reporting rate for DOAC-related gastrointestinal bleeding. The denominator (prescription items) is a proxy for patient numbers, not an exact headcount. The DOAC-specific denominators are estimated from published market share data rather than measured directly. These figures should therefore be interpreted as directional indicators of structural change — they tell us reliably when and in which direction the underlying process shifted, but the absolute rate values carry substantial uncertainty. The structural change points identified by Bootstrap CUSUM are robust to reasonable denominator uncertainty; the absolute rate figures are not.</p> As with other analyses on this site, 5000 loops is recommended for datasets where stage boundaries may be marginal. Annual data with N=21 observations requires careful interpretation &mdash; confidence levels and the number of stages should be verified at both 1000 and 5000 loops.</p>
 
     <hr>
 
@@ -449,9 +449,8 @@
         <p><strong>The metric that matters.</strong> Monitor serious adverse events (bleeds, thrombotic events) per patient-month on anticoagulation &mdash; not raw event counts. As your anticoagulated patient population grows, raw counts will rise even if safety is improving. The rate is the only metric that answers the safety question.</p>
         <p><strong>What Bootstrap CUSUM adds.</strong> Monthly event rate reporting tells you whether this month is above or below target. Bootstrap CUSUM tells you whether the underlying process has structurally changed &mdash; and when. A new anticoagulant management protocol, a change in prescribing practice, a new monitoring system: each of these should produce a detectable change point if it genuinely improved safety. If it doesn&rsquo;t appear in the CUSUM, it hasn&rsquo;t yet produced a structural improvement.</p>
         <p><strong>The policy lag applies here too.</strong> As demonstrated in the <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E article</a>, genuine improvements typically take 12&ndash;24 months to produce a detectable CUSUM signal. A new DOAC prescribing protocol introduced today should not be evaluated at 3 months. Pre-specify a minimum observation period &mdash; and let the CUSUM tell you when the signal arrives.</p>
+        <p style="margin-top:10px;"><em>Note: all rates in this analysis are surrogate indicators of structural change, not precise measurements of true harm rates. Numerator and denominator both carry under-reporting and estimation uncertainty. The structural change points are robust; the absolute figures are directional.</em></p>
     </div>
-
-    <hr>
 
     <h2>What Bootstrap CUSUM adds to anticoagulation safety evaluation</h2>
 
