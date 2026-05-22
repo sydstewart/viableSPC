@@ -207,7 +207,7 @@
 
     <h3>Finding 1: The anticoagulant patient population had structurally doubled by 2015</h3>
 
-    <p>Bootstrap CUSUM applied to total anticoagulant prescriptions (BNF section 0208, NHS BSA Prescription Cost Analysis, England 2005&ndash;2025, N=21, 95% confidence, Loops=1000) detects one structural change point: <strong>2015, +107%, 98.5% confidence.</strong></p>
+    <p>Bootstrap CUSUM applied to total anticoagulant prescriptions (BNF section 0208, NHS BSA Prescription Cost Analysis, England 2005&ndash;2025, N=21, 95% confidence, Loops=1000) detects one structural change point: <strong>2015, +107%, 98.5% confidence.</strong> This is a statistically significant structural change at the 95% threshold. It does not meet the stricter Shewhart SPC definition of special cause (99.7% / 3SD) &mdash; but it is a genuine and confirmed structural shift in the prescribing process.</p>
 
     <p class="note">&#9888;&#65039; <strong>Confidence level note:</strong> The prescription step change is detected at <strong>95% confidence</strong> (98.5% confidence to be precise) but <strong>not at 99.7% confidence</strong>. This reflects the small dataset size &mdash; N=21 annual observations. The change is real and statistically confirmed, but the strength of evidence is at the 95% threshold rather than the stronger 99.7% threshold used for larger datasets in other articles on this site.</p>
 
@@ -235,7 +235,16 @@
 
     <p>With N=21 annual data points, Bootstrap CUSUM correctly finds one structural boundary. The 3SD control limits on the chart are informative: the upper control limit of approximately 115 per million is breached in 2015 and 2016, confirming those years as genuine special cause signals sitting above even the elevated Stage 2 mean. By 2022 the raw data points have fallen back within the Stage 2 control limits. The decline from 137 per million in 2015 to 27.5 per million in 2025 is consistent and substantial &mdash; but with only 21 annual observations Bootstrap CUSUM cannot confirm whether this represents a second genuine structural change or continued variation within Stage 2. Monthly data analysis would resolve this definitively.</p>
 
-    <p>The X-mR Control Chart below confirms the special cause finding independently. Using a single overall process mean of 61.55 per million across all 21 years, the upper natural process limit (UNPL) is 97.15 per million. The 2015 and 2016 data points at approximately 137 and 133 per million both breach this limit &mdash; special cause signals confirmed by a second method. The difference between the Bootstrap CUSUM 3SD limits and the X-mR UNPL reflects that CUSUM uses stage means while X-mR uses the overall mean; both confirm the same finding.</p>
+    <p>The X-mR Control Chart below confirms the special cause finding independently. Using a single overall process mean of 61.55 per million across all 21 years, the upper natural process limit (UNPL) is 97.15 per million. The 2015 and 2016 data points at approximately 137 and 133 per million both breach this limit &mdash; special cause signals confirmed by a second method.</p>
+
+    <p>It is worth explaining why Bootstrap CUSUM did not flag 2015&ndash;2016 as special cause while the X-mR chart did. The two tools are asking different questions:</p>
+
+    <ul>
+        <li><strong>Bootstrap CUSUM</strong> found a structural step up at 2012 and calculated Stage 2&rsquo;s mean and 3SD limits from the Stage 2 data itself &mdash; which includes the 2015&ndash;2016 peaks. Those peaks contributed to defining the stage, so the stage&rsquo;s own control limits are wide enough to contain them. Within Stage 2&rsquo;s own distribution, 2015&ndash;2016 are elevated but not outside the stage&rsquo;s limits.</li>
+        <li><strong>X-mR</strong> treats all 21 years as a single process and calculates the UNPL from the overall mean and average moving range. The 2015&ndash;2016 peaks stand out clearly against that single overall baseline &mdash; and breach the UNPL of 97.15.</li>
+    </ul>
+
+    <p>Both answers are correct within their own frameworks. Bootstrap CUSUM is asking: <em>&ldquo;has the process structurally changed?&rdquo;</em> X-mR is asking: <em>&ldquo;does this individual point exceed the overall process limits?&rdquo;</em> Together they give a complete picture: a structural step up in 2012 confirmed by Bootstrap CUSUM, and two individual special cause peaks in 2015&ndash;2016 confirmed by X-mR.</p>
 
     <figure class="chart-figure">
         <img src="images/anticoag-chart5-xmr.png" alt="X-mR Control Chart — Total anticoagulant ADR rate 2005–2025">
@@ -249,7 +258,7 @@
 
     <h3>Finding 3: The DOAC adverse event rate fell by over two thirds after 2016</h3>
 
-    <p>Bootstrap CUSUM applied to the DOAC-specific adverse event rate per million DOAC prescriptions (N=18, 95% confidence, Loops=5000) detects one structural change point: <strong>2016, step down from ~650 to ~185 per million, 95% confidence.</strong> That is a reduction of approximately 72% from Stage 1 mean to Stage 2 mean. Within the overall 2008&ndash;2025 period, the rate fell from a peak of approximately 715 per million in 2013&ndash;2015 to 29.5 per million in 2025 &mdash; a 96% reduction from peak. The Bootstrap CUSUM change point at 2016 confirms the structural step down, though the full extent of the decline within Stage 2 is not separately detected as a second structural change with N=18 observations.</p>
+    <p>Bootstrap CUSUM applied to the DOAC-specific adverse event rate per million DOAC prescriptions (N=18, 95% confidence, Loops=5000) detects one structural change point: <strong>2016, step down from ~650 to ~185 per million, 95% confidence.</strong> That is a reduction of approximately 72% from Stage 1 mean to Stage 2 mean. This is a statistically significant structural change — but like the prescriptions finding, it is confirmed at the 95% threshold rather than the stricter 99.7% Shewhart special cause threshold. The 2015–2016 individual data points in Finding 2 that breach the X-mR UNPL are the genuine special cause signals in this dataset. Within the overall 2008&ndash;2025 period, the rate fell from a peak of approximately 715 per million in 2013&ndash;2015 to 29.5 per million in 2025 &mdash; a 96% reduction from peak.</p>
 
     <figure class="chart-figure">
         <img src="images/anticoag-chart4-doac-rate.png" alt="Bootstrap CUSUM — DOAC adverse event rate per million 2008–2025">
@@ -264,7 +273,7 @@
         <li><strong>The switch to apixaban.</strong> As rivaroxaban came under scrutiny, apixaban rapidly became the dominant DOAC. This shift is now strongly supported by the COBRRA trial (Castellucci et al., <em>New England Journal of Medicine</em>, March 2026), a randomised controlled trial of 2,760 patients led by McMaster University which found clinically relevant bleeding occurred in 3.3% of apixaban patients versus 7.1% of rivaroxaban patients over three months — a statistically significant and clinically meaningful difference. The prescriber switch from rivaroxaban to apixaban that began around 2016 was therefore well-founded and is reflected directly in the CUSUM change point.</li>
     </ul>
 
-    <p>This is a classic example of special cause variation driven by events outside the immediate prescribing system — a trial controversy, a regulatory label update, and a drug switch — converging in a single year. The structural step down in 2016 was not the result of gradual learning; it was triggered by specific external events that changed prescribing behaviour rapidly and substantially.</p>
+    <p>This is a clear example of a statistically confirmed structural change driven by identifiable events outside the immediate prescribing system — a trial controversy, a regulatory label update, and a drug switch — converging in a single year. The structural step down in 2016 was not the result of gradual learning; it was triggered by specific external events that changed prescribing behaviour rapidly and substantially. In Deming&rsquo;s terms it behaves like special cause variation &mdash; externally driven and identifiable &mdash; but it is confirmed at 95% statistical confidence rather than the stricter 99.7% Shewhart threshold.</p>
 
     <h3>How did the news spread so quickly?</h3>
 
@@ -281,10 +290,11 @@
     <p>The Bootstrap CUSUM change point of 2016 is therefore not only a statistical finding — it is a validation of the medical information ecosystem. When a major safety signal emerged, the combination of journal publication, regulatory communication, clinical social media, and pharmacy surveillance produced a measurable national structural change within a year. That is a system working reasonably well. The question for your organisation is: what is the equivalent mechanism for detecting and responding to localised prescribing quality problems that never reach the BMJ?</p>
 
     <div class="callout-box">
-        <h3>&#127775; Teaching point: special cause variation from outside the system</h3>
-        <p>The 2016 structural change in DOAC adverse event rates is a textbook illustration of Deming&rsquo;s distinction between common cause and special cause variation. The system had been producing a relatively stable (if high) rate of DOAC adverse events from 2012 to 2015 &mdash; common cause variation around the Stage 1 mean. Then three external events hit simultaneously: a trial controversy, a regulatory label update, and an evidence-based drug switch. The CUSUM detected the resulting structural change and dated it to 2016.</p>
+        <h3>&#127775; Teaching point: a structurally confirmed change driven from outside the system</h3>
+        <p>The 2016 structural change in DOAC adverse event rates illustrates Deming&rsquo;s distinction between common cause and special cause variation in a practical clinical context. The system had been producing a relatively stable (if high) rate of DOAC adverse events from 2012 to 2015 &mdash; common cause variation around the Stage 1 mean. Then three external events hit simultaneously: a trial controversy, a regulatory label update, and an evidence-based drug switch. Bootstrap CUSUM detected the resulting structural change and dated it to 2016 at 95% statistical confidence.</p>
         <p style="margin-top:10px;">The teaching point is this: <strong>no amount of monitoring individual patients more closely would have produced this structural change.</strong> It required an intervention at the system level &mdash; a change in which drug was being prescribed, driven by evidence from outside the immediate prescribing system. This is why Bootstrap CUSUM is more informative than monitoring individual patients: it tells you when the system itself has structurally changed, not just whether this patient&rsquo;s result is within range today.</p>
-        <p style="margin-top:10px;"><strong>The CUSUM did not know about ROCKET-AF, the EMA label update, or the shift to apixaban.</strong> It simply detected that the process had structurally changed and dated it to 2016. The analysis prompted the question &mdash; what happened? &mdash; and the answer turned out to be three converging external events. That is the power of change point analysis: it finds the signal first, then asks why.</p>
+        <p style="margin-top:10px;"><strong>A note on terminology:</strong> the 2016 change is statistically confirmed at 95% confidence &mdash; a genuine structural improvement. But it does not strictly meet the Shewhart SPC definition of special cause, which requires 99.7% (3SD). The genuine special causes in this dataset are the 2015&ndash;2016 ADR rate peaks confirmed by X-mR UNPL breach. The 2016 structural step down behaves like special cause variation in its origin &mdash; externally driven and identifiable &mdash; but is confirmed at the 95% threshold, not 99.7%.</p>
+        <p style="margin-top:10px;"><strong>Bootstrap CUSUM did not know about ROCKET-AF, the EMA label update, or the shift to apixaban.</strong> It simply detected that the process had structurally changed and dated it to 2016. The analysis prompted the question &mdash; what happened? &mdash; and the answer turned out to be three converging external events. That is the power of change point analysis: it finds the signal first, then asks why.</p>
     </div>
 
     <hr>
@@ -308,7 +318,7 @@
                 <tr>
                     <td><strong>Understand special cause variation</strong></td>
                     <td>Identify and eliminate specific, assignable causes of problems before trying to improve the underlying process</td>
-                    <td>The 2016 DOAC step change — the ROCKET-AF controversy and EMA label update were special causes. Removing rivaroxaban from high-risk patients was the right response. Bootstrap CUSUM identified the special cause and dated it.</td>
+                    <td>The 2015&ndash;2016 ADR rate peaks breach the X-mR UNPL &mdash; genuine special cause signals confirmed at 99.7%. The 2016 structural step down is statistically confirmed at 95% and driven by identifiable external events (ROCKET-AF, EMA label update, rivaroxaban&rarr;apixaban switch). Both warranted system-level response, not individual patient adjustment.</td>
                 </tr>
                 <tr>
                     <td><strong>Reduce common cause variation</strong></td>
