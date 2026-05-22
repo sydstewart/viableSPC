@@ -133,6 +133,19 @@
         <p style="margin-top:10px; font-size:0.92em; color:#166534;"><strong>Data sources:</strong> NHS BSA Prescription Cost Analysis 2005&ndash;2025 &middot; MHRA Yellow Card serious and fatal ADR reports &middot; N=21 annual observations &middot; 95% confidence &middot; Loops=5000</p>
     </div>
 
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:20px 0; border:1px solid #e2e8f0; border-radius:8px; background:#f8fafc;">
+        <tr>
+            <td width="50" style="padding:14px; font-size:1.8em; text-align:center;">&#128196;</td>
+            <td style="padding:14px 8px;">
+                <strong style="color:#1e3a5f !important; font-size:1em;">Executive Summary available as PDF</strong><br>
+                <span style="font-size:0.88em; color:#64748b;">3-page summary of all five findings, key chart, and references &mdash; ideal for sharing with colleagues or at conferences.</span>
+            </td>
+            <td width="160" style="padding:14px; text-align:right;">
+                <a href="anticoag-safety-summary.pdf" download style="display:inline-block; background:#1e3a5f; color:white; padding:10px 16px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.88em; white-space:nowrap;">&#11015;&#65039; Download PDF</a>
+            </td>
+        </tr>
+    </table>
+
     <h2>The anticoagulation revolution</h2>
 
     <p>For decades, warfarin was the only oral anticoagulant available for stroke prevention in atrial fibrillation, treatment of venous thromboembolism, and prevention of clots in patients with mechanical heart valves. It worked &mdash; but it required regular blood tests, careful dose adjustment, dietary restrictions, and carried a significant risk of serious bleeding. Managing patients on warfarin was demanding for clinicians and burdensome for patients.</p>
@@ -193,13 +206,11 @@
         </div>
     </div>
 
-    <hr>
-
-    <h2>What Bootstrap CUSUM shows</h2>
-
     <p>The analysis uses two data sources: NHS BSA Prescription Cost Analysis (annual total anticoagulant prescription items, 2005&ndash;2025) as the denominator, and MHRA Yellow Card serious and fatal adverse drug reaction reports for anticoagulant drugs (annual totals, 2005&ndash;2025) as the numerator. The rate is calculated as serious adverse events per million prescription items.</p>
 
-    <p class="note">&#9888;&#65039; <strong>These are indicators, not absolute figures.</strong> The adverse event rates calculated in this analysis are surrogate indicators of anticoagulation safety — not precise measurements of true harm rates. The numerator (MHRA Yellow Card serious and fatal reports) captures only a fraction of actual adverse events — the MHRA estimates 10% of serious reactions are reported nationally, and one NHS Trust study found a 0.56% reporting rate for DOAC-related gastrointestinal bleeding. The denominator (prescription items) is a proxy for patient numbers, not an exact headcount. The DOAC-specific denominators are estimated from published market share data rather than measured directly. These figures should therefore be interpreted as directional indicators of structural change — they tell us reliably when and in which direction the underlying process shifted, but the absolute rate values carry substantial uncertainty. The structural change points identified by Bootstrap CUSUM are robust to reasonable denominator uncertainty; the absolute rate figures are not.</p> As with other analyses on this site, 5000 loops is recommended for datasets where stage boundaries may be marginal. Annual data with N=21 observations requires careful interpretation &mdash; confidence levels and the number of stages should be verified at both 1000 and 5000 loops.</p>
+    <p class="note">&#9888;&#65039; <strong>These are indicators, not absolute figures.</strong> The adverse event rates calculated in this analysis are surrogate indicators of anticoagulation safety &mdash; not precise measurements of true harm rates. The numerator (MHRA Yellow Card serious and fatal reports) captures only a fraction of actual adverse events &mdash; the MHRA estimates 10% of serious reactions are reported nationally, and one NHS Trust study found a 0.56% reporting rate for DOAC-related gastrointestinal bleeding. The denominator (prescription items) is a proxy for patient numbers, not an exact headcount. The DOAC-specific denominators are estimated from published market share data rather than measured directly. The structural change points identified by Bootstrap CUSUM are robust to reasonable denominator uncertainty; the absolute rate figures are not.</p>
+
+    <p class="note">&#128202; <strong>A note on Bootstrap loops:</strong> As with other analyses on this site, 5000 loops is recommended for datasets where stage boundaries may be marginal. Annual data with N=21 observations requires careful interpretation &mdash; confidence levels and the number of stages should be verified at both 1000 and 5000 loops.</p>
 
     <hr>
 
@@ -505,9 +516,12 @@
         <p style="margin-top:8px;"><strong>Comparative ADR rates across drug classes:</strong> Mokbel K. et al., &ldquo;A Comparative Safety Analysis of Medicines Based on the UK Pharmacovigilance and General Practice Prescribing Data in England.&rdquo; <em>In Vivo</em>, 2022;36(2):780&ndash;800. <a href="https://iv.iiarjournals.org/content/36/2/780" target="_blank">doi:10.21873/invivo.12765</a></p>
         <p style="margin-top:8px;"><strong>Under-reporting of anticoagulant ADRs:</strong> &ldquo;Under-reporting of gastrointestinal bleeding associated with anticoagulant use using the UK Yellow Card Scheme.&rdquo; <em>PubMed</em>, 2023. <a href="https://pubmed.ncbi.nlm.nih.gov/37269441/" target="_blank">pubmed.ncbi.nlm.nih.gov/37269441</a> &mdash; one NHS Trust made only 6 DOAC Yellow Card reports from 1,058 possible cases (0.56% reporting rate).</p>
         <p style="margin-top:8px;"><strong>AF-related stroke rates:</strong> Leeds Teaching Hospitals study, &ldquo;Temporal trends in AF-related stroke rates in England.&rdquo; <em>European Heart Journal</em>, 2018 &mdash; anticoagulation uptake 48% to 78.6%; estimated 4,068 fewer strokes per year by 2015/16.</p>
-        <p style="margin-top:8px;"><strong>Anticoagulation management programmes:</strong> Barnes G.D. et al., Michigan Anticoagulation Quality Improvement Initiative (MAQI&sup2;). <a href="https://www.maqi2.org" target="_blank">maqi2.org</a></p>
-        <p style="margin-top:8px;"><strong>VA anticoagulation programmes:</strong> Witt D.M. et al., &ldquo;Effect of a centralized clinical pharmacy anticoagulation service on the outcomes of anticoagulation therapy.&rdquo; <em>Chest</em>, 2005.</p>
-        <p style="margin-top:8px;"><strong>NICE technology appraisals:</strong> NICE TA249 (dabigatran, 2012), TA256 (rivaroxaban, 2012), TA275 (apixaban, 2013), TA355 (edoxaban, 2015).</p>
+        <p style="margin-top:8px;"><strong>Michigan Anticoagulation Quality Improvement Initiative (MAQI²) — founding paper:</strong> Barnes G.D. &amp; Kline-Rogers E., &ldquo;Engaging with quality improvement in anticoagulation management.&rdquo; <em>Journal of Thrombosis and Thrombolysis</em>, 2015;39:403&ndash;409. Multi-centre collaborative quality initiative across Michigan health systems, 23,000+ patients on oral anticoagulants. <a href="https://www.maqi2.org" target="_blank">maqi2.org</a></p>
+        <p style="margin-top:8px;"><strong>DOAC population management dashboard — VA nationwide implementation:</strong> Barnes G.D. et al., &ldquo;Pharmacist Use of a Population Management Dashboard for Safe Anticoagulant Prescribing: Evaluation of a Nationwide Implementation Effort.&rdquo; <em>Journal of the American Heart Association</em>, 2024;13(18):e035859. <a href="https://pubmed.ncbi.nlm.nih.gov/39248259/" target="_blank">doi:10.1161/JAHA.124.035859</a> &mdash; 128,652 patients across 123 VA centres. Early dashboard adoption associated with reduced off-label DOAC dosing, reduced bleeding, and reduced VTE/stroke events.</p>
+        <p style="margin-top:8px;"><strong>Correcting inappropriate DOAC prescribing — population health approach:</strong> Dawson T. et al., &ldquo;Correcting Inappropriate Prescribing of Direct Oral Anticoagulants: A Population Health Approach.&rdquo; <em>Journal of the American Heart Association</em>, 2020;9(22):e016949. <a href="https://pubmed.ncbi.nlm.nih.gov/33150804/" target="_blank">doi:10.1161/JAHA.120.016949</a></p>
+        <p style="margin-top:8px;"><strong>Real-world prevalence of DOAC off-label doses:</strong> Shen N.N. et al., &ldquo;Real-World Prevalence of Direct Oral Anticoagulant Off-Label Doses in Atrial Fibrillation: An Epidemiological Meta-Analysis.&rdquo; <em>Frontiers in Pharmacology</em>, 2021. <a href="https://pubmed.ncbi.nlm.nih.gov/34122056/" target="_blank">doi:10.3389/fphar.2021.581293</a> &mdash; 9&ndash;20% of DOAC patients on off-label doses.</p>
+        <p style="margin-top:8px;"><strong>DOAC population management tool — anticoagulation monitoring:</strong> Valencia D. et al., &ldquo;Impact of a Direct Oral Anticoagulant Population Management Tool on Anticoagulation Therapy Monitoring in Clinical Practice.&rdquo; <em>Annals of Pharmacotherapy</em>, 2019;53(8):806&ndash;811. <a href="https://pubmed.ncbi.nlm.nih.gov/30784310/" target="_blank">doi:10.1177/1060028019835843</a></p>
+        <p style="margin-top:8px;"><strong>Anticoagulants now #1 cause of adverse drug events:</strong> Budnitz D.S. et al., &ldquo;US emergency department visits attributed to medication harms, 2017&ndash;2019.&rdquo; <em>JAMA</em>, 2021;326(13):1299&ndash;1309. <a href="https://pubmed.ncbi.nlm.nih.gov/34609453/" target="_blank">doi:10.1001/jama.2021.13844</a></p> NICE TA249 (dabigatran, 2012), TA256 (rivaroxaban, 2012), TA275 (apixaban, 2013), TA355 (edoxaban, 2015).</p>
         <p style="margin-top:8px;"><strong>Deming W.E.:</strong> <em>Out of the Crisis</em>, MIT Press, 1982. The foundational text on common cause vs special cause variation, tampering, and the funnel experiment.</p>
         <p style="margin-top:8px;"><strong>Joiner B.L.:</strong> <em>Fourth Generation Management</em>, McGraw-Hill, 1994. Chapter 8: The Price of Ignorance, page 128 &mdash; the anticoagulation management scenario as an illustration of Deming&rsquo;s tampering principle.</p>
         <p style="margin-top:8px;"><strong>Method:</strong> Bootstrap CUSUM step-change analysis. Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
