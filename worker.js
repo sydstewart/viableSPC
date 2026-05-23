@@ -1,4 +1,20 @@
 /**
+ * StepChangeAnalysis.com — Bootstrap CUSUM SPC Tool
+ * Copyright © Syd Stewart / StepChangeAnalysis.com 2026
+ * All rights reserved.
+ *
+ * This file contains proprietary statistical algorithms implementing
+ * Bootstrap CUSUM step-change analysis. Unauthorised copying, modification,
+ * distribution or use of this code, in whole or in part, without the express
+ * written permission of the author is strictly prohibited.
+ *
+ * The Bootstrap CUSUM algorithm was originally developed in Python and
+ * converted to JavaScript for browser-based execution. The intellectual
+ * property in the algorithm design and implementation belongs to the author.
+ */
+
+
+/**
  * worker.js - Pure JavaScript SPC Analysis Engine
  * StepChangeAnalysis.com
  *
