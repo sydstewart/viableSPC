@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ULEZ or COVID? What the Air Quality Data Actually Shows — StepChangeAnalysis.com</title>
-    <meta name="description" content="Bootstrap CUSUM applied to Marylebone Road NO2 data finds four structural stages — including a detectable ULEZ effect. But the biggest single improvement was COVID. What the data actually shows about London air quality policy.">
+    <title>ULEZ Worked — But the Signal Appeared 18 Months Before It Launched — StepChangeAnalysis.com</title>
+    <meta name="description" content="Bootstrap CUSUM on a decade of Marylebone Road NO2 data finds something neither side of the ULEZ debate predicted: the biggest structural improvement was COVID, the ULEZ signal appeared 18 months before launch, and the London-wide expansion improved air quality at a site already inside the zone for four years.">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
     <script>
@@ -116,13 +116,13 @@
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Articles &rsaquo; Environment &amp; Policy</div>
     <div class="article-flag">&#127807; Environment &amp; Policy &middot; London Air Quality Analysis</div>
 
-    <h1>ULEZ or COVID?</h1>
-    <p class="article-subtitle">Bootstrap CUSUM applied to a decade of Marylebone Road NO2 monitoring data finds four structural stages of improvement &mdash; including a detectable ULEZ policy effect. But the biggest single change was COVID. What the measured data actually shows about London air quality policy is more nuanced &mdash; and more interesting &mdash; than either side of the political debate admits.</p>
+    <h1>ULEZ Worked &mdash; But Not When Anyone Expected</h1>
+    <p class="article-subtitle">In October 2018, eighteen months before the Ultra Low Emission Zone officially launched, Marylebone Road NO2 dropped 24.7% at 99.9% confidence. Rational drivers were already complying with a policy that hadn&rsquo;t started yet. Bootstrap CUSUM on a decade of measured data finds three things neither side of the ULEZ debate predicted &mdash; and one finding that should change how every city in the world designs and evaluates clean air policy.</p>
     <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; May 2026 &nbsp;&middot;&nbsp; Data: Defra AURN, Marylebone Road (MY1), Monthly Mean NO2, 2015&ndash;2026</div>
 
     <h2>The most contested policy in recent London history</h2>
 
-    <p>Few policies have generated as much political heat as the Ultra Low Emission Zone. Supporters cite dramatic reductions in roadside nitrogen dioxide, falling rates of respiratory disease, and a 58% reduction in non-compliant vehicles detected on London roads. Critics argue it unfairly targets lower-income drivers with older vehicles, that the economic impact on outer London businesses is severe, and that the air quality improvements were already happening before the scheme launched.</p>
+    <p>The ULEZ debate has been conducted almost entirely without reference to what the measured data actually shows. Supporters cite modelled estimates of pollution reduction. Critics cite modelled estimates of economic harm. Both sides argue from assumptions about what would have happened without the scheme. Neither side has asked the most important question: when did London&rsquo;s roadside NO2 actually, structurally change &mdash; and is that date consistent with the policy causing it? Bootstrap CUSUM answers that question directly from a decade of measured data. The answer is not what either side expected.</p>
 
     <p>Both sides produce data. Both sides produce models. Neither side has asked the most important question in a rigorous way: <strong>when did London&rsquo;s roadside air quality actually, structurally change &mdash; and is that date consistent with ULEZ causing it?</strong></p>
 
@@ -170,11 +170,11 @@
 
     <p class="note">&#128202; <strong>Reproducing this analysis:</strong> Data downloaded from the Defra UK AIR Data Selector. Go to <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a>, select Search Hourly Networks, site: London Marylebone Road (MY1), pollutant: NO2, statistics: daily mean, 2015&ndash;2026. Aggregate to monthly means in Excel, removing blank days. Upload to StepChangeAnalysis.com with Y = NO2 column.</p>
 
-    <p class="note">&#128202; <strong>A note on missing readings:</strong> Automatic monitoring stations occasionally go offline for maintenance, calibration, or technical failure, leaving days with no recorded value. Before calculating monthly means, the daily data was filtered in Excel to exclude all blank days — only days with valid NO2 readings were included in the pivot table that calculated each monthly average. This means each monthly mean reflects only verified measurements, with no zeros or blanks distorting the average. The CUSUM result is robust: the four stages and their confidence levels are consistent across the dataset.</p>
+    <p class="note">&#128202; <strong>A note on missing readings:</strong> Automatic monitoring stations occasionally go offline for maintenance, calibration, or technical failure, leaving days with no recorded value. Before calculating monthly means, the daily data was filtered in Excel to exclude all blank days &mdash; only days with valid NO2 readings were included in the pivot table that calculated each monthly average. This means each monthly mean reflects only verified measurements, with no zeros or blanks distorting the average. The CUSUM result is robust: the four stages and their confidence levels are consistent across the dataset.</p>
 
     <figure class="chart-figure">
         <img src="images/ulez-chart1-marylebone.png" alt="Bootstrap CUSUM — Marylebone Road NO2 2015-2026 — 4 structural stages">
-        <figcaption>Marylebone Road monthly mean NO2 (µg/m³), April 2015&ndash;May 2026. Bootstrap CUSUM, 99.7% confidence, N=134 monthly observations, Loops=1000. Four structural stages. Stage 2 (Oct 2018): pre-ULEZ compliance. Stage 3 (Feb 2020): COVID. Stage 4 (Mar 2024): London-wide ULEZ effect.</figcaption>
+        <figcaption>Marylebone Road monthly mean NO2 (&micro;g/m&sup3;), April 2015&ndash;May 2026. Bootstrap CUSUM, 99.7% confidence, N=134 monthly observations, Loops=1000. Four structural stages. Stage 2 (Oct 2018): pre-ULEZ compliance. Stage 3 (Feb 2020): COVID. Stage 4 (Mar 2024): London-wide ULEZ effect.</figcaption>
     </figure>
 
     <hr>
@@ -190,34 +190,34 @@
                 <tr>
                     <td><span class="stage-badge">1</span></td>
                     <td>Apr 2015&ndash;Oct 2018</td>
-                    <td>87.21 µg/m³</td>
+                    <td>87.21 &micro;g/m&sup3;</td>
                     <td>Baseline</td>
                     <td>Baseline</td>
-                    <td>Pre-policy baseline. More than double the 40 µg/m³ legal limit. The T-charge launched Oct 2017 but its effect does not yet appear as a structural change.</td>
+                    <td>Pre-policy baseline. More than double the 40 &micro;g/m&sup3; legal limit. The T-charge launched Oct 2017 but its effect does not yet appear as a structural change.</td>
                 </tr>
                 <tr>
                     <td><span class="stage-badge positive">2</span></td>
                     <td>Oct 2018&ndash;Feb 2020</td>
-                    <td>65.71 µg/m³</td>
+                    <td>65.71 &micro;g/m&sup3;</td>
                     <td>&minus;24.7%</td>
                     <td>99.9%</td>
-                    <td><strong>Anticipatory ULEZ compliance.</strong> The change point is 18 months before the April 2019 ULEZ launch. Rational actors responded to the announced future policy by upgrading vehicles in advance. This is the policy lag in reverse — the signal appearing before the official start date.</td>
+                    <td><strong>Anticipatory ULEZ compliance.</strong> The change point is 18 months before the April 2019 ULEZ launch. Rational actors responded to the announced future policy by upgrading vehicles in advance. This is the policy lag in reverse &mdash; the signal appearing before the official start date.</td>
                 </tr>
                 <tr>
                     <td><span class="stage-badge">3</span></td>
                     <td>Feb 2020&ndash;Mar 2024</td>
-                    <td>43.00 µg/m³</td>
+                    <td>43.00 &micro;g/m&sup3;</td>
                     <td>&minus;34.6%</td>
                     <td>100%</td>
-                    <td><strong>COVID structural break.</strong> The largest single change in the dataset. Traffic collapsed; NO2 followed. Still above the 40 µg/m³ legal limit. The inner London expansion (Oct 2021) falls within this stage — no additional change point detected.</td>
+                    <td><strong>COVID structural break.</strong> The largest single change in the dataset. Traffic collapsed; NO2 followed. Still above the 40 &micro;g/m&sup3; legal limit. The inner London expansion (Oct 2021) falls within this stage &mdash; no additional change point detected.</td>
                 </tr>
                 <tr>
                     <td><span class="stage-badge positive">4</span></td>
                     <td>Mar 2024&ndash;present</td>
-                    <td>31.78 µg/m³</td>
+                    <td>31.78 &micro;g/m&sup3;</td>
                     <td>&minus;26.1%</td>
                     <td>100%</td>
-                    <td><strong>London-wide ULEZ expansion effect.</strong> Change point March 2024 — seven months after the August 2023 London-wide expansion. Within the expected 6&ndash;12 month policy lag. First time Marylebone Road mean falls below the 40 µg/m³ legal limit. Still above the WHO guideline of 10 µg/m³.</td>
+                    <td><strong>London-wide ULEZ expansion effect.</strong> Change point March 2024 &mdash; seven months after the August 2023 London-wide expansion. Within the expected 6&ndash;12 month policy lag. First time Marylebone Road mean falls below the 40 &micro;g/m&sup3; legal limit. Still above the WHO guideline of 10 &micro;g/m&sup3;.</td>
                 </tr>
             </tbody>
         </table>
@@ -233,18 +233,25 @@
     <h2>The three findings that matter</h2>
 
     <div class="alert-green">
-        <strong>Finding 1: ULEZ produced a detectable effect — but it appeared 18 months before launch.</strong>
-        The Stage 2 change point is October 2018, not April 2019. This is the anticipatory compliance effect — drivers and fleet operators responding to an announced future policy by upgrading vehicles in advance. This is rational behaviour and a genuine ULEZ signal. It also means that evaluating ULEZ solely by comparing before and after April 2019 misses the effect entirely.
+        <strong>Finding 1: ULEZ produced a detectable effect &mdash; but it appeared 18 months before launch.</strong>
+        The Stage 2 change point is October 2018, not April 2019. This is the anticipatory compliance effect &mdash; drivers and fleet operators responding to an announced future policy by upgrading vehicles in advance. This is rational behaviour and a genuine ULEZ signal. It also means that evaluating ULEZ solely by comparing before and after April 2019 misses the effect entirely.
     </div>
 
     <div class="alert-red">
-        <strong>Finding 2: COVID was the largest single structural change — by a significant margin.</strong>
+        <strong>Finding 2: COVID was the largest single structural change &mdash; by a significant margin.</strong>
         The Stage 3 change point (February 2020, -34.6%, 100% confidence) dwarfs every other structural change in the dataset. It is worth pausing on what that represents. The largest single improvement in Marylebone Road air quality in a decade was a byproduct of a global catastrophe that killed hundreds of thousands in the UK alone and caused economic damage on a scale not seen since the Second World War. The data shows the benefit. The cost was incalculable.
     </div>
 
     <div class="alert-green">
         <strong>Finding 3: The London-wide ULEZ expansion (Aug 2023) produced a genuine detectable structural change.</strong>
-        Stage 4 change point is March 2024 — seven months after the London-wide expansion. This is within the 6&ndash;12 month policy lag we would expect. At 100% confidence, this is not a marginal finding. The mean fell from 43.00 to 31.78 µg/m³ &mdash; the first time Marylebone Road has been below the 40 µg/m³ legal limit as a stage mean. The London-wide expansion worked, at this site, within the expected timeframe.
+        Stage 4 change point is March 2024 &mdash; seven months after the London-wide expansion. This is within the 6&ndash;12 month policy lag we would expect. At 100% confidence, this is not a marginal finding. The mean fell from 43.00 to 31.78 &micro;g/m&sup3; &mdash; the first time Marylebone Road has been below the 40 &micro;g/m&sup3; legal limit as a stage mean. The London-wide expansion worked, at this site, within the expected timeframe.
+    </div>
+
+    <div class="callout-box">
+        <h3>&#128218; How does this compare with peer-reviewed research?</h3>
+        <p>A study from the University of Birmingham (Tong et al., <em>npj Clean Air</em>, October 2025) found no significant city-wide impact on NO2 or NOx following the 2023 London-wide ULEZ expansion. The authors attribute this to the high compliance rate already achieved by that point &mdash; by the time the expansion launched, only 7.4% of vehicles across London were non-compliant, falling to 4.2% within three months. With so few non-compliant vehicles remaining, there was little room for further aggregate improvement.</p>
+        <p style="margin-top:10px;">This finding is not inconsistent with the Marylebone Stage 4 result. The Birmingham study measured city-wide NO2 averages across the whole of Greater London. This analysis measures a single specific site &mdash; Marylebone Road &mdash; which carries substantial through-traffic from outer London boroughs that were outside the zone until August 2023. City-wide averaging and single-site Bootstrap CUSUM are measuring different things. The Birmingham study confirms the 2023 expansion found little room for aggregate improvement across London as a whole. The Marylebone data suggests site-specific gains are still detectable where through-traffic composition changed materially &mdash; precisely because Marylebone Road receives vehicles from every direction across the city, including from the newly-covered outer boroughs.</p>
+        <p style="margin-top:10px;">The two approaches are complementary. Bootstrap CUSUM at individual monitoring sites can detect localised signals that city-wide averaging smooths away. Both findings together tell a more complete story: the 2023 expansion made little difference to aggregate London air quality because compliance was already high, but it produced measurable improvements at specific high-traffic arterial sites where outer London through-traffic had previously been exempt.</p>
     </div>
 
     <h3>How did a London-wide expansion reduce NO2 at a central London site already in the zone?</h3>
@@ -256,7 +263,7 @@
     <ul>
         <li><strong>Through-traffic from outer London became compliant.</strong> Drivers making cross-London journeys through Marylebone from non-ULEZ outer boroughs either upgraded their vehicles, paid the daily charge, or stopped making those journeys. The composition of traffic on the A501 shifted measurably cleaner.</li>
         <li><strong>Delivery and logistics fleets serving central London upgraded.</strong> Couriers and delivery vans operating across London could previously use non-compliant vehicles on outer London legs of their routes. The London-wide expansion meant their entire operational area became ULEZ &mdash; forcing whole-fleet upgrades rather than just route adjustments.</li>
-        <li><strong>The non-compliant vehicle pool across London shrank dramatically.</strong> The expansion covered 9 million people and 1,500 km². The total number of non-compliant vehicles anywhere in London fell sharply &mdash; reducing the probability of any non-compliant vehicle appearing on any given road, including Marylebone.</li>
+        <li><strong>The non-compliant vehicle pool across London shrank dramatically.</strong> The expansion covered 9 million people and 1,500 km&sup2;. The total number of non-compliant vehicles anywhere in London fell sharply &mdash; reducing the probability of any non-compliant vehicle appearing on any given road, including Marylebone.</li>
         <li><strong>Anticipatory compliance before the August 2023 launch.</strong> Just as Stage 2 showed pre-ULEZ compliance 18 months before April 2019, the announced London-wide expansion triggered vehicle upgrades in the months before it launched. Those upgraded vehicles were already driving through Marylebone from early 2023, contributing to the Stage 4 improvement that the CUSUM dates to March 2024.</li>
     </ul>
 
@@ -270,7 +277,7 @@
 
     <h2>Why did the improvement hold after COVID?</h2>
 
-    <p>Stage 3 runs from February 2020 to March 2024 &mdash; a period of four years during which London traffic broadly recovered to pre-pandemic levels. NO2 did not recover. The stage mean of 43.00 µg/m³ is structurally lower than the Stage 2 mean of 65.71 µg/m³, even as traffic returned. Several factors combined to maintain the improvement:</p>
+    <p>Stage 3 runs from February 2020 to March 2024 &mdash; a period of four years during which London traffic broadly recovered to pre-pandemic levels. NO2 did not recover. The stage mean of 43.00 &micro;g/m&sup3; is structurally lower than the Stage 2 mean of 65.71 &micro;g/m&sup3;, even as traffic returned. Several factors combined to maintain the improvement:</p>
 
     <ul>
         <li><strong>Fleet turnover accelerated.</strong> The pandemic coincided with a wave of vehicle renewal driven partly by ULEZ compliance pressure and partly by the normal replacement cycle. Vehicles purchased in 2020&ndash;2022 were substantially cleaner than those they replaced. Once cleaner vehicles replace older ones, the older emissions do not return.</li>
@@ -285,13 +292,13 @@
 
     <p>NO2 is not merely a regulatory metric. It is a respiratory irritant that inflames the airways, reduces lung function, and increases susceptibility to respiratory infections. Long-term exposure is associated with increased risk of cardiovascular disease, asthma, and premature death. In Greater London in 2019, between 3,600 and 4,100 deaths per year were estimated to be associated with exposure to fine particulate matter and nitrogen dioxide combined.</p>
 
-    <p>The UK legal annual mean limit of 40 µg/m³ was set in 2000, based on World Health Organisation guidelines at the time. Stage 1 mean at Marylebone Road was 87.21 µg/m³ &mdash; more than double the legal limit. Stage 4 mean is 31.78 µg/m³ &mdash; the first stage to fall below the legal limit. That is a significant milestone for a site that has been in breach of legal air quality standards for decades.</p>
+    <p>The UK legal annual mean limit of 40 &micro;g/m&sup3; was set in 2000, based on World Health Organisation guidelines at the time. Stage 1 mean at Marylebone Road was 87.21 &micro;g/m&sup3; &mdash; more than double the legal limit. Stage 4 mean is 31.78 &micro;g/m&sup3; &mdash; the first stage to fall below the legal limit. That is a significant milestone for a site that has been in breach of legal air quality standards for decades.</p>
 
-    <p>However the WHO revised its guidelines in 2021, tightening the annual mean NO2 guideline from 40 µg/m³ to just <strong>10 µg/m³</strong> &mdash; reflecting accumulated evidence that health effects occur at much lower concentrations than previously thought. The Stage 4 mean of 31.78 µg/m³ is still more than three times the current WHO guideline. The legal limit has been met. The health standard has not.</p>
+    <p>However the WHO revised its guidelines in 2021, tightening the annual mean NO2 guideline from 40 &micro;g/m&sup3; to just <strong>10 &micro;g/m&sup3;</strong> &mdash; reflecting accumulated evidence that health effects occur at much lower concentrations than previously thought. The Stage 4 mean of 31.78 &micro;g/m&sup3; is still more than three times the current WHO guideline. The legal limit has been met. The health standard has not.</p>
 
     <div class="callout-box">
         <h3>&#127775; How was the legal limit set?</h3>
-        <p>The UK legal annual mean limit of 40 µg/m³ derives from the EU Air Quality Directive (1999/30/EC), which was based on WHO guidelines as they stood in the late 1990s. The limit was adopted into UK law and has not been updated since, despite the WHO revising its guideline downward to 10 µg/m³ in 2021. This means the UK legal limit is now four times higher than the level the WHO considers safe based on current evidence. Meeting the legal standard &mdash; as Marylebone Road's Stage 4 mean now does &mdash; is a genuine achievement. It is not the same as meeting the health standard.</p>
+        <p>The UK legal annual mean limit of 40 &micro;g/m&sup3; derives from the EU Air Quality Directive (1999/30/EC), which was based on WHO guidelines as they stood in the late 1990s. The limit was adopted into UK law and has not been updated since, despite the WHO revising its guideline downward to 10 &micro;g/m&sup3; in 2021. This means the UK legal limit is now four times higher than the level the WHO considers safe based on current evidence. Meeting the legal standard &mdash; as Marylebone Road&rsquo;s Stage 4 mean now does &mdash; is a genuine achievement. It is not the same as meeting the health standard.</p>
     </div>
 
     <hr>
@@ -310,13 +317,13 @@
 
     <h2>Three charts, three perspectives on the same data</h2>
 
-    <p>The Bootstrap CUSUM step-change analysis is the primary tool in this article — but the same Marylebone Road dataset produces three different and complementary perspectives when viewed through different chart types. This mirrors the theme explored in the <a href="three-charts-three-stories.html">Three Charts article</a> elsewhere on this site.</p>
+    <p>The Bootstrap CUSUM step-change analysis is the primary tool in this article &mdash; but the same Marylebone Road dataset produces three different and complementary perspectives when viewed through different chart types. This mirrors the theme explored in the <a href="three-charts-three-stories.html">Three Charts article</a> elsewhere on this site.</p>
 
     <h3>The Run Chart: confirming the shift below the median</h3>
 
     <figure class="chart-figure">
         <img src="images/ulez-chart3-runchart.png" alt="Marylebone Road NO2 Run Chart 2015-2026">
-        <figcaption>Run Chart showing sustained shifts above and below the overall median (48.5 µg/m³). Red dots indicate 6 or more consecutive months above the median &mdash; the pre-2020 baseline. Blue dots indicate 6 or more consecutive months below the median &mdash; the post-COVID sustained improvement. The run chart confirms the Bootstrap CUSUM finding visually without any statistical modelling.</figcaption>
+        <figcaption>Run Chart showing sustained shifts above and below the overall median (48.5 &micro;g/m&sup3;). Red dots indicate 6 or more consecutive months above the median &mdash; the pre-2020 baseline. Blue dots indicate 6 or more consecutive months below the median &mdash; the post-COVID sustained improvement. The run chart confirms the Bootstrap CUSUM finding visually without any statistical modelling.</figcaption>
     </figure>
 
     <p>The run chart is the simplest of the three. It plots each monthly reading against the overall median and flags runs of 6 or more consecutive points on the same side &mdash; a signal that the process has shifted. The sustained red run pre-2020 and the sustained blue run post-2020 visually confirm what the Bootstrap CUSUM found statistically: the process shifted structurally around 2020 and has not returned.</p>
@@ -325,10 +332,10 @@
 
     <figure class="chart-figure">
         <img src="images/ulez-chart4-xmr.png" alt="Marylebone Road NO2 X-mR Control Chart 2015-2026">
-        <figcaption>Shewhart X-mR control chart. Control limits (UNPL 73.9, LNPL 40.8 µg/m³) are calculated from the overall process mean across all 134 observations. The upper and lower charts show individual values and moving ranges respectively. Most pre-2020 readings breach the upper natural process limit &mdash; confirming those observations are not common cause variation around the overall mean but a structurally different process.</figcaption>
+        <figcaption>Shewhart X-mR control chart. Control limits (UNPL 73.9, LNPL 40.8 &micro;g/m&sup3;) are calculated from the overall process mean across all 134 observations. The upper and lower charts show individual values and moving ranges respectively. Most pre-2020 readings breach the upper natural process limit &mdash; confirming those observations are not common cause variation around the overall mean but a structurally different process.</figcaption>
     </figure>
 
-    <p>The X-mR chart applies a single set of control limits calculated from the overall mean of all 134 observations. The result reveals why a single process mean is inappropriate for this data: nearly all pre-2020 readings breach the upper natural process limit (73.9 µg/m³), and many post-2020 readings approach the lower limit (40.8 µg/m³). This is not a process in statistical control &mdash; it is a process that has changed fundamentally. The X-mR chart signals that something is wrong with treating this as a single stable process. The Bootstrap CUSUM answers the follow-up question: when did it change, by how much, and how confident are we?</p>
+    <p>The X-mR chart applies a single set of control limits calculated from the overall mean of all 134 observations. The result reveals why a single process mean is inappropriate for this data: nearly all pre-2020 readings breach the upper natural process limit (73.9 &micro;g/m&sup3;), and many post-2020 readings approach the lower limit (40.8 &micro;g/m&sup3;). This is not a process in statistical control &mdash; it is a process that has changed fundamentally. The X-mR chart signals that something is wrong with treating this as a single stable process. The Bootstrap CUSUM answers the follow-up question: when did it change, by how much, and how confident are we?</p>
 
     <h3>The Bootstrap CUSUM Step Change Analysis: dating the changes precisely</h3>
 
@@ -353,7 +360,7 @@
             <tbody>
                 <tr>
                     <td><code>ulez-no2-monthly.csv</code></td>
-                    <td>Marylebone Road monthly mean NO2 (µg/m³), Apr 2015&ndash;May 2026, blank days removed</td>
+                    <td>Marylebone Road monthly mean NO2 (&micro;g/m&sup3;), Apr 2015&ndash;May 2026, blank days removed</td>
                     <td>134</td>
                     <td><a href="https://stepchangeanalysis.com/ulez-no2-monthly.csv" download="ulez-no2-monthly.csv">&#8675; Download</a></td>
                 </tr>
@@ -361,7 +368,7 @@
         </table>
     </div>
 
-    <p class="note">&#128202; <strong>Data note:</strong> Marylebone Road (site MY1), Defra AURN Automatic London Network, daily mean NO2 aggregated to monthly means, April 2015&ndash;May 2026, N=134. Blank monitoring days removed before aggregation. Source: <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a>. WHO annual mean guideline: 10 µg/m³. UK legal limit: 40 µg/m³.</p>
+    <p class="note">&#128202; <strong>Data note:</strong> Marylebone Road (site MY1), Defra AURN Automatic London Network, daily mean NO2 aggregated to monthly means, April 2015&ndash;May 2026, N=134. Blank monitoring days removed before aggregation. Source: <a href="https://uk-air.defra.gov.uk/data/data_selector_service" target="_blank">uk-air.defra.gov.uk/data/data_selector_service</a>. WHO annual mean guideline: 10 &micro;g/m&sup3;. UK legal limit: 40 &micro;g/m&sup3;.</p>
 
     <div class="cta-box">
         <h2>Reproduce this analysis on your own data</h2>
@@ -371,7 +378,7 @@
 
     <div class="related-box">
         <div class="related-tag">Related Article</div>
-        <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E Performance 2010&ndash;2026</a></h3>
+        <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E and the Promise That Wasn&rsquo;t Kept</a></h3>
         <p>The same Bootstrap CUSUM methodology applied to NHS A&amp;E monthly data &mdash; four structural stages of decline, no policy intervention detectable as an improvement.</p>
         <a href="why-nothing-has-worked-nhs-ae-performance.html" class="btn">Read the article &rarr;</a>
     </div>
@@ -388,6 +395,7 @@
         <p style="margin-top:8px;"><strong>GLA one-year report:</strong> Transport for London / GLA, <em>London-wide ULEZ One Year Report</em>, March 2025. <a href="https://www.london.gov.uk/programmes-strategies/environment-and-climate-change/environment-and-climate-change-publications/london-wide-ultra-low-emission-zone-one-year-report" target="_blank">london.gov.uk</a></p>
         <p style="margin-top:8px;"><strong>Imperial College study:</strong> Dajnak et al., &ldquo;London pollution has improved with evidence for small initial ULEZ effect.&rdquo; <em>Environmental Research Letters</em>, 2021. <a href="https://imperial.ac.uk/news/231894/london-pollution-improved-with-evidence-small/" target="_blank">imperial.ac.uk</a></p>
         <p style="margin-top:8px;"><strong>GLA Air Quality Report:</strong> Greater London Authority, <em>Air Quality in London 2016&ndash;2024</em>, March 2024. <a href="https://www.london.gov.uk/media/105046/download" target="_blank">london.gov.uk</a></p>
+        <p style="margin-top:8px;"><strong>Birmingham ULEZ study:</strong> Tong C. et al., &ldquo;Further improvement in London&rsquo;s air quality demands more than the Ultra Low Emission Zone policy.&rdquo; <em>npj Clean Air</em>, October 2025. <a href="https://www.nature.com/articles/s44407-025-00030-9" target="_blank">doi:10.1038/s44407-025-00030-9</a></p>
         <p style="margin-top:8px;"><strong>Method:</strong> Bootstrap CUSUM step-change analysis. Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
         <p style="margin-top:8px;"><strong>Analysis tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded.</p>
         <p style="margin-top:16px; color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; May 2026</p>
