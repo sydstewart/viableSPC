@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grid Fixed Itself. Transport Didn't. What UK Carbon Data Actually Shows — StepChangeAnalysis.com</title>
+    <meta name="description" content="The UK cut greenhouse gas emissions 53% since 1990. Bootstrap CUSUM on 35 years of data shows three different causes — and domestic transport, 30% of all emissions, shows no statistically significant structural change at 95% confidence across 34 years of climate policy.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:  #002d5b;
+            --brand-mid:   #0056b3;
+            --brand-light: #e9f2ff;
+            --text:        #1e293b;
+            --muted:       #64748b;
+            --border:      #e2e8f0;
+            --bg:          #f8f9fa;
+            --green:       #198754;
+            --orange:      #e67e22;
+            --red:         #c0392b;
+            --teal:        #0e7490;
+            --slate:       #475569;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        .article-wrap { max-width: 820px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .article-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+        h1 { font-size: clamp(1.7em, 4vw, 2.5em); line-height: 1.2; color: var(--brand-blue); margin-bottom: 16px; font-weight: bold; }
+        .article-subtitle { font-size: 1.1em; color: var(--muted); font-style: italic; margin-bottom: 24px; border-left: 4px solid var(--teal); padding-left: 16px; line-height: 1.6; }
+        .article-meta { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
+        h2 { font-size: 1.35em; color: var(--brand-blue); margin: 40px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.1em; color: var(--brand-blue); margin: 28px 0 10px; font-style: italic; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        ul, ol { margin: 0 0 1.2em 1.5em; }
+        li { margin-bottom: 0.5em; font-size: 1.0em; }
+        strong { color: var(--brand-blue); }
+        .chart-figure { margin: 28px 0 32px; }
+        .chart-figure img { width: 100%; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); display: block; }
+        .chart-figure figcaption { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-top: 10px; font-style: italic; padding: 0 4px; }
+        .callout-box { background: #f0fdfa; border: 2px solid var(--teal); border-radius: 8px; padding: 20px 24px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .callout-box h3 { color: var(--teal); margin: 0 0 10px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
+        .callout-box p { font-size: 0.95em; color: #134e4a; margin-bottom: 10px; }
+        .callout-box p:last-child { margin-bottom: 0; }
+        .dark-box { background: #1e293b; border-radius: 8px; padding: 24px 28px; margin: 28px 0; color: white; }
+        .dark-box h3 { color: #93c5fd; margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; font-family: system-ui, sans-serif; }
+        .dark-box p { font-size: 0.97em; color: #e2e8f0; margin-bottom: 10px; line-height: 1.7; }
+        .dark-box p:last-child { margin-bottom: 0; }
+        .dark-box strong { color: #ffffff; }
+        .dark-box .quote { font-size: 1.1em; font-style: italic; color: #bfdbfe; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 14px 0; }
+        .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; }
+        .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
+        .numbers-box th { background: var(--brand-blue); color: white; padding: 8px 12px; text-align: left; }
+        .numbers-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .numbers-box tr:last-child td { border-bottom: none; }
+        .stage-badge { display: inline-block; background: var(--teal); color: white; font-size: 0.75em; font-weight: bold; padding: 2px 8px; border-radius: 3px; font-family: system-ui, sans-serif; }
+        .stage-badge.green { background: var(--green); }
+        .stage-badge.orange { background: var(--orange); }
+        .stage-badge.red { background: var(--red); }
+        .alert-green { background: #f0fdf4; border-left: 5px solid var(--green); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #14532d; }
+        .alert-green strong { color: var(--green); display: block; margin-bottom: 6px; }
+        .alert-red { background: #fff5f5; border-left: 5px solid var(--red); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #7f1d1d; }
+        .alert-red strong { color: var(--red); display: block; margin-bottom: 6px; }
+        .alert-orange { background: #fff8f0; border-left: 5px solid var(--orange); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #4a3000; }
+        .alert-orange strong { color: var(--orange); display: block; margin-bottom: 6px; }
+        hr { border: none; border-top: 3px solid var(--brand-light); margin: 48px 0; }
+        .cta-box { background: var(--brand-blue); border-radius: 12px; padding: 32px; text-align: center; margin: 48px 0 32px; color: white; }
+        .cta-box h2 { color: white; border: none; margin-top: 0; font-size: 1.4em; }
+        .cta-box p { color: rgba(255,255,255,0.88); font-family: system-ui, sans-serif; font-size: 0.95em; margin-bottom: 20px; }
+        .cta-btn { display: inline-block; background: white; color: var(--brand-blue); font-weight: bold; font-size: 1em; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-family: system-ui, sans-serif; }
+        .cta-btn:hover { background: var(--brand-light); }
+        .related-box { background: #f0f4f8; border: 1px solid #cce5ff; border-radius: 8px; padding: 20px 24px; margin: 20px 0; font-family: system-ui, sans-serif; }
+        .related-box .related-tag { font-size: 0.8em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 10px; }
+        .related-box h3 { font-style: normal; margin-bottom: 6px; }
+        .related-box h3 a { color: var(--brand-blue); text-decoration: none; font-size: 1.0em; }
+        .related-box h3 a:hover { text-decoration: underline; }
+        .related-box p { color: var(--muted); font-size: 0.9em; margin: 0 0 12px; }
+        .related-box a.btn { display: inline-block; background: var(--brand-mid); color: white; padding: 8px 18px; border-radius: 6px; font-size: 0.88em; font-weight: 700; text-decoration: none; }
+        .related-box a.btn:hover { background: #004494; }
+        .article-footer { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .article-footer a { color: var(--brand-mid); }
+        .note { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); font-style: italic; background: #f8f9fa; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin: 16px 0; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px; margin-bottom: 16px; }
+        .summary-card { background: white; border-radius: 8px; padding: 16px; font-family: system-ui, sans-serif; }
+        .summary-card-title { font-weight: 700; color: var(--brand-blue); font-size: 0.95em; margin-bottom: 6px; }
+        .summary-card-body { font-size: 0.9em; color: var(--text); line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the Free Tool</a>
+</header>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Articles &rsaquo; Environment &amp; Policy</div>
+    <div class="article-flag">&#127807; Environment &amp; Policy &middot; UK Carbon Emissions Analysis</div>
+
+    <h1>The Grid Fixed Itself. Transport Didn&rsquo;t.</h1>
+    <p class="article-subtitle">In his 2011 Budget, George Osborne announced the carbon price floor. It was not presented as a historic climate intervention &mdash; it was a Treasury revenue mechanism, taking effect April 2013. In the 23 years before it, no climate policy had produced a detectable structural change in UK electricity supply emissions. In the 11 years since, electricity supply emissions fell 55.4% at 99.8% statistical confidence. Bootstrap CUSUM on 35 years of territorial data finds three structural causes for the UK&rsquo;s 53% emissions reduction &mdash; and domestic transport, 30% of all emissions, shows no statistically significant structural change at 95% confidence across 34 years. But the policies that may transform transport are still within the lag window. The CUSUM cannot yet say they have failed.</p>
+
+    <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; May 2026 &nbsp;&middot;&nbsp; Data: DESNZ UK Territorial GHG Emissions 1990&ndash;2024 &amp; DEFRA Consumption Emissions 1996&ndash;2022</div>
+
+    <!-- Summary box -->
+    <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.78em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="the-grid-fixed-itself-summary.pdf" download style="color:var(--brand-mid);">&#8675; Download Executive Summary PDF</a></div>
+        <div class="summary-grid">
+            <div class="summary-card" style="border-left:4px solid var(--teal);">
+                <div class="summary-card-title">The headline number</div>
+                <div class="summary-card-body">53% reduction in UK territorial GHG emissions since 1990. Bootstrap CUSUM finds four structural stages with three different causes — only the most recent is primarily climate policy.</div>
+            </div>
+            <div class="summary-card" style="border-left:4px solid var(--green);">
+                <div class="summary-card-title">Electricity: the policy that worked</div>
+                <div class="summary-card-body">One change point — 2013 — at 99.8% confidence. Emissions fell 55.4% in 11 years. 23 years of minimal structural progress, then the carbon price floor changed the economics of coal generation overnight.</div>
+            </div>
+            <div class="summary-card" style="border-left:4px solid var(--red);">
+                <div class="summary-card-title">Transport: no structural change yet</div>
+                <div class="summary-card-body">No structural change at 95% confidence across 34 years. All four stage boundaries below 95%. Population grew 19%. But the EV-era policies are still within the lag window — the CUSUM cannot yet say they have failed.</div>
+            </div>
+            <div class="summary-card" style="border-left:4px solid var(--orange);">
+                <div class="summary-card-title">The consumption comparison</div>
+                <div class="summary-card-body">Consumption-based emissions show the same 2008 and 2015 change points as territorial — but not the 1998 change. That early territorial reduction has no consumption equivalent: it reflects production shifts, not genuine decarbonisation.</div>
+            </div>
+        </div>
+        <div style="font-size:0.85em;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">
+            <strong style="color:var(--text);">Data:</strong> DESNZ Final UK GHG Emissions 1990&ndash;2024 &nbsp;&middot;&nbsp; DEFRA UK Carbon Footprint 1996&ndash;2022 &nbsp;&middot;&nbsp; <strong style="color:var(--text);">Method:</strong> Bootstrap CUSUM, N=35 territorial, N=27 consumption, Loops=5000
+        </div>
+    </div>
+
+    <h2>The policy that worked &mdash; and why timing matters</h2>
+
+    <p>In his March 2011 Budget speech, George Osborne announced the carbon price floor &mdash; a minimum price for carbon in electricity generation, taking effect April 2013. It was not primarily marketed as a climate policy. Environmental groups gave it a cautious welcome. The electricity industry objected. Osborne called himself a low-tax Conservative. The mechanism was principally a revenue instrument designed to support the Emissions Trading Scheme.</p>
+
+    <p>Bootstrap CUSUM on UK electricity supply emissions 1990&ndash;2024 finds that nothing before April 2013 produced a detectable structural change across 23 years of climate policy. In the decade after, electricity supply emissions fell 55.4% at 99.8% confidence &mdash; the strongest statistical signal in the entire dataset. The most effective climate policy in 35 years of UK emissions data was introduced by a Chancellor who wasn&rsquo;t primarily thinking about climate. It worked because it changed the economics of an entire system rather than asking individuals to change their behaviour.</p>
+
+    <p>Before drawing any conclusions from Bootstrap CUSUM applied to emissions data, one principle must be stated clearly: <strong>there is always a lag between a policy taking effect and any detectable outcome in the data.</strong> For the carbon price floor, the lag was short &mdash; roughly two years from announcement to structural change &mdash; because the mechanism worked through economics. Coal plant operators didn&rsquo;t need new equipment or new habits. The price signal changed and closures followed within months. But for policies that work through behaviour, infrastructure, or fleet turnover &mdash; the kind that dominate transport policy &mdash; the lag is measured in years or decades. A policy announced in 2020 should not be expected to produce a detectable Bootstrap CUSUM change point until the mid-to-late 2020s at the earliest.</p>
+
+    <p>This caveat applies throughout this article. The transport null result &mdash; no structural change at 95% confidence across 34 years &mdash; reflects the pre-EV policy era. The policies that may genuinely transform transport &mdash; the 2030 petrol and diesel ban, EV mandates, charging infrastructure investment &mdash; are still within the lag window. The CUSUM cannot yet say they have failed. What it can say is that nothing before them has structurally moved the sector in 34 years of data.</p>
+
+    <hr>
+
+    <h2>The government&rsquo;s claim and the CUSUM question</h2>
+
+    <p>The UK government&rsquo;s official position is straightforward: territorial greenhouse gas emissions have fallen 53% since 1990, demonstrating that climate policy works and that the UK is a world leader in decarbonisation. The trajectory is presented as evidence of steady, broad-based progress across the economy over three and a half decades.</p>
+
+    <p>Bootstrap CUSUM asks a different question. Not <em>how much</em> have emissions fallen, but <em>when</em> did they structurally change &mdash; and is the timing consistent with the causes being claimed? A policy that produces a genuine structural change will show a detectable change point dated to around the time of implementation, allowing for the expected lag. A change driven by economic shock, fuel switching, or offshoring will show a change point dated to those events instead.</p>
+
+    <p>Applied to 35 years of DESNZ territorial emissions data, Bootstrap CUSUM identifies four structural stages with three different causes. Only the most recent stage change &mdash; dated to 2015 &mdash; is primarily attributable to climate policy. The preceding reductions were driven by energy market liberalisation and an economic catastrophe. And the largest remaining sector &mdash; domestic transport at 30% of all emissions &mdash; shows no statistically significant structural change at 95% confidence across the pre-EV policy era.</p>
+
+    <p class="note">&#128202; <strong>Data note:</strong> Analysis uses DESNZ Final UK Territorial Greenhouse Gas Emissions statistics, 1990&ndash;2024, N=35 annual observations. Sector data from Table 1.2. Consumption-based (footprint) emissions from DEFRA UK Carbon Footprint publication, 1996&ndash;2022, N=27. Bootstrap CUSUM, Loops=5000, Turn Length=5. <a href="https://www.gov.uk/government/statistics/final-uk-greenhouse-gas-emissions-statistics-1990-to-2024" target="_blank">gov.uk/government/statistics/final-uk-greenhouse-gas-emissions-statistics-1990-to-2024</a></p>
+
+    <hr>
+
+    <h2>Total emissions: four stages, three causes</h2>
+
+    <p>The chart below shows total UK territorial greenhouse gas emissions 1990&ndash;2024 with Bootstrap CUSUM at 90% confidence, 5000 loops. Four structural stages emerge.</p>
+
+    <figure class="chart-figure">
+        <img src="images/carbon-chart1-total-90.png" alt="Bootstrap CUSUM — UK total greenhouse gas emissions 1990-2024 — four stages at 90% confidence">
+        <figcaption>UK total territorial greenhouse gas emissions 1990&ndash;2024. Bootstrap CUSUM, 90% confidence, N=35, Loops=5000. Four structural stages. Stage boundaries at 1998, 2008, and 2015. The CUSUM line rises continuously from 1990 to approximately 2008 &mdash; emissions consistently above the overall mean &mdash; then falls continuously to 2024.</figcaption>
+    </figure>
+
+    <figure class="chart-figure">
+        <img src="images/carbon-chart2-total-99.png" alt="Bootstrap CUSUM — UK total greenhouse gas emissions 1990-2024 — two stages at 99.7% confidence">
+        <figcaption>The same data at 99.7% confidence: two stages only. The 1998 and 2015 boundaries do not survive at 3-sigma. Only the 2008 change point is beyond reasonable doubt at this confidence level &mdash; the financial crisis structural break dominates the series.</figcaption>
+    </figure>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Stage</th><th>Period</th><th>Mean MtCO2e</th><th>Change</th><th>Confidence</th><th>Primary cause</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><span class="stage-badge">1</span></td>
+                    <td>1990&ndash;1998</td>
+                    <td>762.96</td>
+                    <td>Baseline</td>
+                    <td>Baseline</td>
+                    <td>Post-war industrial baseline. Early 1990s recession produces a small dip but no structural break.</td>
+                </tr>
+                <tr>
+                    <td><span class="stage-badge orange">2</span></td>
+                    <td>1998&ndash;2008</td>
+                    <td>698.50</td>
+                    <td>&minus;8.4%</td>
+                    <td>95.46%</td>
+                    <td><strong>Dash for gas.</strong> Coal replaced by natural gas in power generation, driven by energy market liberalisation under privatised electricity markets. The Kyoto Protocol was signed in 1997 but this change point predates serious policy implementation. Energy economics, not climate policy.</td>
+                </tr>
+                <tr>
+                    <td><span class="stage-badge red">3</span></td>
+                    <td>2008&ndash;2015</td>
+                    <td>578.61</td>
+                    <td>&minus;17.2%</td>
+                    <td>93.88%</td>
+                    <td><strong>Global financial crisis.</strong> UK GDP fell 4.2% in 2008&ndash;09. Heavy industry contracted. Manufacturing output collapsed. The Climate Change Act received Royal Assent in November 2008 &mdash; but the CUSUM change point dates to the beginning of that year, before the Act passed. Economic shock, not legislation, is the primary driver of this stage.</td>
+                </tr>
+                <tr>
+                    <td><span class="stage-badge green">4</span></td>
+                    <td>2015&ndash;2024</td>
+                    <td>436.83</td>
+                    <td>&minus;24.5%</td>
+                    <td>93.88%</td>
+                    <td><strong>Climate policy working.</strong> The coal phase-out accelerated from 2015 as carbon costs made coal generation uneconomical. Offshore wind scaled dramatically. The Paris Agreement was signed in 2015. The last coal power station closed September 2024. This is the first stage change that is primarily attributable to climate policy &mdash; but it took 25 years from 1990 to get here.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert-orange">
+        <strong>The honest reading of the 53% headline:</strong>
+        The UK's total territorial reduction from Stage 1 mean to Stage 4 mean is 42.8% (762.96 to 436.83 MtCO2e). Of that reduction: approximately 20% came from energy market liberalisation (Stage 1&rarr;2, 1998), approximately 40% from the global financial crisis shock (Stage 2&rarr;3, 2008), and approximately 57% from genuine climate policy effects (Stage 3&rarr;4, 2015). The majority of the structural reduction is in the most recent stage &mdash; but it arrives after 25 years, not as the product of progressive policy since 1990.
+    </div>
+
+    <hr>
+
+    <h2>Electricity supply: 23 years of stagnation, then one policy changed everything</h2>
+
+    <p>The electricity supply sector tells the most striking story in the dataset. Isolated from the aggregate, Bootstrap CUSUM finds not four stages but two &mdash; and the contrast between them is extraordinary.</p>
+
+    <figure class="chart-figure">
+        <img src="images/carbon-chart3-electricity.png" alt="Bootstrap CUSUM — UK electricity supply emissions 1990-2024 — two stages at 90% confidence">
+        <figcaption>UK electricity supply sector emissions 1990&ndash;2024. Bootstrap CUSUM, 90% confidence, N=35, Loops=10,000. Two stages: a stable baseline 1990&ndash;2013 (mean 167.53 MtCO2e) and a structural collapse from 2013 (mean 74.76 MtCO2e). Change point 2013 at 99.81% confidence (10,000 loops) &mdash; approximately 99.8% across multiple runs &mdash; the strongest signal in the entire dataset. Near 3-sigma on annual data.</figcaption>
+    </figure>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Stage</th><th>Period</th><th>Mean MtCO2e</th><th>Change</th><th>Confidence</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><span class="stage-badge">1</span></td>
+                    <td>1990&ndash;2013</td>
+                    <td>167.53</td>
+                    <td>Baseline</td>
+                    <td>Baseline</td>
+                </tr>
+                <tr>
+                    <td><span class="stage-badge green">2</span></td>
+                    <td>2013&ndash;2024</td>
+                    <td>74.76</td>
+                    <td>&minus;55.4%</td>
+                    <td><strong>99.8%</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert-green">
+        <strong>The electricity finding:</strong>
+        Electricity supply emissions were essentially flat for 23 years — from 1990 to 2013 — despite the Kyoto Protocol (1997), the Renewables Obligation (2002), the Climate Change Act (2008), and everything else. Then in 2013 a structural break occurred at 99.8% confidence and emissions fell 55.4% in 11 years. This is what a genuine policy-driven system change looks like in a Bootstrap CUSUM: one sharp structural break at near-3-sigma confidence, not gradual drift. The mechanism was the carbon price floor, introduced April 2013, which made coal-fired electricity generation uneconomical almost overnight.
+    </div>
+
+    <h3>The renewables that were waiting for the signal</h3>
+
+    <p>The wind turbines and solar installations now visible across the UK were building capacity throughout the 2000s under the Renewables Obligation (2002). But they were operating <em>alongside</em> coal rather than replacing it &mdash; aggregate electricity emissions remained stubbornly flat as renewable generation grew. The carbon price floor triggered the coal closures that allowed renewables to take their place. The Stage 2 change point at 2013 captures both effects simultaneously: the exit of coal and the scaling of renewables that had been building for a decade. Neither alone would have produced the structural break the CUSUM detects. The renewables were necessary but not sufficient. The price signal was the trigger that allowed a decade of renewable investment to translate into a structural emissions reduction.</p>
+
+    <div class="callout-box">
+        <h3>&#127808; A lucky unintended consequence &mdash; and what systems thinking says about it</h3>
+        <p>The carbon price floor was not designed to close coal power stations. It was a Treasury revenue mechanism intended to support investment certainty in the carbon market and top up the ailing EU Emissions Trading Scheme price. Osborne&rsquo;s framing was fiscal, not environmental. The coal closures were, in a meaningful sense, an unintended consequence.</p>
+        <p style="margin-top:10px;">But it was a <em>positive</em> unintended consequence &mdash; and systems thinking explains why. Most well-intentioned policy interventions produce negative unintended consequences through two mechanisms Peter Senge identifies in <em>The Fifth Discipline</em>:</p>
+        <p style="margin-top:10px;"><strong>Time delays</strong> &mdash; a significant lag between an action and its full impact makes it hard to link negative outcomes to the original fix. The carbon price floor had the opposite problem: its time delay was <em>shorter</em> than expected, because the price signal worked through existing market mechanisms that responded within months.</p>
+        <p style="margin-top:10px;"><strong>Policy resistance</strong> &mdash; well-intentioned solutions are often absorbed by the system, triggering compensating feedback loops that defeat the solution. The classic example is building more roads to reduce congestion: more roads induce more traffic, congestion returns. The carbon price floor avoided this because it worked <em>with</em> the market feedback loop rather than against it. It didn&rsquo;t try to suppress behaviour &mdash; it changed the price signal that generators were already responding to. The compensating feedback loop ran in the desired direction: coal became expensive, gas and renewables filled the gap, further reducing the cost advantage of fossil fuel generation.</p>
+        <p style="margin-top:10px;">Three coincidental conditions made the positive unintended consequence possible. The EU ETS price had collapsed &mdash; making the CPS top-up large enough to genuinely bite. US shale gas had reduced gas prices &mdash; making gas immediately competitive with coal once carbon costs were added. And offshore wind had scaled to the point where it could fill capacity gaps rapidly. If any of these had been different &mdash; expensive gas, a recovered EU ETS, insufficient renewable capacity &mdash; the carbon price floor might have raised electricity prices without triggering coal closures. The unintended consequence required the right system conditions to already be present. The policy hit the system at the right moment, with the right feedback loops in place, to produce an amplifying rather than a compensating response.</p>
+        <p style="margin-top:10px;">Transport policy faces the opposite problem. Fuel duty &mdash; the equivalent mechanism for transport &mdash; raises the cost of driving but does not change the underlying system that makes driving necessary: inadequate public transport, housing distant from employment, road infrastructure designed for cars. The system absorbs the intervention through compensating feedback loops: people economise elsewhere, buy more fuel-efficient vehicles, but keep driving. The Bootstrap CUSUM shows the result &mdash; 34 years of marginal signals below 95% confidence. The feedback loops are compensating, not amplifying. Until the system itself changes &mdash; electrified fleet, ubiquitous charging, genuine modal alternatives &mdash; transport policy will continue to face the resistance the electricity sector escaped in 2013.</p>
+    </div>
+
+    <p>The carbon price floor was introduced in April 2013 &mdash; a minimum price for carbon in the electricity generation sector that immediately changed the economics of coal. Coal plants that had been marginally profitable became structurally unviable. Closures accelerated. Gas and renewables filled the gap. The Stage 2 mean of 74.76 MtCO2e represents an 11-year average that includes values falling all the way to approximately 38 MtCO2e in 2024 &mdash; an 82% reduction from the 1990 starting point of 204 MtCO2e.</p>
+
+    <p>The important lesson is not just that the policy worked &mdash; it is that it worked because it changed the economics of the system rather than the behaviour of individuals. No one was asked to use less electricity. No awareness campaigns were run. The fuel source changed because the price signal made one option uneconomical. This is Layer 1 system change: the mechanism was redesigned so the desired outcome became the economically rational choice. Every electricity generator in the country responded to the same signal simultaneously.</p>
+
+    <p>The 23 years of near-zero structural progress from 1990 to 2013 is equally important. The Kyoto targets, the Renewables Obligation, the Climate Change Act &mdash; none of these produced a detectable structural change point in electricity supply emissions. The system did not change until the economics changed.</p>
+
+    <hr>
+
+    <h2>Domestic transport: 34 years, no structural change at 95% confidence</h2>
+
+    <p>Domestic transport is now the largest single emitting sector in the UK, responsible for approximately 30% of all territorial emissions in 2024. It is also the sector most directly connected to the daily lives of every UK resident. Bootstrap CUSUM applied to domestic transport emissions tells a very different story from electricity.</p>
+
+    <figure class="chart-figure">
+        <img src="images/carbon-chart4-transport.png" alt="Bootstrap CUSUM — UK domestic transport emissions 1990-2024 — four stages at 90% confidence">
+        <figcaption>UK domestic transport emissions 1990&ndash;2024. Bootstrap CUSUM, 90% confidence, N=35, Loops=10,000. Four stages detected at 90% &mdash; but all four stage boundaries fall below 95% confidence (Stage 2: 93.24%, Stages 3&ndash;4: 91.85%). The process oscillates within a narrow band across 34 years. Net absolute reduction from baseline to most recent stage: 10.6%.</figcaption>
+    </figure>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Stage</th><th>Period</th><th>Mean MtCO2e</th><th>Change</th><th>Confidence</th>
+            </tr></thead>
+            <tbody>
+                <tr><td><span class="stage-badge">1</span></td><td>1990&ndash;1995</td><td>121.70</td><td>Baseline</td><td>Baseline</td></tr>
+                <tr><td><span class="stage-badge orange">2</span></td><td>1995&ndash;2009</td><td>127.63</td><td>+4.9%</td><td>93.24%</td></tr>
+                <tr><td><span class="stage-badge orange">3</span></td><td>2009&ndash;2019</td><td>121.29</td><td>&minus;5.0%</td><td>91.85%</td></tr>
+                <tr><td><span class="stage-badge orange">4</span></td><td>2019&ndash;2024</td><td>108.42</td><td>&minus;10.6%</td><td>91.85%</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert-red">
+        <strong>The transport finding:</strong>
+        At 95% confidence — the standard statistical threshold — domestic transport emissions show no structural change across 34 years. All four stage boundaries identified at 90% confidence fall below the 95% threshold. Stage 4 (2019&ndash;2024) is the most recent and most promising signal, but its start date coincides with COVID-19 lockdowns, which collapsed transport activity in 2020. The Stage 4 reduction may be partly a COVID artefact rather than a genuine policy signal. The UK population grew 19% from 1990 to 2024. Net absolute transport emissions fell 10.6%. Per capita transport emissions have fallen &mdash; but the sector as a whole has not structurally decarbonised.
+    </div>
+
+    <div class="callout-box">
+        <h3>&#9203; What the CUSUM cannot yet tell us about transport</h3>
+        <p>The 34-year null result covers the pre-EV policy era. The policies with genuine potential to transform transport structurally &mdash; the original 2030 petrol and diesel sales ban (announced 2020), mandatory EV charging infrastructure, ZEV mandates for manufacturers &mdash; are all within the expected lag window.</p>
+        <p style="margin-top:10px;">Fleet turnover takes 10&ndash;15 years. A policy announced in 2020 changes new vehicle sales immediately but only begins to affect the aggregate emissions of 35 million vehicles as older petrol and diesel cars are retired. The Bootstrap CUSUM change point for a genuine transport structural break &mdash; if the EV transition produces one &mdash; should appear somewhere in the late 2020s to mid-2030s.</p>
+        <p style="margin-top:10px;">The carbon price floor produced a CUSUM change point within approximately two years of taking effect because it acted on a centralised system. Transport policy acts on a distributed system of 35 million individual decisions with a 15-year replacement cycle. The lag is structural, not a sign of policy failure. Running Bootstrap CUSUM on transport emissions annually from 2025 onward will be the objective test of whether the EV transition is producing a genuine structural break &mdash; or whether, like every previous transport policy, it is producing marginal signals below 95% confidence.</p>
+    </div>
+
+    <h3>Why EVs are not yet visible in the data &mdash; and when they will be</h3>
+
+    <p>A reasonable question: the UK has approximately 1.2 million fully electric vehicles on the road as of 2024. They produce zero tailpipe emissions. Why doesn&rsquo;t the Bootstrap CUSUM show this?</p>
+
+    <p>The arithmetic answers it precisely. 1.2 million EVs out of 35 million total licensed vehicles is approximately 3.5% of the fleet. If each EV replaces a petrol car averaging 120g CO2/km driven 10,000km per year, the annual saving is approximately 1.2 million &times; 1.2 tonnes = <strong>1.44 MtCO2e per year</strong>. Against a sector total of approximately 108 MtCO2e, that is 1.3% of sector emissions &mdash; well below the statistical noise floor of the Bootstrap CUSUM with this sample size and SD of 7.71.</p>
+
+    <p>To produce a detectable structural break, the EV fleet needs to reach roughly 12&ndash;15 million vehicles &mdash; approximately one-third to one-half of the total fleet &mdash; and sustain that level long enough to shift the annual mean by 15&ndash;20 MtCO2e. At current EV registration rates of approximately 300,000&ndash;400,000 new vehicles per year, that fleet share arrives somewhere around <strong>2034&ndash;2038</strong>. That is the window when a Bootstrap CUSUM change point should appear in transport emissions &mdash; if the EV transition proceeds at its current trajectory.</p>
+
+    <p>The Bootstrap CUSUM is not a verdict on EV policy. It is a clock. The electricity sector clock rang in 2013 &mdash; loudly, at 99.8% confidence &mdash; because the carbon price floor acted on a centralised system of 300 power stations. The transport clock will ring when the EV fleet reaches critical mass in a distributed system of 35 million vehicles. The interesting question is not whether it will ring, but whether the change point will be sharp &mdash; like electricity &mdash; or gradual. A sharp break would suggest a tipping point in fleet composition. A gradual drift would suggest the B1 compensating loop is still partially absorbing the transition through increased vehicle use, road freight growth, or population-driven demand increases.</p>
+
+    <h3>Why transport is structurally different from electricity</h3>
+
+    <p>The contrast between electricity and transport is not a failure of transport policy specifically. It reflects a fundamental difference in how the two systems can be changed.</p>
+
+    <p>Electricity generation is a centralised system. There are approximately 300 significant power stations in the UK. Changing the carbon price changes the economics for all 300 simultaneously. When coal becomes uneconomical, every coal plant closes. The change is systemic, rapid, and does not require any individual to change their behaviour. The CUSUM change point appears within a year of the policy mechanism changing.</p>
+
+    <p>Transport is a distributed system. There are approximately 35 million licensed vehicles in the UK, driven by 35 million individual decision-makers. Decarbonising transport requires changing the vehicle purchasing decisions of 35 million people over the replacement cycle of the existing fleet &mdash; typically 10&ndash;15 years. Road fuel duty, emission zones, vehicle excise duty bands &mdash; all of these are Layer 3 and 4 interventions in the hierarchy of controls. They apply pressure to individual decisions without changing the system that produces those decisions. The result is gradual, marginal change &mdash; visible at 90% confidence but not at 95%.</p>
+
+    <p>The Layer 1 equivalent for transport is full electrification of the vehicle fleet, combined with charging infrastructure that makes electric vehicles the default rational choice. That is decades away from completion. Until then, transport will continue to produce a Bootstrap CUSUM that looks like 34 years of marginal variation &mdash; because the system that produces transport emissions has not been fundamentally redesigned.</p>
+
+    <div class="dark-box">
+        <h3>&#128200; The Deming lens: system change vs individual change</h3>
+        <p class="quote">&ldquo;A bad system will beat a good person every time.&rdquo; &mdash; W. Edwards Deming</p>
+        <p><strong style="color:#93c5fd;">Electricity:</strong> The carbon price floor changed the system. No individual behaviour change was required. The CUSUM shows a structural break at 99.8% confidence within a year of the policy taking effect. This is what system-level change looks like.</p>
+        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Transport:</strong> Fuel duty, emission zones, and vehicle tax bands apply pressure to individual decisions within an unchanged system. 35 million vehicle owners make individual choices within a system designed around fossil fuel combustion. The CUSUM shows no structural change at 95% confidence across 34 years. This is what individual-level pressure without system change looks like.</p>
+        <p style="margin-top:10px;">The implication for transport decarbonisation policy is precise: the interventions that will produce a detectable Bootstrap CUSUM change point are those that change the system &mdash; the charging infrastructure that makes EVs the default, the planning policy that makes car dependency unnecessary, the public transport investment that makes driving the less convenient option. Interventions that require 35 million people to individually choose differently will continue to produce marginal signals below 95% confidence.</p>
+    </div>
+
+    <h3>Causal Loop Diagram: why R1 amplified and B1 compensated</h3>
+
+    <p>The contrast between electricity and transport can be mapped precisely as two causal loops. The carbon price floor triggered a reinforcing (amplifying) loop — R1 — where each stage accelerated the next with no compensating mechanism to absorb the change. Transport policy faces a balancing (compensating) loop — B1 — where efficiency improvements absorb the cost signal before it reaches driving behaviour. The three teal boxes show the enabling conditions that had to be present for R1 to run in the right direction.</p>
+
+    <figure class="chart-figure" style="background:var(--bg);border-radius:8px;padding:8px;">
+        <img src="images/carbon-cld.png" alt="Causal Loop Diagram — R1 reinforcing electricity loop vs B1 compensating transport loop">
+        <figcaption>Causal Loop Diagram. Left: R1 reinforcing loop &mdash; carbon price floor triggered coal closures, renewables filled the gap, further accelerating coal&rsquo;s exit. No compensating mechanism existed. Right: B1 balancing loop &mdash; transport cost signals are absorbed by vehicle efficiency improvements, leaving miles driven and aggregate emissions unchanged. Three teal enabling conditions (EU ETS collapse, cheap gas, renewable capacity) were necessary for R1 to produce the 2013 structural break. Source: Peter M. Senge, <em>The Fifth Discipline</em> (1990) &mdash; reinforcing and balancing loop framework.</figcaption>
+    </figure>
+
+    <hr>
+
+    <h2>The consumption comparison: what UK residents actually cause</h2>
+
+    <p>Territorial emissions measure what happens within the UK&rsquo;s borders. They do not capture the emissions embedded in goods the UK imports &mdash; steel made in China, electronics assembled in Taiwan, clothing manufactured in Bangladesh. As UK manufacturing declined, some of its emissions migrated to other countries&rsquo; territorial accounts while remaining in the UK&rsquo;s consumption footprint.</p>
+
+    <p>DEFRA publishes consumption-based emissions &mdash; GHG associated with UK residents&rsquo; consumption regardless of where the emissions occur. Running Bootstrap CUSUM on this series provides a test of whether the territorial reductions are genuine or partly an accounting effect of offshoring.</p>
+
+    <figure class="chart-figure">
+        <img src="images/carbon-chart5-consumption.png" alt="Bootstrap CUSUM — UK consumption-based GHG emissions 1996-2022 — three stages at 90% confidence">
+        <figcaption>UK consumption-based GHG emissions (GHG from UK produced goods and services consumed by UK residents), 1996&ndash;2022. Bootstrap CUSUM, 90% confidence, N=27, Loops=5000. Three structural stages &mdash; change points at 2008 and 2015. No equivalent of the 1998 territorial stage change. Both stage boundaries below 95% confidence.</figcaption>
+    </figure>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Stage</th><th>Period</th><th>Mean MtCO2e</th><th>Change</th><th>Confidence</th>
+            </tr></thead>
+            <tbody>
+                <tr><td><span class="stage-badge">1</span></td><td>1996&ndash;2008</td><td>368.62</td><td>Baseline</td><td>Baseline</td></tr>
+                <tr><td><span class="stage-badge orange">2</span></td><td>2008&ndash;2015</td><td>303.13</td><td>&minus;17.8%</td><td>93.48%</td></tr>
+                <tr><td><span class="stage-badge green">3</span></td><td>2015&ndash;2022</td><td>232.13</td><td>&minus;23.4%</td><td>93.48%</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout-box">
+        <h3>&#128200; What the consumption comparison reveals</h3>
+        <p>The consumption series shares the territorial change points at 2008 and 2015 &mdash; confirming those reductions are real on both measures, not offshoring artefacts. The 2008 financial crisis and the 2015 policy acceleration reduced both what the UK produces and what the UK consumes.</p>
+        <p style="margin-top:10px;">Crucially, the consumption series has <strong>no equivalent of the 1998 territorial stage change</strong>. That early &minus;8.4% territorial reduction &mdash; the dash-for-gas period &mdash; does not appear in the consumption data. UK residents continued consuming at the same level; what changed was where the electricity was generated and by what fuel. The 1998 territorial reduction is partly a production shift, not a consumption change. This is the offshoring/restructuring signal the territorial data alone cannot reveal.</p>
+        <p style="margin-top:10px;">The comparison also clarifies the honest scale of reduction. Territorial emissions fell from a Stage 1 mean of 763 MtCO2e to a Stage 4 mean of 437 MtCO2e. Consumption emissions fell from a Stage 1 mean of 369 MtCO2e to a Stage 3 mean of 232 MtCO2e &mdash; a &minus;37% reduction on a comparable basis. Both are real improvements. The 1998 territorial reduction that has no consumption equivalent is approximately 8 percentage points of the headline 53% figure.</p>
+    </div>
+
+    <hr>
+
+    <h2>Three series, one story</h2>
+
+    <p>Put the three Bootstrap CUSUM analyses together and a coherent narrative emerges &mdash; one that is both more encouraging and more challenging than the government&rsquo;s headline figure suggests.</p>
+
+    <p><strong>The encouraging part:</strong> Stage 4 of the total emissions series is real. The 2015 structural break at 93.88% confidence reflects genuine decarbonisation &mdash; coal leaving the electricity system, renewables scaling, efficiency improving. The electricity sector change point at 99.8% confidence is one of the strongest signals in any Bootstrap CUSUM analysis on this site. The carbon price floor worked. The Paris Agreement coincided with genuine structural change. Climate policy, when it changes the system rather than pressuring individual behaviour, produces detectable results.</p>
+
+    <p><strong>The challenging part:</strong> 34 years of transport policy have not produced a single statistically significant structural change point in the largest emitting sector. The 1998 territorial reduction is partly a production restructuring effect with no consumption equivalent. The 2008 reduction was driven by an economic catastrophe. The headline 53% reduction encompasses three structurally different phenomena, only one of which is the story climate policy wants to tell.</p>
+
+    <p>The consumption series confirms that the reductions are not a pure accounting fiction &mdash; they are real on both measures from 2008 onward. But it also confirms that the path to genuine deep decarbonisation runs through transport, buildings, and agriculture &mdash; the distributed, behaviour-dependent sectors where Layer 3 and 4 interventions produce marginal signals and Layer 1 system change is decades away.</p>
+
+    <div class="dark-box">
+        <h3>&#128161; What Bootstrap CUSUM tells policymakers</h3>
+        <p>The electricity result is the proof of concept. A policy mechanism that changes the economics of an entire system &mdash; making the desired outcome the rational choice for every actor simultaneously &mdash; produces a structural change point within a year at near-3-sigma confidence. The carbon price floor is the clearest example in 35 years of UK climate data.</p>
+        <p style="margin-top:10px;">The transport result is the challenge. No equivalent mechanism exists yet. Fuel duty applies pressure but does not change the system. EV mandates are coming but fleet turnover takes 15 years. Charging infrastructure is scaling but unevenly. The Bootstrap CUSUM for transport will show a genuine structural change point &mdash; probably in the late 2020s or early 2030s &mdash; when the EV share of the fleet reaches the point where the aggregate effect becomes statistically significant. Until then, transport will continue to produce marginal signals below 95% confidence, exactly as it has done for 34 years.</p>
+        <p style="margin-top:10px;" class="quote">&ldquo;You cannot sustainably change a result without changing the process that produces it.&rdquo; &mdash; W. Edwards Deming, Out of the Crisis (1982)</p>
+        <p>The electricity sector changed the process. Transport has not yet done so. The CUSUM cannot predict when it will. But it will detect the change point &mdash; precisely and objectively &mdash; when it does. That is the prospective value of establishing this analytical baseline now.</p>
+    </div>
+
+    <hr>
+
+    <h2>A note on the data and its limitations</h2>
+
+    <p>Several limitations apply to this analysis and should be noted explicitly.</p>
+
+    <p><strong>Annual data and detection power.</strong> With N=35 annual observations, Bootstrap CUSUM has reasonable statistical power for detecting large structural breaks. The electricity supply change point at 99.8% confidence is robust. The total emissions stage boundaries at 93&ndash;95% confidence are suggestive but not definitive. The transport null result &mdash; no change at 95% &mdash; is the most reliable statistical statement in the article: you cannot have been fooled into missing a change that is there.</p>
+
+    <p><strong>The 2008 financial crisis confounds Stage 3.</strong> The change point dated to 2008 almost certainly reflects both economic shock and accelerating renewable deployment. Separating these effects with annual data is not possible. The stage is real; the attribution to financial crisis is the most parsimonious explanation given the timing, but policy effects may also be present.</p>
+
+    <p><strong>Transport Stage 4 and COVID.</strong> The Stage 4 transport boundary (2019&ndash;2024, &minus;10.6%) coincides with COVID-19 lockdowns that collapsed transport activity in 2020. The Stage 4 mean of 108.42 MtCO2e includes the 2020 low of approximately 99 MtCO2e. As post-COVID recovery and EV adoption both affect the series, it will become clearer in future years whether Stage 4 represents a genuine structural break or a COVID-dominated temporary effect.</p>
+
+    <p><strong>Consumption data ends at 2022.</strong> The DEFRA consumption series runs to 2022 only &mdash; three years behind the territorial series. The most recent territorial developments (2022&ndash;2024) cannot be assessed on a consumption basis yet.</p>
+
+    <p><strong>The consumption series used here is one component of the full footprint.</strong> The DEFRA series used is &ldquo;GHG from UK produced goods and services consumed by UK residents&rdquo; &mdash; which does not include the full embedded import emissions. The headline DEFRA figure of only 20% reduction since 1990 uses the full consumption footprint including all imported emissions. The series used here shows a larger reduction because it captures domestic production efficiency improvements but not the full scale of offshored emissions. Both measures tell part of the story.</p>
+
+    <div class="cta-box">
+        <h2>Reproduce this analysis on your own data</h2>
+        <p>Download the DESNZ data, create a CSV, and run Bootstrap CUSUM step-change analysis. Free, browser-based, no data leaves your computer.</p>
+        <a href="index.html" class="cta-btn">&#128202; Open the Free Tool</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="uk-gdp-analysis.html">The Chart That Changes How You See 77 Years of UK Economic History</a></h3>
+        <p>Bootstrap CUSUM applied to UK GDP data &mdash; finding structural stages of long-run deceleration that conventional trend analysis misses entirely.</p>
+        <a href="uk-gdp-analysis.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="ulez-london-air-quality.html">ULEZ Worked &mdash; But Not When Anyone Expected</a></h3>
+        <p>Bootstrap CUSUM on Marylebone Road NO2 data &mdash; the ULEZ signal appeared 18 months before the scheme launched, and the London-wide expansion improved air quality at a site already inside the zone for four years.</p>
+        <a href="ulez-london-air-quality.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E and the Promise That Wasn&rsquo;t Kept</a></h3>
+        <p>The same Bootstrap CUSUM methodology applied to NHS A&amp;E performance &mdash; fifteen years of policy interventions invisible in the data. The constraint was never in A&amp;E.</p>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <p class="note">&#128202; <strong>Data sources:</strong> DESNZ Final UK Territorial Greenhouse Gas Emissions Statistics 1990&ndash;2024 &mdash; <a href="https://www.gov.uk/government/statistics/final-uk-greenhouse-gas-emissions-statistics-1990-to-2024" target="_blank">gov.uk</a>. DEFRA UK Carbon Footprint to 2022 &mdash; <a href="https://www.gov.uk/government/statistics/uks-carbon-footprint" target="_blank">gov.uk</a>. Analysis tool: <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based.</p>
+
+    <footer class="article-footer">
+        <p><strong>Territorial emissions data:</strong> Department for Energy Security and Net Zero (DESNZ), <em>Final UK Greenhouse Gas Emissions Statistics 1990 to 2024</em>. Published February 2026. <a href="https://www.gov.uk/government/statistics/final-uk-greenhouse-gas-emissions-statistics-1990-to-2024" target="_blank">gov.uk</a></p>
+        <p style="margin-top:8px;"><strong>Consumption emissions data:</strong> Department for Environment, Food &amp; Rural Affairs (DEFRA), <em>UK and England&rsquo;s Carbon Footprint to 2022</em>. Published May 2025. <a href="https://www.gov.uk/government/statistics/uks-carbon-footprint" target="_blank">gov.uk</a></p>
+        <p style="margin-top:8px;"><strong>Carbon price floor:</strong> HM Treasury / HMRC, Carbon Price Support mechanism, introduced April 2013. <a href="https://www.gov.uk/guidance/carbon-price-support" target="_blank">gov.uk/guidance/carbon-price-support</a></p>
+        <p style="margin-top:8px;"><strong>Climate Change Act 2008:</strong> UK Parliament, Climate Change Act 2008, Royal Assent 26 November 2008. <a href="https://www.legislation.gov.uk/ukpga/2008/27/contents" target="_blank">legislation.gov.uk</a></p>
+        <p style="margin-top:8px;"><strong>UK population data:</strong> ONS, UK Population Estimates. <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates" target="_blank">ons.gov.uk</a></p>
+        <p style="margin-top:8px;"><strong>Systems thinking / unintended consequences:</strong> Peter M. Senge, <em>The Fifth Discipline: The Art and Practice of the Learning Organisation</em>. Currency/Doubleday, 1990. ISBN 978-0-385-51725-6. Jay W. Forrester, <em>Urban Dynamics</em>. MIT Press, 1969 &mdash; foundational work on policy resistance and compensating feedback loops.</p>
+        <p style="margin-top:8px;"><strong>Deming:</strong> W. Edwards Deming, <em>Out of the Crisis</em>. MIT Press, 1982.</p>
+        <p style="margin-top:8px;"><strong>Method:</strong> Bootstrap CUSUM step-change analysis. Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><strong>Analysis tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded.</p>
+        <p style="margin-top:16px; color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; May 2026</p>
+    </footer>
+
+</main>
+</body>
+</html>
