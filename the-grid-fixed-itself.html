@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Grid Fixed Itself. Transport Didn't. What UK Carbon Data Actually Shows — StepChangeAnalysis.com</title>
-    <meta name="description" content="The UK cut greenhouse gas emissions 53% since 1990. Bootstrap CUSUM on 35 years of data shows three different causes — and domestic transport, 30% of all emissions, shows no statistically significant structural change at 95% confidence across 34 years of climate policy.">
+    <meta name="description" content="The UK cut emissions 53% since 1990. Bootstrap CUSUM identifies three causes: energy market liberalisation (1998), the global financial crisis (2008), and coal phase-out via the carbon price floor (2015). Only the last is climate policy. Transport shows no structural change at 95% confidence across 34 years.">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
     <script>
@@ -114,7 +114,7 @@
     <div class="article-flag">&#127807; Environment &amp; Policy &middot; UK Carbon Emissions Analysis</div>
 
     <h1>The Grid Fixed Itself. Transport Didn&rsquo;t.</h1>
-    <p class="article-subtitle">In his 2011 Budget, George Osborne announced the carbon price floor. It was not presented as a historic climate intervention &mdash; it was a Treasury revenue mechanism, taking effect April 2013. In the 23 years before it, no climate policy had produced a detectable structural change in UK electricity supply emissions. In the 11 years since, electricity supply emissions fell 55.4% at 99.8% statistical confidence. Bootstrap CUSUM on 35 years of territorial data finds three structural causes for the UK&rsquo;s 53% emissions reduction &mdash; and domestic transport, 30% of all emissions, shows no statistically significant structural change at 95% confidence across 34 years. But the policies that may transform transport are still within the lag window. The CUSUM cannot yet say they have failed.</p>
+    <p class="article-subtitle">In his 2011 Budget, George Osborne announced the carbon price floor. It was not presented as a historic climate intervention &mdash; it was a Treasury revenue mechanism, taking effect April 2013. In the 23 years before it, no climate policy had produced a detectable structural change in UK electricity supply emissions. In the 11 years since, electricity supply emissions fell 55.4% at 99.8% statistical confidence. Bootstrap CUSUM on 35 years of DESNZ data finds three structural causes for the UK&rsquo;s 53% emissions reduction &mdash; and domestic transport, 30% of all emissions, shows no statistically significant structural change at 95% confidence across 34 years. But the policies that may transform transport are still within the lag window. The CUSUM cannot yet say they have failed.</p>
 
     <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; May 2026 &nbsp;&middot;&nbsp; Data: DESNZ UK Territorial GHG Emissions 1990&ndash;2024 &amp; DEFRA Consumption Emissions 1996&ndash;2022</div>
 
@@ -123,8 +123,8 @@
         <div style="font-size:0.78em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="the-grid-fixed-itself-summary.pdf" download style="color:var(--brand-mid);">&#8675; Download Executive Summary PDF</a></div>
         <div class="summary-grid">
             <div class="summary-card" style="border-left:4px solid var(--teal);">
-                <div class="summary-card-title">The headline number</div>
-                <div class="summary-card-body">53% reduction in UK territorial GHG emissions since 1990. Bootstrap CUSUM finds four structural stages with three different causes — only the most recent is primarily climate policy.</div>
+                <div class="summary-card-title">The headline number — and its three causes</div>
+                <div class="summary-card-body">53% reduction in UK emissions from within UK borders since 1990. Bootstrap CUSUM finds three structural causes: energy market liberalisation (1998), the global financial crisis (2008), and coal phase-out driven by the carbon price floor (2015). Only the most recent is primarily climate policy.</div>
             </div>
             <div class="summary-card" style="border-left:4px solid var(--green);">
                 <div class="summary-card-title">Electricity: the policy that worked</div>
@@ -132,21 +132,21 @@
             </div>
             <div class="summary-card" style="border-left:4px solid var(--red);">
                 <div class="summary-card-title">Transport: no structural change yet</div>
-                <div class="summary-card-body">No structural change at 95% confidence across 34 years. All four stage boundaries below 95%. Population grew 19%. But the EV-era policies are still within the lag window — the CUSUM cannot yet say they have failed.</div>
+                <div class="summary-card-body">No structural change at 95% confidence across 34 years. All four stage boundaries below 95% in the Bootstrap CUSUM analysis. Population grew 19%. But the EV-era policies are still within the lag window — the CUSUM cannot yet say they have failed.</div>
             </div>
             <div class="summary-card" style="border-left:4px solid var(--orange);">
                 <div class="summary-card-title">The consumption comparison</div>
-                <div class="summary-card-body">Consumption-based emissions show the same 2008 and 2015 change points as territorial — but not the 1998 change. That early territorial reduction has no consumption equivalent: it reflects production shifts, not genuine decarbonisation.</div>
+                <div class="summary-card-body">Consumption-based emissions (what UK residents actually cause, wherever in the world) confirm 2008 and 2015 are genuine reductions. But the 1998 change in UK-border emissions has no consumption equivalent — it reflects production shifts, not genuine decarbonisation.</div>
             </div>
         </div>
         <div style="font-size:0.85em;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">
-            <strong style="color:var(--text);">Data:</strong> DESNZ Final UK GHG Emissions 1990&ndash;2024 &nbsp;&middot;&nbsp; DEFRA UK Carbon Footprint 1996&ndash;2022 &nbsp;&middot;&nbsp; <strong style="color:var(--text);">Method:</strong> Bootstrap CUSUM, N=35 territorial, N=27 consumption, Loops=5000
+            <strong style="color:var(--text);">Data:</strong> DESNZ Final UK GHG Emissions 1990&ndash;2024 &nbsp;&middot;&nbsp; DEFRA UK Carbon Footprint 1996&ndash;2022 &nbsp;&middot;&nbsp; <strong style="color:var(--text);">Method:</strong> Bootstrap CUSUM, N=35 emissions-from-UK-borders, N=27 consumption, Loops=10,000
         </div>
     </div>
 
     <h2>The policy that worked &mdash; and why timing matters</h2>
 
-    <p>In his March 2011 Budget speech, George Osborne announced the carbon price floor &mdash; a minimum price for carbon in electricity generation, taking effect April 2013. It was not primarily marketed as a climate policy. Environmental groups gave it a cautious welcome. The electricity industry objected. Osborne called himself a low-tax Conservative. The mechanism was principally a revenue instrument designed to support the Emissions Trading Scheme.</p>
+    <p>In his March 2011 Budget speech, George Osborne announced the carbon price floor &mdash; a minimum price for carbon in electricity generation, taking effect April 2013. It was not primarily marketed as a climate policy. Environmental groups gave it a cautious welcome. The electricity industry objected. Osborne called himself a low-tax Conservative. The mechanism was principally a revenue instrument designed to support the EU Emissions Trading Scheme &mdash; a Europe-wide carbon market where electricity generators bought permits to emit CO2, but whose price had collapsed far below the level needed to make coal uneconomical.</p>
 
     <p>Bootstrap CUSUM on UK electricity supply emissions 1990&ndash;2024 finds that nothing before April 2013 produced a detectable structural change across 23 years of climate policy. In the decade after, electricity supply emissions fell 55.4% at 99.8% confidence &mdash; the strongest statistical signal in the entire dataset. The most effective climate policy in 35 years of UK emissions data was introduced by a Chancellor who wasn&rsquo;t primarily thinking about climate. It worked because it changed the economics of an entire system rather than asking individuals to change their behaviour.</p>
 
@@ -158,11 +158,13 @@
 
     <h2>The government&rsquo;s claim and the CUSUM question</h2>
 
-    <p>The UK government&rsquo;s official position is straightforward: territorial greenhouse gas emissions have fallen 53% since 1990, demonstrating that climate policy works and that the UK is a world leader in decarbonisation. The trajectory is presented as evidence of steady, broad-based progress across the economy over three and a half decades.</p>
+    <p>The UK government&rsquo;s official position is straightforward: greenhouse gas emissions from within UK borders have fallen 53% since 1990, demonstrating that climate policy works and that the UK is a world leader in decarbonisation. The trajectory is presented as evidence of steady, broad-based progress across the economy over three and a half decades.</p>
+
+    <p class="note">&#128202; <strong>Two measures used in this article:</strong> <strong>Emissions from within UK borders</strong> (sometimes called territorial emissions) count all greenhouse gases physically released in the UK &mdash; from power stations, factories, vehicles, and farms &mdash; regardless of whether the goods produced are consumed here or exported. <strong>Consumption-based emissions</strong> count all the carbon caused by what UK residents consume, wherever in the world that carbon was actually released &mdash; including the embedded emissions in goods we import. The difference between the two measures reveals how much of the UK&rsquo;s reduction reflects genuine decarbonisation versus production shifting abroad.</p>
 
     <p>Bootstrap CUSUM asks a different question. Not <em>how much</em> have emissions fallen, but <em>when</em> did they structurally change &mdash; and is the timing consistent with the causes being claimed? A policy that produces a genuine structural change will show a detectable change point dated to around the time of implementation, allowing for the expected lag. A change driven by economic shock, fuel switching, or offshoring will show a change point dated to those events instead.</p>
 
-    <p>Applied to 35 years of DESNZ territorial emissions data, Bootstrap CUSUM identifies four structural stages with three different causes. Only the most recent stage change &mdash; dated to 2015 &mdash; is primarily attributable to climate policy. The preceding reductions were driven by energy market liberalisation and an economic catastrophe. And the largest remaining sector &mdash; domestic transport at 30% of all emissions &mdash; shows no statistically significant structural change at 95% confidence across the pre-EV policy era.</p>
+    <p>Applied to 35 years of DESNZ emissions data, Bootstrap CUSUM identifies four structural stages with three different causes. Those three causes are: <strong>energy market liberalisation (1998)</strong> &mdash; coal replaced by gas as privatised electricity markets drove fuel switching, predating serious climate policy; <strong>the global financial crisis (2008)</strong> &mdash; UK GDP fell 4.2%, heavy industry contracted, the Climate Change Act passed the same year but the change point predates it; and <strong>coal phase-out driven by the carbon price floor (2015)</strong> &mdash; the first genuinely policy-driven structural stage, arriving 25 years after the 1990 baseline. The largest remaining sector &mdash; domestic transport at 30% of all emissions &mdash; shows no statistically significant structural change at 95% confidence across the pre-EV policy era.</p>
 
     <p class="note">&#128202; <strong>Data note:</strong> Analysis uses DESNZ Final UK Territorial Greenhouse Gas Emissions statistics, 1990&ndash;2024, N=35 annual observations. Sector data from Table 1.2. Consumption-based (footprint) emissions from DEFRA UK Carbon Footprint publication, 1996&ndash;2022, N=27. Bootstrap CUSUM, Loops=5000, Turn Length=5. <a href="https://www.gov.uk/government/statistics/final-uk-greenhouse-gas-emissions-statistics-1990-to-2024" target="_blank">gov.uk/government/statistics/final-uk-greenhouse-gas-emissions-statistics-1990-to-2024</a></p>
 
@@ -170,11 +172,11 @@
 
     <h2>Total emissions: four stages, three causes</h2>
 
-    <p>The chart below shows total UK territorial greenhouse gas emissions 1990&ndash;2024 with Bootstrap CUSUM at 90% confidence, 5000 loops. Four structural stages emerge.</p>
+    <p>The chart below shows total UK greenhouse gas emissions from within UK borders 1990&ndash;2024 with Bootstrap CUSUM at 90% confidence, 5000 loops. Four structural stages emerge.</p>
 
     <figure class="chart-figure">
         <img src="images/carbon-chart1-total-90.png" alt="Bootstrap CUSUM — UK total greenhouse gas emissions 1990-2024 — four stages at 90% confidence">
-        <figcaption>UK total territorial greenhouse gas emissions 1990&ndash;2024. Bootstrap CUSUM, 90% confidence, N=35, Loops=5000. Four structural stages. Stage boundaries at 1998, 2008, and 2015. The CUSUM line rises continuously from 1990 to approximately 2008 &mdash; emissions consistently above the overall mean &mdash; then falls continuously to 2024.</figcaption>
+        <figcaption>UK total greenhouse gas emissions from within UK borders 1990&ndash;2024. Bootstrap CUSUM, 90% confidence, N=35, Loops=5000. Four structural stages. Stage boundaries at 1998, 2008, and 2015. The CUSUM line rises continuously from 1990 to approximately 2008 &mdash; emissions consistently above the overall mean &mdash; then falls continuously to 2024.</figcaption>
     </figure>
 
     <figure class="chart-figure">
@@ -338,7 +340,36 @@
 
     <h3>Why transport is structurally different from electricity</h3>
 
-    <p>The contrast between electricity and transport is not a failure of transport policy specifically. It reflects a fundamental difference in how the two systems can be changed.</p>
+    <p>The contrast between electricity and transport is not a failure of transport policy specifically. It reflects a fundamental difference in how the two systems can be changed — and in which level of the hierarchy of controls has been applied to each.</p>
+
+    <div class="callout-box">
+        <h3>&#128200; The hierarchy of controls — what it is and why it matters</h3>
+        <p>The hierarchy of controls is a framework from occupational health and safety engineering, widely used in process industries and Major Hazard installations under COMAH and HSE regulation. It classifies interventions from weakest to strongest:</p>
+        <p style="margin-top:10px;"><strong>Layer 1 — Elimination:</strong> redesign the system so the problem cannot occur. Strongest. No reliance on individual behaviour.</p>
+        <p style="margin-top:6px;"><strong>Layer 2 — Engineering controls:</strong> physical barriers that make the problem difficult or impossible regardless of behaviour. The carbon price floor worked at this level — it made coal generation economically impossible without requiring anyone to make a different choice.</p>
+        <p style="margin-top:6px;"><strong>Layer 3 — Administrative controls:</strong> rules, standards, mandates, taxes. Rely on compliance. Can be absorbed by compensating behaviour.</p>
+        <p style="margin-top:6px;"><strong>Layer 4 — Training and procedure:</strong> weakest. Relies entirely on individual action.</p>
+        <p style="margin-top:10px;">Thirty-four years of transport policy operated almost entirely at Layers 3 and 4. The carbon price floor acted at Layer 2. The Bootstrap CUSUM shows the difference.</p>
+    </div>
+
+    <h2>Why did transport policies fail? Four precise reasons</h2>
+
+    <div class="dark-box">
+        <h3>&#10067; Q: Why did 34 years of transport policy produce no structural change at 95% confidence?</h3>
+        <p><strong style="color:#93c5fd;">A: Not lack of effort. A structural mismatch between the interventions applied and the system being changed.</strong> Four interlocking reasons explain the null result.</p>
+
+        <p style="margin-top:14px;"><strong style="color:#93c5fd;">Reason 1 — The compensating feedback loop (Senge B1)</strong></p>
+        <p>Fuel duty raises the cost of driving &rarr; vehicle manufacturers respond with more efficient engines &rarr; cost per mile falls back toward its original level &rarr; drivers continue driving the same miles &rarr; aggregate emissions unchanged. This is Senge&rsquo;s policy resistance in action: the system absorbed every cost signal through the efficiency feedback loop. Between 1990 and 2024, average new car fuel efficiency roughly doubled &mdash; yet total transport emissions fell only 10.6% in absolute terms. The efficiency gains were entirely consumed by maintained or increased demand.</p>
+
+        <p style="margin-top:14px;"><strong style="color:#93c5fd;">Reason 2 — Population growth absorbed the per-capita gains</strong></p>
+        <p>The UK population grew from 57 million in 1990 to 68 million in 2024 &mdash; a 19% increase. Even genuine per-capita efficiency improvements were cancelled in aggregate by more people making more journeys. A policy that reduces emissions per person by 10% while population grows 19% produces a net increase in absolute emissions. The Bootstrap CUSUM measures absolute emissions. Population growth is a permanent demand-side pressure that no efficiency policy can overcome without system redesign.</p>
+
+        <p style="margin-top:14px;"><strong style="color:#93c5fd;">Reason 3 — The wrong layer of the hierarchy</strong></p>
+        <p>Every transport policy of the past 34 years operated at Layer 3 (administrative — fuel duty, vehicle excise duty, emission zones, congestion charges) or Layer 4 (behavioural — public awareness, green travel plans). None redesigned the underlying system. The system that produces transport emissions is the combination of road infrastructure designed for cars, housing located far from employment, and absence of viable modal alternatives for most journeys. Taxing driving within that system applies pressure without changing the conditions that make driving necessary. You cannot sustainably change a result without changing the system that produces it.</p>
+
+        <p style="margin-top:14px;"><strong style="color:#93c5fd;">Reason 4 — No mechanism equivalent to the carbon price floor</strong></p>
+        <p>The carbon price floor made coal generation simultaneously uneconomical for every electricity generator, with no available workaround. There has been no equivalent for transport &mdash; no single mechanism that simultaneously makes fossil fuel vehicles unviable for all 35 million drivers. The 2030 petrol and diesel sales ban is the closest equivalent: a date beyond which the fossil fuel option becomes legally unavailable for new vehicles. But it acts through fleet turnover over 15 years, not through immediate economic shock. The Bootstrap CUSUM will detect the change point when fleet penetration reaches critical mass &mdash; expected in the 2034&ndash;2038 window.</p>
+    </div>
 
     <p>Electricity generation is a centralised system. There are approximately 300 significant power stations in the UK. Changing the carbon price changes the economics for all 300 simultaneously. When coal becomes uneconomical, every coal plant closes. The change is systemic, rapid, and does not require any individual to change their behaviour. The CUSUM change point appears within a year of the policy mechanism changing.</p>
 
@@ -391,9 +422,14 @@
 
     <div class="callout-box">
         <h3>&#128200; What the consumption comparison reveals</h3>
-        <p>The consumption series shares the territorial change points at 2008 and 2015 &mdash; confirming those reductions are real on both measures, not offshoring artefacts. The 2008 financial crisis and the 2015 policy acceleration reduced both what the UK produces and what the UK consumes.</p>
-        <p style="margin-top:10px;">Crucially, the consumption series has <strong>no equivalent of the 1998 territorial stage change</strong>. That early &minus;8.4% territorial reduction &mdash; the dash-for-gas period &mdash; does not appear in the consumption data. UK residents continued consuming at the same level; what changed was where the electricity was generated and by what fuel. The 1998 territorial reduction is partly a production shift, not a consumption change. This is the offshoring/restructuring signal the territorial data alone cannot reveal.</p>
-        <p style="margin-top:10px;">The comparison also clarifies the honest scale of reduction. Territorial emissions fell from a Stage 1 mean of 763 MtCO2e to a Stage 4 mean of 437 MtCO2e. Consumption emissions fell from a Stage 1 mean of 369 MtCO2e to a Stage 3 mean of 232 MtCO2e &mdash; a &minus;37% reduction on a comparable basis. Both are real improvements. The 1998 territorial reduction that has no consumption equivalent is approximately 8 percentage points of the headline 53% figure.</p>
+        <p>The consumption series shares the change points at 2008 and 2015 &mdash; confirming those reductions are real on both measures, not offshoring artefacts. The 2008 financial crisis and the 2015 policy acceleration reduced both what the UK produces and what the UK consumes.</p>
+        <p style="margin-top:10px;">Crucially, the consumption series has <strong>no equivalent of the 1998 stage change in UK-border emissions</strong>. That early &minus;8.4% reduction &mdash; the dash-for-gas period &mdash; does not appear in the consumption data. UK residents continued consuming at the same level; what changed was where the electricity was generated and by what fuel. The 1998 reduction is partly a production shift, not a consumption change.</p>
+        <p style="margin-top:10px;">The comparison also clarifies the honest scale of reduction. Emissions from within UK borders fell from a Stage 1 mean of 763 MtCO2e to a Stage 4 mean of 437 MtCO2e. Consumption emissions fell from a Stage 1 mean of 369 MtCO2e to a Stage 3 mean of 232 MtCO2e &mdash; a &minus;37% reduction on a comparable basis. Both are real improvements. The 1998 UK-border reduction that has no consumption equivalent is approximately 8 percentage points of the headline 53% figure.</p>
+    </div>
+
+    <div class="alert-orange">
+        <strong>The honest number behind the headline:</strong>
+        Roughly 8 percentage points of the UK&rsquo;s headline 53% emissions reduction reflects production shifts &mdash; the dash for gas and early deindustrialisation &mdash; rather than genuine decarbonisation of UK economic activity. These changes reduced emissions from within UK borders without reducing the carbon caused by what UK residents consume. The remaining 45 percentage points reflect real structural change confirmed on both measures.
     </div>
 
     <hr>
@@ -408,12 +444,173 @@
 
     <p>The consumption series confirms that the reductions are not a pure accounting fiction &mdash; they are real on both measures from 2008 onward. But it also confirms that the path to genuine deep decarbonisation runs through transport, buildings, and agriculture &mdash; the distributed, behaviour-dependent sectors where Layer 3 and 4 interventions produce marginal signals and Layer 1 system change is decades away.</p>
 
+    <hr>
+
+    <h2>Three frameworks, one lesson: why the level of intervention determines the result</h2>
+
+    <p>The carbon price floor worked. Thirty-four years of transport policy did not. Bootstrap CUSUM dates both findings precisely. But to understand <em>why</em> &mdash; and what it means for any organisation or government trying to change a complex system &mdash; three analytical frameworks converge on the same answer.</p>
+
+    <p><strong>The Control of Major Accident Hazards (COMAH) Regulations 2015</strong> enforce stringent safety standards in Major Hazard installations involving dangerous substances &mdash; toxic, explosive, or highly flammable chemicals. From this tradition comes the hierarchy of controls: a framework classifying interventions from weakest (training and procedure) to strongest (elimination). The principle is fundamental: the lower the layer, the more the intervention depends on human behaviour under pressure. The higher the layer, the more the system is redesigned so the right outcome happens by default.</p>
+
+    <p><strong>Donella Meadows&rsquo; leverage points</strong> (from <em>Thinking in Systems</em>, 2008) provide the systems thinking equivalent &mdash; a ranked list of places to intervene in a system, in increasing order of effectiveness. Meadows observed that people instinctively reach for the least effective leverage points first, because they are the most familiar and the least threatening to existing structures. The most powerful interventions &mdash; changing the goals or paradigm of the system &mdash; are the ones that meet the fiercest resistance, because they threaten everything the system currently exists to produce.</p>
+
+    <p><strong>Brian Joiner&rsquo;s Levels of Fix</strong> (from <em>Fourth Generation Management</em>, 1994, applied in the <a href="never-events-wrong-route.html" style="color:var(--brand-mid);">Never Events article</a> on this site) complete the picture: Level 1 fixes the output, Level 2 fixes the process, Level 3 fixes the system. Joiner&rsquo;s insight &mdash; that most organisations spend most of their time at Level 1, firefighting outputs, while the system that produces those outputs remains unchanged &mdash; applies directly to 34 years of UK transport policy.</p>
+
+    <p>All three frameworks say the same thing. And critically: <strong>the higher the level of intervention, the more effective it is &mdash; and the more politically difficult, controversial, and threatening to existing power structures it becomes.</strong> Governments reach for Level 9/Layer 4/Level 1 interventions not because they are ignorant of the alternatives, but because higher-level interventions threaten electoral coalitions, face organised industrial opposition, and produce visible costs before invisible benefits. The carbon price floor accidentally hit the right level. Transport policy has not yet done so.</p>
+
+    <div class="numbers-box" style="overflow-x:auto;">
+        <table style="font-size:0.88em;line-height:1.5;">
+            <thead>
+                <tr>
+                    <th style="width:18%;background:var(--brand-blue);color:white;padding:10px 12px;">COMAH hierarchy<br><span style="font-weight:400;font-size:0.85em;color:#93c5fd;">Control of Major Accident Hazards 2015</span></th>
+                    <th style="width:18%;background:var(--brand-blue);color:white;padding:10px 12px;">Meadows leverage point<br><span style="font-weight:400;font-size:0.85em;color:#93c5fd;">Thinking in Systems (2008)</span></th>
+                    <th style="width:18%;background:var(--brand-blue);color:white;padding:10px 12px;">Joiner level of fix<br><span style="font-weight:400;font-size:0.85em;"><a href="never-events-wrong-route.html" style="color:#93c5fd;">4th Generation Management</a></span></th>
+                    <th style="width:23%;background:var(--brand-blue);color:white;padding:10px 12px;">UK transport example</th>
+                    <th style="width:23%;background:var(--brand-blue);color:white;padding:10px 12px;">UK electricity example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background:#fff8f0;vertical-align:top;">
+                    <td style="padding:12px;">
+                        <strong style="color:var(--orange);">Layer 4</strong><br>
+                        <span style="font-weight:600;">Training &amp; procedure</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Weakest. Relies entirely on human behaviour under pressure.</span>
+                    </td>
+                    <td style="padding:12px;">
+                        <strong>9.</strong> <span style="font-weight:600;">Parameters</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Taxes, subsidies, standards. Adjusts numbers within an unchanged system.</span>
+                    </td>
+                    <td style="padding:12px;">
+                        <strong style="color:var(--orange);">Level 1</strong><br>
+                        <span style="font-weight:600;">Fix the output</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Correct problems as they appear. Does not prevent recurrence.</span>
+                    </td>
+                    <td style="padding:12px;">Fuel duty, road tax bands, green travel plans, emission awareness campaigns</td>
+                    <td style="padding:12px;">Renewables Obligation (2002) &mdash; subsidy parameter. <em>No structural change point in CUSUM.</em></td>
+                </tr>
+                <tr style="vertical-align:top;">
+                    <td style="padding:12px;">
+                        <strong style="color:var(--orange);">Layer 3</strong><br>
+                        <span style="font-weight:600;">Administrative controls</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Rules and mandates. Can be absorbed by compensating behaviour.</span>
+                    </td>
+                    <td style="padding:12px;">
+                        <strong>4.</strong> <span style="font-weight:600;">Rules of the system</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Incentives, constraints, regulations. Changes what actors must do.</span>
+                    </td>
+                    <td style="padding:12px;">
+                        <strong style="color:var(--orange);">Level 2</strong><br>
+                        <span style="font-weight:600;">Fix the process</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Change the process that allowed the problem. Prevents recurrence of that specific event.</span>
+                    </td>
+                    <td style="padding:12px;">2030 petrol/diesel ban, Ultra Low Emission Zones, MOT emissions standards</td>
+                    <td style="padding:12px;">Climate Change Act 2008 &mdash; new legal targets. <em>No CUSUM change point on announcement.</em></td>
+                </tr>
+                <tr style="background:#f0fdf4;vertical-align:top;">
+                    <td style="padding:12px;border-left:4px solid var(--green);">
+                        <strong style="color:var(--green);">Layer 2</strong><br>
+                        <span style="font-weight:600;">Engineering controls</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Physical or economic barriers. System changes regardless of behaviour.</span>
+                    </td>
+                    <td style="padding:12px;border-left:4px solid var(--green);">
+                        <strong>6.</strong> <span style="font-weight:600;">Material flows &amp; nodes</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Change the physical or economic structure at key nodes. Most actors respond automatically.</span>
+                    </td>
+                    <td style="padding:12px;border-left:4px solid var(--green);">
+                        <strong style="color:var(--green);">Level 3</strong><br>
+                        <span style="font-weight:600;">Fix the system</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Change the system that allowed the faulty process to exist. Deming&rsquo;s 14 points.</span>
+                    </td>
+                    <td style="padding:12px;border-left:4px solid var(--green);"><em>Ubiquitous charging infrastructure making EVs the default rational choice.</em> Not yet implemented at scale.</td>
+                    <td style="padding:12px;border-left:4px solid var(--green);"><strong>Carbon price floor (2013)</strong> &mdash; changed node economics for all 300 generators simultaneously.<br><strong style="color:var(--green);">CUSUM: 99.8% confidence.</strong></td>
+                </tr>
+                <tr style="background:#f0fdf4;vertical-align:top;">
+                    <td style="padding:12px;border-left:4px solid var(--green);">
+                        <strong style="color:var(--green);">Layer 1</strong><br>
+                        <span style="font-weight:600;">Elimination</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Strongest. Redesign the system so the problem cannot arise.</span>
+                    </td>
+                    <td style="padding:12px;border-left:4px solid var(--green);">
+                        <strong>1&ndash;2.</strong> <span style="font-weight:600;">Paradigm &amp; goals</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Change the mindset out of which the system&rsquo;s goals, rules, and power structure arise. Highest resistance.</span>
+                    </td>
+                    <td style="padding:12px;border-left:4px solid var(--green);">
+                        <strong style="color:var(--green);">Level 3 deep</strong><br>
+                        <span style="font-weight:600;">Fix the system root</span><br>
+                        <span style="color:var(--muted);font-size:0.85em;">Change the deep flaws Deming identified: lack of purpose, departmental barriers, management by fear.</span>
+                    </td>
+                    <td style="padding:12px;border-left:4px solid var(--green);">Redesign cities so car dependency is structurally eliminated &mdash; housing near employment, public transport as default. <em>Generational project.</em></td>
+                    <td style="padding:12px;border-left:4px solid var(--green);">Fully renewable grid with no fossil fuel infrastructure &mdash; the destination, not yet the reality.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size:0.8em;color:var(--muted);margin-top:10px;font-style:italic;">&#8593; Effectiveness increases going down. &#8593; Political difficulty and resistance to change also increase going down.</p>
+    </div>
+
+    <div class="alert-orange">
+        <strong>The fundamental political economy of system change:</strong>
+        The higher the level of intervention, the more effective it is &mdash; and the harder it is to implement. Level 9/Layer 4 interventions are politically survivable because they adjust parameters within an unchanged system. The costs are diffuse, the benefits are delayed, and the existing power structures are not threatened. Level 6/Layer 2 interventions change the material structure of the system. They threaten the industries whose economics depend on the existing structure &mdash; as the carbon price floor threatened coal operators. Level 1/paradigm interventions change the goals of the system entirely &mdash; they are the most effective and the most politically dangerous. Governments reach for Level 9 by default not because they are ignorant of alternatives, but because democratic electoral cycles are shorter than the lag windows for genuine system change.
+    </div>
+
+    <p class="note">&#8224; <strong>Source note:</strong> COMAH hierarchy of controls from occupational health and safety engineering practice under The Control of Major Accident Hazards (COMAH) Regulations 2015, enforced by the HSE. See also NIOSH Hierarchy of Controls: <a href="https://www.cdc.gov/niosh/topics/hierarchy/" target="_blank">cdc.gov/niosh/topics/hierarchy</a>. Meadows leverage points: Donella H. Meadows, <em>Thinking in Systems: A Primer</em>. Chelsea Green Publishing, 2008. ISBN 978-1-60358-055-7. Joiner levels of fix: Brian L. Joiner, <em>Fourth Generation Management</em>. McGraw-Hill, 1994.</p>
+
+    <h3>Did governments get here by accident?</h3>
+
+    <p>The Bootstrap CUSUM evidence supports an uncomfortable answer: largely, yes &mdash; and the one exception proves the rule.</p>
+
+    <p>The 1998 reduction was a commercial accident. Energy market privatisation was designed to break union power and reduce electricity prices. The dash for gas was a decision by newly privatised generators choosing the cheapest fuel. Nobody planned the carbon reduction &mdash; it was a positive byproduct of an economic restructuring with entirely different objectives.</p>
+
+    <p>The 2008 reduction was an economic catastrophe. No government set out to cut emissions by collapsing the economy 4.2% in a year. The carbon reduction was the incidental consequence of industrial contraction on a scale not seen since the Second World War.</p>
+
+    <p>The 2015 stage is the most genuinely intentional &mdash; but even here the carbon price floor was introduced primarily as a revenue mechanism and market stability instrument. The coal closures happened faster than Treasury models anticipated because the three enabling conditions (EU ETS collapse, cheap gas, ready renewables) were not planned. The policy hit the right leverage point in the system partly by design and partly by circumstance.</p>
+
+    <p>What this tells you about climate policy is not that governments have been incompetent. It is that they have consistently applied interventions below the level of system change required. Layer 3 interventions &mdash; taxes, zones, standards &mdash; are politically easier than Layer 2 interventions that change the system itself. They produce visible costs before the benefits arrive. They face organised opposition from industries whose economics they threaten. And they operate on timescales longer than electoral cycles, making it structurally difficult for any government to maintain them long enough for the lag to expire.</p>
+
+    <p>The carbon price floor was the exception &mdash; a Layer 2 intervention that changed the economics of an entire system simultaneously, with a short enough lag that the results appeared within a single Parliament. That combination &mdash; system-level mechanism, short lag, politically framed as a revenue instrument rather than a climate policy &mdash; is what allowed it to survive long enough to work. The lesson for transport decarbonisation is not &ldquo;try harder.&rdquo; It is: find the equivalent of the carbon price floor for a distributed system of 35 million vehicles. That mechanism &mdash; the one that makes the fossil fuel option simultaneously unavailable or economically irrational for every driver, without requiring individual behaviour change &mdash; is what the Bootstrap CUSUM is waiting to detect.</p>
+
     <div class="dark-box">
         <h3>&#128161; What Bootstrap CUSUM tells policymakers</h3>
         <p>The electricity result is the proof of concept. A policy mechanism that changes the economics of an entire system &mdash; making the desired outcome the rational choice for every actor simultaneously &mdash; produces a structural change point within a year at near-3-sigma confidence. The carbon price floor is the clearest example in 35 years of UK climate data.</p>
         <p style="margin-top:10px;">The transport result is the challenge. No equivalent mechanism exists yet. Fuel duty applies pressure but does not change the system. EV mandates are coming but fleet turnover takes 15 years. Charging infrastructure is scaling but unevenly. The Bootstrap CUSUM for transport will show a genuine structural change point &mdash; probably in the late 2020s or early 2030s &mdash; when the EV share of the fleet reaches the point where the aggregate effect becomes statistically significant. Until then, transport will continue to produce marginal signals below 95% confidence, exactly as it has done for 34 years.</p>
         <p style="margin-top:10px;" class="quote">&ldquo;You cannot sustainably change a result without changing the process that produces it.&rdquo; &mdash; W. Edwards Deming, Out of the Crisis (1982)</p>
         <p>The electricity sector changed the process. Transport has not yet done so. The CUSUM cannot predict when it will. But it will detect the change point &mdash; precisely and objectively &mdash; when it does. That is the prospective value of establishing this analytical baseline now.</p>
+    </div>
+
+    <hr>
+
+    <h2>What should a government actually do?</h2>
+
+    <p>The Bootstrap CUSUM evidence is not politically neutral. It points to specific actions at specific levels of intervention. Here is what the data says &mdash; not as ideology, but as system analysis.</p>
+
+    <div class="dark-box">
+        <h3>&#127981; Four things the data says would work</h3>
+
+        <p style="color:#e2e8f0;font-size:0.93em;border-left:3px solid #475569;padding-left:12px;margin-bottom:14px;"><strong style="color:#93c5fd;">A note on measurement:</strong> Three types of measure are often confused. <strong style="color:white;">Activity metrics</strong> — policies announced, targets set, investment committed — measure what government is doing, not what is changing. <strong style="color:white;">Lag measures</strong> — annual emissions, Bootstrap CUSUM change points — measure what the system has already produced. They tell you what happened after the fact. <strong style="color:white;">Lead measures</strong> — EV fleet share, charging point density, grid carbon intensity — measure the process conditions that predict future outputs. They move before the lag measure does and allow course correction before the annual CUSUM verdict arrives. Governments typically track activity metrics and call them success. Actions 3 and 4 below address this directly.</p>
+
+        <p><strong style="color:#93c5fd;">1. Find the carbon price floor equivalent for each remaining sector &mdash; and frame it correctly.</strong></p>
+        <p>The carbon price floor worked because it changed the economics of coal generation simultaneously for every generator, at Meadows Level 6, with no behavioural workaround. It was framed as a revenue mechanism, not a climate policy &mdash; which is probably why it survived long enough to work. Every remaining high-emission sector needs the equivalent: a mechanism that makes the low-carbon option the economically rational default, not merely the morally preferable one.</p>
+        <p style="margin-top:8px;">For transport: ubiquitous EV charging infrastructure at a guaranteed price that makes the total cost of EV ownership lower than petrol for every income level. Not a subsidy for early adopters &mdash; a structural change to the refuelling node of the system. For buildings: a gas boiler ban combined with a heat pump installation programme that removes the high-carbon option from the market entirely. For agriculture: land use incentives that change what farmers grow, not what consumers eat.</p>
+
+        <p style="margin-top:14px;"><strong style="color:#93c5fd;">2. Apply Bootstrap CUSUM to every major policy programme &mdash; prospectively.</strong></p>
+        <p>Before implementing any intervention, state the prediction in writing: <em>&ldquo;We expect this policy to produce a detectable structural change point within X years at Y% confidence, measured by Bootstrap CUSUM applied to Z data series.&rdquo;</em> Monitor annually. Publish the CUSUM result. This creates accountability that the current system entirely lacks. Ministers currently claim credit for trends they did not cause and escape accountability for policies that produced nothing detectable. A pre-specified CUSUM prediction makes the test objective. The data will not lie.</p>
+
+        <p style="margin-top:14px;"><strong style="color:#93c5fd;">3. Measure success by output, not by policy announcement &mdash; and distinguish lag from lead.</strong></p>
+        <p>Governments currently measure climate progress by policies announced, investment committed, and targets set. These are neither outputs nor genuine lead measures &mdash; they are activity metrics. The Bootstrap CUSUM is a lag measure: it tells you what happened after the system changed or failed to change. Annual emissions data is the scoreboard. You cannot manage the game by looking only at the final score.</p>
+        <p style="margin-top:8px;">Switching the primary accountability framework from activity metrics (policies, spending) to CUSUM-verified structural change points would fundamentally alter the incentive structure for policy design. It is the management equivalent of what Deming called moving from tampering with outputs to understanding the system that produces them. But it must be combined with lead measures &mdash; see action 4 &mdash; to provide the early warning that tells you whether you are on track before the annual CUSUM data arrives.</p>
+
+        <p style="margin-top:14px;"><strong style="color:#93c5fd;">4. Track lead measures, not just lag measures &mdash; and publish them quarterly.</strong></p>
+        <p>Bootstrap CUSUM applied to annual emissions is a lag measure &mdash; it tells you what happened after the system has already changed or failed to change. By the time a transport CUSUM change point appears in the 2030s, the decisions that caused or prevented it will have been made years earlier. Deming and Joiner both argue that genuine system management requires tracking the inputs and process conditions that drive future outputs &mdash; lead measures &mdash; not just the outputs themselves.</p>
+        <p style="margin-top:8px;">For transport: EV fleet share as a percentage of total licensed vehicles (by income decile), charging points per 100km of road (by region), proportion of new car sales that are zero-emission. These move before the annual emissions CUSUM does. If EV adoption is concentrated in higher-income households, the lead measures will show that the compensating feedback loop is still operating &mdash; the people who most need to change are not yet changing &mdash; and aggregate emissions will not move regardless of headline registration numbers. For buildings: heat pump installation rate per quarter, proportion of homes still on gas boilers. For electricity: coal and gas share of generation, grid carbon intensity per kWh &mdash; the lead measure that moved immediately when the carbon price floor took effect in 2013, years before the annual CUSUM confirmed it.</p>
+        <p style="margin-top:8px;">The distinction is between managing the scoreboard (lag measure &mdash; annual emissions, Bootstrap CUSUM) and managing the game (lead measures &mdash; the process conditions that predict whether the lag measure will move). Both are necessary. The Bootstrap CUSUM provides the objective accountability test. Lead measures provide the early warning system that tells you whether you are on track to produce a change point before you get there.</p>
+    </div>
+
+    <div class="callout-box">
+        <h3>&#9874;&#65039; The honest caveat: the structural constraint governments face</h3>
+        <p>The interventions that produce detectable Bootstrap CUSUM change points require 5&ndash;15 year time horizons. Electoral cycles are 4&ndash;5 years. A government that implements a genuine Level 6 intervention bears the political cost &mdash; industry opposition, consumer complaints, visible price rises &mdash; before the benefit appears in the data. The next government takes credit for the change point.</p>
+        <p style="margin-top:10px;">This is not a failure of individual politicians. It is a system design problem &mdash; exactly what Deming would predict. The democratic governance system is not designed to optimise for long-horizon outcomes. Until that constraint is addressed &mdash; through independent climate institutions with statutory powers, pre-committed policy trajectories that bind future parliaments, or international frameworks that make reversal politically costly &mdash; governments will continue to default to Level 9 interventions that produce marginal signals.</p>
+        <p style="margin-top:10px;"><a href="never-events-wrong-route.html" style="color:var(--teal);"><strong>O&rsquo;Neill at Alcoa</strong></a> could act at Level 3 because he owned the system and answered to a board, not to 35 million voters on a four-year cycle. The <a href="never-events-wrong-route.html" style="color:var(--teal);">Never Events article on this site</a> explores the Alcoa parallel in detail &mdash; a CEO who inherited the safest company in aluminium manufacturing, declared zero injuries, redesigned the system rather than retraining individuals, and drove the injury rate to one-twentieth the US average while growing market value from $3 billion to $27.5 billion.</p>
+        <p style="margin-top:10px;">The parallel with NHS medication safety is precise. Wrong-route medication errors have been declared &ldquo;wholly preventable&rdquo; since 2010. Fifteen years of alerts, mandatory safety officers, revised frameworks, and connector mandates &mdash; all Layer 3 and 4 interventions &mdash; have produced a Bootstrap CUSUM that is flat at 17.5 events per year. No structural change point. The engineering solution (ENFit connectors) exists but is bypassed by the workflow surrounding it. The system has not been redesigned at Layer 2. The NHS has applied the equivalent of fifteen years of fuel duty to a problem that requires a carbon price floor: Layer 3 and 4 interventions (Meadows Level 9 &mdash; adjusting parameters within an unchanged system, Joiner Level 1 &mdash; fixing outputs) applied to a problem that requires Layer 2 (Meadows Level 6 &mdash; changing the material flows and nodes, Joiner Level 3 &mdash; fixing the system). In both domains &mdash; NHS medication safety and UK transport &mdash; the Bootstrap CUSUM shows the same signature: a process in statistical control at the wrong level, unresponsive to interventions that do not reach the system.</p>
+        <p style="margin-top:10px;">The Bootstrap CUSUM cannot fix the political system. It can hold the policy system to account. That is not nothing.</p>
     </div>
 
     <hr>
@@ -467,7 +664,9 @@
         <p style="margin-top:8px;"><strong>Carbon price floor:</strong> HM Treasury / HMRC, Carbon Price Support mechanism, introduced April 2013. <a href="https://www.gov.uk/guidance/carbon-price-support" target="_blank">gov.uk/guidance/carbon-price-support</a></p>
         <p style="margin-top:8px;"><strong>Climate Change Act 2008:</strong> UK Parliament, Climate Change Act 2008, Royal Assent 26 November 2008. <a href="https://www.legislation.gov.uk/ukpga/2008/27/contents" target="_blank">legislation.gov.uk</a></p>
         <p style="margin-top:8px;"><strong>UK population data:</strong> ONS, UK Population Estimates. <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates" target="_blank">ons.gov.uk</a></p>
-        <p style="margin-top:8px;"><strong>Systems thinking / unintended consequences:</strong> Peter M. Senge, <em>The Fifth Discipline: The Art and Practice of the Learning Organisation</em>. Currency/Doubleday, 1990. ISBN 978-0-385-51725-6. Jay W. Forrester, <em>Urban Dynamics</em>. MIT Press, 1969 &mdash; foundational work on policy resistance and compensating feedback loops.</p>
+        <p style="margin-top:8px;"><strong>Paul O&rsquo;Neill / Alcoa:</strong> Charles Duhigg, <em>The Power of Habit: Why We Do What We Do in Life and Business</em>. Random House, 2012. Chapter 4: &ldquo;Keystone Habits, or the Ballad of Paul O&rsquo;Neill.&rdquo; ISBN 978-1-4000-6928-6. See also: <a href="never-events-wrong-route.html">Wholly Preventable: Ten Years of a Never Event That Never Stopped</a> &mdash; the O&rsquo;Neill/Alcoa argument applied to NHS medication safety.</p>
+        <p style="margin-top:8px;"><strong>Meadows leverage points:</strong> Donella H. Meadows, <em>Thinking in Systems: A Primer</em>. Chelsea Green Publishing, 2008. ISBN 978-1-60358-055-7. Original paper: &ldquo;Leverage Points: Places to Intervene in a System&rdquo;, Sustainability Institute, 1999.</p>
+        <p style="margin-top:8px;"><strong>Systems thinking / unintended consequences:</strong> Peter M. Senge, <em>The Fifth Discipline</em>. Currency/Doubleday, 1990. ISBN 978-0-385-51725-6.</p>
         <p style="margin-top:8px;"><strong>Deming:</strong> W. Edwards Deming, <em>Out of the Crisis</em>. MIT Press, 1982.</p>
         <p style="margin-top:8px;"><strong>Method:</strong> Bootstrap CUSUM step-change analysis. Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
         <p style="margin-top:8px;"><strong>Analysis tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded.</p>
