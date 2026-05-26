@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sepsis Six: An Intervention Adopted by 96% of NHS Hospitals. Can Public Data Show Whether It Works? — StepChangeAnalysis.com</title>
+    <meta name="description" content="The Sepsis Six bundle has been adopted by 96% of NHS hospitals and is used in 37 countries. Bootstrap CUSUM on every available public measure of sepsis mortality in England finds one stage and no change point across 22 years. The data cannot prove or disprove the intervention worked — and this article explains precisely why.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:  #002d5b;
+            --brand-mid:   #0056b3;
+            --brand-light: #e9f2ff;
+            --text:        #1e293b;
+            --muted:       #64748b;
+            --border:      #e2e8f0;
+            --bg:          #f8f9fa;
+            --green:       #198754;
+            --orange:      #e67e22;
+            --red:         #c0392b;
+            --teal:        #0e7490;
+            --purple:      #7c3aed;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        .article-wrap { max-width: 820px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .article-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+        h1 { font-size: clamp(1.7em, 4vw, 2.5em); line-height: 1.2; color: var(--brand-blue); margin-bottom: 16px; font-weight: bold; }
+        .article-subtitle { font-size: 1.1em; color: var(--muted); font-style: italic; margin-bottom: 24px; border-left: 4px solid var(--teal); padding-left: 16px; line-height: 1.6; }
+        .article-meta { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
+        h2 { font-size: 1.35em; color: var(--brand-blue); margin: 40px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.1em; color: var(--brand-blue); margin: 28px 0 10px; font-style: italic; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        ul, ol { margin: 0 0 1.2em 1.5em; }
+        li { margin-bottom: 0.5em; font-size: 1.0em; }
+        strong { color: var(--brand-blue); }
+        .chart-figure { margin: 28px 0 32px; }
+        .chart-figure img { width: 100%; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); display: block; }
+        .chart-figure figcaption { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-top: 10px; font-style: italic; padding: 0 4px; }
+        .callout-box { background: #f0fdfa; border: 2px solid var(--teal); border-radius: 8px; padding: 20px 24px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .callout-box h3 { color: var(--teal); margin: 0 0 10px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
+        .callout-box p { font-size: 0.95em; color: #134e4a; margin-bottom: 10px; }
+        .callout-box p:last-child { margin-bottom: 0; }
+        .dark-box { background: #1e293b; border-radius: 8px; padding: 24px 28px; margin: 28px 0; color: white; }
+        .dark-box h3 { color: #93c5fd; margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; font-family: system-ui, sans-serif; }
+        .dark-box p { font-size: 0.97em; color: #e2e8f0; margin-bottom: 10px; line-height: 1.7; }
+        .dark-box p:last-child { margin-bottom: 0; }
+        .dark-box strong { color: white; }
+        .dark-box .quote { font-size: 1.1em; font-style: italic; color: #bfdbfe; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 14px 0; }
+        .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; overflow-x: auto; }
+        .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
+        .numbers-box th { background: var(--brand-blue); color: white; padding: 8px 12px; text-align: left; }
+        .numbers-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .numbers-box tr:last-child td { border-bottom: none; }
+        .alert-red { background: #fff5f5; border-left: 5px solid var(--red); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #7f1d1d; }
+        .alert-red strong { color: var(--red); display: block; margin-bottom: 6px; }
+        .alert-green { background: #f0fdf4; border-left: 5px solid var(--green); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #14532d; }
+        .alert-green strong { color: var(--green); display: block; margin-bottom: 6px; }
+        .alert-orange { background: #fff8f0; border-left: 5px solid var(--orange); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #4a3000; }
+        .alert-orange strong { color: var(--orange); display: block; margin-bottom: 6px; }
+        .sepsis-six-box { background: #faf5ff; border: 2px solid var(--purple); border-radius: 8px; padding: 20px 24px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .sepsis-six-box h3 { color: var(--purple); margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
+        .sepsis-six-box .six-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 10px; }
+        .sepsis-six-box .six-num { background: var(--purple); color: white; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9em; flex-shrink: 0; margin-top: 2px; }
+        .sepsis-six-box .six-text { font-size: 0.93em; color: #3b0764; line-height: 1.5; }
+        .sepsis-six-box .six-text strong { color: var(--purple); }
+        hr { border: none; border-top: 3px solid var(--brand-light); margin: 48px 0; }
+        .cta-box { background: var(--brand-blue); border-radius: 12px; padding: 32px; text-align: center; margin: 48px 0 32px; color: white; }
+        .cta-box h2 { color: white; border: none; margin-top: 0; font-size: 1.4em; }
+        .cta-box p { color: rgba(255,255,255,0.88); font-family: system-ui, sans-serif; font-size: 0.95em; margin-bottom: 20px; }
+        .cta-btn { display: inline-block; background: white; color: var(--brand-blue); font-weight: bold; font-size: 1em; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-family: system-ui, sans-serif; }
+        .cta-btn:hover { background: var(--brand-light); }
+        .related-box { background: #f0f4f8; border: 1px solid #cce5ff; border-radius: 8px; padding: 20px 24px; margin: 20px 0; font-family: system-ui, sans-serif; }
+        .related-box .related-tag { font-size: 0.8em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 10px; }
+        .related-box h3 { font-style: normal; margin-bottom: 6px; }
+        .related-box h3 a { color: var(--brand-blue); text-decoration: none; font-size: 1.0em; }
+        .related-box h3 a:hover { text-decoration: underline; }
+        .related-box p { color: var(--muted); font-size: 0.9em; margin: 0 0 12px; }
+        .related-box a.btn { display: inline-block; background: var(--brand-mid); color: white; padding: 8px 18px; border-radius: 6px; font-size: 0.88em; font-weight: 700; text-decoration: none; }
+        .related-box a.btn:hover { background: #004494; }
+        .article-footer { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .article-footer a { color: var(--brand-mid); }
+        .note { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); font-style: italic; background: #f8f9fa; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin: 16px 0; }
+        .ratio-highlight { background: #1e293b; color: white; border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-family: system-ui, sans-serif; font-size: 0.95em; display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-around; }
+        .ratio-highlight .r-item { text-align: center; }
+        .ratio-highlight .r-year { font-size: 0.85em; color: #94a3b8; }
+        .ratio-highlight .r-val { font-size: 1.6em; font-weight: bold; color: #fbbf24; }
+        .ratio-highlight .r-label { font-size: 0.8em; color: #cbd5e1; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px; margin-bottom: 16px; }
+        .summary-card { background: white; border-radius: 8px; padding: 16px; font-family: system-ui, sans-serif; }
+        .summary-card-title { font-weight: 700; color: var(--brand-blue); font-size: 0.95em; margin-bottom: 6px; }
+        .summary-card-body { font-size: 0.9em; color: var(--text); line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the Free Tool</a>
+</header>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Articles &rsaquo; Patient Safety</div>
+    <div class="article-flag">&#128138; Patient Safety &middot; Clinical Quality Improvement</div>
+
+    <h1>The Sepsis Six: Does Public Data Show Whether It Worked?</h1>
+
+    <p class="article-subtitle">In 2005, an NHS intensive care consultant distilled a 58-recommendation international guideline into six actions any ward nurse could perform within one hour. The Sepsis Six is now used in 96% of British hospitals and 37 countries. Bootstrap CUSUM applied to every available public measure of sepsis mortality in England &mdash; 22 years of data, two series, six charts &mdash; finds one stage and no change point in either. The data cannot prove or disprove whether the intervention saved lives. This article explains precisely why &mdash; and why that matters for every clinical quality improvement programme in the NHS.</p>
+
+    <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; May 2026 &nbsp;&middot;&nbsp; Data: ONS Deaths Involving Sepsis England and Wales 2001&ndash;2023</div>
+
+    <!-- Summary box -->
+    <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.78em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="sepsis-six-summary.pdf" download style="color:var(--brand-mid);">&#8675; Download Executive Summary PDF</a> &nbsp;&middot;&nbsp; <a href="sepsis-both-series.csv" download style="color:var(--brand-mid);">&#8675; Download the data CSV</a></div>
+        <div class="summary-grid">
+            <div class="summary-card" style="border-left:4px solid var(--purple);">
+                <div class="summary-card-title">What the Sepsis Six is</div>
+                <div class="summary-card-body">Six bedside actions to be completed within one hour of suspected sepsis: high-flow oxygen, blood cultures, IV antibiotics, IV fluid resuscitation, serum lactate, and urine output monitoring. Developed in 2005 by Dr Ron Daniels at Good Hope Hospital. Now in 96% of NHS trusts.</div>
+            </div>
+            <div class="summary-card" style="border-left:4px solid var(--red);">
+                <div class="summary-card-title">The Bootstrap CUSUM finding</div>
+                <div class="summary-card-body">Both available public mortality series — deaths where sepsis was primary cause and deaths where sepsis was mentioned anywhere — show one stage and no change point at 90% confidence across 22 years (2001–2023, N=23).</div>
+            </div>
+            <div class="summary-card" style="border-left:4px solid var(--orange);">
+                <div class="summary-card-title">The smoking gun — the ratio</div>
+                <div class="summary-card-body">Bootstrap CUSUM on the ratio between the two series finds a structural change point in 2013 at 95.5% confidence, -19.7%. The measurement system changed structurally at the same time as the intervention. The clinical outcome measure did not. This is why public data cannot answer the question.</div>
+            </div>
+            <div class="summary-card" style="border-left:4px solid var(--teal);">
+                <div class="summary-card-title">What this means for clinical QI</div>
+                <div class="summary-card-body">Before implementing any intervention, specify what measure you will use to evaluate it — and verify the measure is stable and not itself changed by the intervention. Bootstrap CUSUM is the Study step of PDSA. The study was never done at national level.</div>
+            </div>
+        </div>
+        <div style="font-size:0.85em;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">
+            <strong style="color:var(--text);">Method &mdash; Bootstrap CUSUM:</strong> A statistical tool that asks one question of a time series: did the process structurally change at any point, and if so when? It works by calculating a cumulative sum of deviations from the mean, then using thousands of random resamples (bootstrap loops) to test whether any apparent change point is statistically significant rather than random variation. A &ldquo;stage&rdquo; is a period where the mean is stable. A &ldquo;change point&rdquo; is a date where the mean shifted to a new level. More stages = more structural changes detected. The confidence level (90%, 95%, 99.7%) states how certain we are the change is real. &nbsp;&middot;&nbsp;
+            <strong style="color:var(--text);">Data:</strong> ONS Deaths Involving Sepsis England and Wales 2001&ndash;2023 &nbsp;&middot;&nbsp; <strong style="color:var(--text);">Data file:</strong> <a href="sepsis-both-series.csv" download style="color:var(--brand-mid);">sepsis-both-series.csv</a> &nbsp;&middot;&nbsp; <strong style="color:var(--text);">CUSUM parameters:</strong> N=23 both series, Loops=5,000, Conf=90%
+        </div>
+    </div>
+
+    <h2>One hour. Six actions. A bundle that spread around the world.</h2>
+
+    <p>In 2005, Dr Ron Daniels &mdash; an intensive care consultant at Good Hope Hospital in Sutton Coldfield &mdash; looked at the Surviving Sepsis Campaign&rsquo;s international guidelines and saw a problem. The guidelines were 58 recommendations across 16 pages. Five years after publication, they were being achieved in fewer than one in seven patients. The gap between the evidence and the ward was not a knowledge problem. It was a translation problem.</p>
+
+    <p>Daniels and colleagues distilled the guidelines into six actions that any nurse or doctor could perform at the bedside, without specialist equipment, within one hour of recognising sepsis. They called it the Sepsis Six.</p>
+
+    <div class="sepsis-six-box">
+        <h3>&#9889; The Sepsis Six &mdash; six actions within one hour of suspected sepsis</h3>
+        <div class="six-item">
+            <div class="six-num">1</div>
+            <div class="six-text"><strong>Administer high-flow oxygen</strong> &mdash; targeting peripheral oxygen saturation above 94% (88&ndash;92% in COPD). Sepsis causes tissue hypoxia; supplemental oxygen supports vital organ perfusion while the infection is treated.</div>
+        </div>
+        <div class="six-item">
+            <div class="six-num">2</div>
+            <div class="six-text"><strong>Take blood cultures</strong> &mdash; before antibiotics are started. Blood cultures identify the causative organism and guide antibiotic selection. Once antibiotics are given, cultures are often negative. This step cannot be done later.</div>
+        </div>
+        <div class="six-item">
+            <div class="six-num">3</div>
+            <div class="six-text"><strong>Give IV antibiotics</strong> &mdash; broad-spectrum, within one hour of recognition. Every hour of delay in antibiotic administration is associated with increased mortality. The choice of antibiotic matters; the timing matters more.</div>
+        </div>
+        <div class="six-item">
+            <div class="six-num">4</div>
+            <div class="six-text"><strong>Give IV fluid resuscitation</strong> &mdash; 500ml bolus of crystalloid. Sepsis causes vasodilation and relative hypovolaemia; fluid resuscitation supports blood pressure and organ perfusion. Reassess and repeat as needed.</div>
+        </div>
+        <div class="six-item">
+            <div class="six-num">5</div>
+            <div class="six-text"><strong>Check serum lactate</strong> &mdash; and repeat if elevated. Lactate is a marker of tissue hypoperfusion. Elevated lactate identifies high-risk patients who may deteriorate despite appearing clinically stable. Falling lactate confirms treatment is working.</div>
+        </div>
+        <div class="six-item">
+            <div class="six-num">6</div>
+            <div class="six-text"><strong>Measure accurate urine output</strong> &mdash; insert a urinary catheter if necessary. Urine output is a direct measure of renal perfusion. Oliguria (less than 0.5ml/kg/hour) signals organ dysfunction requiring escalation.</div>
+        </div>
+        <p style="font-size:0.85em;color:#5b21b6;margin-top:12px;border-top:1px solid #ddd6fe;padding-top:10px;">Source: UK Sepsis Trust, 2005. Endorsed by NICE. Used in 96% of NHS trusts and 37 countries. The six actions work as a bundle — all six together, within one hour. Partial compliance produces partial benefit.</p>
+    </div>
+
+    <p>The bundle was pragmatic by design. Daniels recognised that a complex protocol requiring specialist knowledge would not reach the ward in time. Sepsis kills through a dysregulated inflammatory response that progresses from infection to organ failure to death within hours. The Sepsis Six addressed the hours immediately after recognition &mdash; the window when bedside action matters most.</p>
+
+    <p>In 2011, the UK Sepsis Trust published the first evidence that the Sepsis Six was associated with a 50% reduction in mortality compared to patients who did not receive the full bundle. The UK Sepsis Trust was formally founded in 2012. NHS England adopted the Sepsis Six as a CQUIN indicator &mdash; a financial incentive measure &mdash; in 2013. The NICE guideline NG51 on sepsis recognition and management was published in 2015. The Think Sepsis mandatory screening campaign launched in 2017.</p>
+
+    <p>By 2019, survival rates from sepsis in the UK had reportedly risen from 70% in 2012 to 80%. The Sepsis Six appeared to be a success story.</p>
+
+    <p>Bootstrap CUSUM asks a different question.</p>
+
+    <hr>
+
+    <h2>What is sepsis &mdash; and why measuring it is harder than it looks</h2>
+
+    <p>Sepsis is not a disease. It is a syndrome &mdash; the body&rsquo;s dysregulated response to infection, producing organ dysfunction that can progress to septic shock and death. The infecting organism can be bacterial, viral, or fungal. The source can be anywhere: a urinary tract infection, pneumonia, an infected wound, a bowel perforation. What makes sepsis sepsis is not the infection but the body&rsquo;s catastrophic response to it.</p>
+
+    <p>This creates a fundamental measurement problem. When a person dies of pneumonia complicated by sepsis, what was the cause of death &mdash; the pneumonia or the sepsis? International death certification guidelines ask certifiers to record the underlying cause: the disease that started the chain of events. For most sepsis deaths, the underlying cause is the precipitating infection &mdash; pneumonia, urinary infection, bowel perforation &mdash; not the sepsis itself.</p>
+
+    <div class="alert-orange">
+        <strong>The 8.6% problem:</strong>
+        Research published in the BMJ Open in 2013 found that only 8.6% of deaths definitively associated with sepsis in England had a sepsis-related ICD-10 code (A40 or A41) as the <em>underlying</em> (primary) cause of death. 99% of sepsis deaths had one of those codes mentioned <em>somewhere</em> on the death certificate &mdash; but as a secondary or contributory cause, not the primary one. This means the most readily available mortality series captures approximately 1 in 11 true sepsis deaths. The other 10 are coded to the precipitating infection.
+    </div>
+
+    <p>This is not a data error. It is a feature of how death certification works. But it has a critical implication for evaluating the Sepsis Six: the publicly available mortality series &mdash; deaths where A40 or A41 was the underlying cause &mdash; is both incomplete and unstable over time. If clinical campaigns train staff to recognise and code sepsis as the primary cause more frequently, the underlying cause series will rise even if mortality is actually falling.</p>
+
+    <p class="note">&#128202; <strong>Data note:</strong> Analysis uses ONS &ldquo;Deaths involving sepsis, England and Wales, 2001 to 2023&rdquo; user-requested dataset (released 2024). Two series: Table 1 (sepsis as underlying cause, A40/A41) and Table 2 (sepsis mentioned anywhere on certificate). N=23 annual observations for both. Bootstrap CUSUM, Loops=5,000, Turn Length=3, Conf=90%. England and Wales population grew from approximately 52 million in 2001 to 60 million in 2023 &mdash; a 15% increase &mdash; and aged substantially over the same period. Both factors increase raw sepsis deaths independently of any change in clinical outcomes. The age-standardised rate would correct for this but is not available in this dataset. Data file: <a href="sepsis-both-series.csv" download>&#8675; sepsis-both-series.csv</a></p>
+
+    <h3>The recognition campaigns that changed the coding</h3>
+
+    <p>Four campaigns ran in sequence and each changed how sepsis was documented and coded:</p>
+
+    <ul>
+        <li><strong>Surviving Sepsis Campaign (2002 onwards):</strong> International initiative raising awareness among intensivists and emergency physicians. Primarily an ICU-level intervention. Published major guidelines in 2004, 2008, 2012, and 2016.</li>
+        <li><strong>NHS England CQUIN for sepsis screening (2013):</strong> Financial incentive &mdash; trusts received additional payment for documenting sepsis screening. Directly incentivised staff to document and code sepsis. This is the year the Bootstrap CUSUM detects the ratio change point at 95.5% confidence.</li>
+        <li><strong>NICE guideline NG51 (2016, updated 2017 and 2019):</strong> First NICE guideline specifically addressing sepsis recognition in all clinical settings. Introduced &ldquo;Red Flag Sepsis.&rdquo; Extended the focus beyond ICU to ward and community settings.</li>
+        <li><strong>NHS England Think Sepsis mandatory screening (2017):</strong> Made sepsis screening mandatory in A&amp;E and acute admissions. The most significant coding-level intervention &mdash; ensuring sepsis was formally documented whenever present.</li>
+    </ul>
+
+    <p>The coding change point at 2013 aligns precisely with the CQUIN introduction. Financial incentives for documentation produce documentation improvements. That is not a criticism &mdash; accurate coding is genuinely valuable for resource allocation and research. But it must be separated from clinical outcome measurement. The Bootstrap CUSUM does exactly this: it detects a structural change in the coding ratio at 2013, while finding no structural change in either mortality series.</p>
+
+    <hr>
+
+    <h2>The Bootstrap CUSUM analysis &mdash; two series, six charts</h2>
+
+    <p>The ONS dataset provides two distinct mortality series for England and Wales from 2001 to 2023. Running Bootstrap CUSUM on both &mdash; and comparing them &mdash; tells a more complete story than either series alone.</p>
+
+    <h3>Series 1 &mdash; Deaths where sepsis was mentioned anywhere on the certificate</h3>
+
+    <p>This is the more complete clinical measure. It captures deaths associated with sepsis regardless of which condition was coded as the primary cause. The values range from approximately 17,600 in 2001 to 26,200 in 2023, with a peak of approximately 27,400 in 2006 and a trough of approximately 19,300 in 2020.</p>
+
+    <figure class="chart-figure">
+        <img src="images/sepsis-mentioned-anywhere-cusum.png" alt="Bootstrap CUSUM — Sepsis deaths mentioned anywhere on certificate — England and Wales 2001-2023 — one stage no change point">
+        <figcaption>Deaths where sepsis was mentioned anywhere on the death certificate, England and Wales, 2001&ndash;2023. Bootstrap CUSUM, 90% confidence, N=23, Loops=5000. Mean=23,556. One stage, no change point. The CUSUM line rises steeply 2001&ndash;2009 (deaths consistently above mean), falls to 2014 (below mean), rises again 2015&ndash;2017, then falls through 2020 before recovering sharply. Despite this oscillation the Bootstrap CUSUM does not cross the confidence threshold in either direction.</figcaption>
+    </figure>
+
+    <figure class="chart-figure">
+        <img src="images/sepsis-mentioned-anywhere-run.png" alt="Run chart — Sepsis deaths mentioned anywhere — shift signal 2004-2009">
+        <figcaption>Run chart, same series. Median=23,571. Red dots mark a shift signal of 6+ consecutive points above the median around 2004&ndash;2009 &mdash; the period of rising Surviving Sepsis Campaign awareness and improving clinical recognition. No equivalent shift signal appears in the NHS Sepsis Six rollout period (2012&ndash;2015) or the mandatory Think Sepsis screening period (2017+).</figcaption>
+    </figure>
+
+    <div class="alert-red">
+        <strong>Mentioned anywhere: Bootstrap CUSUM finding</strong>
+        N=23, Mean=23,556, SD=2,566. Stages=1, no change point at 90% confidence, 5000 loops. X-mR confirms: all 23 annual values within natural process limits (UNPL=27,069, LNPL=20,043). No individual year is a special cause signal. The 2020 COVID suppression and 2021&ndash;2023 spike are within or approaching the natural process limits but do not trigger Bootstrap CUSUM stage changes.
+    </div>
+
+    <h3>Series 2 &mdash; Deaths where sepsis was the underlying (primary) cause</h3>
+
+    <p>This is the headline measure most often cited in mortality statistics. It counts only deaths where A40 (streptococcal sepsis) or A41 (other sepsis) was recorded as the primary underlying cause. Values range from approximately 1,958 in 2001 to 4,276 in 2023.</p>
+
+    <figure class="chart-figure">
+        <img src="images/sepsis-underlying-cause-cusum.png" alt="Bootstrap CUSUM — Sepsis underlying cause deaths — England and Wales 2001-2023 — one stage no change point">
+        <figcaption>Deaths where sepsis (A40/A41) was the underlying cause of death, England and Wales, 2001&ndash;2023. Bootstrap CUSUM, 90% confidence, N=23, Loops=5000. Mean=2,488. One stage, no change point. The CUSUM falls continuously from 2001 to approximately 2013, then rises sharply to 2023. The two trends cancel producing one flat stage mean. The rising trend from 2014 coincides precisely with the Think Sepsis coding campaigns &mdash; see ratio analysis below.</figcaption>
+    </figure>
+
+    <figure class="chart-figure">
+        <img src="images/sepsis-underlying-cause-run.png" alt="Run chart — Sepsis underlying cause deaths — six consecutive points below median 2007-2013">
+        <figcaption>Run chart, underlying cause series. Median=2,370. Six consecutive blue dots below the median from 2007&ndash;2013 mark a sustained shift signal. This period &mdash; when underlying cause coding was declining relative to the median &mdash; coincides with the pre-Think Sepsis era when sepsis was less frequently coded as the primary cause. The subsequent sharp rise from 2014 reflects coding improvement, not clinical deterioration.</figcaption>
+    </figure>
+
+    <div class="alert-red">
+        <strong>Underlying cause: Bootstrap CUSUM finding</strong>
+        N=23, Mean=2,488, SD=575. Stages=1, no change point at 90% confidence, 5000 loops. The run chart shows a six-point shift below the median 2007&ndash;2013 followed by a sustained rise from 2014. Both signals are coding artefacts driven by the Think Sepsis recognition campaigns.
+    </div>
+
+    <hr>
+
+    <h2>The ratio &mdash; the article&rsquo;s most important finding</h2>
+
+    <p>Comparing the two series year by year reveals something the individual series cannot show. In 2001, for every death where sepsis was the primary underlying cause, there were approximately nine deaths where sepsis appeared somewhere on the certificate but not as the primary cause. By 2022 that ratio had fallen to approximately 6.8. By 2023 it was 6.1.</p>
+
+    <div class="ratio-highlight">
+        <div class="r-item">
+            <div class="r-year">2001</div>
+            <div class="r-val">9.0x</div>
+            <div class="r-label">mentioned / underlying</div>
+        </div>
+        <div class="r-item">
+            <div class="r-year">2010</div>
+            <div class="r-val">11.5x</div>
+            <div class="r-label">peak ratio</div>
+        </div>
+        <div class="r-item">
+            <div class="r-year">2016</div>
+            <div class="r-val">8.6x</div>
+            <div class="r-label">Think Sepsis begins</div>
+        </div>
+        <div class="r-item">
+            <div class="r-year">2022</div>
+            <div class="r-val">6.8x</div>
+            <div class="r-label">mentioned / underlying</div>
+        </div>
+        <div class="r-item">
+            <div class="r-year">2023</div>
+            <div class="r-val">6.1x</div>
+            <div class="r-label">latest available</div>
+        </div>
+    </div>
+
+    <p>A falling ratio means an increasing proportion of sepsis deaths are being coded as primary sepsis rather than as the underlying infection. This is a <strong>coding improvement</strong>, not a clinical improvement. More deaths are being correctly identified as primarily attributable to the septic response.</p>
+
+    <p>Running Bootstrap CUSUM on the ratio itself &mdash; not on either mortality series, but on the ratio between them &mdash; produces the article&rsquo;s most revealing result.</p>
+
+    <figure class="chart-figure">
+        <img src="images/sepsis-ratio-cusum.png" alt="Bootstrap CUSUM — ratio of mentioned anywhere to underlying cause deaths — two stages, change point 2013 at 95.5% confidence">
+        <figcaption>Bootstrap CUSUM applied to the ratio (mentioned anywhere / underlying cause deaths), 2001&ndash;2023, N=23, 90% confidence, Loops=5000. Two stages. Stage 1 (2001&ndash;2013): mean ratio 10.75. Stage 2 (2013&ndash;2023): mean ratio 8.63. Change point 2013 at 95.5% confidence, -19.7%. The Bootstrap CUSUM finds no change point in clinical mortality &mdash; but finds a statistically significant structural change in the measurement system, dated to 2013.</figcaption>
+    </figure>
+
+    <figure class="chart-figure">
+        <img src="images/sepsis-ratio-run.png" alt="Run chart — sepsis ratio — shift signals above median 2003-2012 and below median 2014-2019">
+        <figcaption>Run chart, ratio series. Median=10.20. Red dots mark a sustained shift of 6+ consecutive points above the median from approximately 2003&ndash;2012. Blue dots mark a sustained shift of 6+ points below the median from approximately 2014&ndash;2019. The X-mR confirms 2022 and 2023 are both below the Lower Natural Process Limit of 7.87 &mdash; special cause signals indicating the ratio has now moved outside the range the earlier system could have produced.</figcaption>
+    </figure>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Stage</th><th>Period</th><th>Mean ratio</th><th>Change</th><th>Confidence</th><th>Interpretation</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td>2001&ndash;2013</td>
+                    <td>10.75</td>
+                    <td>Baseline</td>
+                    <td>Baseline</td>
+                    <td>Pre-Think Sepsis era. For every 1 death coded as primary sepsis, ~11 were coded to underlying infection. High under-coding of sepsis as primary cause.</td>
+                </tr>
+                <tr style="background:#f0fdf4;">
+                    <td><strong>2</strong></td>
+                    <td>2013&ndash;2023</td>
+                    <td>8.63</td>
+                    <td>&minus;19.7%</td>
+                    <td><strong>95.5%</strong></td>
+                    <td>Think Sepsis coding improvement era. For every 1 death coded as primary sepsis, ~9 coded to underlying infection. Structural change in coding practice, not in clinical outcomes.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert-orange">
+        <strong>The smoking gun:</strong>
+        Bootstrap CUSUM finds no structural change point in either clinical mortality series. But it finds a statistically significant structural change point in the <em>ratio</em> between those two series &mdash; dated to 2013, at 95.5% confidence. This is precisely when NHS England introduced the CQUIN financial incentive for sepsis screening. The measurement system changed structurally. The clinical outcome measure did not. The two findings together &mdash; no clinical change point, significant coding change point &mdash; are the most precise possible statement of why public mortality data cannot be used to evaluate the Sepsis Six.
+    </div>
+
+    <div class="dark-box">
+        <h3>&#128200; Why the ratio finding changes everything</h3>
+        <p>If the Bootstrap CUSUM had found a change point in clinical mortality (either series) but not in the ratio, that would suggest genuine clinical improvement. If it had found a change point in the ratio but not in mortality, that would suggest pure coding improvement with no clinical effect. What it actually finds is: no change point in either mortality series, and a significant change point in the ratio dated precisely to the CQUIN incentive year of 2013.</p>
+        <p style="margin-top:10px;">This means the rising underlying cause mortality series from 2013 onwards is primarily a coding improvement, not a clinical trend. The &ldquo;worsening&rdquo; headline number &mdash; sepsis deaths rising from ~2,000 to ~4,000 as primary cause &mdash; is substantially explained by better recognition. And the stability of the &ldquo;mentioned anywhere&rdquo; series &mdash; no upward trend &mdash; suggests total sepsis-associated mortality has not dramatically increased in the way the underlying cause series implies.</p>
+        <p style="margin-top:10px;">The net result: better coding. Not better outcomes. Not worse outcomes. A measurement change that simultaneously inflates the headline mortality number and makes it impossible to detect any clinical signal in either direction. This is not a criticism of the Think Sepsis campaigns &mdash; better coding is genuinely valuable for research and resource allocation. But it should never have been allowed to become the outcome measure for evaluating the clinical intervention it accompanied.</p>
+    </div>
+
+    <div class="dark-box">
+        <h3>&#128202; Why the ratio matters for the CUSUM finding</h3>
+        <p>The Bootstrap CUSUM on the underlying cause series finds one stage with a flat mean. But beneath that flat mean are two opposing trends: a fall from 2001 to 2013 and a rise from 2014 to 2023. The flat stage mean is the average of these two trends.</p>
+        <p style="margin-top:10px;">The falling trend pre-2013 is consistent with either genuine clinical improvement from the Sepsis Six (deaths correctly prevented) <em>or</em> with pre-Think Sepsis under-coding (deaths incorrectly attributed to underlying infections). The rising trend post-2014 is consistent with either genuine increase in sepsis mortality <em>or</em> with Think Sepsis coding improvement (deaths correctly reclassified from underlying infection to sepsis).</p>
+        <p style="margin-top:10px;">The falling ratio confirms the second interpretation dominates. The coding system changed during the intervention period. The Bootstrap CUSUM finds no change point because the coding change and any clinical effect are superimposed on each other and cannot be separated from public mortality data alone.</p>
+        <p style="margin-top:10px;"><strong>This is the article&rsquo;s central finding: the public mortality data cannot tell you whether the Sepsis Six saved lives, because the measure was altered by the recognition campaigns that accompanied the clinical intervention.</strong></p>
+    </div>
+
+    <hr>
+
+    <h2>What the Surviving Sepsis Campaign claimed &mdash; and what the evidence actually shows</h2>
+
+    <p>The UK Sepsis Trust published a 2011 study showing that full Sepsis Six compliance was associated with a 50&ndash;54% reduction in hospital mortality compared to non-compliance. This finding has been widely cited and has driven NHS adoption. It is genuine evidence &mdash; but it is observational evidence from a single hospital, and the comparison is between patients who received the full bundle and those who did not.</p>
+
+    <p>The question this analysis asks is different. Not &ldquo;does the Sepsis Six work in patients who receive it?&rdquo; but &ldquo;did the national rollout of the Sepsis Six change the population-level trajectory of sepsis mortality in England?&rdquo; Those are not the same question, and they require different evidence.</p>
+
+    <p>The observational evidence from 2011 is consistent with the Sepsis Six being effective in patients who receive all six components. But it tells you nothing about whether the NHS rollout achieved consistent enough compliance at sufficient scale to move the national mortality curve. The Bootstrap CUSUM answers that question &mdash; and finds no detectable change in either public mortality series across the 22 years of data.</p>
+
+    <div class="callout-box">
+        <h3>&#128203; The contested evidence base</h3>
+        <p>The Sepsis Six evidence is more contested than its widespread adoption suggests. Key findings from the broader literature:</p>
+        <p style="margin-top:10px;"><strong>In favour:</strong> Daniels et al. (2011) &mdash; 50&ndash;54% mortality reduction with full bundle compliance vs non-compliance (prospective observational, single hospital). NHS Wales compliance data: bundle delivery within one hour associated with improved outcomes in point-prevalence studies.</p>
+        <p style="margin-top:10px;"><strong>Contested:</strong> ProCESS, ARISE, and ProMISe trials (2015) &mdash; three large randomised controlled trials found no mortality benefit from protocolised early goal-directed resuscitation versus usual care in sepsis. Kaukonen et al. (2014, JAMA) &mdash; sepsis mortality was already improving in Australia and New Zealand before bundle adoption. Pugh et al. (Wales, four consecutive yearly studies) &mdash; <em>&ldquo;lack of improvement in sepsis care on the wards&rdquo;</em> despite bundle adoption.</p>
+        <p style="margin-top:10px;">Bootstrap CUSUM does not adjudicate this debate. It asks a specific population-level question: did England&rsquo;s national sepsis mortality series structurally change in a way that is temporally consistent with the intervention timeline? The answer, across both available public measures, is no detectable change point.</p>
+    </div>
+
+    <hr>
+
+    <h2>The Deming/Joiner lens: what the null result actually means</h2>
+
+    <p>The Bootstrap CUSUM finding of no change point is not the same as finding that the Sepsis Six did not work. It is a finding about the measurement system, not (only) about the intervention. Deming&rsquo;s theory of knowledge is precise on this: you cannot learn from an outcome without a stable, consistent measure. When the measure changes during the intervention period, the study step of PDSA is compromised.</p>
+
+    <div class="dark-box">
+        <h3>&#128221; The PDSA failure in the Sepsis Six rollout</h3>
+        <p class="quote">&ldquo;In God we trust. All others bring data.&rdquo; &mdash; W. Edwards Deming</p>
+        <p><strong>Plan:</strong> The Sepsis Six was designed with a clear clinical rationale. The 2011 observational study provided pre-specified evidence of effect. The plan was sound.</p>
+        <p style="margin-top:10px;"><strong>Do:</strong> NHS England adopted the bundle as a CQUIN target from 2013. The Think Sepsis campaign mandated screening from 2017. NICE NG51 was published 2015. The implementation was extensive.</p>
+        <p style="margin-top:10px;"><strong>Study:</strong> This is where the evidence breaks down. No pre-specified national outcome prediction was published: &ldquo;If the Sepsis Six is implemented consistently across NHS trusts, we predict the age-standardised sepsis mortality rate will fall by X% within Y years, detectable by Bootstrap CUSUM at Z confidence.&rdquo; Without that prediction there is no objective study step. The coding changes introduced by the recognition campaigns further compromised the ability to read the outcome measure. NHS England reported improving survival rates &mdash; but the measure used (survival rates in screened patients) is not a stable population-level measure. It is a compliance metric dressed up as an outcome.</p>
+        <p style="margin-top:10px;"><strong>Act:</strong> Without a valid study step, the act step is based on incomplete evidence. The NHS has continued to invest in Sepsis Six compliance without a robust pre-specified test of whether that investment is producing population-level mortality improvement.</p>
+    </div>
+
+    <p>The comparison with the Never Events analysis on this site is instructive. The <a href="never-events-wrong-route.html" style="color:var(--brand-mid);">Never Events Bootstrap CUSUM</a> finds one stage, no change point &mdash; and the reason is clear: the system has not been redesigned at the right level of intervention. The Sepsis Six Bootstrap CUSUM also finds one stage, no change point &mdash; but here the reason is different: the measure itself changed during the intervention period, making it impossible to detect a clinical signal even if one exists.</p>
+
+    <p>Same result. Different diagnosis. Same conclusion: the Study step of PDSA was never properly completed at national level.</p>
+
+    <div class="callout-box">
+        <h3>&#128203; What is PDSA?</h3>
+        <p><strong>Plan &ndash; Do &ndash; Study &ndash; Act</strong> is the improvement cycle developed by Walter Shewhart and popularised by W. Edwards Deming. It is the backbone of clinical quality improvement in the NHS, used in every QI programme from ward-level audits to national rollouts.</p>
+        <p style="margin-top:8px;"><strong>Plan:</strong> Define the change you will make and predict the outcome in advance &mdash; specifically, what measure will improve, by how much, and within what timeframe.</p>
+        <p style="margin-top:8px;"><strong>Do:</strong> Implement the change.</p>
+        <p style="margin-top:8px;"><strong>Study:</strong> Measure the actual outcome against the prediction. This is where Bootstrap CUSUM belongs &mdash; as the objective test of whether the process structurally changed. Without a pre-specified prediction and a stable outcome measure, there is no learning &mdash; only retrospective narrative.</p>
+        <p style="margin-top:8px;"><strong>Act:</strong> If it worked, standardise it. If it did not, revise the theory and run another cycle.</p>
+        <p style="margin-top:8px;">The Sepsis Six was rolled out nationally without a pre-specified CUSUM prediction and without verifying that the outcome measure was stable over time. The Study step was never completed.</p>
+    </div>
+
+    <hr>
+
+    <h2>What would actually show whether the Sepsis Six worked?</h2>
+
+    <p>The public mortality data cannot answer the question. Three other measures could &mdash; and one of them is publicly available and has been collected since 2018.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Measure</th><th>What it captures</th><th>Available</th><th>Bootstrap CUSUM applicability</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>ONS underlying cause mortality (A40/A41)</strong></td>
+                    <td>8.6% of true sepsis deaths. Dominated by coding changes from 2014.</td>
+                    <td>&#9989; Public, 2001&ndash;2023</td>
+                    <td>Not suitable as primary measure due to coding change confound. Used in this article as confirmatory analysis.</td>
+                </tr>
+                <tr style="background:#f0fdf4;">
+                    <td><strong>ONS mentioned anywhere mortality</strong></td>
+                    <td>More complete: all deaths with sepsis on the certificate. Less affected by coding changes (both series changed, reducing the ratio).</td>
+                    <td>&#9989; Public, 2001&ndash;2023</td>
+                    <td>Better measure. Still affected by COVID coding 2020. Used as primary analysis in this article. No change point found.</td>
+                </tr>
+                <tr>
+                    <td><strong>HES in-hospital mortality rate for sepsis admissions</strong></td>
+                    <td>In-hospital mortality as a proportion of all sepsis-coded admissions. Captures clinical outcomes more directly than death certification.</td>
+                    <td>&#128274; NHS Digital DARS request</td>
+                    <td>The correct primary measure. Available going back to 2003. Would provide N=20+ with a pre-intervention baseline. Requires data access request.</td>
+                </tr>
+                <tr style="background:#f0fdf4;">
+                    <td><strong>NHS England sepsis audit data</strong></td>
+                    <td>Time-to-antibiotics, bundle compliance rates, in-hospital mortality in screened patients. Published annually from 2018.</td>
+                    <td>&#9989; Public, 2018&ndash;present (N=6)</td>
+                    <td>Lead measure data &mdash; process compliance. Currently too short for reliable Bootstrap CUSUM. In 5&ndash;7 years this will be the definitive prospective test.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>The NHS England sepsis audit is the most important of these for future evaluation. It collects time-to-antibiotics, bundle compliance, and outcomes from hospitals across England. With annual data from 2018, it will have sufficient observations for Bootstrap CUSUM analysis by approximately 2030. If a structural change point is detectable in that series &mdash; a sustained improvement in bundle compliance correlating with a sustained reduction in in-hospital mortality &mdash; that would be the first robust population-level evidence that the Sepsis Six is moving the mortality curve. The CUSUM is waiting. The data is accumulating.</p>
+
+    <hr>
+
+    <h2>The broader lesson for clinical quality improvement</h2>
+
+    <p>The Sepsis Six is not unique in this problem. Many NHS quality improvement interventions have been adopted on the basis of observational studies, rolled out with enthusiasm, and evaluated against outcome measures that changed at the same time as the intervention. The result is that it is often impossible to say whether the intervention worked &mdash; not because it did not, but because the evidence infrastructure to answer the question was never built.</p>
+
+    <div class="dark-box">
+        <h3>&#128161; Three things every clinical QI programme should do before launch</h3>
+        <p><strong style="color:#93c5fd;">1. Specify the outcome measure before the intervention begins &mdash; and verify it is stable.</strong><br>The measure must be consistent over time, not affected by the intervention itself, and at the right level of attribution. The Sepsis Six rollout was accompanied by coding campaigns that changed the primary outcome measure. The next time a major clinical protocol is adopted nationally, the pre-specified outcome should be the HES in-hospital mortality rate for sepsis admissions &mdash; not the underlying cause death certification series which is known to be coding-sensitive.</p>
+        <p style="margin-top:14px;"><strong style="color:#93c5fd;">2. Make a pre-specified Bootstrap CUSUM prediction.</strong><br>Before implementation, publish in writing: &ldquo;We expect this intervention to produce a detectable structural change point in [specific measure] within [X] years at [Y]% confidence.&rdquo; This is the Study step of PDSA, completed in advance. Without it, the Do step has no feedback mechanism. The NHS adopted the Sepsis Six nationally in 2013 and declared success by 2019 &mdash; without ever specifying what statistical change in what measure would constitute evidence of success.</p>
+        <p style="margin-top:14px;"><strong style="color:#93c5fd;">3. Distinguish lead measures from lag measures from activity metrics.</strong><br>Bundle compliance rates are activity metrics &mdash; they measure what is being done, not what is resulting. Time-to-antibiotics is a lead measure &mdash; it predicts future mortality outcomes. The ONS mortality series is a lag measure. The NHS has evaluated the Sepsis Six primarily on activity metrics (compliance rates) and has conflated improving compliance with improving mortality. A rising compliance rate in a process that does not produce a detectable outcome change is tampering at the reporting level, not improvement at the clinical level.</p>
+    </div>
+
+    <p>None of this is a criticism of the Sepsis Six itself, or of Ron Daniels and the UK Sepsis Trust who created it. The clinical rationale is sound. The 2011 observational evidence is real. The 96% NHS adoption is a genuine achievement of clinical advocacy and implementation science. The question this analysis raises is not whether the Sepsis Six should have been adopted &mdash; it should have been &mdash; but whether the NHS has the analytical infrastructure to know whether its adoption produced the population-level outcomes it was intended to achieve.</p>
+
+    <p>The Bootstrap CUSUM cannot answer that question from public data. But it can hold the question open, state clearly what evidence would answer it, and point to the data that is now accumulating that will provide the answer in the next decade.</p>
+
+    <div class="cta-box">
+        <h2>Reproduce this analysis on your own data</h2>
+        <p>Download the ONS sepsis mortality CSV and apply Bootstrap CUSUM step-change analysis. Free, browser-based, no data leaves your computer.</p>
+        <a href="sepsis-both-series.csv" download style="display:inline-block;background:rgba(255,255,255,0.15);color:white;font-family:system-ui,sans-serif;font-size:0.9em;padding:10px 22px;border-radius:6px;text-decoration:none;margin-bottom:12px;">&#8675; Download the sepsis mortality CSV</a>
+        <br>
+        <a href="index.html" class="cta-btn">&#128202; Open the Free Tool</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="never-events-wrong-route.html">Wholly Preventable: Ten Years of a Never Event That Never Stopped</a></h3>
+        <p>The same Bootstrap CUSUM null result applied to wrong-route medication Never Events &mdash; but for a different reason. Not a measurement problem but a system problem: Layer 3 interventions applied to a problem requiring Layer 1.</p>
+        <a href="never-events-wrong-route.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E and the Promise That Wasn&rsquo;t Kept</a></h3>
+        <p>Fifteen years of NHS A&amp;E policy interventions, invisible in the Bootstrap CUSUM data. The constraint was never in A&amp;E.</p>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="the-grid-fixed-itself.html">The Grid Fixed Itself. Transport Didn&rsquo;t.</a></h3>
+        <p>The same PDSA study-step argument applied to 35 years of UK carbon emissions data. The carbon price floor produced a detectable change point because it pre-specified the mechanism, not just the goal.</p>
+        <a href="the-grid-fixed-itself.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <p class="note">&#128202; <strong>Data source:</strong> ONS, <em>Deaths involving sepsis, England and Wales: 2001 to 2023</em>. User-requested dataset, released 2024. Available at: <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/adhocs/2141deathsinvolvingsepsisenglandandwales2001to2023" target="_blank">ons.gov.uk</a>. Table 1: underlying cause. Table 2: mentioned anywhere. Figures are registered deaths, England and Wales combined, all persons, all ages.</p>
+
+    <footer class="article-footer">
+        <p><strong>Sepsis Six:</strong> Daniels R, Nutbeam T, McNamara G, Galvin C. The sepsis six and the severe sepsis resuscitation bundle: a prospective observational cohort study. <em>Emergency Medicine Journal</em>. 2011;28(6):507&ndash;512. doi:10.1136/emj.2010.095067</p>
+        <p style="margin-top:8px;"><strong>UK Sepsis Trust:</strong> <a href="https://sepsistrust.org" target="_blank">sepsistrust.org</a>. Founded 2012 by Dr Ron Daniels BEM. Sepsis Six developed 2005.</p>
+        <p style="margin-top:8px;"><strong>ONS sepsis mortality data:</strong> Deaths involving sepsis, England and Wales: 2001 to 2023. <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/adhocs/2141deathsinvolvingsepsisenglandandwales2001to2023" target="_blank">ons.gov.uk</a></p>
+        <p style="margin-top:8px;"><strong>8.6% finding:</strong> McPherson D et al. Sepsis-associated mortality in England: an analysis of multiple cause of death data from 2001 to 2010. <em>BMJ Open</em>. 2013;3(8):e002586. doi:10.1136/bmjopen-2013-002586</p>
+        <p style="margin-top:8px;"><strong>ProCESS/ARISE/ProMISe trials:</strong> NEJM 2014&ndash;2015. Three large RCTs finding no mortality benefit of protocolised resuscitation versus usual care in sepsis.</p>
+        <p style="margin-top:8px;"><strong>NICE NG51:</strong> National Institute for Health and Care Excellence. Sepsis: recognition, diagnosis and early management. NICE guideline NG51. Published July 2016, updated 2017 and 2019. <a href="https://www.nice.org.uk/guidance/ng51" target="_blank">nice.org.uk</a></p>
+        <p style="margin-top:8px;"><strong>Surviving Sepsis Campaign:</strong> Dellinger RP et al. Surviving Sepsis Campaign: International Guidelines for Management of Severe Sepsis and Septic Shock. <em>Critical Care Medicine</em>. 2013;41(2):580&ndash;637.</p>
+        <p style="margin-top:8px;"><strong>Deming:</strong> W. Edwards Deming, <em>Out of the Crisis</em>. MIT Press, 1982.</p>
+        <p style="margin-top:8px;"><strong>Joiner:</strong> Brian L. Joiner, <em>Fourth Generation Management</em>. McGraw-Hill, 1994.</p>
+        <p style="margin-top:8px;"><strong>Method:</strong> Bootstrap CUSUM step-change analysis. Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><strong>Analysis tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; May 2026</p>
+    </footer>
+
+</main>
+</body>
+</html>
