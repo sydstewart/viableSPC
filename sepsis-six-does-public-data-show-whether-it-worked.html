@@ -379,6 +379,8 @@
 
     <p>The observational evidence from 2011 is consistent with the Sepsis Six being effective in patients who receive all six components. But it tells you nothing about whether the NHS rollout achieved consistent enough compliance at sufficient scale to move the national mortality curve. The Bootstrap CUSUM answers that question &mdash; and finds no detectable change in either public mortality series across the 22 years of data.</p>
 
+    <p>A 2025 ecological study (Broad et al., <em>Infection</em>, Guy&rsquo;s and St Thomas&rsquo; NHS Foundation Trust / King&rsquo;s College London / UCL) used HES data to examine all sepsis-coded hospital admissions in England from April 1998 to March 2024, including mortality. It found sepsis-coded admissions increased 7.5-fold over that period &mdash; but concluded that this rise &ldquo;may have been impacted by coding changes and improved disease recognition&rdquo; rather than reflecting a true increase in sepsis incidence. That conclusion is precisely the coding change argument this article makes, confirmed by an independent research team using a different data source. The 2025 paper describes the epidemiological trends; it does not apply Bootstrap CUSUM to ask whether a structural change point in the mortality rate is detectable and whether its date is consistent with the Sepsis Six intervention timeline. That is what this article does. The two analyses are complementary, not competing &mdash; and together they make a stronger case than either alone.</p>
+
     <div class="callout-box">
         <h3>&#128203; The contested evidence base</h3>
         <p>The Sepsis Six evidence is more contested than its widespread adoption suggests. Key findings from the broader literature:</p>
@@ -425,6 +427,97 @@
 
     <hr>
 
+
+    <h3>The three measure types &mdash; applied to the Sepsis Six</h3>
+
+    <p>The table below applies Langley et al&rsquo;s three measure types directly to the Sepsis Six. Reading it makes clear why the NHS&rsquo;s evaluation was incomplete and what a complete evaluation would require.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Measure type</th>
+                <th>What it asks</th>
+                <th>For the Sepsis Six</th>
+                <th>Current status</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Outcome measure</strong><br><span style="font-size:0.85em;color:#64748b;">What ultimately matters to the patient</span></td>
+                    <td><em>Are patients surviving who would not have survived before? Are they recovering to their previous quality of life?</em></td>
+                    <td>Age-standardised sepsis mortality rate. In-hospital mortality rate (deaths/admissions). Quality of life and functional recovery at 90 days.</td>
+                    <td style="color:#c0392b;">&#10008; <strong>Not reliably available.</strong> ONS mortality series compromised by coding changes. HES in-hospital mortality rate available but Bootstrap CUSUM not yet applied. Quality of life data not collected at national level.</td>
+                </tr>
+                <tr style="background:#fafafa;">
+                    <td><strong>Process measure</strong><br><span style="font-size:0.85em;color:#64748b;">Whether the change is being implemented</span></td>
+                    <td><em>Are the six actions being delivered to all eligible patients within one hour?</em></td>
+                    <td>Proportion of patients receiving all six bundle components within one hour. Time-to-antibiotics in minutes. Proportion of sepsis patients formally screened.</td>
+                    <td style="color:#e67e22;">&#9888; <strong>Partially available.</strong> NHS England sepsis audit data from 2018 onwards (N=6). CQUIN compliance data 2013&ndash;2018. Shows improving compliance &mdash; but compliance is not the same as outcome.</td>
+                </tr>
+                <tr>
+                    <td><strong>Balancing measure</strong><br><span style="font-size:0.85em;color:#64748b;">Unintended consequences</span></td>
+                    <td><em>Are we creating new problems while solving the old one?</em></td>
+                    <td>Antibiotic resistance rates from broad-spectrum empirical prescribing. Fluid overload complications from aggressive resuscitation. Post-sepsis syndrome rates in survivors. Unnecessary treatment in patients who were not septic.</td>
+                    <td style="color:#c0392b;">&#10008; <strong>Not systematically tracked.</strong> Post-sepsis syndrome affects 40&ndash;60% of survivors but is not reported alongside Sepsis Six compliance data. Antibiotic resistance data exists but is not linked to sepsis bundle implementation at trust level.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert-orange">
+        <strong>The evaluation gap in one sentence:</strong>
+        The NHS has extensive process measure data (compliance rates) and no reliable national outcome measure data (mortality rate, quality of life) and no balancing measure data (post-sepsis syndrome, antibiotic resistance). The improvement cycle cannot be completed without all three.
+    </div>
+
+    <hr>
+
+    <h2>Bright Spots: where is the Sepsis Six working &mdash; and why?</h2>
+
+    <p>The Bootstrap CUSUM null result &mdash; no detectable change point in either national mortality series &mdash; tells you the aggregate picture. It does not tell you whether some trusts, regions, or patient groups are doing substantially better than others. That question requires a different analytical approach: looking for bright spots.</p>
+
+    <p>The concept of positive deviance was coined by Marian Zeitlin, a nutrition scientist at Tufts University, in her 1990 book <em>Positive Deviance in Child Nutrition</em> (UN University Press). Zeitlin asked why some children in desperately poor communities were well-nourished while their neighbours were not &mdash; and found the answer in the specific behaviours of those families, using the same constrained resources as everyone else. Jerry and Monique Sternin operationalised the concept in rural Vietnam in the early 1990s, working with Save the Children to identify families who had avoided childhood malnutrition against all odds. Their pilot rehabilitated 93% of malnourished children and was scaled to 5 million families. Pascale, Sternin and Sternin brought the approach to healthcare and organisational improvement in <em>The Power of Positive Deviance</em> (Harvard Business Press, 2010). Chip and Dan Heath&rsquo;s <em>Switch</em> (2010) popularised the same idea as &ldquo;Bright Spots.&rdquo;</p>
+
+    <p>The core question in all of these is the same: rather than asking &ldquo;why is the system failing?&rdquo;, ask &ldquo;where is it working, and what are those places doing differently?&rdquo; Applied to sepsis: if some NHS trusts are consistently achieving faster time-to-antibiotics, higher bundle compliance, and better survival outcomes than their peers &mdash; with comparable patient populations &mdash; the question is what they are doing that others are not. That knowledge is actionable in a way that a national average null result is not.</p>
+
+    <div class="callout-box">
+        <h3>&#127775; What a bright spots analysis of the Sepsis Six would look like</h3>
+        <p><strong>The data that exists:</strong> NHS England&rsquo;s sepsis audit data from 2018 collects trust-level compliance rates, time-to-antibiotics, and in-hospital outcomes. This data has sufficient granularity to identify outliers &mdash; trusts that are consistently above the national average on outcome measures, not just process measures.</p>
+        <p style="margin-top:10px;"><strong>The Bootstrap CUSUM question at trust level:</strong> Apply Bootstrap CUSUM to each trust&rsquo;s annual sepsis outcome data. Trusts that show a structural change point in their in-hospital mortality rate &mdash; a genuine step-down in mortality, not just random variation &mdash; are the bright spots. The date of their change point, and what changed in that trust at that time, is the hypothesis-generating finding.</p>
+        <p style="margin-top:10px;"><strong>What bright spots analysis has already found in sepsis:</strong> The original Surviving Sepsis Campaign&rsquo;s data showed that the ICUs with the best outcomes were not the ones with the highest technology &mdash; they were the ones with the most consistent bundle compliance across all staff grades, at all times of day, regardless of patient volume. The constraint was not capability but consistency. That is a Layer 2 finding in the Joiner framework: the process, not the system, was the differentiating factor in high-performing units &mdash; exactly the distinction explored in <a href="the-grid-fixed-itself.html#frameworks" style="color:var(--brand-mid);">Three frameworks, one lesson: why the level of intervention determines the result</a> in the carbon emissions article.</p>
+        <p style="margin-top:10px;"><strong>The practical implication:</strong> A trust that applies Bootstrap CUSUM to its own sepsis mortality rate &mdash; comparing its trajectory to the national series &mdash; can objectively determine whether it is a bright spot or a laggard. That is not a judgement. It is a diagnosis, and a starting point for understanding what to do differently.</p>
+    </div>
+
+    <p>The Sepsis Six null result at national level is not evidence that the intervention has failed. It is evidence that the national average conceals substantial variation &mdash; some trusts performing much better, some much worse &mdash; and that the improvement opportunity lies in understanding and propagating the bright spots rather than continuing to push the aggregate number. Bootstrap CUSUM is the tool that makes that analysis rigorous: it distinguishes trusts where the outcome has structurally changed from those where variation remains within common cause noise, and it dates the change precisely enough to ask what happened there that year.</p>
+
+
+    <hr>
+
+    <h2>The patients who survived &mdash; and what happened to them</h2>
+
+    <p>This analysis examines mortality. The 2025 ecological study by Broad et al. examines admissions and survival. Between the two papers, a picture emerges that neither alone provides: <strong>more patients are surviving sepsis &mdash; but we do not know what that survival means for their lives.</strong></p>
+
+    <p>This connects directly to the second of Langley et al&rsquo;s three questions: <em>&ldquo;How will we know that a change is an improvement?&rdquo;</em> The answer that is best for patients requires going further than either mortality data or survival data alone. A patient with sepsis wants three things &mdash; and public data currently measures only the first two:</p>
+
+    <ul>
+        <li><strong>Not to die</strong> &mdash; mortality data addresses this partially, with the coding limitations this article identifies</li>
+        <li><strong>To leave hospital alive</strong> &mdash; HES admission and survival data addresses this, and the 2025 paper shows survival rates have improved</li>
+        <li><strong>To return to the life they had before</strong> &mdash; neither paper addresses this at all</li>
+    </ul>
+
+    <p>That third question is where the evidence base is most conspicuously absent. Studies suggest that 40&ndash;60% of sepsis survivors develop significant long-term morbidity &mdash; cognitive impairment, fatigue, vulnerability to recurrent infections, and psychological trauma collectively described as post-sepsis syndrome. The UK Sepsis Trust now runs a dedicated post-sepsis support programme recognising this. NICE guideline CG191 (rehabilitation after critical illness) addresses it directly. A patient who survives sepsis after receiving the Sepsis Six but spends the following two years with moderate cognitive impairment, repeated hospital admissions, and an inability to return to work has a very different outcome from a patient who survives and returns to full function. Mortality data counts them identically &mdash; both survivors. So does the 2025 HES paper.</p>
+
+    <p>The Sepsis Six was designed to keep patients alive. The evidence suggests it may be doing so &mdash; more patients are surviving to discharge. But <strong>survival is not the same as recovery, and recovery is what patients actually want.</strong> The improvement cycle is not complete until the third question is answered.</p>
+
+    <div class="callout-box">
+        <h3>&#128202; Post-sepsis syndrome as a balancing measure &mdash; and why it changes the impact of both papers</h3>
+        <p>In the language of Langley et al&rsquo;s <em>The Improvement Guide</em>, post-sepsis syndrome is a <strong>balancing measure</strong> &mdash; a measure of what might be getting worse while you focus on the target outcome. An intervention that reduces sepsis mortality while substantially increasing long-term morbidity in survivors has not unambiguously improved patient welfare. It has shifted the burden from death to disability.</p>
+        <p style="margin-top:10px;">This does not mean the Sepsis Six is wrong to aim at survival. It means the complete evaluation requires tracking what happens to survivors &mdash; not just whether they left the hospital alive. The 2025 paper shows more patients are surviving. Our article shows we cannot confirm whether the Sepsis Six is why. <strong>Neither paper measures what survival actually means for patients &mdash; and that is the most important question of all.</strong></p>
+        <p style="margin-top:10px;">The three questions of the Model for Improvement demand all three measure types together: the outcome (survival <em>and</em> quality of life <em>and</em> functional recovery), the process (bundle compliance, time-to-antibiotics), and the balancing measure (post-sepsis syndrome rates, readmission rates, antibiotic resistance). Public data currently provides none of these with the completeness the question deserves.</p>
+    </div>
+
+    <p class="note">&#128202; <strong>Post-sepsis resources:</strong> UK Sepsis Trust post-sepsis support: <a href="https://sepsistrust.org/patient-information/" target="_blank">sepsistrust.org/patient-information</a> &mdash; NICE guideline CG191: <em>Rehabilitation after critical illness in adults</em>, 2009. &mdash; Langley G, Moen R, Nolan K et al. <em>The Improvement Guide</em>. 2nd ed. Jossey-Bass, 2009 &mdash; source of the three measure types (outcome, process, balancing) and the Model for Improvement.</p>
+
+    <hr>
+
     <h2>What would actually show whether the Sepsis Six worked?</h2>
 
     <p>The public mortality data cannot answer the question. Three other measures could &mdash; and one of them is publicly available and has been collected since 2018.</p>
@@ -449,9 +542,9 @@
                 </tr>
                 <tr>
                     <td><strong>HES in-hospital mortality rate for sepsis admissions</strong></td>
-                    <td>In-hospital mortality as a proportion of all sepsis-coded admissions. Captures clinical outcomes more directly than death certification.</td>
-                    <td>&#128274; NHS Digital DARS request</td>
-                    <td>The correct primary measure. Available going back to 2003. Would provide N=20+ with a pre-intervention baseline. Requires data access request.</td>
+                    <td>In-hospital mortality as a proportion of all sepsis-coded admissions. Captures clinical outcomes more directly than death certification. <strong>Note:</strong> a 2025 study (Guy&rsquo;s/KCL/UCL, <em>Infection</em>) applied this measure to 1998&ndash;2024 HES data and found the same coding change caveat applies &mdash; the 7.5-fold rise in admissions is partly explained by improved coding recognition.</td>
+                    <td>&#9989; Aggregated HES data freely available via NHS Digital. Individual-level data requires DARS request. A 2025 study used admissions 1998&ndash;2024, N=26 with pre-intervention baseline.</td>
+                    <td>The correct primary measure. N=26 annual observations sufficient for Bootstrap CUSUM. Not yet applied with CUSUM methodology &mdash; a direct follow-on analysis from this article.</td>
                 </tr>
                 <tr style="background:#f0fdf4;">
                     <td><strong>NHS England sepsis audit data</strong></td>
@@ -475,7 +568,7 @@
         <h3>&#128161; Three things every clinical QI programme should do before launch</h3>
         <p><strong style="color:#93c5fd;">1. Specify the outcome measure before the intervention begins &mdash; and verify it is stable.</strong><br>The measure must be consistent over time, not affected by the intervention itself, and at the right level of attribution. The Sepsis Six rollout was accompanied by coding campaigns that changed the primary outcome measure. The next time a major clinical protocol is adopted nationally, the pre-specified outcome should be the HES in-hospital mortality rate for sepsis admissions &mdash; not the underlying cause death certification series which is known to be coding-sensitive.</p>
         <p style="margin-top:14px;"><strong style="color:#93c5fd;">2. Make a pre-specified Bootstrap CUSUM prediction.</strong><br>Before implementation, publish in writing: &ldquo;We expect this intervention to produce a detectable structural change point in [specific measure] within [X] years at [Y]% confidence.&rdquo; This is the Study step of PDSA, completed in advance. Without it, the Do step has no feedback mechanism. The NHS adopted the Sepsis Six nationally in 2013 and declared success by 2019 &mdash; without ever specifying what statistical change in what measure would constitute evidence of success.</p>
-        <p style="margin-top:14px;"><strong style="color:#93c5fd;">3. Distinguish lead measures from lag measures from activity metrics.</strong><br>Bundle compliance rates are activity metrics &mdash; they measure what is being done, not what is resulting. Time-to-antibiotics is a lead measure &mdash; it predicts future mortality outcomes. The ONS mortality series is a lag measure. The NHS has evaluated the Sepsis Six primarily on activity metrics (compliance rates) and has conflated improving compliance with improving mortality. A rising compliance rate in a process that does not produce a detectable outcome change is tampering at the reporting level, not improvement at the clinical level.</p>
+        <p style="margin-top:14px;"><strong style="color:#93c5fd;">3. Distinguish outcome measures from process measures from balancing measures.</strong><br>Bundle compliance rates are process measures &mdash; they measure what is being done, not what is resulting. Time-to-antibiotics is a lead process measure &mdash; it predicts future mortality outcomes. The ONS mortality series is a lag outcome measure. Post-sepsis syndrome rates and antibiotic resistance are balancing measures. The NHS has evaluated the Sepsis Six primarily on process measures (compliance rates) and has conflated improving compliance with improving mortality. And it has not systematically tracked balancing measures at all. A rising compliance rate in a process that does not produce a detectable outcome change &mdash; and that may be generating new problems in survivors &mdash; is an incomplete picture, not a success story.</p>
     </div>
 
     <p>None of this is a criticism of the Sepsis Six itself, or of Ron Daniels and the UK Sepsis Trust who created it. The clinical rationale is sound. The 2011 observational evidence is real. The 96% NHS adoption is a genuine achievement of clinical advocacy and implementation science. The question this analysis raises is not whether the Sepsis Six should have been adopted &mdash; it should have been &mdash; but whether the NHS has the analytical infrastructure to know whether its adoption produced the population-level outcomes it was intended to achieve.</p>
@@ -514,14 +607,19 @@
     <p class="note">&#128202; <strong>Data source:</strong> ONS, <em>Deaths involving sepsis, England and Wales: 2001 to 2023</em>. User-requested dataset, released 2024. Available at: <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/adhocs/2141deathsinvolvingsepsisenglandandwales2001to2023" target="_blank">ons.gov.uk</a>. Table 1: underlying cause. Table 2: mentioned anywhere. Figures are registered deaths, England and Wales combined, all persons, all ages.</p>
 
     <footer class="article-footer">
-        <p><strong>Sepsis Six:</strong> Daniels R, Nutbeam T, McNamara G, Galvin C. The sepsis six and the severe sepsis resuscitation bundle: a prospective observational cohort study. <em>Emergency Medicine Journal</em>. 2011;28(6):507&ndash;512. doi:10.1136/emj.2010.095067</p>
-        <p style="margin-top:8px;"><strong>UK Sepsis Trust:</strong> <a href="https://sepsistrust.org" target="_blank">sepsistrust.org</a>. Founded 2012 by Dr Ron Daniels BEM. Sepsis Six developed 2005.</p>
+        <p><strong>HES sepsis admissions 1998&ndash;2024:</strong> Broad J et al. &ldquo;Rising rates of sepsis in England: an ecological study.&rdquo; <em>Infection</em>, 2025. <a href="https://pubmed.ncbi.nlm.nih.gov/40663286/" target="_blank">doi:10.1007/s15010-025-02601-0</a> &mdash; Guy&rsquo;s and St Thomas&rsquo; NHS Foundation Trust / KCL / UCL. Sepsis-coded admissions 27.9 to 210.4 per 100,000 (1998&ndash;2023). Mortality data collected. Bootstrap CUSUM not applied &mdash; direct follow-on analysis opportunity.</p>
+        <p style="margin-top:8px;"><strong>Sepsis Six:</strong> Daniels R, Nutbeam T, McNamara G, Galvin C. The sepsis six and the severe sepsis resuscitation bundle: a prospective observational cohort study. <em>Emergency Medicine Journal</em>. 2011;28(6):507&ndash;512. doi:10.1136/emj.2010.095067</p>
+        <p style="margin-top:8px;"><strong>UK Sepsis Trust:</strong> <a href="https://sepsistrust.org" target="_blank">sepsistrust.org</a>. Founded 2012 by Dr Ron Daniels BEM. Sepsis Six developed 2005. Post-sepsis support: <a href="https://sepsistrust.org/patient-information/" target="_blank">sepsistrust.org/patient-information</a></p>
         <p style="margin-top:8px;"><strong>ONS sepsis mortality data:</strong> Deaths involving sepsis, England and Wales: 2001 to 2023. <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/adhocs/2141deathsinvolvingsepsisenglandandwales2001to2023" target="_blank">ons.gov.uk</a></p>
         <p style="margin-top:8px;"><strong>8.6% finding:</strong> McPherson D et al. Sepsis-associated mortality in England: an analysis of multiple cause of death data from 2001 to 2010. <em>BMJ Open</em>. 2013;3(8):e002586. doi:10.1136/bmjopen-2013-002586</p>
         <p style="margin-top:8px;"><strong>ProCESS/ARISE/ProMISe trials:</strong> NEJM 2014&ndash;2015. Three large RCTs finding no mortality benefit of protocolised resuscitation versus usual care in sepsis.</p>
         <p style="margin-top:8px;"><strong>NICE NG51:</strong> National Institute for Health and Care Excellence. Sepsis: recognition, diagnosis and early management. NICE guideline NG51. Published July 2016, updated 2017 and 2019. <a href="https://www.nice.org.uk/guidance/ng51" target="_blank">nice.org.uk</a></p>
+        <p style="margin-top:8px;"><strong>NICE CG191:</strong> National Institute for Health and Care Excellence. Rehabilitation after critical illness in adults. NICE guideline CG191. <a href="https://www.nice.org.uk/guidance/cg83" target="_blank">nice.org.uk/guidance/cg83</a></p>
         <p style="margin-top:8px;"><strong>Surviving Sepsis Campaign:</strong> Dellinger RP et al. Surviving Sepsis Campaign: International Guidelines for Management of Severe Sepsis and Septic Shock. <em>Critical Care Medicine</em>. 2013;41(2):580&ndash;637.</p>
         <p style="margin-top:8px;"><strong>The Improvement Guide:</strong> Langley G, Moen R, Nolan K, Nolan T, Norman C, Provost L. <em>The Improvement Guide: A Practical Approach to Enhancing Organizational Performance</em>. 2nd ed. Jossey-Bass, 2009. ISBN 978-0-470-19241-2. Source of the three measure types (outcome, process, balancing) and the Model for Improvement.</p>
+        <p style="margin-top:8px;"><strong>Positive deviance &mdash; original concept:</strong> Zeitlin M, Ghassemi H, Mansour M. <em>Positive Deviance in Child Nutrition</em>. United Nations University Press, 1990. The foundational text identifying why some children thrived in malnourished communities &mdash; ask what is going right, not only what is going wrong.</p>
+        <p style="margin-top:8px;"><strong>Positive deviance &mdash; operationalisation and healthcare:</strong> Pascale RT, Sternin J, Sternin M. <em>The Power of Positive Deviance: How Unlikely Innovators Solve the World&rsquo;s Toughest Problems</em>. Harvard Business Press, 2010. Jerry and Monique Sternin&rsquo;s Vietnam work scaling to 5 million families; application to healthcare and organisational improvement.</p>
+        <p style="margin-top:8px;"><strong>Bright Spots:</strong> Heath C, Heath D. <em>Switch: How to Change Things When Change Is Hard</em>. Random House, 2010. Popularised positive deviance as &ldquo;Bright Spots&rdquo; for organisational change.</p>
         <p style="margin-top:8px;"><strong>Deming:</strong> W. Edwards Deming, <em>Out of the Crisis</em>. MIT Press, 1982.</p>
         <p style="margin-top:8px;"><strong>Joiner:</strong> Brian L. Joiner, <em>Fourth Generation Management</em>. McGraw-Hill, 1994.</p>
         <p style="margin-top:8px;"><strong>Method:</strong> Bootstrap CUSUM step-change analysis. Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
