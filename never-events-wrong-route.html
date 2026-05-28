@@ -65,7 +65,7 @@
         .method-box { background: #f0fff4; border: 1px solid var(--green); border-radius: 8px; padding: 20px 24px; margin: 24px 0; font-family: system-ui, sans-serif; }
         .method-box h3 { color: var(--green); margin-bottom: 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
         .method-box p { font-size: 0.95em; margin-bottom: 10px; }
-        .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; }
+        .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; overflow-x: auto; }
         .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
         .numbers-box th { background: var(--brand-blue); color: white; padding: 8px 12px; text-align: left; }
         .numbers-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
@@ -111,6 +111,18 @@
         .hierarchy-label { font-weight: bold; font-size: 0.85em; min-width: 70px; }
         .hierarchy-desc { font-size: 0.92em; }
         .hierarchy-nhs { font-size: 0.82em; color: var(--muted); margin-top: 3px; }
+        /* TOC styles */
+        .toc-details { margin: 0 0 28px 0; border: 1px solid var(--border); border-radius: 8px; font-family: system-ui, sans-serif; background: white; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: bold; color: var(--brand-blue); font-size: 0.95em; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+        .toc-details summary::-webkit-details-marker { display: none; }
+        .toc-details summary:hover { background: var(--brand-light); border-radius: 8px; }
+        .toc-details[open] summary { border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; }
+        .toc-details[open] summary:hover { border-radius: 8px 8px 0 0; }
+        .toc-inner { padding: 6px 18px 16px; }
+        .toc-inner ol { margin: 10px 0 0 1.2em; line-height: 2.1; }
+        .toc-inner ol li { font-size: 0.92em; margin-bottom: 0; }
+        .toc-inner ol li a { color: var(--brand-mid); text-decoration: none; }
+        .toc-inner ol li a:hover { text-decoration: underline; color: var(--brand-blue); }
     </style>
 </head>
 <body>
@@ -151,7 +163,7 @@
             </div>
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--purple);">
                 <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The O&rsquo;Neill Comparison</div>
-                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Paul O&rsquo;Neill inherited Alcoa in 1987 — already the safest company in aluminium manufacturing. He declared zero injuries, redesigned the system rather than retraining individuals, and drove the injury rate to one-twentieth the US average. Market value grew from $3bn to $27.5bn. The NHS has issued alerts. The difference is method.</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Paul O&rsquo;Neill inherited Alcoa in 1987 &mdash; already the safest company in aluminium manufacturing. He declared zero injuries, redesigned the system rather than retraining individuals, and drove the injury rate to one-twentieth the US average. Market value grew from $3bn to $27.5bn. The NHS has issued alerts. The difference is method.</div>
             </div>
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
                 <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">What Would Fix It</div>
@@ -163,7 +175,27 @@
         </div>
     </div>
 
-    <h2>A wholly preventable event that keeps happening</h2>
+    <!-- TABLE OF CONTENTS -->
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Table of Contents &mdash; click to expand or collapse</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-wholly-preventable">A wholly preventable event that keeps happening</a></li>
+                <li><a href="#section-timeline">The intervention timeline: fifteen years of activity</a></li>
+                <li><a href="#section-data">The data: Bootstrap CUSUM and X-mR applied to the post-2018 series</a></li>
+                <li><a href="#section-root-cause">The root cause: why the engineering solution didn&rsquo;t fix it</a></li>
+                <li><a href="#section-alcoa">What Paul O&rsquo;Neill did at Alcoa &mdash; and what it means for the NHS</a></li>
+                <li><a href="#section-system-change">What genuine system change would look like</a></li>
+                <li><a href="#section-data-limitations">A note on the data and its limitations</a></li>
+                <li><a href="#section-levels-of-fix">Joiner&rsquo;s Levels of Fix &mdash; where the NHS has been operating</a></li>
+                <li><a href="#section-three-strategies">Joiner&rsquo;s three strategies for improving a stable process</a></li>
+                <li><a href="#section-conclusion">The conclusion Deming would have drawn</a></li>
+                <li><a href="#section-confirmatory">Confirmatory analysis: total Never Events monthly 2019&ndash;2026</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-wholly-preventable">A wholly preventable event that keeps happening</h2>
 
     <p>A Never Event is not simply a serious incident. It is a specific category of patient safety event that the NHS defines as &ldquo;wholly preventable&rdquo; because strong systemic barriers exist at a national level to prevent it. The designation carries a precise implication: if the barriers are implemented, the event should not occur. The Never Events framework was created in 2010 on exactly this premise.</p>
 
@@ -178,7 +210,7 @@
 
     <hr>
 
-    <h2>The intervention timeline: fifteen years of activity</h2>
+    <h2 id="section-timeline">The intervention timeline: fifteen years of activity</h2>
 
     <p>This is not a story of neglect. The NHS has applied substantial effort to wrong-route medication errors for fifteen years. The timeline below shows the interventions against the hierarchy of controls &mdash; the safety science framework that classifies interventions from weakest (training) to strongest (elimination).</p>
 
@@ -250,7 +282,7 @@
 
     <hr>
 
-    <h2>The data: Bootstrap CUSUM and X-mR applied to the post-2018 series</h2>
+    <h2 id="section-data">The data: Bootstrap CUSUM and X-mR applied to the post-2018 series</h2>
 
     <p>The Never Events framework was substantially revised in February 2018, rationalising and merging the medication sub-categories into a single consistent definition. The post-2018 series therefore represents the cleanest, most directly comparable dataset available &mdash; six financial years, one consistent definition, all drawn from final confirmed NHS annual reports.</p>
 
@@ -287,7 +319,7 @@
         <h3>&#128202; What these two charts tell you together</h3>
         <p><strong>The Bootstrap CUSUM</strong> asks: did the process structurally change at any point during this period? The answer is no &mdash; one stage, no change point at 99.7% confidence. This means no intervention produced a statistically detectable step change in the annual wrong-route count.</p>
         <p><strong>The X-mR chart</strong> asks: are individual annual counts behaving as common cause variation around a stable mean, or are any values signalling something outside normal system behaviour? The answer is common cause variation throughout &mdash; including the COVID year. Every value sits within the natural process limits.</p>
-        <p><strong>Together</strong> they say the same thing: this is a process in statistical control, producing roughly 17&ndash;18 wrong-route medication Never Events per year, and it has been doing so consistently since the post-2018 framework was introduced. The variation from year to year is the normal noise of the system, not a signal of anything changing. This is the SPC signature of a system whose underlying conditions have not changed.</p>
+        <p><strong>Together</strong> they say the same thing: this is a process in statistical control, producing roughly 17&ndash;18 wrong-route medication Never Events per year, and it has been doing so consistently since the post-2018 framework was introduced. The variation from year to year is the normal noise of the system, not a signal of anything changing.</p>
     </div>
 
     <h3>The COVID year &mdash; a counterintuitive signal</h3>
@@ -297,24 +329,24 @@
     <ul>
         <li><strong>Staff redeployment to unfamiliar settings.</strong> Nurses and doctors working outside their normal wards encountered different drug storage layouts, unfamiliar syringe types, and medications they did not routinely handle. The system conditions that produce wrong-route errors &mdash; mixed storage, dual syringe availability, cognitive load &mdash; were replicated in new settings without the local familiarity that partially compensates for them.</li>
         <li><strong>Disruption to normal checking procedures.</strong> PPE requirements, physical distancing, and emergency working conditions made double-checking harder under exactly the conditions where cognitive errors are most likely.</li>
-        <li><strong>A genuinely resilient system would have been protected from this.</strong> If Layer 1 controls &mdash; pharmacy unit-dose dispensing, physical removal of Luer syringes &mdash; had been in place, the COVID disruption would not have produced more wrong-route errors. The spike is evidence that the system&rsquo;s protection depends on staff familiarity rather than system design. Remove the familiarity and the errors increase.</li>
+        <li><strong>A genuinely resilient system would have been protected from this.</strong> If Layer 1 controls &mdash; pharmacy unit-dose dispensing, physical removal of Luer syringes &mdash; had been in place, the COVID disruption would not have produced more wrong-route errors. The spike is evidence that the system&rsquo;s protection depends on staff familiarity rather than system design.</li>
     </ul>
 
     <h3>The 2018-19 and 2019-20 low figures &mdash; framework transition or genuine improvement?</h3>
 
-    <p>The two lowest years in the series &mdash; 2018&ndash;19 (10) and 2019&ndash;20 (11) &mdash; deserve specific scrutiny. COVID cannot explain 2018&ndash;19 at all, and only affects the final two weeks of 2019&ndash;20 (the financial year ends March 2020, and COVID restrictions began late February). Three explanations are plausible:</p>
+    <p>The two lowest years in the series &mdash; 2018&ndash;19 (10) and 2019&ndash;20 (11) &mdash; deserve specific scrutiny. Three explanations are plausible:</p>
 
     <ul>
         <li><strong>Framework transition reporting uncertainty.</strong> The February 2018 revision merged three sub-categories into one and changed the reporting pathway. Trusts adapting to new definitions in the first year or two may have under-reported or misclassified some events. NHS England explicitly notes that direct pre- and post-revision comparisons are not appropriate.</li>
-        <li><strong>Anticipatory attention effect &mdash; a mirror of the <a href="ulez-london-air-quality.html" style="color:var(--brand-mid);">ULEZ finding</a>.</strong> The 2018 framework revision was consulted on in 2017 and widely communicated. Heightened organisational attention during the transition &mdash; MSOs reviewing syringe protocols, wards auditing storage &mdash; may have temporarily suppressed error rates. That heightened attention faded as the new framework became routine, and the underlying system conditions reasserted themselves &mdash; producing the jump to 24 in 2020&ndash;21. This mirrors the ULEZ anticipatory compliance finding exactly: a signal appearing before the official change, then fading when attention normalises.</li>
-        <li><strong>The values remain within natural process limits.</strong> The X-mR LNPL is 4.73. Both 10 and 11 sit comfortably above this. They are low relative to the series mean but statistically they are common cause variation &mdash; the system behaving at the lower end of its natural range, not evidence of structural improvement.</li>
+        <li><strong>Anticipatory attention effect.</strong> The 2018 framework revision was consulted on in 2017 and widely communicated. Heightened organisational attention during the transition may have temporarily suppressed error rates. That heightened attention faded as the new framework became routine, producing the jump to 24 in 2020&ndash;21.</li>
+        <li><strong>The values remain within natural process limits.</strong> The X-mR LNPL is 4.73. Both 10 and 11 sit comfortably above this. They are common cause variation &mdash; the system behaving at the lower end of its natural range, not evidence of structural improvement.</li>
     </ul>
 
-    <p>The honest conclusion: 2018&ndash;19 and 2019&ndash;20 are most likely a combination of transition reporting effects and temporary heightened attention, not genuine system improvement. The subsequent return to higher counts confirms this &mdash; a real improvement would have held. The process mean is 17.5 throughout.</p>
+    <p>The honest conclusion: 2018&ndash;19 and 2019&ndash;20 are most likely a combination of transition reporting effects and temporary heightened attention, not genuine system improvement. The subsequent return to higher counts confirms this &mdash; a real improvement would have held.</p>
 
     <hr>
 
-    <h2>The root cause: why the engineering solution didn&rsquo;t fix it</h2>
+    <h2 id="section-root-cause">The root cause: why the engineering solution didn&rsquo;t fix it</h2>
 
     <p>The ISO 80369 connector is the right engineering answer to wrong-route medication errors. Physically incompatible connectors that cannot be joined between IV, enteral, neuraxial and epidural routes make wrong-route connection structurally impossible. If universally implemented, wrong-route Never Events should have collapsed toward zero somewhere around 2015&ndash;2018 as rollout completed.</p>
 
@@ -334,16 +366,15 @@
     <div class="callout-box">
         <h3>&#10067; Why did investigations miss this for fifteen years?</h3>
         <p>This is a legitimate question. The HSIB investigation in 2019 identified the decanting mechanism precisely. The conditions &mdash; mixed storage, dual syringe availability, no national checking standard &mdash; were not hidden. They were visible to anyone who walked onto a ward. Why did fifteen years of Serious Incident investigations not produce a system change?</p>
-        <p style="margin-top:10px;">Several interlinked factors may explain it:</p>
-        <p style="margin-top:8px;"><strong>Possibly no prospective FMEA.</strong> Failure Mode and Effects Analysis applied before the ISO 80369 rollout would likely have identified the decanting workaround as a predictable failure mode &mdash; staff will find the path of least resistance, and if Luer syringes remain available, they will be used. FMEA asks: how could this fail? The answer was foreseeable. It may not have been systematically asked.</p>
-        <p style="margin-top:8px;"><strong>Possibly no PDSA cycle with pre-specified outcome.</strong> Each intervention &mdash; the ENFit rollout, the MSO mandate, the NatSSIPs &mdash; may have been implemented without a pre-specified prediction: &ldquo;if this works, wrong-route events will fall below X within Y months.&rdquo; Without that prediction, there is no study step. Without a study step, there is no learning. The Do happened repeatedly. The Study may never have been completed.</p>
-        <p style="margin-top:8px;"><strong>Possibly the work environment was not studied.</strong> This would of course vary by NHS Trust. Deming&rsquo;s fourth lens &mdash; psychology &mdash; requires understanding the conditions under which people actually work. Wrong-route medication errors typically occur during preparation and administration &mdash; tasks performed under interruption, noise, competing demands, time pressure, and cognitive load. A nurse drawing up medication in a busy ward environment, interrupted mid-task, working with unfamiliar drugs in an unfamiliar setting, is operating in conditions specifically designed to produce errors of exactly this kind. Systematic observation of the actual work environment &mdash; how often preparation is interrupted, how much noise is present, how frequently staff are called away mid-task &mdash; would likely reveal that the system conditions are not just the physical layout of the cupboard but the cognitive and environmental conditions surrounding the preparation moment. These are rarely captured in post-incident investigations, which reconstruct events from memory rather than observing the system in operation.</p>
-        <p style="margin-top:8px;"><strong>Investigations may have involved the wrong people.</strong> Serious Incident investigations are typically conducted by clinical and governance staff. The system conditions that produce wrong-route errors &mdash; procurement decisions about syringe stock, pharmacy dispensing practice, ward layout &mdash; are owned by pharmacy directors, supply chain managers, and facilities teams. The people who could change the system conditions were rarely in the investigation room. The people in the room had no authority to change them. Deming was specific about this: improvement requires the involvement of the people who do the work and the authority of the people who own the system. Both were missing.</p>
+        <p style="margin-top:10px;"><strong>Possibly no prospective FMEA.</strong> Failure Mode and Effects Analysis applied before the ISO 80369 rollout would likely have identified the decanting workaround as a predictable failure mode. FMEA asks: how could this fail? The answer was foreseeable. It may not have been systematically asked.</p>
+        <p style="margin-top:8px;"><strong>Possibly no PDSA cycle with pre-specified outcome.</strong> Each intervention may have been implemented without a pre-specified prediction: &ldquo;if this works, wrong-route events will fall below X within Y months.&rdquo; Without that prediction, there is no study step. Without a study step, there is no learning.</p>
+        <p style="margin-top:8px;"><strong>Possibly the work environment was not studied.</strong> Deming&rsquo;s fourth lens &mdash; psychology &mdash; requires understanding the conditions under which people actually work. Systematic observation of the actual work environment &mdash; how often preparation is interrupted, how much noise is present, how frequently staff are called away mid-task &mdash; would likely reveal conditions specifically designed to produce errors of exactly this kind.</p>
+        <p style="margin-top:8px;"><strong>Investigations may have involved the wrong people.</strong> Serious Incident investigations are typically conducted by clinical and governance staff. The system conditions that produce wrong-route errors &mdash; procurement decisions about syringe stock, pharmacy dispensing practice, ward layout &mdash; are owned by pharmacy directors, supply chain managers, and facilities teams. The people who could change the system conditions were rarely in the investigation room.</p>
     </div>
 
     <hr>
 
-    <h2>What Paul O&rsquo;Neill did at Alcoa &mdash; and what it means for the NHS</h2>
+    <h2 id="section-alcoa">What Paul O&rsquo;Neill did at Alcoa &mdash; and what it means for the NHS</h2>
 
     <p>In October 1987, Paul O&rsquo;Neill stood up in front of Alcoa&rsquo;s investors and board and said he wanted to talk about worker safety. The room went silent. Investors had come expecting a financial turnaround strategy. O&rsquo;Neill told them: &ldquo;Every year, numerous Alcoa workers are injured so badly that they miss a day of work. I intend to make Alcoa the safest company in America. I intend to go for zero injuries.&rdquo;</p>
 
@@ -358,29 +389,29 @@
         <p>O&rsquo;Neill achieved this not by managing financial metrics but by understanding that fixing safety required fixing everything else: processes, communication, training, equipment, culture, procurement. Safety was the keystone that unlocked systemic improvement across the whole organisation.</p>
     </div>
 
-    <p>The parallel with NHS Never Events is precise. Alcoa was already the safest company in the aluminium industry &mdash; exactly as the NHS has interventions that exceed the global average in intent and documentation. O&rsquo;Neill said &ldquo;best in industry&rdquo; and &ldquo;wholly preventable&rdquo; are not the same statement. He was right. The NHS Never Events framework uses the phrase &ldquo;wholly preventable&rdquo;. The data says the system is not performing to that standard. The gap between those two statements is the article.</p>
+    <p>The parallel with NHS Never Events is precise. Alcoa was already the safest company in the aluminium industry &mdash; exactly as the NHS has interventions that exceed the global average in intent and documentation. O&rsquo;Neill said &ldquo;best in industry&rdquo; and &ldquo;wholly preventable&rdquo; are not the same statement. He was right.</p>
 
     <div class="deming-box">
         <h3>&#128221; Deming&rsquo;s System of Profound Knowledge &mdash; applied to wrong-route Never Events</h3>
         <p class="deming-quote">&ldquo;A bad system will beat a good person every time.&rdquo; &mdash; W. Edwards Deming</p>
         <p><strong style="color:#93c5fd;">Appreciation for a system.</strong> A wrong-route error looks like an individual failure &mdash; a nurse drew up an oral liquid into a Luer syringe. It is a system failure. The system stores oral and IV midazolam on the same shelf. The system provides both ENFit and Luer syringes on the same ward. The system has no national double-checking standard. Remove any one of those conditions and the error rate falls. The NHS investigates the individual. O&rsquo;Neill redesigned the system.</p>
-        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Knowledge of variation.</strong> The Bootstrap CUSUM shows one stage and no change points. This is common cause variation around a stable mean &mdash; the signature of a system whose underlying conditions have not changed. The NHS treats each Never Event as a special cause: local investigation, retraining, new local policy. Deming called this <a href="anticoag-safety.html#tampering" style="color:#93c5fd;">tampering</a> &mdash; a particular risk explored in detail in the anticoagulation safety article, where the warfarin funnel experiment illustrates exactly how well-intentioned individual responses to common cause variation make the system worse. It adds cost without moving the mean.</p>
-        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Theory of knowledge.</strong> Not one intervention in the fifteen-year timeline was accompanied by a pre-specified prediction: &ldquo;we expect this to reduce wrong-route events by X within Y months, confirmed at Z confidence.&rdquo; Bootstrap CUSUM makes prospective evaluation possible. It has never been applied to this data. The intervention that genuinely moves the mean will produce a detectable change point. Until then, the system has not responded.</p>
-        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Psychology.</strong> The Never Events framework and mandatory Serious Incident investigations create exactly the management-by-fear environment Deming warned against. Staff know that a Never Event triggers investigation and scrutiny. That pressure does not change the system that produces the error. It demoralises the staff who work within it &mdash; who are, as O&rsquo;Neill understood, victims of the system rather than its cause.</p>
+        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Knowledge of variation.</strong> The Bootstrap CUSUM shows one stage and no change points. This is common cause variation around a stable mean &mdash; the signature of a system whose underlying conditions have not changed. The NHS treats each Never Event as a special cause: local investigation, retraining, new local policy. Deming called this <a href="anticoag-safety.html" style="color:#93c5fd;">tampering</a> &mdash; acting on common cause variation as though it were special cause. It adds cost without moving the mean.</p>
+        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Theory of knowledge.</strong> Not one intervention in the fifteen-year timeline was accompanied by a pre-specified prediction: &ldquo;we expect this to reduce wrong-route events by X within Y months, confirmed at Z confidence.&rdquo; Bootstrap CUSUM makes prospective evaluation possible. The intervention that genuinely moves the mean will produce a detectable change point. Until then, the system has not responded.</p>
+        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Psychology.</strong> The Never Events framework and mandatory Serious Incident investigations create exactly the management-by-fear environment Deming warned against. That pressure does not change the system that produces the error. It demoralises the staff who work within it &mdash; who are, as O&rsquo;Neill understood, victims of the system rather than its cause.</p>
     </div>
 
     <hr>
 
-    <h2>What genuine system change would look like</h2>
+    <h2 id="section-system-change">What genuine system change would look like</h2>
 
-    <p>The Bootstrap CUSUM cannot detect a change that hasn&rsquo;t happened. But it can tell you, prospectively, what it would need to see. A genuine Layer 1 intervention &mdash; pharmacy unit-dose oral dispensing across all high-risk settings, removal of Luer syringes from wards where oral liquids are prepared &mdash; should produce a detectable step change within 18&ndash;24 months of full implementation. The magnitude of that change would depend on how completely the intervention is applied.</p>
+    <p>The Bootstrap CUSUM cannot detect a change that hasn&rsquo;t happened. But it can tell you, prospectively, what it would need to see. A genuine Layer 1 intervention &mdash; pharmacy unit-dose oral dispensing across all high-risk settings, removal of Luer syringes from wards where oral liquids are prepared &mdash; should produce a detectable step change within 18&ndash;24 months of full implementation.</p>
 
     <p>With the current mean of 17.5 and SD of 5.96, a genuine sustained reduction to a mean of 8&ndash;10 (roughly halving the rate) would be detectable at 95% confidence within approximately 3&ndash;4 years of sustained data. A reduction to near zero &mdash; which is what &ldquo;wholly preventable&rdquo; implies &mdash; would be detectable within 2 years.</p>
 
     <p>The system change required has three components, all identified by the HSIB investigation and all within the NHS&rsquo;s operational control:</p>
 
     <ul>
-        <li><strong>Pharmacy unit-dose oral dispensing.</strong> If oral medications arrive on wards in pre-labelled, ready-to-administer unit doses, ward staff never draw up oral liquids at all. The decanting step &mdash; the moment when the engineering barrier is bypassed &mdash; does not occur. This is Layer 1 elimination. It is operationally complex and requires pharmacy capacity investment, but it removes the error mechanism rather than defending against it.</li>
+        <li><strong>Pharmacy unit-dose oral dispensing.</strong> If oral medications arrive on wards in pre-labelled, ready-to-administer unit doses, ward staff never draw up oral liquids at all. The decanting step &mdash; the moment when the engineering barrier is bypassed &mdash; does not occur. This is Layer 1 elimination.</li>
         <li><strong>Removal of universal Luer syringes from high-risk settings.</strong> If Luer syringes are not available in settings where oral liquids are prepared, they cannot be used to draw up oral liquids. This requires procurement change and ward stock redesign but does not require any change in staff behaviour &mdash; the option simply does not exist.</li>
         <li><strong>Separate storage of oral and IV formulations.</strong> Oral and IV forms of high-risk drugs &mdash; midazolam, opioids, concentrated electrolytes &mdash; stored in physically separate locations eliminate the selection error that is the first step in most wrong-route events.</li>
     </ul>
@@ -395,33 +426,29 @@
 
     <hr>
 
-    <h2>A note on the data and its limitations</h2>
+    <h2 id="section-data-limitations">A note on the data and its limitations</h2>
 
     <p>A sceptical reader might ask: is six data points enough to draw any conclusion? The statistical answer requires a careful distinction between two different questions &mdash; and a reframing of what &ldquo;six&rdquo; actually means here.</p>
 
     <h3>Six annual aggregates &mdash; but six years of 105 investigated events</h3>
 
-    <p>The Bootstrap CUSUM sees six data points. But behind those six annual totals sit approximately 105 individual wrong-route medication events (6 &times; 17.5), every one of which was reported to StEIS, investigated as a Serious Incident, reviewed by a Medication Safety Officer, and analysed by NHS England for the annual report. This is not sparse data in any clinical sense. It is a complete, mandatory, independently verified record of every wrong-route Never Event across the entire NHS in England for six years. The sparseness is purely a function of aggregating to annual totals &mdash; a necessary step because the Never Events framework only publishes annual figures.</p>
+    <p>The Bootstrap CUSUM sees six data points. But behind those six annual totals sit approximately 105 individual wrong-route medication events (6 &times; 17.5), every one of which was reported to StEIS, investigated as a Serious Incident, reviewed by a Medication Safety Officer, and analysed by NHS England for the annual report. This is not sparse data in any clinical sense. It is a complete, mandatory, independently verified record of every wrong-route Never Event across the entire NHS in England for six years.</p>
 
     <p>Six years is also a substantial real-world observation window. At Alcoa, O&rsquo;Neill saw meaningful injury rate improvement within the first year. The NHS has had six full years under a consistent post-2018 framework. The question &ldquo;is six years long enough to see improvement if improvement were happening?&rdquo; has a clear answer: yes, if a genuine Layer 1 system change had been implemented, a detectable step change would have appeared within two to three years. None has.</p>
 
     <h3>What the null result is and is not valid for</h3>
 
-    <p>Bootstrap CUSUM with N=6 has wider confidence intervals than a longer series. The specific limitation is this: the method could only reliably detect a <em>large</em> sustained shift &mdash; roughly a reduction from 17.5 to below 8, or an increase above 27. A <em>moderate</em> improvement &mdash; say a sustained reduction to 12 per year &mdash; might not be detectable at 99.7% confidence with this sample size.</p>
+    <p>Bootstrap CUSUM with N=6 has wider confidence intervals than a longer series. The specific limitation is this: the method could only reliably detect a <em>large</em> sustained shift &mdash; roughly a reduction from 17.5 to below 8, or an increase above 27. A <em>moderate</em> improvement might not be detectable at 99.7% confidence with this sample size.</p>
 
-    <p>A sceptical reader might therefore ask: could a moderate improvement be under way but hidden? The data answers this directly. Look at the six values: 10, 11, 24, 23, 17, 20. The most recent three years are 24, 17, 20 &mdash; oscillating around the series mean, with no downward clustering, no suggestion of approach toward a lower level. The data does not look like a process that is moderately improving and waiting for statistical power to confirm it. It looks like a process that is not improving at all. The statistics confirm the visual.</p>
+    <p>A sceptical reader might therefore ask: could a moderate improvement be under way but hidden? The data answers this directly. Look at the six values: 10, 11, 24, 23, 17, 20. The most recent three years are 24, 17, 20 &mdash; oscillating around the series mean, with no downward clustering, no suggestion of approach toward a lower level. The data does not look like a process that is moderately improving. It looks like a process that is not improving at all. The statistics confirm the visual.</p>
 
-    <p>Two independent methods agree on the same conclusion. The Bootstrap CUSUM finds one stage, no change point. The X-mR chart, which uses no resampling whatsoever, finds all six values within natural process limits. When two methodologically distinct approaches applied to the same small dataset produce the same null result, that convergence is meaningful. The risk with small datasets is a false positive &mdash; seeing a change that isn&rsquo;t there. The null result is actually the more reliable finding at small N: you cannot have been fooled into detecting a change that doesn&rsquo;t exist.</p>
+    <p>Two independent methods agree on the same conclusion. The Bootstrap CUSUM finds one stage, no change point. The X-mR chart finds all six values within natural process limits. When two methodologically distinct approaches applied to the same small dataset produce the same null result, that convergence is meaningful.</p>
 
     <h3>The knock-on effect: why wrong-route matters beyond wrong-route</h3>
 
-    <p>There is a further reason why the six-year null result matters beyond the wrong-route count itself. O&rsquo;Neill discovered at Alcoa that genuine safety system improvement is not isolated to the specific incident type being targeted. When he forced the redesign of manufacturing processes to eliminate injuries, the discipline and rigour required to make those changes spread through the whole organisation &mdash; improving production quality, equipment maintenance, and workflow efficiency simultaneously. Safety was the keystone that unlocked systemic improvement everywhere.</p>
+    <p>The system changes required to eliminate wrong-route medication errors &mdash; pharmacy unit-dose dispensing, physical separation of oral and IV drug storage, removal of Luer syringes from high-risk settings &mdash; would simultaneously reduce the conditions that produce <em>other</em> medication Never Events. Fix the wrong-route system conditions at Layer 1 and you restructure the medication safety environment across multiple Never Event categories simultaneously.</p>
 
-    <p>The same logic applies here. The system changes required to eliminate wrong-route medication errors &mdash; pharmacy unit-dose dispensing, physical separation of oral and IV drug storage, removal of Luer syringes from high-risk settings &mdash; would simultaneously reduce the conditions that produce <em>other</em> medication Never Events. Insulin overdoses happen partly because of chaotic ward drug storage and cognitive overload during preparation. Methotrexate overdoses happen partly because of poor pharmacy dispensing discipline. Midazolam mis-selection happens partly because high-risk drugs are stored adjacent to each other.</p>
-
-    <p>Fix the wrong-route system conditions at Layer 1 and you restructure the medication safety environment across multiple Never Event categories simultaneously. The total medication Never Events count &mdash; currently running at roughly 60&ndash;70 per year across all categories &mdash; would be expected to fall substantially, not just the 17.5 wrong-route subset. Bootstrap CUSUM applied to the total medication series would then have considerably more statistical power, and the analysis presented here becomes the foundation for a much larger finding.</p>
-
-    <p>The six-year null result is therefore not just a statement about wrong-route errors. It is a statement about the medication safety system as a whole. A system that has not fixed its most tractable, most clearly specified, most well-documented wrong-route problem is a system whose broader medication safety conditions have also not been restructured. The wrong-route count is the canary &mdash; the sentinel measure whose behaviour tells you about the health of the whole mine. Coal miners carried canaries into the pit because the birds succumb to toxic gases before humans do, giving an early warning that the environment has become dangerous. Wrong-route medication errors are the equivalent: a small, specific, well-defined count that reveals the state of the broader medication safety environment. If the canary is still singing the same flat note after fifteen years of intervention, the mine has not been made safe.</p>
+    <p>The wrong-route count is the canary &mdash; the sentinel measure whose behaviour tells you about the health of the whole mine. If the canary is still singing the same flat note after fifteen years of intervention, the mine has not been made safe.</p>
 
     <div class="numbers-box">
         <table>
@@ -444,7 +471,7 @@
 
     <hr>
 
-    <h2>Joiner&rsquo;s Levels of Fix &mdash; where the NHS has been operating</h2>
+    <h2 id="section-levels-of-fix">Joiner&rsquo;s Levels of Fix &mdash; where the NHS has been operating</h2>
 
     <p>Brian Joiner&rsquo;s <em>Fourth Generation Management</em> introduces a complementary framework to the hierarchy of controls: the three Levels of Fix. The notion is simple &mdash; many problems in an organisation stem from the same deep causes. The deeper we can push a fix, the more problems we will be able to solve or prevent, and the more rapidly we will improve.</p>
 
@@ -462,11 +489,11 @@
                 <tr>
                     <td style="font-weight:bold;color:var(--orange);">Level 2<br><small>Fix the Process</small></td>
                     <td>Change the process that allowed the problem to occur. Develop ways to prevent recurrence. For example, creating a checklist to help ensure nothing is missed or done incorrectly.</td>
-                    <td>The MSO mandate, NatSSIPs, double-checking protocols, colour-coded syringes, training on ENFit. All process-level interventions. All Layer 3 and 4 in the hierarchy of controls. All visible in the intervention timeline. None detectable in the Bootstrap CUSUM.</td>
+                    <td>The MSO mandate, NatSSIPs, double-checking protocols, colour-coded syringes, training on ENFit. All process-level interventions. All Layer 3 and 4 in the hierarchy of controls. None detectable in the Bootstrap CUSUM.</td>
                 </tr>
                 <tr>
                     <td style="font-weight:bold;color:var(--green);">Level 3<br><small>Fix the System</small></td>
-                    <td>Change the system that allowed the faulty process or service to operate with these deficiencies. These system-level issues are usually deep core issues. What do these deep issues tend to look like? Dr Deming captured most of them in his famous 14 points &mdash; <a href="#deming-system-failures" style="color:var(--green);">see below &darr;</a>: lack of a clear aim (constancy of purpose); barriers between departments; management by rewards, fear and punishment for failing to achieve targets; reliance on inspection and compliance rather than prevention; unfair demands on workers in broken environments; failure to understand that suppliers are part of the system. Some of these built-in system flaws can be solved only by dedicated efforts to uproot and change destructive practices. But others are nothing more than policies that can be changed relatively easily.</td>
+                    <td>Change the system that allowed the faulty process or service to operate with these deficiencies. These system-level issues are usually deep core issues captured in Deming&rsquo;s 14 points: lack of constancy of purpose; barriers between departments; management by fear; reliance on inspection rather than prevention. Some are easily changed policies; others require dedicated effort.</td>
                     <td>Pharmacy unit-dose dispensing; removal of Luer syringes from high-risk settings; separated drug storage mandated across all trusts; procurement standards that prevent both syringe types being stocked on the same ward. None systematically implemented. This is where the Bootstrap CUSUM change point will appear &mdash; when and if it ever does.</td>
                 </tr>
             </tbody>
@@ -475,53 +502,42 @@
 
     <div id="deming-system-failures" class="deming-box">
         <h3>&#128221; Deming&rsquo;s system-level failures &mdash; present in this data</h3>
-        <p><strong style="color:#93c5fd;">Lack of constancy of purpose.</strong> The Never Events framework has been revised multiple times. Financial sanctions were introduced then removed. Categories were merged and redefined. Each revision resets organisational attention without changing the underlying system conditions. There has been no single sustained commitment to eliminating wrong-route errors through system redesign.</p>
-        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Barriers between departments.</strong> The people who investigate wrong-route errors (clinical governance) and the people who own the system conditions that produce them (pharmacy, procurement, facilities) operate in separate organisational silos. The HSIB investigation identified the conditions. The people with authority to change them were not in the investigation room.</p>
-        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Management by fear and inspection.</strong> The Never Events designation creates mandatory investigation and reporting. Deming argued that reliance on inspection and compliance rather than prevention generates fear without improvement. Staff know a Never Event on their ward triggers scrutiny. That pressure does not change the system. It demoralises the people working within it.</p>
-        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Unfair demands on workers.</strong> Deming argued it is unfair to ask workers to &ldquo;do it right the first time&rdquo; if the surrounding environment &mdash; faulty tools, noise, interruptions, poor materials, broken systems &mdash; makes doing the job correctly impossible. A nurse drawing up medication in a busy ward, with both syringe types available, oral and IV drugs stored together, and no physical barrier to the error, is being asked to do it right the first time in exactly the conditions Deming identified as unfair.</p>
-        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Suppliers as part of the system.</strong> The syringe manufacturers, the pharmaceutical companies, the NHS Supply Chain &mdash; all are part of the system that produces wrong-route errors. A procurement standard that prevented Luer syringes being supplied to wards where oral liquids are prepared would be a supplier-level system fix. It has not been implemented.</p>
-        <p style="margin-top:10px;">Some of these system-level flaws require dedicated effort to uproot. Others &mdash; as Joiner noted &mdash; are nothing more than policies that can be changed relatively easily. Separating oral and IV drug storage is a facilities management decision. Removing Luer syringes from specific settings is a procurement decision. These are not technically complex changes. They are organisational will changes.</p>
+        <p><strong style="color:#93c5fd;">Lack of constancy of purpose.</strong> The Never Events framework has been revised multiple times. Financial sanctions were introduced then removed. Categories were merged and redefined. Each revision resets organisational attention without changing the underlying system conditions.</p>
+        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Barriers between departments.</strong> The people who investigate wrong-route errors (clinical governance) and the people who own the system conditions that produce them (pharmacy, procurement, facilities) operate in separate organisational silos.</p>
+        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Management by fear and inspection.</strong> The Never Events designation creates mandatory investigation and reporting. Staff know a Never Event on their ward triggers scrutiny. That pressure does not change the system. It demoralises the people working within it.</p>
+        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Unfair demands on workers.</strong> A nurse drawing up medication in a busy ward, with both syringe types available, oral and IV drugs stored together, and no physical barrier to the error, is being asked to do it right the first time in exactly the conditions Deming identified as unfair.</p>
+        <p style="margin-top:10px;"><strong style="color:#93c5fd;">Suppliers as part of the system.</strong> A procurement standard that prevented Luer syringes being supplied to wards where oral liquids are prepared would be a supplier-level system fix. It has not been implemented.</p>
     </div>
 
-    <h2>Joiner&rsquo;s three strategies for improving a stable process</h2>
+    <h2 id="section-three-strategies">Joiner&rsquo;s three strategies for improving a stable process</h2>
 
-    <p>The Bootstrap CUSUM has confirmed what the raw data suggests: this process is stable. Common cause variation, one stage, mean 17.5. A common misconception &mdash; and one that Joiner addresses directly in <em>Fourth Generation Management</em> &mdash; is that a stable process cannot be improved. <em>&ldquo;It&rsquo;s common cause, there&rsquo;s nothing we can do.&rdquo;</em> This is precisely wrong.</p>
-
-    <p>Joiner identifies three strategies for improving a process that is in statistical control on the Common Cause Highway. All three apply directly to wrong-route medication Never Events.</p>
+    <p>The Bootstrap CUSUM has confirmed what the raw data suggests: this process is stable. A common misconception is that a stable process cannot be improved. Joiner identifies three strategies for improving a process that is in statistical control.</p>
 
     <div class="deming-box">
         <h3>&#128161; Joiner&rsquo;s three strategies &mdash; applied to wrong-route Never Events</h3>
         <p class="deming-quote">&ldquo;In a common cause situation, there is no such thing as THE cause.&rdquo; &mdash; Brian Joiner, Fourth Generation Management</p>
 
-        <p><strong style="color:#93c5fd;">Strategy 1 &mdash; Stratify.</strong> Sort the data into groups and look for patterns. The national aggregate of 17.5 wrong-route events per year is one number. But within that aggregate, are some trusts producing zero wrong-route events for sustained periods? Are some drug types (midazolam, opioids) responsible for a disproportionate share? Are some routes (oral-to-IV vs neuraxial) more frequent than others? Are events concentrated in certain settings (ICU, theatres, paediatrics)?</p>
-        <p style="margin-top:8px;">The NHS Never Events annual reports do publish trust-level data &mdash; Table 3 of each report. A trust-level analysis using Bootstrap CUSUM would identify whether any trust has achieved a sustained structural reduction. This is the <strong>Bright Spots</strong> approach developed by Chip and Dan Heath, and the <strong>Positive Deviance</strong> framework of Jerry Sternin: in any failing system, there are always outliers who are succeeding &mdash; not because they have more resources, but because they are doing something differently. The question is not what successful trusts <em>have</em> that others lack. It is what they are <em>doing</em> differently. <a href="why-nothing-has-worked-nhs-ae-performance.html#bright-spots" style="color:#93c5fd;">The same Bright Spots approach is explored in detail in the NHS A&amp;E article</a>, where Bootstrap CUSUM at Trust level is proposed as the method for finding which emergency departments have genuinely improved and dating the change precisely. The same method applies here: a trust whose wrong-route count has been zero for three or more consecutive years is a bright spot. The CUSUM date tells you when something structurally changed. The investigation asks what changed at that trust &mdash; and whether it is replicable.</p>
+        <p><strong style="color:#93c5fd;">Strategy 1 &mdash; Stratify.</strong> Sort the data into groups and look for patterns. The national aggregate of 17.5 wrong-route events per year is one number. Within that aggregate, are some trusts producing zero wrong-route events for sustained periods? Are some drug types (midazolam, opioids) responsible for a disproportionate share? Are events concentrated in certain settings (ICU, theatres, paediatrics)?</p>
+        <p style="margin-top:8px;">The NHS Never Events annual reports publish trust-level data in Table 3 of each report. A trust-level analysis using Bootstrap CUSUM would identify whether any trust has achieved a sustained structural reduction &mdash; the Bright Spots approach. A trust whose wrong-route count has been zero for three or more consecutive years is a bright spot. The CUSUM date tells you when something structurally changed. The investigation asks what changed at that trust &mdash; and whether it is replicable.</p>
 
-        <p style="margin-top:12px;"><strong style="color:#93c5fd;">Strategy 2 &mdash; Experiment.</strong> Make planned changes and learn from the effects. This means pre-specifying what a successful intervention looks like, implementing it in a defined setting, monitoring with Bootstrap CUSUM for a pre-agreed period, and declaring success or failure based on the statistical evidence. Not an alert. Not a framework revision. A controlled experiment with a measurable outcome.</p>
-        <p style="margin-top:8px;">Joiner&rsquo;s insistence on prediction before action is the same as Deming&rsquo;s theory of knowledge. The PDSA cycle &mdash; Plan, Do, Study, Act &mdash; requires that &ldquo;Plan&rdquo; include a prediction: if we implement pharmacy unit-dose dispensing in these ten trusts, we predict the wrong-route count in those trusts will fall below X within Y months, detectable at Z confidence. Bootstrap CUSUM is the Study step.</p>
+        <p style="margin-top:12px;"><strong style="color:#93c5fd;">Strategy 2 &mdash; Experiment.</strong> Make planned changes and learn from the effects. Pre-specify what a successful intervention looks like, implement it in a defined setting, monitor with Bootstrap CUSUM for a pre-agreed period, and declare success or failure based on the statistical evidence. Not an alert. Not a framework revision. A controlled experiment with a measurable outcome.</p>
 
-        <p style="margin-top:12px;"><strong style="color:#93c5fd;">Strategy 3 &mdash; Disaggregate.</strong> Divide the process into component pieces and manage the pieces. The aggregate wrong-route count combines at least three distinct mechanisms: oral-to-IV (the most common, driven by Luer syringe availability and mixed storage), neuraxial-to-IV (addressed by NRFit connectors), and epidural-to-IV (a related but different pathway). These have different root causes and different solutions.</p>
-        <p style="margin-top:8px;">The 2023&ndash;24 annual report shows 16 of 20 wrong-route events were oral-to-IV. The NRFit mandate addresses neuraxial misconnection &mdash; which represents a minority of events. The oral-to-IV pathway, driven by the Luer syringe availability and mixed storage problems identified by HSIB, is the dominant mechanism. Managing the aggregate number without disaggregating by mechanism is managing the wrong metric. Fix the oral-to-IV pathway specifically and the aggregate will move.</p>
+        <p style="margin-top:12px;"><strong style="color:#93c5fd;">Strategy 3 &mdash; Disaggregate.</strong> Divide the process into component pieces and manage the pieces. The aggregate wrong-route count combines at least three distinct mechanisms: oral-to-IV (the most common), neuraxial-to-IV (addressed by NRFit connectors), and epidural-to-IV. The 2023&ndash;24 annual report shows 16 of 20 wrong-route events were oral-to-IV. The NRFit mandate addresses a minority of events. Fix the oral-to-IV pathway specifically and the aggregate will move.</p>
     </div>
 
-    <p>Stratify, Experiment, Disaggregate. Three strategies for improving a stable process, none of which require a new framework, a new alert, or a new safety officer. They require analytical discipline, pre-specified predictions, and the willingness to wait for statistical evidence before claiming success. Bootstrap CUSUM provides the evidence. Joiner provides the method. The data is public. The tool is free.</p>
+    <p>Stratify, Experiment, Disaggregate. Three strategies for improving a stable process, none of which require a new framework, a new alert, or a new safety officer. They require analytical discipline, pre-specified predictions, and the willingness to wait for statistical evidence before claiming success.</p>
 
     <hr>
 
-    <h2>The conclusion Deming would have drawn</h2>
+    <h2 id="section-conclusion">The conclusion Deming would have drawn</h2>
 
     <p>The NHS has not failed to try. It has failed to change the system. Fifteen years of alerts, mandates, frameworks, and revised standards have produced a process that is, by every SPC measure, unchanged. The mean is 17.5. The variation is common cause. The CUSUM shows one stage.</p>
 
     <p>Deming argued that 94% of problems are system failures, not individual failures. Every wrong-route medication Never Event in this dataset triggered a local investigation, a root cause analysis, a retraining programme, a new local policy. None of those responses changed the system that produced the event. The system continued to produce events at the same rate because the conditions that make wrong-route errors possible &mdash; mixed storage, dual syringe availability, no national double-checking standard, no pharmacy unit-dose dispensing &mdash; remained in place.</p>
 
-    <p>O&rsquo;Neill understood this intuitively and proved it numerically over twelve years at Alcoa. He inherited a company where injuries were considered an acceptable cost of doing business in a dangerous industry. He declared that unacceptable, identified the system conditions that produced injuries, and changed them. The injury rate fell to one-twentieth the national average. The company became nine times more valuable.</p>
+    <p>O&rsquo;Neill understood this intuitively and proved it numerically over twelve years at Alcoa. He declared injuries unacceptable, identified the system conditions that produced them, and changed them. The NHS has declared wrong-route medication errors unacceptable. The data says they are happening at the same rate they have always happened. The gap between those statements is not a gap in effort or intent. It is a gap in method.</p>
 
-    <p>The NHS has declared wrong-route medication errors unacceptable. It has said they are wholly preventable. The data says they are happening at the same rate they have always happened. The gap between those statements is not a gap in effort or intent. It is a gap in method. The system has not been changed. The alerts have been issued, the officers have been appointed, the frameworks have been revised &mdash; and the process has not moved.</p>
-
-    <p>Batalden&rsquo;s observation, quoted at the top of this article, is the most precise summary of the Bootstrap CUSUM finding possible. The NHS medication safety system is perfectly designed to produce 17.5 wrong-route errors per year. Not because anyone designed it to fail. But because the conditions that produce wrong-route errors &mdash; oral and IV drugs stored together, Luer syringes available on wards where oral liquids are prepared, no national double-checking standard, no pharmacy unit-dose dispensing &mdash; have been left in place. The system produces exactly what it is designed to produce. Change the design and you change the result. Leave the design unchanged and the CUSUM will be flat in 2030 just as it is flat today.</p>
-
-    <p>Bootstrap CUSUM is a tool for knowing, with statistical rigour, whether a system has genuinely changed. Applied to wrong-route Never Events, it says: not yet. When the Layer 1 interventions are implemented &mdash; pharmacy unit-dose dispensing, Luer syringe removal from high-risk settings, separated storage &mdash; this series will detect the change point and date it precisely. Until then, the data will continue to show what it shows now: a system in statistical control at the wrong level, producing wholly preventable events at a wholly preventable rate.</p>
-
-    <p>Years ago the author attended an NHS patient safety conference attended by several hundred NHS delegates. One hospital CEO was present. The Bootstrap CUSUM suggests that ratio has not fundamentally changed in its consequences &mdash; patient safety remains a function that organisations <em>have</em>, rather than a commitment that leaders personally <em>own</em>. O&rsquo;Neill didn&rsquo;t attend safety conferences. He required every injury reported to him within 24 hours and acted on each one personally. Safety was not delegated. It was owned at the top, and that ownership forced the system conditions to change. The difference between one CEO in a room of hundreds and a CEO who personally receives every incident report within 24 hours is not a difference in intent. It is a difference in method &mdash; and it is precisely the difference the Bootstrap CUSUM measures.</p>
+    <p>Batalden&rsquo;s observation, quoted at the top of this article, is the most precise summary of the Bootstrap CUSUM finding possible. The NHS medication safety system is perfectly designed to produce 17.5 wrong-route errors per year. Change the design and you change the result. Leave the design unchanged and the CUSUM will be flat in 2030 just as it is flat today.</p>
 
     <div class="deming-box">
         <h3>&#128161; The question that should precede every intervention</h3>
@@ -530,7 +546,7 @@
         <p style="margin-top:10px;">That is not a bureaucratic question. It is the only question that separates system change from tampering. O&rsquo;Neill asked it at Alcoa in 1987. The NHS Never Events framework has been asking a different question &mdash; how do we respond to this event? &mdash; for fifteen years. The Bootstrap CUSUM shows what happens when you answer the wrong question repeatedly and call it improvement.</p>
     </div>
 
-    <h2>Confirmatory analysis: total Never Events monthly 2019&ndash;2026</h2>
+    <h2 id="section-confirmatory">Confirmatory analysis: total Never Events monthly 2019&ndash;2026</h2>
 
     <p>The wrong-route series uses annual aggregates giving N=6. As a confirmatory analysis, monthly data for <em>all</em> Never Event types combined is available from NHS England provisional monthly publications, giving N=84 monthly observations from April 2019 to March 2026. This series has substantially more statistical power and provides an independent test of whether the broader Never Events picture tells a different story from the wrong-route subset.</p>
 
@@ -538,20 +554,20 @@
 
     <figure class="chart-figure">
         <img src="images/never-events-chart3-total-xmr.png" alt="X-mR Control Chart — Total Never Events monthly 2019-2026">
-        <figcaption>X-mR control chart, total Never Events monthly, April 2019&ndash;March 2026. N=84, Mean=34.02, SD=7.19, UNPL=53.57, LNPL=14.47. All points within natural process limits. The system is in statistical control across all Never Event types &mdash; producing approximately 34 Never Events per month as common cause variation. No signals, no trends, no points outside limits.</figcaption>
+        <figcaption>X-mR control chart, total Never Events monthly, April 2019&ndash;March 2026. N=84, Mean=34.02, SD=7.19, UNPL=53.57, LNPL=14.47. All points within natural process limits. The system is in statistical control across all Never Event types &mdash; producing approximately 34 Never Events per month as common cause variation.</figcaption>
     </figure>
 
     <figure class="chart-figure">
         <img src="images/never-events-chart4-total-cusum.png" alt="Bootstrap CUSUM — Total Never Events monthly 2019-2026 — 95% confidence 5000 loops">
-        <figcaption>Bootstrap CUSUM, total Never Events monthly, April 2019&ndash;March 2026. N=84, Mean=34.02, Stages=1, Conf=95%, Loops=5000. One stage, no change point at 95% confidence with 5000 loops &mdash; the most rigorous test applied in this article. The CUSUM line drifts upward through 2019&ndash;2022 then gradually downward, but does not clear the 95% threshold. With N=84 and 5000 resamples this is a robust null result: the total Never Events system has not structurally changed.</figcaption>
+        <figcaption>Bootstrap CUSUM, total Never Events monthly, April 2019&ndash;March 2026. N=84, Mean=34.02, Stages=1, Conf=95%, Loops=5000. One stage, no change point at 95% confidence with 5000 loops &mdash; the most rigorous test applied in this article. With N=84 and 5000 resamples this is a robust null result: the total Never Events system has not structurally changed.</figcaption>
     </figure>
 
     <div class="alert-red">
         <strong>The confirmatory finding:</strong>
-        84 monthly observations, all Never Event types combined, Bootstrap CUSUM at 95% confidence, 5000 loops: one stage, no change point. This is the most rigorous test in the article &mdash; N=84 gives substantial statistical power, and 5000 loops gives stable confidence thresholds. The total Never Events system produces approximately 34 events per month &mdash; roughly 408 per year &mdash; as stable common cause variation. The CUSUM drifts downward slightly from 2022&ndash;2026 but does not clear the 95% threshold even at 5000 loops. The wrong-route finding is not an artefact of a small dataset. The entire Never Events system shows the same pattern at a much larger scale: statistically controlled, stable, unresponsive to fifteen years of intervention.
+        84 monthly observations, all Never Event types combined, Bootstrap CUSUM at 95% confidence, 5000 loops: one stage, no change point. This is the most rigorous test in the article &mdash; N=84 gives substantial statistical power, and 5000 loops gives stable confidence thresholds. The total Never Events system produces approximately 34 events per month &mdash; roughly 408 per year &mdash; as stable common cause variation. The wrong-route finding is not an artefact of a small dataset. The entire Never Events system shows the same pattern at a much larger scale.
     </div>
 
-    <p>Read together, the two analyses say the same thing at two different scales. The wrong-route subset (N=6 annual, mean 17.5/year) and the total Never Events series (N=84 monthly, mean 34/month) both show one stage, no change point. The system is not improving at the sub-category level or at the aggregate level. Batalden&rsquo;s observation applies at both scales: every system is perfectly designed to get the results it gets.</p>
+    <p>Read together, the two analyses say the same thing at two different scales. The wrong-route subset (N=6 annual, mean 17.5/year) and the total Never Events series (N=84 monthly, mean 34/month) both show one stage, no change point. Batalden&rsquo;s observation applies at both scales: every system is perfectly designed to get the results it gets.</p>
 
     <div class="cta-box">
         <h2>Reproduce this analysis on your own data</h2>
@@ -576,16 +592,16 @@
     <p class="note">&#128202; <strong>Data note:</strong> Wrong-route medication Never Events, NHS England, financial years 2018&ndash;19 to 2023&ndash;24. Source: NHS England Never Events Final Annual Reports, Table 2. Available at: <a href="https://www.england.nhs.uk/statistics/statistical-work-areas/patient-safety-data/" target="_blank">england.nhs.uk/statistics/statistical-work-areas/patient-safety-data/</a>. Pre-2018 data not used due to framework revision and category rationalisation. 2020&ndash;21 flagged as COVID year. Total Never Events monthly series: NHS England provisional Never Events publications, April 2019&ndash;March 2026, N=84.</p>
 
     <footer class="article-footer">
-        <p><strong>Data source:</strong> NHS England Never Events Final Annual Reports 2018&ndash;19 to 2023&ndash;24, Table 2: Never Events by type. <a href="https://www.england.nhs.uk/statistics/statistical-work-areas/patient-safety-data/" target="_blank">england.nhs.uk/statistics/statistical-work-areas/patient-safety-data/</a></p>
+        <p><strong>Data source:</strong> NHS England Never Events Final Annual Reports 2018&ndash;19 to 2023&ndash;24, Table 2. <a href="https://www.england.nhs.uk/statistics/statistical-work-areas/patient-safety-data/" target="_blank">england.nhs.uk/statistics/statistical-work-areas/patient-safety-data/</a></p>
         <p style="margin-top:8px;"><strong>HSIB investigation:</strong> Healthcare Safety Investigation Branch, <em>Inadvertent Administration of an Oral Liquid Medicine into a Vein</em>. April 2019. <a href="https://psnet.ahrq.gov/issue/inadvertent-administration-oral-liquid-medicine-vein" target="_blank">psnet.ahrq.gov</a></p>
         <p style="margin-top:8px;"><strong>NHS Never Events framework:</strong> NHS England, <em>Never Events Policy and Framework &mdash; Revised January 2018</em>. <a href="https://www.england.nhs.uk/patient-safety/patient-safety-insight/revised-never-events-policy-and-framework/" target="_blank">england.nhs.uk</a></p>
         <p style="margin-top:8px;"><strong>NHS framework consultation 2024:</strong> NHS England, <em>Provisional publication of Never Events reported as occurring between 1 April 2024 and 31 March 2025</em>. May 2025. <a href="https://www.england.nhs.uk/long-read/provisional-publication-of-never-events-reported-as-occurring-between-1-april-2024-and-31-march-2025/" target="_blank">england.nhs.uk</a></p>
         <p style="margin-top:8px;"><strong>CQC report:</strong> Care Quality Commission, <em>Opening the Door to Change</em>. December 2018. <a href="https://www.cqc.org.uk/publications/themed-work/opening-door-change" target="_blank">cqc.org.uk</a></p>
         <p style="margin-top:8px;"><strong>Paul O&rsquo;Neill / Alcoa:</strong> Charles Duhigg, <em>The Power of Habit</em>. Random House, 2012. Chapter 4. ISBN 978-1-4000-6928-6.</p>
         <p style="margin-top:8px;"><strong>Bright Spots:</strong> Chip Heath &amp; Dan Heath, <em>Switch: How to Change Things When Change Is Hard</em>. Crown Business, 2010. ISBN 978-0-385-52875-7.</p>
-        <p style="margin-top:8px;"><strong>Positive Deviance:</strong> Richard Pascale, Jerry Sternin &amp; Monique Sternin, <em>The Power of Positive Deviance: How Unlikely Innovators Solve the World&rsquo;s Toughest Problems</em>. Harvard Business Review Press, 2010. ISBN 978-1-422-11066-9.</p>
-        <p style="margin-top:8px;"><strong>Batalden quote:</strong> Paul Batalden, IHI Senior Fellow &amp; Founding Chair of the IHI Board of Directors. &ldquo;Every system is perfectly designed to get the results it gets.&rdquo; Origin confirmed by Batalden and Earl Conway: <a href="https://www.ihi.org/library/blog/magic-every-system-perfectly-designed" target="_blank">ihi.org</a>. Widely but incorrectly attributed to Deming; Batalden was a direct student of Deming and adapted the observation from his work.</p>
-        <p style="margin-top:8px;"><strong>Joiner:</strong> Brian L. Joiner, <em>Fourth Generation Management: The New Business Consciousness</em>. McGraw-Hill, 1994. ISBN 978-0-07-032715-3. Stratify / Experiment / Disaggregate strategies for improving a stable process: Chapter on variation.</p>
+        <p style="margin-top:8px;"><strong>Positive Deviance:</strong> Richard Pascale, Jerry Sternin &amp; Monique Sternin, <em>The Power of Positive Deviance</em>. Harvard Business Review Press, 2010. ISBN 978-1-422-11066-9.</p>
+        <p style="margin-top:8px;"><strong>Batalden quote:</strong> Paul Batalden, IHI Senior Fellow. &ldquo;Every system is perfectly designed to get the results it gets.&rdquo; <a href="https://www.ihi.org/library/blog/magic-every-system-perfectly-designed" target="_blank">ihi.org</a></p>
+        <p style="margin-top:8px;"><strong>Joiner:</strong> Brian L. Joiner, <em>Fourth Generation Management</em>. McGraw-Hill, 1994. ISBN 978-0-07-032715-3.</p>
         <p style="margin-top:8px;"><strong>Deming:</strong> W. Edwards Deming, <em>Out of the Crisis</em>. MIT Press, 1982.</p>
         <p style="margin-top:8px;"><strong>ISO 80369:</strong> International Organization for Standardization, <em>ISO 80369: Small-bore connectors for liquids and gases in healthcare applications</em>. 2010&ndash;2015.</p>
         <p style="margin-top:8px;"><strong>NRFit mandate:</strong> NHS England National Patient Safety Alert, <em>Transition to NRFit neuraxial connectors</em>. Deadline January 2025.</p>
