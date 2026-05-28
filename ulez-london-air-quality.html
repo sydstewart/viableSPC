@@ -61,7 +61,7 @@
         .method-box { background: #f0fff4; border: 1px solid var(--green); border-radius: 8px; padding: 20px 24px; margin: 24px 0; font-family: system-ui, sans-serif; }
         .method-box h3 { color: var(--green); margin-bottom: 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
         .method-box p { font-size: 0.95em; margin-bottom: 10px; }
-        .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; }
+        .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; overflow-x: auto; }
         .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
         .numbers-box th { background: var(--brand-blue); color: white; padding: 8px 12px; text-align: left; }
         .numbers-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
@@ -102,6 +102,18 @@
         .article-footer { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
         .article-footer a { color: var(--brand-mid); }
         .note { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); font-style: italic; background: #f8f9fa; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin: 16px 0; }
+        /* TOC styles */
+        .toc-details { margin: 0 0 28px 0; border: 1px solid var(--border); border-radius: 8px; font-family: system-ui, sans-serif; background: white; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: bold; color: var(--brand-blue); font-size: 0.95em; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+        .toc-details summary::-webkit-details-marker { display: none; }
+        .toc-details summary:hover { background: var(--brand-light); border-radius: 8px; }
+        .toc-details[open] summary { border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; }
+        .toc-details[open] summary:hover { border-radius: 8px 8px 0 0; }
+        .toc-inner { padding: 6px 18px 16px; }
+        .toc-inner ol { margin: 10px 0 0 1.2em; line-height: 2.1; }
+        .toc-inner ol li { font-size: 0.92em; margin-bottom: 0; }
+        .toc-inner ol li a { color: var(--brand-mid); text-decoration: none; }
+        .toc-inner ol li a:hover { text-decoration: underline; color: var(--brand-blue); }
     </style>
 </head>
 <body>
@@ -120,7 +132,52 @@
     <p class="article-subtitle">In October 2018, eighteen months before the Ultra Low Emission Zone officially launched, Marylebone Road NO2 dropped 24.7% at 99.9% confidence. Rational drivers were already complying with a policy that hadn&rsquo;t started yet. Bootstrap CUSUM on a decade of measured data finds three things neither side of the ULEZ debate predicted &mdash; and one finding that should change how every city in the world designs and evaluates clean air policy.</p>
     <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; May 2026 &nbsp;&middot;&nbsp; Data: Defra AURN, Marylebone Road (MY1), Monthly Mean NO2, 2015&ndash;2026</div>
 
-    <h2>The most contested policy in recent London history</h2>
+    <!-- Summary box -->
+    <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.78em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="ulez-london-air-quality-summary.pdf" download style="color:var(--brand-mid);">&#8675; Download Executive Summary PDF</a> &nbsp;&middot;&nbsp; <a href="ulez-no2-monthly.csv" download style="color:var(--brand-mid);">&#8675; Download the data CSV</a></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px;">
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--purple, #7c3aed);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The anticipatory effect</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">The ULEZ signal appeared 18 months before launch. Bootstrap CUSUM dates the first structural change to October 2018 &mdash; a 24.7% drop at 99.9% confidence &mdash; driven by drivers and fleet operators upgrading vehicles in advance of the April 2019 launch. Evaluating ULEZ by comparing before and after April 2019 misses the effect entirely.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--red);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">COVID was the biggest change</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">The largest single structural improvement in a decade of Marylebone Road data was COVID: &minus;34.6% at 100% confidence from February 2020. The benefit was real. The cost &mdash; hundreds of thousands of deaths and economic damage on a wartime scale &mdash; was not in the data.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--teal);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The London-wide expansion worked</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">The August 2023 London-wide expansion produced a detectable structural change point in March 2024 &mdash; seven months later, within the expected policy lag. At 100% confidence, NO2 fell from 43.00 to 31.78 &micro;g/m&sup3; &mdash; the first time Marylebone Road&rsquo;s stage mean has been below the 40 &micro;g/m&sup3; legal limit.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">Legal limit met; health standard not</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">31.78 &micro;g/m&sup3; is below the UK legal limit of 40 &micro;g/m&sup3; &mdash; a milestone for a site in breach of legal standards for decades. But the WHO revised its guideline to 10 &micro;g/m&sup3; in 2021. The Stage 4 mean is still more than three times the health standard.</div>
+            </div>
+        </div>
+        <div style="font-size:0.85em;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">
+            <strong style="color:var(--text);">Method &mdash; Bootstrap CUSUM:</strong> Model-free step-change detection applied directly to measured data, no counterfactual assumptions. A structural change is confirmed when the cumulative sum of deviations from the mean crosses the bootstrap confidence threshold &mdash; stating precisely when the process changed, by how much, and at what confidence. &nbsp;&middot;&nbsp;
+            <strong style="color:var(--text);">Data:</strong> Defra AURN, Marylebone Road (MY1), monthly mean NO2 &nbsp;&middot;&nbsp; <strong style="color:var(--text);">N=134</strong> monthly observations &nbsp;&middot;&nbsp; <strong style="color:var(--text);">Conf=99.7%</strong> &nbsp;&middot;&nbsp; <strong style="color:var(--text);">Loops=1000</strong> &nbsp;&middot;&nbsp; <strong style="color:var(--text);">Data file:</strong> <a href="ulez-no2-monthly.csv" download style="color:var(--brand-mid);">ulez-no2-monthly.csv</a>
+        </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Table of Contents &mdash; click to expand or collapse</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-debate">The most contested policy in recent London history</a></li>
+                <li><a href="#section-data">The data: Marylebone Road, 2015&ndash;2026</a></li>
+                <li><a href="#section-four-stages">Four stages: what the CUSUM actually shows</a></li>
+                <li><a href="#section-findings">The three findings that matter</a></li>
+                <li><a href="#section-post-covid">Why did the improvement hold after COVID?</a></li>
+                <li><a href="#section-health">What does the NO2 reduction mean for health?</a></li>
+                <li><a href="#section-other-cities">What this means for other cities</a></li>
+                <li><a href="#section-three-charts">Three charts, three perspectives on the same data</a></li>
+                <li><a href="#section-try-it">Try it yourself: the data is public, the tool is free</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-debate">The most contested policy in recent London history</h2>
 
     <p>The ULEZ debate has been conducted almost entirely without reference to what the measured data actually shows. Supporters cite modelled estimates of pollution reduction. Critics cite modelled estimates of economic harm. Both sides argue from assumptions about what would have happened without the scheme. Neither side has asked the most important question: when did London&rsquo;s roadside NO2 actually, structurally change &mdash; and is that date consistent with the policy causing it? Bootstrap CUSUM answers that question directly from a decade of measured data. The answer is not what either side expected.</p>
 
@@ -162,7 +219,7 @@
 
     <hr>
 
-    <h2>The data: Marylebone Road, 2015&ndash;2026</h2>
+    <h2 id="section-data">The data: Marylebone Road, 2015&ndash;2026</h2>
 
     <p>Marylebone Road is one of the most heavily monitored air quality sites in the UK. It sits in the heart of the original central London ULEZ zone, carries some of the highest traffic volumes in London, and has been continuously monitored by the Defra Automatic Urban and Rural Network since the 1990s. It is the site most directly affected by the April 2019 ULEZ launch &mdash; and the site where any ULEZ signal should be most clearly visible.</p>
 
@@ -179,7 +236,7 @@
 
     <hr>
 
-    <h2>Four stages: what the CUSUM actually shows</h2>
+    <h2 id="section-four-stages">Four stages: what the CUSUM actually shows</h2>
 
     <div class="numbers-box">
         <table>
@@ -230,7 +287,7 @@
 
     <hr>
 
-    <h2>The three findings that matter</h2>
+    <h2 id="section-findings">The three findings that matter</h2>
 
     <div class="alert-green">
         <strong>Finding 1: ULEZ produced a detectable effect &mdash; but it appeared 18 months before launch.</strong>
@@ -250,7 +307,7 @@
     <div class="callout-box">
         <h3>&#128218; How does this compare with peer-reviewed research?</h3>
         <p>A study from the University of Birmingham (Tong et al., <em>npj Clean Air</em>, October 2025) found no significant city-wide impact on NO2 or NOx following the 2023 London-wide ULEZ expansion. The authors attribute this to the high compliance rate already achieved by that point &mdash; by the time the expansion launched, only 7.4% of vehicles across London were non-compliant, falling to 4.2% within three months. With so few non-compliant vehicles remaining, there was little room for further aggregate improvement.</p>
-        <p style="margin-top:10px;">This finding is not inconsistent with the Marylebone Stage 4 result. The Birmingham study measured city-wide NO2 averages across the whole of Greater London. This analysis measures a single specific site &mdash; Marylebone Road &mdash; which carries substantial through-traffic from outer London boroughs that were outside the zone until August 2023. City-wide averaging and single-site Bootstrap CUSUM are measuring different things. The Birmingham study confirms the 2023 expansion found little room for aggregate improvement across London as a whole. The Marylebone data suggests site-specific gains are still detectable where through-traffic composition changed materially &mdash; precisely because Marylebone Road receives vehicles from every direction across the city, including from the newly-covered outer boroughs.</p>
+        <p style="margin-top:10px;">This finding is not inconsistent with the Marylebone Stage 4 result. The Birmingham study measured city-wide NO2 averages across the whole of Greater London. This analysis measures a single specific site &mdash; Marylebone Road &mdash; which carries substantial through-traffic from outer London boroughs that were outside the zone until August 2023. City-wide averaging and single-site Bootstrap CUSUM are measuring different things. The Birmingham study confirms the 2023 expansion found little room for aggregate improvement across London as a whole. The Marylebone data suggests site-specific gains are still detectable where through-traffic composition changed materially.</p>
         <p style="margin-top:10px;">The two approaches are complementary. Bootstrap CUSUM at individual monitoring sites can detect localised signals that city-wide averaging smooths away. Both findings together tell a more complete story: the 2023 expansion made little difference to aggregate London air quality because compliance was already high, but it produced measurable improvements at specific high-traffic arterial sites where outer London through-traffic had previously been exempt.</p>
     </div>
 
@@ -275,7 +332,7 @@
 
     <hr>
 
-    <h2>Why did the improvement hold after COVID?</h2>
+    <h2 id="section-post-covid">Why did the improvement hold after COVID?</h2>
 
     <p>Stage 3 runs from February 2020 to March 2024 &mdash; a period of four years during which London traffic broadly recovered to pre-pandemic levels. NO2 did not recover. The stage mean of 43.00 &micro;g/m&sup3; is structurally lower than the Stage 2 mean of 65.71 &micro;g/m&sup3;, even as traffic returned. Several factors combined to maintain the improvement:</p>
 
@@ -288,7 +345,7 @@
 
     <hr>
 
-    <h2>What does the NO2 reduction mean for health?</h2>
+    <h2 id="section-health">What does the NO2 reduction mean for health?</h2>
 
     <p>NO2 is not merely a regulatory metric. It is a respiratory irritant that inflames the airways, reduces lung function, and increases susceptibility to respiratory infections. Long-term exposure is associated with increased risk of cardiovascular disease, asthma, and premature death. In Greater London in 2019, between 3,600 and 4,100 deaths per year were estimated to be associated with exposure to fine particulate matter and nitrogen dioxide combined.</p>
 
@@ -303,19 +360,19 @@
 
     <hr>
 
-    <h2>What this means for other cities</h2>
+    <h2 id="section-other-cities">What this means for other cities</h2>
 
     <p>London is the most cited example of a large-scale urban ULEZ. Cities around the world &mdash; from Paris to Seoul to New York &mdash; are considering similar schemes. The Marylebone Bootstrap CUSUM analysis has several specific implications for how those cities should design and evaluate their programmes.</p>
 
     <p>First, <strong>the anticipatory compliance effect is real and substantial.</strong> A 24.7% improvement appeared 18 months before the scheme launched. Cities should begin monitoring immediately on announcement &mdash; the pre-launch period contains a genuine policy signal that post-launch analysis will miss if the baseline is set at the launch date.</p>
 
-    <p>Second, <strong>the policy lag for city-wide schemes is 6&ndash;12 months</strong>. The London-wide expansion of August 2023 produced a detectable change point in March 2024 &mdash; seven months later. This lag is not a failure of the scheme; it is the time required for the vehicle fleet to turn over and for the new compliance standard to work through normal driving patterns. Bootstrap CUSUM provides an objective way to measure this lag precisely: rather than declaring a policy successful or failed at launch, you set a minimum observation period of 12 months and let the CUSUM tell you when &mdash; and if &mdash; a structural change has occurred. Cities expecting an immediate signal from a ULEZ launch should recalibrate that expectation accordingly.</p>
+    <p>Second, <strong>the policy lag for city-wide schemes is 6&ndash;12 months</strong>. The London-wide expansion of August 2023 produced a detectable change point in March 2024 &mdash; seven months later. This lag is not a failure of the scheme; it is the time required for the vehicle fleet to turn over and for the new compliance standard to work through normal driving patterns. Bootstrap CUSUM provides an objective way to measure this lag precisely: rather than declaring a policy successful or failed at launch, you set a minimum observation period of 12 months and let the CUSUM tell you when &mdash; and if &mdash; a structural change has occurred.</p>
 
     <p>Third, <strong>evaluate at the monitoring site level, not just at the city-wide average level</strong>. Bootstrap CUSUM applied to monitoring sites within the affected zone gives a more sensitive and accurate assessment of policy impact than averaging across the whole city.</p>
 
     <hr>
 
-    <h2>Three charts, three perspectives on the same data</h2>
+    <h2 id="section-three-charts">Three charts, three perspectives on the same data</h2>
 
     <p>The Bootstrap CUSUM step-change analysis is the primary tool in this article &mdash; but the same Marylebone Road dataset produces three different and complementary perspectives when viewed through different chart types. This mirrors the theme explored in the <a href="three-charts-three-stories.html">Three Charts article</a> elsewhere on this site.</p>
 
@@ -348,7 +405,7 @@
 
     <hr>
 
-    <h2>Try it yourself: the data is public, the tool is free</h2>
+    <h2 id="section-try-it">Try it yourself: the data is public, the tool is free</h2>
 
     <p>The Defra UK AIR Data Selector contains daily NO2 data for every automatic monitoring site in England going back decades. Marylebone Road (site code MY1) is one of the most complete and longest-running series. Downloading the daily data, aggregating to monthly means, removing blank monitoring days, and uploading to StepChangeAnalysis.com reproduces this analysis exactly in approximately twenty minutes.</p>
 
