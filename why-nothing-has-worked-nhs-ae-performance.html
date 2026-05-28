@@ -63,7 +63,7 @@
         .method-box { background: #f0fff4; border: 1px solid var(--green); border-radius: 8px; padding: 20px 24px; margin: 24px 0; font-family: system-ui, sans-serif; }
         .method-box h3 { color: var(--green); margin-bottom: 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
         .method-box p { font-size: 0.95em; margin-bottom: 10px; }
-        .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; }
+        .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; overflow-x: auto; }
         .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
         .numbers-box th { background: var(--brand-blue); color: white; padding: 8px 12px; text-align: left; }
         .numbers-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
@@ -88,6 +88,20 @@
         .note { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); font-style: italic; background: #f8f9fa; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin: 16px 0; }
         .alert-red { background: #fff5f5; border-left: 5px solid var(--red); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; color: #7f1d1d; }
         .alert-red strong { color: var(--red); display: block; margin-bottom: 6px; }
+        .finding { background: var(--brand-light); border-left: 5px solid var(--brand-mid); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.97em; }
+        .finding strong { display: block; margin-bottom: 6px; font-size: 1em; color: var(--brand-blue); }
+        /* TOC styles */
+        .toc-details { margin: 0 0 28px 0; border: 1px solid var(--border); border-radius: 8px; font-family: system-ui, sans-serif; background: white; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: bold; color: var(--brand-blue); font-size: 0.95em; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+        .toc-details summary::-webkit-details-marker { display: none; }
+        .toc-details summary:hover { background: var(--brand-light); border-radius: 8px; }
+        .toc-details[open] summary { border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; }
+        .toc-details[open] summary:hover { border-radius: 8px 8px 0 0; }
+        .toc-inner { padding: 6px 18px 16px; }
+        .toc-inner ol { margin: 10px 0 0 1.2em; line-height: 2.1; }
+        .toc-inner ol li { font-size: 0.92em; margin-bottom: 0; }
+        .toc-inner ol li a { color: var(--brand-mid); text-decoration: none; }
+        .toc-inner ol li a:hover { text-decoration: underline; color: var(--brand-blue); }
     </style>
 </head>
 <body>
@@ -108,7 +122,51 @@
 
     <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; May 2026 &nbsp;&middot;&nbsp; Data: NHS England Monthly A&amp;E Time Series 2010&ndash;2026</div>
 
-    <h2>The target that defined a generation of NHS management</h2>
+    <!-- Summary box -->
+    <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.78em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="nhs-ae-performance-summary.pdf" download style="color:var(--brand-mid);">&#8675; Download Executive Summary PDF</a> &nbsp;&middot;&nbsp; <a href="ae-performance.csv" download style="color:var(--brand-mid);">&#8675; Download the data CSV</a></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px;">
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--red);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">Four stages of structural decline</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Bootstrap CUSUM on 184 monthly observations finds four statistically distinct stages at 99.7% confidence. The CUSUM line has been in continuous decline since 2013. Not one policy intervention &mdash; the Five Year Forward View, the Long Term Plan, the Clinical Review of Standards, the revised interim targets &mdash; appears as a detectable upward change point in the data.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--orange);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The constraint is not in A&amp;E</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">An average of 13,700 hospital beds every day in early 2025 were occupied by patients clinically ready for discharge but with nowhere to go. Each blocked bed prevents an admission from A&amp;E. Each blocked admission is a breach counted against A&amp;E performance &mdash; against the department where the problem is visible, not against the social care system where the constraint lies.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">One genuine bright spot</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">At 95% confidence, Stage 10 (November 2023&ndash;present) shows a +2.8% structural improvement at 99.6% confidence &mdash; under full demand pressure, with narrowing variation as well as an improved mean. This is the hallmark of genuine process stabilisation, not a COVID-style false positive. Something changed around November 2023. The CUSUM has found the signal; the investigation should now ask what caused it.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--brand-mid);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The tampering problem</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Policy changes take 18&ndash;24 months to produce a detectable CUSUM signal. Every new intervention in this dataset was layered onto a system that had not yet had time to respond to the last one. Deming called this tampering. The CUSUM provides a pre-specified test: wait 18&ndash;24 months, then let the data speak.</div>
+            </div>
+        </div>
+        <div style="font-size:0.85em;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">
+            <strong style="color:var(--text);">Method &mdash; Bootstrap CUSUM:</strong> 99.7% confidence for structural stages; 95% confidence for bright spot detection &nbsp;&middot;&nbsp;
+            <strong style="color:var(--text);">Data:</strong> NHS England Monthly A&amp;E Time Series &nbsp;&middot;&nbsp; <strong style="color:var(--text);">N=184</strong> monthly observations Aug 2010&ndash;Feb 2026 &nbsp;&middot;&nbsp; <strong style="color:var(--text);">Loops=5000</strong>
+        </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Table of Contents &mdash; click to expand or collapse</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-target">The target that defined a generation of NHS management</a></li>
+                <li><a href="#section-cusum">What Bootstrap CUSUM reveals: four stages of structural decline</a></li>
+                <li><a href="#section-deming">Deming&rsquo;s critique: the target without a method</a></li>
+                <li><a href="#section-constraint">Where is the real constraint? The action is not where the problem appears</a></li>
+                <li><a href="#section-managers">How Bootstrap CUSUM could help NHS managers right now</a></li>
+                <li><a href="#section-lag">How long before a policy change shows up in the data?</a></li>
+                <li><a href="#section-attendance">Is the problem really inappropriate attendance?</a></li>
+                <li><a href="#section-bright-spots">Finding the bright spots: Bootstrap CUSUM at Trust level</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-target">The target that defined a generation of NHS management</h2>
 
     <p>The four-hour target had been announced four years earlier, in 2000, as a commitment rather than a policy detail &mdash; a prime ministerial promise made on live radio. When it was formally introduced in 2004, the standard was set at 98%: virtually every patient attending accident and emergency should be admitted, transferred, or discharged within four hours of arrival. By 2005&ndash;06, the target was being met. It appeared to work.</p>
 
@@ -120,7 +178,7 @@
 
     <hr>
 
-    <h2>What Bootstrap CUSUM reveals: four stages of structural decline</h2>
+    <h2 id="section-cusum">What Bootstrap CUSUM reveals: four stages of structural decline</h2>
 
     <p>The chart below applies Bootstrap CUSUM step-change analysis to 184 monthly observations of NHS A&amp;E performance from August 2010 to February 2026. The Y-axis is the percentage of all attendances seen within four hours. The data is freely available from NHS England and can be uploaded directly to StepChangeAnalysis.com &mdash; the analysis shown here required approximately fifteen minutes of preparation.</p>
 
@@ -136,7 +194,7 @@
     <div class="numbers-box">
         <table>
             <thead><tr>
-                <th>Stage</th><th>Period</th><th>Mean</th><th>What was happening — and the capacity question</th>
+                <th>Stage</th><th>Period</th><th>Mean</th><th>What was happening &mdash; and the capacity question</th>
             </tr></thead>
             <tbody>
                 <tr>
@@ -155,13 +213,13 @@
                     <td><span class="stage-badge">3</span></td>
                     <td>2020&ndash;2022</td>
                     <td>~82%</td>
-                    <td><strong>COVID and immediate aftermath.</strong> Attendances fell 37% during the first wave as people avoided hospitals. Performance briefly improved &mdash; a false positive caused by fewer patients, not a better system. Performance improved during the initial COVID waves due to different demands for emergency care, but since March 2021 has been declining at a significantly faster rate than before the pandemic. When demand returned it came back harder: patients who had delayed care returned with more advanced conditions; the elective backlog drove complications to A&amp;E; infection control measures reduced effective bed capacity. The system emerged from COVID structurally weaker than it entered it.</td>
+                    <td><strong>COVID and immediate aftermath.</strong> Attendances fell 37% during the first wave as people avoided hospitals. Performance briefly improved &mdash; a false positive caused by fewer patients, not a better system. When demand returned it came back harder: patients who had delayed care returned with more advanced conditions; the elective backlog drove complications to A&amp;E; infection control measures reduced effective bed capacity. The system emerged from COVID structurally weaker than it entered it.</td>
                 </tr>
                 <tr>
                     <td><span class="stage-badge">4</span></td>
                     <td>2022&ndash;2026</td>
                     <td>~73%</td>
-                    <td><strong>Post-COVID structural collapse, then first signs of stabilisation.</strong> December 2022: first month where over half of all patients waited more than four hours. Social care blockage reached its peak &mdash; 13,700 beds per day occupied by patients ready for discharge. From late 2023 a modest improvement begins, detectable at 95% confidence as Stage 10 in the detailed analysis. The 3SD limits narrow at this stage &mdash; both mean and variation improving simultaneously, the hallmark of genuine process stabilisation rather than temporary fluctuation.</td>
+                    <td><strong>Post-COVID structural collapse, then first signs of stabilisation.</strong> December 2022: first month where over half of all patients waited more than four hours. Social care blockage reached its peak &mdash; 13,700 beds per day occupied by patients ready for discharge. From late 2023 a modest improvement begins, detectable at 95% confidence as Stage 10 in the detailed analysis. The 3SD limits narrow at this stage &mdash; both mean and variation improving simultaneously, the hallmark of genuine process stabilisation.</td>
                 </tr>
             </tbody>
         </table>
@@ -171,14 +229,14 @@
         <strong>The critical finding:</strong>
         Not one of the major policy interventions of the past decade &mdash; the 2015 Five Year Forward View, the 2018 Clinical Review of Standards, the 2019 NHS Long Term Plan, the 2022 interim target, the 2023&ndash;24 planning guidance &mdash; appears as a detectable upward change point in the CUSUM at 99.7% confidence. The green line has been falling continuously since 2013. It has not responded to a single announcement, review, or revised standard.
         <br><br>
-        This must be read with one important caveat: genuine policy improvements typically take 18&ndash;24 months to produce a detectable CUSUM signal. It is possible that some interventions were beginning to work when the next government or the next policy review cancelled or replaced them. The CUSUM cannot distinguish between a policy that failed and a policy that was abandoned before it could succeed. What it can say with confidence is that no sustained structural improvement has yet emerged from the data. That is a finding about outcomes, not necessarily about intent.
+        This must be read with one important caveat: genuine policy improvements typically take 18&ndash;24 months to produce a detectable CUSUM signal. It is possible that some interventions were beginning to work when the next government or the next policy review cancelled or replaced them. The CUSUM cannot distinguish between a policy that failed and a policy that was abandoned before it could succeed. What it can say with confidence is that no sustained structural improvement has yet emerged from the data.
     </div>
 
     <p>Stage 3 (COVID) deserves a specific note. Attendances fell to below one million in April 2020 &mdash; 42% lower than the previous year. Performance improved because there were far fewer patients, not because the system had improved. Stage 4 is substantially worse than Stage 2 before COVID. The pandemic revealed and accelerated a pre-existing structural failure; it did not cause it.</p>
 
     <hr>
 
-    <h2>Deming&rsquo;s critique: the target without a method</h2>
+    <h2 id="section-deming">Deming&rsquo;s critique: the target without a method</h2>
 
     <p>Deming&rsquo;s central argument, in <em>Out of the Crisis</em> (1982), is that a result is the output of a process, and <strong>you cannot sustainably change a result without changing the process that produces it.</strong> Setting a numerical target for the result, without changing the process, produces one of two outcomes: nothing, or distortion.</p>
 
@@ -193,7 +251,7 @@
 
     <hr>
 
-    <h2>Where is the real constraint? The action is not where the problem appears</h2>
+    <h2 id="section-constraint">Where is the real constraint? The action is not where the problem appears</h2>
 
     <p>Deming tells us that targeting outputs without improving processes is futile. Eliyahu Goldratt&rsquo;s Theory of Constraints adds a sharper question: <em>which</em> process? In any system there is always one binding constraint &mdash; one weakest link &mdash; that limits the throughput of the whole. Improving anything else is largely wasted effort until you identify and address that constraint.</p>
 
@@ -210,7 +268,7 @@
 
     <hr>
 
-    <h2>How Bootstrap CUSUM could help NHS managers right now</h2>
+    <h2 id="section-managers">How Bootstrap CUSUM could help NHS managers right now</h2>
 
     <p>The CUSUM applied in this article was produced using freely available NHS England data and the free tool at StepChangeAnalysis.com. No specialist software, no statistician, no data submission. Fifteen minutes of preparation.</p>
 
@@ -220,7 +278,7 @@
         <h3>&#128202; What Bootstrap CUSUM adds that monthly reporting cannot</h3>
         <p><strong>It distinguishes structural change from common cause variation.</strong> Winter seasonal dips are common cause &mdash; predictable and systemic, not a signal of structural deterioration. A Bootstrap CUSUM boundary dated to a specific month is a structural change &mdash; the process has genuinely moved to a different level. Monthly reports cannot make this distinction. CUSUM does it automatically.</p>
         <p><strong>It dates interventions precisely.</strong> If a new discharge-to-assess programme, a GP streaming pathway, or a social care investment actually improves A&amp;E flow, Bootstrap CUSUM will detect the change point and date it within a few weeks. No intervention has yet produced a detectable change in the national data. A Trust that implements one can now know, objectively, whether it has worked &mdash; not from anecdote, but from statistical evidence.</p>
-        <p><strong>It identifies where in the system the change occurred.</strong> Applied not just to A&amp;E performance but to discharge rates, bed occupancy, and GP referral rates simultaneously, Bootstrap CUSUM can show which upstream constraint moved first &mdash; and whether the A&amp;E improvement followed it. This is Goldratt&rsquo;s constraint analysis made operational with publicly available data and a free browser tool.</p>
+        <p><strong>It identifies where in the system the change occurred.</strong> Applied not just to A&amp;E performance but to discharge rates, bed occupancy, and GP referral rates simultaneously, Bootstrap CUSUM can show which upstream constraint moved first &mdash; and whether the A&amp;E improvement followed it.</p>
         <p><strong>It is transparent and reproducible.</strong> The NHS England time series is publicly downloadable. The analysis can be reproduced by any Trust, commissioner, journalist, or patient group in minutes. That transparency is itself a form of accountability that monthly target reporting &mdash; with its political incentive to manage the number &mdash; cannot provide.</p>
     </div>
 
@@ -244,7 +302,7 @@
 
     <hr>
 
-    <h2>How long before a policy change shows up in the data?</h2>
+    <h2 id="section-lag">How long before a policy change shows up in the data?</h2>
 
     <p>There is one more thing the CUSUM tells us that monthly target reporting cannot &mdash; and it may be the most practically important insight of all. <strong>Policy changes take time to produce detectable results. How much time? And how do you know when to wait, and when to conclude that something is not working?</strong></p>
 
@@ -254,7 +312,7 @@
 
     <h3>The political compounding of tampering</h3>
 
-    <p>Deming&rsquo;s tampering problem is made structurally worse by electoral cycles. A new government arrives. The monthly A&amp;E metric is still poor &mdash; because the previous government&rsquo;s intervention has not yet had 18&ndash;24 months to produce a detectable CUSUM signal. The new government declares the previous policy a failure, announces its own programme, and the cycle begins again. But from a statistical standpoint, the declaration of failure was made entirely on the basis of <strong>common cause variation</strong> &mdash; the normal noise of the system &mdash; not on evidence of structural failure. The previous policy may have been working. There was simply no way to know.</p>
+    <p>Deming&rsquo;s tampering problem is made structurally worse by electoral cycles. A new government arrives. The monthly A&amp;E metric is still poor &mdash; because the previous government&rsquo;s intervention has not yet had 18&ndash;24 months to produce a detectable CUSUM signal. The new government declares the previous policy a failure, announces its own programme, and the cycle begins again. But from a statistical standpoint, the declaration of failure was made entirely on the basis of <strong>common cause variation</strong> &mdash; the normal noise of the system &mdash; not on evidence of structural failure.</p>
 
     <p>This brings us to what is arguably Deming&rsquo;s most important practical distinction: <strong>common cause variation versus special cause variation.</strong></p>
 
@@ -284,53 +342,53 @@
         <strong>Stage 10 is the real bright spot in the national data:</strong>
         Not Stage 7. Stage 7 &mdash; the COVID improvement of +7.1% between December 2019 and June 2020 &mdash; was a false positive caused by fewer patients, not a better system. Attendances collapsed by 42%. Performance improved because the constraint was temporarily removed, not because it was fixed. The CUSUM correctly refuses to recognise this as a genuine structural improvement at 99.7% confidence: the signal disappears when subjected to 3-sigma scrutiny.
         <br><br>
-        Stage 10 is different. From November 2023, the stage mean has held at 0.74 &mdash; a +2.8% improvement from Stage 9 &mdash; at 99.6% confidence. This is happening under full demand pressure: attendances are at record levels, the elective backlog remains, social care is still constrained. Something in the system structurally improved around November 2023, and it has held. The CUSUM is saying, cautiously but clearly, that this is not noise.
+        Stage 10 is different. From November 2023, the stage mean has held at 0.74 &mdash; a +2.8% improvement from Stage 9 &mdash; at 99.6% confidence. This is happening under full demand pressure: attendances are at record levels, the elective backlog remains, social care is still constrained. Something in the system structurally improved around November 2023, and it has held.
         <br><br>
-        This is what a bright spot looks like in national data. The Positive Deviance investigation starts here: what changed around November 2023? The honest answer is that it is not yet clear &mdash; several things converged at the same time and the CUSUM cannot yet attribute the signal to a single cause:
+        What changed around November 2023? Several things converged:
         <br><br>
-        &rarr; <strong>Virtual wards scaling</strong> &mdash; NHS England nominally reached 50,000 virtual ward beds in 2023, discharging patients earlier and directly freeing the blocked beds that the article identifies as the real constraint<br>
+        &rarr; <strong>Virtual wards scaling</strong> &mdash; NHS England nominally reached 50,000 virtual ward beds in 2023, discharging patients earlier and directly freeing blocked beds<br>
         &rarr; <strong>Hospital discharge funding</strong> &mdash; dedicated discharge funding from NHS England increased from 2022&ndash;23, targeting the social care blockage at source<br>
         &rarr; <strong>Urgent community response</strong> &mdash; 2-hour UCR teams were being rolled out nationally from 2022, diverting patients before they reached A&amp;E<br>
-        &rarr; <strong>Same-day emergency care</strong> &mdash; SDEC expansion accelerated through 2022&ndash;23, reaching 84% of hospitals by 2024, allowing patients to be treated without being admitted<br>
+        &rarr; <strong>Same-day emergency care</strong> &mdash; SDEC expansion accelerated through 2022&ndash;23, reaching 84% of hospitals by 2024<br>
         <br>
-        Probably a combination of all of them. What they share is that all four address the constraint &mdash; blocked beds and demand diversion &mdash; rather than A&amp;E itself. The CUSUM has found the signal and dated it precisely to November 2023. The next step is understanding which of these mechanisms produced it, at what scale &mdash; and replicating it systematically. That distinction matters: if we don&rsquo;t know what moved the system, we cannot reliably repeat it.
+        What they share is that all four address the constraint &mdash; blocked beds and demand diversion &mdash; rather than A&amp;E itself. The CUSUM has found the signal and dated it precisely to November 2023. The next step is understanding which mechanism produced it &mdash; and replicating it systematically.
         <br><br>
-        There is one further piece of evidence that Stage 10 is genuine. The 3-sigma control limits at Stage 10 are narrower than in the preceding stages &mdash; the month-to-month variation has reduced as well as the mean improving. A system performing at a higher mean level <em>and</em> doing so more consistently is showing the hallmark of genuine process stabilisation. Compare this with Stage 7 (COVID): the mean went up but the variation was enormous, as attendances collapsed unpredictably and the system lurched between extremes. Wide variation with an improved mean is a false positive. Narrower variation with an improved mean is a structural change. Stage 10 shows both.
+        There is one further piece of evidence that Stage 10 is genuine. The 3-sigma control limits at Stage 10 are narrower than in the preceding stages &mdash; the month-to-month variation has reduced as well as the mean improving. A system performing at a higher mean level <em>and</em> doing so more consistently is showing the hallmark of genuine process stabilisation. Wide variation with an improved mean is a false positive. Narrower variation with an improved mean is a structural change. Stage 10 shows both.
     </div>
 
-    <p>The CUSUM chart makes this visible in a way that monthly reporting never can. The five stage boundaries are the only moments in fifteen years when the data actually contains a signal &mdash; a genuine structural change that exceeds what common cause variation alone could produce. Everything else in the chart &mdash; every month-to-month fluctuation, every seasonal dip, every partial recovery &mdash; is common cause variation. It is noise. It should not be acted upon.</p>
+    <p>The CUSUM chart makes this visible in a way that monthly reporting never can. The five stage boundaries are the only moments in fifteen years when the data actually contains a signal &mdash; a genuine structural change that exceeds what common cause variation alone could produce. Everything else in the chart is noise. It should not be acted upon.</p>
 
-    <p>A government that changes NHS A&amp;E policy in response to a bad December is acting on noise. A government that abandons a policy after twelve months because the CUSUM has not yet shown a signal is acting on noise. A government that waits 24 months, runs the CUSUM, and then evaluates whether a structural change has occurred is acting on signal. The difference is not political courage or analytical sophistication &mdash; it is the difference between understanding and not understanding variation.</p>
+    <p>A government that changes NHS A&amp;E policy in response to a bad December is acting on noise. A government that waits 24 months, runs the CUSUM, and then evaluates whether a structural change has occurred is acting on signal. The difference is not political courage or analytical sophistication &mdash; it is the difference between understanding and not understanding variation.</p>
 
     <div class="callout-box">
         <h3>&#9203; The signal detection timeline</h3>
         <p>How quickly a genuine improvement shows up in the CUSUM depends on three things: the magnitude of the change, the noise level in the data, and the confidence threshold required. With the NHS A&amp;E data (SD = 0.09, approximately 9 percentage points of month-to-month variation), the approximate detection times for a genuine sustained improvement are:</p>
         <p style="margin-top:10px;"><strong>A large improvement (+5 percentage points in stage mean)</strong> &mdash; detectable in approximately 9&ndash;12 months at 95% confidence; 15&ndash;18 months at 99.7%.</p>
         <p style="margin-top:10px;"><strong>A moderate improvement (+3 percentage points)</strong> &mdash; detectable in approximately 15&ndash;20 months at 95% confidence; 24&ndash;30 months at 99.7%.</p>
-        <p style="margin-top:10px;"><strong>A small improvement (+1 percentage point)</strong> &mdash; may take 3&ndash;4 years to produce a statistically confident signal at 95% confidence. At 99.7% it may not be detectable at all within a realistic policy evaluation window.</p>
-        <p style="margin-top:10px;">These timelines are not a weakness of CUSUM &mdash; they are an honest statement of how much evidence the data can provide. The weakness lies in expecting monthly metrics to show policy impact in weeks, and abandoning policies that have not yet had time to work. There is a further dimension: <strong>the amount of month-to-month variation in the data directly determines how quickly a genuine improvement can be detected.</strong> Less variation means the signal stands out sooner against a quieter background. This is not merely theoretical &mdash; it is visible in Stage 10 of the 95% analysis, where the narrowing 3SD limits indicate that both the mean and the variation have improved simultaneously. A system producing less erratic month-to-month results will surface a genuine policy improvement faster. Reducing variation is therefore not just an outcome in itself &mdash; it makes the system more legible and more manageable. Deming argued that understanding variation is the most important skill a manager can have. Stage 10 shows why: the system became easier to read at exactly the moment it started to improve.</p>
+        <p style="margin-top:10px;"><strong>A small improvement (+1 percentage point)</strong> &mdash; may take 3&ndash;4 years to produce a statistically confident signal at 95% confidence.</p>
+        <p style="margin-top:10px;">These timelines are not a weakness of CUSUM &mdash; they are an honest statement of how much evidence the data can provide. The weakness lies in expecting monthly metrics to show policy impact in weeks, and abandoning policies that have not yet had time to work. Reducing variation is therefore not just an outcome in itself &mdash; it makes the system more legible and more manageable. Deming argued that understanding variation is the most important skill a manager can have. Stage 10 shows why: the system became easier to read at exactly the moment it started to improve.</p>
     </div>
 
-    <p>This has a direct practical implication for NHS policy evaluation. Before implementing any significant intervention &mdash; a discharge-to-assess programme, a mental health diversion pathway, a social care investment &mdash; three things should be pre-specified:</p>
+    <p>Before implementing any significant intervention, three things should be pre-specified:</p>
 
     <ol>
-        <li><strong>The expected magnitude of improvement</strong> &mdash; what change in the stage mean would represent success? Even a modest +2 percentage point improvement in the national mean would represent hundreds of thousands of additional patients seen on time each year.</li>
+        <li><strong>The expected magnitude of improvement</strong> &mdash; what change in the stage mean would represent success?</li>
         <li><strong>The confidence threshold for declaring success</strong> &mdash; 95% for ongoing monitoring; 99.7% before claiming the intervention has structurally improved the system.</li>
-        <li><strong>The minimum observation period</strong> &mdash; the period during which the policy will not be modified or abandoned regardless of month-to-month fluctuations. Based on the signal detection timelines above, this should be a minimum of 18 months for a moderate improvement, and 24&ndash;30 months for a system-level change.</li>
+        <li><strong>The minimum observation period</strong> &mdash; a minimum of 18 months for a moderate improvement, and 24&ndash;30 months for a system-level change.</li>
     </ol>
 
-    <p>Bootstrap CUSUM then becomes a <em>prospective</em> tool rather than just a retrospective one. The signal you are looking for is defined before the intervention begins. The CUSUM runs in the background, accumulating evidence. When &mdash; and only when &mdash; the CUSUM declares a statistically significant structural improvement, the policy can be judged to have worked. Until then, the system has not yet had sufficient time to respond, and changing course is tampering.</p>
+    <p>Bootstrap CUSUM then becomes a <em>prospective</em> tool rather than just a retrospective one. The signal you are looking for is defined before the intervention begins. When &mdash; and only when &mdash; the CUSUM declares a statistically significant structural improvement, the policy can be judged to have worked. Until then, changing course is tampering.</p>
 
     <div class="deming-box">
         <h3>&#128336; The commitment CUSUM requires</h3>
         <p class="deming-quote">&ldquo;If you can&rsquo;t describe what you are doing as a process, you don&rsquo;t know what you&rsquo;re doing.&rdquo; &mdash; W. Edwards Deming</p>
         <p>The hardest part of this approach is political, not statistical. Pre-specifying a 24-month observation period requires ministers and managers to commit publicly to waiting for evidence before drawing conclusions &mdash; and to resist the pressure to intervene when monthly metrics fluctuate in the wrong direction. That fluctuation is common cause variation. It is noise, not signal. CUSUM is specifically designed to filter it out.</p>
-        <p style="margin-top:10px;">The four-stage chart shows fifteen years of a system that was never given the time to respond to anything. Every structural change in the CUSUM was driven by the underlying conditions of the system &mdash; social care cuts, demographic pressure, COVID &mdash; not by policy intervention. The policy interventions are invisible in the data because they were either too small, too short-lived, or abandoned before the signal could emerge. CUSUM cannot fix that. But it can tell you, with statistical rigour, whether what you have done has worked &mdash; if you are prepared to wait long enough to find out.</p>
+        <p style="margin-top:10px;">The four-stage chart shows fifteen years of a system that was never given the time to respond to anything. Every structural change in the CUSUM was driven by the underlying conditions of the system &mdash; social care cuts, demographic pressure, COVID &mdash; not by policy intervention. The policy interventions are invisible in the data because they were either too small, too short-lived, or abandoned before the signal could emerge.</p>
     </div>
 
     <hr>
 
-    <h2>Is the problem really inappropriate attendance?</h2>
+    <h2 id="section-attendance">Is the problem really inappropriate attendance?</h2>
 
     <p>A persistent narrative in NHS policy discussions is that a significant proportion of A&amp;E attendances are &ldquo;inappropriate&rdquo; &mdash; patients who could and should have gone to their GP instead. If only people would stop misusing A&amp;E, the argument goes, the waiting time problem would largely solve itself. The data does not support this conclusion.</p>
 
@@ -338,7 +396,7 @@
 
     <div class="callout-box">
         <h3>&#9888;&#65039; Why removing non-urgent cases wouldn&rsquo;t fix the four-hour problem</h3>
-        <p>The patients causing four-hour breaches are not primarily the non-urgent ones. They are the complex, older, high-acuity patients who need admission but cannot get a bed because beds are blocked by patients clinically ready for discharge but with nowhere to go. The non-urgent patients are typically processed more quickly in terms of clinical complexity &mdash; but in practice they wait behind the admitted patients who are blocking the system. The person with a minor injury sits in a waiting room where the tannoy announces a four-hour wait. A few people get up and walk out. Those who stay join a queue that is blocked not by their own clinical need but by the absence of a care home bed somewhere in the social care system. The constraint flows all the way back to the waiting room.</p>
+        <p>The patients causing four-hour breaches are not primarily the non-urgent ones. They are the complex, older, high-acuity patients who need admission but cannot get a bed because beds are blocked by patients clinically ready for discharge but with nowhere to go. The non-urgent patients are typically processed more quickly in terms of clinical complexity &mdash; but in practice they wait behind the admitted patients who are blocking the system. The constraint flows all the way back to the waiting room.</p>
         <p style="margin-top:10px;">Furthermore, <strong>interventions designed to reduce inappropriate attendance consistently fail to do so.</strong> A systematic review published in the <em>British Journal of General Practice</em> (Cowling et al., 2013) found no evidence of reduction in inappropriate A&amp;E attendance following a variety of interventions designed to improve access to primary care. The demand doesn&rsquo;t disappear &mdash; it returns or re-presents within a week. People attend A&amp;E because they cannot access care elsewhere, not because they are making an irrational choice.</p>
     </div>
 
@@ -346,27 +404,27 @@
 
     <hr>
 
-    <h2>Finding the bright spots: Bootstrap CUSUM at Trust level</h2>
+    <h2 id="section-bright-spots">Finding the bright spots: Bootstrap CUSUM at Trust level</h2>
 
     <p>The national CUSUM shows what the system as a whole is doing. It does not tell you whether anyone, anywhere, is doing it differently &mdash; and doing it better. This is where the frameworks of <strong>Bright Spots</strong> (Chip and Dan Heath) and <strong>Positive Deviance</strong> (Jerry Sternin) become directly relevant to NHS A&amp;E analysis.</p>
 
-    <p>Both frameworks start from the same premise: in any failing system, there are always outliers who are succeeding &mdash; not because they have more resources, but because they are doing something differently with the same resources. The question is not &ldquo;what do the successful outliers have that others lack?&rdquo; It is &ldquo;what are they <em>doing</em> differently?&rdquo; The resources are the same. The process is different. And finding that process difference is worth more than any policy review.</p>
+    <p>Both frameworks start from the same premise: in any failing system, there are always outliers who are succeeding &mdash; not because they have more resources, but because they are doing something differently with the same resources. The question is not &ldquo;what do the successful outliers have that others lack?&rdquo; It is &ldquo;what are they <em>doing</em> differently?&rdquo;</p>
 
-    <p>Applied to NHS A&amp;E, the question is: are there Trusts whose CUSUM trajectory looks different from the national picture? Trusts where the equivalent of Stage 9 (the post-COVID collapse in the 95% confidence analysis) never happened, or happened later or less severely? Trusts where a genuine upward change point &mdash; a structural improvement &mdash; appears at a specific date? If those Trusts exist, Bootstrap CUSUM can find them, date the improvement, and provide the statistical foundation for asking: what changed here, and when?</p>
+    <p>Applied to NHS A&amp;E, the question is: are there Trusts whose CUSUM trajectory looks different from the national picture? Trusts where a genuine upward change point &mdash; a structural improvement &mdash; appears at a specific date? If those Trusts exist, Bootstrap CUSUM can find them, date the improvement, and provide the statistical foundation for asking: what changed here, and when?</p>
 
     <div class="method-box">
         <h3>&#128202; How to find bright spots using Trust-level CUSUM</h3>
         <p><strong>The data exists.</strong> The NHS England monthly A&amp;E files contain Trust-level performance data. Each monthly file has a row per Trust. Extracting a single Trust&rsquo;s time series and uploading to StepChangeAnalysis.com takes approximately ten minutes per Trust.</p>
         <p style="margin-top:10px;"><strong>What to look for.</strong> A bright spot Trust will show one or more of: fewer stages than the national picture (greater stability); a consistently higher stage mean; or &mdash; most valuably &mdash; an upward change point at a specific date where the CUSUM reverses from decline to improvement. That date is the signal. It tells you when something structurally changed.</p>
-        <p style="margin-top:10px;"><strong>The Positive Deviance investigation.</strong> Once a Trust with an upward change point is identified, the CUSUM date anchors the investigation. What happened at that Trust in the 6&ndash;12 months before the change point? A new discharge pathway? A GP streaming model? A same-day emergency care unit? A social care partnership? The CUSUM cannot answer that &mdash; but it asks the question with precision. Without the CUSUM date, the question is vague. With it, it is specific.</p>
+        <p style="margin-top:10px;"><strong>The Positive Deviance investigation.</strong> Once a Trust with an upward change point is identified, the CUSUM date anchors the investigation. What happened at that Trust in the 6&ndash;12 months before the change point? A new discharge pathway? A GP streaming model? A same-day emergency care unit? A social care partnership? The CUSUM cannot answer that &mdash; but it asks the question with precision.</p>
         <p style="margin-top:10px;"><strong>The scalability test.</strong> Positive Deviance insists solutions must be achievable with the same resources available to peers. A Trust that performs better because it has more beds or a less deprived catchment is not a bright spot &mdash; it is just better resourced. If a Trust&rsquo;s improvement precedes any identifiable investment, the process change is the more likely explanation &mdash; and the more valuable and transferable finding.</p>
     </div>
 
-    <p>This type of analysis has not, to our knowledge, been applied systematically to Trust-level NHS A&amp;E four-hour performance data using Bootstrap CUSUM &mdash; though CUSUM methods have been used for broader NHS quality trend analysis at national level, and for inter-hospital performance comparison in surgical outcomes. The accessibility barrier is real: until recently, applying Bootstrap CUSUM required specialist statistical software and skilled analysts. The Nuffield Trust used a proprietary Change Point Analysis package for their 2009&ndash;2017 NHS quality review. What has changed is that the method is now available to anyone with a CSV file and a browser. The data is publicly available. The tool is free. Somewhere in the Trust-level data, there may be a different story &mdash; a Trust whose CUSUM turned upward, whose process changed, whose bright spot is waiting to be found and scaled. That is the article that should follow this one.</p>
+    <p>This type of analysis has not, to our knowledge, been applied systematically to Trust-level NHS A&amp;E four-hour performance data using Bootstrap CUSUM. What has changed is that the method is now available to anyone with a CSV file and a browser. The data is publicly available. The tool is free. Somewhere in the Trust-level data, there may be a different story &mdash; a Trust whose CUSUM turned upward, whose process changed, whose bright spot is waiting to be found and scaled.</p>
 
     <div class="finding">
         <strong>An open invitation:</strong>
-        If you work in NHS urgent and emergency care and have access to Trust-level A&amp;E data, the methodology above is waiting to be used. Download the NHS England monthly Trust-level files, extract a time series for your Trust, upload to StepChangeAnalysis.com, and run the Bootstrap CUSUM. If you find an upward change point &mdash; a moment when performance structurally improved &mdash; and you know what changed at that time, that knowledge is worth more than any national policy review. It is evidence that something works, dated precisely, in a real system with real constraints. The CUSUM found it. The question is what to do with it.
+        If you work in NHS urgent and emergency care and have access to Trust-level A&amp;E data, the methodology above is waiting to be used. Download the NHS England monthly Trust-level files, extract a time series for your Trust, upload to StepChangeAnalysis.com, and run the Bootstrap CUSUM. If you find an upward change point &mdash; a moment when performance structurally improved &mdash; and you know what changed at that time, that knowledge is worth more than any national policy review. It is evidence that something works, dated precisely, in a real system with real constraints.
     </div>
 
     <div class="cta-box">
@@ -397,7 +455,7 @@
         <p style="margin-top:8px;"><strong>Deming:</strong> W. Edwards Deming, <em>Out of the Crisis</em> (1982). MIT Press.</p>
         <p style="margin-top:8px;"><strong>Goldratt:</strong> Eliyahu M. Goldratt &amp; Jeff Cox, <em>The Goal</em> (1984); <em>The Theory of Constraints</em> (1990). North River Press.</p>
         <p style="margin-top:8px;"><strong>Bright Spots:</strong> Chip Heath &amp; Dan Heath, <em>Switch: How to Change Things When Change Is Hard</em>. Crown Business, 2010. ISBN 978-0-385-52875-7.</p>
-        <p style="margin-top:8px;"><strong>Positive Deviance:</strong> Richard Pascale, Jerry Sternin &amp; Monique Sternin, <em>The Power of Positive Deviance: How Unlikely Innovators Solve the World&rsquo;s Toughest Problems</em>. Harvard Business Review Press, 2010. ISBN 978-1-422-11066-9.</p>
+        <p style="margin-top:8px;"><strong>Positive Deviance:</strong> Richard Pascale, Jerry Sternin &amp; Monique Sternin, <em>The Power of Positive Deviance</em>. Harvard Business Review Press, 2010. ISBN 978-1-422-11066-9.</p>
         <p style="margin-top:8px;"><strong>Inappropriate attendance review:</strong> Cowling T.E. et al., &ldquo;Reducing inappropriate accident and emergency department attendances.&rdquo; <em>British Journal of General Practice</em>, 2013. <a href="https://bjgp.org/content/63/617/e813" target="_blank">bjgp.org</a></p>
         <p style="margin-top:8px;"><strong>International emergency care comparison:</strong> Baier N. et al., &ldquo;Emergency and urgent care systems in Australia, Denmark, England, France, Germany and the Netherlands.&rdquo; <em>Health Policy</em>, 2019. <a href="https://pubmed.ncbi.nlm.nih.gov/30503764/" target="_blank">doi:10.1016/j.healthpol.2018.11.001</a></p>
         <p style="margin-top:8px;"><strong>Avoidable A&amp;E attendance:</strong> Parkinson B. et al., &ldquo;Clarifying the concept of avoidable emergency department attendance.&rdquo; <em>Journal of Health Services Research &amp; Policy</em>, 2021. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7734604/" target="_blank">pmc.ncbi.nlm.nih.gov</a></p>
