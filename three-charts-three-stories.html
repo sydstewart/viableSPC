@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Same Data, Three Charts, Three Very Different Stories — StepChangeAnalysis.com</title>
     <meta name="description" content="A practical guide for clinical pharmacists, medicines safety officers, and quality improvement leads: how X-mR, Run Chart, and Bootstrap CUSUM step-change analysis tell radically different stories from the same data.">
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -15,7 +14,6 @@
     </script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
             font-size: 1.05rem;
@@ -23,8 +21,6 @@
             color: #1e293b;
             background: #fff;
         }
-
-        /* ── Header ── */
         .site-header {
             background: #002d5b;
             padding: 14px 24px;
@@ -52,15 +48,11 @@
             transition: background 0.2s;
         }
         .site-header a.tool-link:hover { background: #0069d9; }
-
-        /* ── Article wrapper ── */
         .article-wrap {
             max-width: 820px;
             margin: 0 auto;
             padding: 48px 24px 80px;
         }
-
-        /* ── Meta / intro ── */
         .article-tag {
             display: inline-block;
             background: #e8f4fd;
@@ -93,10 +85,7 @@
             padding-bottom: 28px;
             border-bottom: 2px solid #e2e8f0;
         }
-
-        /* ── Body text ── */
         p { margin-bottom: 1.2em; }
-
         h2 {
             font-size: 1.5rem;
             font-weight: 700;
@@ -111,8 +100,6 @@
             color: #1e293b;
             margin: 2em 0 0.6em;
         }
-
-        /* ── Chart headline quote ── */
         .chart-headline {
             background: #f0f4f8;
             border-left: 4px solid #0056b3;
@@ -123,8 +110,6 @@
             color: #002d5b;
             border-radius: 0 6px 6px 0;
         }
-
-        /* ── Chart images ── */
         .chart-figure {
             margin: 28px 0 32px;
             text-align: center;
@@ -142,8 +127,6 @@
             margin-top: 10px;
             font-style: italic;
         }
-
-        /* ── Side-by-side charts ── */
         .chart-pair {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -154,8 +137,6 @@
             .chart-pair { grid-template-columns: 1fr; }
         }
         .chart-pair .chart-figure { margin: 0; }
-
-        /* ── Blockquote ── */
         blockquote {
             background: #f8fafc;
             border-left: 4px solid #0056b3;
@@ -165,8 +146,6 @@
             font-style: italic;
             color: #334155;
         }
-
-        /* ── Tables ── */
         .table-wrap {
             overflow-x: auto;
             margin: 24px 0;
@@ -191,19 +170,14 @@
             border-bottom: 1px solid #e2e8f0;
             vertical-align: top;
         }
-        /* comparison table tick/cross cells */
         .tick  { color: #16a34a; font-weight: 700; }
         .cross { color: #dc2626; font-weight: 700; }
         .part  { color: #d97706; font-weight: 700; }
-
-        /* ── HR ── */
         hr {
             border: none;
             border-top: 2px solid #e2e8f0;
             margin: 2.5em 0;
         }
-
-        /* ── CTA box ── */
         .cta-box {
             background: linear-gradient(135deg, #002d5b 0%, #0056b3 100%);
             color: #fff;
@@ -231,16 +205,12 @@
             transition: background 0.2s;
         }
         .cta-btn:hover { background: #e8f4fd; }
-
-        /* ── References ── */
         .references {
             font-size: 0.85rem;
             color: #64748b;
             line-height: 1.6;
         }
         .references p { margin-bottom: 0.5em; }
-
-        /* ── Footer ── */
         .site-footer {
             background: #f0f4f8;
             border-top: 2px solid #e2e8f0;
@@ -250,17 +220,42 @@
             color: #64748b;
         }
         .site-footer a { color: #0056b3; text-decoration: none; }
+        /* Summary box grid */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .summary-card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: system-ui, sans-serif;
+        }
+        .summary-card-title { font-weight: 700; color: #002d5b; font-size: 0.95em; margin-bottom: 6px; }
+        .summary-card-body { font-size: 0.9em; color: #1e293b; line-height: 1.6; }
+        /* TOC styles */
+        .toc-details { margin: 0 0 28px 0; border: 1px solid #e2e8f0; border-radius: 8px; font-family: system-ui, sans-serif; background: white; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: bold; color: #002d5b; font-size: 0.95em; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+        .toc-details summary::-webkit-details-marker { display: none; }
+        .toc-details summary:hover { background: #e8f4fd; border-radius: 8px; }
+        .toc-details[open] summary { border-bottom: 1px solid #e2e8f0; border-radius: 8px 8px 0 0; }
+        .toc-details[open] summary:hover { border-radius: 8px 8px 0 0; }
+        .toc-inner { padding: 6px 18px 16px; }
+        .toc-inner ol { margin: 10px 0 0 1.2em; line-height: 2.1; }
+        .toc-inner ol li { font-size: 0.92em; margin-bottom: 0; }
+        .toc-inner ol li a { color: #0056b3; text-decoration: none; }
+        .toc-inner ol li a:hover { text-decoration: underline; color: #002d5b; }
     </style>
 </head>
 <body>
 
-<!-- ── Site header ── -->
 <header class="site-header">
     <a class="brand" href="https://stepchangeanalysis.com">&#128202; StepChangeAnalysis.com</a>
     <a class="tool-link" href="https://stepchangeanalysis.com">&#8594; Open the Free Tool</a>
 </header>
 
-<!-- ── Article ── -->
 <main class="article-wrap">
 
     <span class="article-tag">Healthcare Quality Improvement</span>
@@ -270,15 +265,63 @@
     <p class="article-subtitle">A practical guide for clinical pharmacists, medicines safety officers, and quality improvement leads who need to present defensible evidence of change to boards, regulators, and commissioners.</p>
 
     <div class="article-meta">
-        StepChangeAnalysis.com &nbsp;|&nbsp; Bootstrap CUSUM SPC Analysis &nbsp;|&nbsp; 488 weekly observations &nbsp;|&nbsp; 2017–2026
+        StepChangeAnalysis.com &nbsp;|&nbsp; Bootstrap CUSUM SPC Analysis &nbsp;|&nbsp; 488 weekly observations &nbsp;|&nbsp; 2017&ndash;2026
     </div>
 
-    <!-- ── Introduction ── -->
-    <h2>Introduction: the chart is not neutral</h2>
+    <!-- Summary box -->
+    <div style="background:#f0f4f8;border:2px solid #0056b3;border-radius:10px;padding:24px 28px;margin:0 0 36px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.72em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#0056b3;margin-bottom:14px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="three-charts-summary.pdf" download="three-charts-summary.pdf" style="color:#0056b3;">&#8675; Download Executive Summary PDF</a> &nbsp;&middot;&nbsp; <a href="problem-cases.csv" download="problem-cases.csv" style="color:#0056b3;">&#8675; Download the data CSV</a></div>
+        <div class="summary-grid">
+            <div class="summary-card" style="border-left:4px solid #c0392b;">
+                <div class="summary-card-title">The X-mR verdict</div>
+                <div class="summary-card-body">The most common NHS SPC chart reports a flat mean of 22.57 across nine and a half years. It flags early high points in 2017&ndash;18 as the main story. The systematic 85% improvement is completely invisible. The flat mean is an average of a journey reported as a destination.</div>
+            </div>
+            <div class="summary-card" style="border-left:4px solid #e67e22;">
+                <div class="summary-card-title">The run chart verdict</div>
+                <div class="summary-card-body">Correctly detects that something shifted &mdash; broadly around 2019&ndash;2020. But cannot say how many steps occurred, when each one happened, what each change was worth, or with what confidence. A staircase described as a slope.</div>
+            </div>
+            <div class="summary-card" style="border-left:4px solid #198754;">
+                <div class="summary-card-title">The Bootstrap CUSUM verdict</div>
+                <div class="summary-card-body">Eleven distinct stages at 90% confidence. Stage means descend from 42 to 6 &mdash; an 85% reduction over eight years. Each change point is dated within a confidence window. Three stages detected at 100% confidence. One temporary worsening in 2018 correctly identified as a special cause and explained.</div>
+            </div>
+            <div class="summary-card" style="border-left:4px solid #0056b3;">
+                <div class="summary-card-title">The governance implication</div>
+                <div class="summary-card-body">The three-sigma rule in Shewhart charts is fixed by convention. Bootstrap CUSUM confidence is earned from your own data by resampling it &mdash; not assumed from statistical theory. For board papers, CQC submissions, and commissioning cases, this is the difference between a chart that can be challenged and one that can be defended.</div>
+            </div>
+        </div>
+        <div style="font-size:0.85em;color:#64748b;border-top:1px solid #e2e8f0;padding-top:12px;">
+            <strong style="color:#1e293b;">Data:</strong> 488 weekly observations &nbsp;&middot;&nbsp; 2017&ndash;2026 &nbsp;&middot;&nbsp; real anonymised data &nbsp;&middot;&nbsp; <strong style="color:#1e293b;">Method:</strong> Bootstrap CUSUM, 90%/95%/99.7% confidence &nbsp;&middot;&nbsp; Loops=1,000&ndash;10,000 &nbsp;&middot;&nbsp; <strong style="color:#1e293b;">Data file:</strong> <a href="problem-cases.csv" download="problem-cases.csv" style="color:#0056b3;">problem-cases.csv</a>
+        </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Table of Contents &mdash; click to expand or collapse</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-intro">Introduction: the chart is not neutral</a></li>
+                <li><a href="#section-dataset">The dataset</a></li>
+                <li><a href="#section-xmr">Chart 1: The X-mR Shewhart Control Chart</a></li>
+                <li><a href="#section-runchart">Chart 2: The Run Chart</a></li>
+                <li><a href="#section-cusum">Chart 3: Bootstrap CUSUM Step-Change Analysis</a></li>
+                <li><a href="#section-why-bootstrap">Why Bootstrap &mdash; why not classical CUSUM?</a></li>
+                <li><a href="#section-confidence">Choosing your confidence level</a></li>
+                <li><a href="#section-comparison">The three-chart comparison</a></li>
+                <li><a href="#section-when-to-use">When each chart is the right choice</a></li>
+                <li><a href="#section-retro-pro">Retrospective vs Prospective Use &mdash; Two Different but Equally Powerful Applications</a></li>
+                <li><a href="#section-convergence">A note on Bootstrap convergence &mdash; verifying your results</a></li>
+                <li><a href="#section-ig">A note on information governance</a></li>
+                <li><a href="#section-summary">Summary</a></li>
+                <li><a href="#section-references">References</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-intro">Introduction: the chart is not neutral</h2>
 
     <p>When a medicines safety team presents data to a clinical governance board, the choice of chart is rarely treated as a significant decision. You have the data. You plot it. You present it.</p>
 
-    <p>But the chart you choose is not a neutral vessel for your data. It is an analytical lens — and different lenses reveal different things. More troublingly, some lenses actively conceal things that are genuinely present in the data.</p>
+    <p>But the chart you choose is not a neutral vessel for your data. It is an analytical lens &mdash; and different lenses reveal different things. More troublingly, some lenses actively conceal things that are genuinely present in the data.</p>
 
     <p>This article presents three charts of exactly the same dataset: 488 weekly observations of support cases submitted by clinicians using a high-risk medicines clinical decision support system, running from 2016 to 2026. The mean is 22.57. The standard deviation is 11.05. The data is real and has been anonymised.</p>
 
@@ -286,79 +329,75 @@
 
     <hr>
 
-    <!-- ── Dataset ── -->
-    <h2>The dataset</h2>
+    <h2 id="section-dataset">The dataset</h2>
 
-    <p>Over the nine and a half years covered by this dataset, a high-risk medicines clinical decision support system was progressively rolled out, refined, and adopted across a clinical user base. Support cases — queries submitted by clinicians asking how to use the system — were logged weekly throughout this period.</p>
+    <p>Over the nine and a half years covered by this dataset, a high-risk medicines clinical decision support system was progressively rolled out, refined, and adopted across a clinical user base. Support cases &mdash; queries submitted by clinicians asking how to use the system &mdash; were logged weekly throughout this period.</p>
 
-    <p>The weekly case count started high — around 40 to 42 per week — and through successive system improvements, training initiatives, and deepening user proficiency, descended to approximately 6 per week by 2026. That is an 85% reduction over eight years, achieved not in a single step but through eleven distinct, sequential improvements, each embedding before the next was introduced.</p>
+    <p>The weekly case count started high &mdash; around 40 to 42 per week &mdash; and through successive system improvements, training initiatives, and deepening user proficiency, descended to approximately 6 per week by 2026. That is an 85% reduction over eight years, achieved not in a single step but through eleven distinct, sequential improvements, each embedding before the next was introduced.</p>
 
     <p>This is exactly the kind of story a quality improvement programme should be able to tell its board. The question is: which chart tells it?</p>
 
     <hr>
 
-    <!-- ── Chart 1: X-mR ── -->
-    <h2>Chart 1: The X-mR Shewhart Control Chart</h2>
+    <h2 id="section-xmr">Chart 1: The X-mR Shewhart Control Chart</h2>
 
-    <div class="chart-headline">"Nothing much to see here — except some worrying high points in 2017 and 2018."</div>
+    <div class="chart-headline">&ldquo;Nothing much to see here &mdash; except some worrying high points in 2017 and 2018.&rdquo;</div>
 
     <figure class="chart-figure">
         <img src="images/hc-xmr.png" alt="X-mR Shewhart Control Chart — 488 weekly observations 2017–2026">
-        <figcaption>X-mR chart: flat process mean of 22.57, UNPL 39.23, LNPL 5.91. Points breaching upper control limit in 2017–2018 flagged as signals.</figcaption>
+        <figcaption>X-mR chart: flat process mean of 22.57, UNPL 39.23, LNPL 5.91. Points breaching upper control limit in 2017&ndash;2018 flagged as signals.</figcaption>
     </figure>
 
     <p>The X-mR (Individuals and Moving Range) chart is the most commonly used SPC chart in NHS quality improvement. It calculates a process mean (green line, at 22.57), adds upper and lower natural process limits at plus and minus 2.66 times the mean moving range (UNPL 39.23, LNPL 5.91), and flags individual points that breach those limits as potential signals of special cause variation.</p>
 
-    <p>Applied to this dataset, the X-mR chart tells the following story: the process has been broadly stable across nine and a half years, with a flat mean of 22.57. There are a number of points breaching the upper control limit in 2017 and 2018 — these would be flagged for investigation. The lower control limit of 5.91 is never breached significantly until very recently.</p>
+    <p>Applied to this dataset, the X-mR chart tells the following story: the process has been broadly stable across nine and a half years, with a flat mean of 22.57. There are a number of points breaching the upper control limit in 2017 and 2018 &mdash; these would be flagged for investigation. The lower control limit of 5.91 is never breached significantly until very recently.</p>
 
     <p>The implicit governance message is: <em>this is a stable process with some concerning elevated periods in its recent history.</em></p>
 
     <p>This conclusion is not just incomplete. It is actively misleading.</p>
 
-    <p>The flat mean of 22.57 is an average of data that began at 42 and ended at 6. It is a number that accurately describes neither the start of the series nor the end — it is the arithmetic mean of a journey, reported as if it were a destination. The high points in 2017–2018 that the chart flags as "signals" were in fact the beginning of the improvement story, not evidence of deterioration. And the most important feature of the dataset — a sustained, systematic, eight-year programme of measurable improvement — is completely invisible.</p>
+    <p>The flat mean of 22.57 is an average of data that began at 42 and ended at 6. It is a number that accurately describes neither the start of the series nor the end &mdash; it is the arithmetic mean of a journey, reported as if it were a destination. The high points in 2017&ndash;2018 that the chart flags as &ldquo;signals&rdquo; were in fact the beginning of the improvement story, not evidence of deterioration. And the most important feature of the dataset &mdash; a sustained, systematic, eight-year programme of measurable improvement &mdash; is completely invisible.</p>
 
     <h3>Why does this happen?</h3>
 
-    <p>The X-mR chart calculates its control limits from the mean moving range — the average week-to-week variation across the entire series. When a dataset contains genuine, sustained step-changes over time, this calculation absorbs the between-stage variation into the within-stage noise estimate, producing limits that are too wide to detect the steps. The chart is designed for a stable process and interprets everything through that assumption — even when the process is demonstrably not stable.</p>
+    <p>The X-mR chart calculates its control limits from the mean moving range &mdash; the average week-to-week variation across the entire series. When a dataset contains genuine, sustained step-changes over time, this calculation absorbs the between-stage variation into the within-stage noise estimate, producing limits that are too wide to detect the steps. The chart is designed for a stable process and interprets everything through that assumption &mdash; even when the process is demonstrably not stable.</p>
 
-    <p>Additionally, the standard deviation of 11.05 is 49% of the mean of 22.57. This immediately signals substantial non-normality: the data is right-skewed, with most weekly values below the mean and occasional high values pulling the average upward. The control limits, derived from normal-distribution mathematics, are therefore placed in the wrong position — further reducing the chart's sensitivity to genuine change.</p>
+    <p>Additionally, the standard deviation of 11.05 is 49% of the mean of 22.57. This immediately signals substantial non-normality: the data is right-skewed, with most weekly values below the mean and occasional high values pulling the average upward. The control limits, derived from normal-distribution mathematics, are therefore placed in the wrong position &mdash; further reducing the chart&rsquo;s sensitivity to genuine change.</p>
 
     <hr>
 
-    <!-- ── Chart 2: Run Chart ── -->
-    <h2>Chart 2: The Run Chart</h2>
+    <h2 id="section-runchart">Chart 2: The Run Chart</h2>
 
-    <div class="chart-headline">"Something changed — roughly around 2020. But we couldn't tell you much more than that."</div>
+    <div class="chart-headline">&ldquo;Something changed &mdash; roughly around 2020. But we couldn&rsquo;t tell you much more than that.&rdquo;</div>
 
     <figure class="chart-figure">
         <img src="images/hc-runchart.png" alt="Run Chart — 488 weekly observations with median 21.00 and shift markers">
         <figcaption>Run chart: median 21.00. Red markers indicate runs of 6+ consecutive points above the median; blue markers indicate runs below. Broad downward shift visible from approximately 2020.</figcaption>
     </figure>
 
-    <p>The run chart is simpler than the Shewhart chart and, in one important respect, more honest with this dataset. It plots each observation against the overall median (21.00) and uses run rules — specifically, runs of six or more consecutive points above or below the median — to flag potential shifts.</p>
+    <p>The run chart is simpler than the Shewhart chart and, in one important respect, more honest with this dataset. It plots each observation against the overall median (21.00) and uses run rules &mdash; specifically, runs of six or more consecutive points above or below the median &mdash; to flag potential shifts.</p>
 
-    <p>On this dataset, the run chart identifies two broad zones. The red dots — points in a run of six or more above the median — dominate the period from 2017 to approximately 2020. The blue dots — runs of six or more below the median — begin appearing around 2019–2020 and become almost universal from 2023 onwards.</p>
+    <p>On this dataset, the run chart identifies two broad zones. The red dots &mdash; points in a run of six or more above the median &mdash; dominate the period from 2017 to approximately 2020. The blue dots &mdash; runs of six or more below the median &mdash; begin appearing around 2019&ndash;2020 and become almost universal from 2023 onwards.</p>
 
-    <p>The run chart is correctly detecting that something real happened. A quality manager looking at this chart would rightly conclude that the process has shifted downward at some point — probably around 2019 or 2020. This is more than the X-mR chart managed. But it is still a profoundly incomplete picture.</p>
+    <p>The run chart is correctly detecting that something real happened. A quality manager looking at this chart would rightly conclude that the process has shifted downward at some point &mdash; probably around 2019 or 2020. This is more than the X-mR chart managed. But it is still a profoundly incomplete picture.</p>
 
     <h3>What the run chart cannot tell you</h3>
     <ul style="margin: 0 0 1.2em 1.5em;">
         <li>That there were not one but <strong>eleven</strong> distinct stages of improvement</li>
-        <li>That the first step-change occurred in <strong>2017</strong>, not 2019–2020</li>
-        <li>That each step had a specific magnitude — from 42 to 35, from 35 to 24, and so on down to 6</li>
+        <li>That the first step-change occurred in <strong>2017</strong>, not 2019&ndash;2020</li>
+        <li>That each step had a specific magnitude &mdash; from 42 to 35, from 35 to 24, and so on down to 6</li>
         <li>That each change point can be dated within a confidence window</li>
         <li>That the overall reduction was <strong>85%</strong> from start to finish</li>
         <li>That the confidence level on any of these findings is <strong>90%</strong></li>
     </ul>
 
-    <p>The run chart draws one flat median line through a process that visited eleven different levels. It is the equivalent of describing a staircase as a slope — directionally correct, but losing all the structure that makes it useful for governance, evaluation, or funding decisions.</p>
+    <p>The run chart draws one flat median line through a process that visited eleven different levels. It is the equivalent of describing a staircase as a slope &mdash; directionally correct, but losing all the structure that makes it useful for governance, evaluation, or funding decisions.</p>
 
     <hr>
 
-    <!-- ── Chart 3: Bootstrap CUSUM ── -->
-    <h2>Chart 3: Bootstrap CUSUM Step-Change Analysis</h2>
+    <h2 id="section-cusum">Chart 3: Bootstrap CUSUM Step-Change Analysis</h2>
 
-    <div class="chart-headline">"Eleven stages. Ninety percent confidence. An 85% reduction — dated, quantified, and bounded step by step."</div>
+    <div class="chart-headline">&ldquo;Eleven stages. Ninety percent confidence. An 85% reduction &mdash; dated, quantified, and bounded step by step.&rdquo;</div>
 
     <figure class="chart-figure">
         <img src="images/hc-cusum-90.png" alt="Bootstrap CUSUM Step-Change Analysis at 90% confidence — 11 stages identified">
@@ -367,48 +406,46 @@
 
     <p>The Bootstrap CUSUM step-change analysis of the same dataset produces something categorically different from the previous two charts.</p>
 
-    <p>Eleven distinct stages are identified at 90% confidence. The blue step-mean line descends in a clear staircase: approximately 30 at the opening of the series, rising briefly to around 42 in early 2017, then stepping down — 35, 24, 22, 22, 17, 15, 11, 10, and finally approximately 6 by 2026. Each step is accompanied by a dashed confidence box, showing the window within which that step-change is estimated to have occurred.</p>
+    <p>Eleven distinct stages are identified at 90% confidence. The blue step-mean line descends in a clear staircase: approximately 30 at the opening of the series, rising briefly to around 42 in early 2017, then stepping down &mdash; 35, 24, 22, 22, 17, 15, 11, 10, and finally approximately 6 by 2026. Each step is accompanied by a dashed confidence box, showing the window within which that step-change is estimated to have occurred.</p>
 
-    <p>The green CUSUM line tells the story of accumulated evidence: it rises as the metric ran above its eventual long-run level in the early years, peaks around 2019–2020, then descends continuously as sustained improvement compounds. By 2026 it approaches zero — the signature of a process that has been running below its historical average long enough that the accumulated evidence of improvement is overwhelming.</p>
+    <p>The green CUSUM line tells the story of accumulated evidence: it rises as the metric ran above its eventual long-run level in the early years, peaks around 2019&ndash;2020, then descends continuously as sustained improvement compounds. By 2026 it approaches zero &mdash; the signature of a process that has been running below its historical average long enough that the accumulated evidence of improvement is overwhelming.</p>
 
     <p>A governance report based on this analysis can state:</p>
 
     <blockquote>
-        "Bootstrap CUSUM step-change analysis of 488 weekly observations identifies eleven distinct stages of improvement at 90% confidence. Weekly clinical decision support queries have reduced from a stage mean of approximately 42 in early 2017 to approximately 6 in 2026 — an 85% reduction. Each change point is dated within a confidence interval of four to eight weeks, consistent with the implementation timelines of successive pathway interventions."
+        &ldquo;Bootstrap CUSUM step-change analysis of 488 weekly observations identifies eleven distinct stages of improvement at 90% confidence. Weekly clinical decision support queries have reduced from a stage mean of approximately 42 in early 2017 to approximately 6 in 2026 &mdash; an 85% reduction. Each change point is dated within a confidence interval of four to eight weeks, consistent with the implementation timelines of successive pathway interventions.&rdquo;
     </blockquote>
 
     <p>That statement can go into a board paper. It can withstand scrutiny from a clinical governance committee or a CQC inspector. It supports a funding continuation decision. It quantifies the return on a quality improvement programme investment.</p>
 
     <hr>
 
-    <!-- ── Why Bootstrap ── -->
-    <h2>Why Bootstrap — why not classical CUSUM?</h2>
+    <h2 id="section-why-bootstrap">Why Bootstrap &mdash; why not classical CUSUM?</h2>
 
-    <p>The CUSUM chart has been used in industrial quality control since E.S. Page developed it at Cambridge in 1954. Its logic — accumulating evidence of drift rather than evaluating individual observations in isolation — makes it fundamentally better suited than Shewhart charts to detecting sustained shifts.</p>
+    <p>The CUSUM chart has been used in industrial quality control since E.S. Page developed it at Cambridge in 1954. Its logic &mdash; accumulating evidence of drift rather than evaluating individual observations in isolation &mdash; makes it fundamentally better suited than Shewhart charts to detecting sustained shifts.</p>
 
     <p>But classical CUSUM still relies on distributional assumptions when setting its decision threshold. For non-normal data, those assumptions are as problematic as the ones underlying the Shewhart limits.</p>
 
-    <p>Bootstrap CUSUM solves this by deriving the decision threshold directly from the data itself. The actual dataset is randomly reordered one thousand times. For each reordering, the CUSUM statistic is calculated. A random reordering destroys any genuine temporal structure, so this generates an empirical picture of what the CUSUM looks like when there is definitively <em>no</em> change present — using your data's actual distributional characteristics, not a theoretical normal distribution it doesn't follow.</p>
+    <p>Bootstrap CUSUM solves this by deriving the decision threshold directly from the data itself. The actual dataset is randomly reordered one thousand times. For each reordering, the CUSUM statistic is calculated. A random reordering destroys any genuine temporal structure, so this generates an empirical picture of what the CUSUM looks like when there is definitively <em>no</em> change present &mdash; using your data&rsquo;s actual distributional characteristics, not a theoretical normal distribution it doesn&rsquo;t follow.</p>
 
     <p>The decision threshold is then set at the chosen confidence level from this empirical distribution. The confidence level is calculated directly from your actual data by resampling it 1,000 times (or whatever level you choose), rather than looked up from a statistical formula or textbook table that assumes your data follows a normal distribution. It is earned from the data, not assumed from theory.</p>
 
     <hr>
 
-    <!-- ── Confidence levels ── -->
-    <h2>Choosing your confidence level</h2>
+    <h2 id="section-confidence">Choosing your confidence level</h2>
 
-    <p>One of the most practically useful features of Bootstrap CUSUM step-change analysis is that the confidence level is not fixed — it is a choice the analyst makes explicitly, based on the purpose of the analysis and the audience receiving it.</p>
+    <p>One of the most practically useful features of Bootstrap CUSUM step-change analysis is that the confidence level is not fixed &mdash; it is a choice the analyst makes explicitly, based on the purpose of the analysis and the audience receiving it.</p>
 
     <p>Here is what happens when the same 488-observation dataset is analysed at three different confidence levels:</p>
 
     <div class="chart-pair">
         <figure class="chart-figure">
             <img src="images/hc-cusum-95.png" alt="Bootstrap CUSUM at 95% confidence — 10 stages">
-            <figcaption>95% confidence — 10 stages</figcaption>
+            <figcaption>95% confidence &mdash; 10 stages</figcaption>
         </figure>
         <figure class="chart-figure">
             <img src="images/hc-cusum-997.png" alt="Bootstrap CUSUM at 99.7% confidence — 6 stages">
-            <figcaption>99.7% confidence — 6 stages</figcaption>
+            <figcaption>99.7% confidence &mdash; 6 stages</figcaption>
         </figure>
     </div>
 
@@ -429,7 +466,7 @@
         </table>
     </div>
 
-    <p>The tool's <strong>Statistical Evidence Table</strong> makes this concrete with real numbers. At <strong>95% confidence</strong>, the ten stages are:</p>
+    <p>The tool&rsquo;s <strong>Statistical Evidence Table</strong> makes this concrete with real numbers. At <strong>95% confidence</strong>, the ten stages are:</p>
 
     <div class="table-wrap">
         <table>
@@ -438,15 +475,15 @@
             </thead>
             <tbody>
                 <tr><td>1</td><td>02/01/2017</td><td>19/06/2017</td><td>34.88</td><td>11.05</td><td>Baseline</td><td>Baseline</td></tr>
-                <tr><td>2</td><td>19/06/2017</td><td>26/03/2018</td><td>29.59</td><td>11.05</td><td>96.8%</td><td>−15.2%</td></tr>
+                <tr><td>2</td><td>19/06/2017</td><td>26/03/2018</td><td>29.59</td><td>11.05</td><td>96.8%</td><td>&minus;15.2%</td></tr>
                 <tr><td>3</td><td>26/03/2018</td><td>10/12/2018</td><td>41.84</td><td>11.05</td><td>96.0%</td><td>+41.4%</td></tr>
-                <tr><td>4</td><td>10/12/2018</td><td>29/07/2019</td><td>33.85</td><td>11.05</td><td>96.0%</td><td>−19.1%</td></tr>
-                <tr><td>5</td><td>29/07/2019</td><td>28/09/2020</td><td>23.23</td><td>11.05</td><td>100.0%</td><td>−31.4%</td></tr>
-                <tr><td>6</td><td>28/09/2020</td><td>19/04/2021</td><td>18.17</td><td>11.05</td><td>95.4%</td><td>−21.8%</td></tr>
+                <tr><td>4</td><td>10/12/2018</td><td>29/07/2019</td><td>33.85</td><td>11.05</td><td>96.0%</td><td>&minus;19.1%</td></tr>
+                <tr><td>5</td><td>29/07/2019</td><td>28/09/2020</td><td>23.23</td><td>11.05</td><td>100.0%</td><td>&minus;31.4%</td></tr>
+                <tr><td>6</td><td>28/09/2020</td><td>19/04/2021</td><td>18.17</td><td>11.05</td><td>95.4%</td><td>&minus;21.8%</td></tr>
                 <tr><td>7</td><td>19/04/2021</td><td>20/03/2023</td><td>22.82</td><td>11.05</td><td>95.4%</td><td>+25.6%</td></tr>
-                <tr><td>8</td><td>20/03/2023</td><td>06/01/2025</td><td>15.54</td><td>11.05</td><td>100.0%</td><td>−31.9%</td></tr>
-                <tr><td>9</td><td>06/01/2025</td><td>29/09/2025</td><td>11.46</td><td>11.05</td><td>99.3%</td><td>−26.3%</td></tr>
-                <tr><td>10</td><td>29/09/2025</td><td>04/05/2026</td><td>6.75</td><td>11.05</td><td>99.3%</td><td>−41.1%</td></tr>
+                <tr><td>8</td><td>20/03/2023</td><td>06/01/2025</td><td>15.54</td><td>11.05</td><td>100.0%</td><td>&minus;31.9%</td></tr>
+                <tr><td>9</td><td>06/01/2025</td><td>29/09/2025</td><td>11.46</td><td>11.05</td><td>99.3%</td><td>&minus;26.3%</td></tr>
+                <tr><td>10</td><td>29/09/2025</td><td>04/05/2026</td><td>6.75</td><td>11.05</td><td>99.3%</td><td>&minus;41.1%</td></tr>
             </tbody>
         </table>
     </div>
@@ -460,35 +497,34 @@
             </thead>
             <tbody>
                 <tr><td>1</td><td>02/01/2017</td><td>29/07/2019</td><td>34.91</td><td>11.05</td><td>Baseline</td><td>Baseline</td></tr>
-                <tr><td>2</td><td>29/07/2019</td><td>28/09/2020</td><td>23.23</td><td>11.05</td><td>100.0%</td><td>−33.5%</td></tr>
-                <tr><td>3</td><td>28/09/2020</td><td>20/03/2023</td><td>21.81</td><td>11.05</td><td>100.0%</td><td>−6.1%</td></tr>
-                <tr><td>4</td><td>20/03/2023</td><td>06/01/2025</td><td>15.54</td><td>11.05</td><td>100.0%</td><td>−28.7%</td></tr>
-                <tr><td>5</td><td>06/01/2025</td><td>29/09/2025</td><td>11.46</td><td>11.05</td><td>99.7%</td><td>−26.3%</td></tr>
-                <tr><td>6</td><td>29/09/2025</td><td>04/05/2026</td><td>6.75</td><td>11.05</td><td>99.7%</td><td>−41.1%</td></tr>
+                <tr><td>2</td><td>29/07/2019</td><td>28/09/2020</td><td>23.23</td><td>11.05</td><td>100.0%</td><td>&minus;33.5%</td></tr>
+                <tr><td>3</td><td>28/09/2020</td><td>20/03/2023</td><td>21.81</td><td>11.05</td><td>100.0%</td><td>&minus;6.1%</td></tr>
+                <tr><td>4</td><td>20/03/2023</td><td>06/01/2025</td><td>15.54</td><td>11.05</td><td>100.0%</td><td>&minus;28.7%</td></tr>
+                <tr><td>5</td><td>06/01/2025</td><td>29/09/2025</td><td>11.46</td><td>11.05</td><td>99.7%</td><td>&minus;26.3%</td></tr>
+                <tr><td>6</td><td>29/09/2025</td><td>04/05/2026</td><td>6.75</td><td>11.05</td><td>99.7%</td><td>&minus;41.1%</td></tr>
             </tbody>
         </table>
     </div>
 
-    <p>Notice that Stages 2, 3, and 4 at 99.7% confidence are each detected at <strong>100% confidence</strong> — meaning that across all 1,000 bootstrap resamples, not a single one failed to detect these changes. This is as definitive as statistical evidence can be.</p>
+    <p>Notice that Stages 2, 3, and 4 at 99.7% confidence are each detected at <strong>100% confidence</strong> &mdash; meaning that across all 1,000 bootstrap resamples, not a single one failed to detect these changes. This is as definitive as statistical evidence can be.</p>
 
-    <p>Also worth noting: the 95% table reveals a genuine upward step in Stage 3 (March–December 2018, mean 41.84, +41.4%). This is not noise — it is a real, statistically confirmed temporary worsening before the sustained improvement resumed. Stage 3 was subsequently identified as a period of elevated log-on and printing support queries coinciding with reduced nursing and pharmacy staffing levels during the July summer holiday period, when the clinical users most familiar with the system were on leave and knowledge transfer to cover staff was limited. Improvement resumed as staffing normalised.</p>
+    <p>Also worth noting: the 95% table reveals a genuine upward step in Stage 3 (March&ndash;December 2018, mean 41.84, +41.4%). This is not noise &mdash; it is a real, statistically confirmed temporary worsening before the sustained improvement resumed. Stage 3 was subsequently identified as a period of elevated log-on and printing support queries coinciding with reduced nursing and pharmacy staffing levels during the July summer holiday period, when the clinical users most familiar with the system were on leave and knowledge transfer to cover staff was limited. Improvement resumed as staffing normalised.</p>
 
-    <p>In Deming/Shewhart terminology, Stage 3 represents a <strong>special cause</strong> — an assignable, external event temporarily disrupting an otherwise improving process. The Bootstrap CUSUM correctly distinguished it from common cause variation, flagging it as a discrete stage rather than absorbing it into background noise. Identifying and explaining such episodes is only possible when each stage is individually dated and quantified. A standard control chart would have absorbed this into background variation and it would never have been investigated.</p>
+    <p>In Deming/Shewhart terminology, Stage 3 represents a <strong>special cause</strong> &mdash; an assignable, external event temporarily disrupting an otherwise improving process. The Bootstrap CUSUM correctly distinguished it from common cause variation, flagging it as a discrete stage rather than absorbing it into background noise. Identifying and explaining such episodes is only possible when each stage is individually dated and quantified. A standard control chart would have absorbed this into background variation and it would never have been investigated.</p>
 
-    <p>The staircase descends at all three levels. The 85% overall reduction holds regardless of which confidence level is chosen. What changes is the granularity — how many of the individual steps are considered sufficiently well-evidenced to report.</p>
+    <p>The staircase descends at all three levels. The 85% overall reduction holds regardless of which confidence level is chosen. What changes is the granularity &mdash; how many of the individual steps are considered sufficiently well-evidenced to report.</p>
 
-    <p>This has direct practical implications for governance reporting. A board paper going to a conservative clinical governance committee, or a submission to CQC, might use 95% or 99.7% — fewer steps, but each one defensible at a very high level of certainty. An internal improvement team evaluating programme performance in detail might use 90%, capturing every statistically detectable step to understand which interventions moved the needle.</p>
+    <p>This has direct practical implications for governance reporting. A board paper going to a conservative clinical governance committee, or a submission to CQC, might use 95% or 99.7% &mdash; fewer steps, but each one defensible at a very high level of certainty. An internal improvement team evaluating programme performance in detail might use 90%, capturing every statistically detectable step to understand which interventions moved the needle.</p>
 
-    <p>Critically, the core finding is <strong>robust across all three confidence levels</strong>. The direction of change, the approximate magnitude of the overall reduction, and the timing of the major structural shifts are consistent whether you choose 90%, 95%, or 99.7%. This robustness — the fact that the story does not change depending on the threshold — is itself a form of evidence. It means the improvement programme's impact is not a statistical artefact of a particular threshold choice. It is a genuine feature of the data.</p>
+    <p>Critically, the core finding is <strong>robust across all three confidence levels</strong>. The direction of change, the approximate magnitude of the overall reduction, and the timing of the major structural shifts are consistent whether you choose 90%, 95%, or 99.7%. This robustness &mdash; the fact that the story does not change depending on the threshold &mdash; is itself a form of evidence.</p>
 
-    <p>For a sceptical reviewer or governance committee, this is a powerful argument: <em>"We tested the analysis at three different confidence levels. The number of steps detected varies, but the fundamental finding — a sustained, multi-stage reduction of approximately 85% over eight years — is present at every level of stringency we applied. And at every level, the confidence is earned from the data itself, not assumed from a statistical formula."</em></p>
+    <p>For a sceptical reviewer or governance committee, this is a powerful argument: <em>&ldquo;We tested the analysis at three different confidence levels. The number of steps detected varies, but the fundamental finding &mdash; a sustained, multi-stage reduction of approximately 85% over eight years &mdash; is present at every level of stringency we applied. And at every level, the confidence is earned from the data itself, not assumed from a statistical formula.&rdquo;</em></p>
 
     <p>No classical SPC method offers this kind of explicit, transparent confidence calibration. The three-sigma rule used in Shewhart charts is fixed by convention, not chosen by the analyst based on the governance context. Bootstrap CUSUM puts that choice where it belongs: with the person responsible for the analysis and accountable for its conclusions.</p>
 
     <hr>
 
-    <!-- ── Three-chart comparison ── -->
-    <h2>The three-chart comparison</h2>
+    <h2 id="section-comparison">The three-chart comparison</h2>
 
     <div class="table-wrap">
         <table>
@@ -496,12 +532,12 @@
                 <tr><th></th><th>Run Chart</th><th>X-mR Shewhart</th><th>Bootstrap CUSUM</th></tr>
             </thead>
             <tbody>
-                <tr><td>Detects that <em>something</em> changed</td><td class="part">Yes — broadly</td><td class="cross">No</td><td class="tick">Yes — precisely</td></tr>
-                <tr><td>Identifies <em>how many</em> changes</td><td class="cross">No</td><td class="cross">No</td><td class="tick">Yes — 11 stages</td></tr>
-                <tr><td>Dates each change point</td><td class="cross">No</td><td class="cross">No</td><td class="tick">Yes — with confidence interval</td></tr>
-                <tr><td>Quantifies each change</td><td class="cross">No</td><td class="cross">No</td><td class="tick">Yes — stage means, conf % &amp; change %</td></tr>
-                <tr><td>Provides a confidence level</td><td class="cross">No</td><td class="cross">No</td><td class="tick">Yes — from your own data, not statistical theory</td></tr>
-                <tr><td>Handles non-normal data reliably</td><td class="part">Partially</td><td class="cross">No</td><td class="tick">Yes — distribution-free</td></tr>
+                <tr><td>Detects that <em>something</em> changed</td><td class="part">Yes &mdash; broadly</td><td class="cross">No</td><td class="tick">Yes &mdash; precisely</td></tr>
+                <tr><td>Identifies <em>how many</em> changes</td><td class="cross">No</td><td class="cross">No</td><td class="tick">Yes &mdash; 11 stages</td></tr>
+                <tr><td>Dates each change point</td><td class="cross">No</td><td class="cross">No</td><td class="tick">Yes &mdash; with confidence interval</td></tr>
+                <tr><td>Quantifies each change</td><td class="cross">No</td><td class="cross">No</td><td class="tick">Yes &mdash; stage means, conf % &amp; change %</td></tr>
+                <tr><td>Provides a confidence level</td><td class="cross">No</td><td class="cross">No</td><td class="tick">Yes &mdash; from your own data, not statistical theory</td></tr>
+                <tr><td>Handles non-normal data reliably</td><td class="part">Partially</td><td class="cross">No</td><td class="tick">Yes &mdash; distribution-free</td></tr>
                 <tr><td>Defensible under governance challenge</td><td class="part">Partially</td><td class="cross">Unlikely</td><td class="tick">Yes</td></tr>
                 <tr><td>Suitable for board papers and CQC</td><td class="part">Limited</td><td class="part">Limited</td><td class="tick">Yes</td></tr>
             </tbody>
@@ -510,8 +546,7 @@
 
     <hr>
 
-    <!-- ── When to use each ── -->
-    <h2>When each chart is the right choice</h2>
+    <h2 id="section-when-to-use">When each chart is the right choice</h2>
 
     <h3>Use the Run Chart when:</h3>
     <ul style="margin: 0 0 1.2em 1.5em;">
@@ -530,7 +565,7 @@
     <h3>Use Bootstrap CUSUM step-change analysis when:</h3>
     <ul style="margin: 0 0 1.2em 1.5em;">
         <li>You are evaluating historical data to determine whether and when a sustained change occurred</li>
-        <li>Your data is non-normally distributed — counts, rates, costs, rare events, or any series where SD exceeds roughly 40% of the mean</li>
+        <li>Your data is non-normally distributed &mdash; counts, rates, costs, rare events, or any series where SD exceeds roughly 40% of the mean</li>
         <li>You need a statistically defensible confidence level for governance, regulatory, or commissioning purposes</li>
         <li>You want to identify multiple change points and date each one</li>
         <li>You are making a retrospective case for the impact of a quality improvement programme</li>
@@ -538,18 +573,17 @@
 
     <hr>
 
-    <!-- ── Retrospective vs Prospective ── -->
-    <h2>Retrospective vs Prospective Use — Two Different but Equally Powerful Applications</h2>
+    <h2 id="section-retro-pro">Retrospective vs Prospective Use &mdash; Two Different but Equally Powerful Applications</h2>
 
-    <p>The case study in this article is retrospective — we are looking back at nine and a half years of data and asking: did the process change, when, and by how much? The Bootstrap CUSUM answers all three questions with precision.</p>
+    <p>The case study in this article is retrospective &mdash; we are looking back at nine and a half years of data and asking: did the process change, when, and by how much? The Bootstrap CUSUM answers all three questions with precision.</p>
 
-    <p>In our dataset, the step-change boundaries correspond to periods of known system development activity — successive product upgrades and server migrations implemented over the nine-year period. The Bootstrap CUSUM correctly identified that genuine structural changes occurred and dated each one — providing the starting point for any retrospective investigation.</p>
+    <p>In our dataset, the step-change boundaries correspond to periods of known system development activity &mdash; successive product upgrades and server migrations implemented over the nine-year period. The Bootstrap CUSUM correctly identified that genuine structural changes occurred and dated each one &mdash; providing the starting point for any retrospective investigation.</p>
 
-    <p>For the January 2025 stage boundary specifically, the cause is known: the support team introduced a new case category ('Problems at Customer Site') which reclassified a proportion of existing cases out of the main count. This is a textbook special cause in Deming/Shewhart terms — a recording change rather than a genuine process improvement — and should be interpreted accordingly. Crucially, the Bootstrap CUSUM detected it. A standard control chart would not have.</p>
+    <p>For the January 2025 stage boundary specifically, the cause is known: the support team introduced a new case category (&lsquo;Problems at Customer Site&rsquo;) which reclassified a proportion of existing cases out of the main count. This is a textbook special cause in Deming/Shewhart terms &mdash; a recording change rather than a genuine process improvement &mdash; and should be interpreted accordingly. Crucially, the Bootstrap CUSUM detected it. A standard control chart would not have.</p>
 
     <h3>The prospective use case: where Bootstrap CUSUM is most powerful</h3>
 
-    <p>When used <em>prospectively</em> — monitoring for the effect of a planned intervention — the attribution problem disappears entirely.</p>
+    <p>When used <em>prospectively</em> &mdash; monitoring for the effect of a planned intervention &mdash; the attribution problem disappears entirely.</p>
 
     <p>The workflow is straightforward. You implement a change: a new clinical protocol, a prescribing policy, a system upgrade, a training programme. You continue logging your weekly or monthly data as normal. You run the Bootstrap CUSUM analysis periodically. When the analysis detects a new stage, you have statistical confirmation, dated to within weeks, that your intervention has produced a genuine structural change in the process.</p>
 
@@ -559,10 +593,9 @@
 
     <hr>
 
-    <!-- ── Bootstrap Convergence ── -->
-    <h2>A note on Bootstrap convergence — verifying your results</h2>
+    <h2 id="section-convergence">A note on Bootstrap convergence &mdash; verifying your results</h2>
 
-    <p>Because the Bootstrap CUSUM derives its confidence thresholds by resampling the data randomly, there is a small degree of run-to-run variability when the number of iterations is low. At 1,000 loops, marginal change points — those sitting close to the confidence threshold — may appear in some runs and not others. This is not a flaw in the method. It is a property of any resampling procedure and can be managed straightforwardly: increase the number of bootstrap iterations until the result stabilises.</p>
+    <p>Because the Bootstrap CUSUM derives its confidence thresholds by resampling the data randomly, there is a small degree of run-to-run variability when the number of iterations is low. At 1,000 loops, marginal change points &mdash; those sitting close to the confidence threshold &mdash; may appear in some runs and not others. This is not a flaw in the method. It is a property of any resampling procedure and can be managed straightforwardly: increase the number of bootstrap iterations until the result stabilises.</p>
 
     <p>In our dataset at 99.7% confidence:</p>
     <ul style="margin: 0 0 1.2em 1.5em;">
@@ -575,32 +608,29 @@
 
     <hr>
 
-    <!-- ── Information governance ── -->
-    <h2>A note on information governance</h2>
+    <h2 id="section-ig">A note on information governance</h2>
 
-    <p>Uploading patient-adjacent data to cloud-based analytical platforms requires formal DPIA assessment and Information Governance approval in NHS settings — a process that can take months. Browser-native tools, where the analysis runs entirely within the local browser and no data is transmitted to any external server, eliminate this barrier entirely. The CSV file never leaves the analyst's machine. There is no upload, no cloud storage, no third-party data processing — removing the IG approval requirement and making it straightforward to deploy even on air-gapped NHS machines.</p>
+    <p>Uploading patient-adjacent data to cloud-based analytical platforms requires formal DPIA assessment and Information Governance approval in NHS settings &mdash; a process that can take months. Browser-native tools, where the analysis runs entirely within the local browser and no data is transmitted to any external server, eliminate this barrier entirely. The CSV file never leaves the analyst&rsquo;s machine. There is no upload, no cloud storage, no third-party data processing &mdash; removing the IG approval requirement and making it straightforward to deploy even on air-gapped NHS machines.</p>
 
     <hr>
 
-    <!-- ── CTA ── -->
     <div class="cta-box">
         <h2>Try it on your own data</h2>
-        <p>If you have a CSV file of time-series medicines data — weekly or monthly incident counts, prescribing volumes, error rates, cost figures — you can generate all three charts in this article, plus a one-click PDF formatted for board or governance submission, directly in your browser.<br><br>No installation. No login. No data leaving your computer.</p>
+        <p>If you have a CSV file of time-series medicines data &mdash; weekly or monthly incident counts, prescribing volumes, error rates, cost figures &mdash; you can generate all three charts in this article, plus a one-click PDF formatted for board or governance submission, directly in your browser.<br><br>No installation. No login. No data leaving your computer.</p>
         <a class="cta-btn" href="https://stepchangeanalysis.com">&#128202; Open the Free Tool</a>
     </div>
 
     <hr>
 
-    <!-- ── Summary ── -->
-    <h2>Summary</h2>
+    <h2 id="section-summary">Summary</h2>
 
     <p>Three charts. Same data. Radically different conclusions.</p>
 
-    <p>The run chart detects a broad shift — useful, but unable to say when, how many steps, or with what confidence. The X-mR Shewhart chart misses the systematic improvement entirely, reporting a flat mean and flagging early high points as the main story. The Bootstrap CUSUM step-change analysis reveals eleven stages of progressive improvement, an 85% reduction over eight years, with each step dated and bounded at 90% confidence.</p>
+    <p>The run chart detects a broad shift &mdash; useful, but unable to say when, how many steps, or with what confidence. The X-mR Shewhart chart misses the systematic improvement entirely, reporting a flat mean and flagging early high points as the main story. The Bootstrap CUSUM step-change analysis reveals eleven stages of progressive improvement, an 85% reduction over eight years, with each step dated and bounded at 90% confidence.</p>
 
     <p>The difference is not in the data. It is in the method. And for medicines safety teams preparing governance reports, funding cases, or regulatory submissions, the method you choose determines the story your data is allowed to tell.</p>
 
-    <p>In this dataset, the full story is one of the most compelling a quality improvement programme could present: a sustained, multi-intervention, eight-year programme that reduced weekly clinical decision support queries by 85% through eleven measurable, dateable steps — demonstrating that the system embedded, users became proficient, and the support burden reduced in ways that are statistically defensible and chronologically precise.</p>
+    <p>In this dataset, the full story is one of the most compelling a quality improvement programme could present: a sustained, multi-intervention, eight-year programme that reduced weekly clinical decision support queries by 85% through eleven measurable, dateable steps &mdash; demonstrating that the system embedded, users became proficient, and the support burden reduced in ways that are statistically defensible and chronologically precise.</p>
 
     <p>That story was always in the data. It just needed the right chart to show it.</p>
 
@@ -610,31 +640,27 @@
 
     <hr>
 
-    <!-- ── References ── -->
-    <h2>References</h2>
+    <h2 id="section-references">References</h2>
     <div class="references">
-        <p>Page, E.S. (1954). Continuous inspection schemes. <em>Biometrika</em>, 41(1–2), 100–115.</p>
-        <p>Hinkley, D.V. (1971). Inference about the change-point from cumulative sum tests. <em>Biometrika</em>, 58(3), 509–523.</p>
+        <p>Page, E.S. (1954). Continuous inspection schemes. <em>Biometrika</em>, 41(1&ndash;2), 100&ndash;115.</p>
+        <p>Hinkley, D.V. (1971). Inference about the change-point from cumulative sum tests. <em>Biometrika</em>, 58(3), 509&ndash;523.</p>
         <p>Efron, B. &amp; Tibshirani, R.J. (1993). <em>An Introduction to the Bootstrap</em>. Chapman &amp; Hall.</p>
         <p>Taylor, W.A. (2000). Change-point analysis: a powerful new tool for detecting changes. Taylor Enterprises.</p>
-        <p>Mohammed, M.A., Worthington, P. &amp; Woodall, W.H. (2008). Plotting basic control charts: tutorial notes for healthcare practitioners. <em>Quality and Safety in Health Care</em>, 17(2), 137–145.</p>
-        <p>Perla, R.J., Provost, L.P. &amp; Murray, S.K. (2011). The run chart: a simple analytical tool for learning from variation in healthcare processes. <em>BMJ Quality &amp; Safety</em>, 20(1), 46–51.</p>
+        <p>Mohammed, M.A., Worthington, P. &amp; Woodall, W.H. (2008). Plotting basic control charts: tutorial notes for healthcare practitioners. <em>Quality and Safety in Health Care</em>, 17(2), 137&ndash;145.</p>
+        <p>Perla, R.J., Provost, L.P. &amp; Murray, S.K. (2011). The run chart: a simple analytical tool for learning from variation in healthcare processes. <em>BMJ Quality &amp; Safety</em>, 20(1), 46&ndash;51.</p>
     </div>
 
-
-    <!-- ── Related Articles ── -->
     <div style="background:#f0f4f8;border:1px solid #cce5ff;border-radius:8px;padding:20px 24px;margin:32px 0;">
         <div style="font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#c0392b;margin-bottom:10px;">&#127468;&#127463; Related Article</div>
         <a href="uk-gdp-analysis.html" style="text-decoration:none;">
             <h3 style="color:#002d5b;font-size:1.05em;margin-bottom:6px;line-height:1.3;">The Chart That Changes How You See 77 Years of UK Economic History</h3>
         </a>
-        <p style="color:#64748b;font-size:0.9em;margin:0;">The same three-chart comparison applied to UK GDP data — and why Bootstrap CUSUM finds an 8-stage structural deceleration that conventional analysis completely misses.</p>
+        <p style="color:#64748b;font-size:0.9em;margin:0;">The same three-chart comparison applied to UK GDP data &mdash; and why Bootstrap CUSUM finds an 8-stage structural deceleration that conventional analysis completely misses.</p>
         <a href="uk-gdp-analysis.html" style="display:inline-block;margin-top:12px;background:#0056b3;color:white;padding:8px 18px;border-radius:6px;font-size:0.88em;font-weight:700;text-decoration:none;">Read the article &rarr;</a>
     </div>
 
 </main>
 
-<!-- ── Footer ── -->
 <footer class="site-footer">
     <p>&#128202; <a href="https://stepchangeanalysis.com">StepChangeAnalysis.com</a> &nbsp;|&nbsp; Bootstrap CUSUM Step-Change Analysis &nbsp;|&nbsp; Free, browser-native, no data uploaded</p>
 </footer>
