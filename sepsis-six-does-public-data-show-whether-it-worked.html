@@ -106,6 +106,18 @@
         .summary-card { background: white; border-radius: 8px; padding: 16px; font-family: system-ui, sans-serif; }
         .summary-card-title { font-weight: 700; color: var(--brand-blue); font-size: 0.95em; margin-bottom: 6px; }
         .summary-card-body { font-size: 0.9em; color: var(--text); line-height: 1.6; }
+        /* TOC styles */
+        .toc-details { margin: 0 0 28px 0; border: 1px solid var(--border); border-radius: 8px; font-family: system-ui, sans-serif; background: white; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: bold; color: var(--brand-blue); font-size: 0.95em; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+        .toc-details summary::-webkit-details-marker { display: none; }
+        .toc-details summary:hover { background: var(--brand-light); border-radius: 8px; }
+        .toc-details[open] summary { border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; }
+        .toc-details[open] summary:hover { border-radius: 8px 8px 0 0; }
+        .toc-inner { padding: 6px 18px 16px; }
+        .toc-inner ol { margin: 10px 0 0 1.2em; line-height: 2.1; }
+        .toc-inner ol li { font-size: 0.92em; margin-bottom: 0; }
+        .toc-inner ol li a { color: var(--brand-mid); text-decoration: none; }
+        .toc-inner ol li a:hover { text-decoration: underline; color: var(--brand-blue); }
     </style>
 </head>
 <body>
@@ -153,7 +165,26 @@
         </div>
     </div>
 
-    <h2>One hour. Six actions. A bundle that spread around the world.</h2>
+    <!-- TABLE OF CONTENTS -->
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Table of Contents &mdash; click to expand</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-bundle">One hour. Six actions. A bundle that spread around the world.</a></li>
+                <li><a href="#section-measuring">What is sepsis &mdash; and why measuring it is harder than it looks</a></li>
+                <li><a href="#section-cusum">The Bootstrap CUSUM analysis &mdash; two series, six charts</a></li>
+                <li><a href="#section-ratio">The ratio &mdash; the article&rsquo;s most important finding</a></li>
+                <li><a href="#section-campaign">What the Surviving Sepsis Campaign claimed &mdash; and what the evidence actually shows</a></li>
+                <li><a href="#section-deming">The Deming/Joiner lens: what the null result actually means</a></li>
+                <li><a href="#section-bright-spots">Bright Spots: where is the Sepsis Six working &mdash; and why?</a></li>
+                <li><a href="#section-survivors">The patients who survived &mdash; and what happened to them</a></li>
+                <li><a href="#section-what-would-show">What would actually show whether the Sepsis Six worked?</a></li>
+                <li><a href="#section-broader-lesson">The broader lesson for clinical quality improvement</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-bundle">One hour. Six actions. A bundle that spread around the world.</h2>
 
     <p>In 2005, Dr Ron Daniels &mdash; an intensive care consultant at Good Hope Hospital in Sutton Coldfield &mdash; looked at the Surviving Sepsis Campaign&rsquo;s international guidelines and saw a problem. The guidelines were 58 recommendations across 16 pages. Five years after publication, they were being achieved in fewer than one in seven patients. The gap between the evidence and the ward was not a knowledge problem. It was a translation problem.</p>
 
@@ -198,7 +229,7 @@
 
     <hr>
 
-    <h2>What is sepsis &mdash; and why measuring it is harder than it looks</h2>
+    <h2 id="section-measuring">What is sepsis &mdash; and why measuring it is harder than it looks</h2>
 
     <p>Sepsis is not a disease. It is a syndrome &mdash; the body&rsquo;s dysregulated response to infection, producing organ dysfunction that can progress to septic shock and death. The infecting organism can be bacterial, viral, or fungal. The source can be anywhere: a urinary tract infection, pneumonia, an infected wound, a bowel perforation. What makes sepsis sepsis is not the infection but the body&rsquo;s catastrophic response to it.</p>
 
@@ -228,7 +259,7 @@
 
     <hr>
 
-    <h2>The Bootstrap CUSUM analysis &mdash; two series, six charts</h2>
+    <h2 id="section-cusum">The Bootstrap CUSUM analysis &mdash; two series, six charts</h2>
 
     <p>The ONS dataset provides two distinct mortality series for England and Wales from 2001 to 2023. Running Bootstrap CUSUM on both &mdash; and comparing them &mdash; tells a more complete story than either series alone.</p>
 
@@ -277,7 +308,7 @@
 
     <hr>
 
-    <h2>The ratio &mdash; the article&rsquo;s most important finding</h2>
+    <h2 id="section-ratio">The ratio &mdash; the article&rsquo;s most important finding</h2>
 
     <p>Comparing the two series year by year reveals something the individual series cannot show. In 2001, for every death where sepsis was the primary underlying cause, there were approximately nine deaths where sepsis appeared somewhere on the certificate but not as the primary cause. By 2022 that ratio had fallen to approximately 6.8. By 2023 it was 6.1.</p>
 
@@ -371,7 +402,7 @@
 
     <hr>
 
-    <h2>What the Surviving Sepsis Campaign claimed &mdash; and what the evidence actually shows</h2>
+    <h2 id="section-campaign">What the Surviving Sepsis Campaign claimed &mdash; and what the evidence actually shows</h2>
 
     <p>The UK Sepsis Trust published a 2011 study showing that full Sepsis Six compliance was associated with a 50&ndash;54% reduction in hospital mortality compared to non-compliance. This finding has been widely cited and has driven NHS adoption. It is genuine evidence &mdash; but it is observational evidence from a single hospital, and the comparison is between patients who received the full bundle and those who did not.</p>
 
@@ -391,7 +422,7 @@
 
     <hr>
 
-    <h2>The Deming/Joiner lens: what the null result actually means</h2>
+    <h2 id="section-deming">The Deming/Joiner lens: what the null result actually means</h2>
 
     <p>The Bootstrap CUSUM finding of no change point is not the same as finding that the Sepsis Six did not work. It is a finding about the measurement system, not (only) about the intervention. Deming&rsquo;s theory of knowledge is precise on this: you cannot learn from an outcome without a stable, consistent measure. When the measure changes during the intervention period, the study step of PDSA is compromised.</p>
 
@@ -470,7 +501,7 @@
 
     <hr>
 
-    <h2>Bright Spots: where is the Sepsis Six working &mdash; and why?</h2>
+    <h2 id="section-bright-spots">Bright Spots: where is the Sepsis Six working &mdash; and why?</h2>
 
     <p>The Bootstrap CUSUM null result &mdash; no detectable change point in either national mortality series &mdash; tells you the aggregate picture. It does not tell you whether some trusts, regions, or patient groups are doing substantially better than others. That question requires a different analytical approach: looking for bright spots.</p>
 
@@ -491,7 +522,7 @@
 
     <hr>
 
-    <h2>The patients who survived &mdash; and what happened to them</h2>
+    <h2 id="section-survivors">The patients who survived &mdash; and what happened to them</h2>
 
     <p>This analysis examines mortality. The 2025 ecological study by Broad et al. examines admissions and survival. Between the two papers, a picture emerges that neither alone provides: <strong>more patients are surviving sepsis &mdash; but we do not know what that survival means for their lives.</strong></p>
 
@@ -518,7 +549,7 @@
 
     <hr>
 
-    <h2>What would actually show whether the Sepsis Six worked?</h2>
+    <h2 id="section-what-would-show">What would actually show whether the Sepsis Six worked?</h2>
 
     <p>The public mortality data cannot answer the question. Three other measures could &mdash; and one of them is publicly available and has been collected since 2018.</p>
 
@@ -560,7 +591,7 @@
 
     <hr>
 
-    <h2>The broader lesson for clinical quality improvement</h2>
+    <h2 id="section-broader-lesson">The broader lesson for clinical quality improvement</h2>
 
     <p>The Sepsis Six is not unique in this problem. Many NHS quality improvement interventions have been adopted on the basis of observational studies, rolled out with enthusiasm, and evaluated against outcome measures that changed at the same time as the intervention. The result is that it is often impossible to say whether the intervention worked &mdash; not because it did not, but because the evidence infrastructure to answer the question was never built.</p>
 
