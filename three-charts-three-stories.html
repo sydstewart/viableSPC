@@ -304,6 +304,7 @@
                 <li><a href="#section-xmr">Chart 1: The X-mR Shewhart Control Chart</a></li>
                 <li><a href="#section-runchart">Chart 2: The Run Chart</a></li>
                 <li><a href="#section-cusum">Chart 3: Bootstrap CUSUM Step-Change Analysis</a></li>
+                <li><a href="#section-reading-cusum">How to read the green CUSUM line</a></li>
                 <li><a href="#section-why-bootstrap">Why Bootstrap &mdash; why not classical CUSUM?</a></li>
                 <li><a href="#section-confidence">Choosing your confidence level</a></li>
                 <li><a href="#section-comparison">The three-chart comparison</a></li>
@@ -420,7 +421,26 @@
 
     <hr>
 
-    <h2 id="section-why-bootstrap">Why Bootstrap &mdash; why not classical CUSUM?</h2>
+    <h2 id="section-reading-cusum">How to read the green CUSUM line</h2>
+
+    <p>Before going further, it is worth pausing to explain what the green CUSUM line actually is and what it tells you &mdash; because it is the most important element of the chart, and the most commonly misread.</p>
+
+    <div class="method-box" style="background:#f0fff4;border:1px solid #198754;border-radius:8px;padding:20px 24px;margin:24px 0;font-family:system-ui,sans-serif;">
+        <h3 style="color:#198754;margin-bottom:12px;font-size:1em;text-transform:uppercase;letter-spacing:0.06em;font-style:normal;">&#128202; How the CUSUM line is calculated and what it means</h3>
+        <p style="font-size:0.95em;margin-bottom:10px;">The CUSUM (Cumulative Sum) line is built by taking each observation, subtracting the overall mean of the entire series, and adding that deviation to a running total. The result is a line that tells you, at any point in time, whether the data has been running consistently above or below its long-run average.</p>
+        <ul style="margin:10px 0 10px 1.2em;font-size:0.95em;line-height:1.9;">
+            <li><strong>Rising slope</strong> &mdash; data is running above the overall mean. In this dataset: weekly case counts are higher than the long-run average.</li>
+            <li><strong>Falling slope</strong> &mdash; data is running below the overall mean. Case counts are lower &mdash; improvement is accumulating.</li>
+            <li><strong>Flat</strong> &mdash; data is hovering around the overall mean. No net drift in either direction.</li>
+            <li><strong>A peak or turning point</strong> &mdash; the most important feature. This is the moment the process changed direction &mdash; where it switched from running above average to below, or vice versa. The Bootstrap algorithm tests whether that turning point is statistically significant or genuine, or could have occurred by chance.</li>
+            <li><strong>Steepness</strong> &mdash; how far above or below the mean the data is running. A steep slope means the data is strongly and consistently above or below average. A gentle slope means the deviation is small or inconsistent.</li>
+        </ul>
+        <p style="font-size:0.95em;margin-bottom:0;">The <strong>blue stage mean lines</strong> are the Bootstrap algorithm&rsquo;s verdict on where genuine structural changes occurred and with what confidence. The green line is the raw evidence. The blue lines are the statistical interpretation of it. Change the confidence level and the blue lines move &mdash; but the green line never changes, because it is derived entirely from the data.</p>
+    </div>
+
+    <p>With that in mind, look again at the Bootstrap CUSUM chart above. The green line rises from 2017 to around 2019&ndash;2020 &mdash; telling you that during that period, weekly case counts were consistently running above the overall series mean. It then turns and falls continuously to 2026 &mdash; telling you that from that turning point onwards, case counts have been consistently below the overall mean. The turning point is precisely the moment the improvement programme began to structurally outweigh the earlier elevated period. The Bootstrap algorithm&rsquo;s job is to test whether each inflexion in that line represents a statistically significant structural change or is simply noise.</p>
+
+<h2 id="section-why-bootstrap">Why Bootstrap &mdash; why not classical CUSUM?</h2>
 
     <p>The CUSUM chart has been used in industrial quality control since E.S. Page developed it at Cambridge in 1954. Its logic &mdash; accumulating evidence of drift rather than evaluating individual observations in isolation &mdash; makes it fundamentally better suited than Shewhart charts to detecting sustained shifts.</p>
 
