@@ -130,33 +130,33 @@
     <p class="article-subtitle">When the patient population on anticoagulants tripled and prescribing shifted dramatically from warfarin to DOACs, did the rate of serious bleeding events structurally change &mdash; and when? Bootstrap CUSUM applied to NHS prescribing and adverse event data asks the question with statistical rigour.</p>
     <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; June 2026 &nbsp;&middot;&nbsp; Data: NHS BSA Prescription Cost Analysis &amp; MHRA Yellow Card, England 2005&ndash;2025</div>
 
-    <div class="dark-box" style="margin-top:28px; background:#f0fdf4; color:#14532d; border: 1px solid #86efac;">
-        <h3 style="margin-top:0; color:#166534; font-size:1.1em;">&#128202; Summary</h3>
-        <p style="color:#15803d; font-size:1.05em;">Between 2005 and 2025, the number of anticoagulant prescriptions in England tripled as four new direct oral anticoagulants (DOACs) received NICE approval and replaced warfarin for most indications. This analysis applies Bootstrap CUSUM step-change analysis to NHS prescribing data and MHRA Yellow Card adverse event reports to ask: did the rate of serious and fatal adverse events structurally change &mdash; and when?</p>
-        <p style="margin-top:10px; color:#14532d; font-size:1.05em;"><strong>Three structural change points are confirmed at 95% confidence:</strong></p>
-        <ul style="color:#14532d; font-size:1.02em; line-height:1.9; padding-left:20px; margin-top:6px;">
-            <li><strong>2015:</strong> Total anticoagulant prescriptions doubled (+107%) &mdash; the year all four DOACs received NICE approval and NHS funding was mandated.</li>
-            <li><strong>2012:</strong> The total adverse event rate per million prescriptions stepped up from 35 to 79 per million &mdash; as DOACs arrived with high early adverse event rates before renal contraindications were fully understood.</li>
-            <li><strong>2016:</strong> The DOAC-specific adverse event rate fell by over two thirds &mdash; triggered by the ROCKET-AF trial controversy, an EMA renal dosing label update for rivaroxaban, and a rapid prescriber switch to apixaban.</li>
-        </ul>
-        <p style="margin-top:10px; color:#14532d; font-size:1.02em;">By 2025 the total adverse event rate of 27.5 per million approaches the pre-DOAC warfarin baseline of 26 per million. However, approximately half of all DOAC prescriptions were still not appropriately adjusted for renal function by 2019, inappropriate prescribing affects up to 28.9% of hospitalised patients, and prescribing rates vary from 53% to 99% across English regions. The national average has improved substantially. Local variation &mdash; and the scope for further improvement &mdash; remains large.</p>
-        <p style="margin-top:10px; font-size:0.92em; color:#166534;"><strong>Data sources:</strong> NHS BSA Prescription Cost Analysis 2005&ndash;2025 &middot; MHRA Yellow Card serious and fatal ADR reports &middot; N=21 annual observations &middot; 95% confidence &middot; Loops=5000</p>
+    <!-- Summary box -->
+    <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="anticoag-safety-summary.pdf" download="anticoag-safety-summary.pdf" style="color:var(--brand-mid);">&#8675; Download Executive Summary PDF</a> &nbsp;&middot;&nbsp; <a href="anticoag-warfarin-rate.csv" download="anticoag-warfarin-rate.csv" style="color:var(--brand-mid);">&#8675; Warfarin</a> &nbsp;&middot;&nbsp; <a href="anticoag-total-rate.csv" download="anticoag-total-rate.csv" style="color:var(--brand-mid);">&#8675; Total rate</a> &nbsp;&middot;&nbsp; <a href="anticoag-doac-rate.csv" download="anticoag-doac-rate.csv" style="color:var(--brand-mid);">&#8675; DOAC rate</a></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px;">
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--purple);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The anticoagulation revolution</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Between 2005 and 2025, anticoagulant prescriptions in England tripled as four new DOACs received NICE approval and replaced warfarin for most indications. Bootstrap CUSUM identifies three structural change points confirming that both prescribing volumes and adverse event rates shifted structurally &mdash; not just gradually.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--orange);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">2012: adverse event rate doubled</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">As DOACs arrived and NICE mandated funding, the total adverse event rate stepped up from 35 to 79 per million prescriptions. Renal contraindications were not yet fully understood, and the rate peaked at 137 per million in 2015 before clinical practice caught up with the new drug class.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">2016: DOAC rate fell by two-thirds</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">The DOAC-specific adverse event rate fell over two thirds following the ROCKET-AF trial controversy, an EMA renal dosing label update for rivaroxaban, and a rapid prescriber switch to apixaban. By 2025 the total adverse rate of 27.5 per million approaches the pre-DOAC warfarin baseline of 26 per million.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--brand-mid);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">Improvement is real but uneven</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">The national average has improved substantially. But prescribing rates vary from 53% to 99% across English regions, up to 28.9% of hospitalised patients receive inappropriate prescribing, and approximately half of DOAC prescriptions were still not adjusted for renal function by 2019. The scope for further improvement remains large.</div>
+            </div>
+        </div>
+        <div style="font-size:0.85em;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">
+            <strong style="color:var(--text);">Data:</strong> NHS BSA Prescription Cost Analysis 2005&ndash;2025 &nbsp;&middot;&nbsp; MHRA Yellow Card serious and fatal ADR reports &nbsp;&middot;&nbsp; <strong style="color:var(--text);">N=21</strong> annual observations &nbsp;&middot;&nbsp; 95% confidence &nbsp;&middot;&nbsp; Loops=5,000
+        </div>
     </div>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin:20px 0; border:1px solid #e2e8f0; border-radius:8px; background:#f8fafc;">
-        <tr>
-            <td width="50" style="padding:14px; font-size:1.8em; text-align:center;">&#128196;</td>
-            <td style="padding:14px 8px;">
-                <strong style="color:#1e3a5f !important; font-size:1em;">Executive Summary available as PDF</strong><br>
-                <span style="font-size:0.88em; color:#64748b;">3-page summary of all five findings, key chart, and references &mdash; ideal for sharing with colleagues or at conferences.</span>
-            </td>
-            <td width="160" style="padding:14px; text-align:right;">
-                <a href="anticoag-safety-summary.pdf" download style="display:inline-block; background:#1e3a5f; color:white; padding:10px 16px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.88em; white-space:nowrap;">&#11015;&#65039; Download PDF</a>
-            </td>
-        </tr>
-    </table>
-
-    <!-- TABLE OF CONTENTS -->
+   <!-- TABLE OF CONTENTS -->
         <div style="background:#fff8f0;border:2px solid #e67e22;border-radius:10px;padding:18px 24px;margin:0 0 28px 0;font-family:system-ui,sans-serif;">
         <div style="font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#e67e22;margin-bottom:8px;">&#128202; New to Bootstrap CUSUM?</div>
         <p style="font-size:0.95em;color:#1e293b;margin-bottom:12px;line-height:1.6;"><strong><a href="three-charts-three-stories.html" style="color:#002d5b;">Same Data, Three Charts, Three Very Different Stories</a></strong> explains what the green CUSUM line means and why it detects structural change that other charts miss &mdash; including a step-by-step guide to reading the chart. Takes 5 minutes and makes every chart in this article easier to read.</p>
@@ -164,7 +164,7 @@
     </div>
 
 <details class="toc-details">
-        <summary>&#9776;&nbsp; Table of Contents &mdash; click to expand</summary>
+        <summary>&#9776;&nbsp; Table of Contents &mdash; click to expand or collapse</summary>
         <div class="toc-inner">
             <ol>
                 <li><a href="#section-revolution">The anticoagulation revolution</a></li>
