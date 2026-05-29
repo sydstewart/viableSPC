@@ -7,7 +7,6 @@
     <meta name="description" content="What Bootstrap CUSUM reveals about the long deceleration of UK GDP — and why conventional analysis has been telling us the wrong story. Free analysis tool included.">
     <meta name="keywords" content="UK GDP structural change analysis, Bootstrap CUSUM economic history, UK economic deceleration, cumulative GDP analysis, step change analysis economics, why UK growth is slowing, statistical analysis UK economy">
 
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -26,6 +25,8 @@
             --muted:        #64748b;
             --border:       #e2e8f0;
             --bg:           #f8f9fa;
+            --green:        #198754;
+            --orange:       #e67e22;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
@@ -53,6 +54,7 @@
         .deceleration { background: #fff5f5; border: 2px solid var(--accent); border-radius: 8px; padding: 20px 24px; margin: 28px 0; text-align: center; }
         .deceleration .series { font-family: "Courier New", monospace; font-size: 1.3em; font-weight: bold; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 8px; }
         .deceleration p { font-family: system-ui, sans-serif; font-size: 0.9em; color: var(--muted); margin: 0; }
+        .deceleration .decel-note { font-family: system-ui, sans-serif; font-size: 0.88em; color: var(--muted); font-style: italic; margin-top: 12px; border-top: 1px solid #f5c6c6; padding-top: 10px; }
         .data-table-wrap { overflow-x: auto; margin: 24px 0; }
         .data-table { width: 100%; border-collapse: collapse; font-family: system-ui, sans-serif; font-size: 0.92em; }
         .data-table caption { font-weight: bold; color: var(--brand-blue); text-align: left; margin-bottom: 8px; font-size: 1em; padding-bottom: 8px; }
@@ -92,6 +94,18 @@
         .related-box p { color: #64748b; font-size: 0.9em; margin: 0 0 12px; }
         .related-box a.related-btn { display: inline-block; background: #0056b3; color: white; padding: 8px 18px; border-radius: 6px; font-size: 0.88em; font-weight: 700; text-decoration: none; }
         .related-box a.related-btn:hover { background: #004494; }
+        /* TOC styles */
+        .toc-details { margin: 0 0 28px 0; border: 1px solid var(--border); border-radius: 8px; font-family: system-ui, sans-serif; background: white; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: bold; color: var(--brand-blue); font-size: 0.95em; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+        .toc-details summary::-webkit-details-marker { display: none; }
+        .toc-details summary:hover { background: var(--brand-light); border-radius: 8px; }
+        .toc-details[open] summary { border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; }
+        .toc-details[open] summary:hover { border-radius: 8px 8px 0 0; }
+        .toc-inner { padding: 6px 18px 16px; }
+        .toc-inner ol { margin: 10px 0 0 1.2em; line-height: 2.1; }
+        .toc-inner ol li { font-size: 0.92em; margin-bottom: 0; }
+        .toc-inner ol li a { color: var(--brand-mid); text-decoration: none; }
+        .toc-inner ol li a:hover { text-decoration: underline; color: var(--brand-blue); }
     </style>
 </head>
 <body>
@@ -107,52 +121,95 @@
 
     <div class="article-flag">&#127468;&#127463; Economic Analysis &middot; Bootstrap CUSUM</div>
     <h1 class="article-title">The Chart That Changes How You See 77 Years of UK Economic History</h1>
-    <p class="article-subtitle">What Bootstrap CUSUM reveals about the long deceleration — and why conventional analysis has been telling us the wrong story</p>
+    <p class="article-subtitle">What Bootstrap CUSUM reveals about the long deceleration &mdash; and why conventional analysis has been telling us the wrong story</p>
     <div class="article-meta">By Syd Stewart &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; May 2026</div>
+
+    <!-- Summary box -->
+    <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.78em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="uk-gdp-analysis-summary.pdf" download="uk-gdp-analysis-summary.pdf" style="color:var(--brand-mid);">&#8675; Download Executive Summary PDF</a> &nbsp;&middot;&nbsp; <a href="uk-gdp-data.csv" download="uk-gdp-data.csv" style="color:var(--brand-mid);">&#8675; Download the data CSV</a></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px;">
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--accent);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">Three charts, one wrong question</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Applied to annual GDP growth rates, all three methods &mdash; X-mR, Run Chart, and Bootstrap CUSUM &mdash; find nothing. Even Bootstrap CUSUM reports 1 stage across 77 years. Annual growth rates are mean-reverting by design: a recession pulls the rate down, a recovery pulls it back up, and the long-run average stays roughly the same regardless of whether the underlying trajectory has permanently shifted. The question being asked is wrong.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--brand-mid);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The right question changes everything</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Switch to cumulative GDP level data &mdash; compounding annual growth rates into an index starting at 100 in 1949 &mdash; and Bootstrap CUSUM finds 8 distinct structural stages at 90% confidence. The same method, the same data, a different question: has the economy&rsquo;s long-run growth path permanently shifted?</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--orange);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The 2008 Financial Crisis was not a structural break</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Stage 7 runs from 2003 to 2014, absorbing the 2008 Financial Crisis entirely. Bootstrap CUSUM finds no evidence that it created a new structural growth trajectory. The real structural breaks fall at 1958, 1966, 1976, 1986, 1996, 2003, and 2014 &mdash; moments of institutional and policy change, not crisis points.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">A 60-year structural deceleration</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Each successive stage delivers less growth than the last: +24.1% &rarr; +20.5% &rarr; +12.5% &rarr; +13.3% &rarr; +9.9% &rarr; +8.2% &rarr; +6.0%. Continuous across governments of every political persuasion. Notice how the steps in the Bootstrap CUSUM get smaller over time &mdash; the visual signature of a system that is still growing but decelerating with each stage. The finding is robust at 90%, 95%, and 99.7% confidence.</div>
+            </div>
+        </div>
+        <div style="font-size:0.85em;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">
+            <strong style="color:var(--text);">Method:</strong> Bootstrap CUSUM &nbsp;&middot;&nbsp; UK GDP cumulative index 1949=100 &nbsp;&middot;&nbsp; <strong style="color:var(--text);">N=77</strong> annual observations &nbsp;&middot;&nbsp; Loops=3,000 &nbsp;&middot;&nbsp; Confidence: 90%/95%/99.7% &nbsp;&middot;&nbsp; <strong style="color:var(--text);">Data:</strong> World Bank/ONS &nbsp;&middot;&nbsp; <a href="uk-gdp-data.csv" download="uk-gdp-data.csv" style="color:var(--brand-mid);">uk-gdp-data.csv</a>
+        </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Table of Contents &mdash; click to expand or collapse</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-conventional">The conventional story</a></li>
+                <li><a href="#section-wrong-question">Part 1 &mdash; The wrong question: annual growth rates</a></li>
+                <li><a href="#section-right-question">Part 2 &mdash; The right question: cumulative level</a></li>
+                <li><a href="#section-data">What the data actually shows</a></li>
+                <li><a href="#section-robustness">Does the conclusion hold at higher confidence levels?</a></li>
+                <li><a href="#section-implications">What this means for economic analysis</a></li>
+                <li><a href="#section-try-it">Try it yourself</a></li>
+                <li><a href="#section-closing">The closing thought</a></li>
+            </ol>
+        </div>
+    </details>
 
     <div class="article-body">
 
-        <h2>The conventional story</h2>
-        <p>The standard narrative of UK economic history goes something like this: steady post-war growth, punctuated by crises — the IMF bailout of 1976, the recession of the early 1980s, the financial crisis of 2008. Plot annual GDP growth rates and you get a noisy line oscillating around a long-run mean, with a sharp dip in 2008–09 that the economy eventually recovered from.</p>
+        <h2 id="section-conventional">The conventional story</h2>
+        <p>The standard narrative of UK economic history goes something like this: steady post-war growth, punctuated by crises &mdash; the IMF bailout of 1976, the recession of the early 1980s, the financial crisis of 2008. Plot annual GDP growth rates and you get a noisy line oscillating around a long-run mean, with a sharp dip in 2008&ndash;09 that the economy eventually recovered from.</p>
         <p>The conventional conclusion: volatile but mean-reverting. A story of shocks and recoveries.</p>
-        <p>But we have been asking the wrong question. The question is not <em>"did growth temporarily fall?"</em> It is <em>"has the economy's underlying trajectory permanently shifted?"</em> These are completely different questions — and they require completely different analytical methods.</p>
+        <p>But we have been asking the wrong question. The question is not <em>&ldquo;did growth temporarily fall?&rdquo;</em> It is <em>&ldquo;has the economy&rsquo;s underlying trajectory permanently shifted?&rdquo;</em> These are completely different questions &mdash; and they require completely different analytical methods.</p>
 
         <hr class="section-divider">
 
-        <h2>Part 1 — The wrong question: annual growth rates</h2>
+        <h2 id="section-wrong-question">Part 1 &mdash; The wrong question: annual growth rates</h2>
         <p>Here is what the three most common chart types tell you when applied to UK annual GDP growth rates (%) from 1949 to 2025.</p>
 
-        <h3>Chart 1: X-mR Shewhart Control Chart — Annual Growth Rate %</h3>
+        <h3>Chart 1: X-mR Shewhart Control Chart &mdash; Annual Growth Rate %</h3>
         <p>The X-mR chart is the most commonly used SPC chart in quality improvement and process monitoring. Applied to UK annual GDP growth rates:</p>
 
         <div class="chart-figure">
             <img src="images/gdp-pct-xmr.png" alt="X-mR Control Chart of UK Annual GDP Growth Rate">
-            <div class="chart-caption">X-mR Control Chart — UK Annual GDP Growth Rate (%). One stage detected. The 2008 financial crisis and 2020 Covid contraction are the only signals — everything else is classified as common cause variation.</div>
+            <div class="chart-caption">X-mR Control Chart &mdash; UK Annual GDP Growth Rate (%). One stage detected. The 2008 financial crisis and 2020 Covid contraction are the only signals &mdash; everything else is classified as common cause variation.</div>
         </div>
 
         <div class="verdict">
             <strong>What the X-mR tells you:</strong>
-            The UK economy is a stable process with a mean growth rate of 2.43%. Two exceptional events — 2008 and 2020 — stand out. Otherwise: business as usual for 77 years.
+            The UK economy is a stable process with a mean growth rate of 2.43%. Two exceptional events &mdash; 2008 and 2020 &mdash; stand out. Otherwise: business as usual for 77 years.
         </div>
 
-        <h3>Chart 2: Run Chart — Annual Growth Rate %</h3>
+        <h3>Chart 2: Run Chart &mdash; Annual Growth Rate %</h3>
 
         <div class="chart-figure">
             <img src="images/gdp-pct-runchart.png" alt="Run Chart of UK Annual GDP Growth Rate">
-            <div class="chart-caption">Run Chart — UK Annual GDP Growth Rate (%). The median line sits at 2.43%. Only the 2008–2010 recession generates a meaningful run signal below the median.</div>
+            <div class="chart-caption">Run Chart &mdash; UK Annual GDP Growth Rate (%). The median line sits at 2.43%. Only the 2008&ndash;2010 recession generates a meaningful run signal below the median.</div>
         </div>
 
         <div class="verdict">
             <strong>What the Run Chart tells you:</strong>
-            Growth has been broadly stable around the median, with a notable dip around 2008–2010. Perhaps something changed recently — it's hard to say with any precision.
+            Growth has been broadly stable around the median, with a notable dip around 2008&ndash;2010. Perhaps something changed recently &mdash; it&rsquo;s hard to say with any precision.
         </div>
 
-        <h3>Chart 3: Bootstrap CUSUM — Annual Growth Rate % — Result: 1 Stage</h3>
-        <p>Now apply the most sophisticated method — Bootstrap CUSUM step-change analysis — specifically designed to detect structural change:</p>
+        <h3>Chart 3: Bootstrap CUSUM &mdash; Annual Growth Rate % &mdash; Result: 1 Stage</h3>
+        <p>Now apply the most sophisticated method &mdash; Bootstrap CUSUM step-change analysis &mdash; specifically designed to detect structural change:</p>
 
         <div class="chart-figure">
             <img src="images/gdp-pct-cusum-90.png" alt="Bootstrap CUSUM of UK Annual GDP Growth Rate — 1 stage detected">
-            <div class="chart-caption">Bootstrap CUSUM — UK Annual GDP Growth Rate (%), 90% confidence, 3,000 loops. Result: <strong>1 distinct stage</strong>. No structural change detected in 77 years of annual growth rate data.</div>
+            <div class="chart-caption">Bootstrap CUSUM &mdash; UK Annual GDP Growth Rate (%), 90% confidence, 3,000 loops. Result: <strong>1 distinct stage</strong>. No structural change detected in 77 years of annual growth rate data.</div>
         </div>
 
         <div class="finding">
@@ -164,29 +221,29 @@
 
         <hr class="section-divider">
 
-        <h2>Part 2 — The right question: cumulative level</h2>
+        <h2 id="section-right-question">Part 2 &mdash; The right question: cumulative level</h2>
 
-        <p>Annual GDP growth rates measure year-to-year fluctuation. They are mean-reverting by design — recessions cause temporary dips; recoveries bring them back. The right question is not about the acceleration. It is about the trajectory.</p>
+        <p>Annual GDP growth rates measure year-to-year fluctuation. They are mean-reverting by design &mdash; recessions cause temporary dips; recoveries bring them back. The right question is not about the acceleration. It is about the trajectory.</p>
 
-        <p>Cumulative GDP level data — built by compounding annual growth rates into an index starting at 100 in 1949 — captures that trajectory directly. When Bootstrap CUSUM is applied to cumulative level data, it answers: <em>"has the economy's long-run growth path permanently shifted?"</em></p>
+        <p>Cumulative GDP level data &mdash; built by compounding annual growth rates into an index starting at 100 in 1949 &mdash; captures that trajectory directly. When Bootstrap CUSUM is applied to cumulative level data, it answers: <em>&ldquo;has the economy&rsquo;s long-run growth path permanently shifted?&rdquo;</em></p>
 
-        <h3>Chart 4: X-mR Chart — Cumulative Index</h3>
+        <h3>Chart 4: X-mR Chart &mdash; Cumulative Index</h3>
 
         <div class="chart-figure">
             <img src="images/gdp-cum-xmr.png" alt="X-mR Control Chart of UK Cumulative GDP Index">
-            <div class="chart-caption">X-mR Control Chart — UK GDP Cumulative Index (1949=100). The control limits, calculated from the overall mean of ~206, are meaningless for a series that starts at 100 and ends at 285. Almost every observation from 1985 onwards breaches the upper limit.</div>
+            <div class="chart-caption">X-mR Control Chart &mdash; UK GDP Cumulative Index (1949=100). The control limits, calculated from the overall mean of ~206, are meaningless for a series that starts at 100 and ends at 285. Almost every observation from 1985 onwards breaches the upper limit.</div>
         </div>
 
         <div class="verdict">
             <strong>What the X-mR tells you about the cumulative data:</strong>
-            Every observation from 1985 onwards is a "signal." The chart has broken down entirely — it cannot handle trending data because it assumes a stable process mean.
+            Every observation from 1985 onwards is a &ldquo;signal.&rdquo; The chart has broken down entirely &mdash; it cannot handle trending data because it assumes a stable process mean.
         </div>
 
-        <h3>Chart 5: Run Chart — Cumulative Index</h3>
+        <h3>Chart 5: Run Chart &mdash; Cumulative Index</h3>
 
         <div class="chart-figure">
             <img src="images/gdp-cum-runchart.png" alt="Run Chart of UK Cumulative GDP Index — median at 206, 1987 turning point visible">
-            <div class="chart-caption">Run Chart — UK GDP Cumulative Index (1949=100). Every observation before approximately 1987 is below the median (blue); every observation after is above (red). The 1987 turning point is visible — but the run chart draws one flat median through what is clearly a climbing staircase.</div>
+            <div class="chart-caption">Run Chart &mdash; UK GDP Cumulative Index (1949=100). Every observation before approximately 1987 is below the median (blue); every observation after is above (red). The 1987 turning point is visible &mdash; but the run chart draws one flat median through what is clearly a climbing staircase.</div>
         </div>
 
         <div class="verdict">
@@ -194,14 +251,14 @@
             Something changed around 1987. But not how many changes occurred, when each happened, or with what confidence.
         </div>
 
-        <h3>Chart 6: Bootstrap CUSUM — Cumulative Index — 90% Confidence — 8 Stages</h3>
+        <h3>Chart 6: Bootstrap CUSUM &mdash; Cumulative Index &mdash; 90% Confidence &mdash; 8 Stages</h3>
 
         <div class="chart-figure">
             <img src="images/gdp-cum-cusum-90.png" alt="Bootstrap CUSUM of UK Cumulative GDP Index at 90% confidence — 8 distinct stages">
-            <div class="chart-caption">Bootstrap CUSUM — UK GDP Cumulative Index (1949=100), 90% confidence, 3,000 loops. Result: <strong>8 distinct stages</strong>. The staircase of structural growth regime changes is clearly visible across 77 years.</div>
+            <div class="chart-caption">Bootstrap CUSUM &mdash; UK GDP Cumulative Index (1949=100), 90% confidence, 3,000 loops. Result: <strong>8 distinct stages</strong>. The staircase of structural growth regime changes is clearly visible across 77 years.</div>
         </div>
 
-        <p>Notice the CUSUM turning point — the peak of the green CUSUM line — occurs around <strong>1987</strong>. This is the moment at which accumulated deviation from the long-run mean was greatest. After 1987, the cumulative index began consistently exceeding its historical average. Bootstrap CUSUM identifies this as the boundary between Stage 5 and Stage 6 — the shift from the Lawson boom era into the New Labour stability period.</p>
+        <p>Notice the CUSUM turning point &mdash; the peak of the green CUSUM line &mdash; occurs around <strong>1987</strong>. This is the moment at which accumulated deviation from the long-run mean was greatest. After 1987, the cumulative index began consistently exceeding its historical average. Bootstrap CUSUM identifies this as the boundary between Stage 5 and Stage 6 &mdash; the shift from the Lawson boom era into the New Labour stability period.</p>
 
         <div class="finding">
             <strong>Same data. Completely different picture.</strong>
@@ -211,58 +268,59 @@
 
         <hr class="section-divider">
 
-        <h2>What the data actually shows</h2>
+        <h2 id="section-data">What the data actually shows</h2>
 
         <div class="data-table-wrap">
             <table class="data-table">
-                <caption>Bootstrap CUSUM Stage Analysis — UK Cumulative GDP Index (1949 = 100), 90% Confidence</caption>
+                <caption>Bootstrap CUSUM Stage Analysis &mdash; UK Cumulative GDP Index (1949 = 100), 90% Confidence</caption>
                 <thead>
                     <tr><th>Stage</th><th>Period</th><th>Index Mean</th><th>Change %</th><th>Growth Regime</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>1</td><td>1949–1958</td><td>115.35</td><td class="change-col">Baseline</td><td>Post-war recovery</td></tr>
-                    <tr><td>2</td><td>1958–1966</td><td>143.19</td><td class="change-col">+24.1%</td><td>Macmillan boom</td></tr>
-                    <tr><td>3</td><td>1966–1976</td><td>172.55</td><td class="change-col">+20.5%</td><td>Wilson turbulence, sterling crisis</td></tr>
-                    <tr><td>4</td><td>1976–1986</td><td>194.16</td><td class="change-col">+12.5%</td><td>IMF crisis, end of post-war consensus</td></tr>
-                    <tr><td>5</td><td>1986–1996</td><td>220.04</td><td class="change-col">+13.3%</td><td>Lawson boom, financial deregulation</td></tr>
-                    <tr><td>6</td><td>1996–2003</td><td>241.90</td><td class="change-col">+9.9%</td><td>New Labour stability</td></tr>
-                    <tr><td>7</td><td>2003–2014</td><td>261.77</td><td class="change-col">+8.2%</td><td>Pre-crisis peak — absorbs 2008 entirely</td></tr>
-                    <tr class="latest"><td>8</td><td>2014–2025</td><td>277.40</td><td class="change-col">+6.0%</td><td>Post-austerity new normal — weakest in 77 years</td></tr>
+                    <tr><td>1</td><td>1949&ndash;1958</td><td>115.35</td><td class="change-col">Baseline</td><td>Post-war recovery</td></tr>
+                    <tr><td>2</td><td>1958&ndash;1966</td><td>143.19</td><td class="change-col">+24.1%</td><td>Macmillan boom</td></tr>
+                    <tr><td>3</td><td>1966&ndash;1976</td><td>172.55</td><td class="change-col">+20.5%</td><td>Wilson turbulence, sterling crisis</td></tr>
+                    <tr><td>4</td><td>1976&ndash;1986</td><td>194.16</td><td class="change-col">+12.5%</td><td>IMF crisis, end of post-war consensus</td></tr>
+                    <tr><td>5</td><td>1986&ndash;1996</td><td>220.04</td><td class="change-col">+13.3%</td><td>Lawson boom, financial deregulation</td></tr>
+                    <tr><td>6</td><td>1996&ndash;2003</td><td>241.90</td><td class="change-col">+9.9%</td><td>New Labour stability</td></tr>
+                    <tr><td>7</td><td>2003&ndash;2014</td><td>261.77</td><td class="change-col">+8.2%</td><td>Pre-crisis peak &mdash; absorbs 2008 entirely</td></tr>
+                    <tr class="latest"><td>8</td><td>2014&ndash;2025</td><td>277.40</td><td class="change-col">+6.0%</td><td>Post-austerity new normal &mdash; weakest in 77 years</td></tr>
                 </tbody>
             </table>
         </div>
 
         <div class="finding">
-            <strong>Finding 1 — 2008 was not a structural break</strong>
-            Stage 7 runs from 2003 to 2014, absorbing the financial crisis entirely. Bootstrap CUSUM finds no evidence that 2008 created a new structural growth trajectory.
+            <strong>Finding 1 &mdash; The 2008 Financial Crisis was not a structural break</strong>
+            Stage 7 runs from 2003 to 2014, absorbing the 2008 Financial Crisis entirely. Bootstrap CUSUM finds no evidence that it created a new structural growth trajectory.
         </div>
 
         <div class="finding">
-            <strong>Finding 2 — The real structural breaks were elsewhere</strong>
-            Stage boundaries fall in 1958, 1966, 1976, 1986, 1996, 2003, and 2014 — at moments of institutional and policy change, not at crisis points.
+            <strong>Finding 2 &mdash; The real structural breaks were elsewhere</strong>
+            Stage boundaries fall in 1958, 1966, 1976, 1986, 1996, 2003, and 2014 &mdash; at moments of institutional and policy change, not at crisis points.
         </div>
 
         <div class="finding">
-            <strong>Finding 3 — The long deceleration</strong>
+            <strong>Finding 3 &mdash; The long deceleration</strong>
         </div>
 
         <div class="deceleration">
             <div class="series">+24.1% &rarr; +20.5% &rarr; +12.5% &rarr; +13.3% &rarr; +9.9% &rarr; +8.2% &rarr; +6.0%</div>
-            <p>Each successive stage delivers less growth than the last — a 60-year structural deceleration, continuous across governments of every political persuasion.</p>
+            <p>Each successive stage delivers less growth than the last &mdash; a 60-year structural deceleration, continuous across governments of every political persuasion.</p>
+            <p class="decel-note">Note: observe how the steps in the Bootstrap CUSUM chart get smaller over time &mdash; each stage boundary is closer to the last than the one before it. This is the visual signature of structural deceleration: the economy is still growing, but each growth regime delivers less than its predecessor.</p>
         </div>
 
         <hr class="section-divider">
 
-        <h2>Does the conclusion hold at higher confidence levels?</h2>
+        <h2 id="section-robustness">Does the conclusion hold at higher confidence levels?</h2>
 
         <div class="chart-pair">
             <div class="chart-figure">
                 <img src="images/gdp-cum-cusum-95.png" alt="Bootstrap CUSUM at 95% confidence — 5 stages">
-                <div class="chart-caption"><strong>95% confidence — 5 stages.</strong> Three marginal stages drop out but the staircase and deceleration remain clearly visible.</div>
+                <div class="chart-caption"><strong>95% confidence &mdash; 5 stages.</strong> Three marginal stages drop out but the staircase and deceleration remain clearly visible.</div>
             </div>
             <div class="chart-figure">
                 <img src="images/gdp-cum-cusum-997.png" alt="Bootstrap CUSUM at 99.7% confidence — 4 stages">
-                <div class="chart-caption"><strong>99.7% confidence — 4 stages.</strong> Only the four largest structural shifts survive at the most conservative threshold. The deceleration from +24% to +6% is still unambiguous.</div>
+                <div class="chart-caption"><strong>99.7% confidence &mdash; 4 stages.</strong> Only the four largest structural shifts survive at the most conservative threshold. The deceleration from +24% to +6% is still unambiguous.</div>
             </div>
         </div>
 
@@ -273,29 +331,29 @@
 
         <hr class="section-divider">
 
-        <h2>What this means for economic analysis</h2>
-        <p>If the deceleration predates 2008, 2016, and 2020, then fixing those "events" will not reverse it. The structural breaks identified — 1966, 1976, 1986, 2014 — suggest trajectory shifted at moments of institutional and policy change. Understanding <em>why</em> those breaks occurred is a more useful question than relitigating the financial crisis or Brexit.</p>
+        <h2 id="section-implications">What this means for economic analysis</h2>
+        <p>If the deceleration predates 2008, 2016, and 2020, then fixing those &ldquo;events&rdquo; will not reverse it. The structural breaks identified &mdash; 1966, 1976, 1986, 2014 &mdash; suggest trajectory shifted at moments of institutional and policy change. Understanding <em>why</em> those breaks occurred is a more useful question than relitigating the financial crisis or Brexit.</p>
 
         <div class="caveats">
             <h3>&#9888; Honest caveats</h3>
             <ul>
-                <li>This uses total GDP, not per capita GDP — population growth affects the picture</li>
+                <li>This uses total GDP, not per capita GDP &mdash; population growth affects the picture</li>
                 <li>GDP measurement methodology has changed over 77 years</li>
-                <li>The analysis identifies <em>that</em> shifts occurred and <em>when</em> — attribution requires separate economic analysis</li>
+                <li>The analysis identifies <em>that</em> shifts occurred and <em>when</em> &mdash; attribution requires separate economic analysis</li>
                 <li>This is a statistical description, not an economic forecast</li>
             </ul>
         </div>
 
         <hr class="section-divider">
 
-        <h2>Try it yourself</h2>
+        <h2 id="section-try-it">Try it yourself</h2>
 
         <div class="steps-box">
-            <h3>&#128203; Step by step — UK GDP cumulative index</h3>
+            <h3>&#128203; Step by step &mdash; UK GDP cumulative index</h3>
             <ol>
-                <li>Download UK annual GDP growth data from the <a href="https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?locations=GB" target="_blank">World Bank</a> or ONS</li>
+                <li>Download UK annual GDP growth data from the <a href="https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?locations=GB" target="_blank">World Bank</a> or ONS &mdash; or use the <a href="uk-gdp-data.csv" download="uk-gdp-data.csv">prepared CSV download</a> above</li>
                 <li>In Excel, create a cumulative column: set 1949 = 100, then <code>=prev_row * (1 + growth_rate/100)</code></li>
-                <li>Add a Year column: 1949, 1950, 1951...</li>
+                <li>Add a Year column: 1949, 1950, 1951&hellip;</li>
                 <li>Save as CSV and upload to <a href="index.html">stepchangeanalysis.com</a></li>
                 <li>X-Axis = Year, Y-Axis = Cumulative, Date Format = YYYY, Turn Length = 10, Loops = 3000, Conf % = 90</li>
                 <li>Click <strong>Recalculate Chart</strong></li>
@@ -308,24 +366,23 @@
             <a href="index.html" class="cta-btn">&#9654; Open the Free Tool</a>
         </div>
 
-        <h2>The closing thought</h2>
-        <p>The chart of UK GDP growth rates tells you the economy fluctuates. The Bootstrap CUSUM chart of cumulative UK GDP tells you the economy has been slowing for 60 years — continuously, structurally, and regardless of who was in power.</p>
+        <h2 id="section-closing">The closing thought</h2>
+        <p>The chart of UK GDP growth rates tells you the economy fluctuates. The Bootstrap CUSUM chart of cumulative UK GDP tells you the economy has been slowing for 60 years &mdash; continuously, structurally, and regardless of who was in power.</p>
         <p>The difference is not in the data. It is in the question you ask of it.</p>
 
     </div>
 
-    <!-- ── Related Articles ── -->
     <div class="related-box">
         <div class="related-tag">Related Article</div>
         <h3><a href="three-charts-three-stories.html">Same Data, Three Charts, Three Very Different Stories</a></h3>
-        <p>See how X-mR, Run Chart, and Bootstrap CUSUM give completely different answers from the same healthcare dataset — with direct implications for clinical governance reporting.</p>
+        <p>See how X-mR, Run Chart, and Bootstrap CUSUM give completely different answers from the same healthcare dataset &mdash; with direct implications for clinical governance reporting.</p>
         <a href="three-charts-three-stories.html" class="related-btn">Read the article &rarr;</a>
     </div>
 
     <footer class="article-footer">
         <p><strong>Method:</strong> Bootstrap CUSUM step-change analysis. Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993).</p>
-        <p style="margin-top:8px;"><strong>Data:</strong> UK annual GDP growth rates 1949–2025. Source: World Bank / ONS.</p>
-        <p style="margin-top:8px;"><strong>Analysis:</strong> <a href="index.html">stepchangeanalysis.com</a> — free, browser-based, no data uploaded.</p>
+        <p style="margin-top:8px;"><strong>Data:</strong> UK annual GDP growth rates 1949&ndash;2025. Source: World Bank / ONS.</p>
+        <p style="margin-top:8px;"><strong>Analysis:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded.</p>
         <p style="margin-top:16px; color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; May 2026</p>
     </footer>
 
