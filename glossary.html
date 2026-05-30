@@ -43,6 +43,7 @@
         .glossary-entry:target{border-left-color:var(--brand-mid);box-shadow:0 0 0 3px rgba(0,86,179,0.1);}
         .glossary-entry:hover{border-left-color:var(--brand-mid);}
         .glossary-entry.hidden{display:none;}
+        .search-section-badge{font-size:0.7em;font-weight:600;background:#e9f2ff;color:#0056b3;border:1px solid #cce5ff;border-radius:10px;padding:2px 8px;margin-left:8px;vertical-align:middle;letter-spacing:0.03em;}
         .glossary-term{font-size:1.05em;font-weight:bold;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;}
         .glossary-term .term-tag{display:inline-block;font-size:0.72em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:10px;margin-left:8px;vertical-align:middle;}
         .glossary-def{font-size:0.97em;color:var(--text);line-height:1.75;margin-bottom:10px;}
@@ -78,7 +79,7 @@
 <div class="page-flag">&#128218; Reference</div>
 <h1>Glossary of Key Terms</h1>
 <p class="page-intro">Definitions of the statistical, analytical, and management concepts used across StepChangeAnalysis.com &mdash; with links to the article sections where each term appears in context. Terms may appear in more than one section where relevant to multiple disciplines.</p>
-<div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Last updated May 2026 &nbsp;&middot;&nbsp; 42 terms across 8 sections &nbsp;&middot;&nbsp; All 9 published articles</div>
+<div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Last updated May 2026 &nbsp;&middot;&nbsp; 45 terms across 8 sections &nbsp;&middot;&nbsp; All 9 published articles</div>
 
 <div class="glossary-search-box">
     <div class="glossary-search-label">&#128269; Search the glossary</div>
@@ -108,60 +109,60 @@
 <div class="glossary-section" id="section-cusum">
 <div class="glossary-section-header">Bootstrap CUSUM &amp; SPC Charts</div>
 
-<div class="glossary-entry cat-cusum" id="term-bootstrap-cusum">
+<div data-section="Bootstrap CUSUM &amp; SPC" class="glossary-entry cat-cusum" id="term-bootstrap-cusum">
 <div class="glossary-term">Bootstrap CUSUM <span class="term-tag">Core Method</span></div>
 <div class="glossary-def">A statistical method for detecting structural change points in time-series data. Works by accumulating deviations from the process mean over time (the CUSUM line), then using bootstrap resampling to test whether observed turning points are statistically significant or genuine, or could have arisen by chance. Unlike classical CUSUM, the decision threshold is derived directly from the data &mdash; making it valid for non-normal data such as counts, rates, and rare events. The confidence level is earned from the data, not assumed from theory.</div>
 <div class="glossary-see"><strong>Explained in:</strong> <a href="three-charts-three-stories.html#section-why-bootstrap">Three Charts &rarr; Why Bootstrap?</a> &nbsp;&middot;&nbsp; <a href="hydrogen-plant-cusum.html#section-residual-cusum">Hydrogen Plant &rarr; Residual CUSUM</a></div>
 <div class="glossary-also">See also: <a href="#term-xmr">X-mR Chart</a> &nbsp;&middot;&nbsp; <a href="#term-run-chart">Run Chart</a> &nbsp;&middot;&nbsp; <a href="#term-cusum-line">CUSUM Line</a> &nbsp;&middot;&nbsp; <a href="#term-spc">SPC</a> (Improvement Methods)</div>
 </div>
 
-<div class="glossary-entry cat-cusum" id="term-cusum-line">
+<div data-section="Bootstrap CUSUM &amp; SPC" class="glossary-entry cat-cusum" id="term-cusum-line">
 <div class="glossary-term">CUSUM Line (the green line) <span class="term-tag">Reading Charts</span></div>
 <div class="glossary-def">The green cumulative sum line is calculated by subtracting the overall series mean from each observation and adding that deviation to a running total. Its slope shows whether the process is above or below its long-run average: <strong>rising slope</strong> = consistently above the mean; <strong>falling slope</strong> = consistently below; <strong>flat</strong> = around the mean. A <strong>peak or turning point</strong> marks the moment the process changed direction &mdash; the most important feature. <strong>Steepness</strong> indicates how far above or below average the data is running. Changing the confidence level or Turn Length does not move the green line &mdash; it is derived entirely from the data.</div>
 <div class="glossary-see"><strong>Explained in:</strong> <a href="three-charts-three-stories.html#section-reading-cusum">Three Charts &rarr; How to Read the Green CUSUM Line</a> &nbsp;&middot;&nbsp; <a href="hydrogen-plant-cusum.html#section-residual-cusum">Hydrogen Plant &rarr; Two Different Things on the Same Chart</a></div>
 <div class="glossary-also">See also: <a href="#term-stage-boundaries">Stage Boundaries</a> &nbsp;&middot;&nbsp; <a href="#term-change-point">Change Point</a> (Data section)</div>
 </div>
 
-<div class="glossary-entry cat-cusum" id="term-stage-boundaries">
+<div data-section="Bootstrap CUSUM &amp; SPC" class="glossary-entry cat-cusum" id="term-stage-boundaries">
 <div class="glossary-term">Stage Boundaries (the blue lines) <span class="term-tag">Reading Charts</span></div>
 <div class="glossary-def">The blue horizontal step-mean lines represent the Bootstrap algorithm&rsquo;s statistically tested verdict on where genuine structural changes occurred. Unlike the green CUSUM line, stage boundaries depend on the analyst&rsquo;s chosen confidence level and Turn Length. Increasing confidence demands stronger evidence &mdash; fewer but better-supported stages. The stage boundaries show what can be statistically defended; the CUSUM line shows what actually happened.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-confidence">Three Charts &rarr; Choosing Your Confidence Level</a></div>
 <div class="glossary-also">See also: <a href="#term-confidence-level">Confidence Level</a> &nbsp;&middot;&nbsp; <a href="#term-turn-length">Turn Length</a></div>
 </div>
 
-<div class="glossary-entry cat-cusum" id="term-confidence-level">
+<div data-section="Bootstrap CUSUM &amp; SPC" class="glossary-entry cat-cusum" id="term-confidence-level">
 <div class="glossary-term">Confidence Level <span class="term-tag">Settings</span></div>
 <div class="glossary-def">The minimum statistical weight of evidence required before Bootstrap CUSUM declares a change point. <strong>90%</strong>: 1-in-10 chance the detected change is noise &mdash; suitable for early warning. <strong>95%</strong>: 1-in-20 &mdash; standard working threshold. <strong>99.7%</strong> (3-sigma): 1-in-370 &mdash; use when a false positive would trigger a costly or irreversible action, or for formal governance submissions. The confidence level is earned by resampling the actual data &mdash; not looked up from a table assuming normality.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-confidence">Three Charts &rarr; Choosing Your Confidence Level</a> &nbsp;&middot;&nbsp; <a href="hydrogen-plant-cusum.html#section-confidence">Hydrogen Plant &rarr; Setting the Confidence Level</a></div>
 </div>
 
-<div class="glossary-entry cat-cusum" id="term-turn-length">
+<div data-section="Bootstrap CUSUM &amp; SPC" class="glossary-entry cat-cusum" id="term-turn-length">
 <div class="glossary-term">Turn Length (TL) <span class="term-tag">Settings</span></div>
 <div class="glossary-def">The minimum number of observations that a stage must contain before Bootstrap CUSUM will declare a change point. For 3 readings per day where no genuine change could last less than 2 weeks, TL = 3 &times; 14 = 42. Too low: spurious boundaries from noise. Too high: genuine events missed. Practical rule: set TL to the minimum number of observations you would need to be convinced a genuine change had occurred.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="hydrogen-plant-cusum.html#section-turn-length">Hydrogen Plant &rarr; Setting the Turn Length</a></div>
 </div>
 
-<div class="glossary-entry cat-cusum" id="term-bootstrap-loops">
+<div data-section="Bootstrap CUSUM &amp; SPC" class="glossary-entry cat-cusum" id="term-bootstrap-loops">
 <div class="glossary-term">Bootstrap Loops (iterations) <span class="term-tag">Settings</span></div>
 <div class="glossary-def">The number of times the Bootstrap algorithm randomly resamples the data. More loops = more stable results. At 1,000 loops, marginal change points may appear inconsistently. At 5,000, results stabilise for most datasets. For formal governance submissions or publication, 10,000 loops is recommended. For low signal-to-noise datasets &mdash; NHS A&amp;E monthly series (SNR = 0.09) or hydrogen plant residuals (SNR = 0.28) &mdash; 5,000 loops minimum is essential.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-convergence">Three Charts &rarr; Bootstrap Convergence</a> &nbsp;&middot;&nbsp; <a href="hydrogen-plant-cusum.html#section-turn-length">Hydrogen Plant &rarr; Bootstrap Loops Note</a></div>
 </div>
 
-<div class="glossary-entry cat-cusum" id="term-residual-cusum">
+<div data-section="Bootstrap CUSUM &amp; SPC" class="glossary-entry cat-cusum" id="term-residual-cusum">
 <div class="glossary-term">Residual CUSUM <span class="term-tag">Industrial Monitoring</span></div>
 <div class="glossary-def">A CUSUM variant where the tracked variable is the deviation of an observed measurement from what the process should be producing at its current operating point &mdash; the residual &mdash; rather than the raw measurement. Strips out legitimate variation caused by production rate, load, or throughput, leaving only the condition signal (such as catalyst degradation). Essential whenever the monitored metric is confounded by a legitimate operating variable.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="hydrogen-plant-cusum.html#section-residual-cusum">Hydrogen Plant &rarr; The Residual CUSUM Method</a></div>
 <div class="glossary-also">See also: <a href="#term-signal-noise">Signal-to-Noise Ratio</a> (Data section)</div>
 </div>
 
-<div class="glossary-entry cat-cusum" id="term-xmr">
+<div data-section="Bootstrap CUSUM &amp; SPC" class="glossary-entry cat-cusum" id="term-xmr">
 <div class="glossary-term">X-mR Chart (Shewhart Individuals Chart) <span class="term-tag">SPC Chart</span></div>
 <div class="glossary-def">The most commonly used SPC chart in NHS quality improvement. Evaluates each observation independently, discarding all previous history &mdash; insensitive to sustained step-changes buried in noise, and invalid for non-normal data where SD exceeds roughly 40% of the mean. CUSUM accumulates evidence; Shewhart charts discard it. The X-mR reports a flat mean of 22.57 across data that started at 42 and ended at 6 &mdash; an average of a journey reported as a destination.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-xmr">Three Charts &rarr; Chart 1: The X-mR Chart</a></div>
 <div class="glossary-also">See also: <a href="#term-spc">SPC</a> (Improvement Methods) &nbsp;&middot;&nbsp; <a href="#term-common-cause">Common Cause Variation</a> (Deming section)</div>
 </div>
 
-<div class="glossary-entry cat-cusum" id="term-run-chart">
+<div data-section="Bootstrap CUSUM &amp; SPC" class="glossary-entry cat-cusum" id="term-run-chart">
 <div class="glossary-term">Run Chart <span class="term-tag">SPC Chart</span></div>
 <div class="glossary-def">Plots observations against the overall median, using run rules &mdash; typically runs of 6+ consecutive points above or below the median &mdash; to flag potential shifts. More honest than the X-mR for multi-stage datasets but cannot identify how many structural changes occurred, when each happened, what each was worth, or with what confidence. A staircase described as a slope.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-runchart">Three Charts &rarr; Chart 2: The Run Chart</a></div>
@@ -171,47 +172,47 @@
 <div class="glossary-section" id="section-deming">
 <div class="glossary-section-header">Deming &mdash; Key Concepts</div>
 
-<div class="glossary-entry cat-deming" id="term-deming">
+<div data-section="Deming" class="glossary-entry cat-deming" id="term-deming">
 <div class="glossary-term">Deming, W. Edwards <span class="term-tag">Person</span></div>
 <div class="glossary-def">American statistician and management theorist (1900&ndash;1993). Central argument: a result is the output of a process, and you cannot sustainably change a result without changing the process that produces it. His question applied to every management target: <em>&ldquo;By what method?&rdquo;</em> Author of <em>Out of the Crisis</em> (1982). His System of Profound Knowledge comprises four lenses: appreciation of a system, understanding of variation, theory of knowledge, and psychology.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="why-nothing-has-worked-nhs-ae-performance.html#section-deming">NHS A&amp;E &rarr; Deming&rsquo;s Critique</a> &nbsp;&middot;&nbsp; <a href="never-events-wrong-route.html#section-conclusion">Never Events &rarr; The Conclusion Deming Would Have Drawn</a></div>
 <div class="glossary-also">See also: <a href="#term-common-cause">Common Cause Variation</a> &nbsp;&middot;&nbsp; <a href="#term-tampering">Tampering</a> &nbsp;&middot;&nbsp; <a href="#term-joiner">Joiner: Levels of Fix</a> (Systems Thinking)</div>
 </div>
 
-<div class="glossary-entry cat-deming" id="term-common-cause">
+<div data-section="Deming" class="glossary-entry cat-deming" id="term-common-cause">
 <div class="glossary-term">Common Cause Variation <span class="term-tag">Variation</span></div>
 <div class="glossary-def">Variation inherent to the system as designed &mdash; the normal, predictable noise produced by the process itself. Examples: seasonal winter dips in NHS A&amp;E performance; month-to-month fluctuation around a stable mean. Can only be reduced by fundamentally changing the system. Responding to it as if it were a specific problem &mdash; introducing a new policy after a bad month &mdash; is tampering and will make things worse.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="why-nothing-has-worked-nhs-ae-performance.html#section-lag">NHS A&amp;E &rarr; Common Cause vs Special Cause</a> &nbsp;&middot;&nbsp; <a href="three-charts-three-stories.html#section-cusum">Three Charts &rarr; Deming/Shewhart Terminology</a></div>
 <div class="glossary-also">See also: <a href="#term-special-cause">Special Cause Variation</a> &nbsp;&middot;&nbsp; <a href="#term-tampering">Tampering</a> &nbsp;&middot;&nbsp; <a href="#term-common-cause-qi">Common Cause in QI context</a> (Quality Improvement section)</div>
 </div>
 
-<div class="glossary-entry cat-deming" id="term-special-cause">
+<div data-section="Deming" class="glossary-entry cat-deming" id="term-special-cause">
 <div class="glossary-term">Special Cause Variation <span class="term-tag">Variation</span></div>
 <div class="glossary-def">Variation caused by something outside the normal operation of the system &mdash; an assignable, specific cause. Can be positive (a genuine structural improvement) or negative (a deterioration from a specific incident). A Bootstrap CUSUM change point surviving at 95% confidence is a statistically significant or genuine special cause. The most common management mistake: treating common cause variation as if it were special cause, reacting to noise as if it were a signal.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="why-nothing-has-worked-nhs-ae-performance.html#section-lag">NHS A&amp;E &rarr; Common Cause vs Special Cause</a></div>
 <div class="glossary-also">See also: <a href="#term-common-cause">Common Cause Variation</a> &nbsp;&middot;&nbsp; <a href="#term-change-point">Change Point</a> (Data section)</div>
 </div>
 
-<div class="glossary-entry cat-deming" id="term-tampering">
+<div data-section="Deming" class="glossary-entry cat-deming" id="term-tampering">
 <div class="glossary-term">Tampering <span class="term-tag">Failure Mode</span></div>
 <div class="glossary-def">Adjusting a system still within its natural (common cause) variation based on a single data point or short run of results, making things worse. NHS A&amp;E policy shows tampering at national scale: each new intervention was layered onto a system that had not yet had time to respond to the last one. Bootstrap CUSUM is designed to prevent tampering by requiring statistically significant evidence before declaring change.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="why-nothing-has-worked-nhs-ae-performance.html#section-lag">NHS A&amp;E &rarr; Policy Lag &amp; Tampering</a></div>
 <div class="glossary-also">See also: <a href="#term-common-cause">Common Cause Variation</a> &nbsp;&middot;&nbsp; <a href="#term-pdsa">PDSA</a> (Improvement Methods)</div>
 </div>
 
-<div class="glossary-entry cat-deming" id="term-by-what-method">
+<div data-section="Deming" class="glossary-entry cat-deming" id="term-by-what-method">
 <div class="glossary-term">&ldquo;By what method?&rdquo; <span class="term-tag">Deming Principle</span></div>
 <div class="glossary-def">Deming&rsquo;s three-word challenge to any numerical target. Setting a goal without providing the method, resources, and system changes needed to achieve it is &ldquo;a numerical goal without a method is nonsense.&rdquo; Applied to NHS A&amp;E: setting a 95% four-hour target without providing the social care discharge capacity that determines whether it is physically achievable. The question is not what the target is &mdash; the question is: by what method will you get there?</div>
 <div class="glossary-see"><strong>See:</strong> <a href="why-nothing-has-worked-nhs-ae-performance.html#section-deming">NHS A&amp;E &rarr; Deming&rsquo;s Critique</a></div>
 <div class="glossary-also">See also: <a href="#term-hierarchy-of-controls">Hierarchy of Controls</a> (Safety section) &nbsp;&middot;&nbsp; <a href="#term-joiner">Joiner: Levels of Fix</a> (Systems Thinking)</div>
-<div class="glossary-entry cat-deming" id="term-deming-fourteen-points">
+<div data-section="Deming" class="glossary-entry cat-deming" id="term-deming-fourteen-points">
 <div class="glossary-term">Deming&rsquo;s 14 Points <span class="term-tag">Deming Principle</span></div>
 <div class="glossary-def">Deming&rsquo;s 14 management obligations from <em>Out of the Crisis</em> (1982), describing the system-level changes required for genuine quality transformation. The points most relevant to the articles include: <strong>constancy of purpose</strong> &mdash; a steady, long-term commitment to improvement rather than reacting to short-term pressures; <strong>cease dependence on inspection</strong> &mdash; build quality into the process rather than inspecting failures after the fact; <strong>break down barriers between departments</strong> &mdash; the constraint on NHS A&amp;E performance lies in social care, not in A&amp;E itself; <strong>eliminate management by fear</strong> &mdash; A&amp;E staff held accountable for a target determined by social care capacity experience exactly this; <strong>eliminate numerical quotas</strong> &mdash; setting a 95% four-hour target without changing the system that produces the outcome; and <strong>remove barriers to pride in workmanship</strong> &mdash; staff cannot take pride in results they cannot influence. Together the 14 points describe Joiner&rsquo;s Level 3 fix in Deming&rsquo;s own words: change the system, not just the people or the process.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="never-events-wrong-route.html#section-levels-of-fix">Never Events &rarr; Joiner: Levels of Fix</a> &nbsp;&middot;&nbsp; <a href="the-grid-fixed-itself.html#frameworks">Carbon Grid &rarr; Meadows, Joiner &amp; COMAH</a></div>
 <div class="glossary-also">See also: <a href="#term-deming">Deming</a> &nbsp;&middot;&nbsp; <a href="#term-joiner">Joiner: Levels of Fix</a> (Systems Thinking) &nbsp;&middot;&nbsp; <a href="#term-by-what-method">&ldquo;By what method?&rdquo;</a></div>
 </div>
 
-<div class="glossary-entry cat-deming" id="term-joiner-deming">
+<div data-section="Deming" class="glossary-entry cat-deming" id="term-joiner-deming">
 <div class="glossary-term">Joiner, Brian &mdash; Deming Disciple <span class="term-tag">Deming Connection</span></div>
 <div class="glossary-def">Brian Joiner worked directly with W. Edwards Deming and his Levels of Fix framework is best understood as Deming&rsquo;s System of Profound Knowledge made operational. Deming identified that most organisational problems are system problems, not people problems &mdash; that 94% of failures are caused by the system, not the individual. Joiner translated this into a practical three-level diagnostic: Level 1 (fix the output) and Level 2 (fix the process) are where most managers spend their time; Level 3 (fix the system) is what Deming was asking for. <em>Fourth Generation Management</em> (1994) is explicitly a continuation of Deming&rsquo;s work, extending it into a practical management framework. Joiner&rsquo;s concept of &ldquo;constancy of purpose&rdquo; at the system level directly echoes Deming&rsquo;s first of the 14 Points.</div>
 <div class="glossary-see"><strong>Full entry:</strong> <a href="#term-joiner">Joiner: Levels of Fix</a> (Systems Thinking section)</div>
@@ -223,41 +224,41 @@
 <div class="glossary-section" id="section-systems">
 <div class="glossary-section-header">Systems Thinking</div>
 
-<div class="glossary-entry cat-systems" id="term-meadows">
+<div data-section="Systems Thinking" class="glossary-entry cat-systems" id="term-meadows">
 <div class="glossary-term">Meadows, Donella &mdash; Leverage Points <span class="term-tag">Systems Thinking</span></div>
 <div class="glossary-def">Donella Meadows identified 12 places to intervene in a system, ranked least to most effective, in <em>Thinking in Systems</em> (2008). Least effective: parameter adjustments (taxes, subsidies, targets). Most effective: paradigm changes &mdash; altering the mindset from which the system&rsquo;s goals arise. Most people instinctively reach for the least effective leverage points because they are most familiar and least threatening. Most policy interventions operate at leverage point 9 (parameters) when leverage point 6 (changing material flows and nodes) or higher is required for genuine structural change.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="the-grid-fixed-itself.html#frameworks">Carbon Grid &rarr; Meadows, Joiner &amp; COMAH</a> &nbsp;&middot;&nbsp; <a href="never-events-wrong-route.html#section-timeline">Never Events &rarr; Policy Timeline</a></div>
 <div class="glossary-also">See also: <a href="#term-joiner">Joiner: Levels of Fix</a> &nbsp;&middot;&nbsp; <a href="#term-hierarchy-of-controls">Hierarchy of Controls</a> (Safety section)</div>
 </div>
 
-<div class="glossary-entry cat-systems" id="term-joiner">
+<div data-section="Systems Thinking" class="glossary-entry cat-systems" id="term-joiner">
 <div class="glossary-term">Joiner, Brian &mdash; Levels of Fix <span class="term-tag">Systems Thinking</span></div>
 <div class="glossary-def">From <em>Fourth Generation Management</em> (1994). <strong>Level 1</strong>: fix the output &mdash; correct problems as they appear without preventing recurrence. <strong>Level 2</strong>: fix the process &mdash; change the process that allowed the problem. <strong>Level 3</strong>: fix the system &mdash; change the system that allowed the faulty process to exist. Most organisations spend most time at Level 1. NHS medication errors, transport emissions, and A&amp;E performance all receive Level 1 and 2 interventions when Level 3 is required.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="never-events-wrong-route.html#section-levels-of-fix">Never Events &rarr; Joiner: Levels of Fix</a> &nbsp;&middot;&nbsp; <a href="the-grid-fixed-itself.html#frameworks">Carbon Grid &rarr; Meadows, Joiner &amp; COMAH</a></div>
 <div class="glossary-also">See also: <a href="#term-meadows">Meadows: Leverage Points</a> &nbsp;&middot;&nbsp; <a href="#term-hierarchy-of-controls">Hierarchy of Controls</a> (Safety section) &nbsp;&middot;&nbsp; <a href="#term-joiner-deming">Joiner as Deming disciple</a> (Deming section)</div>
 </div>
 
-<div class="glossary-entry cat-systems" id="term-goldratt">
+<div data-section="Systems Thinking" class="glossary-entry cat-systems" id="term-goldratt">
 <div class="glossary-term">Goldratt, Eliyahu &mdash; Theory of Constraints <span class="term-tag">Systems Thinking</span></div>
 <div class="glossary-def">From <em>The Goal</em> (1984). In any system there is always one binding constraint &mdash; one weakest link &mdash; that limits the throughput of the whole. Improving anything other than the constraint is largely wasted effort. Applied to NHS A&amp;E: the constraint is social care discharge capacity &mdash; 13,700 beds per day occupied by patients ready for discharge but with nowhere to go. Targeting A&amp;E performance without addressing social care is managing the wrong part of the system.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="why-nothing-has-worked-nhs-ae-performance.html#section-constraint">NHS A&amp;E &rarr; The Real Constraint</a></div>
 </div>
 
-<div class="glossary-entry cat-systems" id="term-senge">
+<div data-section="Systems Thinking" class="glossary-entry cat-systems" id="term-senge">
 <div class="glossary-term">Senge, Peter &mdash; The Fifth Discipline <span class="term-tag">Systems Thinking</span></div>
 <div class="glossary-def">Two mechanisms central to the articles: <strong>Policy resistance</strong> &mdash; interventions trigger compensating feedback loops that absorb the change (e.g. raising fuel duty triggers efficiency improvements that maintain total driving). <strong>Reinforcing loops</strong> &mdash; changes that amplify themselves (e.g. carbon price floor made coal uneconomical; renewables filled the gap, further accelerating coal&rsquo;s exit).</div>
 <div class="glossary-see"><strong>See:</strong> <a href="the-grid-fixed-itself.html#section-why-failed">Carbon Grid &rarr; Why Transport Failed</a></div>
 <div class="glossary-also">See also: <a href="#term-unintended-consequences">Unintended Consequences</a></div>
 </div>
 
-<div class="glossary-entry cat-systems" id="term-positive-deviance">
+<div data-section="Systems Thinking" class="glossary-entry cat-systems" id="term-positive-deviance">
 <div class="glossary-term">Positive Deviance &amp; Bright Spots <span class="term-tag">Improvement Method</span></div>
 <div class="glossary-def">Two related frameworks: <strong>Positive Deviance</strong> (Sternin, Pascale) &mdash; in any failing system, who is succeeding with the same resources, and what are they doing differently? <strong>Bright Spots</strong> (Heath &amp; Heath, <em>Switch</em>, 2010) &mdash; find and clone success rather than analysing failure. Bootstrap CUSUM provides the statistical foundation for finding bright spots precisely &mdash; dated to within weeks &mdash; rather than relying on anecdote. Applied to NHS A&amp;E: are there Trusts whose CUSUM shows an upward change point the national data does not?</div>
 <div class="glossary-see"><strong>See:</strong> <a href="why-nothing-has-worked-nhs-ae-performance.html#section-bright-spots">NHS A&amp;E &rarr; Finding the Bright Spots</a> &nbsp;&middot;&nbsp; <a href="sepsis-six-does-public-data-show-whether-it-worked.html#section-bright-spots">Sepsis Six &rarr; Bright Spots</a></div>
 <div class="glossary-also">See also: <a href="#term-positive-deviance-methods">Positive Deviance in Improvement Methods context</a></div>
 </div>
 
-<div class="glossary-entry cat-systems" id="term-unintended-consequences">
+<div data-section="Systems Thinking" class="glossary-entry cat-systems" id="term-unintended-consequences">
 <div class="glossary-term">Unintended Consequences <span class="term-tag">Systems Thinking</span></div>
 <div class="glossary-def">System responses to an intervention not anticipated by its designers. The carbon price floor is a rare example of a <em>positive</em> unintended consequence &mdash; introduced as a revenue instrument, it triggered coal closures faster than anticipated because three enabling conditions happened to be present: collapsed EU ETS price, cheap US shale gas, and ready renewable capacity. Senge identifies time delays as the key reason unintended consequences are hard to anticipate.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="the-grid-fixed-itself.html#section-policy-worked">Carbon Grid &rarr; The Policy That Worked</a></div>
@@ -268,28 +269,28 @@
 <div class="glossary-section" id="section-safety">
 <div class="glossary-section-header">Safety &amp; Hierarchy of Controls</div>
 
-<div class="glossary-entry cat-safety" id="term-hierarchy-of-controls">
+<div data-section="Safety &amp; Controls" class="glossary-entry cat-safety" id="term-hierarchy-of-controls">
 <div class="glossary-term">Hierarchy of Controls <span class="term-tag">Safety Engineering</span></div>
 <div class="glossary-def">From occupational health and safety engineering, enforced under COMAH Regulations 2015. Weakest to strongest: <strong>Layer 4</strong> &mdash; training and procedure; <strong>Layer 3</strong> &mdash; administrative controls (rules, mandates, taxes; can be absorbed by compensating behaviour); <strong>Layer 2</strong> &mdash; engineering controls (physical or economic barriers that operate regardless of behaviour); <strong>Layer 1</strong> &mdash; elimination (redesign so the problem cannot arise). Most policy interventions operate at Layers 3 and 4. The carbon price floor operated at Layer 2. The NHS Never Events engineering solution (ENFit connectors) is a Layer 2 intervention sitting unused.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="never-events-wrong-route.html#section-root-cause">Never Events &rarr; Root Cause</a> &nbsp;&middot;&nbsp; <a href="the-grid-fixed-itself.html#frameworks">Carbon Grid &rarr; Meadows, Joiner &amp; COMAH</a></div>
 <div class="glossary-also">See also: <a href="#term-joiner">Joiner: Levels of Fix</a> (Systems Thinking) &nbsp;&middot;&nbsp; <a href="#term-meadows">Meadows: Leverage Points</a> (Systems Thinking) &nbsp;&middot;&nbsp; <a href="#term-comah">COMAH</a></div>
 </div>
 
-<div class="glossary-entry cat-safety" id="term-comah">
+<div data-section="Safety &amp; Controls" class="glossary-entry cat-safety" id="term-comah">
 <div class="glossary-term">COMAH (Control of Major Accident Hazards) <span class="term-tag">Regulation</span></div>
 <div class="glossary-def">The Control of Major Accident Hazards Regulations 2015, enforced by the UK Health and Safety Executive. Applies to sites handling dangerous substances above threshold quantities &mdash; toxic, explosive, or highly flammable chemicals. Mandates stringent safety management systems and the hierarchy of controls. The COMAH tradition provides the engineering rigour behind the hierarchy of controls framework applied across the articles to explain why Layer 3 and 4 interventions fail to produce structural change.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="the-grid-fixed-itself.html#frameworks">Carbon Grid &rarr; Meadows, Joiner &amp; COMAH</a></div>
 <div class="glossary-also">See also: <a href="#term-hierarchy-of-controls">Hierarchy of Controls</a></div>
 </div>
 
-<div class="glossary-entry cat-safety" id="term-oneill-alcoa">
+<div data-section="Safety &amp; Controls" class="glossary-entry cat-safety" id="term-oneill-alcoa">
 <div class="glossary-term">O&rsquo;Neill, Paul &mdash; Alcoa Safety Programme <span class="term-tag">Case Study</span></div>
 <div class="glossary-def">Paul O&rsquo;Neill became CEO of Alcoa in 1987 and declared zero injuries at an already-safe company. Rather than retraining individuals, he redesigned the system: every injury required a report to O&rsquo;Neill within 24 hours, triggering root cause investigation and system change. Injury rate fell to one-twentieth of the US average; market value grew from $3bn to $27.5bn. Described in Duhigg&rsquo;s <em>The Power of Habit</em> (2012). The direct contrast to NHS Never Events &mdash; same problem type, different level of intervention applied.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="never-events-wrong-route.html#section-alcoa">Never Events &rarr; O&rsquo;Neill at Alcoa</a></div>
 <div class="glossary-also">See also: <a href="#term-hierarchy-of-controls">Hierarchy of Controls</a> &nbsp;&middot;&nbsp; <a href="#term-joiner">Joiner: Levels of Fix</a> (Systems Thinking)</div>
 </div>
 
-<div class="glossary-entry cat-safety" id="term-never-events">
+<div data-section="Safety &amp; Controls" class="glossary-entry cat-safety" id="term-never-events">
 <div class="glossary-term">Never Events <span class="term-tag">Patient Safety</span></div>
 <div class="glossary-def">Serious, largely preventable patient safety incidents that should not occur if available preventative measures are implemented. Wrong-route medication administration has been classified as wholly preventable since 2010. Bootstrap CUSUM on 15 years of NHS data finds a flat process at 17.5 events per year with no structural change. The engineering solution (ENFit connectors making wrong-route administration physically impossible) exists &mdash; this is a Layer 2 intervention sitting unused while the NHS continues applying Layer 3 and 4 responses: alerts, training, revised frameworks.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="never-events-wrong-route.html#section-wholly-preventable">Never Events &rarr; Wholly Preventable</a></div>
@@ -300,28 +301,28 @@
 <div class="glossary-section" id="section-methods">
 <div class="glossary-section-header">Improvement Methods</div>
 
-<div class="glossary-entry cat-methods" id="term-pdsa">
+<div data-section="Improvement Methods" class="glossary-entry cat-methods" id="term-pdsa">
 <div class="glossary-term">PDSA (Plan&ndash;Do&ndash;Study&ndash;Act) <span class="term-tag">Improvement Cycle</span></div>
 <div class="glossary-def">The iterative improvement cycle from <em>The Improvement Guide</em> (Langley, Nolan, and Associates in Process Improvement). <strong>Plan</strong> &mdash; identify the change and predict the outcome; <strong>Do</strong> &mdash; test on small scale; <strong>Study</strong> &mdash; analyse results against prediction; <strong>Act</strong> &mdash; adopt, adapt, or abandon. Bootstrap CUSUM strengthens the Study phase: pre-specify a CUSUM change point as the test of whether the change worked. When a statistically significant boundary appears coinciding with the intervention, the change is confirmed with dated, bounded, defensible evidence.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-retro-pro">Three Charts &rarr; Retrospective vs Prospective Use</a></div>
 <div class="glossary-also">See also: <a href="#term-model-for-improvement">Model for Improvement</a> &nbsp;&middot;&nbsp; <a href="#term-tampering">Tampering</a> (Deming section) &nbsp;&middot;&nbsp; <a href="#term-prospective-retrospective">Prospective vs Retrospective Analysis</a> (Data section)</div>
 </div>
 
-<div class="glossary-entry cat-methods" id="term-model-for-improvement">
+<div data-section="Improvement Methods" class="glossary-entry cat-methods" id="term-model-for-improvement">
 <div class="glossary-term">Model for Improvement <span class="term-tag">QI Framework</span></div>
 <div class="glossary-def">Framework by Associates in Process Improvement (Langley, Nolan et al.) combining three questions &mdash; What are we trying to accomplish? How will we know a change is an improvement? What changes can we make? &mdash; with PDSA cycles. Bootstrap CUSUM directly addresses the second question: it provides a dated, confidence-bounded, statistically defensible answer to &ldquo;how will we know a change is an improvement?&rdquo; replacing visual inspection of a trend or run chart with a rigorous change point test.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-retro-pro">Three Charts &rarr; Retrospective vs Prospective Use</a></div>
 <div class="glossary-also">See also: <a href="#term-pdsa">PDSA</a> &nbsp;&middot;&nbsp; <a href="#term-spc">SPC</a></div>
 </div>
 
-<div class="glossary-entry cat-methods" id="term-spc">
+<div data-section="Improvement Methods" class="glossary-entry cat-methods" id="term-spc">
 <div class="glossary-term">SPC (Statistical Process Control) <span class="term-tag">Methods Family</span></div>
 <div class="glossary-def">A family of statistical methods for monitoring processes over time, distinguishing genuine structural changes (special causes) from normal variation (common causes). Includes Shewhart control charts (X-mR, p-chart, c-chart), run charts, and CUSUM charts. The X-mR Shewhart chart is the most widely used SPC tool in NHS quality improvement. Bootstrap CUSUM is a distribution-free SPC method suited to non-normal data &mdash; counts, rates, costs, rare events, or any series where SD exceeds roughly 40% of the mean.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-comparison">Three Charts &rarr; Three-Chart Comparison</a> &nbsp;&middot;&nbsp; <a href="three-charts-three-stories.html#section-when-to-use">Three Charts &rarr; When to Use Each Chart</a></div>
 <div class="glossary-also">See also: <a href="#term-xmr">X-mR Chart</a> &nbsp;&middot;&nbsp; <a href="#term-run-chart">Run Chart</a> &nbsp;&middot;&nbsp; <a href="#term-bootstrap-cusum">Bootstrap CUSUM</a></div>
 </div>
 
-<div class="glossary-entry cat-methods" id="term-positive-deviance-methods">
+<div data-section="Improvement Methods" class="glossary-entry cat-methods" id="term-positive-deviance-methods">
 <div class="glossary-term">Positive Deviance &amp; Bright Spots <span class="term-tag">Improvement Method</span></div>
 <div class="glossary-def">See the <a href="#term-positive-deviance">full entry in the Systems Thinking section</a>. In the improvement methods context: Positive Deviance and Bright Spots provide the investigative framework that Bootstrap CUSUM makes operationally precise. The CUSUM identifies <em>when</em> a structural change occurred and <em>that</em> it is statistically significant. The Positive Deviance investigation then asks <em>what</em> changed at that Trust or pathway in the 6&ndash;12 months before the change point. The two methods work together: CUSUM provides the statistical signal; Positive Deviance provides the human investigation that follows it.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="why-nothing-has-worked-nhs-ae-performance.html#section-bright-spots">NHS A&amp;E &rarr; Finding the Bright Spots</a></div>
@@ -332,20 +333,20 @@
 <div class="glossary-section" id="section-qi">
 <div class="glossary-section-header">Quality Improvement</div>
 
-<div class="glossary-entry cat-qi" id="term-information-governance">
+<div data-section="Quality Improvement" class="glossary-entry cat-qi" id="term-information-governance">
 <div class="glossary-term">Information Governance (IG) &amp; DPIA <span class="term-tag">NHS Governance</span></div>
 <div class="glossary-def">Uploading patient-adjacent data to cloud-based platforms requires a formal Data Protection Impact Assessment (DPIA) and Information Governance approval in NHS settings &mdash; a process that can take months. StepChangeAnalysis.com is browser-native: the analysis runs entirely within the local browser and no data is transmitted to any external server. The CSV file never leaves the analyst&rsquo;s machine. This removes the IG approval requirement entirely, making it straightforward to deploy even on air-gapped NHS machines.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-ig">Three Charts &rarr; Information Governance</a></div>
 </div>
 
-<div class="glossary-entry cat-qi" id="term-prospective-qi">
+<div data-section="Quality Improvement" class="glossary-entry cat-qi" id="term-prospective-qi">
 <div class="glossary-term">Prospective Use of Bootstrap CUSUM <span class="term-tag">QI Application</span></div>
 <div class="glossary-def">When Bootstrap CUSUM is used prospectively &mdash; monitoring for the effect of a planned intervention &mdash; the attribution problem disappears. Implement the change; log data as normal; run Bootstrap CUSUM periodically. When a stage boundary appears coinciding with the intervention, statistical confirmation is dated to within weeks. This is precisely the evidence clinical governance committees, commissioners, and CQC inspectors need &mdash; not a run chart showing a vague trend, but a dated, bounded, confidence-quantified change.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-retro-pro">Three Charts &rarr; Retrospective vs Prospective Use</a></div>
 <div class="glossary-also">See also: <a href="#term-pdsa">PDSA</a> (Improvement Methods)</div>
 </div>
 
-<div class="glossary-entry cat-qi" id="term-common-cause-qi">
+<div data-section="Quality Improvement" class="glossary-entry cat-qi" id="term-common-cause-qi">
 <div class="glossary-term">Common Cause vs Special Cause Variation <span class="term-tag">QI Concept</span></div>
 <div class="glossary-def">See the <a href="#term-common-cause">full entries in the Deming section</a>. In the QI context: the failure to distinguish common cause from special cause variation is the single most common error in healthcare quality improvement reporting. A bad December in A&amp;E (common cause &mdash; seasonal, predictable) triggers a new policy. A slightly better April (equally common cause) is claimed as evidence of success. Neither conclusion is supported by the data. Bootstrap CUSUM filters common cause variation automatically, only declaring change when the evidence passes the chosen statistical threshold.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-cusum">Three Charts &rarr; Bootstrap CUSUM Analysis</a></div>
@@ -356,77 +357,98 @@
 <div class="glossary-section" id="section-clinical">
 <div class="glossary-section-header">Clinical &amp; Policy Terms</div>
 
-<div class="glossary-entry cat-clinical" id="term-doac">
+<div data-section="Clinical &amp; Policy" class="glossary-entry cat-clinical" id="term-doac">
 <div class="glossary-term">DOACs (Direct Oral Anticoagulants) <span class="term-tag">Clinical</span></div>
 <div class="glossary-def">Oral anticoagulants that directly inhibit specific clotting factors, offering more predictable dosing than warfarin without regular INR monitoring. The four licensed in the UK for AF stroke prevention: apixaban, rivaroxaban, dabigatran, edoxaban. Bootstrap CUSUM identifies three structural change points: adverse event rate doubled in 2012 as DOACs arrived before renal contraindications were fully understood; prescription volumes doubled in 2015 when NICE mandated funding; DOAC adverse event rate fell by two-thirds in 2016 following the ROCKET-AF controversy and EMA renal dosing label update.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="anticoag-safety.html#section-revolution">Anticoagulation &rarr; The Anticoagulation Revolution</a></div>
 </div>
 
-<div class="glossary-entry cat-clinical" id="term-four-hour-target">
+<div data-section="Clinical &amp; Policy" class="glossary-entry cat-clinical" id="term-four-hour-target">
 <div class="glossary-term">Four-Hour A&amp;E Target <span class="term-tag">NHS Policy</span></div>
 <div class="glossary-def">The standard that 95% of A&amp;E patients should be admitted, transferred, or discharged within four hours. Announced by Tony Blair in January 2000; formally introduced in 2004 at 98%; relaxed to 95% in 2010; missed nationally for the first time in July 2015 and not met since. Bootstrap CUSUM on 184 monthly observations finds four structural stages of decline and not one policy intervention visible as an upward change point at 99.7% confidence across 15 years.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="why-nothing-has-worked-nhs-ae-performance.html#section-target">NHS A&amp;E &rarr; The Four-Hour Target</a></div>
 <div class="glossary-also">See also: <a href="#term-tampering">Tampering</a> (Deming section) &nbsp;&middot;&nbsp; <a href="#term-by-what-method">&ldquo;By what method?&rdquo;</a> (Deming section)</div>
 </div>
 
-<div class="glossary-entry cat-clinical" id="term-sepsis-six">
+<div data-section="Clinical &amp; Policy" class="glossary-entry cat-clinical" id="term-sepsis-six">
 <div class="glossary-term">Sepsis Six Bundle <span class="term-tag">Clinical Protocol</span></div>
 <div class="glossary-def">Six time-critical interventions &mdash; oxygen, blood cultures, IV antibiotics, IV fluids, lactate measurement, urine output monitoring &mdash; to be completed within one hour of identifying sepsis. Bootstrap CUSUM applied to NHS sepsis mortality and admission data asks whether the campaign produced a detectable structural change in outcomes. The ratio of sepsis deaths to sepsis admissions is the most meaningful measure &mdash; more informative than raw mortality counts, which reflect both case fatality rate and detection rate improvements simultaneously.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="sepsis-six-does-public-data-show-whether-it-worked.html#section-bundle">Sepsis Six &rarr; The Bundle</a> &nbsp;&middot;&nbsp; <a href="sepsis-six-does-public-data-show-whether-it-worked.html#section-ratio">Sepsis Six &rarr; The Key Ratio</a></div>
 </div>
 
-<div class="glossary-entry cat-clinical" id="term-carbon-price-floor">
+<div data-section="Clinical &amp; Policy" class="glossary-entry cat-clinical" id="term-carbon-price-floor">
 <div class="glossary-term">Carbon Price Floor (Carbon Price Support) <span class="term-tag">Policy</span></div>
 <div class="glossary-def">A minimum price for carbon in UK electricity generation, introduced April 2013. Designed as a revenue instrument. Produced the strongest structural change signal in 35 years of UK emissions data: electricity supply emissions fell 55.4% in 11 years, detected at 99.8% Bootstrap CUSUM confidence. Worked because it changed the economics of coal generation simultaneously for every generator (Layer 2 engineering control) without requiring any individual behaviour change. The proof of concept for what a genuine system-level policy mechanism looks like in CUSUM data.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="the-grid-fixed-itself.html#section-policy-worked">Carbon Grid &rarr; The Policy That Worked</a></div>
 <div class="glossary-also">See also: <a href="#term-hierarchy-of-controls">Hierarchy of Controls</a> (Safety section) &nbsp;&middot;&nbsp; <a href="#term-unintended-consequences">Unintended Consequences</a> (Systems Thinking)</div>
 </div>
 
-<div class="glossary-entry cat-clinical" id="term-ulez">
+<div data-section="Clinical &amp; Policy" class="glossary-entry cat-clinical" id="term-ulez">
 <div class="glossary-term">ULEZ (Ultra Low Emission Zone) <span class="term-tag">Policy</span></div>
 <div class="glossary-def">London&rsquo;s Ultra Low Emission Zone, charging non-compliant vehicles in central London. Introduced April 2019; expanded London-wide August 2023. Bootstrap CUSUM on 11 years of Marylebone Road NO2 data finds four structural stages: an anticipatory effect beginning approximately 18 months before launch; COVID improvement in 2020 (the largest single change); post-COVID recovery; and a further improvement following the London-wide expansion at a site already inside the original zone for four years. The WHO health standard has not yet been achieved despite the legal limit now being met.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="ulez-london-air-quality.html#section-findings">ULEZ &rarr; Key Findings</a></div>
 </div>
 </div>
+<div data-section="Clinical &amp; Policy" class="glossary-entry cat-clinical" id="term-arrs">
+<div class="glossary-term">ARRs — Additional Roles Reimbursement Scheme <span class="term-tag">NHS Policy</span></div>
+<div class="glossary-def">An NHS England funding scheme introduced in 2019 as part of the NHS Long Term Plan, paying GP practices and Primary Care Networks to employ non-GP clinical staff alongside traditional practice teams. Roles include clinical pharmacists (the most common), paramedics, first-contact physiotherapists, social prescribers, mental health practitioners, physician associates, dietitians, and occupational therapists. By March 2023, the scheme had funded 17,588 full-time equivalent staff at a cost of &pound;1.027 billion per year, up from 280 FTE in March 2020. The intention was to free GP time for complex cases by routing appropriate work to other clinicians. Bootstrap CUSUM analysis of NHS GP appointments data shows the scheme reached structural scale in mid-2022, producing a detectable step-down in GP workforce share (from 51% to 45% of all appointments) at 99.7% confidence. GP doctor contact rates per 1000 patients remained flat throughout.</div>
+<div class="glossary-see"><strong>See also:</strong> <a href="#term-gpad">GP Appointments Data (GPAD)</a> &nbsp;&middot;&nbsp; <a href="#term-multimorbidity">Multimorbidity</a> &nbsp;&middot;&nbsp; <a href="#term-theory-of-constraints">Theory of Constraints</a></div>
+<div class="glossary-see"><strong>In context:</strong> <a href="gp-appointments-analysis.html#section-gp-share">GP workforce share — what does it mean?</a> &nbsp;&middot;&nbsp; <a href="gp-appointments-analysis.html#section-2022">Mid-2022: restructuring, not recovery</a></div>
+</div>
+
+<div data-section="Clinical &amp; Policy" class="glossary-entry cat-clinical" id="term-multimorbidity">
+<div class="glossary-term">Multimorbidity <span class="term-tag">Clinical</span></div>
+<div class="glossary-def">The co-existence of two or more long-term health conditions in the same patient. Common combinations include type 2 diabetes with hypertension, heart disease with depression, or chronic obstructive pulmonary disease with musculoskeletal conditions. Multimorbid patients require longer consultations, more frequent contact, and more complex clinical decision-making than patients with a single condition &mdash; and cannot safely be managed through simple triage to a specialist role. Over 14 million people in England have multiple long-term conditions, and more than half of all GP consultations are with multimorbid patients. Multimorbidity increased across all older age groups between 2005 and 2019 and continues to rise, driven by improved survival from conditions that previously had higher mortality, rising obesity prevalence and its downstream diseases, and an ageing population. The post-WW2 baby boomer cohort (born 1945&ndash;1955), now aged 70&ndash;80, is at peak multimorbidity age, representing the demographic demand peak whose management is now arriving at the GP surgery. A second peak is arithmetically visible: the 2020s migration cohort will reach the same age in the 2060s and 2070s.</div>
+<div class="glossary-see"><strong>See also:</strong> <a href="#term-arrs">ARRs</a> &nbsp;&middot;&nbsp; <a href="#term-theory-of-constraints">Theory of Constraints</a> &nbsp;&middot;&nbsp; <a href="#term-common-cause">Common Cause Variation</a></div>
+<div class="glossary-see"><strong>In context:</strong> <a href="gp-appointments-analysis.html#section-demand-capacity">Demand up, capacity down</a> &nbsp;&middot;&nbsp; <a href="gp-appointments-analysis.html#section-wood">The wood from the trees</a></div>
+</div>
+
+<div data-section="Clinical &amp; Policy" class="glossary-entry cat-clinical" id="term-gpad">
+<div class="glossary-term">GP Appointments Data (GPAD) <span class="term-tag">NHS Data</span></div>
+<div class="glossary-def">The NHS England monthly dataset covering every appointment recorded across all GP practices in England, published since September 2018. Records total appointments, appointment mode (face-to-face, telephone, home visit, video), healthcare professional type (GP doctor, nurse, ARRs staff), and appointment status (attended, did not attend). Three major releases (February 2021, October 2022, October 2025) each cover different time windows and use slightly different classification systems, requiring careful stitching for longitudinal analysis. The article on GP appointments on this site stitches all three releases to produce 80 monthly observations from September 2018 to October 2025.</div>
+<div class="glossary-see"><strong>In context:</strong> <a href="gp-appointments-analysis.html#section-data">Data notes and methodology</a></div>
+</div>
+
+
 
 <div class="glossary-section" id="section-data">
 <div class="glossary-section-header">Data &amp; Statistics</div>
 
-<div class="glossary-entry cat-data" id="term-change-point">
+<div data-section="Data &amp; Statistics" class="glossary-entry cat-data" id="term-change-point">
 <div class="glossary-term">Change Point <span class="term-tag">Statistics</span></div>
 <div class="glossary-def">The moment in a time series when the underlying process mean permanently shifted to a new level. A Bootstrap CUSUM change point is dated within a confidence window and accompanied by a confidence level indicating statistical strength of evidence. The confidence level at which a boundary survives is itself diagnostic: a boundary at 99.7% represents a large change relative to process noise; one appearing only at 95% was smaller and more marginal.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-cusum">Three Charts &rarr; Bootstrap CUSUM Analysis</a></div>
 <div class="glossary-also">See also: <a href="#term-cusum-line">CUSUM Line</a> &nbsp;&middot;&nbsp; <a href="#term-stage-boundaries">Stage Boundaries</a></div>
 </div>
 
-<div class="glossary-entry cat-data" id="term-signal-noise">
+<div data-section="Data &amp; Statistics" class="glossary-entry cat-data" id="term-signal-noise">
 <div class="glossary-term">Signal-to-Noise Ratio (SNR) <span class="term-tag">Statistics</span></div>
 <div class="glossary-def">The ratio of the magnitude of a genuine change (signal) to the background variability of the data (noise). An SNR below 1.0 means the signal is smaller than the noise on any individual observation &mdash; undetectable without a method that accumulates evidence. The hydrogen plant case has SNR = 0.28 at the action threshold. This is why the X-mR chart produces not a single signal across a full year containing a genuine, financially significant step change. CUSUM is specifically designed for low-SNR environments.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="hydrogen-plant-cusum.html#section-monitoring-challenge">Hydrogen Plant &rarr; Monitoring Challenge</a></div>
 <div class="glossary-also">See also: <a href="#term-residual-cusum">Residual CUSUM</a></div>
 </div>
 
-<div class="glossary-entry cat-data" id="term-mean-reverting">
+<div data-section="Data &amp; Statistics" class="glossary-entry cat-data" id="term-mean-reverting">
 <div class="glossary-term">Mean-Reverting <span class="term-tag">Statistics</span></div>
 <div class="glossary-def">A property of a time series in which values tend to return to a long-run average after temporary deviations. Annual GDP growth rates are mean-reverting by design: a recession temporarily reduces the growth rate; recovery brings it back. This is why Bootstrap CUSUM finds nothing when applied to annual growth rates &mdash; it is answering the wrong question. The correct question is answered by applying CUSUM to the cumulative GDP index: has the economy&rsquo;s long-run growth <em>path</em> structurally changed?</div>
 <div class="glossary-see"><strong>See:</strong> <a href="uk-gdp-analysis.html#section-wrong-question">UK GDP &rarr; The Wrong Question</a> &nbsp;&middot;&nbsp; <a href="uk-gdp-analysis.html#section-right-question">UK GDP &rarr; The Right Question</a></div>
 <div class="glossary-also">See also: <a href="#term-cumulative-index">Cumulative Index</a></div>
 </div>
 
-<div class="glossary-entry cat-data" id="term-cumulative-index">
+<div data-section="Data &amp; Statistics" class="glossary-entry cat-data" id="term-cumulative-index">
 <div class="glossary-term">Cumulative Index <span class="term-tag">Data Transformation</span></div>
 <div class="glossary-def">A time series built by compounding successive values &mdash; setting a base year to 100 and multiplying each year by (1 + growth rate). Captures the trajectory of a process rather than year-to-year fluctuation. Applying Bootstrap CUSUM to the cumulative UK GDP index finds 8 structural stages of long-run deceleration invisible in the growth rate data. The choice of raw values vs cumulative index fundamentally determines what question is being answered.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="uk-gdp-analysis.html#section-right-question">UK GDP &rarr; The Right Question</a></div>
 <div class="glossary-also">See also: <a href="#term-mean-reverting">Mean-Reverting</a></div>
 </div>
 
-<div class="glossary-entry cat-data" id="term-consumption-emissions">
+<div data-section="Data &amp; Statistics" class="glossary-entry cat-data" id="term-consumption-emissions">
 <div class="glossary-term">Consumption vs Territorial Emissions <span class="term-tag">Data</span></div>
 <div class="glossary-def"><strong>Territorial emissions</strong> count greenhouse gases physically released within UK borders regardless of consumption. <strong>Consumption-based emissions</strong> count all carbon caused by UK residents&rsquo; consumption, wherever released &mdash; including embedded emissions in imports. Bootstrap CUSUM on both series confirms the 2008 and 2015 reductions are genuine on both measures. But the 1998 territorial reduction (the dash-for-gas) has no consumption equivalent &mdash; it reflects a production shift, not a genuine reduction in what UK residents caused.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="the-grid-fixed-itself.html#section-consumption">Carbon Grid &rarr; Consumption Emissions</a></div>
 </div>
 
-<div class="glossary-entry cat-data" id="term-prospective-retrospective">
+<div data-section="Data &amp; Statistics" class="glossary-entry cat-data" id="term-prospective-retrospective">
 <div class="glossary-term">Prospective vs Retrospective Analysis <span class="term-tag">Method</span></div>
 <div class="glossary-def"><strong>Retrospective</strong>: Bootstrap CUSUM applied to historical data to identify when structural changes occurred and what caused them &mdash; as in all nine articles on this site. <strong>Prospective</strong>: pre-specifying a CUSUM change point as the test of whether a planned intervention has worked, then running Bootstrap CUSUM periodically as data accumulates. The prospective use is where Bootstrap CUSUM is most powerful for governance: the change is dated, bounded, and defensible &mdash; you know what you did and when; the CUSUM tells you whether it worked.</div>
 <div class="glossary-see"><strong>See:</strong> <a href="three-charts-three-stories.html#section-retro-pro">Three Charts &rarr; Retrospective vs Prospective</a></div>
@@ -475,6 +497,8 @@
         if (!q) {
             entries.forEach(function(e) { e.classList.remove('hidden'); removeHL(e); });
             sections.forEach(function(s) { s.style.display = ''; });
+            // Remove section badges
+            document.querySelectorAll('.search-section-badge').forEach(function(b) { b.remove(); });
             status.textContent = '';
             noRes.style.display = 'none';
             return;
