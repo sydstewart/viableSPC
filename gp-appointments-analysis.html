@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Appointments, Same Doctor: What Seven Years of GP Data Actually Shows — StepChangeAnalysis.com</title>
+    <meta name="description" content="Bootstrap CUSUM applied to 80 months of NHS GP appointments data finds three structural changes. One finding cuts through the noise: actual GP doctor contact rates have not changed since 2018. The system grew. The GP contact rate didn&rsquo;t.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:  #002d5b;
+            --brand-mid:   #0056b3;
+            --brand-light: #e9f2ff;
+            --text:        #1e293b;
+            --muted:       #64748b;
+            --border:      #e2e8f0;
+            --bg:          #f8f9fa;
+            --green:       #198754;
+            --orange:      #e67e22;
+            --red:         #c0392b;
+            --purple:      #7c3aed;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        .article-wrap { max-width: 820px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .article-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 16px; }
+        h1 { font-size: clamp(1.7em, 4vw, 2.5em); line-height: 1.2; color: var(--brand-blue); margin-bottom: 16px; font-weight: bold; }
+        .article-subtitle { font-size: 1.1em; color: var(--muted); font-style: italic; margin-bottom: 24px; border-left: 4px solid var(--brand-mid); padding-left: 16px; line-height: 1.6; }
+        .article-meta { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
+        h2 { font-size: 1.35em; color: var(--brand-blue); margin: 40px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.1em; color: var(--brand-blue); margin: 28px 0 10px; font-style: italic; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        ul, ol { margin: 0 0 1.2em 1.5em; }
+        li { margin-bottom: 0.5em; font-size: 1.0em; }
+        strong { color: var(--brand-blue); }
+        .chart-figure { margin: 28px 0 32px; }
+        .chart-figure img { width: 100%; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); display: block; }
+        .chart-figure figcaption { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-top: 10px; font-style: italic; padding: 0 4px; }
+        .callout-box { background: #fff8f0; border: 2px solid var(--orange); border-radius: 8px; padding: 20px 24px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .callout-box h3 { color: var(--orange); margin: 0 0 10px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
+        .callout-box p { font-size: 0.95em; color: #4a3000; margin: 0 0 8px; }
+        .callout-box p:last-child { margin: 0; }
+        .finding-box { background: #f0fdf4; border: 2px solid var(--green); border-radius: 8px; padding: 20px 24px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .finding-box h3 { color: var(--green); margin: 0 0 10px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; font-style: normal; }
+        .finding-box p { font-size: 0.95em; margin: 0 0 8px; }
+        .finding-box p:last-child { margin: 0; }
+        .deming-box { background: #1e293b; border-radius: 8px; padding: 24px 28px; margin: 28px 0; color: white; }
+        .deming-box h3 { color: #93c5fd; margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; font-family: system-ui, sans-serif; }
+        .deming-box p { font-size: 0.97em; color: #e2e8f0; margin-bottom: 10px; line-height: 1.7; }
+        .deming-box p:last-child { margin-bottom: 0; }
+        .deming-box .deming-quote { font-size: 1.15em; font-style: italic; color: #bfdbfe; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 14px 0; }
+        .deming-box strong { color: #ffffff; }
+        .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; overflow-x: auto; }
+        .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
+        .numbers-box th { background: var(--brand-blue); color: white; padding: 8px 12px; text-align: left; }
+        .numbers-box td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .numbers-box tr:last-child td { border-bottom: none; }
+        .numbers-box tr:nth-child(even) td { background: white; }
+        .alert-green { background: #f0fdf4; border-left: 4px solid var(--green); padding: 14px 18px; margin: 20px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; }
+        .alert-orange { background: #fff8f0; border-left: 4px solid var(--orange); padding: 14px 18px; margin: 20px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; }
+        .alert-red { background: #fff5f5; border-left: 4px solid var(--red); padding: 14px 18px; margin: 20px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; }
+        .stage-badge { display: inline-block; background: var(--brand-blue); color: white; font-size: 0.75em; font-weight: bold; padding: 2px 8px; border-radius: 10px; font-family: system-ui, sans-serif; vertical-align: middle; margin-right: 4px; }
+        .related-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin: 36px 0; font-family: system-ui, sans-serif; }
+        .related-tag { font-size: 0.75em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 8px; }
+        .related-box h3 { font-size: 1.05em; color: var(--brand-blue); margin-bottom: 8px; font-style: normal; border: none; padding: 0; }
+        .related-box h3 a { color: var(--brand-blue); text-decoration: none; }
+        .related-box h3 a:hover { text-decoration: underline; }
+        .related-box p { font-size: 0.9em; color: var(--muted); margin-bottom: 12px; line-height: 1.6; }
+        .btn { display: inline-block; background: var(--brand-mid); color: white; padding: 8px 18px; border-radius: 6px; text-decoration: none; font-size: 0.9em; font-weight: bold; }
+        .btn:hover { background: var(--brand-blue); }
+        .toc-details { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 0; margin: 0 0 28px; font-family: system-ui, sans-serif; overflow: hidden; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: 600; font-size: 0.9em; color: var(--brand-mid); list-style: none; display: flex; align-items: center; justify-content: space-between; }
+        .toc-details summary::after { content: "▼"; font-size: 0.8em; }
+        .toc-details[open] summary::after { content: "▲"; }
+        .toc-details ol { padding: 0 18px 16px 36px; }
+        .toc-details ol li { padding: 3px 0; font-size: 0.9em; }
+        .toc-details ol li a { color: var(--brand-mid); text-decoration: none; }
+        .toc-details ol li a:hover { text-decoration: underline; }
+        .page-footer { margin-top: 60px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+        hr { border: none; border-top: 2px solid var(--border); margin: 40px 0; }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the Free Tool</a>
+</header>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; More Appointments, Same Doctor</div>
+    <div class="article-flag">&#127973; Healthcare &nbsp;&middot;&nbsp; GP Access &nbsp;&middot;&nbsp; NHS Primary Care</div>
+
+    <h1>More GP Appointments Recorded, Fewer Patients Feeling Seen</h1>
+    <p class="article-subtitle">Bootstrap CUSUM applied to 80 months of NHS GP appointments data finds three structural changes — and one finding that cuts through all the noise: actual GP doctor contact rates have not changed since 2018.</p>
+    <div class="article-meta">
+        By Syd Stewart, Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp;
+        Data: NHS England GP Appointments Data (GPAD), three releases &nbsp;&middot;&nbsp;
+        N=80 monthly observations, September 2018 &ndash; October 2025 &nbsp;&middot;&nbsp; 99.7% confidence
+    </div>
+
+    <div class="alert-orange" style="margin-bottom:28px;">
+        <strong>&#8220;GPs are expected to manage and coordinate increasingly complex care, but do not have the resources, infrastructure and authority that this requires.&#8221;</strong> Lord Ara Darzi&rsquo;s 2024 independent NHS review identified rising multimorbidity and an ageing population as drivers of growing demand, and concluded the NHS is in &ldquo;serious trouble.&rdquo; Bootstrap CUSUM gives his observation a sharper statistical edge: GP doctor contacts per 1000 patients have been <em>flat since 2018</em> &mdash; unchanged through COVID, lockdowns, and a &pound;1 billion per year workforce expansion. The system grew around the GP. The GP contact rate didn&rsquo;t. And the patients in that flat line are older and more complex than they were in 2018 &mdash; for reasons that Darzi identified but did not fully separate. This article does.
+    </div>
+
+    <!-- Summary box -->
+    <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.72em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:6px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="gp-appointments-summary.pdf" download="gp-appointments-summary.pdf" style="color:var(--brand-mid);">&#8675; Download Executive Summary PDF</a></div>
+        <div style="font-size:0.72em;font-weight:600;letter-spacing:0.04em;color:var(--brand-mid);margin-bottom:14px;"><a href="gp-appts-per-1000.csv" download="gp-appts-per-1000.csv" style="color:var(--brand-mid);">&#8675; Total appts</a> &nbsp;&middot;&nbsp; <a href="gp-doctor-appts-per-1000.csv" download="gp-doctor-appts-per-1000.csv" style="color:var(--brand-mid);">&#8675; GP doctor appts</a> &nbsp;&middot;&nbsp; <a href="gp-appts-mode.csv" download="gp-appts-mode.csv" style="color:var(--brand-mid);">&#8675; Mode</a> &nbsp;&middot;&nbsp; <a href="gp-patient-survey-trend.csv" download="gp-patient-survey-trend.csv" style="color:var(--brand-mid);">&#8675; Patient Survey</a> &nbsp;&middot;&nbsp; <span style="font-style:italic;font-weight:400;">CSV data files</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:16px;">
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--brand-mid);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The headline number is misleading</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Total GP appointments per 1000 patients rose 46% above pre-COVID baseline. But patients avoiding appointments because too difficult more than doubled &mdash; from 11% to 28%. More appointments recorded; harder to access them.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--red);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">COVID changed how, not how many</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Face-to-face collapsed from 79% to 47% in April 2020. Three Bootstrap CUSUM stages at 99.7% confidence: stable at 79%, COVID collapse to 57%, new normal of 65% from mid-2022. Telephone settled at 26%, double the pre-COVID baseline. Neither is recovering further.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--orange);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">Mid-2022: restructuring, not recovery</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">ARRs (pharmacists, paramedics, physiotherapists) grew from 280 to 17,588 FTE at &pound;1bn/year. More appointments, fewer delivered by GPs. GP workforce share stepped down from 51% to 45% and is still falling. The system grew around the GP. The GP&rsquo;s proportion shrank.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The wood from the trees</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Bootstrap CUSUM on GP doctor appointments per 1000 patients: one flat stage, mean 212.53, across the entire seven-year series at 99.7% confidence. No structural change through COVID, lockdowns, ARRs, or the Access Recovery Plan. A patient&rsquo;s access to a GP is statistically unchanged since 2018.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--purple);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">A system problem, not a people problem</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">GPs are not failing. Patients are not over-demanding. Demand is rising (ageing boomers, multimorbidity). GP capacity is falling (15% fewer FTE GPs per 1000 patients since 2013). France maintained its GP workforce share without spending more &mdash; by choosing differently. The flat line is the statistical proof of 40 years of short-term planning.</div>
+            </div>
+        </div>
+        <div style="font-size:0.85em;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">
+            <strong style="color:var(--text);">Data:</strong> NHS England GP Appointments Data (GPAD) &nbsp;&middot;&nbsp; Three releases stitched: Feb 2021, Oct 2022, Oct 2025 &nbsp;&middot;&nbsp; <strong style="color:var(--text);">N=80</strong> monthly observations &nbsp;&middot;&nbsp; 99.7% confidence &nbsp;&middot;&nbsp; Loops=5,000
+        </div>
+    </div>
+
+    <!-- Orange box -->
+    <div style="background:#fff8f0;border:2px solid #e67e22;border-radius:10px;padding:18px 24px;margin:0 0 28px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#e67e22;margin-bottom:8px;">&#128202; New to Bootstrap CUSUM?</div>
+        <p style="font-size:0.95em;color:#1e293b;margin-bottom:12px;line-height:1.6;"><strong><a href="three-charts-three-stories.html" style="color:#002d5b;">Same Data, Three Charts, Three Very Different Stories</a></strong> explains what the green CUSUM line means and why it detects structural change that other charts miss &mdash; including a step-by-step guide to reading the chart. Takes 5 minutes and makes every chart in this article easier to read.</p>
+        <a href="three-charts-three-stories.html" style="display:inline-block;background:#0056b3;color:white;padding:7px 16px;border-radius:6px;font-size:0.88em;font-weight:700;text-decoration:none;">Read above first</a> &nbsp; <a href="glossary.html" style="display:inline-block;background:#f0f4f8;color:#0056b3;border:1px solid #0056b3;padding:7px 14px;border-radius:6px;font-size:0.85em;font-weight:600;text-decoration:none;">&#128218; Glossary &mdash; CUSUM, Deming, Meadows, Joiner, PDSA and more</a>
+        <div style="font-size:0.8em;color:#64748b;margin-top:6px;font-style:italic;">Definitions &mdash; e.g. CUSUM, Deming, Meadows, Joiner, PDSA and more</div>
+    </div>
+
+    <!-- TOC -->
+    <details class="toc-details">
+        <summary>Table of contents &mdash; click to expand or collapse</summary>
+        <ol>
+            <li><a href="#section-headline">The headline number is misleading</a></li>
+            <li><a href="#section-covid">COVID changed how, not how many</a></li>
+            <li><a href="#section-face-to-face">Face-to-face: three stages, one permanent change</a></li>
+            <li><a href="#section-telephone">Telephone: tripled, then stabilised</a></li>
+            <li><a href="#section-2022">Mid-2022: restructuring, not recovery</a></li>
+            <li><a href="#section-gp-share">What does GP workforce share actually mean?</a></li>
+            <li><a href="#section-wood">The wood from the trees</a></li>
+            <li><a href="#section-demand-capacity">Demand up, capacity down</a></li>
+            <li><a href="#section-why-flat">Why is the GP contact rate unchanged?</a></li>
+            <li><a href="#section-quality">Are patients better served? The quality question</a></li>
+            <li><a href="#section-international">Is this a uniquely British problem?</a></li>
+            <li><a href="#section-elsewhere">Where did the unmet demand go?</a></li>
+            <li><a href="#section-deming">What Deming would ask</a>
+                <ol style="margin-top:4px;padding-left:16px;">
+                    <li style="padding:2px 0;"><a href="#section-deming">By what method? And whose system?</a></li>
+                    <li style="padding:2px 0;"><a href="#section-deming">The tyranny of the short term</a></li>
+                    <li style="padding:2px 0;"><a href="#section-deming">The trap &mdash; and what might be done within it</a></li>
+                </ol>
+            </li>
+            <li><a href="#section-closing">The system that built the NHS, and the system that is failing it</a>
+                <ol style="margin-top:4px;padding-left:16px;">
+                    <li style="padding:2px 0;"><a href="#section-arc">The arc of this article</a></li>
+                    <li style="padding:2px 0;"><a href="#section-doing-it">What might &ldquo;doing it again&rdquo; look like?</a></li>
+                </ol>
+            </li>
+            <li><a href="#section-data">Data notes and methodology</a></li>
+        </ol>
+    </details>
+
+    <!-- SECTION 1 -->
+    <h2 id="section-headline">The headline number is misleading</h2>
+
+    <p>The government says GP access is at record levels. The BMA says GPs are overwhelmed and under-resourced. The media runs stories about patients unable to get through at 8am. Everyone is arguing about GP access. Nobody is running Bootstrap CUSUM on the data.</p>
+
+    <p>The NHS England GP Appointments Data (GPAD &mdash; the monthly national dataset covering every appointment recorded across all GP practices in England) has been published since 2018. Stitching together three releases gives 80 monthly observations from September 2018 to October 2025 &mdash; spanning the pre-COVID baseline, the pandemic, the recovery, and the present. Bootstrap CUSUM applied to that series asks: what structurally changed, when, and with what confidence?</p>
+
+    <p>The headline figure is total appointments per 1000 registered patients. In September 2018, the pre-COVID baseline average was <strong>422 appointments per 1000 patients per month</strong>. By October 2025 it was <strong>615</strong> &mdash; 46% above baseline. Record numbers. Case closed?</p>
+
+    <div class="alert-orange">
+        <strong>Not quite.</strong> The GP Patient Survey tells a different story: the proportion of patients who had tried to make an appointment in the past 6 months collapsed from 77% in 2019 to 63% in 2021 during COVID, and the proportion who <em>avoided</em> making an appointment because it was too difficult rose from 11.1% in 2021 to 27.9% in 2023. More appointments recorded, fewer patients feeling seen.
+    </div>
+
+    <p>Bootstrap CUSUM applied to total appointments per 1000 finds two stages at 99.7% confidence: a pre-2022 stage mean of 415, and a post-2022 stage mean of 479. The structural step-up happened in <strong>mid-2022</strong> &mdash; not during COVID recovery, but 18 months after restrictions lifted. And the green CUSUM line is still rising at the right edge of the chart, suggesting the process has not yet stabilised. The October 2025 spike to 615 is at the upper Shewhart limit and is likely a special cause rather than the new mean.</p>
+
+    <p>The question is what is being counted. From 2020&ndash;21 onwards, a new national category system captured activity that was always happening but not recorded. More importantly, the Additional Roles Reimbursement Scheme (ARRS) &mdash; clinical pharmacists, physiotherapists, social prescribers, paramedics &mdash; means many appointments counted in the GPAD are not with a GP. The total appointment count is real. But it is not the same as GP access.</p>
+
+    <!-- SECTION 2 -->
+    <h2 id="section-covid">COVID changed how, not how many</h2>
+
+    <p>The most dramatic event in the entire 80-month series is March and April 2020. Total appointments per 1000 fell from 450 in January 2020 to <strong>265 in April 2020</strong> &mdash; a 37% collapse in a single month. That is the largest single structural shock in the dataset. It is visible in every series, undeniable in every chart.</p>
+
+    <p>But Bootstrap CUSUM on total appointments finds only two stages &mdash; and neither boundary falls in April 2020. The COVID trough was deep but temporary. The process recovered to its pre-COVID mean within roughly 18 months, and the CUSUM accumulated that recovery as common cause variation around a stable long-run mean. The structural change came later, in 2022, for different reasons.</p>
+
+    <p>What COVID did change &mdash; structurally and permanently &mdash; was <em>how</em> appointments were delivered. The mode mix story is the real COVID story.</p>
+
+    <!-- SECTION 3 -->
+    <h2 id="section-face-to-face">Face-to-face: three stages, one permanent change</h2>
+
+    <figure class="chart-figure">
+        <img src="images/gp_appts_mode___Step_Change_Analysis___29_05_2026_16_42___pct_face_to_face.png" alt="Bootstrap CUSUM chart showing face-to-face appointment percentage — three structural stages at 99.7% confidence">
+        <figcaption>Bootstrap CUSUM: % of GP appointments delivered face-to-face, September 2018 &ndash; October 2025. Three stages at 99.7% confidence. N=80 monthly observations, 5,000 loops. The green CUSUM line in Stage 3 hovers around zero &mdash; the process has stabilised. The pre-COVID normal is not returning.</figcaption>
+    </figure>
+
+    <p>Bootstrap CUSUM on the face-to-face percentage finds <strong>three stages at 99.7% confidence</strong> &mdash; as clean a structural change story as any in the published articles on this site.</p>
+
+    <div class="numbers-box">
+        <table>
+            <tr><th>Stage</th><th>Period</th><th>Mean</th><th>What happened</th></tr>
+            <tr><td><span class="stage-badge">Stage 1</span></td><td>Sep 2018 &ndash; Feb 2020</td><td>79%</td><td>Pre-COVID baseline. Tight variation. Stable for at least 18 months before the shock.</td></tr>
+            <tr><td><span class="stage-badge">Stage 2</span></td><td>Mar 2020 &ndash; mid 2022</td><td>57%</td><td>COVID collapse. Face-to-face fell to 47% in April 2020. Partial, gradual recovery through 2021&ndash;22 as practices reopened and NHS England increased pressure to restore in-person access.</td></tr>
+            <tr><td><span class="stage-badge">Stage 3</span></td><td>mid 2022 &ndash; Oct 2025</td><td>65%</td><td>New normal. The CUSUM line in this stage hovers around zero &mdash; statistically flat. Face-to-face is not recovering further. 14 percentage points below the pre-COVID baseline.</td></tr>
+        </table>
+    </div>
+
+    <p>The shape of the green CUSUM line in Stage 3 is the critical observation. It is not rising &mdash; there is no upward slope suggesting further recovery. It is not falling &mdash; there is no ongoing deterioration. It is fluctuating around zero: a process in statistical control at 65% face-to-face. This <em>is</em> the new normal.</p>
+
+    <div class="finding-box">
+        <h3>The honest finding</h3>
+        <p>The 2022 GP Access Recovery Plan &mdash; NHS England&rsquo;s push to restore in-person appointments &mdash; produced a detectable structural change at 99.7% confidence. Face-to-face rose from 57% to 65%. That is real and should be acknowledged.</p>
+        <p>But it stopped at 65%, not 79% &mdash; the pre-COVID baseline. The remaining 14 percentage points have not recovered and the CUSUM says they will not recover under the current system. The recovery plan succeeded in shifting the mean. It did not restore the pre-COVID normal.</p>
+    </div>
+
+    <!-- SECTION 4 -->
+    <h2 id="section-telephone">Telephone: tripled, then stabilised</h2>
+
+    <figure class="chart-figure">
+        <img src="images/gp_appts_mode___Step_Change_Analysis___29_05_2026_16_43___pct_telephone.png" alt="Bootstrap CUSUM chart showing telephone appointment percentage — three structural stages at 99.7% confidence">
+        <figcaption>Bootstrap CUSUM: % of GP appointments delivered by telephone, September 2018 &ndash; October 2025. Three stages mirror the face-to-face story exactly. Stage 3 mean: 26% &mdash; double the pre-COVID baseline of 13%, now statistically stable.</figcaption>
+    </figure>
+
+    <p>The telephone series is the mirror image of the face-to-face series and tells exactly the same story with the same three change points. Pre-COVID: <strong>13%</strong>. COVID peak: <strong>48%</strong>. New settled level: <strong>26%</strong>.</p>
+
+    <p>Telephone appointments doubled as a share of all contacts. Like the face-to-face recovery, the decline from the COVID peak is real and statistically confirmed. Also like the face-to-face recovery, it stopped well short of the pre-COVID baseline. The CUSUM in Stage 3 is flat.</p>
+
+    <p>The pre-COVID mode mix &mdash; 79% face-to-face, 13% telephone &mdash; is gone. The new mode mix &mdash; 65% face-to-face, 26% telephone &mdash; has stabilised. Both charts, at 99.7% confidence, say the same thing: <strong>this is now the system.</strong></p>
+
+    <!-- SECTION 5 -->
+    <h2 id="section-2022">Mid-2022: restructuring, not recovery</h2>
+
+    <p>Three of the four Bootstrap CUSUM series analysed in this article find a structural change point in <strong>mid-2022</strong> &mdash; approximately June to August 2022. Total appointments stepped up. Face-to-face partially recovered. GP workforce share stepped down. All three at 99.7% confidence.</p>
+
+    <p>The political narrative around this period frames it as GP access recovery &mdash; the result of the 2022 Access Recovery Plan, which mandated a return to in-person appointments and set targets for face-to-face percentages.</p>
+
+    <p>Deming had a specific objection to targets of this kind. Setting a target for face-to-face percentage without changing the capacity, staffing, and system that determines how appointments are allocated is precisely what he called a numerical goal without a method. The target moved the percentage &mdash; the Bootstrap CUSUM confirms it, from 57% to 65%. But it stopped at 65% because the underlying system capacity had not changed. The target reached the limit of what the unchanged system could deliver, and stopped there. A face-to-face target also creates pressure on the metric rather than the underlying need: practices under pressure to hit a percentage will convert telephone to face-to-face appointments whether or not the conversion is clinically indicated. The target measures activity, not outcome.</p>
+
+    <p>Bootstrap CUSUM confirms that something structural did happen in mid-2022. But looking at what changed in each series simultaneously:</p>
+
+    <ul>
+        <li>Total appointments per 1000: <strong>stepped UP</strong> from 415 to 479</li>
+        <li>Face-to-face %: <strong>stepped UP</strong> from 57% to 65%</li>
+        <li>Telephone %: <strong>stepped DOWN</strong> from 37% to 26%</li>
+        <li>GP workforce share: <strong>stepped DOWN</strong> from 51% to 45%</li>
+    </ul>
+
+    <p>More appointments, more face-to-face, fewer telephone &mdash; and fewer of those appointments delivered by a GP. This is not the fingerprint of a recovery. It is the fingerprint of a <strong>system restructuring</strong> &mdash; more contacts overall, absorbed by a growing ARRs workforce, with GPs maintaining roughly the same absolute contact rate while their share of a larger total fell.</p>
+
+    <div class="callout-box">
+        <h3>The ARRS timeline</h3>
+        <p>The Additional Roles Reimbursement Scheme was introduced in 2019, funding GP practices to employ clinical pharmacists, physiotherapists, social prescribers, paramedics, and other roles. By 2022, over 26,000 additional staff had been recruited into general practice under the scheme.</p>
+        <p>Bootstrap CUSUM on GP workforce share shows the scheme&rsquo;s structural impact began to appear in mid-2022 &mdash; the point at which ARRs numbers reached sufficient scale to displace GP appointments structurally rather than merely supplement them. The structural step down in GP share coincides exactly with the structural step up in total appointment volume. The system grew. The GP&rsquo;s proportion of it shrank.</p>
+    </div>
+
+    <!-- SECTION 6 -->
+        <!-- SECTION 6 -->
+    <h2 id="section-gp-share">What does GP workforce share actually mean?</h2>
+
+    <figure class="chart-figure">
+        <img src="images/gp_appts_mode___Step_Change_Analysis___29_05_2026_16_43___pct_gp_delivered.png" alt="Bootstrap CUSUM chart showing GP-delivered appointment percentage — two structural stages at 99.7% confidence">
+        <figcaption>Bootstrap CUSUM: % of GP appointments delivered by a GP doctor, August 2021 &ndash; October 2025. Two stages at 99.7% confidence. Stage 1 mean: 51%. Stage 2 mean: 45%. The green CUSUM line in Stage 2 is still falling — this structural shift has not yet stabilised.</figcaption>
+    </figure>
+
+    <p>Of every 100 appointments in the GPAD (GP Appointments Data), how many were with a GP doctor rather than someone else? Pre-COVID this was <strong>52 in every 100</strong>. By October 2025 it is <strong>40 in every 100</strong>. Bootstrap CUSUM finds a structural step-down from 51% to 45% in mid-2022 at 99.7% confidence, and the CUSUM line is still gently falling &mdash; the shift has not stabilised.</p>
+
+    <p>The remaining 55&ndash;60 appointments in every 100 are with a mix of practice nurses (who have always been part of the primary care workforce and are not ARRs roles), healthcare assistants, and an increasingly large contingent of ARRs (Additional Roles Reimbursement Scheme) staff. Understanding what ARRs means is essential to understanding what these charts are actually showing.</p>
+
+    <div class="callout-box">
+        <h3>What are ARRs roles?</h3>
+        <p>The Additional Roles Reimbursement Scheme was introduced in 2019 as part of the NHS Long Term Plan. NHS England funds GP practices and Primary Care Networks to employ non-GP clinicians alongside traditional practice staff. The roles include:</p>
+        <p><strong>Clinical pharmacists</strong> &mdash; the most common ARRs role by far; medication reviews, prescribing support, long-term condition management. <strong>Paramedics</strong> &mdash; urgent and acute assessment; the clinician you typically see quickly for same-day concerns. <strong>First-contact physiotherapists</strong> &mdash; musculoskeletal problems without GP referral. <strong>Social prescribers</strong> &mdash; loneliness, housing, lifestyle. <strong>Mental health practitioners, dietitians, physician associates, occupational therapists.</strong></p>
+        <p>The principle: route simpler or specialist-adjacent work to other clinicians and free up GP time for complex cases. By March 2023, 17,588 full-time equivalent ARRs staff had been commissioned by 1,223 Primary Care Networks, at a cost of &pound;1.027 billion per year &mdash; up from &pound;110 million in 2019&ndash;20.</p>
+        <p>The paramedic who sees you quickly for an urgent concern, the pharmacist who calls about your medications, the submission form that routes your request to the right clinician &mdash; all of this is the ARRs scheme in practice. It created the triage system. It This is what explains why GP workforce share fell while total appointment volume rose &mdash; the denominator grew faster than the GP contribution to it.</p>
+    </div>
+
+    <p>In absolute terms, the arithmetic of GP appointments per patient looks like this:</p>
+
+    <div class="numbers-box">
+        <table>
+            <tr><th>Period</th><th>Total appts / 1000</th><th>GP share</th><th>GP appts / 1000</th></tr>
+            <tr><td>Pre-COVID (Sep 2018 &ndash; Feb 2020)</td><td>422</td><td>52%</td><td><strong>218</strong></td></tr>
+            <tr><td>Post-2022 (Jul 2022 &ndash; Oct 2025)</td><td>479</td><td>45%</td><td><strong>214</strong></td></tr>
+            <tr><td>Change</td><td>+14%</td><td>&minus;7 pp</td><td><strong>&minus;2% (not significant)</strong></td></tr>
+        </table>
+    </div>
+
+    <p>The system grew substantially around the GP. The GP&rsquo;s absolute contact rate barely moved. Which leads directly to the centrepiece finding.</p>
+
+    <!-- SECTION 7 -->
+    <h2 id="section-wood">The wood from the trees</h2>
+
+    <figure class="chart-figure">
+        <img src="images/gp_doctor_appts_per_1000___Step_Change_Analysis___29_05_2026_16_55___gp_appts_per_1000.png" alt="Bootstrap CUSUM chart showing GP doctor appointments per 1000 patients — one stage across the entire seven-year series at 99.7% confidence">
+        <figcaption>Bootstrap CUSUM: GP doctor appointments per 1000 registered patients, September 2018 &ndash; October 2025. One stage across the entire series at both 90% and 99.7% confidence. Mean: 212.53. No structural change through COVID, lockdowns, the ARRs expansion, or the Access Recovery Plan. <em>Image file: gp_doctor_appts_per_1000___Step_Change_Analysis___29_05_2026_16_55___gp_appts_per_1000.png</em></figcaption>
+    </figure>
+
+    <p>One stage. Mean 212.53. A flat blue line across the entire seven-year series. At both 90% and 99.7% confidence, Bootstrap CUSUM finds <strong>no structural change</strong> in GP doctor appointments per 1000 patients across 70 monthly observations.</p>
+
+    <p>The green CUSUM line tells the story with complete clarity: it collapsed during the COVID trough, recovered as practices reopened, and has been oscillating around zero ever since. A process in statistical control throughout. The April 2020 low of 146 GP appointments per 1000 &mdash; visible as the lowest red point &mdash; was deep but temporary, absorbed as a special cause within a stable long-run process. COVID was a shock. It was not a structural change in GP access.</p>
+
+    <div class="alert-green">
+        <strong>The finding in plain English:</strong> Despite the pandemic, lockdowns, the ARRs expansion, record total appointment figures, the 8am phone queue, and years of political argument &mdash; a patient&rsquo;s actual access to a GP doctor is statistically unchanged since 2018. The number of times a patient sees a GP is flat. Everything else is noise around that line.
+    </div>
+
+    <p>There is an important nuance about patient experience that the data does not capture. A flat GP contact rate does not mean the experience of accessing a GP is unchanged. Pre-2018, a patient could typically ring, explain once to a receptionist, and get a GP appointment within a day or two. Now the same appointment is distributed through an online submission form, a triage decision by a clinician or algorithm, a potential redirection to a paramedic or pharmacist, and then a week&rsquo;s wait for the GP slot if that is the verdict. The count is flat. The friction required to achieve it has grown substantially.</p>
+
+    <p>The triage system also introduces equity questions the data cannot answer. The capacity to navigate an online form, articulate symptoms clearly in writing, and wait a week for a response is not equally distributed across the population. The patients who most need a GP &mdash; older, more complex, less digitally confident &mdash; may be systematically disadvantaged by a system redesigned for those who can navigate it most easily.</p>
+
+    <!-- SECTION 8 -->
+    <h2 id="section-demand-capacity">Demand up, capacity down</h2>
+
+    <p>The flat GP contact rate of 213 per 1000 per month does not mean nothing has changed. It means two forces &mdash; rising demand and falling GP capacity &mdash; have been held in an uncomfortable equilibrium by the ARRs expansion. Understanding each force separately is essential to understanding whether the current equilibrium is stable.</p>
+
+    <h3>Demand is rising</h3>
+
+    <p>The need for GP consultations has grown steadily and will continue to grow. Over 14 million people in England have multiple long-term health conditions &mdash; multimorbidity &mdash; and multimorbidity increased across all older age groups between 2005 and 2019, a trend that has continued since. Since 2008, the population has aged and age-specific morbidity levels have increased, meaning the need for GP practice consultations has grown while the average number of consultations per person has not kept pace. More than half of all GP consultations are now with patients with multimorbidity &mdash; patients who require longer appointments, more frequent contacts, and greater clinical complexity than a decade ago.</p>
+
+    <p>This is structural demand growth, not a temporary surge. It is driven by demographics and the long-run increase in chronic disease prevalence, and no policy intervention is going to reverse it. The 65+ population requiring the most primary care is growing; the 0&ndash;14 population requiring the least is shrinking. The average registered patient is older, sicker, and more medically complex than they were when the GPAD data series began in 2018.</p>
+
+    <div class="callout-box">
+        <h3>Where does rising complexity come from?</h3>
+        <p>Darzi identified rising complexity as a driver of GP demand but did not separate its causes or timeframes. The answer matters because the two drivers require fundamentally different policy responses &mdash; and conflating them produces the wrong solution.</p>
+        <p><strong>Two different timeframes, two different causes:</strong> The long-run driver &mdash; the post-WW2 baby boomer cohort, born 1945&ndash;1955, now aged 70&ndash;80 and moving through peak multimorbidity age &mdash; was entirely predictable decades in advance. This cohort is the largest birth cohort in English history until the late 1980s, and at ages 70&ndash;80 typically manages three to five long-term conditions simultaneously. This demographic bulge moving through the healthcare system was visible in NHS planning documents from the 2000s. It was known. It was measurable. Deming would observe it was planned for inadequately. The short-run driver &mdash; COVID-accelerated complexity from 2020 onwards &mdash; was a special cause superimposed on that long-run common cause trend: Long Covid, deferred cancer and cardiovascular diagnoses, and a mental health surge all added to the complexity of the patient cohort within the 7-year GPAD window.</p>
+
+        <p><strong>Survival:</strong> Medical advances mean patients who would previously have died now live with long-term consequences &mdash; cancer survivors managing treatment side-effects, cardiac patients on multiple medications, premature infants reaching adulthood with complex needs. Each successful treatment creates a long-term primary care patient who did not exist a generation ago.</p>
+        <p><strong>Obesity and its downstream conditions:</strong> Type 2 diabetes, hypertension, osteoarthritis, sleep apnoea, non-alcoholic fatty liver disease &mdash; all obesity-related, all rising, all requiring ongoing GP management. Over 28% of English adults are obese, up from 15% in 1993. Each condition is manageable but not curable. Each requires regular monitoring, medication reviews, and GP contacts for the rest of the patient&rsquo;s life.</p>
+        <p><strong>Mental health:</strong> Diagnosed depression, anxiety, and ADHD have all risen substantially in the past decade. Whether this reflects a genuine increase in prevalence, better recognition, reduced stigma, or all three is debated &mdash; but the GP workload consequence is real regardless of cause. Mental health conditions are the single largest driver of GP consultation growth in recent years.</p>
+        <p><strong>Polypharmacy:</strong> More conditions mean more medications. More medications mean more interactions, more side-effects, more medication reviews, and more GP contacts to manage them. A patient on eight or more medications &mdash; not uncommon in the over-75 population &mdash; requires substantially more GP time per year than a patient on two.</p>
+        <p>None of these drivers is reversible in the short term. All of them are still growing. The flat GP contact line of 213 per 1000 per month is holding steady against a rising tide of structural demand &mdash; which is exactly what Darzi observed, and exactly what Bootstrap CUSUM can now date and quantify.</p>
+
+        <div style="background:#f0f4f8;border-top:1px solid #e2e8f0;margin-top:16px;padding-top:14px;">
+        <p style="font-size:0.88em;color:#475569;line-height:1.7;margin-bottom:0;"><strong style="color:#1e293b;">&#128203; A note on population growth and future demand.</strong> Since 2020, net international migration has accounted for 99% of UK population growth &mdash; natural change (births minus deaths) turned negative in 2023 for the first time. This is not a political observation: the demographic mathematics are the same regardless of origin. The majority of migrants arriving in the 2020s are of working age &mdash; currently the lowest-demand group in primary care. In 40&ndash;50 years, this cohort will itself reach peak multimorbidity age (70&ndash;80), creating a second demographic bulge in the 2060s and 2070s that is already arithmetically visible today. A health system with constancy of purpose &mdash; Deming&rsquo;s first point &mdash; would be planning for that peak now, exactly as it should have been planning in the 1980s for the peak now arriving. The question is whether the lesson of the baby boomer planning failure will be learned. The ONS projects the UK population reaching 72 million by 2049, with all growth from net migration. The GP workforce planning implications are measurable, dateable, and currently unaddressed.</p>
+        </div>
+    </div>
+
+    <h3>GP capacity is falling</h3>
+
+    <p>Between 2013 and 2023, the number of NHS general practices in England decreased by 20%, with 15% fewer qualified full-time equivalent GPs per 1000 patients, while the average practice patient list size increased by 40%. The number of fully qualified permanent GPs fell from 28,590 to 26,576 on a full-time equivalent basis between September 2015 and June 2023 &mdash; a 7% decline despite repeated government promises to increase it. Available GP time per patient fell by 10% between 2015 and 2019 alone, from 60.5 minutes per patient per year to 55.2 minutes, as patient numbers rose while the GP workforce shrank.</p>
+
+    <p>There is a particularly troubling dynamic identified by the BMA in 2025: despite a 39% increase in GP training places since 2014, half of all GP trainees in their final year of training between 2018 and 2024 were still not employed by a GP practice a year after qualifying. The pipeline is growing. The practices to absorb them are not. Over 1,465 independent community GP practices have closed or merged since 2015.</p>
+
+    <!-- SECTION: Why is the GP contact rate unchanged -->
+    <h2 id="section-why-flat">Why is the GP contact rate unchanged?</h2>
+
+    <p>The Bootstrap CUSUM centrepiece finding — one flat stage, mean 212.53, no structural change across seven years — needs an explanation. It is not an accident. It is the arithmetic result of two structural forces meeting.</p>
+
+    <div class="alert-red">
+        <strong>The constraint in plain numbers:</strong> 0.46 qualified FTE GPs per 1000 patients in 2024, down from 0.52 in 2015 &mdash; a 12% fall in the GP-to-patient ratio over nine years, against a backdrop of rising demand complexity per patient. The ARRs workforce grew from near-zero to 17,588 FTE over the same period, absorbing all the growth in appointment volume. The flat GP contact rate is the arithmetic result of these two trends meeting: falling GP capacity offset exactly by ARRs growth, leaving the number of times a patient sees a doctor statistically unchanged.
+    </div>
+
+    <p>This matters because patients do not experience a GP appointment and an ARRs appointment as equivalent. When a patient submits an online consultation form, waits for a triage decision, is seen by a paramedic, and is then told they need a GP after all — that pathway consumes more calendar time, more patient effort, and more system resource than a direct GP appointment would have done. The count is flat. The experience is not.</p>
+
+    <p>There is also a question of what patients want and reasonably expect. Primary care in England was built on the registered GP list &mdash; a named doctor who knows your history, your family, and your context. The GP Patient Survey consistently shows that patients value continuity of care with a named GP above almost every other aspect of primary care experience. What the ARRs expansion delivered is more appointments with more different clinicians. What it did not deliver is more access to the clinician patients most want to see.</p>
+
+    <div class="finding-box">
+        <h3>The patient expectation gap</h3>
+        <p>It is reasonable to expect that a patient presenting with an urgent concern wants to see a doctor. The triage system routes many of those patients to a paramedic or pharmacist who may be entirely clinically appropriate for that specific problem &mdash; and for many conditions, particularly musculoskeletal and medication-related, the evidence suggests ARRs clinicians deliver equivalent or better outcomes.</p>
+        <p>But the patient does not know that at the point of submitting their online form. They know they feel unwell, they want a doctor's assessment, and they are being asked to describe their symptoms in a text box before anyone has decided whether that is what they will get. The friction is real, the uncertainty is real, and the experience of navigating a triage system when you are unwell is qualitatively different from ringing a surgery and being offered an appointment.</p>
+        <p>The GP Patient Survey captures this directly: the proportion of patients satisfied with the overall appointment-making experience fell from 68.6% in 2018 to 54.4% in 2023, despite record total appointment numbers. More appointments, lower satisfaction with getting one. The flat GP contact rate, the growing complexity of access, and the declining satisfaction are three measures of the same underlying problem.</p>
+    </div>
+
+    <!-- SECTION 9 -->
+    <h2 id="section-quality">Are patients better served? The quality question</h2>
+
+    <p>The most important question &mdash; and the hardest to answer from appointment data alone &mdash; is whether the restructured primary care system is delivering better care. More total appointments, more ARRs staff, more triage: is the outcome better for patients?</p>
+
+    <p>The evidence is genuinely mixed, and honest about its limitations.</p>
+
+    <h3>What the evidence shows</h3>
+
+    <p>The ARRs scheme has been associated with a small improvement in patient satisfaction and perceptions of access, according to a 2024 University of Bristol NIHR-funded study. Clinical pharmacists &mdash; the most common ARRs role &mdash; are associated with reduced prescription rates, which could reflect more appropriate prescribing. First-contact physiotherapists have good evidence for clinical effectiveness in musculoskeletal conditions. Social prescribers address needs that GP appointments were never the right tool for.</p>
+
+    <p>These are real benefits and should not be dismissed. A patient who needs a physiotherapist and gets one quickly, without first having to see a GP who then refers them, is better served by the new model than the old.</p>
+
+    <h3>What the evidence does not show</h3>
+
+    <p>The same Bristol study found no improvement in the Quality and Outcomes Framework &mdash; the primary NHS measure of clinical quality in general practice. The QOF measures achievement against clinical targets for conditions including diabetes, hypertension, asthma, and mental health. A system with nearly 17,600 additional clinical staff, at a cost of over &pound;1 billion per year, that cannot demonstrate improvement on the primary quality measure is a system whose cost-effectiveness should be questioned.</p>
+
+    <p>The GP Patient Survey shows overall patient satisfaction with general practice has declined since 2019. The proportion of patients rating their overall experience as good or very good fell from 83% in 2019 to 71% in 2023 before recovering slightly. The proportion saying they found it easy to get through to their surgery on the phone declined. These are patient-reported outcomes &mdash; they reflect the experience of the triage system, the waiting times, and the friction of access that the appointment count cannot capture.</p>
+
+    <div class="finding-box">
+        <h3>The honest answer to the quality question</h3>
+        <p>For specific conditions well-matched to ARRs roles &mdash; musculoskeletal, medication management, social needs &mdash; the evidence for benefit is reasonable. For the broader question of whether the restructured primary care system is delivering better overall care, the evidence is absent or negative. The QOF has not improved. Patient satisfaction has declined. The unmet demand overflow into A&amp;E and private care suggests the system is not meeting needs it should be meeting.</p>
+        <p>What the data cannot answer &mdash; and what no currently published study has answered &mdash; is whether a patient who is triaged, seen by a paramedic, and then either discharged or referred to a GP has better clinical outcomes than a patient who saw a GP on day one. That is the key question for the next decade of primary care research. Bootstrap CUSUM can identify when structural changes happened. It cannot tell us whether those changes were improvements.</p>
+    </div>
+
+    <!-- SECTION: International comparison -->
+    <h2 id="section-international">Is this a uniquely British problem?</h2>
+
+    <p>A reasonable question at this point is whether the flat GP contact rate, the falling workforce share, and the growing access friction are features of the English NHS specifically &mdash; the result of particular policy choices &mdash; or whether this is a structural challenge facing primary care systems across the developed world.</p>
+
+    <p>The answer is: both. The underlying drivers are shared internationally. The severity of England&rsquo;s response is not.</p>
+
+    <div class="numbers-box">
+        <table>
+            <tr><th>Country</th><th>The shared problem</th><th>What they did differently</th></tr>
+            <tr><td><strong>All OECD countries</strong></td><td>The share of GPs among all doctors has fallen in most countries. On average across EU countries, only one in five doctors is a GP; two-thirds are specialists. The shift of medical graduates toward specialist careers is a global phenomenon.</td><td>Several countries acted early. France mandated that at least 40% of all new postgraduate training places go to general medicine from 2017. Belgium increased its GP training share. Portugal, Finland, Belgium, and France have maintained GP proportions above 30% of all doctors.</td></tr>
+            <tr><td><strong>Canada</strong></td><td>In 2023, 17% of Canadian adults reported having no regular primary care provider. Only 26% reported same- or next-day appointments. 15% of emergency department visits were for conditions manageable in primary care &mdash; a pattern almost identical to England.</td><td>Canada faces the same structural problem but has been slower to respond. The average number of patients seen per family physician fell from 1,746 in 2013 to 1,353 in 2021 &mdash; fewer patients per GP, compounding the workforce shortage.</td></tr>
+            <tr><td><strong>UK vs OECD average</strong></td><td>Rising multimorbidity, ageing populations, and the drift of medical graduates toward specialist careers are universal trends across high-income countries.</td><td>The UK has 15.8% fewer GPs per 1,000 population than the OECD average &mdash; one of the lowest ratios in the developed world. Primary care&rsquo;s share of NHS funding fell from 24% in 2009 to 18% in 2021, while hospital spending rose.</td></tr>
+        </table>
+    </div>
+
+    <div class="finding-box">
+        <h3>The honest international verdict</h3>
+        <p>The GP access problem is not unique to England &mdash; the structural drivers are shared across all high-income countries with ageing populations and medical training systems that reward specialist over generalist practice. Canada, Australia, and many European countries face versions of the same challenge.</p>
+        <p>What is distinctive about England is the combination: a GP-to-patient ratio significantly below the OECD average, a primary care funding share that fell sharply during the decade when the demographic pressure was accelerating, and a workforce expansion response (ARRs) that grew everything around the GP rather than growing the GP workforce itself. France, Belgium, and Portugal are not model successes &mdash; France still has regional medical deserts and a looming retirement wave &mdash; but they made different choices about training allocation and are better placed for the demographic pressure ahead. England made the opposite choices at the opposite time.</p>
+        <p>The Bootstrap CUSUM flat line is England&rsquo;s specific statistical signature of a problem that other countries have managed with more constancy of purpose. It is not inevitable. It was chosen &mdash; through decades of decisions that prioritised hospital care, specialist training, and short-term targets over the long-term GP workforce investment the demographic evidence demanded.</p>
+    </div>
+
+    <!-- SECTION 10 - WHERE DID DEMAND GO -->
+    <h2 id="section-elsewhere">Where did the unmet demand go?</h2>
+
+    <p>If GP doctor contact rates are flat &mdash; unchanged since 2018 &mdash; but need is rising and the system has introduced more friction into accessing GP care, then some patients are getting what they need through other routes, and some are not getting it at all.</p>
+
+    <h3>A&amp;E as the overflow valve</h3>
+
+    <p>Minor condition attendances at A&amp;E have reached record levels. Cough attendances rose from 44,000 in 2020&ndash;21 to 435,728 in 2024&ndash;25 &mdash; nearly tenfold. Backache rose from 211,000 to 396,000. More than 2.2 million A&amp;E attendances in 2024&ndash;25 resulted in &ldquo;no abnormality detected.&rdquo; These are primary care presentations arriving in emergency departments because the primary care front door is harder to open. The Bootstrap CUSUM analysis of NHS A&amp;E performance on this site finds four stages of structural decline across 15 years. The GP access picture helps explain why.</p>
+
+    <h3>The private alternative</h3>
+
+    <p>For those who can afford it, private primary care has absorbed a significant share of unmet demand. Health insurer Vitality reported private GP claims rose 374% between 2018 and 2022. The proportion of their insurance claims for primary care rose from 32% in 2019 to 55% in 2022. Private hospital admissions reached a record 898,000 in 2023. The NHS figures show flat GP contact rates for the population as a whole. They do not show whether the distribution of those contacts is equitable. The patients who supplement NHS access privately are, by definition, those who can afford to do so.</p>
+
+    <h3>The unmet remainder</h3>
+
+    <p>Some demand is simply not being met. The GP Patient Survey records this directly: the proportion of patients avoiding making an appointment because it was too difficult more than doubled &mdash; from 11.1% in 2021 to 27.9% in 2023. The proportion finding it easy to get through on the phone fell from 68% in 2021 to 50% in 2023, the lowest in eleven years of the survey. Five percentage points of the patient population have stopped trying, or stopped succeeding, in the time covered by this analysis. The Bootstrap CUSUM data cannot quantify this group. But the combination of rising A&amp;E minor attendances, surging private GP use, and declining survey-reported access all point to the same conclusion: the flat GP contact rate coexists with growing unmet primary care need.</p>
+
+    <!-- SECTION 11 -->
+    <h2 id="section-deming">What Deming would ask</h2>
+
+    <div class="deming-box">
+        <h3>By what method? And whose system?</h3>
+        <p>The 2022 Access Recovery Plan produced a detectable structural change at 99.7% confidence &mdash; total appointment volume stepped up, face-to-face partially recovered. These are real and should be acknowledged.</p>
+        <div class="deming-quote">&ldquo;A numerical goal without a method is nonsense.&rdquo; &mdash; W. Edwards Deming</div>
+        <p>But the goal was to restore GP access. Bootstrap CUSUM says that goal was not achieved &mdash; not because the plan failed to change the system, but because <strong>it changed the wrong part of the system.</strong> It increased total appointment volume. It did not increase GP contact rates. The flat line across seven years is the verdict.</p>
+        <p>Darzi observed that GPs lack the resources, infrastructure, and authority to manage the complexity now arriving at their door. That is accurate. But the deeper Deming question is: <em>whose system produced that gap?</em> The GPs did not plan the workforce. The GPs did not set GP training numbers. The GPs did not build &mdash; or fail to build &mdash; the estate. The GPs did not design the social care funding formula that determines whether their most complex patients can be discharged from hospital or remain blocking beds. These are system decisions taken over decades by people who are not GPs.</p>
+        <p>Deming&rsquo;s most cited observation is that 94% of problems are caused by the system, not the people working in it. Applied here: the GP contact rate is flat not because GPs are failing, but because the system they work in was shaped &mdash; through decades of decisions taken elsewhere &mdash; to produce exactly this outcome.</p>
+
+        <h3 style="color:#93c5fd;margin-top:18px;font-size:1em;text-transform:uppercase;letter-spacing:0.08em;font-style:normal;font-family:system-ui,sans-serif;">The tyranny of the short term</h3>
+        <p>Deming&rsquo;s first of the 14 Points is <strong>constancy of purpose</strong> &mdash; a long-term commitment to improvement that transcends short electoral cycles and quarterly targets. His specific critique of Western management was that it optimises for the visible and the immediate at the expense of the structural and the long-term. He called the resulting failure the tyranny of the short term.</p>
+        <p>The baby boomer demographic bulge &mdash; the cohort born 1945&ndash;1955 now aged 70&ndash;80, moving through peak multimorbidity &mdash; was not a surprise. The Office of Population Censuses and Surveys was tracking it from the 1970s. Academic literature on GP workforce shortages relative to an ageing population goes back to the 1980s. The King&rsquo;s Fund was publishing warnings in the 1990s. The demographic peak now arriving at GP surgeries was visible and measurable 40 years ago.</p>
+        <div class="deming-quote">&ldquo;The most important things cannot be measured.&rdquo; &mdash; W. Edwards Deming</div>
+        <p>What should have been decided in the 1980s and 1990s to handle the demand now arriving:</p>
+        <ul style="color:#e2e8f0;padding-left:20px;margin-bottom:12px;line-height:1.8;">
+            <li>GP training places expanded to meet 2020s demand &mdash; instead they declined; the number of fully qualified FTE GPs fell between 2015 and 2023 despite record patient list sizes</li>
+            <li>Primary care infrastructure built for a population managing multiple long-term conditions &mdash; instead 20% of GP estate predates the founding of the NHS in 1948</li>
+            <li>A prevention strategy that reduced the multimorbidity rate in the cohort now hitting peak demand &mdash; instead obesity rates tripled between 1993 and 2024</li>
+            <li>A social care system capable of managing complexity at home and reducing GP workload &mdash; instead social care funding was cut from 2010 and 13,700 beds per day are occupied by patients clinically ready for discharge with nowhere to go</li>
+        </ul>
+        <p>None of these decisions was made &mdash; because the payoff was 30 years away and the electoral cycle is five years. The Bootstrap CUSUM flat line is the statistical record of what 30 years of short-termism produces. The constraint was identifiable in 1985. Addressing it required decisions in the 1980s and 1990s. They were not made.</p>
+
+        <h3 style="color:#93c5fd;margin-top:18px;font-size:1em;text-transform:uppercase;letter-spacing:0.08em;font-style:normal;font-family:system-ui,sans-serif;">The trap &mdash; and what might be done within it</h3>
+        <p style="color:#e2e8f0;line-height:1.7;">Training more GPs is necessary. It is not sufficient for the patient who needs to be seen next week. The GP training pipeline takes 7&ndash;10 years. England is in a structural trap: the constraint cannot be resolved overnight, and the decisions that would have avoided the trap were not made when they should have been. The question is what can be done within the 10-year lag while the pipeline fills.</p>
+
+        <p style="color:#e2e8f0;line-height:1.7;"><strong style="color:white;">Restore continuity of care.</strong> Research consistently shows that when patients see the same GP regularly, consultation time falls substantially &mdash; a GP who knows a patient&rsquo;s history, context, and medication reaches a clinical decision in 8 minutes; a GP seeing that patient for the first time may need 15&ndash;20 minutes to reach the same conclusion. The move toward large practices and whoever-is-available triage has destroyed continuity at exactly the moment it is most valuable. Restoring named GP lists as an operational standard &mdash; not an aspiration &mdash; would increase effective GP capacity without a single new qualification.</p>
+
+        <p style="color:#e2e8f0;line-height:1.7;"><strong style="color:white;">Unblock social care.</strong> The 13,700 blocked beds are not a GP problem &mdash; but resolving them frees GP time as well as hospital capacity. A GP managing a complex elderly patient who cannot be discharged, reviewing medication changes made during an admission, handling calls about that patient &mdash; that is GP time consumed by a social care failure. Every discharge resolved frees GP time without requiring a new GP to qualify.</p>
+
+        <p style="color:#e2e8f0;line-height:1.7;"><strong style="color:white;">Remove non-GP tasks from GP lists.</strong> Studies consistently find that 15&ndash;30% of GP consultations are for tasks that do not require a medical degree: routine medication renewals, fit notes, chronic disease monitoring within stable parameters. Better system design &mdash; not triage on top of the GP, but genuinely removing non-GP tasks from the GP&rsquo;s list &mdash; could increase effective GP contact rate within the existing workforce.</p>
+
+        <p style="color:#e2e8f0;line-height:1.7;"><strong style="color:white;">GLP-1 prevention.</strong> The new class of GLP-1 agonist drugs (semaglutide and related agents) are producing structural results in obesity reduction in clinical trials. Type 2 diabetes, hypertension, and osteoarthritis &mdash; three of the highest-volume multimorbidity drivers &mdash; all have obesity as a major modifiable risk factor. A targeted prescribing programme for high-risk groups could reduce the rate at which new patients enter the complex chronic disease cohort within 5&ndash;8 years &mdash; faster than the GP training pipeline, and addressing the demand side of the constraint rather than the supply side.</p>
+
+        <p style="color:#e2e8f0;line-height:1.7;"><strong style="color:white;">The honest assessment.</strong> None of these is a solution. All of them are partial mitigations that buy time while the training pipeline fills. The constraint &mdash; insufficient GP doctors able to assess undifferentiated complex presentations &mdash; cannot be resolved by anything other than having more such doctors. The four levers above slow the rate at which the constraint tightens. They do not remove it. England is in the trap precisely because the decisions that would have avoided it were not made. The question now is whether the decisions that would avoid the second trap &mdash; the 2060s demographic bulge &mdash; will be made while there is still time.</p>
+
+        <h3 style="color:#93c5fd;margin-top:18px;font-size:1em;text-transform:uppercase;letter-spacing:0.08em;font-style:normal;font-family:system-ui,sans-serif;">Goldratt: you optimised everything except the constraint</h3>
+        <p>Goldratt&rsquo;s Theory of Constraints states that in any system there is always one binding constraint &mdash; the weakest link that limits throughput of the whole. Improving anything other than the constraint is largely wasted effort.</p>
+
+        <div style="background:#1e3a5f;border-left:5px solid #60a5fa;border-radius:6px;padding:18px 22px;margin:16px 0;">
+            <p style="color:#e2e8f0;font-size:1.05em;line-height:1.7;margin:0;font-style:italic;"><strong style="color:white;">The constraint in English primary care is the availability of a qualified GP doctor</strong> &mdash; specifically, access to the clinician trained and authorised to assess complex, undifferentiated, and multi-system presentations: the conditions that cannot safely be triaged to a pharmacist, physiotherapist, or paramedic.</p>
+        </div>
+
+        <p>The ARRs scheme spent &pound;1 billion per year growing the workforce around that constraint without addressing it. More appointments with more clinicians; the same number of appointments with a GP.</p>
+        <p>The result: QOF (Quality and Outcomes Framework &mdash; the primary NHS measure of clinical quality) unchanged, GP contact rates flat, patient satisfaction down, A&amp;E minor attendances at record levels, private GP use up 374%. A system Deming would summarise in one sentence: <strong>you set numerical targets without a method, you optimised for the short term at the expense of the long term, and you improved everything except the constraint. The Bootstrap CUSUM flat line is the proof.</strong></p>
+    </div>
+
+    <!-- SECTION: Closing reflection -->
+    <h2 id="section-closing">The system that built the NHS, and the system that is failing it</h2>
+
+    <p>In 1948, Aneurin Bevan created the National Health Service in a country that was genuinely bankrupt. Britain had just emerged from six years of total war, was still rationing food, and owed enormous debts to the United States. The political case for the NHS was made not despite those constraints but through them: a healthy workforce is a productive workforce, preventing illness is cheaper than treating it, and universal access regardless of ability to pay is both morally right and economically rational. The NHS was not conceived as a cost. It was conceived as an investment.</p>
+
+    <p>That founding act was Deming&rsquo;s constancy of purpose in its most literal form: a commitment made in 1948 for a benefit that would accrue over decades, funded by a government that could not afford not to make it. Bevan understood that the time horizon of the return on investment was longer than any electoral cycle &mdash; and he made the investment anyway.</p>
+
+    <div class="deming-box">
+        <h3>Does it all come down to the economy?</h3>
+        <p>The obvious question is whether the failure of long-term GP planning is simply a money problem &mdash; government always short of cash, 50-year horizons impossible in a five-year electoral cycle.</p>
+        <div class="deming-quote">&ldquo;It is not necessary to change. Survival is not mandatory.&rdquo; &mdash; W. Edwards Deming</div>
+        <p>The international evidence says no, it is not simply a money problem. France spends 12.1% of GDP on healthcare against England&rsquo;s 10.5% &mdash; a difference, but not the whole explanation. France also allocated 40% of postgraduate training places to general medicine in 2017&ndash;18, and in 2019 abolished the <em>numerus clausus</em> cap on medical school admissions that had constrained its workforce since 1971. France is not a solved example &mdash; it still has GP shortages and regional medical deserts &mdash; but it made these decisions earlier and is better positioned for the demographic pressure ahead. The difference between France and England is not wealth. It is the timing and direction of decisions made when the evidence was already clear.</p>
+        <p>The deeper economic argument runs in the opposite direction to the one usually made. A GP appointment that catches a deteriorating diabetic patient costs approximately &pound;30. The hospital admission that follows uncontrolled diabetes costs approximately &pound;3,000. The GP contact is not a cost &mdash; it is a return on investment with a ratio of roughly 100:1. Primary care investment has the highest economic return in the healthcare system. The failure to invest in GP training from 2010 was not economically rational. It was a short-term budget saving that will cost multiples of itself in A&amp;E attendances, hospital admissions, and lost productivity over the following decades.</p>
+        <p>Bevan understood this in 1948. The Bootstrap CUSUM data quantifies what forgetting it has produced.</p>
+    </div>
+
+    <p>The three observations the data suggests &mdash; for patients, for the NHS, and for government &mdash; are distinct but connected. They are offered not as prescriptions but as questions the data raises: things worth considering in light of what seven years of monthly observations actually show, rather than what the headlines have claimed.</p>
+
+    <div class="numbers-box">
+        <table>
+            <tr><th>Audience</th><th>Questions the data raises</th></tr>
+            <tr><td><strong>For patients</strong></td><td>The 8am queue, the online form, the week&rsquo;s wait &mdash; the data confirms them. They are not your imagination and not the GP&rsquo;s fault. The system was redesigned around you without the GP workforce to support it. If the experience of accessing primary care feels harder than it used to, the Bootstrap CUSUM flat line suggests why: the GP contact rate is unchanged while the friction required to achieve it has grown substantially. Whether that is an acceptable trade-off is a question worth asking of those responsible for the system.</td></tr>
+            <tr><td><strong>For the NHS</strong></td><td>ARRs spent &pound;1 billion per year without moving the one measure that matters &mdash; GP contact rate. That is not a criticism of the staff it funded; it is a systems observation about where the constraint lies. A question worth considering: if PCNs were measured on GP contact rates per 1000 patients rather than total appointment counts, would the picture look different? Bootstrap CUSUM applied at PCN and practice level could identify the <a href="why-nothing-has-worked-nhs-ae-performance.html#section-bright-spots" style="color:var(--brand-mid);">bright spots</a> &mdash; the practices that have genuinely improved GP contact rates &mdash; and surface what they did differently. The constraint can be identified. Whether the system is currently looking in the right place is less certain.</td></tr>
+            <tr><td><strong>For government</strong></td><td>The data suggests this is a system problem created by decades of decisions rather than a people problem &mdash; GPs are not failing, patients are not over-demanding. France allocated 40% of postgraduate training places to general medicine and is better positioned heading into the 2030s, having made that decision earlier; whether a similar reallocation here is feasible is a question for those with the authority and information to judge. The demographic demand peak now arriving was measurable 40 years ago; the second peak is measurable now. Whether the mechanisms exist &mdash; statutory workforce floors, independent planning, short-term visibility of the cost of inaction &mdash; to make 30-year commitments within a 5-year electoral cycle is, as the analysis above acknowledges, genuinely uncertain. The data can identify the problem precisely. It cannot make the political choices.</td></tr>
+        </table>
+    </div>
+
+    <!-- Arc of the article box -->
+    <div id="section-arc" style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:32px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.78em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:16px;">&#128202; The arc of this article</div>
+        <ol style="margin-left:20px;line-height:1.8;color:var(--text);">
+            <li style="margin-bottom:10px;font-size:0.95em;"><strong>Data</strong> &mdash; 80 months of NHS GPAD, three workbooks stitched, five Bootstrap CUSUM series run across total appointments, face-to-face, telephone, GP workforce share, and GP doctor contacts per patient.</li>
+            <li style="margin-bottom:10px;font-size:0.95em;"><strong>Statistical analysis</strong> &mdash; change points dated, confidence levels earned from the data, not assumed from theory. The centrepiece: one flat stage at 99.7% confidence across seven years of GP doctor contacts. The green CUSUM line oscillating around zero. A process in statistical control throughout.</li>
+            <li style="margin-bottom:10px;font-size:0.95em;"><strong>Systems diagnosis</strong> &mdash; the flat line explained. Falling GP capacity (15% fewer FTE GPs per 1000 patients since 2013) meeting rising demand (14 million people with multiple long-term conditions, baby boomer cohort at peak multimorbidity age), held in an uncomfortable equilibrium by &pound;1 billion per year of ARRs. The constraint identified.</li>
+            <li style="margin-bottom:10px;font-size:0.95em;"><strong>Level 3 thinking</strong> &mdash; not <em>fix the output</em> (record appointment numbers that don&rsquo;t reflect GP access), not <em>fix the process</em> (triage systems that add friction without adding GP capacity), but <em>fix the system</em>: GP training allocation decisions taken now for a benefit in 2032, primary care funding share restored, the lesson from France acted on.</li>
+            <li style="margin-bottom:0;font-size:0.95em;"><strong>Constancy of purpose</strong> &mdash; Bevan did it in 1948 with no money, against a demographic need that was already visible. The demographic evidence for doing it again has been available for 40 years. The Bootstrap CUSUM flat line is the statistical record of not doing it. The question is whether the next 40 years will produce a different record.</li>
+        </ol>
+    </div>
+
+    <!-- What would doing it again involve -->
+    <h3 id="section-doing-it" style="color:var(--brand-blue);margin:28px 0 14px;font-style:italic;">What might &ldquo;doing it again&rdquo; look like? Joiner Level 3 possibilities across three timeframes</h3>
+
+    <p>Joiner&rsquo;s framework asks whether we are fixing the output (Level 1), fixing the process (Level 2), or fixing the system (Level 3). Most of what has been attempted in primary care since 2010 has been Level 1 and Level 2. The following sketches what Level 3 might look like &mdash; offered as possibilities suggested by the data and the international evidence, not as prescriptions from a position of authority. Those with the access, resources, and accountability to make these decisions will have information and constraints the data does not capture.</p>
+
+    <p>The demographic evidence for a second major primary care investment is already in the data. The 2020s migration cohort reaching peak multimorbidity age in the 2060s. The obesity cohort now aged 30&ndash;50 becoming the next wave of complex chronic disease patients. The baby boomer lesson, unlearned, repeating.</p>
+
+    <div class="numbers-box" style="margin-top:16px;">
+        <table>
+            <tr><th style="width:18%;">Timeframe</th><th>Level 3 possibilities &mdash; questions the data suggests asking</th></tr>
+
+            <tr><td><strong>Short term<br/>0&ndash;5 years</strong><br/><br/>
+                <em style="font-size:0.85em;color:#64748b;">Decisions that can be made now with results in 5&ndash;10 years</em>
+            </td><td>
+                <p style="margin-bottom:10px;"><strong>GP training allocation.</strong> Mandate that a minimum percentage of all postgraduate medical training places go to general practice. In France, 40% of postgraduate places went to general medicine in 2017&ndash;18; France also abolished its <em>numerus clausus</em> cap entirely in 2019 and is expanding medical school places from 11,500 to 16,000 by 2027. France still has GP shortages &mdash; these reforms have not fully solved the problem &mdash; but they represent a direction of travel England has not matched. It takes 7&ndash;10 years to produce a qualified GP, so decisions made now produce GPs from approximately 2032. This is a policy decision, not a budget one: it costs no more to train a GP than a cardiologist.</p>
+                <p style="margin-bottom:10px;"><strong>Primary care funding share.</strong> Restore primary care&rsquo;s share of NHS funding from 18% toward the 24% it held in 2009. Every percentage point is approximately &pound;1.8bn at current NHS spend. The economic case is straightforward: a GP appointment preventing a hospital admission returns roughly 100:1. Cutting primary care to balance the annual budget is borrowing from the future at a very high interest rate.</p>
+                <p style="margin-bottom:10px;"><strong>Measure what matters.</strong> Hold PCNs accountable for GP contact rates per 1000 patients, not total appointment counts. Total appointments can be increased by adding ARRs appointments without increasing GP access. Apply Bootstrap CUSUM prospectively at PCN and practice level &mdash; identify the <a href="why-nothing-has-worked-nhs-ae-performance.html#section-bright-spots" style="color:var(--brand-mid);">bright spots</a>, understand what they did differently, and replicate it.</p>
+                <p style="margin-bottom:0;"><strong>GP estate.</strong> 20% of GP practice buildings predate the founding of the NHS in 1948. Modern, fit-for-purpose premises are a prerequisite for multidisciplinary team working. A capital programme for GP estate renewal is a short-term investment with a 30-year return.</p>
+            </td></tr>
+
+            <tr><td><strong>Medium term<br/>5&ndash;15 years</strong><br/><br/>
+                <em style="font-size:0.85em;color:#64748b;">What follows from short-term decisions, and structural reforms that take a full Parliament to design and implement</em>
+            </td><td>
+                <p style="margin-bottom:10px;"><strong>The GP training dividend.</strong> Expansion of training places decided now produces newly qualified GPs from approximately 2032. The pipeline lag is unavoidable &mdash; which is why starting now, not in five years, is the critical decision. A sustained expansion over 10 years could restore the GP-to-patient ratio to 2015 levels by approximately 2040.</p>
+                <p style="margin-bottom:10px;"><strong>Social care reform.</strong> 13,700 beds per day are occupied by patients clinically ready for discharge but with nowhere to go. This is Goldratt&rsquo;s constraint operating in the hospital system: it backs up into A&amp;E, which backs up into primary care as patients with unresolved conditions present repeatedly. Freeing even a fraction of those beds through properly funded community social care reduces hospital pressure, A&amp;E overflow, and the downstream GP demand it generates. Social care reform is not separate from GP access reform &mdash; it is a precondition for it.</p>
+                <p style="margin-bottom:10px;"><strong>Mental health early intervention.</strong> Mental health conditions are the single largest driver of GP consultation growth. Investment in CAMHS, community mental health, and workplace mental health support now reduces the chronic mental health burden arriving in primary care in the 2030s. Like GP training, the lag between investment and return is a decade &mdash; which makes starting now urgent.</p>
+                <p style="margin-bottom:0;"><strong>Prevention targeting the 30&ndash;50 cohort.</strong> The patients who will generate the next multimorbidity peak are aged 30&ndash;50 today. Obesity prevalence in this cohort (currently 28%) translates directly into type 2 diabetes, hypertension, and osteoarthritis in the 2040s and 2050s. A genuine prevention strategy &mdash; not a public information campaign but structural interventions at the food system level, Joiner Level 3 &mdash; that reduces obesity prevalence by even 5 percentage points in this cohort substantially reduces GP demand in the 2040s.</p>
+            </td></tr>
+
+            <tr><td><strong>Long term<br/>15&ndash;50 years</strong><br/><br/>
+                <em style="font-size:0.85em;color:#64748b;">Constancy of purpose: the decisions that require commitment beyond any single government</em>
+            </td><td>
+                <p style="margin-bottom:10px;"><strong>Plan for the second demographic bulge.</strong> The 2020s migration cohort &mdash; currently of working age and low primary care demand &mdash; will reach 70&ndash;80 in the 2060s and 2070s. The arithmetic is visible today: training places, estate, social care capacity for that peak should be in planning documents now. The baby boomer planning failure was not ignorance &mdash; the bulge was measurable. It was the absence of constancy of purpose across governments of all parties over 40 years. The second bulge offers the opportunity to demonstrate that the lesson was learned.</p>
+                <p style="margin-bottom:10px;"><strong>Rebalance medical training toward generalism permanently.</strong> The OECD specialist drift &mdash; medical graduates choosing specialist over generalist careers &mdash; is universal but not irreversible. France improved its general medicine training allocation significantly, though it has not fully solved the problem. The direction of travel matters: sustained commitment to increasing the GP training proportion across successive governments, regardless of party, is the lever available. Applying it consistently is what Deming meant by constancy of purpose &mdash; not a single policy announcement, but a sustained institutional commitment that outlasts the electoral cycle that made it.</p>
+                <p style="margin-bottom:0;"><strong>Treat primary care as economic infrastructure.</strong> Roads, railways, broadband, energy &mdash; all are treated as economic infrastructure requiring long-term capital investment regardless of short-term budget pressures, because the return on investment is measurable and favourable over a 30-year horizon. Primary care generates a comparable return: a healthy, productive workforce at full employment capacity versus one interrupted by unmanaged chronic disease. The NHS was founded on exactly this economic argument. Restoring it as the organising principle &mdash; rather than treating primary care as a cost to be minimised &mdash; is the long-term system change that the demographic evidence demands.</p>
+            </td></tr>
+        </table>
+    </div>
+
+    <div class="callout-box" style="margin-top:28px;">
+        <h3>The political time horizon problem</h3>
+        <p>There is an obvious objection to everything in the table above. A government that commits today to expanding GP training places will not be in office when the new GPs qualify in 2032. A government that restores primary care funding to 24% of NHS spend will face the electoral cost immediately &mdash; the disruption, the resistance from hospital specialists, the upfront spending &mdash; while the benefit accrues to whoever wins the election after next. Politicians have to win elections. A 30-year planning horizon is not compatible with a 5-year electoral cycle.</p>
+
+        <p>Aneurin Bevan faced the same problem in 1948 &mdash; and appeared to solve it. But it is worth being precise about how he solved it, because the mechanism does not transfer straightforwardly to the current situation. Bevan did not succeed by making a persuasive long-term economic argument. He succeeded because six years of world war had done three things no peacetime politician can replicate.</p>
+
+        <p>First, the war had destroyed the legitimacy of the pre-war system. Conscription medical examinations had revealed publicly that millions of working-class men were unfit for service &mdash; malnourished, untreated, and failed by a system that charged for care. The case against the status quo had been made by events, not by argument. Second, six years of collective sacrifice had created a political consensus that the post-war settlement must be different &mdash; the 1945 Labour landslide was a vote against going back, not merely a vote for socialism. Third, and most importantly: the political return on Bevan&rsquo;s investment was not 30 years away. People who had never seen a doctor began receiving treatment within months of the NHS opening in July 1948. The benefit was immediate, personal, and visible to every voter before the next election.</p>
+
+        <p>The GP workforce problem has none of these structural advantages. No equivalent event has destroyed the legitimacy of the current system &mdash; it is failing gradually and unevenly, not catastrophically and visibly. There is no shared sacrifice narrative that makes long-term investment politically inevitable. And the return on investment &mdash; more qualified GPs in 2032, lower A&amp;E pressure in 2035, better patient outcomes in 2040 &mdash; falls entirely outside the current Parliament.</p>
+
+        <div class="numbers-box" style="margin-top:16px;margin-bottom:16px;">
+            <table>
+                <tr><th>Mechanism</th><th>What it does</th><th>Precedent</th></tr>
+                <tr><td><strong>Statutory workforce floors</strong></td><td>Legislate minimum GP training proportions and primary care funding floors that successive governments cannot fall below without primary legislation. Electoral cost of creating the Act falls once; the constraint persists.</td><td>Climate Change Act 2008 commits successive governments to carbon targets regardless of party. No government has repealed it.</td></tr>
+                <tr><td><strong>Independent workforce planning</strong></td><td>A statutory body with independent authority to set and monitor health workforce targets, modelled on the Office for Budget Responsibility for fiscal policy. Provides continuity across governments without requiring any single government to carry the full political cost.</td><td>The NHS Long Term Workforce Plan (2023) attempts this but has no statutory force and no funding guarantee beyond the current Parliament.</td></tr>
+                <tr><td><strong>Making inaction visible now</strong></td><td>The political argument that sometimes works for long-cycle investments is demonstrating the current cost of not investing. Bootstrap CUSUM at PCN level &mdash; linking the practices with the lowest GP contact rates to the highest downstream A&amp;E and hospital admission rates &mdash; makes the cost of inaction visible within the current Parliament, not 30 years hence.</td><td>The NHS A&amp;E performance data on this site shows four structural stages of decline. Not one policy intervention is visible as an upward change point. That is a political argument in the data.</td></tr>
+            </table>
+        </div>
+
+        <p>None of these mechanisms is sufficient on its own. Statutory frameworks can be repealed. Independent bodies can be defunded or ignored. Data-driven arguments can be disputed. The deeper question &mdash; which the data cannot answer &mdash; is whether the democratic system is capable of making 30-year investments in the absence of a crisis that compresses the time horizon. The international evidence suggests that some countries &mdash; those with proportional representation, stronger technocratic institutions, or less adversarial political cultures &mdash; find this easier than England. The NHS was founded in a political environment that will not recur. The question is what mechanisms exist to achieve constancy of purpose without it.</p>
+
+        <p>Bootstrap CUSUM cannot answer that question. What it can do &mdash; and what it has done in this article &mdash; is make the current state of the system precisely visible: a flat line in a rising tide, the statistical record of decisions not made, dateable to within months, and now requiring a response whose benefits will not be measurable within any single Parliament. Whether that response is made is a political question. That it is needed is not.</p>
+    </div>
+
+    <div class="alert-green" style="margin-top:28px;">
+        <strong>The Bootstrap CUSUM flat line in one sentence:</strong> It is not evidence of failure by the people in the system. It is evidence of failure <em>of</em> the system itself &mdash; designed short-term, planned inadequately for a demographic peak that was visible for decades, and now holding a flat line in a rising tide of demand that was always coming and always knowable. The question is not whether the evidence exists for acting differently. It always has. The question is whether this time the electoral cycle will be shorter than the planning horizon required.
+    </div>
+
+    <!-- SECTION 12 -->
+    <h2 id="section-data">Data notes and methodology</h2>
+
+    <div class="method-box" style="background:#f0f9ff;border:1px solid var(--brand-mid);border-radius:8px;padding:20px 24px;margin:24px 0;font-family:system-ui,sans-serif;">
+        <h3 style="color:var(--brand-mid);margin-bottom:12px;font-size:1em;text-transform:uppercase;letter-spacing:0.06em;font-style:normal;">Methodology</h3>
+        <p style="font-size:0.95em;margin-bottom:10px;"><strong>Data source:</strong> NHS England GP Appointments Data (GPAD), published monthly. Three summary workbooks stitched: GP_APPT_Publication_February_2021.xlsx, GP_Enhanced_APPT_Publication_October_2022.xlsx, GP_Appointment_Publication_Summary_October_2025.xlsx.</p>
+        <p style="font-size:0.95em;margin-bottom:10px;"><strong>Date range:</strong> September 2018 to October 2025. Gap: November 2022 to April 2023 (7 months, bridged from adjacent releases using overlapping 30-month windows).</p>
+        <p style="font-size:0.95em;margin-bottom:10px;"><strong>GP-delivered series:</strong> Pre-2022 data uses the &ldquo;Healthcare Professional: GP&rdquo; classification from older releases. Post-2022 uses the SDS Role Group &ldquo;GP&rdquo; classification. Values at the join (August&ndash;September 2021) are consistent at ~50%, supporting comparability. Both series use the same denominator: registered patients at open active practices.</p>
+        <p style="font-size:0.95em;margin-bottom:10px;"><strong>Bootstrap CUSUM settings:</strong> 5,000 loops, Turn Length 5, confidence 99.7% (3-sigma) unless otherwise stated. All stage boundaries survive at both 95% and 99.7% confidence.</p>
+        <p style="font-size:0.95em;margin-bottom:0;"><strong>Known limitation:</strong> The 2020&ndash;21 national category definition change improved recording completeness and may account for part of the post-2022 volume increase. The GP-doctor-per-1000 series is less affected by this change than the total appointment series, since it tracks a specific professional group rather than total activity.</p>
+    </div>
+
+    <hr>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E and the Promise That Wasn&rsquo;t Kept</a></h3>
+        <p>Bootstrap CUSUM on 184 monthly A&amp;E observations finds four stages of structural decline. Not one policy intervention is visible as a change point. The GP access picture in this article helps explain why &mdash; patients who cannot access primary care present at emergency departments instead.</p>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="btn">Read the article</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="three-charts-three-stories.html">Same Data, Three Charts, Three Very Different Stories</a></h3>
+        <p>A practical guide to X-mR, Run Chart, and Bootstrap CUSUM. The X-mR applied to the GP data would report a flat mean across a series that contains three structural changes. Bootstrap CUSUM finds each one, dates it, and quantifies it &mdash; showing why chart choice determines what you see.</p>
+        <a href="three-charts-three-stories.html" class="btn">Read the article</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="never-events-wrong-route.html">Wholly Preventable: Ten Years of a Never Event That Never Stopped</a></h3>
+        <p>Wrong-route medication Never Events have been declared wholly preventable since 2010. Bootstrap CUSUM on 15 years of NHS data finds a flat process in statistical control at 17.5 events per year. The engineering solution exists. The same Joiner Level 3 analysis applied here to GP access applies there to patient safety &mdash; the system surrounding the solution does not yet enforce it.</p>
+        <a href="never-events-wrong-route.html" class="btn">Read the article</a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Data:</strong> NHS England GP Appointments Data (GPAD) &nbsp;&middot;&nbsp; <strong>Method:</strong> Bootstrap CUSUM &nbsp;&middot;&nbsp; <strong>Tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded</p>
+        <p style="margin-top:8px;"><strong>Data sources:</strong></p>
+        <ul style="font-size:0.85em;color:var(--muted);line-height:1.8;margin:8px 0 16px 20px;">
+            <li>NHS England GP Appointments Data (GPAD), three releases: Feb 2021, Oct 2022, Oct 2025 &mdash; <a href="https://digital.nhs.uk/data-and-information/publications/statistical/appointments-in-general-practice" style="color:var(--brand-mid);">digital.nhs.uk</a></li>
+            <li>Ipsos GP Patient Survey 2023 National Report &mdash; <a href="https://gp-patient.co.uk" style="color:var(--brand-mid);">gp-patient.co.uk</a></li>
+            <li>Vitality Health Insurance claims data, reported in Health Foundation briefing (2022)</li>
+            <li>OECD Health at a Glance: Europe 2024 &mdash; GP training proportions and workforce data</li>
+            <li>ONS National Population Projections 2024-based &mdash; <a href="https://www.ons.gov.uk" style="color:var(--brand-mid);">ons.gov.uk</a></li>
+            <li>Migration Observatory, University of Oxford &mdash; impact of migration on UK population growth (2025)</li>
+            <li>Lord Darzi. <em>Independent Investigation of the National Health Service in England.</em> September 2024</li>
+            <li>NHS England Long Term Workforce Plan (2023)</li>
+            <li>University of Bristol NIHR-funded study on ARRs outcomes (2024)</li>
+        </ul>
+        <p><strong>Analytical framework &mdash; key references:</strong></p>
+        <ul style="font-size:0.85em;color:var(--muted);line-height:1.8;margin:8px 0 16px 20px;">
+            <li>Deming, W.E. <em>Out of the Crisis.</em> MIT Press, 1982 &mdash; common cause/special cause variation, tampering, 14 Points, constancy of purpose, 94% system responsibility</li>
+            <li>Joiner, B.L. <em>Fourth Generation Management.</em> McGraw-Hill, 1994 &mdash; Levels of Fix (output / process / system)</li>
+            <li>Goldratt, E.M. &amp; Cox, J. <em>The Goal.</em> North River Press, 1984 &mdash; Theory of Constraints</li>
+            <li>Meadows, D.H. <em>Thinking in Systems.</em> Chelsea Green, 2008 &mdash; leverage points and places to intervene in a system</li>
+            <li>Heath, C. &amp; Heath, D. <em>Switch: How to Change Things When Change Is Hard.</em> Random House, 2010 &mdash; <a href="why-nothing-has-worked-nhs-ae-performance.html#section-bright-spots" style="color:var(--brand-mid);">Bright Spots</a> framework</li>
+            <li>Pascale, R., Sternin, J. &amp; Sternin, M. <em>The Power of Positive Deviance.</em> Harvard Business Press, 2010 &mdash; Positive Deviance approach</li>
+            <li>Senge, P. <em>The Fifth Discipline.</em> Doubleday, 1990 &mdash; systems thinking, policy resistance, reinforcing loops</li>
+            <li>Page, E.S. Continuous inspection schemes. <em>Biometrika</em> 41(1&ndash;2), 1954 &mdash; original CUSUM method</li>
+            <li>Taylor, W.A. Change-point analysis: a powerful new tool for detecting changes. 2000 &mdash; <a href="https://www.variation.com/cpa/tech/changepoint.html" style="color:var(--brand-mid);">variation.com</a></li>
+            <li>Efron, B. &amp; Tibshirani, R.J. <em>An Introduction to the Bootstrap.</em> Chapman &amp; Hall, 1993</li>
+        </ul>
+        <p><strong>Regulatory and policy context:</strong></p>
+        <ul style="font-size:0.85em;color:var(--muted);line-height:1.8;margin:8px 0 16px 20px;">
+            <li>Control of Major Accident Hazards Regulations 2015 (COMAH) &mdash; hierarchy of controls framework applied to system-level interventions</li>
+            <li>NHS England: Additional Roles Reimbursement Scheme (ARRS) guidance and workforce data 2019&ndash;2023</li>
+            <li>Bevan, A. <em>In Place of Fear.</em> Heinemann, 1952 &mdash; NHS founding principles and economic rationale</li>
+        </ul>
+        <p style="font-size:0.85em;color:var(--muted);">All Bootstrap CUSUM analysis in this article is reproducible using the downloadable CSV files and the free tool at <a href="index.html" style="color:var(--brand-mid);">stepchangeanalysis.com</a> &mdash; browser-based, no data uploaded.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; May 2026</p>
+    </footer>
+
+</main>
+</body>
+</html>

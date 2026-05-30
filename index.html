@@ -205,15 +205,15 @@
     <!-- ── X-mR Specific Summary Bar ── -->
     <div id="xmr-summary-bar">
         <span><b>X-mR Chart:</b></span>
-        <span>UNPL = <b id="xmrUnpl">—</b></span> <span>|</span>
-        <span>LNPL = <b id="xmrLnpl">—</b></span>
+        <span>UNPL = <b id="xmrUnpl">&mdash;</b></span> <span>|</span>
+        <span>LNPL = <b id="xmrLnpl">&mdash;</b></span>
         <span>&nbsp;&nbsp;///&nbsp;&nbsp;</span>
         <span>mR Chart:</span>
-        <span>URL = <b id="xmrUrl">—</b></span>
+        <span>URL = <b id="xmrUrl">&mdash;</b></span>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <span>N = <b id="xmrN">—</b></span> <span>|</span>
-        <span>Mean = <b id="xmrMean">—</b></span> <span>|</span>
-        <span>SD = <b id="xmrSd">—</b></span>
+        <span>N = <b id="xmrN">&mdash;</b></span> <span>|</span>
+        <span>Mean = <b id="xmrMean">&mdash;</b></span> <span>|</span>
+        <span>SD = <b id="xmrSd">&mdash;</b></span>
     </div>
 
     <!-- ── Tabs ── -->
@@ -242,22 +242,28 @@
         <h2>&#128240; Articles &amp; Case Studies</h2>
         <div class="articles-grid">
 
+            <a href="gp-appointments-analysis.html" class="article-card">
+                <div class="article-card-tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</div>
+                <h3>More GP Appointments Recorded, Fewer Patients Feeling Seen</h3>
+                <p>Bootstrap CUSUM on 80 months of NHS GP appointments data finds one finding that cuts through the political noise: GP doctor contact rates have not changed since 2018. The system grew. The GP contact rate didn&rsquo;t. A system problem, not a people problem.</p>
+            </a>
+
             <a href="three-charts-three-stories.html" class="article-card">
                 <div class="article-card-tag" style="color:#0056b3;">Healthcare Quality Improvement</div>
                 <h3>Same Data, Three Charts, Three Very Different Stories</h3>
-                <p>How X-mR, Run Chart, and Bootstrap CUSUM tell radically different stories from 488 weeks of clinical data — and why it matters for governance reporting.</p>
+                <p>How X-mR, Run Chart, and Bootstrap CUSUM tell radically different stories from 488 weeks of clinical data &mdash; and why it matters for governance reporting.</p>
             </a>
 
             <a href="uk-gdp-analysis.html" class="article-card">
                 <div class="article-card-tag" style="color:#c0392b;">&#127468;&#127463; Economic Analysis</div>
                 <h3>The Chart That Changes How You See 77 Years of UK Economic History</h3>
-                <p>What Bootstrap CUSUM reveals about the long deceleration of UK GDP — and why conventional analysis has been telling us the wrong story.</p>
+                <p>What Bootstrap CUSUM reveals about the long deceleration of UK GDP &mdash; and why conventional analysis has been telling us the wrong story.</p>
             </a>
 
             <a href="hydrogen-plant-cusum.html" class="article-card">
                 <div class="article-card-tag" style="color:#198754;">&#9881;&#65039; Industrial Process Monitoring</div>
-                <h3>The Hydrogen Plant Problem — How Residual CUSUM Catches What Other Charts Miss</h3>
-                <p>Two identical plants, a 17% efficiency gap, and the residual CUSUM monitoring system — built on one reading per shift, pen and paper — that solved it.</p>
+                <h3>The Hydrogen Plant Problem &mdash; How Residual CUSUM Catches What Other Charts Miss</h3>
+                <p>Two identical plants, a 17% efficiency gap, and the residual CUSUM monitoring system &mdash; built on one reading per shift, pen and paper &mdash; that solved it.</p>
             </a>
 
             <a href="why-nothing-has-worked-nhs-ae-performance.html" class="article-card">
@@ -269,7 +275,7 @@
             <a href="ulez-london-air-quality.html" class="article-card">
                 <div class="article-card-tag" style="color:#0e7490;">&#127807; Environment &amp; Policy</div>
                 <h3>ULEZ Worked &mdash; But Not When Anyone Expected</h3>
-                <p>Bootstrap CUSUM on a decade of Marylebone Road NO2 data finds the ULEZ signal appeared 18 months before the scheme launched. But the biggest single change was COVID — and the London-wide expansion improved air quality at a site already in the zone for four years.</p>
+                <p>Bootstrap CUSUM on a decade of Marylebone Road NO2 data finds the ULEZ signal appeared 18 months before the scheme launched. But the biggest single change was COVID &mdash; and the London-wide expansion improved air quality at a site already in the zone for four years.</p>
             </a>
 
             <a href="anticoag-safety.html" class="article-card">
@@ -293,7 +299,7 @@
             <a href="sepsis-six-does-public-data-show-whether-it-worked.html" class="article-card">
                 <div class="article-card-tag" style="color:#7c3aed;">&#128138; Patient Safety &middot; Clinical QI</div>
                 <h3>The Sepsis Six: Does Public Data Show Whether It Worked?</h3>
-                <p>Six bedside actions. 96% of NHS hospitals. 37 countries. Bootstrap CUSUM on 22 years of ONS mortality data finds one stage and no change point in either clinical series. But the ratio between the two series shows a structural change point in 2013 at 95.5% confidence — the year the CQUIN coding incentive was introduced. Better coding. Not better outcomes. Not worse. The study step of PDSA was never completed.</p>
+                <p>Six bedside actions. 96% of NHS hospitals. 37 countries. Bootstrap CUSUM on 22 years of ONS mortality data finds one stage and no change point in either clinical series. But the ratio between the two series shows a structural change point in 2013 at 95.5% confidence &mdash; the year the CQUIN coding incentive was introduced. Better coding. Not better outcomes. Not worse. The study step of PDSA was never completed.</p>
             </a>
 
         </div>
@@ -303,6 +309,11 @@
     <div class="articles-modal-overlay" id="articlesModal" onclick="if(event.target===this)this.classList.remove('active')">
         <div class="articles-modal-box">
             <h3>&#128240; Articles &amp; Case Studies</h3>
+
+            <a href="gp-appointments-analysis.html">
+                <span class="tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</span>
+                <span class="title">More GP Appointments Recorded, Fewer Patients Feeling Seen</span>
+            </a>
 
             <a href="three-charts-three-stories.html">
                 <span class="tag" style="color:#0056b3;">Healthcare Quality Improvement</span>
@@ -316,7 +327,7 @@
 
             <a href="hydrogen-plant-cusum.html">
                 <span class="tag" style="color:#198754;">&#9881;&#65039; Industrial Process Monitoring</span>
-                <span class="title">The Hydrogen Plant Problem — How Residual CUSUM Catches What Other Charts Miss</span>
+                <span class="title">The Hydrogen Plant Problem &mdash; How Residual CUSUM Catches What Other Charts Miss</span>
             </a>
 
             <a href="why-nothing-has-worked-nhs-ae-performance.html">
@@ -356,22 +367,22 @@
     <div class="modal-overlay" id="helpModal">
         <div class="modal-box">
             <button class="modal-close" onclick="document.getElementById('helpModal').classList.remove('active')">&#10005;</button>
-            <h2>&#128202; StepChangeAnalysis.com — Help</h2>
+            <h2>&#128202; StepChangeAnalysis.com &mdash; Help</h2>
 
             <h3>Preparing your CSV file</h3>
-            <p>Your CSV must have at least two columns: a date column and a numeric value column. The analyser runs an automatic data quality check when you upload — if it detects blanks, zeros, or missing date periods it will show a yellow warning banner. A few common issues to avoid:</p>
+            <p>Your CSV must have at least two columns: a date column and a numeric value column. The analyser runs an automatic data quality check when you upload &mdash; if it detects blanks, zeros, or missing date periods it will show a yellow warning banner. A few common issues to avoid:</p>
             <ul>
-                <li><b>Numeric values with comma separators</b> (e.g. 1,234,567) — these can break the CSV structure if not properly quoted. Before saving as CSV from Excel, format your value column as a plain number with no thousands separator, or ensure values are wrapped in quotes. Run the Data Validator to check for this.</li>
-                <li><b>Merged cells in Excel</b> — merged date cells leave blank rows in the CSV. Unmerge all cells and fill each row with its own date before saving.</li>
-                <li><b>Mixed date formats</b> — ensure all dates in the date column use the same format throughout. The Data Validator will flag inconsistencies.</li>
-                <li><b>Unsupported date formats</b> — financial year formats like "2004-05" are not supported. Convert to a proper date (e.g. 01/04/2004) before uploading.</li>
+                <li><b>Numeric values with comma separators</b> (e.g. 1,234,567) &mdash; these can break the CSV structure if not properly quoted. Before saving as CSV from Excel, format your value column as a plain number with no thousands separator, or ensure values are wrapped in quotes. Run the Data Validator to check for this.</li>
+                <li><b>Merged cells in Excel</b> &mdash; merged date cells leave blank rows in the CSV. Unmerge all cells and fill each row with its own date before saving.</li>
+                <li><b>Mixed date formats</b> &mdash; ensure all dates in the date column use the same format throughout. The Data Validator will flag inconsistencies.</li>
+                <li><b>Unsupported date formats</b> &mdash; financial year formats like "2004-05" are not supported. Convert to a proper date (e.g. 01/04/2004) before uploading.</li>
             </ul>
 
             <h3>&#9888;&#65039; Missing data: zeros and blanks</h3>
             <p>Missing values in your data can significantly affect stage means and confidence levels. There are two distinct cases to be aware of:</p>
             <ul>
-                <li><b>Case 1 — The row is omitted entirely from the CSV.</b> If a monitoring station, sensor, or recording system simply produces no entry for a period, the CSV will skip that date. The tool treats each row as the next observation in sequence. A small number of omitted rows has minimal effect. A large number of omitted rows compresses the time axis and may cause change points to be dated incorrectly. Check that your data has no unexpected date gaps before uploading.</li>
-                <li><b>Case 2 — A blank cell is present in the value column.</b> This is the more dangerous case. When a monitoring station is offline or a value is unavailable, some data sources record the period but leave the value blank. Depending on how the CSV was saved, a blank cell may be read by the tool as zero. A zero in a value column — particularly for a metric that should never reach zero, such as NO2 concentration, temperature, or a count — will severely depress the stage mean and may create false change points. <b>Before uploading, filter your data in Excel and delete any rows where the value column is blank or zero when zero is not a valid measurement.</b></li>
+                <li><b>Case 1 &mdash; The row is omitted entirely from the CSV.</b> If a monitoring station, sensor, or recording system simply produces no entry for a period, the CSV will skip that date. The tool treats each row as the next observation in sequence. A small number of omitted rows has minimal effect. A large number of omitted rows compresses the time axis and may cause change points to be dated incorrectly. Check that your data has no unexpected date gaps before uploading.</li>
+                <li><b>Case 2 &mdash; A blank cell is present in the value column.</b> This is the more dangerous case. When a monitoring station is offline or a value is unavailable, some data sources record the period but leave the value blank. Depending on how the CSV was saved, a blank cell may be read by the tool as zero. A zero in a value column &mdash; particularly for a metric that should never reach zero, such as NO2 concentration, temperature, or a count &mdash; will severely depress the stage mean and may create false change points. <b>Before uploading, filter your data in Excel and delete any rows where the value column is blank or zero when zero is not a valid measurement.</b></li>
             </ul>
             <p><b>Best practice:</b> Before uploading any CSV, open it in Excel, sort by the value column, and check the lowest values. Any unexpected zeros or blanks should be investigated and removed if they represent missing readings rather than genuine zero measurements.</p>
 
@@ -385,14 +396,14 @@
                 <li><b>Date Style:</b> Choose the format that matches your date column.</li>
                 <li><b>Start / End Date:</b> Optionally filter your data to a specific date range.</li>
                 <li><b>Turn Length:</b> Minimum number of points required in a segment before a change point can be detected. Default 5.</li>
-                <li><b>Loops:</b> Number of bootstrap resamples. 1,000 is fast; use 5,000–10,000 for governance reports.</li>
+                <li><b>Loops:</b> Number of bootstrap resamples. 1,000 is fast; use 5,000&ndash;10,000 for governance reports.</li>
                 <li><b>Conf %:</b> Minimum confidence level required to declare a change point. 90% = sensitive; 95% = standard; 99.7% = conservative.</li>
-                <li><b>Show 3SD Limits:</b> Adds &#177;3 standard deviation bands to the Step Change chart.</li>
+                <li><b>Show 3SD Limits:</b> Adds &plusmn;3 standard deviation bands to the Step Change chart.</li>
             </ul>
 
             <h3>Chart Types</h3>
             <ul>
-                <li><b>Step Change Analysis:</b> Bootstrap CUSUM — detects multiple sequential step-changes with confidence levels. Main governance chart.</li>
+                <li><b>Step Change Analysis:</b> Bootstrap CUSUM &mdash; detects multiple sequential step-changes with confidence levels. Main governance chart.</li>
                 <li><b>Stage Summary:</b> Table showing each stage with start date, end date, mean, SD, confidence level, and % change from previous stage.</li>
                 <li><b>X-mR Chart:</b> Shewhart Individuals and Moving Range chart. Shows UNPL, LNPL, and URL control limits.</li>
                 <li><b>Run Chart:</b> Plots data against the median. Highlights runs of 6+ consecutive points above or below the median.</li>
@@ -408,7 +419,7 @@
                 <li><b>Pan:</b> Click the pan icon in the toolbar, then drag the chart left or right.</li>
                 <li><b>Hover for values:</b> Hover over any point to see the exact date and value.</li>
             </ul>
-            <p><i>Note: The <b>Export PNG</b> button produces a higher quality image with stats and settings metadata — use this for reports rather than the camera icon.</i></p>
+            <p><i>Note: The <b>Export PNG</b> button produces a higher quality image with stats and settings metadata &mdash; use this for reports rather than the camera icon.</i></p>
 
             <h3>Exporting</h3>
             <p>Use <b>Export PNG</b> to save the current chart as an image. Use <b>Export PDF</b> to generate a formatted report suitable for board papers and governance submissions.</p>
@@ -416,12 +427,12 @@
             <h3>Data Validator</h3>
             <p>If your analysis produces unexpected results, or if you see a data quality warning after uploading, click <b>Data Validator</b> to run a full diagnostic scan on your CSV. The validator checks for:</p>
             <ul>
-                <li><b>Blank values</b> — missing readings that may be interpreted as zero, depressing stage means and creating false change points.</li>
-                <li><b>Zero values</b> — readings recorded as 0 that may represent monitoring outages rather than genuine zero measurements.</li>
-                <li><b>Missing periods in the date sequence</b> — gaps in the sequence cause change points to be dated incorrectly, because the CUSUM treats each row as the next consecutive observation regardless of the actual time gap.</li>
-                <li><b>Out-of-order dates</b> — rows not in chronological sequence, which cause a spider-web chart pattern.</li>
-                <li><b>Unrecognised date formats</b> — dates the analyser cannot parse.</li>
-                <li><b>Column structure errors</b> — unquoted commas in numeric values corrupting the CSV structure.</li>
+                <li><b>Blank values</b> &mdash; missing readings that may be interpreted as zero, depressing stage means and creating false change points.</li>
+                <li><b>Zero values</b> &mdash; readings recorded as 0 that may represent monitoring outages rather than genuine zero measurements.</li>
+                <li><b>Missing periods in the date sequence</b> &mdash; gaps in the sequence cause change points to be dated incorrectly, because the CUSUM treats each row as the next consecutive observation regardless of the actual time gap.</li>
+                <li><b>Out-of-order dates</b> &mdash; rows not in chronological sequence, which cause a spider-web chart pattern.</li>
+                <li><b>Unrecognised date formats</b> &mdash; dates the analyser cannot parse.</li>
+                <li><b>Column structure errors</b> &mdash; unquoted commas in numeric values corrupting the CSV structure.</li>
             </ul>
             <p><b>Note:</b> The analyser also runs an automatic pre-flight check when you upload a CSV and when you change the X or Y column selection. If blanks, zeros, or date gaps are detected, a yellow warning banner will appear with a link to the Data Validator.</p>
 
@@ -434,18 +445,18 @@
             <h3>When Bootstrap CUSUM works best</h3>
             <p>Bootstrap CUSUM answers: <b>"has the underlying mean level of this process permanently shifted?"</b> It works best on:</p>
             <ul>
-                <li><b>Support or incident counts</b> — where training or system improvements produce lasting reductions</li>
-                <li><b>Prescribing volumes or error rates</b> — where a clinical intervention permanently shifts the baseline</li>
+                <li><b>Support or incident counts</b> &mdash; where training or system improvements produce lasting reductions</li>
+                <li><b>Prescribing volumes or error rates</b> &mdash; where a clinical intervention permanently shifts the baseline</li>
                 <li><b>Any data where improvements are expected to be sustained</b>, not temporary</li>
             </ul>
 
             <h3>When you may see "1 distinct stage"</h3>
             <ul>
-                <li><b>The data is cyclical or mean-reverting</b> — e.g. annual GDP growth rates naturally oscillate around a long-run mean.</li>
-                <li><b>The confidence threshold is too high</b> — try lowering Conf % to 95% or 90%.</li>
-                <li><b>The dataset is too short</b> — fewer than 20–30 observations.</li>
-                <li><b>The Turn Length is too high</b> — try reducing from 5 to 3.</li>
-                <li><b>Genuine stability</b> — the process may simply not have changed.</li>
+                <li><b>The data is cyclical or mean-reverting</b> &mdash; e.g. annual GDP growth rates naturally oscillate around a long-run mean.</li>
+                <li><b>The confidence threshold is too high</b> &mdash; try lowering Conf % to 95% or 90%.</li>
+                <li><b>The dataset is too short</b> &mdash; fewer than 20&ndash;30 observations.</li>
+                <li><b>The Turn Length is too high</b> &mdash; try reducing from 5 to 3.</li>
+                <li><b>Genuine stability</b> &mdash; the process may simply not have changed.</li>
             </ul>
 
             <p style="font-size:0.85em; color:#888; margin-top:20px;">Based on Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). Implemented at StepChangeAnalysis.com.</p>
