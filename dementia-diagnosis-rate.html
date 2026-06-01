@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The 66% Target: What the Dementia Diagnosis Data Actually Shows — StepChangeAnalysis.com</title>
-    <meta name="description" content="England exceeded the dementia diagnosis target in 2019. Then COVID created a structural step-change confirmed by Bootstrap CUSUM at 95% confidence. Stage 1 mean 67.88% — above target. Stage 2 mean 63.76% — below target. By March 2025, England is still 1.1 percentage points below a target set in 2012.">
+    <meta name="description" content="England exceeded the dementia diagnosis target in 2019. Then COVID created a structural step-change confirmed by Bootstrap CUSUM at 95% confidence. Bootstrap CUSUM finds one stage at 99.7% confidence, mean 65.39%, N=9. The COVID collapse is visible as a special cause on the X-mR moving range chart. By March 2025, England is still 1.1 percentage points below a target set in 2012.">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
@@ -94,8 +94,8 @@
         .btn:hover { background: var(--brand-blue); }
         .toc-details { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 0; margin: 0 0 28px; font-family: system-ui, sans-serif; overflow: hidden; }
         .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: 600; font-size: 0.9em; color: var(--brand-mid); list-style: none; display: flex; align-items: center; justify-content: space-between; }
-        .toc-details summary::after { content: "&#9660;"; font-size: 0.8em; }
-        .toc-details[open] summary::after { content: "&#9650;"; }
+        .toc-details summary::after { content: "\25BC"; font-size: 0.8em; }
+        .toc-details[open] summary::after { content: "\25B2"; }
         .toc-details ol { padding: 0 18px 16px 36px; }
         .toc-details ol li { padding: 3px 0; font-size: 0.9em; }
         .toc-details ol li a { color: var(--brand-mid); text-decoration: none; }
@@ -119,28 +119,28 @@
     <div class="article-flag">&#127973;&#65039; NHS Healthcare Policy &nbsp;&middot;&nbsp; Dementia &nbsp;&middot;&nbsp; Diagnosis Rates</div>
 
     <h1>The 66% Target: What the Dementia Diagnosis Data Actually Shows</h1>
-    <p class="article-subtitle">England first hit the dementia diagnosis target in November 2015. By 2019 it was exceeding it. Then COVID wiped out years of progress in a single structural step &mdash; confirmed by Bootstrap CUSUM at 95% confidence. By March 2025, England is still 1.1 percentage points below a target set in 2012.</p>
+    <p class="article-subtitle">England first hit the dementia diagnosis target in November 2015. By 2019 it was exceeding it. Then COVID produced the largest single-year fall in the series &mdash; visible in both the Bootstrap CUSUM and the X-mR moving range chart. By March 2025, England is still 1.1 percentage points below a target set in 2012.</p>
     <div class="article-meta">
         By Syd Stewart, Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp;
         Data: OHID Fingertips Estimated Dementia Diagnosis Rate (EDDR), England &nbsp;&middot;&nbsp;
-        N=18 annual observations, 2017&ndash;2025 &nbsp;&middot;&nbsp; 2 stages at 95% confidence
+        N=9 annual observations, 2017&ndash;2025 &nbsp;&middot;&nbsp; 1 stage at 99.7% confidence
     </div>
 
     <div class="alert-orange" style="margin-bottom:28px;">
-        <strong>&#8220;A timely diagnosis of dementia, occurring when the patient and their family are ready to access help, provides an explanation for symptoms and enables patients and carers to access post-diagnostic support, care planning, and treatment.&#8221;</strong> &mdash; NHS England clinical rationale for the 66.7% diagnosis target. The national target was set in 2012. England crossed it in 2019 at 68.5% &mdash; a special cause above the upper natural process limit. COVID then drove the rate to 61.7% in 2021 &mdash; a fall of nearly 7 percentage points and a special cause below the lower limit. Bootstrap CUSUM confirms two structural stages: a pre-COVID mean of 67.88% <em>above</em> the target, and a post-COVID mean of 63.76% <em>below</em> it. As of March 2025, the rate is 65.6%. Still below the target set thirteen years ago.
+        <strong>&#8220;A timely diagnosis of dementia, occurring when the patient and their family are ready to access help, provides an explanation for symptoms and enables patients and carers to access post-diagnostic support, care planning, and treatment.&#8221;</strong> &mdash; NHS England clinical rationale for the 66.7% diagnosis target. The national target was set in 2012. England crossed it in 2019 at 68.5% &mdash; a special cause above the upper natural process limit. COVID then drove the rate to 61.7% in 2021 &mdash; a fall of nearly 7 percentage points and a special cause below the lower limit. Bootstrap CUSUM on N=9 annual observations finds one stage at 99.7% confidence, mean 65.39%. The X-mR moving range between 2020 and 2021 exceeds the upper range limit &mdash; the COVID collapse is confirmed as a special cause on the rate of change chart. As of March 2025, the rate is 65.6%. Still below the target set thirteen years ago.
     </div>
 
     <!-- Summary box -->
     <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px 0;font-family:system-ui,sans-serif;">
-        <div style="font-size:0.72em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:6px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="dementia-eddr-england.csv" download="dementia-eddr-england.csv" style="color:var(--brand-mid);">&#8675; Download EDDR data CSV (Estimated Dementia Diagnosis Rate)</a></div>
+        <div style="font-size:0.72em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:6px;">&#128203; Article Summary &nbsp;&middot;&nbsp; <a href="dementia-diagnosis-summary.pdf" download="dementia-diagnosis-summary.pdf" style="color:var(--brand-mid);">&#8675; Download Executive Summary PDF</a> &nbsp;&middot;&nbsp; <a href="dementia-eddr-england.csv" download="dementia-eddr-england.csv" style="color:var(--brand-mid);">&#8675; Download EDDR data CSV</a></div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:14px 0 16px;">
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
                 <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">England briefly got there</div>
-                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">The 66.7% target was first achieved in November 2015. By 2019 England was at 68.5% &mdash; above the upper natural process limit on the X-mR chart. The PM&rsquo;s Challenge, backed by CQUIN incentives, worked at its peak.</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">The 66.7% target was first achieved in November 2015. From 2017 to 2020 the rate ran above the target each year, peaking at 68.5% in 2019. The Bootstrap CUSUM overall mean is 65.39% &mdash; the 2017&ndash;2020 period ran consistently above both the mean and the 66.7% target.</div>
             </div>
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--red);">
-                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">COVID: a structural step-change</div>
-                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Bootstrap CUSUM finds two stages at 95% confidence. Stage 1 (2017&ndash;2020): mean 67.88%, above target. Stage 2 (2020&ndash;2025): mean 63.76%, below target. A structural step-down of 6.1 percentage points confirmed at 95.78% confidence.</div>
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">COVID: a visible collapse</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Bootstrap CUSUM finds one stage across the full series, mean 65.39% (N=9). The rate ran above the mean 2017&ndash;2020, collapsed to 61.7% in 2021, and has been recovering since. The X-mR moving range between 2020 and 2021 of 5.7pp exceeds the URL of 5.19pp &mdash; the COVID collapse confirmed as a special cause on the rate of change chart.</div>
             </div>
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--orange);">
                 <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The slow recovery</div>
@@ -152,7 +152,7 @@
             </div>
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid #1e293b;">
                 <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">Purchased behaviour, not system design</div>
-                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Deming&rsquo;s 12th Point warns against incentive schemes: they purchase behaviour rather than embed it, and disappear when removed. The CQUIN drove the rate above 66.7% &mdash; then the rate drifted when the incentive changed. The constraint &mdash; memory clinic capacity &mdash; was never resolved. A Deming-consistent approach would have built cognitive assessment into routine GP annual reviews as standard, not an incentivised extra.</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Deming&rsquo;s 12th Point warns against incentive schemes: they purchase behaviour rather than embed it, and disappear when removed. The rate was above 66.7% while the CQUIN was active, then fell when COVID disrupted the pathway. The constraint &mdash; memory clinic capacity &mdash; was never resolved. A Deming-consistent approach would have built cognitive assessment into routine GP annual reviews as standard, not an incentivised extra.</div>
             </div>
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--brand-mid);">
                 <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">Level 3: fix the system, not the metric</div>
@@ -160,7 +160,7 @@
             </div>
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--red);">
                 <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">A metric that moves for the wrong reasons</div>
-                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">The EDDR denominator is recalculated every month as the population ages &mdash; even if no diagnostic activity changes at all, the rate falls automatically. The underlying CFAS II prevalence rates are from 2011. The 66.7% target is a political round number: two-thirds. A practice diagnosing the same patients every month shows a falling rate simply because its patients got older. The recovery from 61.7% to 65.6% was achieved against a rising denominator &mdash; making it more significant than the raw numbers suggest.</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">The EDDR denominator is recalculated every month as the registered population ages &mdash; even if diagnostic activity is unchanged, the rate falls automatically. The 66.7% target is a political round number (two-thirds), not a clinically derived figure. A practice diagnosing exactly the same patients every month will show a falling rate simply because its patients got older. The recovery from 61.7% to 65.6% was achieved against this rising denominator &mdash; making it more significant than the raw numbers suggest.</div>
             </div>
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid #0e7490;">
                 <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">Drive measures and balance measures</div>
@@ -168,7 +168,7 @@
             </div>
         </div>
         <div style="font-size:0.85em;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;">
-            <strong style="color:var(--text);">Data:</strong> OHID Fingertips <a href="glossary.html#term-eddr" style="color:var(--brand-mid);">EDDR</a> indicator, England &nbsp;&middot;&nbsp; <strong style="color:var(--text);">N=18</strong> annual observations 2017&ndash;2025 &nbsp;&middot;&nbsp; 95% confidence &nbsp;&middot;&nbsp; Loops=5,000
+            <strong style="color:var(--text);">Data:</strong> OHID Fingertips <a href="glossary.html#term-eddr" style="color:var(--brand-mid);">EDDR</a> indicator, England &nbsp;&middot;&nbsp; <strong style="color:var(--text);">N=9</strong> annual observations 2017&ndash;2025 &nbsp;&middot;&nbsp; 95% confidence &nbsp;&middot;&nbsp; Loops=5,000
         </div>
     </div>
 
@@ -232,7 +232,7 @@
 
     <figure class="chart-figure">
         <img src="images/dementia-eddr-xmr.png" alt="X-mR control chart of England dementia diagnosis rate 2017-2025 showing special cause signals in 2019 above UNPL and 2021 below LNPL">
-        <figcaption>X-mR Control Chart &mdash; Estimated Dementia Diagnosis Rate, England, 2017&ndash;2025. Mean=65.39%, UNPL=67.38%, LNPL=63.40%, URL=2.44 percentage points. Special causes confirmed: 2019 above UNPL at 68.5% &mdash; England briefly exceeded the 66.7% target; 2021 below LNPL at 61.7% with moving range exceeding URL &mdash; COVID structural collapse. Source: OHID Fingertips.</figcaption>
+        <figcaption>X-mR Control Chart &mdash; Estimated Dementia Diagnosis Rate, England, 2017&ndash;2025. Mean=65.39%, UNPL=67.38%, LNPL=63.40%, URL=2.44 percentage points. All nine values fall within the natural process limits (UNPL 69.61%, LNPL 61.17%). The moving range between 2020 and 2021 of 5.7pp exceeds the URL of 5.19pp &mdash; a special cause on the rate of change chart confirming the COVID collapse as statistically unusual. Source: OHID Fingertips.</figcaption>
     </figure>
 
     <div class="numbers-box">
@@ -240,10 +240,10 @@
             <tr><th>Year</th><th>EDDR (%)</th><th>X-mR signal</th><th>Context</th></tr>
             <tr><td>2017</td><td>68.0</td><td>Within limits</td><td>Post-Challenge high, above target</td></tr>
             <tr><td>2018</td><td>67.5</td><td>Within limits</td><td>Modest drift beginning</td></tr>
-            <tr class="highlight"><td>2019</td><td>68.5</td><td><strong>Above UNPL (67.38%)</strong></td><td>Special cause &mdash; England exceeds target</td></tr>
-            <tr><td>2020</td><td>67.4</td><td>On LNPL</td><td>First COVID disruption to diagnostics</td></tr>
-            <tr class="alert-row"><td>2021</td><td>61.7</td><td><strong>Below LNPL (63.40%)</strong></td><td>Special cause &mdash; COVID collapse &minus;5.7pp</td></tr>
-            <tr class="caution-row"><td>2022</td><td>62.0</td><td>Below LNPL</td><td>Still in COVID trough</td></tr>
+            <tr><td>2019</td><td>68.5</td><td>Within limits</td><td>Peak year &mdash; closest to UNPL (69.61%)</td></tr>
+            <tr><td>2020</td><td>67.4</td><td>Within limits</td><td>First COVID disruption to diagnostics</td></tr>
+            <tr class="caution-row"><td>2021</td><td>61.7</td><td>Within limits (mR special cause)</td><td>COVID collapse &mdash; mR 5.7pp exceeds URL 5.19pp</td></tr>
+            <tr><td>2022</td><td>62.0</td><td>Within limits</td><td>Still in COVID trough</td></tr>
             <tr><td>2023</td><td>63.0</td><td>Within limits</td><td>Recovery beginning</td></tr>
             <tr><td>2024</td><td>64.5</td><td>Within limits</td><td>Continuing recovery</td></tr>
             <tr class="caution-row"><td>2025</td><td>65.6</td><td>Within limits</td><td>1.1pp below 66.7% target</td></tr>
@@ -254,25 +254,29 @@
 
     <figure class="chart-figure">
         <img src="images/dementia-eddr-bootstrap-cusum.png" alt="Bootstrap CUSUM step change analysis of England dementia diagnosis rate 2017-2025 showing two stages at 95% confidence with change point at 2020">
-        <figcaption>Bootstrap CUSUM &mdash; Estimated Dementia Diagnosis Rate, England, 2017&ndash;2025. Two stages at 95% confidence. Stage 1 mean 67.88% (2017&ndash;2020), above the 66.7% target. Stage 2 mean 63.76% (2020&ndash;2025), below the target. Change point 2020, confirmed at 95.78% confidence. N=18 annual observations, 5,000 loops, TL=5. Source: OHID Fingertips. &mdash; <em>Reading the CUSUM:</em> The green line rises 2017&ndash;2020 because every value was above the overall mean. It falls steeply 2021&ndash;2022 as COVID drove values below the mean. The sharp vertical step of the blue stage mean at 2020 is the change point marker &mdash; this is Bootstrap CUSUM correctly identifying the structural break, not a chart error.</figcaption>
+        <figcaption>Bootstrap CUSUM &mdash; Estimated Dementia Diagnosis Rate, England, 2017&ndash;2025. One stage at 99.7% confidence, mean 65.39%, SD 2.69%. N=9 annual observations (deduplicated), 1,000 loops, TL=5. The CUSUM rises to 2019&ndash;2020 (above the mean) then falls steeply through 2021&ndash;2022 (COVID collapse below the mean) then recovers toward zero by 2025. Source: OHID Fingertips. &mdash; <em>Reading the chart:</em> There is one data value per year (the red line with dots, read against the left axis). The green line is not a second data series &mdash; it is the running cumulative sum of deviations from the overall mean, read against the right axis. When the red line runs above the mean the green line rises; when it falls sharply below the mean (as in 2021&ndash;2022) the green line drops steeply, which can appear as a near-vertical line. The blue stepped line shows the stage means. The sharp vertical step at 2020 is the change point marker, not a data error.</figcaption>
     </figure>
 
-    <p><strong>Bootstrap CUSUM result: two stages at 95% confidence.</strong> Stage 1 (2017&ndash;2020): mean 67.88% &mdash; England consistently at or above the 66.7% target. Stage 2 (2020&ndash;2025): mean 63.76% &mdash; a structural step-down of 6.1 percentage points confirmed at 95.78% confidence, with change point at 2020. The COVID collapse was not a temporary dip &mdash; it was a structural shift to a new, lower mean from which the series has not yet fully recovered.</p>
+    <p><strong>Bootstrap CUSUM result: one stage at 99.7% confidence, mean 65.39%, SD 2.69%, N=9.</strong> With nine annual observations the series does not contain sufficient data points for Bootstrap CUSUM to confirm a structural stage change at any confidence level, despite the dramatic visual collapse in 2021. The CUSUM shape is revealing nonetheless: it rises steadily from 2017 to 2019&ndash;2020 (values above the mean) then falls steeply to 2021&ndash;2022 (values well below the mean) then recovers toward zero by 2025 &mdash; the classic inverted-V signature of a temporary disruption returning toward its pre-event level. Bootstrap CUSUM correctly reports one stage: the series is returning to where it started.</p>
 
-    <p>At 99.7% confidence the step-down falls just short &mdash; reflecting the genuine statistical challenge of N=18 annual observations. The 95% finding is analytically appropriate for this dataset: the signal is real and the confidence level matches the evidence available. The change point at 2020 is unambiguous regardless of threshold.</p>
+    <p>The honest statistical assessment: nine annual observations is a very small dataset. The pattern is clear visually and the X-mR moving range confirms the 2021 collapse as a special cause. But the Bootstrap CUSUM cannot declare a structural stage change from N=9 alone. More data points &mdash; either monthly observations or a longer annual series &mdash; would strengthen the statistical picture considerably.</p>
+
+    <div class="alert-blue">
+        <strong>What is a structural change &mdash; and why does it matter?</strong> A structural change (or step-change) occurs when a process permanently shifts to a new mean level &mdash; not a temporary dip or spike, but a lasting change in the underlying system that produced the data. Bootstrap CUSUM is specifically designed to detect these: it identifies when the cumulative deviation from the mean crosses a threshold that is statistically unlikely under random variation alone. A confirmed structural change tells you the system itself has changed &mdash; not just that an unusual event occurred. In this dataset the COVID collapse is visible and confirmed as a special cause on the moving range chart, but with N=9 the Bootstrap CUSUM cannot determine whether the system has permanently shifted to a new lower mean or is returning to its pre-COVID level. The recovery to 65.6% by 2025 &mdash; close to the overall mean of 65.39% &mdash; is consistent with return to the pre-existing process rather than a new structural stage. <strong>The conclusion:</strong> the PM&rsquo;s Challenge did not create a detectable structural change in the diagnosis rate that Bootstrap CUSUM can confirm from this dataset. The rate was above target while the policy was active. Whether this was caused by the policy or would have happened anyway cannot be determined from N=9.
+    </div>
 
     <hr>
 
     <!-- Section 3 -->
     <h2 id="section-2019">The 2019 peak: England briefly got there</h2>
 
-    <p>The X-mR control chart gives control limits of UNPL 67.38% and LNPL 63.40% &mdash; the boundaries of expected natural variation around the long-run mean of 65.39%. The 2019 observation of 68.5% sits above the upper natural process limit. This is not random variation &mdash; it is a genuine special cause signal. Something changed to push the rate above what the process would naturally produce.</p>
+    <p>The X-mR control chart gives control limits of UNPL 69.61% and LNPL 61.17% &mdash; the boundaries of expected natural variation around the long-run mean of 65.39%. With N=9 annual observations the limits are necessarily wide. All nine values fall within these limits, including the 2021 COVID collapse at 61.7% &mdash; which sits just above the LNPL. The special cause signal comes from the moving range chart: the 5.7pp fall between 2020 and 2021 exceeds the URL of 5.19pp, confirming the rate of change as statistically unusual even if the absolute level remains within limits.</p>
 
-    <p>In Shewhart&rsquo;s terms: the PM&rsquo;s Challenge worked. The combination of the two PM&rsquo;s Challenges, the CQUIN incentive, and sustained national focus had driven the rate to a level it had not previously achieved and could not sustain without that external pressure.</p>
+    <p>In Shewhart&rsquo;s terms: the process was running consistently above the 66.7% target throughout 2017&ndash;2020. The X-mR cannot declare a special cause from nine annual data points, but the consistent pattern of values above the mean in Stage 1 is clear. The PM&rsquo;s Challenge, backed by CQUIN incentives and sustained national focus, had driven the rate to a level it could not sustain without that external pressure.</p>
 
     <div class="finding-box">
         <h3>England crossed the 66.7% target in 2019 at 68.5%</h3>
-        <p>The X-mR confirms this as a special cause above the upper natural process limit. The NHS has tended to downplay this achievement in the post-COVID period, noting only that the target has not yet been re-achieved. But England did get there &mdash; briefly, under exceptional political focus. The question the data raises is why it required exceptional pressure to reach a level that should be the routine floor.</p>
+        <p>With N=9 the natural process limits are wide (UNPL 69.61%, LNPL 61.17%) and 2019 at 68.5% falls within limits. The X-mR cannot confirm 2019 as a special cause from nine data points alone. What the data does show clearly is that England was consistently above the 66.7% target throughout 2017&ndash;2020 &mdash; a genuine achievement that is often lost in the post-COVID narrative. The question the data raises is why it required exceptional political pressure to reach and sustain a level that should be the routine floor.</p>
     </div>
 
     <p>The moving range chart is well-behaved in 2017&ndash;2019 &mdash; small, consistent year-on-year changes, all within the URL of 2.44 percentage points. The process was stable and improving. Then 2020 arrived.</p>
@@ -306,11 +310,12 @@
     <div class="numbers-box">
         <table>
             <tr><th>Metric</th><th>Value</th></tr>
-            <tr><td>Bootstrap CUSUM: stages (95% confidence)</td><td>2</td></tr>
-            <tr><td>Stage 1 mean (2017&ndash;2020)</td><td>67.88% &mdash; <em>above</em> the 66.7% target</td></tr>
-            <tr><td>Stage 2 mean (2020&ndash;2025)</td><td>63.76% &mdash; <em>below</em> the 66.7% target</td></tr>
-            <tr><td>Step-down at change point (2020)</td><td>&minus;6.1 percentage points at 95.78% confidence</td></tr>
-            <tr><td>X-mR: UNPL / LNPL / URL</td><td>67.38% / 63.40% / 2.44 pp</td></tr>
+            <tr><td>Bootstrap CUSUM: stages (99.7% confidence)</td><td>1 &mdash; N=9 too small for stage detection</td></tr>
+            <tr><td>Bootstrap CUSUM: overall mean</td><td>65.39%</td></tr>
+            <tr><td>Bootstrap CUSUM: SD</td><td>2.69 percentage points</td></tr>
+            <tr><td>X-mR: UNPL / LNPL / URL</td><td>69.61% / 61.17% / 5.19 pp</td></tr>
+            <tr><td>2021 vs LNPL</td><td>61.7% vs LNPL 61.17% &mdash; borderline, within limits</td></tr>
+            <tr><td>2020&rarr;2021 moving range vs URL</td><td>5.7pp vs URL 5.19pp &mdash; <strong>special cause</strong></td></tr>
             <tr class="highlight"><td>National target (set 2012)</td><td>66.7%</td></tr>
             <tr><td>Current rate (March 2025)</td><td>65.6%</td></tr>
             <tr><td>Gap to target</td><td>1.1 percentage points</td></tr>
@@ -351,14 +356,14 @@
     <div class="deming-box">
         <h3>A numerical goal without a method</h3>
         <div class="deming-quote">&ldquo;A numerical goal without a method is nonsense.&rdquo; &mdash; W. Edwards Deming</div>
-        <p>The 66.7% target was set in 2012. It was first achieved in November 2015 &mdash; three years later, backed by CQUIN incentives, a national focus, and two Prime Ministers who personally championed the cause. The Bootstrap CUSUM confirms the PM&rsquo;s Challenge produced a real structural effect: Stage 1 mean 67.88% (2017&ndash;2020) was consistently above the 66.7% target. When the political focus and financial incentives were reduced, the rate began a modest drift even before COVID arrived.</p>
-        <p>Deming&rsquo;s first of the 14 Points is <strong>constancy of purpose</strong> &mdash; a long-term commitment that transcends electoral cycles. The CQUIN incentive created demand for assessment without proportionately increasing assessment capacity. The result &mdash; a rate that reached the target under exceptional political pressure, then drifted when that pressure eased, then collapsed under COVID &mdash; is exactly what a system without a resolved constraint produces.</p>
+        <p>The 66.7% target was set in 2012. It was first achieved in November 2015 &mdash; three years later, backed by CQUIN incentives, a national focus, and two Prime Ministers who personally championed the cause. The Bootstrap CUSUM finds one stage across the full series at 99.7% confidence, mean 65.39%. The data from 2017&ndash;2020 shows the rate running above the 66.7% target in each of those four years &mdash; consistent with the PM&rsquo;s Challenge having a sustained positive effect. When the political focus and financial incentives were reduced, the rate began a modest drift even before COVID arrived.</p>
+        <p>Deming&rsquo;s first of the 14 Points is <strong>constancy of purpose</strong> &mdash; a long-term commitment that transcends electoral cycles. The CQUIN incentive created demand for assessment without proportionately increasing assessment capacity. The result &mdash; a rate that reached the target under exceptional political pressure, ran above it for four years, then fell sharply when COVID closed memory clinics &mdash; is consistent with what a system without a resolved constraint produces. The modest drift before COVID is visible in the data (67.5% in 2018, 67.4% in 2020) though with N=9 this cannot be confirmed statistically.</p>
 
         <h3>By what method?</h3>
-        <p>The PM&rsquo;s Challenge drove the rate above the target by mobilising proactive identification programmes and sustained national attention. But Deming would identify the central mechanism &mdash; the CQUIN financial incentive &mdash; as precisely the wrong approach. Deming&rsquo;s 12th Point explicitly warns against incentive pay and extrinsic reward schemes: they purchase behaviour rather than embedding it, they optimise for the metric rather than the purpose, and they disappear when the incentive is removed &mdash; taking the behaviour with them.</p>
+        <p>The data shows the rate was above the 66.7% target throughout 2017&ndash;2020. The PM&rsquo;s Challenge, which pre-dates the 2017 data series, was well underway during this period &mdash; and the target had been first achieved in November 2015. Whether the rate was above target because of the Challenge or whether it would have reached this level anyway cannot be determined from the available data. What the data confirms is that the rate was above target when the Challenge was active, and fell when COVID disrupted the diagnostic pathway. But Deming would identify the central mechanism &mdash; the CQUIN financial incentive &mdash; as precisely the wrong approach. Deming&rsquo;s 12th Point explicitly warns against incentive pay and extrinsic reward schemes: they purchase behaviour rather than embedding it, they optimise for the metric rather than the purpose, and they disappear when the incentive is removed &mdash; taking the behaviour with them.</p>
         <p>The EDDR data proves the point. The rate rose while the CQUIN was active and the political focus was intense. It drifted when the incentive structure changed, even before COVID. The 2019 peak is a special cause &mdash; something unusual pushed the rate above its natural range. That &ldquo;something&rdquo; was purchased behaviour, not system redesign. Without the purchase, the rate returned to its natural range.</p>
         <p>A Deming-consistent alternative would have redesigned the <em>system</em> to make dementia identification routine &mdash; building cognitive assessment into every GP over-65 annual review as a standard process, not an incentivised extra, and building memory assessment capacity so that a referral produces a timely result without exceptional pressure. The CQUIN created demand for referral without proportionately building the assessment capacity to receive it. The method was misidentified.</p>
-        <p><strong>Deming&rsquo;s question is not &ldquo;why did COVID collapse the diagnosis rate?&rdquo; &mdash; that answer is obvious.</strong> His question is: why, three years after COVID ended, is the rate still below a target set thirteen years ago? The answer is that the purchased behaviour was never replaced by embedded system design.</p>
+        <p><strong>Deming&rsquo;s question is not &ldquo;why did COVID collapse the diagnosis rate?&rdquo; &mdash; that answer is obvious.</strong> His question is: why, five years after the COVID diagnostic collapse, is the rate still below a target set thirteen years ago? The data shows recovery to 65.6% by March 2025 &mdash; but still 1.1 percentage points short. Whether this reflects the absence of embedded system design, the ongoing constraint of memory clinic capacity, or simply the slow pace of structural recovery from a large disruption is a question the data raises but N=9 cannot resolve statistically.</p>
 
         <h3>The constraint identified</h3>
         <p>The constraint on dementia diagnosis is not patient awareness, not GP motivation, and not public willingness to be assessed. Research consistently shows high awareness and reasonable help-seeking behaviour. The constraint is <strong>memory clinic capacity</strong> &mdash; the number of specialist assessments available per year.</p>
@@ -410,7 +415,7 @@
         <p><strong style="color:white;">The critical insight:</strong> you cannot flip a reinforcing loop by pushing on the output. The PM pushed on the EDDR. R2 accelerated and R1 continued eroding. What flips a loop is a structural intervention at a specific node that reverses the direction of at least one link. For R1 that node is career attractiveness. For R2 it is throughput capacity relative to demand. Both require decisions with long lead times &mdash; which is precisely why they were not made, and why both loops have been running vicious for 30 years.</p>
 
         <h3>What Level 3 looks like for dementia diagnosis</h3>
-        <p>Joiner&rsquo;s framework asks whether we are fixing the output (Level 1), the process (Level 2), or the system (Level 3). Most dementia diagnosis policy has operated at Level 1 and 2. The CQUIN was Level 1 &mdash; telling people to do more, with a financial incentive attached. Pathway redesign is Level 2. Level 3 would address the binding constraint directly:</p>
+        <p>Joiner&rsquo;s framework asks whether we are fixing the output (Level 1), the process (Level 2), or the system (Level 3). Most dementia diagnosis policy has operated at Level 1 and 2. The CQUIN was Level 1 &mdash; telling people to do more, with a financial incentive attached. Pathway redesign is Level 2. Level 3 would address the binding constraint directly. It is worth noting that the answers to Level 3 system interventions can often be found in Deming&rsquo;s 14 Points &mdash; particularly Point 1 (constancy of purpose), Point 6 (institute training), Point 13 (institute education and self-improvement), and Point 12 (remove barriers that rob people of pride of workmanship, which includes poorly designed career incentive structures):</p>
         <ul style="color:#e2e8f0;padding-left:20px;margin-bottom:12px;line-height:1.8;">
             <li><strong style="color:white;">Build memory clinic capacity structurally</strong> &mdash; not as a response to demand, but ahead of the demographic curve. The 70&ndash;80 cohort driving peak dementia prevalence was predictable decades in advance. Memory clinic sessions should have been expanding since 2005.</li>
             <li><strong style="color:white;">Integrate cognitive assessment into routine GP annual reviews</strong> &mdash; make it a standard process for all patients aged 75+, not a separate referral pathway. This removes the GP-to-specialist bottleneck for straightforward presentations and reserves memory clinic capacity for complex cases.</li>
@@ -419,7 +424,7 @@
         </ul>
         <p>The key distinction: Level 3 interventions do not require exceptional political pressure to sustain. They are designed into the system so that the outcome is produced routinely, not under extraordinary circumstances.</p>
 
-        <h3>The right measures &mdash; and the balance measures that guard against gaming</h3>
+        <h3>Suggested measures &mdash; and the balance measures that guard against gaming</h3>
         <p>The EDDR measures the first step of the care pathway. Deming&rsquo;s critique of measurement applies: a metric that captures only the initial event tells you nothing about whether the system is achieving its purpose. The purpose of dementia diagnosis is not to count diagnoses &mdash; it is to enable people with dementia to live well, with appropriate support, for as long as possible.</p>
         <p>But drive measures alone are not enough. Without balance measures, optimising any single metric produces unintended consequences &mdash; what Deming called suboptimisation. A memory clinic under pressure to reduce waiting times will process patients faster, which may mean less thorough assessments. A GP practice incentivised to increase referrals will refer patients who don&rsquo;t need assessment, overwhelming clinic capacity. Every drive measure needs a counterweight.</p>
         <div style="overflow-x:auto;margin:16px 0;">
@@ -486,24 +491,33 @@
         <p style="font-size:0.95em;margin-bottom:10px;"><strong>Data source:</strong> Office for Health Improvement and Disparities (OHID), Fingertips Dementia Profile. Estimated Dementia Diagnosis Rate (EDDR) indicator, England national level. Annual March snapshot. Downloaded via the fingertips_py Python package, 31 May 2026. Available at: <a href="dementia-eddr-england.csv" download="dementia-eddr-england.csv">dementia-eddr-england.csv</a>.</p>
         <p style="font-size:0.95em;margin-bottom:10px;"><strong>EDDR methodology:</strong> Compares the number of people aged 65+ with a coded dementia diagnosis on their GP practice register to the estimated number expected to have dementia, using CFAS II age- and sex-specific prevalence rates. Expressed as a percentage. A rate of 100% would mean every person estimated to have dementia has a recorded diagnosis.</p>
         <p style="font-size:0.95em;margin-bottom:10px;"><strong>Series break:</strong> The EDDR methodology changed in 2017/18 when CFAS II prevalence estimates replaced earlier survey estimates. Data before 2017 is not directly comparable. This article analyses the 2017&ndash;2025 series only. Historical anchor points (target first achieved November 2015; pre-pandemic peak 67.4% March 2020; 5.4% fall to February 2023) are from published NHS England commentary and peer-reviewed literature.</p>
-        <p style="font-size:0.95em;margin-bottom:10px;"><strong>Bootstrap CUSUM settings:</strong> N=18 annual observations. 5,000 loops. Turn length 5. Confidence threshold 95%. Result: 2 stages. Stage 1 (2017&ndash;2020): mean 67.88%. Stage 2 (2020&ndash;2025): mean 63.76%. Change point confidence: 95.78%. Overall mean 65.39%, SD 2.61%.</p>
-        <p style="font-size:0.95em;margin-bottom:10px;"><strong>X-mR settings:</strong> Mean 65.39%. UNPL 67.38%. LNPL 63.40%. URL 2.44 percentage points. Special causes: 2019 above UNPL; 2021 below LNPL with moving range exceeding URL.</p>
+        <p style="font-size:0.95em;margin-bottom:10px;"><strong>Bootstrap CUSUM settings:</strong> N=9 annual observations (after deduplication of source data). 1,000 loops. Turn length 5. Confidence threshold 99.7%. Result: 1 stage, mean 65.39%, SD 2.69%. N=9 is too small to confirm a structural stage change; the visual pattern is clear but the statistical evidence is limited.</p>
+        <p style="font-size:0.95em;margin-bottom:10px;"><strong>X-mR settings:</strong> N=9. Mean 65.39%. UNPL 69.61%. LNPL 61.17%. URL 5.19 percentage points. Special causes: 2021 borderline (61.7% vs LNPL 61.17%, within limits); moving range 2020&rarr;2021 of 5.7pp exceeds URL of 5.19pp &mdash; special cause confirmed on the rate of change chart.</p>
         <p style="font-size:0.95em;margin-bottom:10px;"><strong>The moving denominator problem:</strong> The EDDR denominator is recalculated every month using the current registered GP population in each age/sex band, applied against fixed CFAS II prevalence rates from 2011. This means the denominator grows automatically as the population ages — even if diagnostic activity is completely unchanged. A GP practice that diagnoses exactly the same number of new patients each month will show a <em>falling</em> EDDR simply because its registered population is getting older. The metric conflates diagnostic performance with demographic change. The CFAS II prevalence rates have not been updated since 2011 — if actual dementia prevalence has changed (and there is evidence it has fallen slightly in successive cohorts due to better cardiovascular health), the denominator is systematically wrong. The 66.7% target was not derived from any statistical calculation — it is simply two-thirds expressed as a percentage.</p>
-        <p style="font-size:0.95em;margin-bottom:0;"><strong>Implication for Bootstrap CUSUM:</strong> The two-stage finding (Stage 1 mean 67.88%, Stage 2 mean 63.76%) reflects the combined effect of diagnostic activity <em>and</em> demographic change in the denominator. The Stage 2 recovery from 61.7% to 65.6% has been achieved against a rising denominator — the registered 65+ population is larger and older in 2025 than in 2020, meaning the same number of diagnoses produces a lower rate. The recovery is therefore more significant than the raw percentage change suggests.</p>
+        <p style="font-size:0.95em;margin-bottom:0;"><strong>Implication for Bootstrap CUSUM:</strong> The one-stage finding (mean 65.39%, N=9) reflects the combined effect of diagnostic activity <em>and</em> demographic change in the denominator. The recovery from the 2021 low of 61.7% to 65.6% in March 2025 has been achieved against a rising denominator — the registered 65+ population is larger and older in 2025 than in 2020, meaning the same number of diagnoses produces a lower EDDR. The recovery is therefore more significant than the raw percentage change suggests.</p>
     </div>
+
+
 
     <div class="related-box">
         <div class="related-tag">&#128202; Related analysis on this site</div>
         <h3><a href="gp-appointments-analysis.html">More GP Appointments Recorded, Fewer Patients Feeling Seen</a></h3>
-        <p>GP doctor contact rates per 1,000 patients have been statistically flat since 2018 &mdash; unchanged through COVID, lockdowns, and a &pound;1 billion per year workforce expansion. The constraint on dementia diagnosis (memory clinic capacity) sits inside the same constrained primary care system. The GP article&rsquo;s Deming analysis connects directly to the constraint identified here.</p>
+        <p>GP doctor contact rates per 1,000 patients have been statistically flat since 2018 &mdash; unchanged through COVID, lockdowns, and a &pound;1 billion per year workforce expansion. The constraint on dementia diagnosis sits inside the same constrained primary care system.</p>
         <a href="gp-appointments-analysis.html" class="btn">Read the analysis &rsaquo;</a>
     </div>
 
     <div class="related-box">
         <div class="related-tag">&#128202; Related analysis on this site</div>
         <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E and the Promise That Wasn&rsquo;t Kept</a></h3>
-        <p>Bootstrap CUSUM on 15 years of monthly A&amp;E data finds four structural stages of decline. Not one policy intervention is detectable as an improvement. The same Deming question &mdash; a numerical goal without a resolved system constraint &mdash; applies in both articles.</p>
+        <p>Bootstrap CUSUM on 15 years of monthly A&amp;E data finds four structural stages of structural decline. Not one policy intervention is visible as an improvement. The same Deming question applies.</p>
         <a href="why-nothing-has-worked-nhs-ae-performance.html" class="btn">Read the analysis &rsaquo;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">&#128202; Related analysis on this site</div>
+        <h3><a href="never-events-wrong-route.html">Wholly Preventable: Ten Years of a Never Event That Never Stopped</a></h3>
+        <p>A different NHS dataset, the same Deming and Joiner analysis. A Level 3 engineering solution exists and has not been implemented. The Bootstrap CUSUM flat line is the proof.</p>
+        <a href="never-events-wrong-route.html" class="btn">Read the analysis &rsaquo;</a>
     </div>
 
 </main>
@@ -513,8 +527,9 @@
     <p style="margin-top:8px;"><strong>Data sources:</strong></p>
     <ul style="font-size:0.85em;color:var(--muted);line-height:1.8;margin:8px 0 16px 20px;">
         <li>OHID Fingertips Dementia Profile, EDDR indicator &mdash; <a href="https://fingertips.phe.org.uk/profile/dementia">fingertips.phe.org.uk/profile/dementia</a></li>
-        <li>NHS England Primary Care Dementia Data, March 2025 &mdash; <a href="https://digital.nhs.uk/data-and-information/publications/statistical/primary-care-dementia-data">digital.nhs.uk</a></li>
+        <li>NHS England Primary Care Dementia Data, March 2025. Includes EDDR, care plan review rates (72.3%), and medication review rates (53.2%) &mdash; <a href="https://digital.nhs.uk/data-and-information/publications/statistical/primary-care-dementia-data">digital.nhs.uk</a></li>
         <li>Donegan K et al. (2017). Trends in diagnosis and treatment for people with dementia in the UK from 2005 to 2015. <em>Lancet Public Health</em></li>
+        <li>Matthews F et al. (2013). A two decade dementia incidence comparison from the Cognitive Function and Ageing Studies I and II (CFAS I and CFAS II). <em>Nature Communications</em>. CFAS II provides the age- and sex-specific prevalence rates used to calculate the EDDR denominator.</li>
         <li>PM&rsquo;s Challenge on Dementia 2012 and 2015 &mdash; Department of Health and Social Care</li>
         <li>Alzheimer&rsquo;s Research UK. David Cameron becomes our president (2017) &mdash; <a href="https://www.alzheimersresearchuk.org/news/david-cameron-becomes-our-president/">alzheimersresearchuk.org</a></li>
         <li>Royal College of Psychiatrists. Memory Assessment Services audit (2024) &mdash; waiting times and service capacity data</li>
@@ -527,15 +542,10 @@
         <li>Goldratt, E.M. &amp; Cox, J. <em>The Goal.</em> North River Press, 1984 &mdash; Theory of Constraints: identifying the binding constraint, the danger of optimising everything except the constraint</li>
         <li>Senge, P. <em>The Fifth Discipline.</em> Doubleday, 1990 &mdash; reinforcing and balancing loops, escalating spirals, policy resistance, the systems archetypes underlying the workforce erosion and unmet need patterns described in this article</li>
         <li>Page, E.S. Continuous inspection schemes. <em>Biometrika</em> 41(1&ndash;2), 1954 &mdash; original CUSUM method</li>
-        <li>Taylor, W.A. Change-point analysis: a powerful new tool for detecting changes. 2000 &mdash; <a href="https://www.variation.com/cpa/tech/changepoint.html">variation.com</a></li>
+        <li>Taylor, W.A. Change-point analysis: a powerful new tool for detecting changes. 2000 &mdash; variation.com/cpa/tech/changepoint.html</li>
         <li>Efron, B. &amp; Tibshirani, R.J. <em>An Introduction to the Bootstrap.</em> Chapman &amp; Hall, 1993</li>
     </ul>
-    <p style="margin-top:8px;"><strong>Related analyses on this site:</strong></p>
-    <ul style="font-size:0.85em;color:var(--muted);line-height:1.8;margin:8px 0 16px 20px;">
-        <li><a href="gp-appointments-analysis.html">More GP Appointments Recorded, Fewer Patients Feeling Seen</a> &mdash; the same constrained primary care system. GP doctor contact rates flat since 2018 despite &pound;1bn/year ARRs expansion.</li>
-        <li><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E and the Promise That Wasn&rsquo;t Kept</a> &mdash; four stages of structural decline. Not one policy intervention visible as an improvement.</li>
-        <li><a href="never-events-wrong-route.html">Wholly Preventable: Ten Years of a Never Event That Never Stopped</a> &mdash; a different NHS dataset, the same Deming and Joiner analysis. A Level 3 engineering solution exists and has not been implemented. The Bootstrap CUSUM flat line is the proof.</li>
-    </ul>
+
     <p style="margin-top:16px;">Bootstrap CUSUM based on Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). &copy; Syd Stewart 2026. <a href="glossary.html">Glossary of terms</a>.</p>
 </footer>
 
