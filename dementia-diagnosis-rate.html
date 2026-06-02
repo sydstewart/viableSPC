@@ -103,6 +103,45 @@
         .page-footer { margin-top: 60px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
         .page-footer a { color: var(--brand-mid); }
         hr { border: none; border-top: 2px solid var(--border); margin: 40px 0; }
+        /* Lighter analysis section boxes replacing the single dark deming box */
+        .analysis-box { border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+        .analysis-box h3 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; font-family: system-ui, sans-serif; margin: 0 0 12px; }
+        .analysis-box p { font-size: 0.97em; margin-bottom: 10px; line-height: 1.7; }
+        .analysis-box p:last-child { margin-bottom: 0; }
+        .analysis-box ul { font-size: 0.97em; line-height: 1.8; margin-bottom: 10px; padding-left: 20px; }
+        .analysis-box strong { font-weight: 700; }
+        /* Dark navy — for key quotes and constraint box */
+        .ab-dark { background: #1e293b; color: #e2e8f0; }
+        .ab-dark h3 { color: #93c5fd; }
+        .ab-dark p, .ab-dark li { color: #e2e8f0; }
+        .ab-dark strong { color: #ffffff; }
+        .ab-dark .deming-quote { font-size: 1.1em; font-style: italic; color: #bfdbfe; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 12px 0; }
+        /* Steel blue — light background, dark readable text */
+        .ab-steel { background: #eff6ff; color: #1e293b; border-left: 4px solid #3b82f6; }
+        .ab-steel h3 { color: #1d4ed8; }
+        .ab-steel p, .ab-steel li { color: #1e293b; }
+        .ab-steel strong { color: #002d5b; }
+        .ab-steel .deming-quote { font-size: 1.1em; font-style: italic; color: #1d4ed8; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 12px 0; }
+        /* Slate — for root cause / loops */
+        .ab-slate { background: #334155; color: #e2e8f0; }
+        .ab-slate h3 { color: #7dd3fc; }
+        .ab-slate p, .ab-slate li { color: #cbd5e1; }
+        .ab-slate strong { color: #ffffff; }
+        /* Teal — for Level 3 / measures */
+        .ab-teal { background: #f0f9ff; border-left: 4px solid #0e7490; color: #1e293b; }
+        .ab-teal h3 { color: #0e7490; }
+        .ab-teal p, .ab-teal li { color: #1e293b; }
+        .ab-teal strong { color: #002d5b; }
+        /* Green — for virtuous / positive */
+        .ab-green { background: #f0fdf4; border-left: 4px solid #198754; color: #1e293b; }
+        .ab-green h3 { color: #198754; }
+        .ab-green p, .ab-green li { color: #1e293b; }
+        .ab-green strong { color: #002d5b; }
+        /* Orange — for lag / tampering warning */
+        .ab-orange { background: #fff8f0; border-left: 4px solid #e67e22; color: #1e293b; }
+        .ab-orange h3 { color: #e67e22; }
+        .ab-orange p, .ab-orange li { color: #4a3000; }
+        .ab-orange strong { color: #002d5b; }
         @media (max-width: 600px) { h1 { font-size: 1.6em; } .numbers-box td, .numbers-box th { padding: 7px 10px; font-size: 0.82em; } }
     </style>
 </head>
@@ -189,7 +228,19 @@
             <li><a href="#section-covid">COVID: the largest single-year fall</a></li>
             <li><a href="#section-recovery">The slow recovery</a></li>
             <li><a href="#section-diagnosis-value">Is a diagnosis actually helpful?</a></li>
-            <li><a href="#section-deming">What Deming would ask</a></li>
+            <li><a href="#section-deming">What Deming would ask</a>
+                <ol style="margin-top:4px;padding-left:16px;">
+                    <li style="padding:2px 0;"><a href="#section-deming-method2">By what method?</a></li>
+                    <li style="padding:2px 0;"><a href="#section-deming-constraint">The constraint identified</a></li>
+                    <li style="padding:2px 0;"><a href="#section-deming-rootcause">The root cause of the constraint</a></li>
+                    <li style="padding:2px 0;"><a href="#section-deming-loops">Two reinforcing loops</a></li>
+                    <li style="padding:2px 0;"><a href="#section-deming-virtuous">Flipping from vicious to virtuous</a></li>
+                    <li style="padding:2px 0;"><a href="#section-deming-level3">What Level 3 looks like</a></li>
+                    <li style="padding:2px 0;"><a href="#section-deming-lag">The lag and the tampering trap</a></li>
+                    <li style="padding:2px 0;"><a href="#section-deming-measures">Suggested measures</a></li>
+                    <li style="padding:2px 0;"><a href="#section-deming-conclusion">The system produced this result</a></li>
+                </ol>
+            </li>
             <li><a href="#section-notes">Data notes and methodology</a></li>
         </ol>
     </details>
@@ -353,132 +404,120 @@
     <!-- Section 7: Deming -->
     <h2 id="section-deming">What Deming would ask</h2>
 
-    <div class="deming-box">
+        <!-- Deming analysis — broken into separate sections for TOC and readability -->
+
+    <div class="analysis-box ab-steel" id="section-deming-method">
         <h3>A numerical goal without a method</h3>
         <div class="deming-quote">&ldquo;A numerical goal without a method is nonsense.&rdquo; &mdash; W. Edwards Deming</div>
-        <p>The 66.7% target was set in 2012. It was first achieved in November 2015 &mdash; three years later, backed by CQUIN incentives, a national focus, and two Prime Ministers who personally championed the cause. The Bootstrap CUSUM finds one stage across the full series at 99.7% confidence, mean 65.39%. The data from 2017&ndash;2020 shows the rate running above the 66.7% target in each of those four years &mdash; consistent with the PM&rsquo;s Challenge having a sustained positive effect. When the political focus and financial incentives were reduced, the rate began a modest drift even before COVID arrived.</p>
-        <p>Deming&rsquo;s first of the 14 Points is <strong>constancy of purpose</strong> &mdash; a long-term commitment that transcends electoral cycles. The CQUIN incentive created demand for assessment without proportionately increasing assessment capacity. The result &mdash; a rate that reached the target under exceptional political pressure, ran above it for four years, then fell sharply when COVID closed memory clinics &mdash; is consistent with what a system without a resolved constraint produces. The modest drift before COVID is visible in the data (67.5% in 2018, 67.4% in 2020) though with N=9 this cannot be confirmed statistically.</p>
+        <p>The 66.7% target was set in 2012. The rate ran above it 2017&ndash;2020. Five years after the COVID collapse it has not recovered to the target. Bootstrap CUSUM finds one stage at 99.7%: mean 65.39%, below the 66.7% ambition. The CQUIN incentive created demand for assessment without proportionately increasing assessment capacity. The result &mdash; a rate that reached the target under exceptional political pressure, then fell sharply when COVID disrupted the pathway &mdash; is exactly what a system without a resolved constraint produces.</p>
+    </div>
 
-        <h3>By what method?</h3>
-        <p>The data shows the rate was above the 66.7% target throughout 2017&ndash;2020. The PM&rsquo;s Challenge, which pre-dates the 2017 data series, was well underway during this period &mdash; and the target had been first achieved in November 2015. Whether the rate was above target because of the Challenge or whether it would have reached this level anyway cannot be determined from the available data. What the data confirms is that the rate was above target when the Challenge was active, and fell when COVID disrupted the diagnostic pathway. But Deming would identify the central mechanism &mdash; the CQUIN financial incentive &mdash; as precisely the wrong approach. Deming&rsquo;s 12th Point explicitly warns against incentive pay and extrinsic reward schemes: they purchase behaviour rather than embedding it, they optimise for the metric rather than the purpose, and they disappear when the incentive is removed &mdash; taking the behaviour with them.</p>
-        <p>The EDDR data proves the point. The rate rose while the CQUIN was active and the political focus was intense. It drifted when the incentive structure changed, even before COVID. The 2019 peak is a special cause &mdash; something unusual pushed the rate above its natural range. That &ldquo;something&rdquo; was purchased behaviour, not system redesign. Without the purchase, the rate returned to its natural range.</p>
-        <p>A Deming-consistent alternative would have redesigned the <em>system</em> to make dementia identification routine &mdash; building cognitive assessment into every GP over-65 annual review as a standard process, not an incentivised extra, and building memory assessment capacity so that a referral produces a timely result without exceptional pressure. The CQUIN created demand for referral without proportionately building the assessment capacity to receive it. The method was misidentified.</p>
-        <p><strong>Deming&rsquo;s question is not &ldquo;why did COVID collapse the diagnosis rate?&rdquo; &mdash; that answer is obvious.</strong> His question is: why, five years after the COVID diagnostic collapse, is the rate still below a target set thirteen years ago? The data shows recovery to 65.6% by March 2025 &mdash; but still 1.1 percentage points short. Whether this reflects the absence of embedded system design, the ongoing constraint of memory clinic capacity, or simply the slow pace of structural recovery from a large disruption is a question the data raises but N=9 cannot resolve statistically.</p>
+    <h2 id="section-deming-method2">By what method?</h2>
+    <p>The rate was above 66.7% while the CQUIN was active. Deming&rsquo;s 12th Point explicitly warns against incentive pay and extrinsic reward schemes: they purchase behaviour rather than embedding it, they optimise for the metric rather than the purpose, and they disappear when the incentive is removed &mdash; taking the behaviour with them.</p>
+    <p>A Deming-consistent alternative would have redesigned the <em>system</em> to make dementia identification routine &mdash; building cognitive assessment into every GP over-65 annual review as a standard process, not an incentivised extra. The CQUIN created demand for referral without proportionately building the assessment capacity to receive it. The method was misidentified.</p>
+    <p><strong>Deming&rsquo;s question is not &ldquo;why did COVID collapse the diagnosis rate?&rdquo; &mdash; that answer is obvious.</strong> His question is: why, five years after the COVID diagnostic collapse, is the rate still below a target set thirteen years ago? The data shows recovery to 65.6% by March 2025 &mdash; but still 1.1 percentage points short. The purchased behaviour was never replaced by embedded system design.</p>
 
-        <h3>The constraint identified</h3>
-        <p>The constraint on dementia diagnosis is not patient awareness, not GP motivation, and not public willingness to be assessed. Research consistently shows high awareness and reasonable help-seeking behaviour. The constraint is <strong>memory clinic capacity</strong> &mdash; the number of specialist assessments available per year.</p>
-        <p>Memory clinics are the diagnostic bottleneck. GP referral rates recovered to pre-pandemic levels quickly after COVID. The diagnosis rate did not recover correspondingly &mdash; because the referred patients entered a backlog that the memory clinic system could not clear at the required rate. Goldratt would identify this immediately: you cannot improve throughput by optimising anything other than the constraint.</p>
+    <h2 id="section-deming-constraint">The constraint identified</h2>
+    <div class="analysis-box ab-steel">
+        <h3>The binding constraint</h3>
+        <p>The constraint on dementia diagnosis is not patient awareness, not GP motivation, and not public willingness to be assessed. The constraint is <strong>memory clinic capacity</strong> &mdash; the number of specialist assessments available per year. GP referral rates recovered to pre-pandemic levels quickly after COVID. The diagnosis rate did not recover correspondingly &mdash; because the referred patients entered a backlog that the memory clinic system could not clear at the required rate.</p>
+        <p>Goldratt would identify this immediately: you cannot improve throughput by optimising anything other than the constraint. Addressing the EDDR without addressing memory clinic capacity is optimising everything except the constraint.</p>
+    </div>
 
-        <div class="constraint-box">
-            <p>The constraint on dementia diagnosis in England is not awareness, not referral, and not political will. It is the capacity of the specialist memory assessment services that sit between a GP referral and a confirmed diagnosis. Addressing the EDDR without addressing memory clinic capacity is optimising everything except the constraint.</p>
-        </div>
-
-        <h3>The root cause of the constraint</h3>
-        <p>Identifying the constraint as memory clinic capacity is necessary but not sufficient. Goldratt&rsquo;s framework asks: what is causing the constraint? Four compounding factors drive the constraint — distinct from the causal loop links described later: In causal loop diagrams, each arrow carries a polarity: <strong style="color:white;">S</strong> (same direction &mdash; cause rises, effect rises) or <strong style="color:white;">O</strong> (opposite &mdash; cause rises, effect falls). A loop with an even number of O links is reinforcing &mdash; a vicious circle. Both loops below share the same constraint node and amplify each other:</p>
-        <ul style="color:#e2e8f0;padding-left:20px;margin-bottom:14px;line-height:1.9;">
-            <li><strong style="color:white;">Factor 1 &mdash; Old Age Psychiatry workforce shortage.</strong> Memory clinics require Consultant Old Age Psychiatrists as their clinical backbone &mdash; they make or confirm the diagnosis and are the only clinicians authorised to prescribe the main dementia medications. Old Age Psychiatry has been chronically undersubscribed for decades: less prestigious, less well-paid relative to effort, and less research-glamorous than neurology or general psychiatry. Medical graduates systematically avoid it. This is the primary root cause &mdash; the constraint has a constraint.</li>
-            <li><strong style="color:white;">Factor 2 &mdash; Neuroimaging bottleneck.</strong> 60% of memory services cannot view brain scan images because they lack access to the required imaging systems (PACS). A CT or MRI scan is required to exclude reversible causes before a dementia diagnosis can be confirmed. If the memory clinic cannot see the scan, the pathway stalls. This is a capital equipment and IT infrastructure failure that compounds the workforce constraint.</li>
-            <li><strong style="color:white;">Factor 3 &mdash; Waiting times getting worse.</strong> The 2024 Memory Assessment Services audit found the average wait from GP referral to first assessment is now 13 weeks &mdash; up from 9 weeks in 2021 and 5 weeks before COVID. End-to-end from referral to diagnosis now exceeds five months. Only 26% of patients are diagnosed within the Government&rsquo;s own 6-week target timeframe.</li>
-            <li><strong style="color:white;">Factor 4 &mdash; Disease-modifying treatments arriving at the worst possible moment.</strong> Lecanemab and donanemab require early, precise diagnosis with biomarker confirmation and MRI monitoring. Community memory services &mdash; which handle 98% of referrals &mdash; lack the infrastructure to deliver this new treatment pathway. The system was configured for volume at low clinical complexity; the new treatment era requires lower volume at high complexity. The two are in direct conflict.</li>
+    <h2 id="section-deming-rootcause">The root cause of the constraint</h2>
+    <div class="analysis-box ab-teal">
+        <h3>Four compounding factors</h3>
+        <p>Identifying the constraint as memory clinic capacity is necessary but not sufficient. Four compounding factors drive the constraint &mdash; distinct from the causal loop links described below:</p>
+        <ul>
+            <li><strong>Factor 1 &mdash; Old Age Psychiatry workforce shortage.</strong> Memory clinics require Consultant Old Age Psychiatrists as their clinical backbone &mdash; they make or confirm the diagnosis and are the only clinicians authorised to prescribe the main dementia medications. Old Age Psychiatry has been chronically undersubscribed for decades: less prestigious, less well-paid relative to effort, and less research-glamorous than neurology or general psychiatry. Medical graduates systematically avoid it. This is the primary root cause &mdash; the constraint has a constraint.</li>
+            <li><strong>Factor 2 &mdash; Neuroimaging bottleneck.</strong> 60% of memory services cannot view brain scan images because they lack access to the required imaging systems (PACS). A CT or MRI scan is required to exclude reversible causes before a dementia diagnosis can be confirmed. This is a capital equipment and IT infrastructure failure that compounds the workforce constraint.</li>
+            <li><strong>Factor 3 &mdash; Waiting times getting worse.</strong> The 2024 Memory Assessment Services audit found the average wait from GP referral to first assessment is now 13 weeks &mdash; up from 9 weeks in 2021 and 5 weeks before COVID. End-to-end from referral to diagnosis now exceeds five months. Only 26% of patients are diagnosed within the Government&rsquo;s own 6-week target timeframe.</li>
+            <li><strong>Factor 4 &mdash; Disease-modifying treatments arriving at the worst possible moment.</strong> Lecanemab and donanemab require early, precise diagnosis with biomarker confirmation and MRI monitoring. Community memory services &mdash; which handle 98% of referrals &mdash; lack the infrastructure to deliver this new treatment pathway. The system was configured for volume at low clinical complexity; the new treatment era requires lower volume at high complexity.</li>
         </ul>
-        <p><strong style="color:white;">The root cause stated plainly:</strong> 30 years of systematic underinvestment in Old Age Psychiatry as a specialty &mdash; in training places, career incentives, research funding, and the prestige that attracts medical graduates. Everything downstream &mdash; the waiting times, the imaging gaps, the EDDR failing to recover, the inability to deliver new disease-modifying treatments &mdash; flows from that single workforce decision made repeatedly across successive decades.</p>
-        <p>The PM was given a metric measuring the output of a system whose constraint was caused by a workforce problem, caused by a career incentive problem, caused by a planning failure. The PM addressed the output with a numerical target and a financial incentive that created demand without addressing any link in the causal chain. The Bootstrap CUSUM result &mdash; Stage 1 above target under exceptional pressure, Stage 2 below target when that pressure eased &mdash; is the statistical proof of what happens when you address the output and leave the root cause untouched.</p>
+        <p><strong>The root cause stated plainly:</strong> 30 years of systematic underinvestment in Old Age Psychiatry as a specialty &mdash; in training places, career incentives, research funding, and the prestige that attracts medical graduates. Everything downstream flows from that single workforce decision made repeatedly across successive decades.</p>
+    </div>
 
-        <h3>Two reinforcing loops — the constraint tightens automatically</h3>
-        <p>Identifying the root cause is still not enough. The deeper structural problem is that the constraint is maintained by two <strong style="color:white;">reinforcing causal loops</strong> — vicious circles that tighten the constraint automatically, without any external pressure required. Senge called these escalating spirals. Each rotation makes the next rotation worse.</p>
-        <ul style="color:#e2e8f0;padding-left:20px;margin-bottom:14px;line-height:1.9;">
-            <li><strong style="color:white;">R1 — The Workforce Erosion Loop.</strong> As career attractiveness of Old Age Psychiatry falls <strong style="color:#93c5fd;">(S)</strong> &rarr; consultant supply falls <strong style="color:#93c5fd;">(S)</strong> &rarr; memory clinic throughput falls &rarr; consultant workload and burnout risk rises <strong style="color:#f87171;">(O)</strong> &rarr; career attractiveness falls further <strong style="color:#f87171;">(O)</strong>. Two O links &mdash; reinforcing. Each rotation erodes the workforce a little further without any external trigger required.</li>
-            <li><strong style="color:white;">R2 — The Unmet Need Spiral.</strong> As memory clinic throughput falls <strong style="color:#f87171;">(O)</strong> &rarr; unmet need accumulates &rarr; demand for diagnosis rises <strong style="color:#f87171;">(O)</strong> &rarr; throughput is constrained further. Two O links &mdash; reinforcing. Unmet need drives more demand against a system simultaneously losing its workforce through R1. New disease-modifying treatments (lecanemab, donanemab) amplify this further &mdash; each assessment now requires biomarker confirmation and MRI monitoring, making assessments more complex and slower, reducing throughput per consultant and accelerating burnout.</li>
+    <h2 id="section-deming-loops">Two reinforcing loops &mdash; the constraint tightens automatically</h2>
+    <div class="analysis-box ab-teal">
+        <h3>R1 and R2</h3>
+        <p>The constraint is maintained by two reinforcing causal loops &mdash; vicious circles that tighten the constraint automatically, without any external pressure required. In causal loop diagrams, each arrow carries a polarity: <strong>S</strong> (same direction) or <strong>O</strong> (opposite direction). A loop with an even number of O links is reinforcing &mdash; a vicious circle.</p>
+        <ul>
+            <li><strong>R1 &mdash; The Workforce Erosion Loop.</strong> As career attractiveness of Old Age Psychiatry falls (S) &rarr; consultant supply falls (S) &rarr; memory clinic throughput falls &rarr; consultant workload and burnout risk rises (O) &rarr; career attractiveness falls further (O). Two O links &mdash; reinforcing. Each rotation erodes the workforce a little further without any external trigger required.</li>
+            <li><strong>R2 &mdash; The Unmet Need Spiral.</strong> As memory clinic throughput falls (O) &rarr; unmet need accumulates &rarr; demand for diagnosis rises (O) &rarr; throughput is constrained further. Two O links &mdash; reinforcing. New disease-modifying treatments amplify this further &mdash; each assessment now requires biomarker confirmation and MRI monitoring, making assessments more complex and slower.</li>
         </ul>
-        <figure class="chart-figure" style="background:#1e293b;padding:16px;border-radius:8px;margin:20px 0;">
-            <img src="images/dementia-causal-loops.png" alt="Two reinforcing causal loops centred on memory clinic throughput: R1 The Workforce Erosion Loop, R2 The Unmet Need Spiral. Red arrows show O (opposite) links, blue arrows show S (same) links." style="width:100%;background:white;border-radius:6px;padding:8px;">
-            <figcaption style="color:#94a3b8;font-family:system-ui,sans-serif;font-size:0.82em;margin-top:8px;font-style:italic;line-height:1.6;"><strong style="color:#e2e8f0;">How to read this diagram:</strong> Each arrow is labelled <strong style="color:#e2e8f0;">S</strong> (same direction: cause rises → effect rises) or <strong style="color:#e2e8f0;">O</strong> (opposite: cause rises → effect falls). A loop with an even number of O links is reinforcing &mdash; it amplifies in one direction without stopping. Dashed arrows are the return paths completing each loop. &mdash; <strong style="color:#e2e8f0;">Talking around R1:</strong> &ldquo;As career attractiveness falls (S) consultant supply falls; as consultant supply falls (S) memory clinic throughput falls; as throughput falls (O) career attractiveness falls further &mdash; R1 closes, reinforcing.&rdquo; &mdash; <strong style="color:#e2e8f0;">R2:</strong> &ldquo;As demand for diagnosis rises (O) throughput falls; as throughput falls (O) consultant workload rises; as workload rises (O) career attractiveness falls &mdash; R2 closes, also reinforcing, feeding back into R1.&rdquo;</figcaption>
-        </figure>
+        <p>Neither loop requires new external pressure to keep running. They are self-sustaining. The PM&rsquo;s Challenge added exceptional pressure to a system in two reinforcing loops. The moment that pressure was removed, the loops reasserted themselves.</p>
+    </div>
 
-        <p>The critical systems insight: <strong style="color:white;">none of these loops requires new external pressure to keep running.</strong> They are self-sustaining. This is why the PM&rsquo;s Challenge produced a temporary effect — it added exceptional pressure to a system in two reinforcing loops. The moment that pressure was removed, the loops reasserted themselves and the system returned toward its natural deteriorating state.</p>
-        <p>Deming would say: the system is behaving exactly as it was designed to behave. Not by intention — no one designed these loops deliberately — but by the accumulated effect of decades of decisions that left the root cause unaddressed. To escape a reinforcing loop you must break at least one link in at least one loop. The PM&rsquo;s Challenge broke none.</p>
+    <figure class="chart-figure">
+        <img src="images/dementia-causal-loops.png" alt="Two reinforcing causal loops centred on memory clinic throughput: R1 The Workforce Erosion Loop, R2 The Unmet Need Spiral." style="width:100%;border-radius:6px;">
+        <figcaption>R1 &mdash; The Workforce Erosion Loop (left) and R2 &mdash; The Unmet Need Spiral (right), both centred on Memory Clinic Throughput. Red arrows show O (opposite) links, blue arrows show S (same) links. Two O links in each loop = reinforcing. The diagram was drawn by the author.</figcaption>
+    </figure>
 
-        <h3 style="color:#93c5fd;margin-top:18px;font-size:1em;text-transform:uppercase;letter-spacing:0.08em;font-style:normal;font-family:system-ui,sans-serif;">Flipping from vicious to virtuous</h3>
-        <p>Reinforcing loops can run in either direction. The same structure that drives a vicious circle will drive a virtuous circle if the starting conditions at a key node are reversed. The mechanism is identical &mdash; only the direction changes. R1 and R2 are currently running destructively, but each has a virtuous version waiting to be activated.</p>
+    <h2 id="section-deming-virtuous">Flipping from vicious to virtuous</h2>
+    <div class="analysis-box ab-green">
+        <h3>Reversing the loops</h3>
+        <p>Reinforcing loops can run in either direction. The same structure that drives a vicious circle will drive a virtuous circle if the starting conditions at a key node are reversed.</p>
+        <p><strong>To flip R1 &mdash; The Workforce Erosion Loop &mdash; to virtuous,</strong> intervene at career attractiveness: mandate Old Age Psychiatry training places; pay parity with neurology and general psychiatry; redistribute tasks off consultant lists so caseload per consultant falls, burnout falls, and attractiveness rises &mdash; R1 now runs virtuous.</p>
+        <p><strong>To flip R2 &mdash; The Unmet Need Spiral &mdash; to virtuous,</strong> increase throughput faster than demand grows: build memory clinic capacity ahead of demographic demand; integrate cognitive assessment into GP annual reviews for over-75s as standard process. When capacity runs ahead of demand the loop becomes self-reinforcing positively.</p>
+        <p><strong>The critical insight:</strong> you cannot flip a reinforcing loop by pushing on the output. The PM pushed on the EDDR. R2 accelerated and R1 continued eroding. What flips a loop is a structural intervention at a specific node that reverses the direction of at least one link. Both require decisions with long lead times &mdash; which is precisely why they were not made, and why both loops have been running vicious for 30 years.</p>
+    </div>
 
-        <p><strong style="color:white;">To flip R1 &mdash; The Workforce Erosion Loop &mdash; to virtuous,</strong> intervene at the highest-leverage node: career attractiveness. Three structural actions would reverse the loop direction:</p>
-        <ul style="color:#e2e8f0;padding-left:20px;margin-bottom:12px;line-height:1.8;">
-            <li><strong style="color:white;">Mandate training places.</strong> Guarantee a minimum proportion of psychiatry training goes to Old Age Psychiatry regardless of application rates. As more consultants qualify, caseload per consultant falls, burnout falls, career attractiveness rises &mdash; R1 now runs virtuous.</li>
-            <li><strong style="color:white;">Restructure career incentives.</strong> Pay parity with neurology and general psychiatry, dedicated research funding, named career pathways. Higher attractiveness increases supply, which reduces caseload, which reduces burnout, which raises attractiveness further. Each rotation strengthens the specialty rather than eroding it.</li>
-            <li><strong style="color:white;">Redistribute tasks off consultant lists.</strong> Clinical nurse specialists and trained GPs managing stable diagnosed patients frees consultant time for complex new assessments &mdash; directly reducing the workload node and reversing the burnout link without requiring a single new consultant to qualify.</li>
+    <h2 id="section-deming-level3">What Level 3 looks like for dementia diagnosis</h2>
+    <div class="analysis-box ab-teal">
+        <h3>Joiner&rsquo;s Levels of Fix</h3>
+        <p>Joiner&rsquo;s framework asks whether we are fixing the output (Level 1), the process (Level 2), or the system (Level 3). Most dementia diagnosis policy has operated at Level 1 and 2. The CQUIN was Level 1. It is worth noting that the answers to Level 3 system interventions can often be found in Deming&rsquo;s 14 Points &mdash; particularly Point 1 (constancy of purpose), Point 6 (institute training), Point 12 (remove barriers to pride of workmanship) and Point 13 (institute self-improvement). Level 3 would address the binding constraint directly:</p>
+        <ul>
+            <li><strong>Build memory clinic capacity structurally</strong> &mdash; not as a response to demand, but ahead of the demographic curve. The 70&ndash;80 cohort driving peak dementia prevalence was predictable decades in advance. Memory clinic sessions should have been expanding since 2005.</li>
+            <li><strong>Integrate cognitive assessment into routine GP annual reviews</strong> &mdash; make it a standard process for all patients aged 75+, not a separate referral pathway. This removes the GP-to-specialist bottleneck for straightforward presentations.</li>
+            <li><strong>Co-locate memory assessment with primary care</strong> &mdash; the Netherlands model of GP-led assessment with specialist support available, rather than a separate secondary care referral pathway.</li>
+            <li><strong>Proactive case-finding in care homes as a system standard</strong> &mdash; the 2023 NHS care home programme worked. Making it permanent and funded is a Level 3 decision.</li>
         </ul>
-        <p><strong style="color:white;">To flip R2 &mdash; The Unmet Need Spiral &mdash; to virtuous,</strong> increase throughput faster than demand grows. When capacity runs ahead of demand the loop becomes self-reinforcing positively: more throughput &rarr; unmet need falls &rarr; demand pressure eases &rarr; throughput less constrained. Two O links &mdash; still reinforcing, now virtuous.</p>
-        <ul style="color:#e2e8f0;padding-left:20px;margin-bottom:12px;line-height:1.8;">
-            <li><strong style="color:white;">Build memory clinic capacity ahead of demographic demand.</strong> The 70&ndash;80 age cohort peak is visible now. Capacity built today runs ahead of demand rather than behind it, tipping R2 from accumulating backlog into reducing backlog.</li>
-            <li><strong style="color:white;">Integrate cognitive assessment into GP annual reviews for over-75s.</strong> Standard screening at GP stage means memory clinics receive appropriately triaged referrals, increasing effective throughput without proportionally increasing funded capacity.</li>
-        </ul>
-        <p><strong style="color:white;">The critical insight:</strong> you cannot flip a reinforcing loop by pushing on the output. The PM pushed on the EDDR. R2 accelerated and R1 continued eroding. What flips a loop is a structural intervention at a specific node that reverses the direction of at least one link. For R1 that node is career attractiveness. For R2 it is throughput capacity relative to demand. Both require decisions with long lead times &mdash; which is precisely why they were not made, and why both loops have been running vicious for 30 years.</p>
+        <p>The key distinction: Level 3 interventions do not require exceptional political pressure to sustain. They are designed into the system so that the outcome is produced routinely.</p>
+    </div>
 
-        <h3>What Level 3 looks like for dementia diagnosis</h3>
-        <p>Joiner&rsquo;s framework asks whether we are fixing the output (Level 1), the process (Level 2), or the system (Level 3). Most dementia diagnosis policy has operated at Level 1 and 2. The CQUIN was Level 1 &mdash; telling people to do more, with a financial incentive attached. Pathway redesign is Level 2. Level 3 would address the binding constraint directly. It is worth noting that the answers to Level 3 system interventions can often be found in Deming&rsquo;s 14 Points &mdash; particularly Point 1 (constancy of purpose), Point 6 (institute training), Point 13 (institute education and self-improvement), and Point 12 (remove barriers that rob people of pride of workmanship, which includes poorly designed career incentive structures):</p>
-        <ul style="color:#e2e8f0;padding-left:20px;margin-bottom:12px;line-height:1.8;">
-            <li><strong style="color:white;">Build memory clinic capacity structurally</strong> &mdash; not as a response to demand, but ahead of the demographic curve. The 70&ndash;80 cohort driving peak dementia prevalence was predictable decades in advance. Memory clinic sessions should have been expanding since 2005.</li>
-            <li><strong style="color:white;">Integrate cognitive assessment into routine GP annual reviews</strong> &mdash; make it a standard process for all patients aged 75+, not a separate referral pathway. This removes the GP-to-specialist bottleneck for straightforward presentations and reserves memory clinic capacity for complex cases.</li>
-            <li><strong style="color:white;">Co-locate memory assessment with primary care</strong> &mdash; the Netherlands model of GP-led assessment with specialist support available, rather than a separate secondary care referral pathway, reduces the constraint by bringing capacity to where the patients are.</li>
-            <li><strong style="color:white;">Proactive case-finding in care homes as a system standard</strong> &mdash; the 2023 NHS care home programme worked and produced measurable results. Making it a permanent, funded part of the system rather than a time-limited pilot is a Level 3 decision.</li>
+    <h2 id="section-deming-lag">The lag between intervention and measurable result</h2>
+    <div class="analysis-box ab-orange">
+        <h3>Why results take time &mdash; and the tampering trap</h3>
+        <p>One of the most dangerous traps in systems thinking is expecting rapid results from structural interventions. Level 3 changes operate on long time horizons. For dementia diagnosis specifically:</p>
+        <ul>
+            <li><strong>Mandating Old Age Psychiatry training places: 7&ndash;10 years.</strong> Decisions made in 2026 produce qualified consultants from approximately 2033&ndash;2036.</li>
+            <li><strong>Restructuring career incentives: 3&ndash;5 years.</strong> Applications change first; memory clinic throughput changes last.</li>
+            <li><strong>Integrating cognitive assessment into GP annual reviews: 2&ndash;3 years.</strong> The fastest-acting intervention because it does not require new workforce.</li>
+            <li><strong>Building memory clinic capacity: 5&ndash;8 years.</strong> Capital programmes, estate development, recruitment.</li>
         </ul>
-        <p>The key distinction: Level 3 interventions do not require exceptional political pressure to sustain. They are designed into the system so that the outcome is produced routinely, not under extraordinary circumstances.</p>
+        <p><strong>The tampering trap.</strong> Deming identified a specific and dangerous behaviour that the lag makes almost inevitable: <em>tampering</em>. Tampering occurs when a manager sees that the measures have not responded and intervenes again &mdash; adjusting, redirecting, or reversing the intervention &mdash; before the first intervention has had time to work. Each additional intervention resets the lag clock. The system never gets the sustained period of stable conditions it needs to produce a measurable result.</p>
+        <p>In the dementia diagnosis story, tampering is precisely what the political cycle produces. A government mandates Old Age Psychiatry training places. The EDDR does not move for three years (as expected). The next government concludes the intervention failed, reverses the mandate, and replaces it with a new incentive scheme. The lag clock resets. Each iteration is recorded as a policy failure. The actual failure is the absence of constancy of purpose &mdash; and the confusion between the lag that structural change requires and the signal that an intervention is not working.</p>
+        <p>Bootstrap CUSUM is the honest arbiter: it will not declare a stage change until the evidence warrants it. A structural intervention applied consistently over 10 years and tracked with Bootstrap CUSUM will eventually produce a quiet, statistically confirmed shift to a new mean. That is what success looks like in a complex system. It does not announce itself.</p>
+    </div>
 
-        <h3>Suggested measures &mdash; and the balance measures that guard against gaming</h3>
-        <p>The EDDR measures the first step of the care pathway. Deming&rsquo;s critique of measurement applies: a metric that captures only the initial event tells you nothing about whether the system is achieving its purpose. The purpose of dementia diagnosis is not to count diagnoses &mdash; it is to enable people with dementia to live well, with appropriate support, for as long as possible.</p>
-        <p>But drive measures alone are not enough. Without balance measures, optimising any single metric produces unintended consequences &mdash; what Deming called suboptimisation. A memory clinic under pressure to reduce waiting times will process patients faster, which may mean less thorough assessments. A GP practice incentivised to increase referrals will refer patients who don&rsquo;t need assessment, overwhelming clinic capacity. Every drive measure needs a counterweight.</p>
+    <h2 id="section-deming-measures">Suggested measures &mdash; and the balance measures that guard against gaming</h2>
+    <div class="analysis-box ab-teal">
+        <h3>Drive measures and balance measures</h3>
+        <p>The EDDR measures the first step of the care pathway. Deming&rsquo;s critique of measurement applies: a metric that captures only the initial event tells you nothing about whether the system is achieving its purpose. But drive measures alone are not enough &mdash; without balance measures, optimising any single metric produces unintended consequences (what Deming called suboptimisation).</p>
         <div style="overflow-x:auto;margin:16px 0;">
         <table style="width:100%;border-collapse:collapse;font-size:0.88em;font-family:system-ui,sans-serif;">
             <tr>
-                <th style="background:#1e3a5f;color:white;padding:8px 12px;text-align:left;width:12%;">Level</th>
-                <th style="background:#1e3a5f;color:white;padding:8px 12px;text-align:left;width:28%;">Drive measure</th>
-                <th style="background:#1e3a5f;color:white;padding:8px 12px;text-align:left;width:28%;">Balance measure</th>
-                <th style="background:#1e3a5f;color:white;padding:8px 12px;text-align:left;width:32%;">What the balance measure guards against</th>
+                <th style="background:#0e7490;color:white;padding:8px 12px;text-align:left;width:12%;">Level</th>
+                <th style="background:#0e7490;color:white;padding:8px 12px;text-align:left;width:28%;">Drive measure</th>
+                <th style="background:#0e7490;color:white;padding:8px 12px;text-align:left;width:28%;">Balance measure</th>
+                <th style="background:#0e7490;color:white;padding:8px 12px;text-align:left;width:32%;">What it guards against</th>
             </tr>
-            <tr style="background:#1e293b;">
-                <td style="color:#93c5fd;padding:8px 12px;border-bottom:1px solid #334155;"><strong style="color:#93c5fd;">Input</strong></td>
-                <td style="color:#e2e8f0;padding:8px 12px;border-bottom:1px solid #334155;">Memory clinic capacity (funded sessions/year)</td>
-                <td style="color:#e2e8f0;padding:8px 12px;border-bottom:1px solid #334155;">Cost per assessment</td>
-                <td style="color:#94a3b8;padding:8px 12px;border-bottom:1px solid #334155;">Over-resourcing without efficiency</td>
-            </tr>
-            <tr style="background:#243044;">
-                <td style="color:#93c5fd;padding:8px 12px;border-bottom:1px solid #334155;"><strong style="color:#93c5fd;">Process</strong></td>
-                <td style="color:#e2e8f0;padding:8px 12px;border-bottom:1px solid #334155;">GP referral rate per 1,000 aged 75+</td>
-                <td style="color:#e2e8f0;padding:8px 12px;border-bottom:1px solid #334155;">Referral conversion rate (% confirmed as dementia)</td>
-                <td style="color:#94a3b8;padding:8px 12px;border-bottom:1px solid #334155;">Over-referral overwhelming clinic capacity with inappropriate cases</td>
-            </tr>
-            <tr style="background:#1e293b;">
-                <td style="color:#93c5fd;padding:8px 12px;border-bottom:1px solid #334155;"><strong style="color:#93c5fd;">Process</strong></td>
-                <td style="color:#e2e8f0;padding:8px 12px;border-bottom:1px solid #334155;">Waiting time: GP referral &rarr; assessment</td>
-                <td style="color:#e2e8f0;padding:8px 12px;border-bottom:1px solid #334155;">Diagnostic accuracy at 12-month follow-up</td>
-                <td style="color:#94a3b8;padding:8px 12px;border-bottom:1px solid #334155;">Speeding up assessments at the expense of diagnostic quality</td>
-            </tr>
-            <tr style="background:#243044;">
-                <td style="color:#93c5fd;padding:8px 12px;border-bottom:1px solid #334155;"><strong style="color:#93c5fd;">Output</strong></td>
-                <td style="color:#e2e8f0;padding:8px 12px;border-bottom:1px solid #334155;">Diagnoses made per 1,000 aged 75+</td>
-                <td style="color:#e2e8f0;padding:8px 12px;border-bottom:1px solid #334155;">Geographic and demographic equity of diagnosis rates</td>
-                <td style="color:#94a3b8;padding:8px 12px;border-bottom:1px solid #334155;">National average rising while deprived areas and ethnic minorities fall further behind</td>
-            </tr>
-            <tr style="background:#1e293b;">
-                <td style="color:#93c5fd;padding:8px 12px;border-bottom:1px solid #334155;"><strong style="color:#93c5fd;">Outcome</strong></td>
-                <td style="color:#e2e8f0;padding:8px 12px;border-bottom:1px solid #334155;">Post-diagnostic support within 12 weeks</td>
-                <td style="color:#e2e8f0;padding:8px 12px;border-bottom:1px solid #334155;">Carer-reported quality of support</td>
-                <td style="color:#94a3b8;padding:8px 12px;border-bottom:1px solid #334155;">Box-ticking &mdash; a 15-minute phone call coded as &ldquo;post-diagnostic support received&rdquo;</td>
-            </tr>
-            <tr style="background:#243044;">
-                <td style="color:#93c5fd;padding:8px 12px;"><strong style="color:#93c5fd;">Outcome</strong></td>
-                <td style="color:#e2e8f0;padding:8px 12px;">Avoidable crisis admissions per 100,000 aged 75+</td>
-                <td style="color:#e2e8f0;padding:8px 12px;">All-cause emergency admissions aged 75+</td>
-                <td style="color:#94a3b8;padding:8px 12px;">Coding avoidance &mdash; dementia admissions reclassified rather than genuinely reduced</td>
-            </tr>
+            <tr style="background:#f0f9ff;"><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#0e7490;"><strong>Input</strong></td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">Memory clinic capacity (sessions/year)</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">Cost per assessment</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;">Over-resourcing without efficiency</td></tr>
+            <tr style="background:white;"><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#0e7490;"><strong>Process</strong></td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">GP referral rate per 1,000 aged 75+</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">Referral conversion rate</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;">Over-referral overwhelming capacity</td></tr>
+            <tr style="background:#f0f9ff;"><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#0e7490;"><strong>Process</strong></td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">Waiting time: referral &rarr; assessment</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">Diagnostic accuracy at 12 months</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;">Faster but lower quality assessments</td></tr>
+            <tr style="background:white;"><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#0e7490;"><strong>Output</strong></td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">Diagnoses per 1,000 aged 75+</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">Geographic and demographic equity</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;">National average masking inequality</td></tr>
+            <tr style="background:#f0f9ff;"><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#0e7490;"><strong>Outcome</strong></td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">Post-diagnostic support within 12 weeks</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">Carer-reported quality of support</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;">Box-ticking support</td></tr>
+            <tr style="background:white;"><td style="padding:8px 12px;color:#0e7490;"><strong>Outcome</strong></td><td style="padding:8px 12px;">Avoidable crisis admissions per 100,000 aged 75+</td><td style="padding:8px 12px;">All-cause emergency admissions 75+</td><td style="padding:8px 12px;color:#64748b;">Coding avoidance not genuine reduction</td></tr>
         </table>
         </div>
-        <p>The EDDR sits at the output level &mdash; but calculated against a moving, modelled denominator that changes for demographic reasons outside anyone&rsquo;s control. A PM advised by this framework would have been tracking six pairs of measures across the full pathway, not chasing one ratio against a 2011 prevalence estimate. The constraint &mdash; memory clinic waiting time &mdash; would have been visible from the first month it emerged. The system would have responded to evidence, not to political pressure.</p>
-        <p>A system that diagnoses 90% of people with dementia and then provides no post-diagnostic support has not achieved the purpose of the target. The EDDR cannot tell you that. The framework above can.</p>
+        <p>A PM advised by this framework would have been tracking six pairs of measures across the full pathway, not chasing one ratio against a 2011 prevalence estimate. The constraint &mdash; memory clinic waiting time &mdash; would have been visible from the first month it emerged.</p>
+    </div>
 
-        <h3>The system produced exactly this result</h3>
-        <p>Deming&rsquo;s 94% rule: 94% of problems are caused by the system, not the people in it. The memory clinic capacity constraint was identifiable in 2012 when the target was set. It was not structurally resolved by either PM&rsquo;s Challenge. The result &mdash; a rate that briefly exceeded the target under exceptional pressure, then failed to sustain it &mdash; is exactly what a system that has never resolved its binding constraint produces.</p>
-        <p>The Bootstrap CUSUM two-stage picture &mdash; above target in Stage 1 under political pressure, below target in Stage 2 after COVID &mdash; is the statistical record of a system that was temporarily overridden but never fixed. The same pattern appears in the GP appointments data on this site: a flat line maintained by competing pressures, not by system design. The Deming question in both cases is the same: <em>whose system produced this outcome, and what decisions &mdash; taken or not taken &mdash; designed it to produce exactly this?</em></p>
+    <h2 id="section-deming-conclusion">The system produced exactly this result</h2>
+    <div class="analysis-box ab-steel">
+        <h3>Deming&rsquo;s 94% rule</h3>
+        <p>94% of problems are caused by the system, not the people in it. The memory clinic capacity constraint was identifiable in 2012 when the target was set. It was not structurally resolved by either PM&rsquo;s Challenge. The result &mdash; a rate that briefly exceeded the target under exceptional pressure, then failed to sustain it &mdash; is exactly what a system that has never resolved its binding constraint produces.</p>
+        <p>The Bootstrap CUSUM one-stage picture &mdash; mean 65.39% across the full period, with a visible COVID disruption confirmed by the moving range chart &mdash; is the statistical record of a system that was temporarily overridden but never fixed. The same pattern appears in the GP appointments data on this site: a flat line maintained by competing pressures, not by system design. The Deming question in both cases is the same: <em>whose system produced this outcome, and what decisions &mdash; taken or not taken &mdash; designed it to produce exactly this?</em></p>
     </div>
 
     <hr>
