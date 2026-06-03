@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joiner Levels of Fix — Why most improvement fails and what actually works — StepChangeAnalysis.com</title>
+    <meta name="description" content="Joiner's levels of fix explain why most improvement programmes fail. Level 1 firefighting, Level 2 process fixes, and Level 3 system change — and why only Level 3 produces the structural change that Bootstrap CUSUM will confirm. Supported by Meadows, COMAH, CDC NIOSH, and Deming.">
+    <link rel="canonical" href="https://stepchangeanalysis.com/joiner-levels-of-fix.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <style>
+        :root {
+            --brand-blue:  #002d5b;
+            --brand-mid:   #0056b3;
+            --brand-light: #e9f2ff;
+            --text:        #1e293b;
+            --muted:       #64748b;
+            --border:      #e2e8f0;
+            --bg:          #f8f9fa;
+            --green:       #198754;
+            --orange:      #e67e22;
+            --red:         #c0392b;
+            --teal:        #0e7490;
+            --purple:      #7c3aed;
+            --q1:          #7c3aed;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-nav { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; }
+        .header-nav a:hover { color: white; text-decoration: underline; }
+        .header-nav a.active { color: white; font-weight: 700; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        /* Hero */
+        .hero { padding: 40px 0 32px; border-bottom: 2px solid var(--border); margin-bottom: 40px; }
+        .hero-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 14px; }
+        .hero h1 { font-size: clamp(1.8em, 4vw, 2.6em); line-height: 1.15; color: var(--brand-blue); margin-bottom: 20px; font-weight: bold; }
+        .hero-sub { font-size: 1.15em; color: var(--muted); line-height: 1.7; margin-bottom: 24px; max-width: 680px; }
+        /* Body */
+        h2 { font-size: 1.4em; color: var(--brand-blue); margin: 44px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.1em; color: var(--brand-blue); margin: 28px 0 10px; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        a { color: var(--brand-mid); }
+        blockquote { border-left: 4px solid var(--brand-mid); padding: 14px 20px; margin: 24px 0; background: var(--brand-light); border-radius: 0 6px 6px 0; font-style: italic; font-size: 1.05em; color: var(--brand-blue); line-height: 1.7; }
+        blockquote.warning { border-left-color: var(--red); background: #fef2f2; color: var(--red); }
+        blockquote.teal { border-left-color: var(--teal); background: #f0f9ff; color: #0c4a6e; }
+        /* Joiner level cards */
+        .level-stack { display: flex; flex-direction: column; gap: 0; margin: 28px 0; }
+        .level-card { border-radius: 0; border: 1px solid var(--border); border-bottom: none; padding: 0; overflow: hidden; }
+        .level-card:first-child { border-radius: 10px 10px 0 0; }
+        .level-card:last-child { border-radius: 0 0 10px 10px; border-bottom: 1px solid var(--border); }
+        .level-header { display: grid; grid-template-columns: 140px 1fr; }
+        .level-badge { padding: 18px 20px; display: flex; flex-direction: column; justify-content: center; }
+        .level-tag { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; }
+        .level-name { font-family: system-ui, sans-serif; font-size: 1em; font-weight: 700; line-height: 1.2; }
+        .level-body { background: white; padding: 18px 22px; border-left: 1px solid var(--border); }
+        .level-body p { font-size: 0.95em; line-height: 1.65; margin-bottom: 0.8em; color: var(--text); }
+        .level-body p:last-child { margin-bottom: 0; }
+        .level-body strong { color: var(--brand-blue); }
+        .level-card.l1 .level-badge { background: #fef2f2; color: var(--red); }
+        .level-card.l2 .level-badge { background: #fff8f0; color: var(--orange); }
+        .level-card.l3 .level-badge { background: var(--brand-light); color: var(--brand-mid); }
+        .level-card.l3d .level-badge { background: #f0fdf4; color: #166534; }
+        /* The critical callout */
+        .critical-box { background: #faf5ff; border: 2px solid var(--purple); border-radius: 10px; padding: 24px 28px; margin: 32px 0; }
+        .critical-box .cb-label { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
+        .critical-box p { font-size: 1.1em; font-style: italic; font-weight: bold; color: var(--brand-blue); line-height: 1.6; margin: 0; }
+        /* Comparison table */
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-family: system-ui, sans-serif; font-size: 0.88em; }
+        .comparison-table th { background: var(--brand-blue); color: white; padding: 10px 14px; text-align: left; font-weight: 600; line-height: 1.3; }
+        .comparison-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+        .comparison-table tr:nth-child(even) td { background: #fafafa; }
+        .comparison-table .row-l1 td:first-child { border-left: 4px solid var(--red); }
+        .comparison-table .row-l2 td:first-child { border-left: 4px solid var(--orange); }
+        .comparison-table .row-l3 td:first-child { border-left: 4px solid var(--brand-mid); }
+        .comparison-table .row-l3d td:first-child { border-left: 4px solid #166534; }
+        .comparison-table td:first-child { font-weight: 700; color: var(--brand-blue); white-space: nowrap; }
+        .comparison-table td.framework-col { color: var(--text); }
+        .comparison-table td.framework-col em { color: var(--muted); display: block; font-size: 0.9em; margin-top: 3px; }
+        /* Framework source boxes */
+        .source-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 24px 0; }
+        .source-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; border-top: 3px solid var(--brand-mid); }
+        .source-card.meadows { border-top-color: #166534; }
+        .source-card.comah { border-top-color: var(--red); }
+        .source-card.deming { border-top-color: var(--teal); }
+        .source-card .sc-label { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+        .source-card .sc-title { font-family: system-ui, sans-serif; font-size: 0.95em; font-weight: 700; color: var(--brand-blue); margin-bottom: 6px; }
+        .source-card p { font-size: 0.88em; color: var(--text); line-height: 1.55; margin: 0; }
+        /* Alerts */
+        .alert-blue   { background: var(--brand-light); border-left: 4px solid var(--brand-mid); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-green  { background: #f0fdf4; border-left: 4px solid var(--green); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-orange { background: #fff8f0; border-left: 4px solid var(--orange); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; color: #4a3000; }
+        .alert-teal   { background: #f0f9ff; border-left: 4px solid var(--teal); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        /* Policy box */
+        .policy-box { background: var(--brand-light); border: 2px solid var(--brand-mid); border-radius: 10px; padding: 24px 28px; margin: 28px 0; }
+        .policy-box .pb-label { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 8px; }
+        .policy-box .pb-title { font-family: system-ui, sans-serif; font-size: 1.05em; font-weight: 700; color: var(--brand-blue); margin-bottom: 10px; }
+        .policy-box p { font-size: 0.95em; color: var(--text); line-height: 1.6; margin-bottom: 0.8em; }
+        .policy-box p:last-child { margin-bottom: 0; }
+        .policy-box ul { padding-left: 1.2em; margin: 8px 0; }
+        .policy-box li { font-size: 0.92em; color: var(--text); line-height: 1.6; margin-bottom: 4px; }
+        /* Mission */
+        .mission-box { background: #f8f5ff; border: 2px solid var(--q1); border-radius: 10px; padding: 28px 32px; margin: 40px 0; text-align: center; }
+        .mission-box p { font-size: 1.1em; font-style: italic; font-weight: bold; color: var(--brand-blue); line-height: 1.7; margin: 0; }
+        .mission-box .mission-label { font-family: system-ui, sans-serif; font-size: 0.75em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--q1); margin-bottom: 12px; }
+        /* Buttons */
+        .btn-primary { display: inline-block; background: var(--brand-mid); color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 700; }
+        .btn-primary:hover { background: var(--brand-blue); }
+        .btn-secondary { display: inline-block; background: white; color: var(--brand-mid); padding: 12px 24px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 600; border: 2px solid var(--brand-mid); }
+        .btn-secondary:hover { background: var(--brand-light); }
+        /* Footer */
+        .page-footer { margin-top: 60px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.7em; }
+            .level-header { grid-template-columns: 100px 1fr; }
+            .comparison-table { font-size: 0.78em; }
+            .source-grid { grid-template-columns: 1fr; }
+            .header-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <a href="why-nothing-changes.html">Why nothing changes</a>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="how-to-use.html">How to use</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> &rsaquo;
+        <a href="why-nothing-changes.html">Why nothing changes</a> &rsaquo;
+        Joiner levels of fix
+    </div>
+
+    <div class="hero">
+        <div class="hero-flag">&#128161; Concept page &middot; Intervention depth &middot; Why improvement fails</div>
+        <h1>Joiner&rsquo;s levels of fix &mdash; why most improvement fails and what actually works</h1>
+        <p class="hero-sub">Most improvement programmes fail not because the people involved lacked commitment or capability, but because the intervention was aimed at the wrong level. Brian Joiner&rsquo;s three levels of fix explain why &mdash; and why the same insight appears independently in safety engineering, systems thinking, and Deming&rsquo;s management theory.</p>
+    </div>
+
+    <!-- THE CENTRAL INSIGHT -->
+    <h2>The central insight</h2>
+
+    <p>Problems in organisations have a root and a surface. The surface is what you see &mdash; the metric that is not improving, the process that keeps failing, the target that is never quite met. The root is the system condition that generated the surface problem and will keep generating it regardless of how many times the surface is treated.</p>
+
+    <p>Most interventions treat the surface. They are fast, visible, and satisfying to implement. They produce the feeling of progress. And within weeks or months the same problem returns &mdash; because the system that produced it has not changed.</p>
+
+    <p>Joiner&rsquo;s model gives this a precise name. There are three levels at which you can intervene. The level you choose determines not just whether the problem goes away, but whether it <em>stays</em> away.</p>
+
+    <div class="critical-box">
+        <div class="cb-label">&#9888;&#65039; The critical principle</div>
+        <p>The higher the level of intervention, the more effective it is &mdash; and the more politically difficult, controversial, and threatening to existing power structures it becomes.</p>
+    </div>
+
+    <p>This is why Level 1 firefighting is so persistent. It is not that organisations are irrational. It is that Level 1 is accessible, immediate, and politically safe. Level 3 requires redistributing authority, changing who decides things, and challenging the structures that currently exist. That is hard in any organisation. It is hardest in the ones that most need it.</p>
+
+    <!-- THE FOUR LEVELS -->
+    <h2>The four levels &mdash; what they are and what they produce</h2>
+
+    <div class="level-stack">
+
+        <div class="level-card l1">
+            <div class="level-header">
+                <div class="level-badge">
+                    <div class="level-tag">Level 1</div>
+                    <div class="level-name">Fix the output</div>
+                </div>
+                <div class="level-body">
+                    <p><strong>Firefighting.</strong> React to the problem after it has occurred. Fix the symptom. The system is entirely unchanged, so the problem returns. This is where most organisations spend most of their time &mdash; not because they are lazy or undisciplined, but because the system keeps generating the same problems and someone has to deal with them.</p>
+                    <p>Level 1 is always available. It requires no authority, no structural change, no difficult conversation. Anyone can do it. It produces immediate visible results. And it does not work in the long term.</p>
+                    <p><strong>Examples:</strong> a manager personally resolves the escalated support case &middot; a clinician chases the missing test result themselves &middot; a plant engineer manually adjusts a parameter that keeps drifting &middot; a hospital sets a target for reduced readmissions without changing the discharge process.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="level-card l2">
+            <div class="level-header">
+                <div class="level-badge">
+                    <div class="level-tag">Level 2</div>
+                    <div class="level-name">Fix the process</div>
+                </div>
+                <div class="level-body">
+                    <p><strong>A checklist, a protocol, a gate, a training programme.</strong> Change the process that allowed the problem to occur. This prevents the specific failure mode from recurring &mdash; but does not change the underlying system that generated the process in the first place.</p>
+                    <p>Level 2 interventions are real improvements. They are durable for the specific problem they address. But they are fragile when the broader system pushes back &mdash; a new process in an old system will gradually be absorbed and neutralised by the system&rsquo;s existing gravity.</p>
+                    <p><strong>Examples:</strong> a readiness checklist before a new implementation goes live &middot; a mandatory handover protocol in a hospital ward &middot; a two-person authorisation rule for high-risk medication &middot; a standard operating procedure for parameter adjustment.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="level-card l3">
+            <div class="level-header">
+                <div class="level-badge">
+                    <div class="level-tag">Level 3</div>
+                    <div class="level-name">Fix the system</div>
+                </div>
+                <div class="level-body">
+                    <p><strong>Change roles, decision rights, policies, structures.</strong> Change the system itself &mdash; the roles, the decision rights, the policies, the structures that determine how work flows and who has authority over what. System fixes are durable because they work regardless of who is in the role and regardless of individual effort or goodwill.</p>
+                    <p>Level 3 requires the people who benefit from the current system to accept a redistribution of authority. That is politically difficult. It is also the only intervention that produces the kind of change Bootstrap CUSUM will confirm as genuine and sustained.</p>
+                    <p><strong>Examples:</strong> appointing an Operations Manager with written authority so decisions have a route that does not go through the most senior person &middot; building memory clinic capacity structurally rather than incentivising GPs to refer more &middot; engineering out the hazard rather than training workers to avoid it &middot; changing the discharge process rather than penalising hospitals for readmissions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="level-card l3d">
+            <div class="level-header">
+                <div class="level-badge">
+                    <div class="level-tag">Level 3 Deep</div>
+                    <div class="level-name">Fix the root</div>
+                </div>
+                <div class="level-body">
+                    <p><strong>Change the mental model that generated the system design.</strong> The hardest level and the highest leverage. Without this, every Level 3 structural fix will be quietly undermined because the leader&rsquo;s behaviour &mdash; and the organisation&rsquo;s culture &mdash; gravitationally recreate the old system.</p>
+                    <p>Level 3 Deep is not about changing a process or a structure. It is about changing what people believe their job is. In Deming&rsquo;s language, it is <em>constancy of purpose</em> &mdash; a fundamental reorientation of what the organisation is for. In Meadows&rsquo; language, it is the paradigm that generates all the other levels of the system.</p>
+                    <p><strong>Examples:</strong> a leader redefining their own role from problem-solver to system-builder &middot; a hospital moving from compliance-focused to genuinely patient-centred care &middot; a regulator shifting from checkbox auditing to evidence-based prevention &middot; a chemical plant embedding safety as a value rather than a cost.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- THE POLICY SHORTCUT -->
+    <div class="policy-box">
+        <div class="pb-label">&#128161; The policy shortcut &mdash; the most underused Level 3 intervention</div>
+        <div class="pb-title">A written, signed, dated rule that governs a category of decisions permanently</div>
+        <p>Policy decisions are unusual because they sit at Level 3 in their effect while being remarkably low in cost and complexity to implement. A policy does not require new technology, new staff, new budget, or a restructure. It requires a conversation, a document, a signature, and the discipline to hold it.</p>
+        <p>The impact of a well-chosen policy can be profound &mdash; because it changes the system&rsquo;s behaviour in every future instance of that decision, not just the one in front of you today. Examples:</p>
+        <ul>
+            <li><strong>A readiness gate policy</strong> &mdash; nothing goes live until three conditions are met. Cost: a one-page checklist. Effect: implementation failures stop occurring.</li>
+            <li><strong>A no-customisation policy</strong> &mdash; only the standard product is sold. Cost: a sales instruction. Effect: version sprawl stops growing from day one.</li>
+            <li><strong>A priority policy</strong> &mdash; one development priority at a time, everything else in a reviewed backlog. Cost: one afternoon to write. Effect: every future development decision is made against the policy, not against whoever last made a compelling case.</li>
+        </ul>
+        <p>The policy is cheap to create. The discipline to hold it under pressure is where the work is. A verbal policy is not a policy &mdash; it is an intention, and intentions bend. A written, signed, dated policy can be pointed to. That is what makes it a system change rather than an aspiration.</p>
+    </div>
+
+    <!-- THE TEST -->
+    <blockquote>
+        <strong>The test of whether an intervention is at the right level is simple:</strong> if the intervention stopped tomorrow, would the problem return? If yes &mdash; the intervention is Level 1 or Level 2. Something deeper is needed. If no &mdash; the system has genuinely changed. That is what Level 3 looks like.
+    </blockquote>
+
+    <!-- FOUR FRAMEWORKS, ONE HIERARCHY -->
+    <h2>Four frameworks, one hierarchy &mdash; independent confirmation</h2>
+
+    <p>Joiner&rsquo;s classification was published in <em>Fourth Generation Management</em> in 1994. What gives it particular weight is that the same hierarchy &mdash; the same gradient from ineffective-but-easy to effective-but-hard &mdash; was independently identified by frameworks in safety engineering, systems thinking, and management theory. They arrived at the same structure from different disciplines and different decades.</p>
+
+    <div class="source-grid">
+        <div class="source-card">
+            <div class="sc-label">&#128202; Joiner (1994)</div>
+            <div class="sc-title">Fourth Generation Management</div>
+            <p>Fix the output &rarr; Fix the process &rarr; Fix the system &rarr; Fix the system root. The primary framework on this site. The level you choose determines whether the improvement holds.</p>
+        </div>
+        <div class="source-card meadows">
+            <div class="sc-label">&#127807; Meadows (2008)</div>
+            <div class="sc-title">Thinking in Systems &mdash; leverage points</div>
+            <p>Parameters (weakest) &rarr; Rules of the system &rarr; Material flows and nodes &rarr; Paradigm and goals (strongest). The harder the leverage point is to change, the more powerful its effect on the system.</p>
+        </div>
+        <div class="source-card comah">
+            <div class="sc-label">&#9888;&#65039; COMAH / CDC NIOSH</div>
+            <div class="sc-title">Hierarchy of Controls</div>
+            <p>PPE (weakest) &rarr; Administrative controls &rarr; Engineering controls &rarr; Substitution &rarr; Elimination (strongest). Used in every major hazard and occupational safety context worldwide. Regulatory law in process safety industries.</p>
+        </div>
+        <div class="source-card deming">
+            <div class="sc-label">&#128201; Deming (1982&ndash;1993)</div>
+            <div class="sc-title">Out of the Crisis &middot; The New Economics</div>
+            <p>94% of problems are caused by the system, not the people in it. Targets without methods produce distortion. Constancy of purpose is the prerequisite for structural change. The system must be changed, not the worker.</p>
+        </div>
+    </div>
+
+    <p>The convergence across these four independent frameworks is not coincidental. It reflects a structural truth about how systems work: interventions that do not change the system that produced the problem cannot permanently eliminate the problem. The frameworks differ in language and domain. The underlying principle is identical.</p>
+
+    <!-- THE COMPARISON TABLE -->
+    <h2>The frameworks compared &mdash; how they map onto each other</h2>
+
+    <p>The table below shows the direct correspondence between Joiner&rsquo;s levels and the equivalent level in each of the four supporting frameworks. Read each row as four independent descriptions of the same intervention depth.</p>
+
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th>Joiner level</th>
+                <th>Meadows &mdash; leverage point<br><em>Thinking in Systems (2008)</em></th>
+                <th>COMAH / CDC NIOSH<br><em>Hierarchy of Controls</em></th>
+                <th>Deming<br><em>Out of the Crisis (1982)</em></th>
+                <th>Durability</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row-l1">
+                <td>Level 1<br>Fix the output</td>
+                <td class="framework-col">Parameters<br><em>Adjust numbers within unchanged system. Taxes, subsidies, targets. System continues as before.</em></td>
+                <td class="framework-col">PPE &amp; administrative controls<br><em>Weakest. Relies entirely on human behaviour. Fails under pressure, fatigue, or distraction.</em></td>
+                <td class="framework-col">Management by results<br><em>Points 10 &amp; 11: eliminate numerical quotas and targets without method. They optimise the metric not the system.</em></td>
+                <td class="framework-col" style="color:var(--red);font-weight:700;">Lowest<br>Problem returns</td>
+            </tr>
+            <tr class="row-l2">
+                <td>Level 2<br>Fix the process</td>
+                <td class="framework-col">Rules of the system<br><em>Incentives, constraints, regulations. Changes what actors must do. Does not change the system that governs them.</em></td>
+                <td class="framework-col">Administrative controls<br><em>Work practices, job rotation, training, access controls. Better than PPE. Still behaviour-dependent.</em></td>
+                <td class="framework-col">Institute training &amp; supervision<br><em>Points 6 &amp; 7: training on the job, institute leadership. Necessary but insufficient without system change.</em></td>
+                <td class="framework-col" style="color:var(--orange);font-weight:700;">Moderate<br>Durable for specific failure mode</td>
+            </tr>
+            <tr class="row-l3">
+                <td>Level 3<br>Fix the system</td>
+                <td class="framework-col">Material flows &amp; nodes<br><em>Change physical or economic structure at key nodes. Most actors respond automatically because the system itself has changed.</em></td>
+                <td class="framework-col">Engineering controls<br><em>Physical or technical barriers. System changes regardless of worker behaviour. Preferred over all lower levels.</em></td>
+                <td class="framework-col">Break down barriers &amp; build quality in<br><em>Points 3, 9 &amp; 14: cease dependence on inspection, remove barriers, transformation is everyone's job.</em></td>
+                <td class="framework-col" style="color:var(--brand-mid);font-weight:700;">High<br>System routes differently</td>
+            </tr>
+            <tr class="row-l3d">
+                <td>Level 3 Deep<br>Fix the root</td>
+                <td class="framework-col">Paradigm &amp; goals<br><em>The mindset out of which the system&rsquo;s goals, rules, and power structure arise. Highest resistance. Highest leverage.</em></td>
+                <td class="framework-col">Elimination &amp; substitution<br><em>Strongest. Redesign so the hazard cannot arise. Most difficult to implement in an existing process. Most durable.</em></td>
+                <td class="framework-col">Constancy of purpose<br><em>Point 1: create constancy of purpose for improvement. The fundamental reorientation of what the organisation is for.</em></td>
+                <td class="framework-col" style="color:#166534;font-weight:700;">Highest<br>Self-maintaining</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="alert-orange">
+        <strong>The COMAH connection.</strong> In process safety and major hazards management, the hierarchy of controls is not a suggestion &mdash; it is regulatory law. Engineering controls (Level 3) must be considered before administrative controls (Level 2), and administrative controls before PPE (Level 1). A safety case that relies on PPE where an engineering control is practicable will not be accepted by a regulator. The same logic applies to organisational improvement: interventions that rely on behaviour where structural change is possible are the equivalent of requiring PPE when the hazard could be engineered out. Regulators in process safety understood this decades before it was widely accepted in quality improvement.
+    </div>
+
+    <!-- WHY LEVEL 3 IS POLITICALLY HARD -->
+    <h2>Why Level 3 is politically difficult &mdash; and why that matters</h2>
+
+    <p>The critical principle stated at the top of this page bears repeating because it explains so much of what goes wrong in improvement programmes:</p>
+
+    <blockquote class="warning">
+        The higher the level of intervention, the more effective it is &mdash; and the more politically difficult, controversial, and threatening to existing power structures it becomes.
+    </blockquote>
+
+    <p>This is not accidental. It is structural. Consider what each level requires:</p>
+
+    <p><strong>Level 1</strong> requires nothing except the willingness to respond. No authority is threatened. No structure changes. No one&rsquo;s role is different tomorrow. It is the path of least political resistance &mdash; which is why organisations under pressure default to it every time.</p>
+
+    <p><strong>Level 2</strong> requires agreement on what the new process is, and someone with authority to hold it when pressure mounts to revert. That authority may be contested. The new process may challenge existing practices. But the structural power relationships are largely unchanged &mdash; people do their existing jobs differently, they do not lose their existing roles.</p>
+
+    <p><strong>Level 3</strong> requires changing who decides what. The Operations Manager gets decision rights the senior person previously held. The engineering control removes the need for the skilled worker who previously managed the hazard manually. The policy removes the discretion that previously allowed exceptions. Every Level 3 intervention redistributes authority &mdash; and authority is rarely redistributed without resistance.</p>
+
+    <p><strong>Level 3 Deep</strong> requires the person at the centre of the current system to change what they believe their job is. That is an identity challenge, not just a behavioural one. It is the hardest thing to ask of anyone &mdash; and it is the precondition for every other Level 3 change holding in the long run.</p>
+
+    <div class="alert-teal">
+        <strong>The political economy of improvement failure.</strong> Most improvement programmes stall at Level 2 not because the practitioners are wrong about what is needed, but because Level 3 requires changes that those with structural power in the current system have reason to resist. Recognising this is not cynicism &mdash; it is diagnosis. The question is not only what intervention is technically correct, but what conditions would make Level 3 politically achievable. That is a different conversation from the one most improvement programmes have.
+    </div>
+
+    <!-- BOOTSTRAP CUSUM CONNECTION -->
+    <h2>How Bootstrap CUSUM confirms the level of intervention</h2>
+
+    <p>Bootstrap CUSUM is the measurement tool that tells you, with statistical confidence, whether an intervention has produced genuine structural change in a system &mdash; or whether you are seeing variation around an unchanged mean.</p>
+
+    <p>Applied to Joiner&rsquo;s levels, the Bootstrap CUSUM chart is the arbiter:</p>
+
+    <ul style="padding-left:1.4em; margin-bottom:1.2em; font-size:1.05em;">
+        <li style="margin-bottom:0.6em;"><strong>Level 1 intervention</strong> &mdash; Bootstrap CUSUM finds no confirmed step change. The metric may have moved temporarily. The process mean has not shifted. The problem will return.</li>
+        <li style="margin-bottom:0.6em;"><strong>Level 2 intervention</strong> &mdash; Bootstrap CUSUM may find a step change, but watch the chart over 12&ndash;24 months. If the change revertes when the intervention is removed or pressure increases, the underlying system was not changed.</li>
+        <li style="margin-bottom:0.6em;"><strong>Level 3 intervention</strong> &mdash; Bootstrap CUSUM finds a confirmed, sustained step change at high statistical confidence. The system has moved to a new mean. It maintains that mean without continued intervention.</li>
+    </ul>
+
+    <p>The NHS A&amp;E data on this site is the clearest available illustration. Fifteen years of policy interventions, targets, and improvement programmes. <a href="why-nothing-has-worked-nhs-ae-performance.html">Bootstrap CUSUM finds four structural stages &mdash; all downward</a>. Not one policy intervention is detectable as a structural improvement. The interventions were almost entirely Level 1 and Level 2. The system was not changed. The chart shows exactly what Joiner&rsquo;s model predicts.</p>
+
+    <div class="alert-green">
+        <strong>The Bootstrap CUSUM is the honest arbiter.</strong> It will not declare a structural change until the evidence warrants it. A Level 1 or Level 2 intervention cannot fake a confirmed step change on the Bootstrap CUSUM chart &mdash; not over a sufficient time horizon. This makes it the most useful tool available for evaluating whether an improvement programme has genuinely worked, rather than producing the temporary metric movement that gets declared a success before the next cycle of targets begins. <a href="index.html">Run Bootstrap CUSUM on your own improvement data &rsaquo;</a>
+    </div>
+
+    <!-- WORKED EXAMPLES -->
+    <h2>Joiner&rsquo;s levels in practice &mdash; worked examples from the site</h2>
+
+    <p>Every article on this site applies Bootstrap CUSUM to real data and interprets the result through Joiner&rsquo;s framework. The pattern is consistent: where Bootstrap CUSUM finds no structural change, the interventions were at Level 1 or Level 2. Where structural change is found, something systemic changed.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0;">
+        <div style="background:white;border-radius:8px;padding:18px;border-left:4px solid var(--red);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.75em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin-bottom:6px;">&#127973;&#65039; Level 1 &amp; 2 &mdash; no structural change</div>
+            <h4 style="font-size:0.95em;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;"><a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; fifteen years of targets</a></h4>
+            <p style="font-size:0.88em;color:var(--muted);margin:0;line-height:1.6;">Four confirmed steps of structural decline. Not one policy intervention detectable as improvement. Every intervention was aimed at the output or the process. The system producing A&amp;E pressure was never addressed.</p>
+        </div>
+        <div style="background:white;border-radius:8px;padding:18px;border-left:4px solid var(--red);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.75em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin-bottom:6px;">&#127973;&#65039; Level 1 &amp; 2 &mdash; no structural change</div>
+            <h4 style="font-size:0.95em;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;"><a href="dementia-diagnosis-rate.html">Dementia diagnosis &mdash; twelve years below target</a></h4>
+            <p style="font-size:0.88em;color:var(--muted);margin:0;line-height:1.6;">The constraint was memory clinic capacity. The interventions targeted GP referral rates &mdash; Level 1 and Level 2. Bootstrap CUSUM finds one stage, mean below target, no structural improvement from any policy initiative.</p>
+        </div>
+        <div style="background:white;border-radius:8px;padding:18px;border-left:4px solid var(--red);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.75em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin-bottom:6px;">&#128138; Level 2 withheld &mdash; flat process</div>
+            <h4 style="font-size:0.95em;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;"><a href="never-events-wrong-route.html">Never events &mdash; wholly preventable</a></h4>
+            <p style="font-size:0.88em;color:var(--muted);margin:0;line-height:1.6;">The engineering solution existed since 2010. A Level 3 fix (NRFit connectors) was available and not implemented. Bootstrap CUSUM finds a flat process at 17.5 events per year. Level 2 guidance was issued. The Level 3 engineering control was not mandated.</p>
+        </div>
+        <div style="background:white;border-radius:8px;padding:18px;border-left:4px solid var(--green);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.75em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">&#127807; Level 3 &mdash; structural change confirmed</div>
+            <h4 style="font-size:0.95em;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;"><a href="ulez-london-air-quality.html">ULEZ &mdash; structural air quality change</a></h4>
+            <p style="font-size:0.88em;color:var(--muted);margin:0;line-height:1.6;">A charging zone that changed the economics of vehicle use &mdash; a structural change to who enters London and in what vehicle. Bootstrap CUSUM confirms a structural step change in NO2 levels. A Level 3 intervention in the vehicle fleet produced what Level 2 guidance about emissions could not.</p>
+        </div>
+    </div>
+
+    <!-- DEMING 14 POINTS -->
+    <h2>Joiner and Deming &mdash; the same insight, two frameworks</h2>
+
+    <p>Joiner noted explicitly in <em>Fourth Generation Management</em> that most Level 3 system fixes are already described in Deming&rsquo;s 14 Points. Deming identified them decades earlier &mdash; but without the level classification that makes clear <em>why</em> they work when lower-level interventions do not.</p>
+
+    <p>The connection matters practically. If you are looking for Level 3 interventions in your own organisation, Deming&rsquo;s 14 Points are a ready-made checklist of what Level 3 looks like in management practice. And if you want to understand <em>why</em> Deming&rsquo;s Points matter, Joiner&rsquo;s levels explain the mechanism: they are Level 3 and Level 3 Deep interventions, and only Level 3 interventions produce the structural change that Bootstrap CUSUM will confirm.</p>
+
+    <table class="comparison-table" style="margin-top:20px;">
+        <thead>
+            <tr>
+                <th>Deming Point</th>
+                <th>Joiner level</th>
+                <th>Why</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row-l3d">
+                <td>Point 1 &mdash; Constancy of purpose</td>
+                <td style="color:#166534;font-weight:700;">Level 3 Deep</td>
+                <td class="framework-col">The mental model that generates the system. Without it every structural change reverts. Meadows calls this the paradigm level &mdash; the highest leverage point in any system.</td>
+            </tr>
+            <tr class="row-l3d">
+                <td>Point 2 &mdash; Adopt the new philosophy</td>
+                <td style="color:#166534;font-weight:700;">Level 3 Deep</td>
+                <td class="framework-col">A fundamental reorientation of what the organisation is for. Cannot be achieved by a process change or a structural change alone. Requires the paradigm shift.</td>
+            </tr>
+            <tr class="row-l3">
+                <td>Point 3 &mdash; Cease dependence on inspection</td>
+                <td style="color:var(--brand-mid);font-weight:700;">Level 3</td>
+                <td class="framework-col">Stop relying on Level 1 and Level 2 checking. Build quality into the system so that inspection becomes unnecessary. The COMAH equivalent: engineer out the hazard rather than inspect for it.</td>
+            </tr>
+            <tr class="row-l3">
+                <td>Point 4 &mdash; End lowest-cost supplier policy</td>
+                <td style="color:var(--brand-mid);font-weight:700;">Level 3</td>
+                <td class="framework-col">The purchasing system produces the quality problem. Changing the supplier relationship without changing the system produces temporary improvement. Change the system.</td>
+            </tr>
+            <tr class="row-l3">
+                <td>Point 5 &mdash; Improve constantly</td>
+                <td style="color:var(--brand-mid);font-weight:700;">Level 3</td>
+                <td class="framework-col">PDSA as a structural discipline built into every process &mdash; not a one-off project. The system is designed to improve itself.</td>
+            </tr>
+            <tr class="row-l2">
+                <td>Point 6 &mdash; Institute training</td>
+                <td style="color:var(--orange);font-weight:700;">Level 2</td>
+                <td class="framework-col">Necessary but insufficient without system change. Training changes what people do in the current system. It does not change the system that produced the need for training in the first place.</td>
+            </tr>
+            <tr class="row-l3">
+                <td>Point 7 &mdash; Institute leadership</td>
+                <td style="color:var(--brand-mid);font-weight:700;">Level 3</td>
+                <td class="framework-col">Supervision that helps people do better work requires changing the role of management structurally &mdash; from directing outputs to improving the system that produces them.</td>
+            </tr>
+            <tr class="row-l3d">
+                <td>Point 8 &mdash; Drive out fear</td>
+                <td style="color:#166534;font-weight:700;">Level 3 Deep</td>
+                <td class="framework-col">Fear is a system condition, not a personal failing. It is produced by systems that route blame to individuals rather than to system causes. Removing it requires structural change to how performance is evaluated.</td>
+            </tr>
+            <tr class="row-l3">
+                <td>Point 9 &mdash; Break down barriers</td>
+                <td style="color:var(--brand-mid);font-weight:700;">Level 3</td>
+                <td class="framework-col">Siloed departments are a structural design. Changing them requires structural intervention &mdash; not exhortation to collaborate better.</td>
+            </tr>
+            <tr class="row-l1">
+                <td>Point 10 &mdash; Eliminate slogans</td>
+                <td style="color:var(--red);font-weight:700;">Anti-Level-1</td>
+                <td class="framework-col">Slogans aimed at workers are Level 1 interventions. They tell people to try harder without changing the system. Deming is explicit: the system produces the result, not the worker&rsquo;s effort or attitude.</td>
+            </tr>
+            <tr class="row-l1">
+                <td>Point 11 &mdash; Eliminate numerical quotas</td>
+                <td style="color:var(--red);font-weight:700;">Anti-Level-1</td>
+                <td class="framework-col">Quotas without method are goals without a system change. They optimise the metric, not the process. Bootstrap CUSUM on the NHS dementia diagnosis target &mdash; a numerical quota &mdash; shows no structural improvement after twelve years.</td>
+            </tr>
+            <tr class="row-l3">
+                <td>Point 12 &mdash; Remove barriers to pride</td>
+                <td style="color:var(--brand-mid);font-weight:700;">Level 3</td>
+                <td class="framework-col">Pride in work is destroyed by systems that blame individuals for system failures. Removing those barriers is a structural change to how work is evaluated and how problems are attributed.</td>
+            </tr>
+            <tr class="row-l3">
+                <td>Point 13 &mdash; Institute education</td>
+                <td style="color:var(--brand-mid);font-weight:700;">Level 3</td>
+                <td class="framework-col">Not training for the current job &mdash; education that develops people&rsquo;s capacity to improve the system itself. Builds the system&rsquo;s own improvement capability rather than dependence on external intervention.</td>
+            </tr>
+            <tr class="row-l3d">
+                <td>Point 14 &mdash; The transformation is everyone&rsquo;s job</td>
+                <td style="color:#166534;font-weight:700;">Level 3 Deep</td>
+                <td class="framework-col">The organisation&rsquo;s entire operating model must change, not just specific processes. The precondition is that top management leads the change and commits to it permanently &mdash; Deming&rsquo;s definition of constancy of purpose in action.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="alert-blue">
+        <strong>Points 10 and 11 are Deming&rsquo;s explicit rejection of Level 1.</strong> Slogans, targets, and quotas aimed at workers shift responsibility from the system &mdash; where 94% of problems originate &mdash; to the individual. They are not just ineffective. Deming argues they are actively harmful because they obscure where the real problem lies. Joiner&rsquo;s level classification makes the mechanism precise: a Level 1 intervention cannot produce a Level 3 result, regardless of how forcefully it is applied or how clearly the target is communicated.
+    </div>
+
+    <p>A full plain-English explanation of all 14 Points with worked examples from the articles on this site is on the <a href="deming-14-points.html">Deming&rsquo;s 14 Points page &rsaquo;</a></p>
+
+    <!-- FURTHER READING -->
+    <h2>Where this fits &mdash; and where to go next</h2>
+
+    <p>Joiner&rsquo;s levels answer one question: <em>is this intervention deep enough to hold?</em> They sit at Tier 3 in the improvement thinking framework on this site &mdash; a classification tool that connects the worked examples below to the broader diagnostic method above.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:24px 0;">
+
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--purple);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);margin-bottom:6px;">&#8593; Above this page &mdash; the method</div>
+            <h4 style="font-size:0.95em;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;"><a href="why-nothing-changes.html">Why nothing changes &mdash; the full diagnostic method</a></h4>
+            <p style="font-size:0.88em;color:var(--muted);margin:0;line-height:1.6;">The five-stage method for finding the root cause that requires a Level 3 intervention. Joiner&rsquo;s levels are the check between Step 4 and Step 5 &mdash; classifying each proposed intervention before it is sequenced.</p>
+        </div>
+
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--brand-mid);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:6px;">&#8593; Above this page &mdash; the framework</div>
+            <h4 style="font-size:0.95em;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;"><a href="start-here.html">How to make improvements that really work</a></h4>
+            <p style="font-size:0.88em;color:var(--muted);margin:0;line-height:1.6;">The three questions of the Model for Improvement. Joiner&rsquo;s levels answer Question 3 &mdash; what change can we make that will result in an improvement &mdash; at the right depth.</p>
+        </div>
+
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--teal);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">&#8594; Related concept page</div>
+            <h4 style="font-size:0.95em;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;"><a href="deming-14-points.html">Deming&rsquo;s 14 Points explained</a></h4>
+            <p style="font-size:0.88em;color:var(--muted);margin:0;line-height:1.6;">Most of Deming&rsquo;s 14 Points are Level 3 interventions. This page explains all 14 in plain English with worked examples &mdash; and shows which level each one operates at.</p>
+        </div>
+
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--green);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">&#8595; Below this page &mdash; evidence</div>
+            <h4 style="font-size:0.95em;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;"><a href="dementia-diagnosis-rate.html">Dementia &mdash; twelve years of Level 1 targets</a></h4>
+            <p style="font-size:0.88em;color:var(--muted);margin:0;line-height:1.6;">Bootstrap CUSUM on the 66.7% dementia diagnosis target. Numerical quotas without system change &mdash; Deming&rsquo;s Point 11 in practice. No confirmed structural improvement after twelve years.</p>
+        </div>
+
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--red);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin-bottom:6px;">&#8595; Below this page &mdash; evidence</div>
+            <h4 style="font-size:0.95em;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;"><a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; fifteen years of Level 1 &amp; 2 interventions</a></h4>
+            <p style="font-size:0.88em;color:var(--muted);margin:0;line-height:1.6;">Four confirmed structural stages of decline. Bootstrap CUSUM finds no policy intervention detectable as improvement. The constraint was never addressed at Level 3.</p>
+        </div>
+
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--green);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">&#8595; Below this page &mdash; evidence</div>
+            <h4 style="font-size:0.95em;color:var(--brand-blue);margin-bottom:6px;font-family:system-ui,sans-serif;"><a href="never-events-wrong-route.html">Never events &mdash; Level 3 available, not implemented</a></h4>
+            <p style="font-size:0.88em;color:var(--muted);margin:0;line-height:1.6;">The engineering control existed since 2010. Bootstrap CUSUM finds a flat process. Level 2 guidance was issued. The Level 3 structural fix was not mandated.</p>
+        </div>
+
+    </div>
+
+    <div class="alert-blue">
+        <strong>The keyword that connects these pages.</strong> Every page above links upward to <a href="start-here.html">start-here.html</a> and <a href="why-nothing-changes.html">why-nothing-changes.html</a>. Every article below links to this page when it discusses Joiner&rsquo;s levels. That internal link structure carries SEO authority upward through the tree &mdash; from the specific data queries at Tier 4 through the concept pages at Tier 3 to the mission pages at Tier 1 and 2.
+    </div>
+
+    <div class="mission-box">
+        <div class="mission-label">&#127919; Our mission</div>
+        <p>&ldquo;Give people better tools and a better mental model to ask better questions about whether things have improved through structural change &mdash; and to understand why, when they haven&rsquo;t.&rdquo;</p>
+    </div>
+
+    <p style="text-align:center; font-family:system-ui,sans-serif; margin-top:32px;">
+        <a href="index.html" class="btn-primary" style="margin-right:12px;">&#9654; Run Bootstrap CUSUM on your data</a>
+        <a href="why-nothing-changes.html" class="btn-secondary">The full diagnostic method &rsaquo;</a>
+    </p>
+
+</main>
+
+<footer class="page-footer" style="max-width:860px;margin:0 auto;padding:0 24px 60px;">
+    <p><strong>Tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based Bootstrap CUSUM and X-mR analyser &middot; no data uploaded &middot; any sector</p>
+    <p style="margin-top:8px;"><strong>Key references:</strong> Joiner, B.L. <em>Fourth Generation Management</em>, McGraw-Hill, 1994 &middot; Meadows, D. <em>Thinking in Systems</em>, Chelsea Green, 2008 &middot; CDC NIOSH <em>Hierarchy of Controls</em>, 2024 &middot; UK COMAH Regulations 2015 &middot; Deming, W.E. <em>Out of the Crisis</em>, MIT Press, 1982</p>
+    <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). &copy; Syd Stewart 2026. <a href="glossary.html">Glossary</a> &middot; <a href="about.html">About</a></p>
+</footer>
+
+</body>
+</html>
