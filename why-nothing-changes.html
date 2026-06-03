@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why nothing changes — and what actually will — StepChangeAnalysis.com</title>
+    <meta name="description" content="Your improvement programme is not producing structural change. Bootstrap CUSUM shows no confirmed step change. This page explains why — and what level of intervention will actually move the line. Joiner levels, Deming's by what method, Goldratt's constraint, Bright Spots.">
+    <link rel="canonical" href="https://stepchangeanalysis.com/why-nothing-changes.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <style>
+        :root {
+            --brand-blue:  #002d5b;
+            --brand-mid:   #0056b3;
+            --brand-light: #e9f2ff;
+            --text:        #1e293b;
+            --muted:       #64748b;
+            --border:      #e2e8f0;
+            --bg:          #f8f9fa;
+            --green:       #198754;
+            --orange:      #e67e22;
+            --red:         #c0392b;
+            --teal:        #0e7490;
+            --purple:      #7c3aed;
+            --q1:          #7c3aed;
+            --q2:          #0e7490;
+            --q3:          #0056b3;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+
+        /* ── Header ── */
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-nav { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; }
+        .header-nav a:hover { color: white; text-decoration: underline; }
+        .header-nav a.active { color: white; font-weight: 700; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+
+        /* ── Page wrap ── */
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+
+        /* ── Hero ── */
+        .hero { padding: 40px 0 32px; border-bottom: 2px solid var(--border); margin-bottom: 40px; }
+        .hero-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 14px; }
+        .hero h1 { font-size: clamp(1.8em, 4vw, 2.6em); line-height: 1.15; color: var(--brand-blue); margin-bottom: 20px; font-weight: bold; }
+        .hero-sub { font-size: 1.15em; color: var(--muted); line-height: 1.7; margin-bottom: 24px; max-width: 680px; }
+        .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+        .btn-primary { display: inline-block; background: var(--brand-mid); color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 700; }
+        .btn-primary:hover { background: var(--brand-blue); }
+        .btn-secondary { display: inline-block; background: white; color: var(--brand-mid); padding: 12px 24px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 600; border: 2px solid var(--brand-mid); }
+        .btn-secondary:hover { background: var(--brand-light); }
+
+        /* ── Headings ── */
+        h2 { font-size: 1.4em; color: var(--brand-blue); margin: 44px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.1em; color: var(--brand-blue); margin: 28px 0 10px; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+
+        /* ── Alerts ── */
+        .alert-orange { background: #fff8f0; border-left: 4px solid var(--orange); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; color: #4a3000; }
+        .alert-blue   { background: var(--brand-light); border-left: 4px solid var(--brand-mid); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-green  { background: #f0fdf4; border-left: 4px solid var(--green); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-teal   { background: #f0f9ff; border-left: 4px solid var(--teal); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-purple { background: #faf5ff; border-left: 4px solid var(--purple); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+
+        /* ── Signal cards ── */
+        .signal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 24px 0; }
+        .signal-card { background: white; border-radius: 8px; padding: 20px; border-left: 4px solid var(--brand-mid); }
+        .signal-num { font-family: system-ui, sans-serif; font-size: 1.8em; font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 8px; }
+        .signal-title { font-family: system-ui, sans-serif; font-size: 0.92em; font-weight: 700; color: var(--brand-blue); margin-bottom: 6px; }
+        .signal-desc { font-size: 0.9em; color: var(--text); line-height: 1.6; margin: 0; }
+
+        /* ── Callout question ── */
+        .q-callout { background: #f8f5ff; border: 2px solid var(--purple); border-radius: 10px; padding: 24px 28px; margin: 28px 0; text-align: center; }
+        .q-callout .q-label { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
+        .q-callout .q-text { font-size: 1.15em; font-style: italic; color: var(--brand-blue); line-height: 1.5; margin: 0; }
+
+        /* ── Five stages ── */
+        .stages { list-style: none; margin: 28px 0; padding: 0; counter-reset: stage; }
+        .stage-item { counter-increment: stage; display: grid; grid-template-columns: 52px 1fr; gap: 0 20px; padding-bottom: 28px; position: relative; }
+        .stage-item:not(:last-child)::after { content: ''; position: absolute; left: 25px; top: 54px; bottom: 0; width: 2px; background: var(--border); }
+        .stage-num { width: 52px; height: 52px; border-radius: 50%; background: var(--brand-blue); color: white; display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; font-size: 1.25em; font-weight: 700; flex-shrink: 0; position: relative; z-index: 1; }
+        .stage-body { padding-top: 10px; }
+        .stage-title { font-family: system-ui, sans-serif; font-size: 0.98em; font-weight: 700; color: var(--brand-blue); margin-bottom: 6px; }
+        .stage-desc { font-size: 0.95em; color: var(--text); line-height: 1.65; margin-bottom: 10px; }
+        .stage-qs { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+        .stage-qs li { font-family: system-ui, sans-serif; font-size: 0.88em; color: var(--muted); line-height: 1.5; padding-left: 18px; position: relative; }
+        .stage-qs li::before { content: '→'; position: absolute; left: 0; color: var(--brand-mid); font-weight: 700; }
+
+        /* ── Joiner levels ── */
+        .levels { display: flex; flex-direction: column; gap: 10px; margin: 24px 0; }
+        .level { display: grid; grid-template-columns: 120px 1fr; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+        .level-badge { padding: 16px 18px; }
+        .level-tag { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+        .level-name { font-family: system-ui, sans-serif; font-size: 0.92em; font-weight: 700; line-height: 1.2; }
+        .level-body { background: white; padding: 16px 20px; border-left: 1px solid var(--border); }
+        .level-body p { font-size: 0.9em; color: var(--text); line-height: 1.6; margin: 0; }
+        .level-body strong { color: var(--brand-blue); }
+
+        .level.l1 .level-badge { background: #fef2f2; color: var(--red); }
+        .level.l2 .level-badge { background: #fff8f0; color: var(--orange); }
+        .level.l3 .level-badge { background: var(--brand-light); color: var(--brand-mid); }
+        .level.l3d .level-badge { background: #f0f9ff; color: var(--teal); }
+
+        /* ── Bright Spots cards ── */
+        .bs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 24px 0; }
+        .bs-card { background: white; border-radius: 8px; padding: 20px; border-top: 4px solid var(--green); }
+        .bs-q { font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: 700; color: var(--brand-blue); margin-bottom: 8px; line-height: 1.3; }
+        .bs-a { font-size: 0.88em; color: var(--muted); line-height: 1.55; margin: 0; }
+
+        /* ── Bridge section — light ── */
+        .bridge-section { background: var(--brand-light); border-top: 2px solid var(--border); border-bottom: 2px solid var(--border); padding: 40px 0; margin: 48px 0; }
+        .bridge-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+        .bridge-section h2 { color: var(--brand-blue); border: none; border-bottom: none; margin-top: 0; padding-bottom: 0; font-size: 1.25em; text-transform: uppercase; letter-spacing: 0.08em; }
+        .bridge-section p { color: var(--text); }
+        .bridge-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; margin: 24px 0; }
+        .bridge-box { background: white; border-radius: 8px; padding: 18px 20px; border: 1px solid var(--border); }
+        .bridge-box .bb-label { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+        .bridge-box .bb-title { font-family: system-ui, sans-serif; font-size: 1em; font-weight: 700; color: var(--brand-blue); margin-bottom: 5px; }
+        .bridge-box .bb-desc { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); line-height: 1.5; margin: 0; }
+        .bridge-arrow { font-size: 2em; color: var(--brand-mid); text-align: center; }
+        .btn-white { display: inline-block; background: var(--brand-mid); color: white; padding: 12px 26px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 700; margin-top: 8px; }
+        .btn-white:hover { background: var(--brand-blue); }
+
+        /* ── Evidence cards — matches index.html style ── */
+        .evidence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+        .evidence-card { background: white; border-radius: 8px; padding: 18px; border-left: 4px solid var(--brand-mid); }
+        .evidence-card .e-tag { font-family: system-ui, sans-serif; font-size: 0.75em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 6px; }
+        .evidence-card h4 { font-size: 0.95em; color: var(--brand-blue); margin-bottom: 6px; font-family: system-ui, sans-serif; }
+        .evidence-card h4 a { color: var(--brand-blue); text-decoration: none; }
+        .evidence-card h4 a:hover { text-decoration: underline; }
+        .evidence-card p { font-size: 0.88em; color: var(--muted); margin: 0; line-height: 1.6; }
+
+        /* ── Mission box ── */
+        .mission-box { background: #f8f5ff; border: 2px solid var(--q1); border-radius: 10px; padding: 28px 32px; margin: 40px 0; text-align: center; }
+        .mission-box p { font-size: 1.1em; font-style: italic; color: var(--brand-blue); line-height: 1.7; margin: 0; }
+        .mission-box .mission-label { font-family: system-ui, sans-serif; font-size: 0.75em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--q1); margin-bottom: 12px; }
+
+        /* ── Framework refs ── */
+        .framework-refs { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .framework-refs a { color: var(--brand-mid); }
+
+        /* ── Footer ── */
+        .page-footer { margin-top: 60px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.7em; }
+            .signal-grid, .bs-grid, .evidence-grid { grid-template-columns: 1fr; }
+            .bridge-grid { grid-template-columns: 1fr; }
+            .bridge-arrow { display: none; }
+            .level { grid-template-columns: 100px 1fr; }
+            .header-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Header — matches start-here.html exactly ── -->
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <a href="why-nothing-changes.html" class="active">Why nothing changes</a>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="how-to-use.html">How to use</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Start here</a> &rsaquo; Why nothing changes</div>
+
+    <!-- ── HERO ── -->
+    <div class="hero">
+        <div class="hero-flag">&#128161; Question 3 &mdash; Langley et al. &middot; The Improvement Guide</div>
+        <h1>Why nothing changes &mdash; and what actually will</h1>
+        <p class="hero-sub">You have the data. You can see the system is not improving. You have tried things &mdash; training, new processes, more resource, a new target. The Bootstrap CUSUM chart shows no confirmed step change. This page explains why that happens &mdash; and what kind of intervention will actually move the line.</p>
+
+        <div class="alert-orange">
+            <strong>The tampering trap.</strong> If you have the right kind of initiative &mdash; ideally a Level 3 structural intervention &mdash; the most dangerous thing you can do is abandon it before it has had time to work. Deming called this <em>tampering</em>: changing a process in response to variation rather than genuine evidence of structural change. Bootstrap CUSUM is the tool that tells you when to wait and when to act &mdash; because it distinguishes between genuine step change and noise. <a href="start-here.html">Start here to understand the full picture &rsaquo;</a>
+        </div>
+
+        <div class="hero-cta">
+            <a href="index.html" class="btn-primary">&#9654; Run Bootstrap CUSUM on your data</a>
+            <a href="start-here.html" class="btn-secondary">&#8592; Back to start here</a>
+        </div>
+    </div>
+
+    <!-- ── SECTION 1: THREE SIGNALS ── -->
+    <h2>Three signals that tell you more effort is not the answer</h2>
+
+    <p>Most persistent problems are treated as effort problems. Work harder. Try again. The next attempt will be different. But when any of the following three signals are present, the problem is structural &mdash; and structural problems do not respond to effort. They require a different kind of intervention altogether.</p>
+
+    <div class="signal-grid">
+        <div class="signal-card">
+            <div class="signal-num">1</div>
+            <div class="signal-title">The same failure shape keeps recurring</div>
+            <p class="signal-desc">Despite different attempts, the failure keeps happening in roughly the same way. Random bad luck produces random failure. Structural causes produce <em>consistent</em> failure patterns. If you can describe the shape of the failure before it happens &mdash; it is structural.</p>
+        </div>
+        <div class="signal-card">
+            <div class="signal-num">2</div>
+            <div class="signal-title">Effort increases &mdash; results do not</div>
+            <p class="signal-desc">Deming called this working harder within a flawed system. If people are working harder than before and the outcome is the same or worse, the constraint is not effort &mdash; it is the system. No amount of trying harder moves a result that is structurally limited.</p>
+        </div>
+        <div class="signal-card">
+            <div class="signal-num">3</div>
+            <div class="signal-title">The solution feels obvious inside &mdash; invisible outside</div>
+            <p class="signal-desc">When the people closest to the work are convinced the solution is clear and the outside world keeps failing to see it, there is usually a jobs mismatch &mdash; the solution addresses a problem the mainstream does not recognise as its own.</p>
+        </div>
+    </div>
+
+    <div class="q-callout">
+        <div class="q-label">The diagnostic test &mdash; one question before you proceed</div>
+        <p class="q-text">If we doubled our effort from tomorrow, would the result improve &mdash; or would we produce the same outcome twice as fast?</p>
+    </div>
+
+    <p>If the honest answer is the second: stop. Diagnose. The constraint is not effort. Find what the constraint actually is &mdash; then direct persistence at the right thing, not at repeating the same action with more energy.</p>
+
+    <!-- ── SECTION 2: FIVE STAGES ── -->
+    <h2>Finding the root cause &mdash; a five-stage method</h2>
+
+    <p>This is not an analytical technique. It is a question discipline &mdash; a structured sequence of obvious questions that the system is not designed to ask of itself. Each stage builds on the previous. The diagnosis is in the answers, not in the frameworks.</p>
+
+    <div class="alert-blue">
+        <strong>The root cause is often an absence, not a fault.</strong> The instinct is to look for something wrong that needs stopping. But in most persistent organisational problems, the root cause is <em>something absent that needs building</em> &mdash; a missing role, a missing policy, a missing process that forces everything to route through whatever is available. Look for the structural absence before looking for the fault.
+    </div>
+
+    <ol class="stages">
+
+        <li class="stage-item">
+            <div class="stage-num">1</div>
+            <div class="stage-body">
+                <div class="stage-title">Gather the data &mdash; before naming the problem</div>
+                <p class="stage-desc">List every symptom, recurring problem, and unexplained variation. <strong>Look hardest at where outcomes vary most for no obvious reason</strong> &mdash; that variation is Deming's diagnostic clue. High outcome variation is the fingerprint of a system dependent on people rather than design. Do not explain anything yet.</p>
+                <ul class="stage-qs">
+                    <li>What keeps happening that should not keep happening?</li>
+                    <li>Where do outcomes vary most &mdash; some go well, some go badly, for no obvious reason?</li>
+                    <li>What decisions wait for one specific person before they can move?</li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="stage-item">
+            <div class="stage-num">2</div>
+            <div class="stage-body">
+                <div class="stage-title">Find the root cause &mdash; or the structural absence</div>
+                <p class="stage-desc">Look for the single condition &mdash; one sentence &mdash; that makes all symptoms simultaneously inevitable. Test it three ways: does every symptom necessarily follow from it (necessity test)? Would most symptoms disappear if it were eliminated (removal test)? Do insiders nod when they hear it, rather than argue (recognition test)?</p>
+                <ul class="stage-qs">
+                    <li>What single condition, if true, would make every symptom on the list necessarily follow?</li>
+                    <li>What is absent that, if it existed, would make most symptoms disappear?</li>
+                    <li>When you describe this root cause to someone inside &mdash; do they nod, or argue?</li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="stage-item">
+            <div class="stage-num">3</div>
+            <div class="stage-body">
+                <div class="stage-title">Find the loop &mdash; why does it keep recurring?</div>
+                <p class="stage-desc">Every persistent problem has a reinforcing loop &mdash; a point where a consequence of the problem feeds back and makes the original condition worse or harder to fix. This is why the short-term fix always relieves the pressure to make the fundamental fix. Find the loop in plain language &mdash; no diagram needed.</p>
+                <ul class="stage-qs">
+                    <li>What does this problem directly produce? What do those consequences produce?</li>
+                    <li>Does any consequence eventually make the original problem worse or harder to fix?</li>
+                    <li>What short-term fix relieves the pressure &mdash; and how does that fix prevent the fundamental fix from ever being made?</li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="stage-item">
+            <div class="stage-num">4</div>
+            <div class="stage-body">
+                <div class="stage-title">Separate causes from consequences</div>
+                <p class="stage-desc">Most symptom lists contain genuine structural causes mixed with consequences of the system that are being treated as independent problems. Treating a consequence as a root cause produces an intervention aimed at the wrong level. The definitive test is simple.</p>
+                <ul class="stage-qs">
+                    <li>Would this symptom exist if the root cause did not exist?</li>
+                    <li>If we fixed this tomorrow, would the root cause keep producing it?</li>
+                    <li>Is this a description of what someone does &mdash; or what the system produces?</li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="stage-item">
+            <div class="stage-num">5</div>
+            <div class="stage-body">
+                <div class="stage-title">Sequence the structural response</div>
+                <p class="stage-desc">Design one intervention per structural cause. Then ask: which interventions must precede which? The sequence is a logical dependency &mdash; each intervention creates the conditions the next one requires. Not a list of good ideas. A dependency map.</p>
+                <ul class="stage-qs">
+                    <li>Does this intervention require another to be working before it can succeed?</li>
+                    <li>What is the prediction &mdash; what will change, by how much, within how many weeks?</li>
+                    <li>What would we need to see to conclude it is not working &mdash; and what would we do then?</li>
+                </ul>
+            </div>
+        </li>
+
+    </ol>
+
+    <div class="alert-teal">
+        <strong>The full question set.</strong> The complete diagnostic question set &mdash; 54 questions across all five stages, the Joiner check, Goldratt's five focusing steps, and the lead user validation questions &mdash; is available as a structured reference. <a href="glossary.html">See the glossary for framework definitions &rsaquo;</a>
+    </div>
+
+    <!-- ── SECTION 3: JOINER ── -->
+    <h2>Is the intervention deep enough to hold? &mdash; Joiner&rsquo;s levels</h2>
+
+    <p>Before designing any intervention, classify it. This is the question that determines whether a change will hold or revert. Most improvement programmes fail not because the intervention was wrong but because it was aimed at the wrong depth. A Level 1 or Level 2 intervention aimed at a Level 3 problem will produce temporary improvement followed by reversion, every time, regardless of how well it is implemented.</p>
+
+    <p>Bootstrap CUSUM is the arbiter. A Level 1 fix will show no confirmed step change &mdash; or a brief apparent improvement that reverts. A Level 3 structural change will show a confirmed sustained step change with statistical confidence.</p>
+
+    <div class="levels">
+        <div class="level l1">
+            <div class="level-badge">
+                <div class="level-tag">Level 1</div>
+                <div class="level-name">Fix the output</div>
+            </div>
+            <div class="level-body">
+                <p><strong>Firefighting.</strong> React to the problem after it has occurred. The system is unchanged. The problem returns. Bootstrap CUSUM will show no confirmed step change &mdash; because nothing structural has changed. Necessary in the short term. Insufficient as a strategy.</p>
+            </div>
+        </div>
+        <div class="level l2">
+            <div class="level-badge">
+                <div class="level-tag">Level 2</div>
+                <div class="level-name">Fix the process</div>
+            </div>
+            <div class="level-body">
+                <p><strong>A checklist, a protocol, a gate.</strong> Prevents this specific failure mode recurring. Does not change the underlying system that generated the process. May show a temporary step change before reverting when the broader system pushes back. The dementia diagnosis target is a Level 1&ndash;2 intervention inside an unchanged system.</p>
+            </div>
+        </div>
+        <div class="level l3">
+            <div class="level-badge">
+                <div class="level-tag">Level 3</div>
+                <div class="level-name">Fix the system</div>
+            </div>
+            <div class="level-body">
+                <p><strong>Change roles, decision rights, policies, structures.</strong> Durable because it works regardless of who is in the role and regardless of individual effort. Bootstrap CUSUM will show a confirmed sustained step change &mdash; the signal that the system has genuinely moved. The ULEZ air quality improvement is a Level 3 system change.</p>
+            </div>
+        </div>
+        <div class="level l3d">
+            <div class="level-badge">
+                <div class="level-tag">Level 3 Deep</div>
+                <div class="level-name">Fix the root</div>
+            </div>
+            <div class="level-body">
+                <p><strong>Change the mental model that generated the system design.</strong> The hardest level and the highest leverage. Without this, every Level 3 structural fix will be quietly undermined because the leader&rsquo;s behaviour gravitationally recreates the old system. Joiner&rsquo;s fourth generation management is entirely about this level.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert-purple">
+        <strong>The policy shortcut &mdash; the most underused Level 3 intervention.</strong> A written, signed, dated rule that governs a category of decisions permanently. It costs one afternoon to write and nothing to implement. Its effect is permanent because it changes every future instance of that decision, not just the one in front of you today. Before designing a complex structural change, always ask: <em>could a policy decision achieve the same result?</em>
+    </div>
+
+    <div class="q-callout">
+        <div class="q-label">Deming&rsquo;s test &mdash; applied to every proposed intervention</div>
+        <p class="q-text">&ldquo;By what method will this intervention produce the improvement we are predicting?&rdquo;</p>
+    </div>
+
+    <p>If the answer is <em>because people will try harder</em> or <em>because the target is higher</em> &mdash; it is not a method. It is a goal without a method. Deming spent forty years showing why goals without methods produce distortion, not improvement. Go back to the system and find the Level 3 structural change that makes the improvement happen regardless of individual effort.</p>
+
+    <!-- ── SECTION 4: BRIGHT SPOTS ── -->
+    <h2>Look for what is already working &mdash; before building anything new</h2>
+
+    <p>Chip and Dan Heath (<em>Switch</em>, 2010) and Jerry Sternin&rsquo;s Positive Deviance framework make the same observation: the answer to most persistent problems is already present somewhere in the system. Someone, somewhere, with the same resources and the same constraints, is already achieving the outcome you are trying to produce.</p>
+
+    <p>In twelve years of the UK dementia challenge, Kent&rsquo;s integrated care model recovered from COVID at <strong>nine times the national average rate</strong> &mdash; using the same NHS workforce, the same population, the same disease. The answer was already there. No one was looking for it. The improvement programme was designed to create new solutions rather than find and scale the Bright Spot that already existed.</p>
+
+    <div class="bs-grid">
+        <div class="bs-card">
+            <div class="bs-q">Where in this system is performance significantly better &mdash; with no obvious explanation in additional resource?</div>
+            <p class="bs-a">The Bright Spot detection question. The positive outlier in the variation data is the structural answer waiting to be found.</p>
+        </div>
+        <div class="bs-card">
+            <div class="bs-q">What does the Bright Spot do that others do not?</div>
+            <p class="bs-a">The structural difference. This is the Level 3 intervention already running in one part of your system. Study it before designing anything.</p>
+        </div>
+        <div class="bs-card">
+            <div class="bs-q">If the specific people involved left tomorrow &mdash; would the better outcome continue?</div>
+            <p class="bs-a">Tests whether the Bright Spot is structural (scaleable) or personal (not automatically scaleable). Only structural Bright Spots transfer reliably.</p>
+        </div>
+    </div>
+
+    <div class="alert-green">
+        <strong>Scale through discovery, not instruction.</strong> Sternin&rsquo;s most important practical finding: a solution discovered from within the community is owned by the community. A solution brought in from outside is complied with and then abandoned when pressure increases. Help people find the Bright Spot themselves &mdash; do not present it to them.
+    </div>
+
+</main>
+
+<!-- ── BRIDGE SECTION — full width dark ── -->
+<div class="bridge-section">
+    <div class="bridge-inner">
+        <h2>How Bootstrap CUSUM and this method work together</h2>
+        <p>They answer different questions. Used together they give a complete picture &mdash; from detection to diagnosis to action.</p>
+
+        <div class="bridge-grid">
+            <div class="bridge-box">
+                <div class="bb-label">Question 2 &mdash; Langley et al. &middot; Study phase of PDSA</div>
+                <div class="bb-title">Bootstrap CUSUM</div>
+                <p class="bb-desc">Has a structural change occurred? Is this a genuine step change or noise? When should I wait &mdash; and when should I act?</p>
+            </div>
+            <div class="bridge-arrow">&#8594;</div>
+            <div class="bridge-box">
+                <div class="bb-label">Question 3 &mdash; Langley et al. &middot; This method</div>
+                <div class="bb-title">The diagnostic method</div>
+                <p class="bb-desc">Why has no structural change occurred? What level of intervention would actually produce the step change the chart is waiting to detect?</p>
+            </div>
+        </div>
+
+        <p>When Bootstrap CUSUM shows no confirmed step change after genuine improvement effort, apply the five-stage diagnostic method. Find the root cause or structural absence. Classify the intervention using Joiner&rsquo;s levels. Design at Level 3 or deeper. Write a prediction. Then run Bootstrap CUSUM again &mdash; and watch for the step change the chart has been waiting to show.</p>
+
+        <a href="index.html" class="btn-white">&#9654; Run Bootstrap CUSUM on your own data &mdash; free, browser-based, any sector</a>
+    </div>
+</div>
+
+<main class="page-wrap" style="padding-top:0;">
+
+    <!-- ── SECTION 5: WORKED EXAMPLES ── -->
+    <h2>See the diagnosis in practice</h2>
+
+    <p>Each article below applies the full five-stage diagnostic method to a real system where improvement has stalled &mdash; showing what the Bootstrap CUSUM chart reveals, why the standard interventions did not produce structural change, and what would have.</p>
+
+    <div class="evidence-grid">
+        <div class="evidence-card">
+            <div class="e-tag">&#127973;&#65039; NHS Public Health</div>
+            <h4><a href="dementia-diagnosis-rate.html">Dementia &mdash; twelve years of targets, no structural change</a></h4>
+            <p>Two Prime Ministerial challenges, fifty commitments, &pound;300m. The diagnosis rate barely moved from the 2012 target. The five-stage method identifies the root cause: a reactive system design and a single-node GP dependency. Bootstrap CUSUM confirms: one stage, no confirmed structural improvement.</p>
+        </div>
+        <div class="evidence-card">
+            <div class="e-tag">&#127973;&#65039; NHS Emergency Care</div>
+            <h4><a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; four stages of structural decline</a></h4>
+            <p>Bootstrap CUSUM applied to 15 years of monthly data. Not one policy intervention is detectable as a structural improvement. Four confirmed step changes &mdash; all downward. The constraint was never identified. The interventions were all Level 1 and Level 2.</p>
+        </div>
+        <div class="evidence-card">
+            <div class="e-tag">&#128138; Patient Safety</div>
+            <h4><a href="never-events-wrong-route.html">Never events that never stopped</a></h4>
+            <p>Declared &ldquo;wholly preventable&rdquo; in 2011. The engineering solution existed. Bootstrap CUSUM finds a flat process at 17.5 events per year. A Level 3 structural change was available and not made. The Level 2 guidance was issued and ignored.</p>
+        </div>
+    </div>
+
+    <!-- ── MISSION ── -->
+    <div class="mission-box">
+        <div class="mission-label">&#127919; Our mission</div>
+        <p>&ldquo;Give people better tools and a better mental model to ask better questions about whether things have improved through structural change &mdash; and to understand why, when they haven&rsquo;t.&rdquo;</p>
+    </div>
+
+    <p style="text-align:center; font-family:system-ui,sans-serif; margin-top:32px;">
+        <a href="index.html" class="btn-primary" style="margin-right:12px;">&#9654; Open the free tool</a>
+        <a href="start-here.html" class="btn-secondary">&#8592; Back to start here</a>
+    </p>
+
+    <!-- ── FRAMEWORK REFS ── -->
+    <div class="framework-refs">
+        <p><strong>Frameworks referenced on this page:</strong></p>
+        <p style="margin-top:8px;">
+            <strong>Joiner levels of fix</strong> &mdash; Joiner, B.L. <em>Fourth Generation Management</em>, McGraw-Hill, 1994 &middot;
+            <strong>By what method &mdash; Deming</strong> &mdash; Deming, W.E. <em>Out of the Crisis</em>, MIT Press, 1982; <em>The New Economics</em>, MIT Press, 1993 &middot;
+            <strong>Theory of Constraints</strong> &mdash; Goldratt, E.M. <em>The Goal</em>, 1984; <em>It&rsquo;s Not Luck</em>, 1994 &middot;
+            <strong>Systems thinking &middot; reinforcing loops</strong> &mdash; Meadows, D. <em>Thinking in Systems</em>, Chelsea Green, 2008; Senge, P. <em>The Fifth Discipline</em>, 1990 &middot;
+            <strong>Bright Spots</strong> &mdash; Heath, C. and Heath, D. <em>Switch</em>, Random House, 2010 &middot;
+            <strong>Positive Deviance</strong> &mdash; Pascale, R., Sternin, J. and Sternin, M. <em>The Power of Positive Deviance</em>, Harvard Business Press, 2010 &middot;
+            <strong>Model for Improvement</strong> &mdash; Langley, G.L. et al. <em>The Improvement Guide</em>, 2nd ed., Jossey-Bass, 2009
+        </p>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="page-footer">
+        <p><strong>Tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based Bootstrap CUSUM and X-mR analyser &middot; no data uploaded &middot; any sector</p>
+        <p style="margin-top:8px;"><strong>Framework:</strong> Deming (Out of the Crisis, 1982) &middot; Joiner (Fourth Generation Management, 1994) &middot; Goldratt (The Goal, 1984) &middot; Senge (The Fifth Discipline, 1990) &middot; Model for Improvement (Langley et al., 1996/2009)</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). &copy; Syd Stewart 2026. <a href="glossary.html">Glossary</a> &middot; <a href="about.html">About</a></p>
+    </footer>
+
+</main>
+
+</body>
+</html>

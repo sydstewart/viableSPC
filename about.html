@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — StepChangeAnalysis.com</title>
+    <meta name="description" content="StepChangeAnalysis.com was built by Syd Stewart, Chartered Chemical Engineer. High-specification chemical manufacturing, major hazards plant management, forty-plus years managing clinical software for high risk medication patients across the UK, US, and Canada. The tool is free, browser-based, and works in any sector worldwide.">
+    <link rel="canonical" href="https://stepchangeanalysis.com/about.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <style>
+        :root {
+            --brand-blue:  #002d5b;
+            --brand-mid:   #0056b3;
+            --brand-light: #e9f2ff;
+            --text:        #1e293b;
+            --muted:       #64748b;
+            --border:      #e2e8f0;
+            --bg:          #f8f9fa;
+            --green:       #198754;
+            --orange:      #e67e22;
+            --red:         #c0392b;
+            --teal:        #0e7490;
+            --q1:          #7c3aed;
+            --q2:          #0e7490;
+            --q3:          #0056b3;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-nav { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; }
+        .header-nav a:hover { color: white; text-decoration: underline; }
+        .header-nav a.active { color: white; font-weight: 700; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        /* Hero */
+        .hero { padding: 40px 0 32px; border-bottom: 2px solid var(--border); margin-bottom: 40px; }
+        .hero-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 14px; }
+        .hero h1 { font-size: clamp(1.8em, 4vw, 2.6em); line-height: 1.15; color: var(--brand-blue); margin-bottom: 20px; font-weight: bold; }
+        .hero-sub { font-size: 1.15em; color: var(--muted); line-height: 1.7; margin-bottom: 0; max-width: 680px; }
+        /* Body */
+        h2 { font-size: 1.4em; color: var(--brand-blue); margin: 44px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.1em; color: var(--brand-blue); margin: 28px 0 10px; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        a { color: var(--brand-mid); }
+        blockquote { border-left: 4px solid var(--brand-mid); padding: 14px 20px; margin: 24px 0; background: var(--brand-light); border-radius: 0 6px 6px 0; font-style: italic; font-size: 1.05em; color: var(--brand-blue); line-height: 1.7; }
+        /* Career timeline */
+        .timeline { margin: 32px 0; display: flex; flex-direction: column; gap: 0; }
+        .tl-item { display: grid; grid-template-columns: 140px 1fr; gap: 0 24px; padding-bottom: 28px; position: relative; }
+        .tl-item:not(:last-child)::after { content: ''; position: absolute; left: 139px; top: 28px; bottom: 0; width: 2px; background: var(--border); }
+        .tl-left { text-align: right; padding-top: 3px; }
+        .tl-period { font-family: system-ui, sans-serif; font-size: 0.78em; font-weight: 700; color: var(--brand-mid); letter-spacing: 0.04em; display: block; margin-bottom: 4px; }
+        .tl-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--brand-blue); border: 2px solid var(--brand-light); display: inline-block; margin-left: auto; position: absolute; left: 134px; top: 5px; }
+        .tl-right { padding-left: 20px; }
+        .tl-role { font-family: system-ui, sans-serif; font-size: 0.98em; font-weight: 700; color: var(--brand-blue); margin-bottom: 5px; }
+        .tl-body { font-size: 0.95em; color: var(--text); line-height: 1.65; margin: 0; }
+        /* Profile card */
+        .profile-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 28px 32px; margin: 32px 0; display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start; }
+        .profile-initials { width: 72px; height: 72px; border-radius: 50%; background: var(--brand-blue); color: white; display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; font-size: 1.6em; font-weight: 700; flex-shrink: 0; }
+        .profile-name { font-family: system-ui, sans-serif; font-size: 1.15em; font-weight: 700; color: var(--brand-blue); margin-bottom: 4px; }
+        .profile-title { font-family: system-ui, sans-serif; font-size: 0.88em; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
+        .profile-body p { font-size: 0.95em; color: var(--text); margin-bottom: 0.8em; line-height: 1.65; }
+        .profile-body p:last-child { margin-bottom: 0; }
+        /* Framework table */
+        .framework-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-family: system-ui, sans-serif; font-size: 0.9em; }
+        .framework-table th { background: var(--brand-blue); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+        .framework-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+        .framework-table tr:nth-child(even) td { background: var(--brand-light); }
+        .framework-table td:first-child { font-weight: 600; color: var(--brand-blue); white-space: nowrap; }
+        /* Alerts */
+        .alert-blue   { background: var(--brand-light); border-left: 4px solid var(--brand-mid); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-green  { background: #f0fdf4; border-left: 4px solid var(--green); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-teal   { background: #f0f9ff; border-left: 4px solid var(--teal); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-orange { background: #fff8f0; border-left: 4px solid var(--orange); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; color: #4a3000; }
+        /* Mission */
+        .mission-box { background: #f8f5ff; border: 2px solid var(--q1); border-radius: 10px; padding: 28px 32px; margin: 40px 0; text-align: center; }
+        .mission-box p { font-size: 1.15em; font-style: italic; font-weight: bold; color: var(--brand-blue); line-height: 1.7; margin: 0; }
+        .mission-box .mission-label { font-family: system-ui, sans-serif; font-size: 0.75em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--q1); margin-bottom: 12px; }
+        /* Buttons */
+        .btn-primary { display: inline-block; background: var(--brand-mid); color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 700; }
+        .btn-primary:hover { background: var(--brand-blue); }
+        .btn-secondary { display: inline-block; background: white; color: var(--brand-mid); padding: 12px 24px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 600; border: 2px solid var(--brand-mid); }
+        .btn-secondary:hover { background: var(--brand-light); }
+        /* Footer */
+        .page-footer { margin-top: 60px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.7em; }
+            .profile-card { grid-template-columns: 1fr; }
+            .tl-item { grid-template-columns: 1fr; }
+            .tl-item::after { display: none; }
+            .tl-left { text-align: left; }
+            .tl-dot { display: none; }
+            .tl-right { padding-left: 0; }
+            .header-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <a href="why-nothing-changes.html">Why nothing changes</a>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="how-to-use.html">How to use</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html" class="active">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; About</div>
+
+    <div class="hero">
+        <div class="hero-flag">&#8505;&#65039; About this site</div>
+        <h1>Who built this, why, and what it is for</h1>
+        <p class="hero-sub">StepChangeAnalysis.com is built on fifty years of working with systems where getting the measurement wrong has real consequences &mdash; pharmaceutical-grade manufacturing, major hazards plant management, and clinical software for patients on high risk medications. The question that runs through all of it is the same: <em>how do you know whether anything has actually changed?</em></p>
+    </div>
+
+    <!-- WHO BUILT IT -->
+    <h2>Who built it</h2>
+
+    <div class="profile-card">
+        <div class="profile-initials">SS</div>
+        <div class="profile-body">
+            <div class="profile-name">Syd Stewart</div>
+            <div class="profile-title">Chartered Chemical Engineer &middot; Clinical software company founder &middot; UK, US and Canada &middot; Builder of StepChangeAnalysis.com</div>
+            <p>Twelve years as a process engineer and plant manager at a major chemicals company producing a high-specification product with impurity limits measured in parts per million &mdash; where a shift in process mean is not just an efficiency question but a product quality and patient safety question. That environment was the first encounter with CUSUM: a statistical tool that detects process shifts that standard control charts miss.</p>
+            <p>Plant manager on a major hazards installation &mdash; COMAH-regulated, where the consequences of not detecting a structural change in process behaviour are measured in more than financial terms. The discipline of major hazards management asks the same questions as good improvement work: what is the system actually doing, how do you know, and what level of intervention produces durable change rather than temporary compliance?</p>
+            <p>Forty-plus years managing a clinical software company helping healthcare professionals manage patients taking high risk medications &mdash; anticoagulants, cytotoxics, immunosuppressants, biologics, and biosimilars. The software supports the monitoring and clinical decision-making that keeps those patients safe. The data those systems generate is time-series data. The question of whether a patient&rsquo;s medication control has structurally improved &mdash; or whether variation is noise around an unchanged mean &mdash; is precisely the question Bootstrap CUSUM is designed to answer.</p>
+            <p>StepChangeAnalysis.com is the convergence of those three strands: the statistical method from pharmaceutical manufacturing, the systems thinking from major hazards management, and the clinical context from forty years in healthcare software.</p>
+        </div>
+    </div>
+
+    <!-- THE CAREER -->
+    <h2>The career behind the site</h2>
+
+    <p>The connection between pharmaceutical manufacturing, major hazards plant management, and NHS improvement data is not coincidental. They share a common structure: a system operating under tight specifications, a measurement challenge, and high stakes if the wrong conclusion is drawn from the data.</p>
+
+    <div class="timeline">
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <span class="tl-period">12 years</span>
+                <span class="tl-dot"></span>
+            </div>
+            <div class="tl-right">
+                <div class="tl-role">Process engineer and plant manager &mdash; pharmaceutical-grade chemicals</div>
+                <p class="tl-body">Major chemicals company producing a high-specification chemical product with impurity limits at parts per million level. At ppm specifications, a process shift that standard control charts show as normal variation can be the difference between a product that meets specification and one that does not. First experience of CUSUM as a practical tool for detecting small, sustained shifts in process mean &mdash; shifts that are invisible in monthly averages, invisible on a run chart, but visible in the cumulative sum. The product was not pharmaceutical but the discipline was the same: tight specifications, high stakes, and a measurement method that had to be honest about what had actually changed.</p>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <span class="tl-period">Plant manager</span>
+                <span class="tl-dot"></span>
+            </div>
+            <div class="tl-right">
+                <div class="tl-role">Major hazards installation &mdash; COMAH-regulated</div>
+                <p class="tl-body">Plant manager on a major hazards installation under COMAH (Control of Major Accident Hazards) regulations. The COMAH hierarchy of controls &mdash; elimination, engineering controls, administrative controls, training and procedure &mdash; is the same hierarchy that Joiner&rsquo;s levels of intervention describes for improvement work. The most durable fixes are structural. The least durable are behavioural. Major hazards management makes this undeniably clear because the consequences of relying on behaviour under pressure are visible and documented.</p>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <span class="tl-period">40+ years</span>
+                <span class="tl-dot"></span>
+            </div>
+            <div class="tl-right">
+                <div class="tl-role">Clinical software company &mdash; high risk medication management</div>
+                <p class="tl-body">Founded and managed a clinical software company helping healthcare professionals manage patients taking high risk medications &mdash; anticoagulants, cytotoxics, immunosuppressants, biologics, and biosimilars &mdash; medications where the therapeutic window is narrow, the monitoring requirements are complex, and the consequences of a monitoring failure are serious and the consequences of a monitoring failure are serious. Customers include NHS trusts across the UK and major healthcare organisations in the US and Canada. Forty-plus years working alongside clinicians, pharmacists, and managers in different healthcare systems has made one pattern unmistakable: the clinical risk is the same wherever the patient is, the regulatory frameworks differ, but the underlying measurement question &mdash; has this patient&rsquo;s control structurally improved &mdash; is identical. So is the tool needed to answer it honestly.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <blockquote>
+        The connection between detecting a process shift in a pharmaceutical plant and detecting whether an NHS improvement programme has worked is not metaphorical. It is the same statistical problem applied to the same kind of high-stakes outcome. The tool changed. The question did not.
+    </blockquote>
+
+    <!-- WHY FREE -->
+    <h2>Why the tool is free</h2>
+
+    <p>The Bootstrap CUSUM tool costs nothing to use, requires no login, and uploads no data. Every calculation runs entirely in your browser. This is a deliberate choice, not an oversight.</p>
+
+    <p>The practitioners who most need a statistically honest answer to the question <em>has my improvement programme actually worked?</em> are not always in organisations with commercial analytics budgets. A QI lead in an NHS trust, a safety manager in a small manufacturer, a clinical pharmacist asking whether a new monitoring protocol has genuinely changed patient outcomes &mdash; these are exactly the people this tool is designed for, and charging for it would stop most of them using it.</p>
+
+    <div class="alert-green">
+        <strong>No data ever leaves your computer.</strong> The Bootstrap CUSUM analysis runs entirely in your browser using JavaScript. Your CSV file is read locally and never transmitted to any server. There is no account, no login, no tracking of what data you analyse. The only analytics on this site are standard Google Analytics page view counts &mdash; not your data.
+    </div>
+
+    <!-- MISSION -->
+    <div class="mission-box">
+        <div class="mission-label">&#127919; The mission</div>
+        <p>&ldquo;Give people better tools and a better mental model to ask better questions about whether things have improved through structural change &mdash; and to understand why, when they haven&rsquo;t.&rdquo;</p>
+    </div>
+
+    <!-- GLOBAL SCOPE -->
+    <h2>Built for any sector, anywhere in the world</h2>
+
+    <p>The NHS articles on this site are the most developed example set because that is where the clinical software background runs deepest &mdash; but Bootstrap CUSUM and the diagnostic method here apply equally to any organisation, in any sector, anywhere in the world where improvement is attempted and measurement matters.</p>
+
+    <p>The underlying question is always the same: <em>has this system structurally changed, or are we seeing variation around an unchanged mean?</em> That question does not belong to any single sector. It belongs to anyone who collects time-series data and needs an honest answer about whether an intervention has worked.</p>
+
+    <p>The clinical software company behind this site has customers in the UK, the United States, Canada, and around the world &mdash; and the tool has been applied to data from process manufacturing, environmental monitoring, economics, and public services as well as healthcare. The articles will expand to reflect that breadth as the site grows.</p>
+
+    <h3>Healthcare &mdash; globally</h3>
+    <p>A US hospital monitoring readmission rates, a Canadian healthcare organisation tracking medication safety outcomes, an Australian aged care provider measuring quality indicators, a WHO vaccination programme evaluating coverage &mdash; all face the same measurement challenge as an NHS trust. Regulatory frameworks differ. The Bootstrap CUSUM question does not. The clinical software background on this site includes working with healthcare organisations in the UK, US, and Canada &mdash; where the clinical risk is the same wherever the patient is and the question of whether a patient&rsquo;s treatment control has structurally improved is identical in every jurisdiction.</p>
+
+    <h3>Process industries and manufacturing</h3>
+    <p>This is where the career behind the site began. High-specification chemical manufacturing with ppm-level impurity control is where CUSUM was first encountered as a practical tool &mdash; not in a textbook but on a plant where detecting a small, sustained shift in process mean was the difference between a batch that met specification and one that did not. That discipline applies directly to pharmaceutical process validation, batch release data analysis, continuous process verification (CPV), and any manufacturing context where a process shift needs to be detected early, with statistical confidence, before it becomes a quality failure or a safety incident. Major hazards installations, COMAH-regulated sites, safety-critical process environments &mdash; all share the same need for honest, statistically robust change detection.</p>
+
+    <h3>Environment and public policy</h3>
+    <p>Did the clean air zone actually change air quality &mdash; or did traffic patterns shift before the zone launched? Did the emissions reduction policy produce structural change in the data &mdash; or did energy prices do the work? Bootstrap CUSUM answers these questions without the need for a control group, a randomised trial, or a regression model. It simply asks: did the process permanently shift to a new mean, and if so when? That question is as useful to an environmental regulator as to an NHS trust. The ULEZ and UK emissions articles on this site demonstrate the method applied to environmental data &mdash; and the findings are often more nuanced than the policy narrative suggests.</p>
+
+    <h3>Education, local government, and public services</h3>
+    <p>School outcome data, pupil attendance rates, council service performance, benefit claim processing times, housing allocation rates &mdash; all generate time-series data and all prompt the same question after an intervention: has anything actually changed? The Bootstrap CUSUM gives a statistically honest answer that a simple before-and-after comparison cannot. It is particularly useful in public service contexts where political pressure to declare success arrives well before the lag time required for a structural change to become statistically detectable.</p>
+
+    <h3>Safety-critical industries</h3>
+    <p>Aviation incident rates, nuclear plant performance indicators, rail safety metrics, offshore process safety data &mdash; all share the COMAH discipline of asking whether the safety barrier is holding or degrading. In safety-critical industries, detecting a structural shift in a safety indicator early &mdash; before it becomes a significant incident &mdash; is the entire purpose of process safety monitoring. Bootstrap CUSUM detects that shift with statistical confidence, distinguishing genuine degradation from noise at a level that standard SPC charts cannot match.</p>
+
+    <div class="alert-teal">
+        <strong>Working outside the NHS or outside the UK?</strong> The tool, the method, and the frameworks on this site are not NHS-specific and not UK-specific. If you are working in US or Canadian healthcare, pharmaceutical manufacturing, process safety, environmental monitoring, education, or any other sector where detecting structural change in a time series matters &mdash; the tool works on your data, the <a href="why-nothing-changes.html">diagnostic method</a> applies to your system, and the frameworks are the same wherever you are.
+    </div>
+
+    <!-- FRAMEWORKS -->
+    <h2>The intellectual framework</h2>
+
+    <p>Bootstrap CUSUM answers one question well: <em>has the process structurally shifted to a new mean?</em> But knowing whether something has changed is only useful if you also understand why it has not changed, and what kind of intervention would actually produce the step change you need. The thinking on this site draws on four bodies of work:</p>
+
+    <table class="framework-table">
+        <thead>
+            <tr>
+                <th>Framework</th>
+                <th>Core insight</th>
+                <th>Where it appears</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>W. Edwards Deming</td>
+                <td>94% of problems are caused by the system, not the people in it. Targets without methods produce distortion, not improvement. Variation is the diagnostic clue &mdash; look hardest at where outcomes vary most.</td>
+                <td>Every article. The tampering trap. The <em>by what method</em> question. <a href="start-here.html">Start here.</a></td>
+            </tr>
+            <tr>
+                <td>Brian Joiner</td>
+                <td>Three levels of intervention: fix the output (Level 1), fix the process (Level 2), fix the system (Level 3). Only Level 3 produces structural change that Bootstrap CUSUM will confirm. The COMAH hierarchy maps directly onto Joiner&rsquo;s levels.</td>
+                <td><a href="why-nothing-changes.html">Why nothing changes.</a> The A&amp;E, dementia, and never events articles.</td>
+            </tr>
+            <tr>
+                <td>Eliyahu Goldratt</td>
+                <td>The constraint determines throughput. You cannot improve a system by optimising anything other than the constraint. Subordinate everything else to the constraint before investing in elevating it.</td>
+                <td>The dementia article (memory clinic capacity as the constraint). <a href="why-nothing-changes.html">Why nothing changes.</a></td>
+            </tr>
+            <tr>
+                <td>Senge &amp; Meadows</td>
+                <td>Systems have reinforcing loops that make poor performance self-sustaining. High variation in outcomes is the fingerprint of a system dependent on people rather than design. Structural change requires intervening at the right node in the loop.</td>
+                <td>The A&amp;E and dementia articles (reinforcing loops mapped). <a href="why-nothing-changes.html">Why nothing changes.</a></td>
+            </tr>
+            <tr>
+                <td>Langley et al.</td>
+                <td>The three questions of the Model for Improvement: what are we trying to accomplish, how will we know a change is an improvement, what change can we make. Bootstrap CUSUM sits in the Study phase &mdash; the answer to Question 2.</td>
+                <td><a href="start-here.html">Start here &mdash; the three questions.</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>None of these frameworks is new. What is less common is applying all of them together to the same dataset, with a statistically honest measurement tool that confirms or denies whether the intervention worked. That combination &mdash; honest measurement plus structural diagnosis plus the right level of intervention &mdash; is what this site is trying to make more accessible.</p>
+
+    <!-- THE METHOD -->
+    <h2>The Bootstrap CUSUM method</h2>
+
+    <p>Bootstrap CUSUM is a distribution-free method for detecting structural changes in time series data. Unlike standard SPC charts, it does not assume normality &mdash; making it particularly suited to healthcare safety data, incident counts, and pharmaceutical process data where normal distribution assumptions produce unreliable control limits.</p>
+
+    <p>The method computes the cumulative sum of deviations from the overall mean, then uses bootstrap resampling to establish confidence limits for each detected change point. A change point is only declared when the bootstrap confidence exceeds the threshold you set &mdash; typically 95% for standard analytical use, 99.7% for governance reports where false positives carry significant cost.</p>
+
+    <div class="alert-blue">
+        <strong>The statistical lineage.</strong> The Bootstrap CUSUM implementation on this site is based on Taylor, W.A. (2000), <em>Change-Point Analysis: A Powerful New Tool for Detecting Changes</em>, building on Page, E.S. (1954), <em>Continuous Inspection Schemes</em>, Hinkley, D.V. (1971), <em>Inference about the change-point from cumulative sum tests</em>, and the bootstrap resampling method of Efron, B. and Tibshirani, R.J. (1993), <em>An Introduction to the Bootstrap</em>. The browser-based implementation is original work. The statistical method is not &mdash; it stands on the shoulders of statisticians who spent decades making it rigorous.
+    </div>
+
+    <!-- FEEDBACK -->
+    <h2>Feedback, corrections, and collaboration</h2>
+
+    <p>Every article on this site uses publicly available data, documented methodology, and cited sources. If you find an error in the analysis, a misidentified data source, or a statistical interpretation you disagree with, please say so. The feedback form on the tool page is the best way to make contact.</p>
+
+    <p>If you work in clinical software, pharmaceutical manufacturing, process safety, or any sector where detecting a structural change in a process matters &mdash; and you would like to discuss applying Bootstrap CUSUM to your own data &mdash; that conversation is welcome.</p>
+
+    <div class="alert-teal">
+        <strong>Use the tool. Read the articles. Apply the method.</strong> If Bootstrap CUSUM shows no structural change in your improvement data &mdash; whether you are in the NHS, a US health system, a Canadian healthcare organisation, or a process industry anywhere in the world &mdash; that is valuable information, not a failure. It tells you that the intervention was not at the right level, or has not had time to work, or that the constraint you addressed was not the binding one. <a href="why-nothing-changes.html">The diagnostic method on this site</a> is designed to help you work out which of those is true &mdash; and what to do about it.
+    </div>
+
+    <p style="text-align:center; font-family:system-ui,sans-serif; margin-top:40px;">
+        <a href="index.html" class="btn-primary" style="margin-right:12px;">&#9654; Open the free tool</a>
+        <a href="start-here.html" class="btn-secondary">Start here &rsaquo;</a>
+    </p>
+
+</main>
+
+<footer class="page-footer" style="max-width:860px;margin:0 auto;padding:0 24px 60px;">
+    <p><strong>Tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based Bootstrap CUSUM and X-mR analyser &middot; no data uploaded &middot; any sector</p>
+    <p style="margin-top:8px;"><strong>Framework:</strong> Deming (Out of the Crisis, 1982) &middot; Joiner (Fourth Generation Management, 1994) &middot; Goldratt (The Goal, 1984) &middot; Senge (The Fifth Discipline, 1990) &middot; Model for Improvement (Langley et al., 1996/2009)</p>
+    <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). &copy; Syd Stewart 2026. <a href="glossary.html">Glossary</a> &middot; <a href="about.html">About</a></p>
+</footer>
+
+</body>
+</html>
