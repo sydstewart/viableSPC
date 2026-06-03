@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deming's 14 Points explained — with Joiner levels and NHS examples — StepChangeAnalysis.com</title>
+    <meta name="description" content="Deming's 14 Points explained in plain English, classified by Joiner's levels of fix, with worked examples from NHS and public sector data. Most of the 14 Points are Level 3 system interventions. Points 10 and 11 are Deming's explicit rejection of targets without method.">
+    <link rel="canonical" href="https://stepchangeanalysis.com/deming-14-points.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <style>
+        :root {
+            --brand-blue:  #002d5b;
+            --brand-mid:   #0056b3;
+            --brand-light: #e9f2ff;
+            --text:        #1e293b;
+            --muted:       #64748b;
+            --border:      #e2e8f0;
+            --bg:          #f8f9fa;
+            --green:       #198754;
+            --orange:      #e67e22;
+            --red:         #c0392b;
+            --teal:        #0e7490;
+            --purple:      #7c3aed;
+            --q1:          #7c3aed;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-nav { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; }
+        .header-nav a:hover { color: white; text-decoration: underline; }
+        .header-nav a.active { color: white; font-weight: 700; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        /* Hero */
+        .hero { padding: 40px 0 32px; border-bottom: 2px solid var(--border); margin-bottom: 40px; }
+        .hero-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 14px; }
+        .hero h1 { font-size: clamp(1.8em, 4vw, 2.6em); line-height: 1.15; color: var(--brand-blue); margin-bottom: 20px; font-weight: bold; }
+        .hero-sub { font-size: 1.15em; color: var(--muted); line-height: 1.7; margin-bottom: 24px; max-width: 680px; }
+        /* Body */
+        h2 { font-size: 1.4em; color: var(--brand-blue); margin: 44px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.1em; color: var(--brand-blue); margin: 28px 0 10px; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        a { color: var(--brand-mid); }
+        blockquote { border-left: 4px solid var(--brand-mid); padding: 14px 20px; margin: 24px 0; background: var(--brand-light); border-radius: 0 6px 6px 0; font-style: italic; font-size: 1.05em; color: var(--brand-blue); line-height: 1.7; }
+        /* Level badges — inline */
+        .badge { display: inline-block; font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 4px; vertical-align: middle; white-space: nowrap; }
+        .badge-l1   { background: #fef2f2; color: var(--red); }
+        .badge-l2   { background: #fff8f0; color: var(--orange); }
+        .badge-l3   { background: var(--brand-light); color: var(--brand-mid); }
+        .badge-l3d  { background: #f0fdf4; color: #166534; }
+        .badge-anti { background: #fef2f2; color: var(--red); border: 1px solid #fca5a5; }
+        /* Point cards */
+        .points-list { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; }
+        .point-card { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+        .point-header { display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 0; padding: 14px 18px; border-bottom: 1px solid var(--border); background: #fafafa; }
+        .point-num { font-family: system-ui, sans-serif; font-size: 1.3em; font-weight: 900; color: var(--brand-blue); }
+        .point-title { font-family: system-ui, sans-serif; font-size: 0.98em; font-weight: 700; color: var(--brand-blue); line-height: 1.3; }
+        .point-body { padding: 16px 20px; }
+        .point-body p { font-size: 0.95em; color: var(--text); line-height: 1.65; margin-bottom: 0.8em; }
+        .point-body p:last-child { margin-bottom: 0; }
+        .point-body strong { color: var(--brand-blue); }
+        .point-body .point-example { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); font-style: italic; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+        /* The 94% rule box */
+        .rule-box { background: var(--brand-light); border: 2px solid var(--brand-mid); border-radius: 10px; padding: 24px 28px; margin: 28px 0; }
+        .rule-box .rb-label { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 8px; }
+        .rule-box .rb-stat { font-family: system-ui, sans-serif; font-size: 2.2em; font-weight: 900; color: var(--brand-blue); line-height: 1; margin-bottom: 8px; }
+        .rule-box p { font-size: 0.95em; color: var(--text); line-height: 1.6; margin: 0; }
+        /* Critical callout */
+        .critical-box { background: #faf5ff; border: 2px solid var(--purple); border-radius: 10px; padding: 24px 28px; margin: 32px 0; }
+        .critical-box .cb-label { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
+        .critical-box p { font-size: 1.1em; font-style: italic; font-weight: bold; color: var(--brand-blue); line-height: 1.6; margin: 0; }
+        /* Summary table */
+        .summary-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-family: system-ui, sans-serif; font-size: 0.88em; }
+        .summary-table th { background: var(--brand-blue); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+        .summary-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+        .summary-table tr:nth-child(even) td { background: #fafafa; }
+        /* Alerts */
+        .alert-blue   { background: var(--brand-light); border-left: 4px solid var(--brand-mid); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-green  { background: #f0fdf4; border-left: 4px solid var(--green); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-orange { background: #fff8f0; border-left: 4px solid var(--orange); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; color: #4a3000; }
+        .alert-red    { background: #fef2f2; border-left: 4px solid var(--red); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; color: #7f1d1d; }
+        .alert-teal   { background: #f0f9ff; border-left: 4px solid var(--teal); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        /* Mission */
+        .mission-box { background: #f8f5ff; border: 2px solid var(--q1); border-radius: 10px; padding: 28px 32px; margin: 40px 0; text-align: center; }
+        .mission-box p { font-size: 1.1em; font-style: italic; font-weight: bold; color: var(--brand-blue); line-height: 1.7; margin: 0; }
+        .mission-box .mission-label { font-family: system-ui, sans-serif; font-size: 0.75em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--q1); margin-bottom: 12px; }
+        /* Nav cards */
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 14px; margin: 24px 0; }
+        .nav-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 18px; text-decoration: none; display: block; }
+        .nav-card:hover { border-color: var(--brand-mid); }
+        .nav-card .nc-dir { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+        .nav-card h4 { font-size: 0.95em; color: var(--brand-blue); font-family: system-ui, sans-serif; margin-bottom: 5px; }
+        .nav-card p { font-size: 0.85em; color: var(--muted); line-height: 1.5; margin: 0; }
+        /* Buttons */
+        .btn-primary { display: inline-block; background: var(--brand-mid); color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 700; }
+        .btn-primary:hover { background: var(--brand-blue); }
+        .btn-secondary { display: inline-block; background: white; color: var(--brand-mid); padding: 12px 24px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 600; border: 2px solid var(--brand-mid); }
+        .btn-secondary:hover { background: var(--brand-light); }
+        /* Footer */
+        .page-footer { margin-top: 60px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.7em; }
+            .point-header { grid-template-columns: 44px 1fr; }
+            .point-header .badge { display: none; }
+            .header-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <a href="why-nothing-changes.html">Why nothing changes</a>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="how-to-use.html">How to use</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> &rsaquo;
+        <a href="why-nothing-changes.html">Why nothing changes</a> &rsaquo;
+        <a href="joiner-levels-of-fix.html">Joiner levels of fix</a> &rsaquo;
+        Deming&rsquo;s 14 Points
+    </div>
+
+    <div class="hero">
+        <div class="hero-flag">&#128161; Concept page &middot; Deming &middot; System thinking in management practice</div>
+        <h1>Deming&rsquo;s 14 Points &mdash; plain English, with Joiner levels and NHS examples</h1>
+        <p class="hero-sub">W. Edwards Deming identified most Level 3 system interventions decades before Joiner gave them a classification. The 14 Points are not a management checklist &mdash; they are a structural description of what a system that produces quality looks like, and what stands in the way of building one. Most organisations implement none of them.</p>
+    </div>
+
+    <!-- WHO WAS DEMING -->
+    <h2>Who was Deming and why does he matter?</h2>
+
+    <p>W. Edwards Deming was an American statistician and management theorist who transformed Japanese manufacturing after World War II. Toyota, Sony, and the companies that became synonymous with quality in the 1970s and 1980s built their operating systems on his ideas. His influence on Japanese industry was so significant that Japan&rsquo;s most prestigious quality prize &mdash; the Deming Prize &mdash; has been awarded since 1951.</p>
+
+    <p>Western management largely ignored him until the 1980s, when it became impossible to deny that Japanese manufacturers were consistently outcompeting their American and European rivals. Deming spent the last decades of his life teaching American companies what he had spent decades teaching Japan. He published <em>Out of the Crisis</em> in 1982, at the age of 82. It remains the most important book on quality management ever written.</p>
+
+    <p>His relevance to this site is direct. Deming was a statistician first. His entire framework is built on the idea that you cannot improve what you cannot measure honestly &mdash; and that most measurement in organisations is dishonest, either by design (targets that incentivise gaming) or by method (charts that cannot distinguish genuine change from noise). Bootstrap CUSUM is the tool that makes the Study phase of his PDSA cycle honest. The 14 Points are the management system that gives Level 3 interventions their practical form.</p>
+
+    <!-- THE 94% RULE -->
+    <div class="rule-box">
+        <div class="rb-label">&#128201; The central insight &mdash; Deming&rsquo;s 94% rule</div>
+        <div class="rb-stat">94%</div>
+        <p>Deming estimated that 94% of problems in any organisation are caused by the <em>system</em> &mdash; the structures, processes, policies, and management practices that determine how work gets done. Only 6% are caused by individual workers. This is the foundation of every one of the 14 Points. If 94% of problems are system problems, then 94% of improvement effort should be aimed at the system. Most organisations do the opposite: they react to symptoms, train individuals, set targets, and apply pressure &mdash; all Level 1 and Level 2 interventions aimed at the 6% while the 94% continues unchanged.</p>
+    </div>
+
+    <div class="critical-box">
+        <div class="cb-label">&#9888;&#65039; The connection to Joiner</div>
+        <p>Joiner noted explicitly that most Level 3 system fixes are already described in Deming&rsquo;s 14 Points. Deming identified them decades earlier &mdash; but without the level classification that makes clear why they work when lower-level interventions do not. Read the 14 Points through Joiner&rsquo;s lens and the mechanism becomes precise: most of the Points are Level 3 or Level 3 Deep interventions. The ones that are not &mdash; Points 10 and 11 &mdash; are Deming&rsquo;s explicit rejection of Level 1.</p>
+    </div>
+
+    <!-- THE 14 POINTS -->
+    <h2>The 14 Points &mdash; plain English with Joiner levels</h2>
+
+    <p>Each Point is explained in plain English, classified by Joiner&rsquo;s level, and illustrated with an example from the NHS or public sector data on this site where available.</p>
+
+    <div class="points-list">
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">1</div>
+                <div class="point-title">Create constancy of purpose for improvement</div>
+                <span class="badge badge-l3d">Level 3 Deep</span>
+            </div>
+            <div class="point-body">
+                <p>The organisation must have a clear, stable, long-term purpose &mdash; one that does not change with every new leader, every new political cycle, or every new performance framework. Without constancy of purpose, every structural improvement is eventually dismantled when the next reorganisation arrives.</p>
+                <p><strong>Why Level 3 Deep:</strong> This is Meadows&rsquo; paradigm level &mdash; the mental model from which the system&rsquo;s goals, rules, and structures flow. You cannot achieve it by changing a process or writing a policy. It requires the organisation to genuinely commit to improvement as its primary purpose rather than as a periodic initiative.</p>
+                <div class="point-example">NHS example: the A&amp;E four-hour target has been the subject of fourteen different policy initiatives in fifteen years. Bootstrap CUSUM finds four stages of structural decline. No constancy of purpose &mdash; no sustained structural improvement.</div>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">2</div>
+                <div class="point-title">Adopt the new philosophy</div>
+                <span class="badge badge-l3d">Level 3 Deep</span>
+            </div>
+            <div class="point-body">
+                <p>Reject the acceptance of defects, delays, and poor quality as inevitable. The &ldquo;new philosophy&rdquo; is that quality is not an inspection problem &mdash; it is a design problem. The system must be designed to produce quality, not to detect failure after it has occurred.</p>
+                <p><strong>Why Level 3 Deep:</strong> This is a fundamental reorientation of what the organisation is for. It cannot be achieved by a training programme or a new process. It requires management to change what they believe about where quality comes from.</p>
+                <div class="point-example">Healthcare example: wrong-route medication administration was declared &ldquo;wholly preventable&rdquo; in 2011. The engineering solution (NRFit connectors) existed. Adopting it would have required accepting that the problem was a design failure, not a training failure. The training-based approach continued. Bootstrap CUSUM finds a flat process at 17.5 events per year.</div>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">3</div>
+                <div class="point-title">Cease dependence on inspection to achieve quality</div>
+                <span class="badge badge-l3">Level 3</span>
+            </div>
+            <div class="point-body">
+                <p>Inspection at the end of a process finds defects after they have been created. It does not prevent them. Build quality into the process so that inspection becomes unnecessary. &ldquo;Build it right first time&rdquo; is not a slogan &mdash; it is the result of designing a system that cannot easily produce defects.</p>
+                <p><strong>Why Level 3:</strong> Stopping dependence on inspection requires changing the process design, not just the inspection protocol. It is an engineering control in Joiner and COMAH terms &mdash; the hazard is addressed at source rather than detected downstream.</p>
+                <div class="point-example">Manufacturing example: in pharmaceutical-grade chemical production, inspection of the final product does not improve it. The specification is met or not met. The improvement is in the process stability &mdash; detected by CUSUM on the process parameters, not by end-product testing alone.</div>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">4</div>
+                <div class="point-title">End the practice of awarding business on price alone</div>
+                <span class="badge badge-l3">Level 3</span>
+            </div>
+            <div class="point-body">
+                <p>Lowest-cost procurement produces lowest-quality input. Move toward single suppliers for important items, building long-term relationships based on quality and total cost rather than unit price. The purchasing system produces the quality problem &mdash; changing the system changes the output.</p>
+                <p><strong>Why Level 3:</strong> This is a structural change to the procurement system, not a request for buyers to make better decisions within the existing system. It requires changing the rules and incentives that govern purchasing, not just the preferences of individual buyers.</p>
+                <div class="point-example">NHS example: NHS procurement frameworks that award contracts primarily on price produce lowest-cost suppliers who then cut corners on quality and reliability. The cost of failure far exceeds the saving on unit price &mdash; but the saving is visible on the procurement dashboard and the cost of failure appears elsewhere in the system.</div>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">5</div>
+                <div class="point-title">Improve constantly and forever</div>
+                <span class="badge badge-l3">Level 3</span>
+            </div>
+            <div class="point-body">
+                <p>Improvement is not a project with a start and an end date. It is a permanent structural discipline built into every process. PDSA as a continuous cycle &mdash; not as a response to a crisis or a regulatory requirement. The system is designed to improve itself.</p>
+                <p><strong>Why Level 3:</strong> Embedding continuous improvement requires changing the structure of work so that improvement activity is part of every role &mdash; not an additional task assigned to a separate team. It is a system design change, not a behavioural request.</p>
+                <div class="point-example">Bootstrap CUSUM connection: a system that improves constantly will show a progressive downward staircase of step changes on the Bootstrap CUSUM chart &mdash; each cycle producing a new confirmed lower mean. A system that improves episodically and then reverts will show step changes followed by reversion. The chart shape tells you whether improvement is structural or cyclical.</div>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">6</div>
+                <div class="point-title">Institute training on the job</div>
+                <span class="badge badge-l2">Level 2</span>
+            </div>
+            <div class="point-body">
+                <p>Workers cannot do good work if they do not know what good work looks like or how to achieve it. Training is necessary. But training alone is Level 2 &mdash; it changes what people do within the existing system without changing the system that determines what is possible.</p>
+                <p><strong>Why Level 2:</strong> Deming and Joiner both note that training is necessary but insufficient without system change. A well-trained worker in a poorly designed system will still produce poor-quality output &mdash; because the system determines the outcome, not the individual&rsquo;s effort or knowledge.</p>
+                <div class="point-example">NHS example: dementia awareness training for GPs is a Level 2 intervention. It may improve individual behaviour within the existing pathway. It does not address the constraint &mdash; memory clinic capacity &mdash; that limits the pathway&rsquo;s throughput regardless of how well-trained the referring GP is.</div>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">7</div>
+                <div class="point-title">Institute leadership</div>
+                <span class="badge badge-l3">Level 3</span>
+            </div>
+            <div class="point-body">
+                <p>The job of management is not to supervise and control workers &mdash; it is to improve the system that workers operate in. Leadership in Deming&rsquo;s sense means helping people do better work by understanding and changing the system, not by monitoring performance metrics and applying pressure when targets are missed.</p>
+                <p><strong>Why Level 3:</strong> This requires changing the role of management structurally &mdash; from directing outputs to improving systems. It is a fundamental change to what managers are responsible for and how their performance is evaluated. It cannot be achieved by a leadership training course.</p>
+                <div class="point-example">Organisation example: a manager who responds to every missed target by pressuring the team to work harder is a Level 1 manager in a Level 3 role. The system continues to produce the same results. A manager who responds by asking what in the system produced the miss &mdash; and changes that &mdash; is applying Deming&rsquo;s Point 7.</div>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">8</div>
+                <div class="point-title">Drive out fear</div>
+                <span class="badge badge-l3d">Level 3 Deep</span>
+            </div>
+            <div class="point-body">
+                <p>Fear of reporting problems, fear of raising concerns, fear of missing targets &mdash; all produce the same result: people hide what is actually happening. Bad data flows upward. Good decisions cannot be made. The organisation optimises for the appearance of performance rather than its reality.</p>
+                <p><strong>Why Level 3 Deep:</strong> Fear is a system condition produced by structures that blame individuals for system failures. It requires structural change to how performance is evaluated, how problems are reported, and whether the messenger is punished. It cannot be addressed by asking people to be braver.</p>
+                <div class="point-example">NHS example: the Mid Staffordshire inquiry documented how fear of reporting poor performance allowed serious failures to persist for years. The cultural conditions that produced that fear were structural &mdash; a board focused on financial targets, a regulatory environment that penalised admission of failure, and a management culture that treated concerns as threats rather than data.</div>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">9</div>
+                <div class="point-title">Break down barriers between departments</div>
+                <span class="badge badge-l3">Level 3</span>
+            </div>
+            <div class="point-body">
+                <p>Departments that optimise for their own performance measures produce system-level failure. Quality problems, handover failures, and coordination costs are almost always the result of structural siloes &mdash; not of individuals who do not want to cooperate. Breaking down the barriers requires changing the structure, not exhorting people to collaborate more.</p>
+                <p><strong>Why Level 3:</strong> Siloed departments are a structural design. Changing them requires changing reporting lines, shared measures, physical co-location, or integrated information systems &mdash; structural interventions, not cultural ones.</p>
+                <div class="point-example">NHS example: the dementia pathway fails at the boundary between primary care (GP referral), secondary care (memory clinic diagnosis), and social care (post-diagnostic support). Each part is optimised for its own metrics. The patient journey through the boundary is nobody&rsquo;s explicit responsibility.</div>
+            </div>
+        </div>
+
+        <div class="point-card" style="border: 2px solid var(--red);">
+            <div class="point-header" style="background: #fef2f2;">
+                <div class="point-num">10</div>
+                <div class="point-title">Eliminate slogans, exhortations, and targets for the workforce</div>
+                <span class="badge badge-anti">Anti-Level-1</span>
+            </div>
+            <div class="point-body">
+                <p>Slogans that ask workers to try harder, work smarter, or achieve zero defects do nothing to change the system that produces defects. They shift responsibility from the system &mdash; where Deming says 94% of problems originate &mdash; to the individual worker. Deming argues this is not just ineffective but <em>actively harmful</em>: it damages morale, produces adversarial relationships, and obscures where the real problem lies.</p>
+                <p><strong>Why Anti-Level-1:</strong> Slogans are Level 1 interventions &mdash; they react to outcomes without changing the system that produces them. Deming&rsquo;s Point 10 is his explicit rejection of this approach. The system produces the result. Change the system.</p>
+                <div class="point-example">NHS example: &ldquo;zero harm&rdquo; campaigns, patient safety slogans, and targets for never events fall into this category when they are not accompanied by system-level changes. Bootstrap CUSUM on NHS never events data finds a flat process &mdash; the slogans and targets have not moved the line.</div>
+            </div>
+        </div>
+
+        <div class="point-card" style="border: 2px solid var(--red);">
+            <div class="point-header" style="background: #fef2f2;">
+                <div class="point-num">11</div>
+                <div class="point-title">Eliminate numerical quotas and management by objectives</div>
+                <span class="badge badge-anti">Anti-Level-1</span>
+            </div>
+            <div class="point-body">
+                <p>Numerical quotas without a method for achieving them are goals without a system change. They produce exactly what Deming predicted: gaming, distortion, and measurement that optimises the number rather than the outcome it was intended to represent. The quota replaces the aim. People hit the number by changing how it is counted, not by improving what it is supposed to measure.</p>
+                <p><strong>Why Anti-Level-1:</strong> A target is a Level 1 intervention. It reacts to an output without changing the system that produced it. Bootstrap CUSUM applied to any metric governed primarily by a numerical target will typically find temporary movement followed by reversion &mdash; or, worse, a persistent change in the metric that reflects changed coding rather than changed outcomes.</p>
+                <div class="point-example">NHS example: the dementia 66.7% diagnosis target was set in 2012. By 2019 England briefly exceeded it. Bootstrap CUSUM finds one stage, mean below target, no sustained structural improvement. The target measured the number of diagnoses recorded. It did not change the system that constrained how many diagnoses could be made or what happened after diagnosis.</div>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">12</div>
+                <div class="point-title">Remove barriers that rob workers of pride in workmanship</div>
+                <span class="badge badge-l3">Level 3</span>
+            </div>
+            <div class="point-body">
+                <p>Workers who cannot do good work because the system prevents it &mdash; inadequate tools, unclear standards, performance evaluations that measure the wrong things, managers who blame them for system failures &mdash; lose the motivation to improve. The system has taken away their ability to take pride in their work.</p>
+                <p><strong>Why Level 3:</strong> Pride in work is destroyed by system conditions, not by individual attitudes. Restoring it requires structural changes to how work is designed, how performance is evaluated, and how problems are attributed. It cannot be achieved by asking workers to take more pride.</p>
+                <div class="point-example">NHS example: clinicians who see patients readmitted because the discharge process is inadequate &mdash; and who cannot change the discharge process &mdash; experience exactly this. The system prevents them from doing the work they know is right. The result is disengagement and resignation, not improved performance.</div>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">13</div>
+                <div class="point-title">Institute a vigorous programme of education and self-improvement</div>
+                <span class="badge badge-l3">Level 3</span>
+            </div>
+            <div class="point-body">
+                <p>Not training for the current job &mdash; education that develops people&rsquo;s capacity to understand and improve the system itself. Statistical thinking, systems thinking, improvement methodology. The organisation that educates its people to understand the system they work in builds its own internal improvement capability rather than depending on external consultants or periodic initiatives.</p>
+                <p><strong>Why Level 3:</strong> Building internal improvement capability requires a structural commitment &mdash; time protected for education, career paths that reward improvement knowledge, and management that uses what people learn. It is a system design change, not a training budget line.</p>
+            </div>
+        </div>
+
+        <div class="point-card">
+            <div class="point-header">
+                <div class="point-num">14</div>
+                <div class="point-title">Put everyone to work to accomplish the transformation</div>
+                <span class="badge badge-l3d">Level 3 Deep</span>
+            </div>
+            <div class="point-body">
+                <p>The transformation to a quality organisation is not a project managed by a quality department. It requires top management to lead it, commit to it permanently, and involve everyone in it. Deming&rsquo;s Point 14 is the application of Point 1&rsquo;s constancy of purpose to the transformation itself: the commitment must be genuine, visible, and sustained &mdash; not announced and then quietly abandoned when the next crisis arrives.</p>
+                <p><strong>Why Level 3 Deep:</strong> This requires the entire organisation&rsquo;s mental model to change &mdash; from &ldquo;improvement is something the quality team does&rdquo; to &ldquo;improvement is everyone&rsquo;s job in every role every day.&rdquo; It is the definition of constancy of purpose in action.</p>
+                <div class="point-example">The connection to Bootstrap CUSUM: if Point 14 is genuinely in place, the Bootstrap CUSUM chart for every key metric will show a progressive downward staircase over years &mdash; each PDSA cycle producing a confirmed new lower mean. That is what a transforming organisation looks like in data.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- POINTS 10 AND 11 IN DEPTH -->
+    <h2>Points 10 and 11 in depth &mdash; why targets without method fail</h2>
+
+    <p>Points 10 and 11 deserve special attention because they are the most commonly violated and the most directly relevant to the Bootstrap CUSUM findings on this site. Together they represent Deming&rsquo;s explicit, forceful rejection of management by targets.</p>
+
+    <div class="alert-red">
+        <strong>The mechanism of target failure.</strong> A numerical target set without a method for achieving it does four things. First, it shifts attention from the system to the metric. Second, it creates pressure to hit the number through any available means &mdash; including changing how the number is counted. Third, it obscures the constraint that is actually limiting performance &mdash; because people are focused on the metric, not the system. Fourth, it relieves the pressure for structural change by producing the appearance of improvement when the number temporarily moves &mdash; even if nothing in the system has changed. Bootstrap CUSUM strips away the appearance and shows the underlying structure. That is why the NHS data on this site is so consistent: targets without system change produce no confirmed step change.
+    </div>
+
+    <blockquote>
+        &ldquo;A goal without a method is nonsense. Management by numerical goal is an attempt to manage without knowledge of what to do.&rdquo; &mdash; W. Edwards Deming
+    </blockquote>
+
+    <p>The dementia 66.7% diagnosis target is the clearest illustration on this site. Set in 2012. Briefly exceeded in 2019. <a href="dementia-diagnosis-rate.html">Bootstrap CUSUM finds one stage, mean below target, no confirmed structural improvement</a>. The target measured the number of diagnoses recorded. It did not change the constraint &mdash; memory clinic capacity &mdash; that limited how many diagnoses could be made. It did not change what happened to patients after diagnosis. It did not change the reinforcing loops that kept the pathway reactive rather than proactive. It was a numerical quota without a method. Deming predicted exactly this result eighty years ago.</p>
+
+    <!-- SUMMARY TABLE -->
+    <h2>Quick reference &mdash; all 14 Points by Joiner level</h2>
+
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th>Point</th>
+                <th>Title</th>
+                <th>Joiner level</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Constancy of purpose</td><td><span class="badge badge-l3d">Level 3 Deep</span></td></tr>
+            <tr><td>2</td><td>Adopt the new philosophy</td><td><span class="badge badge-l3d">Level 3 Deep</span></td></tr>
+            <tr><td>3</td><td>Cease dependence on inspection</td><td><span class="badge badge-l3">Level 3</span></td></tr>
+            <tr><td>4</td><td>End lowest-cost supplier policy</td><td><span class="badge badge-l3">Level 3</span></td></tr>
+            <tr><td>5</td><td>Improve constantly</td><td><span class="badge badge-l3">Level 3</span></td></tr>
+            <tr><td>6</td><td>Institute training</td><td><span class="badge badge-l2">Level 2</span></td></tr>
+            <tr><td>7</td><td>Institute leadership</td><td><span class="badge badge-l3">Level 3</span></td></tr>
+            <tr><td>8</td><td>Drive out fear</td><td><span class="badge badge-l3d">Level 3 Deep</span></td></tr>
+            <tr><td>9</td><td>Break down barriers</td><td><span class="badge badge-l3">Level 3</span></td></tr>
+            <tr><td>10</td><td>Eliminate slogans and targets</td><td><span class="badge badge-anti">Anti-Level-1</span></td></tr>
+            <tr><td>11</td><td>Eliminate numerical quotas</td><td><span class="badge badge-anti">Anti-Level-1</span></td></tr>
+            <tr><td>12</td><td>Remove barriers to pride</td><td><span class="badge badge-l3">Level 3</span></td></tr>
+            <tr><td>13</td><td>Institute education</td><td><span class="badge badge-l3">Level 3</span></td></tr>
+            <tr><td>14</td><td>The transformation is everyone&rsquo;s job</td><td><span class="badge badge-l3d">Level 3 Deep</span></td></tr>
+        </tbody>
+    </table>
+
+    <div class="alert-teal">
+        <strong>The pattern is stark.</strong> Ten of the 14 Points are Level 3 or Level 3 Deep interventions. One is Level 2. Two are explicit rejections of Level 1. Not one Point is a Level 1 firefighting intervention. Deming is not describing a list of good practices &mdash; he is describing a system redesign. Most organisations implement Point 6 (training) and ignore the rest. Then they wonder why nothing changes.
+    </div>
+
+    <!-- DEMING AND BOOTSTRAP CUSUM -->
+    <h2>Deming and Bootstrap CUSUM &mdash; the measurement connection</h2>
+
+    <p>Deming invented the PDSA cycle &mdash; Plan, Do, Study, Act. He was insistent that the <strong>Study phase</strong> is the most important and the most neglected. Most organisations plan and do, then declare success or failure without genuinely studying the evidence. The study requires honest measurement &mdash; a tool that can distinguish genuine structural change from noise.</p>
+
+    <p>Bootstrap CUSUM is that tool. It sits in the Study phase of every PDSA cycle on this site. When a policy is implemented, a target is set, or a structural intervention is made, Bootstrap CUSUM answers the question Deming demanded: <em>has the process actually changed, or are we seeing variation around an unchanged mean?</em></p>
+
+    <div class="alert-green">
+        <strong>Deming&rsquo;s tampering trap and Bootstrap CUSUM.</strong> Deming identified tampering as one of the most common causes of persistent failure: intervening again before the first intervention has had time to produce its effect. Bootstrap CUSUM prevents tampering by making the evidence explicit &mdash; it will not confirm a structural change until the statistical evidence warrants it. A confirmed step change on the Bootstrap CUSUM chart is Deming&rsquo;s Study phase completed honestly. <a href="index.html">Run Bootstrap CUSUM on your own improvement data &rsaquo;</a>
+    </div>
+
+    <!-- WHERE TO GO NEXT -->
+    <h2>Where this fits &mdash; and where to go next</h2>
+
+    <div class="nav-grid">
+        <a href="why-nothing-changes.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--purple);">&#8593; Above this page &mdash; the method</div>
+            <h4>Why nothing changes &mdash; the full diagnostic method</h4>
+            <p>The five-stage method for finding the root cause. The Joiner check between Step 4 and Step 5 classifies each intervention. Deming&rsquo;s by what method test applies to every proposed change.</p>
+        </a>
+        <a href="start-here.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--brand-mid);">&#8593; Above this page &mdash; the framework</div>
+            <h4>How to make improvements that really work</h4>
+            <p>The three questions of the Model for Improvement. Deming&rsquo;s Points answer Question 3 &mdash; what change can we make &mdash; at the right depth. Bootstrap CUSUM answers Question 2.</p>
+        </a>
+        <a href="joiner-levels-of-fix.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--teal);">&#8594; Related concept page</div>
+            <h4>Joiner&rsquo;s levels of fix explained</h4>
+            <p>The classification system that explains why most of Deming&rsquo;s Points are Level 3 interventions &mdash; and why only Level 3 produces the structural change that Bootstrap CUSUM will confirm.</p>
+        </a>
+        <a href="dementia-diagnosis-rate.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--red);">&#8595; Below this page &mdash; Points 10 &amp; 11 in data</div>
+            <h4>Dementia &mdash; twelve years of numerical quotas</h4>
+            <p>The 66.7% target. Bootstrap CUSUM finds one stage, mean below target. A numerical quota without a method for achieving it. Deming&rsquo;s Point 11 in twelve years of NHS data.</p>
+        </a>
+        <a href="never-events-wrong-route.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--red);">&#8595; Below this page &mdash; Point 2 &amp; 3 in data</div>
+            <h4>Never events &mdash; the engineering solution not taken</h4>
+            <p>The engineering control existed. The new philosophy (Point 2) and cessation of dependence on inspection (Point 3) were not adopted. Bootstrap CUSUM finds a flat process at 17.5 per year.</p>
+        </a>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--red);">&#8595; Below this page &mdash; Point 1 in data</div>
+            <h4>NHS A&amp;E &mdash; no constancy of purpose</h4>
+            <p>Fourteen policy initiatives in fifteen years. No constancy of purpose (Point 1). Bootstrap CUSUM finds four structural stages of decline. Not one intervention detectable as improvement.</p>
+        </a>
+    </div>
+
+    <div class="mission-box">
+        <div class="mission-label">&#127919; Our mission</div>
+        <p>&ldquo;Give people better tools and a better mental model to ask better questions about whether things have improved through structural change &mdash; and to understand why, when they haven&rsquo;t.&rdquo;</p>
+    </div>
+
+    <p style="text-align:center; font-family:system-ui,sans-serif; margin-top:32px;">
+        <a href="index.html" class="btn-primary" style="margin-right:12px;">&#9654; Run Bootstrap CUSUM on your data</a>
+        <a href="joiner-levels-of-fix.html" class="btn-secondary">Joiner levels of fix &rsaquo;</a>
+    </p>
+
+</main>
+
+<footer class="page-footer" style="max-width:860px;margin:0 auto;padding:0 24px 60px;">
+    <p><strong>Tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based Bootstrap CUSUM and X-mR analyser &middot; no data uploaded &middot; any sector</p>
+    <p style="margin-top:8px;"><strong>Key references:</strong> Deming, W.E. <em>Out of the Crisis</em>, MIT Press, 1982 &middot; Deming, W.E. <em>The New Economics</em>, MIT Press, 1993 &middot; Joiner, B.L. <em>Fourth Generation Management</em>, McGraw-Hill, 1994 &middot; Langley, G.L. et al. <em>The Improvement Guide</em>, Jossey-Bass, 2009</p>
+    <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). &copy; Syd Stewart 2026. <a href="glossary.html">Glossary</a> &middot; <a href="about.html">About</a></p>
+</footer>
+
+</body>
+</html>
