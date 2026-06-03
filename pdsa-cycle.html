@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The PDSA cycle explained — Plan Do Study Act with Bootstrap CUSUM — StepChangeAnalysis.com</title>
+    <meta name="description" content="The PDSA cycle explained in plain English — Plan, Do, Study, Act. Why the Study phase is where most improvement cycles fail, and why Bootstrap CUSUM is the honest measurement tool for that phase. With NHS worked examples and Joiner level classification.">
+    <link rel="canonical" href="https://stepchangeanalysis.com/pdsa-cycle.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <style>
+        :root {
+            --brand-blue:  #002d5b;
+            --brand-mid:   #0056b3;
+            --brand-light: #e9f2ff;
+            --text:        #1e293b;
+            --muted:       #64748b;
+            --border:      #e2e8f0;
+            --bg:          #f8f9fa;
+            --green:       #198754;
+            --orange:      #e67e22;
+            --red:         #c0392b;
+            --teal:        #0e7490;
+            --purple:      #7c3aed;
+            --q1:          #7c3aed;
+            --plan:        #7c3aed;
+            --do:          #0056b3;
+            --study:       #198754;
+            --act:         #e67e22;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-nav { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; }
+        .header-nav a:hover { color: white; text-decoration: underline; }
+        .header-nav a.active { color: white; font-weight: 700; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        /* Hero */
+        .hero { padding: 40px 0 32px; border-bottom: 2px solid var(--border); margin-bottom: 40px; }
+        .hero-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 14px; }
+        .hero h1 { font-size: clamp(1.8em, 4vw, 2.6em); line-height: 1.15; color: var(--brand-blue); margin-bottom: 20px; font-weight: bold; }
+        .hero-sub { font-size: 1.15em; color: var(--muted); line-height: 1.7; margin-bottom: 24px; max-width: 680px; }
+        /* Body */
+        h2 { font-size: 1.4em; color: var(--brand-blue); margin: 44px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.1em; color: var(--brand-blue); margin: 28px 0 10px; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        a { color: var(--brand-mid); }
+        blockquote { border-left: 4px solid var(--brand-mid); padding: 14px 20px; margin: 24px 0; background: var(--brand-light); border-radius: 0 6px 6px 0; font-style: italic; font-size: 1.05em; color: var(--brand-blue); line-height: 1.7; }
+        /* PDSA phase cards */
+        .pdsa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap: 0; margin: 28px 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+        .pdsa-card { padding: 22px 20px; border-right: 1px solid var(--border); }
+        .pdsa-card:last-child { border-right: none; }
+        .pdsa-letter { font-family: system-ui, sans-serif; font-size: 2.4em; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+        .pdsa-word { font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .pdsa-desc { font-size: 0.88em; color: var(--text); line-height: 1.55; margin: 0; }
+        .pdsa-card.plan { background: #faf5ff; }
+        .pdsa-card.plan .pdsa-letter, .pdsa-card.plan .pdsa-word { color: var(--plan); }
+        .pdsa-card.do { background: var(--brand-light); }
+        .pdsa-card.do .pdsa-letter, .pdsa-card.do .pdsa-word { color: var(--do); }
+        .pdsa-card.study { background: #f0fdf4; }
+        .pdsa-card.study .pdsa-letter, .pdsa-card.study .pdsa-word { color: var(--study); }
+        .pdsa-card.act { background: #fff8f0; }
+        .pdsa-card.act .pdsa-letter, .pdsa-card.act .pdsa-word { color: var(--act); }
+        /* Study phase highlight */
+        .study-box { background: #f0fdf4; border: 2px solid var(--green); border-radius: 10px; padding: 24px 28px; margin: 28px 0; }
+        .study-box .sb-label { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+        .study-box .sb-title { font-family: system-ui, sans-serif; font-size: 1.05em; font-weight: 700; color: var(--brand-blue); margin-bottom: 10px; }
+        .study-box p { font-size: 0.95em; color: var(--text); line-height: 1.65; margin-bottom: 0.8em; }
+        .study-box p:last-child { margin-bottom: 0; }
+        /* Prediction box */
+        .prediction-box { background: var(--brand-light); border: 2px solid var(--brand-mid); border-radius: 10px; padding: 22px 26px; margin: 24px 0; }
+        .prediction-box .pb-label { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 8px; }
+        .prediction-box .pb-example { font-family: system-ui, sans-serif; font-size: 0.95em; font-style: italic; color: var(--brand-blue); line-height: 1.6; padding: 10px 14px; background: white; border-radius: 6px; border-left: 3px solid var(--brand-mid); margin: 10px 0; }
+        .prediction-box p { font-size: 0.92em; color: var(--text); line-height: 1.6; margin-bottom: 0; }
+        /* Three questions grid */
+        .questions-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 16px; margin: 24px 0; }
+        .q-card { border-radius: 10px; padding: 20px; border-top: 4px solid; }
+        .q-card.q1 { background: #faf5ff; border-color: var(--purple); }
+        .q-card.q2 { background: #f0f9ff; border-color: var(--teal); }
+        .q-card.q3 { background: var(--brand-light); border-color: var(--brand-mid); }
+        .q-card .qc-num { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+        .q-card.q1 .qc-num { color: var(--purple); }
+        .q-card.q2 .qc-num { color: var(--teal); }
+        .q-card.q3 .qc-num { color: var(--brand-mid); }
+        .q-card h3 { font-size: 0.95em; margin: 0 0 8px; font-style: italic; }
+        .q-card.q1 h3 { color: var(--purple); }
+        .q-card.q2 h3 { color: var(--teal); }
+        .q-card.q3 h3 { color: var(--brand-mid); }
+        .q-card p { font-size: 0.88em; color: var(--text); margin: 0; line-height: 1.6; }
+        .q-card .site-provides { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-style: italic; }
+        .q-card .site-provides a { color: var(--brand-mid); text-decoration: none; }
+        /* Alerts */
+        .alert-blue   { background: var(--brand-light); border-left: 4px solid var(--brand-mid); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-green  { background: #f0fdf4; border-left: 4px solid var(--green); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        .alert-orange { background: #fff8f0; border-left: 4px solid var(--orange); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; color: #4a3000; }
+        .alert-red    { background: #fef2f2; border-left: 4px solid var(--red); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; color: #7f1d1d; }
+        .alert-teal   { background: #f0f9ff; border-left: 4px solid var(--teal); padding: 16px 20px; margin: 24px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; line-height: 1.6; }
+        /* Evidence cards */
+        .evidence-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 16px; margin: 24px 0; }
+        .evidence-card { background: white; border-radius: 8px; padding: 18px; border-left: 4px solid var(--brand-mid); }
+        .evidence-card .e-tag { font-family: system-ui, sans-serif; font-size: 0.75em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 6px; }
+        .evidence-card h4 { font-size: 0.95em; color: var(--brand-blue); margin-bottom: 6px; font-family: system-ui, sans-serif; }
+        .evidence-card h4 a { color: var(--brand-blue); text-decoration: none; }
+        .evidence-card h4 a:hover { text-decoration: underline; }
+        .evidence-card p { font-size: 0.88em; color: var(--muted); margin: 0; line-height: 1.6; }
+        /* Nav cards */
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin: 24px 0; }
+        .nav-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 18px; text-decoration: none; display: block; transition: border-color .15s; }
+        .nav-card:hover { border-color: var(--brand-mid); }
+        .nav-card .nc-dir { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+        .nav-card h4 { font-size: 0.95em; color: var(--brand-blue); font-family: system-ui, sans-serif; margin-bottom: 5px; }
+        .nav-card p { font-size: 0.85em; color: var(--muted); line-height: 1.5; margin: 0; }
+        /* Mission */
+        .mission-box { background: #f8f5ff; border: 2px solid var(--q1); border-radius: 10px; padding: 28px 32px; margin: 40px 0; text-align: center; }
+        .mission-box p { font-size: 1.1em; font-style: italic; font-weight: bold; color: var(--brand-blue); line-height: 1.7; margin: 0; }
+        .mission-box .mission-label { font-family: system-ui, sans-serif; font-size: 0.75em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--q1); margin-bottom: 12px; }
+        /* Buttons */
+        .btn-primary { display: inline-block; background: var(--brand-mid); color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 700; }
+        .btn-primary:hover { background: var(--brand-blue); }
+        .btn-secondary { display: inline-block; background: white; color: var(--brand-mid); padding: 12px 24px; border-radius: 6px; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: 600; border: 2px solid var(--brand-mid); }
+        .btn-secondary:hover { background: var(--brand-light); }
+        /* Footer */
+        .page-footer { margin-top: 60px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.7em; }
+            .pdsa-grid { grid-template-columns: 1fr 1fr; }
+            .pdsa-card { border-right: none; border-bottom: 1px solid var(--border); }
+            .pdsa-card:last-child { border-bottom: none; }
+            .header-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <a href="why-nothing-changes.html">Why nothing changes</a>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="how-to-use.html">How to use</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> &rsaquo;
+        <a href="start-here.html">Start here</a> &rsaquo;
+        PDSA cycle
+    </div>
+
+    <div class="hero">
+        <div class="hero-flag">&#128161; Concept page &middot; PDSA &middot; Model for Improvement</div>
+        <h1>The PDSA cycle &mdash; and why the Study phase is where most improvement fails</h1>
+        <p class="hero-sub">Plan, Do, Study, Act. The PDSA cycle is the operating mechanism of every serious improvement programme. Most organisations run the Plan and Do phases reasonably well. Almost all of them fail in the Study phase &mdash; because they use measurement tools that cannot tell the difference between genuine structural change and noise. Bootstrap CUSUM is the tool that makes the Study phase honest.</p>
+    </div>
+
+    <!-- WHAT IS PDSA -->
+    <h2>What is the PDSA cycle?</h2>
+
+    <p>The PDSA cycle &mdash; Plan, Do, Study, Act &mdash; is the improvement cycle developed by Walter Shewhart, refined by W. Edwards Deming, and formalised by Langley et al. in <em>The Improvement Guide</em> (1996). It is the operating framework for improvement in healthcare, manufacturing, education, and public services worldwide. The NHS uses it extensively through the Model for Improvement.</p>
+
+    <p>The cycle is deliberately simple. Its power is not in its complexity but in the discipline it imposes: <strong>no change without a prediction, no result without a measure, no conclusion without evidence.</strong> Each cycle is small. Each cycle builds on the learning from the last. Improvement compounds over time through repeated cycles rather than through single bold interventions.</p>
+
+    <div class="pdsa-grid">
+        <div class="pdsa-card plan">
+            <div class="pdsa-letter">P</div>
+            <div class="pdsa-word">Plan</div>
+            <p class="pdsa-desc">Define the objective. State the prediction. Specify who does what and when. Decide how data will be collected. The plan is a commitment to learning &mdash; not a commitment to the change being right.</p>
+        </div>
+        <div class="pdsa-card do">
+            <div class="pdsa-letter">D</div>
+            <div class="pdsa-word">Do</div>
+            <p class="pdsa-desc">Carry out the change at small scale. Document what actually happens, including surprises. Begin collecting the data specified in the plan. Resist expanding the change before the Study is complete.</p>
+        </div>
+        <div class="pdsa-card study">
+            <div class="pdsa-letter">S</div>
+            <div class="pdsa-word">Study</div>
+            <p class="pdsa-desc">Analyse the data against the prediction. What worked? What did not? What was unexpected? This is the most important stage and the most frequently skipped. Bootstrap CUSUM belongs here.</p>
+        </div>
+        <div class="pdsa-card act">
+            <div class="pdsa-letter">A</div>
+            <div class="pdsa-word">Act</div>
+            <p class="pdsa-desc">Decide what to do next based on evidence: adopt and expand, adapt and retest, or abandon and try a different theory. Three options &mdash; all valid. Only one of them is chosen without evidence.</p>
+        </div>
+    </div>
+
+    <!-- THE PREDICTION DISCIPLINE -->
+    <h2>The prediction discipline &mdash; the Plan phase done properly</h2>
+
+    <p>The most important thing about the Plan phase is writing a specific prediction <em>before</em> implementing the change. Not a goal. Not an aspiration. A testable prediction with a number, a direction, and a timeframe.</p>
+
+    <p>Without a prediction, the Study phase has nothing to study against. Any result can be rationalised as success or explained away as special cause. The prediction is what makes the Study phase meaningful &mdash; because it commits you to what you expected to see before you see what actually happened.</p>
+
+    <div class="prediction-box">
+        <div class="pb-label">&#128221; What a proper prediction looks like</div>
+        <div class="pb-example">If we appoint an Operations Manager with written authority over support triage, the number of escalations reaching the senior leader will fall by 30% within eight weeks, as measured by the weekly escalation count on the SPC chart.</div>
+        <div class="pb-example">If we implement the dementia readiness checklist in all GP practices in Kent, the diagnosis rate will rise above 66.7% and be sustained for at least twelve months, as confirmed by Bootstrap CUSUM at 95% confidence.</div>
+        <p>A prediction names the change, the expected effect, the size of the effect, the timeframe, and the measurement method. Without all five elements it is not a prediction &mdash; it is a hope.</p>
+    </div>
+
+    <blockquote>
+        &ldquo;By what method? It is not enough to do your best. You must know what to do, and then do your best.&rdquo; &mdash; W. Edwards Deming
+    </blockquote>
+
+    <p>Deming&rsquo;s question &mdash; <em>by what method?</em> &mdash; is the Plan phase in one sentence. If you cannot describe the mechanism by which the change will produce the improvement, the prediction is not a theory. It is a guess. A PDSA cycle built on a guess produces noise, not learning.</p>
+
+    <!-- THE STUDY PHASE -->
+    <div class="study-box">
+        <div class="sb-label">&#128202; The Study phase &mdash; where most PDSA cycles fail</div>
+        <div class="sb-title">The most important phase. The most commonly skipped. The one Bootstrap CUSUM is designed for.</div>
+        <p>The Study phase asks one question: <em>did the process actually change, or are we seeing variation around an unchanged mean?</em> Most improvement practitioners answer this question with a run chart, a before-and-after comparison, or a RAG (Red-Amber-Green) status rating. None of these can reliably distinguish genuine structural change from noise. A RAG rating tells you whether a metric is above or below a threshold at a single point in time &mdash; it says nothing about whether the underlying process has structurally changed.</p>
+        <p>A run chart can show that recent data points are higher or lower than previous ones. It cannot tell you whether the underlying process mean has genuinely shifted &mdash; or whether you are seeing random fluctuation that will revert. A before-and-after comparison shows you two numbers. It cannot tell you whether the difference is statistically meaningful or whether it will persist.</p>
+        <p>This is the gap Bootstrap CUSUM fills. It applies to time-series data and asks specifically: has the process permanently shifted to a new mean &mdash; and if so, when? It gives a statistical confidence level for the answer. It will not declare a structural change until the evidence warrants it. That is what an honest Study phase looks like.</p>
+    </div>
+
+    <!-- THE THREE ACT OPTIONS -->
+    <h2>The Act phase &mdash; three options, all legitimate</h2>
+
+    <p>The Act phase has exactly three possible outcomes. All three are legitimate results of a PDSA cycle. Only one of them &mdash; abandon &mdash; is treated as failure in most organisations, which is why the Study phase gets skipped: if abandonment is treated as failure, the temptation is to declare success regardless of what the data shows.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:24px 0;">
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--green);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.78em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);margin-bottom:8px;">Adopt</div>
+            <p style="font-size:0.9em;color:var(--text);line-height:1.6;margin:0;">The prediction was correct. The Bootstrap CUSUM chart confirms a structural step change. The change is expanded to the next scale. The next PDSA cycle tests whether the improvement holds at larger scale.</p>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--orange);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.78em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--orange);margin-bottom:8px;">Adapt</div>
+            <p style="font-size:0.9em;color:var(--text);line-height:1.6;margin:0;">The prediction was partially correct or the implementation revealed problems. The Bootstrap CUSUM shows movement but not a confirmed step change. The change is modified based on what was learned and tested in a new cycle.</p>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--red);">
+            <div style="font-family:system-ui,sans-serif;font-size:0.78em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--red);margin-bottom:8px;">Abandon</div>
+            <p style="font-size:0.9em;color:var(--text);line-height:1.6;margin:0;">The prediction was wrong. The Bootstrap CUSUM shows no confirmed change. The theory of improvement was incorrect. This is valuable information &mdash; not failure. The next cycle tests a different theory. This is Deming's method working correctly.</p>
+        </div>
+    </div>
+
+    <div class="alert-orange">
+        <strong>The tampering trap &mdash; the most dangerous Act phase error.</strong> Deming identified tampering as changing a process in response to variation rather than waiting for genuine evidence of structural change. In PDSA terms: abandoning or adapting a change before the Study phase has had time to produce an honest answer. Bootstrap CUSUM prevents tampering by making the evidence explicit &mdash; it will not confirm a structural change until the statistical evidence warrants it. If the chart shows no confirmed step change after a realistic lag period, that is the signal to act. Not before.
+    </div>
+
+    <!-- THE THREE QUESTIONS -->
+    <h2>PDSA and the Model for Improvement &mdash; the three questions</h2>
+
+    <p>Langley et al.&rsquo;s Model for Improvement places the PDSA cycle inside three questions that must be answered before any cycle begins. The questions establish the aim, the measurement, and the theory of change. The PDSA cycle then tests the theory repeatedly until the aim is achieved.</p>
+
+    <div class="questions-grid">
+        <div class="q-card q1">
+            <div class="qc-num">Question 1 &mdash; Langley et al.</div>
+            <h3>What are we trying to accomplish?</h3>
+            <p>The aim. Specific, time-bounded, stated in terms of the system rather than the activity. Every PDSA cycle serves this aim. If a proposed cycle cannot be connected to it, it does not belong in the programme.</p>
+            <div class="site-provides">This site provides: <a href="why-nothing-changes.html">the five-stage diagnostic method</a> for finding the right aim &mdash; the structural root cause rather than the surface symptom.</div>
+        </div>
+        <div class="q-card q2">
+            <div class="qc-num">Question 2 &mdash; Bootstrap CUSUM answers this</div>
+            <h3>How will we know a change is an improvement?</h3>
+            <p>The measurement. Has the process structurally shifted to a new mean &mdash; or are we seeing variation around an unchanged level? Bootstrap CUSUM answers this question with statistical confidence that standard run charts cannot provide.</p>
+            <div class="site-provides">This site provides: the <a href="index.html">free Bootstrap CUSUM tool</a> &mdash; the honest measurement for the Study phase of every PDSA cycle.</div>
+        </div>
+        <div class="q-card q3">
+            <div class="qc-num">Question 3 &mdash; Langley et al.</div>
+            <h3>What change can we make that will result in an improvement?</h3>
+            <p>The theory of change. The PDSA cycle tests it. <a href="joiner-levels-of-fix.html">Joiner&rsquo;s levels</a> classify whether the proposed change is deep enough to hold. <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a> describe what Level 3 changes look like in management practice.</p>
+            <div class="site-provides">This site provides: <a href="joiner-levels-of-fix.html">Joiner levels</a>, <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>, and <a href="why-nothing-changes.html">the full diagnostic method</a>.</div>
+        </div>
+    </div>
+
+    <!-- JOINER AND PDSA -->
+    <h2>Joiner&rsquo;s levels and PDSA &mdash; classifying the change before testing it</h2>
+
+    <p>The PDSA cycle tests whether a change produces improvement. Joiner&rsquo;s levels classify how deep the change is &mdash; and therefore whether it is capable of producing the kind of improvement that Bootstrap CUSUM will confirm as genuine and sustained.</p>
+
+    <p>This is the most important connection on this page. A PDSA cycle applied to a Level 1 intervention will produce a Study phase result showing no confirmed structural change &mdash; not because PDSA failed, but because the intervention was not aimed at the right level. The cycle worked correctly. The theory of change was wrong.</p>
+
+    <div class="alert-blue">
+        <strong>Apply the Joiner check before the Plan phase.</strong> Before writing a prediction, classify the proposed change using <a href="joiner-levels-of-fix.html">Joiner&rsquo;s levels</a>. If the change is Level 1 or Level 2 in response to a Level 3 problem, the PDSA cycle will confirm that the change has not worked &mdash; which is useful information but an expensive way to discover something that classification would have revealed in advance. The Joiner check is the quality gate before the Plan phase begins.
+    </div>
+
+    <p>The practical sequence is:</p>
+
+    <ol style="padding-left:1.4em;margin-bottom:1.4em;font-size:1.05em;">
+        <li style="margin-bottom:0.6em;">Apply the <a href="why-nothing-changes.html">five-stage diagnostic method</a> to find the structural root cause</li>
+        <li style="margin-bottom:0.6em;">Classify the proposed intervention using <a href="joiner-levels-of-fix.html">Joiner&rsquo;s levels</a> &mdash; is it deep enough?</li>
+        <li style="margin-bottom:0.6em;">Write the prediction using Deming&rsquo;s <em>by what method</em> discipline &mdash; name the mechanism</li>
+        <li style="margin-bottom:0.6em;">Run the PDSA cycle &mdash; small scale, defined timeframe, defined measure</li>
+        <li style="margin-bottom:0.6em;">Use Bootstrap CUSUM in the Study phase &mdash; the honest arbiter of whether the process has genuinely changed</li>
+        <li style="margin-bottom:0.6em;">Adopt, adapt, or abandon based on evidence &mdash; not on political pressure or elapsed time</li>
+    </ol>
+
+    <!-- WORKED EXAMPLES -->
+    <h2>PDSA in the NHS data &mdash; what the Study phase actually shows</h2>
+
+    <p>Every article on this site is, in effect, a completed Study phase for a real-world policy intervention. The Plan was the policy. The Do was its implementation. Bootstrap CUSUM completes the Study. The results are consistent: where the intervention was at Level 1 or Level 2, no confirmed structural change. Where something systemic changed, the chart shows it.</p>
+
+    <div class="evidence-grid">
+        <div class="evidence-card" style="border-left-color:var(--red);">
+            <div class="e-tag" style="color:var(--red);">&#127973;&#65039; Study phase result &mdash; no step change</div>
+            <h4><a href="dementia-diagnosis-rate.html">Dementia diagnosis &mdash; twelve years of PDSA without an honest Study phase</a></h4>
+            <p>The 66.7% target was set in 2012. The Plan was the target. The Do was the CQUIN incentive and the awareness campaigns. The Study phase &mdash; Bootstrap CUSUM &mdash; finds one stage, mean below target, no confirmed structural improvement. The Study phase was never completed honestly. The Act phase kept adopting an approach the evidence did not support.</p>
+        </div>
+        <div class="evidence-card" style="border-left-color:var(--red);">
+            <div class="e-tag" style="color:var(--red);">&#127973;&#65039; Study phase result &mdash; no step change</div>
+            <h4><a href="never-events-wrong-route.html">Never events &mdash; Level 2 PDSA, Level 3 solution available</a></h4>
+            <p>The PDSA cycles applied to wrong-route medication administration used Level 2 interventions &mdash; guidance, training, alerts. Bootstrap CUSUM finds a flat process at 17.5 per year. The Study phase result was available. The Act phase should have abandoned the Level 2 approach and adopted the Level 3 engineering control. It did not.</p>
+        </div>
+        <div class="evidence-card" style="border-left-color:var(--green);">
+            <div class="e-tag" style="color:var(--green);">&#127807; Study phase result &mdash; confirmed step change</div>
+            <h4><a href="ulez-london-air-quality.html">ULEZ &mdash; a Level 3 intervention confirmed by Bootstrap CUSUM</a></h4>
+            <p>The Ultra Low Emission Zone changed the economics of vehicle use in London &mdash; a Level 3 structural change. Bootstrap CUSUM confirms a structural step change in NO2 levels. The Study phase gives an unambiguous Adopt result. The theory of change was correct. The mechanism worked.</p>
+        </div>
+    </div>
+
+    <!-- WHERE TO GO NEXT -->
+    <h2>Where this fits &mdash; and where to go next</h2>
+
+    <div class="nav-grid">
+        <a href="start-here.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--purple);">&#8593; Above this page</div>
+            <h4>How to make improvements that really work</h4>
+            <p>The Model for Improvement and the three questions. PDSA sits inside Question 2 and Question 3. Bootstrap CUSUM answers Question 2.</p>
+        </a>
+        <a href="why-nothing-changes.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--brand-mid);">&#8593; Above this page</div>
+            <h4>Why nothing changes &mdash; the diagnostic method</h4>
+            <p>The five-stage method for finding what the PDSA cycle should be testing. The Joiner check classifies whether the proposed change is deep enough before the cycle begins.</p>
+        </a>
+        <a href="joiner-levels-of-fix.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--teal);">&#8594; Related concept page</div>
+            <h4>Joiner&rsquo;s levels of fix</h4>
+            <p>The classification system for the change you are testing in the PDSA cycle. A Level 1 change in a PDSA cycle will produce a Level 1 result. Classify before you plan.</p>
+        </a>
+        <a href="deming-14-points.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--teal);">&#8594; Related concept page</div>
+            <h4>Deming&rsquo;s 14 Points</h4>
+            <p>Deming invented the PDSA cycle. His 14 Points describe what Level 3 changes look like in management practice &mdash; the changes that PDSA will confirm as genuinely structural.</p>
+        </a>
+        <a href="index.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--green);">&#8595; The tool</div>
+            <h4>Bootstrap CUSUM &mdash; the honest Study phase tool</h4>
+            <p>Run Bootstrap CUSUM on your own improvement data. Find out whether your PDSA cycle has produced structural change &mdash; or whether you are seeing variation around an unchanged mean.</p>
+        </a>
+        <a href="three-charts-three-stories.html" class="nav-card">
+            <div class="nc-dir" style="color:var(--green);">&#8595; Why Bootstrap CUSUM</div>
+            <h4>Same data, three charts, three very different stories</h4>
+            <p>Why Bootstrap CUSUM answers the Study phase question more honestly than a run chart or a before-and-after comparison. The same data, the same improvement programme, three radically different conclusions.</p>
+        </a>
+    </div>
+
+    <div class="mission-box">
+        <div class="mission-label">&#127919; Our mission</div>
+        <p>&ldquo;Give people better tools and a better mental model to ask better questions about whether things have improved through structural change &mdash; and to understand why, when they haven&rsquo;t.&rdquo;</p>
+    </div>
+
+    <p style="text-align:center; font-family:system-ui,sans-serif; margin-top:32px;">
+        <a href="index.html" class="btn-primary" style="margin-right:12px;">&#9654; Run Bootstrap CUSUM on your data</a>
+        <a href="start-here.html" class="btn-secondary">Back to start here &rsaquo;</a>
+    </p>
+
+</main>
+
+<footer class="page-footer" style="max-width:860px;margin:0 auto;padding:0 24px 60px;">
+    <p><strong>Tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based Bootstrap CUSUM and X-mR analyser &middot; no data uploaded &middot; any sector</p>
+    <p style="margin-top:8px;"><strong>Key references:</strong> Langley, G.L. et al. <em>The Improvement Guide</em>, 2nd ed., Jossey-Bass, 2009 &middot; Deming, W.E. <em>Out of the Crisis</em>, MIT Press, 1982 &middot; Shewhart, W.A. <em>Statistical Method from the Viewpoint of Quality Control</em>, 1939 &middot; Joiner, B.L. <em>Fourth Generation Management</em>, McGraw-Hill, 1994</p>
+    <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). &copy; Syd Stewart 2026. <a href="glossary.html">Glossary</a> &middot; <a href="about.html">About</a></p>
+</footer>
+
+</body>
+</html>
