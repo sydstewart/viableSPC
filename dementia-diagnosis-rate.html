@@ -80,14 +80,15 @@
         .alert-orange { background: #fff8f0; border-left: 4px solid var(--orange); padding: 14px 18px; margin: 20px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; }
         .alert-red { background: #fff5f5; border-left: 4px solid var(--red); padding: 14px 18px; margin: 20px 0; border-radius: 0 6px 6px 0; font-family: system-ui, sans-serif; font-size: 0.95em; }
         /* Deming dark box */
-        .deming-box { background: #1e293b; border-radius: 8px; padding: 24px 28px; margin: 28px 0; color: white; }
-        .deming-box h3 { color: #93c5fd; margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; font-family: system-ui, sans-serif; }
-        .deming-box p { font-size: 0.97em; color: #e2e8f0; margin-bottom: 10px; line-height: 1.7; }
+        .deming-box { background: #f0f4f8; border-radius: 8px; padding: 24px 28px; margin: 28px 0; color: #1e293b;
+        border: 3px solid #002d5b;}
+        .deming-box h3 { color: #002d5b; margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; font-family: system-ui, sans-serif; }
+        .deming-box p { font-size: 0.97em; color: #1e293b; margin-bottom: 10px; line-height: 1.7; }
         .deming-box p:last-child { margin-bottom: 0; }
-        .deming-box .deming-quote { font-size: 1.15em; font-style: italic; color: #bfdbfe; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 14px 0; }
+        .deming-box .deming-quote { font-size: 1.15em; font-style: italic; color: #0056b3; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 14px 0; }
         .deming-box strong { color: #ffffff; }
-        .constraint-box { background: #1e3a5f; border-left: 5px solid #60a5fa; border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 20px 0; }
-        .constraint-box p { font-size: 0.97em; color: #e2e8f0; font-style: italic; line-height: 1.7; margin: 0; }
+        .constraint-box { background: #eff6ff; border-left: 5px solid #60a5fa; border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 20px 0; }
+        .constraint-box p { font-size: 0.97em; color: #1e293b; font-style: italic; line-height: 1.7; margin: 0; }
         /* Numbers table */
         .numbers-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 20px 0; font-family: system-ui, sans-serif; overflow-x: auto; }
         .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
@@ -127,11 +128,12 @@
         .analysis-box ul { font-size: 0.97em; line-height: 1.8; margin-bottom: 10px; padding-left: 20px; }
         .analysis-box strong { font-weight: 700; }
         /* Dark navy — for key quotes and constraint box */
-        .ab-dark { background: #1e293b; color: #e2e8f0; }
-        .ab-dark h3 { color: #93c5fd; }
+        .ab-dark { background: #f0f4f8; color: #e2e8f0;
+        border: 3px solid #002d5b;}
+        .ab-dark h3 { color: #002d5b; }
         .ab-dark p, .ab-dark li { color: #e2e8f0; }
         .ab-dark strong { color: #ffffff; }
-        .ab-dark .deming-quote { font-size: 1.1em; font-style: italic; color: #bfdbfe; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 12px 0; }
+        .ab-dark .deming-quote { font-size: 1.1em; font-style: italic; color: #0056b3; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 12px 0; }
         /* Steel blue — light background, dark readable text */
         .ab-steel { background: #eff6ff; color: #1e293b; border-left: 4px solid #3b82f6; }
         .ab-steel h3 { color: #1d4ed8; }
@@ -139,9 +141,9 @@
         .ab-steel strong { color: #002d5b; }
         .ab-steel .deming-quote { font-size: 1.1em; font-style: italic; color: #1d4ed8; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 12px 0; }
         /* Slate — for root cause / loops */
-        .ab-slate { background: #334155; color: #e2e8f0; }
-        .ab-slate h3 { color: #7dd3fc; }
-        .ab-slate p, .ab-slate li { color: #cbd5e1; }
+        .ab-slate { background: #f1f5f9; color: #e2e8f0; }
+        .ab-slate h3 { color: #002d5b; }
+        .ab-slate p, .ab-slate li { color: #1e293b; }
         .ab-slate strong { color: #ffffff; }
         /* Teal — for Level 3 / measures */
         .ab-teal { background: #f0f9ff; border-left: 4px solid #0e7490; color: #1e293b; }
@@ -289,6 +291,8 @@
                 <a href="types-of-measures.html">Types of measures</a>
                 <a href="model-for-improvement.html">Model for Improvement</a>
                 <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>
+                <a href="variation-and-spc.html">Variation &amp; SPC</a>
+                <a href="bright-spots.html">Bright Spots</a>
             </div>
         </div>
         <div class="nav-dropdown">
