@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tampering, Impatience and the Western Electric Rules — StepChangeAnalysis.com</title>
+    <meta name="description" content="Tampering explained — acting on common cause variation as if it were special cause. The Western Electric Rules (WECO): when exactly it is right to intervene. Warfarin INR as Joiner's worked example. How the StepChangeAnalysis tool flags signals while leaving the decision with the clinician.">
+    <meta name="keywords" content="tampering Deming explained, acting on common cause variation, why improvement programmes fail, warfarin INR tampering, Joiner fourth generation management, how to know when to intervene, Bootstrap CUSUM tampering, Western Electric Rules explained, WECO rules control chart, Western Electric Rules SPC, Zone A Zone B Zone C control chart">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:   #002d5b;
+            --brand-mid:    #0056b3;
+            --brand-light:  #e9f2ff;
+            --text:         #1e293b;
+            --muted:        #64748b;
+            --border:       #e2e8f0;
+            --bg:           #f8f9fa;
+            --green:        #198754;
+            --orange:       #e67e22;
+            --red:          #c0392b;
+            --teal:         #0e7490;
+            --purple:       #7c3aed;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-nav { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; padding: 6px 10px; border-radius: 4px; }
+        .header-nav a:hover { color: white; background: rgba(255,255,255,0.1); text-decoration: none; }
+        .header-nav a.active { color: white; font-weight: 700; background: rgba(255,255,255,0.15); }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-btn { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; background: none; border: none; cursor: pointer; padding: 6px 10px; border-radius: 4px; display: flex; align-items: center; gap: 4px; }
+        .nav-dropdown-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+        .nav-dropdown-btn .arrow { font-size: 0.7em; transition: transform 0.2s; }
+        .nav-dropdown:hover .arrow { transform: rotate(180deg); }
+        .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); min-width: 220px; z-index: 200; padding: 12px 0 6px; margin-top: 0; }
+        .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+        .nav-dropdown-menu::before { content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
+        .nav-dropdown-menu a { display: block; color: #1e293b; font-family: system-ui, sans-serif; font-size: 0.85em; padding: 8px 16px; text-decoration: none; white-space: nowrap; border-radius: 0; background: none; }
+        .nav-dropdown-menu a:hover { background: #e9f2ff; color: #002d5b; }
+        .nav-dropdown-menu .menu-section { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; padding: 8px 16px 4px; }
+        .nav-dropdown-menu .menu-divider { border: none; border-top: 1px solid #e2e8f0; margin: 4px 0; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        @media (max-width: 600px) { .header-nav { display: none; } }
+
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .page-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+        h1 { font-size: clamp(1.8em, 4vw, 2.6em); line-height: 1.2; color: var(--brand-blue); margin-bottom: 16px; font-weight: bold; }
+        .page-intro { font-size: 1.05em; color: var(--muted); font-style: italic; margin-bottom: 12px; border-left: 4px solid var(--red); padding-left: 16px; line-height: 1.7; }
+        .page-meta { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
+        h2 { font-size: 1.3em; color: var(--brand-blue); margin: 40px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.05em; color: var(--brand-blue); margin: 24px 0 10px; font-style: italic; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        strong { color: var(--brand-blue); }
+        hr { border: none; border-top: 3px solid var(--brand-light); margin: 48px 0; }
+
+        /* Definition box — the core concept */
+        .definition-box { background: #fff5f5; border: 3px solid var(--red); border-radius: 10px; padding: 24px 28px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .definition-box .def-label { font-size: 0.72em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+        .definition-box .def-term { font-size: 1.5em; font-weight: 900; color: var(--brand-blue); margin-bottom: 12px; line-height: 1.2; }
+        .definition-box .def-text { font-size: 1.0em; color: var(--text); line-height: 1.7; margin-bottom: 10px; }
+        .definition-box .def-source { font-size: 0.85em; color: var(--muted); font-style: italic; }
+
+        /* Funnel diagram — common cause vs special cause */
+        .funnel-wrap { display: flex; gap: 24px; align-items: stretch; margin: 28px 0; flex-wrap: wrap; }
+        .funnel-card { flex: 1; min-width: 240px; border-radius: 10px; padding: 20px 22px; font-family: system-ui, sans-serif; }
+        .funnel-card.common { background: #f0fdf4; border: 2px solid var(--green); }
+        .funnel-card.special { background: #fff5f5; border: 2px solid var(--red); }
+        .funnel-card .fc-label { font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+        .funnel-card.common .fc-label { color: var(--green); }
+        .funnel-card.special .fc-label { color: var(--red); }
+        .funnel-card h3 { font-style: normal; margin: 0 0 10px; font-size: 1.1em; }
+        .funnel-card.common h3 { color: #14532d; }
+        .funnel-card.special h3 { color: var(--red); }
+        .funnel-card p { font-size: 0.92em; line-height: 1.6; margin: 0 0 8px; }
+        .funnel-card.common p { color: #14532d; }
+        .funnel-card.special p { color: #7f1d1d; }
+        .funnel-card .fc-action { font-size: 0.88em; font-weight: 700; padding: 8px 12px; border-radius: 6px; margin-top: 10px; display: block; }
+        .funnel-card.common .fc-action { background: #dcfce7; color: #14532d; }
+        .funnel-card.special .fc-action { background: #fee2e2; color: #7f1d1d; }
+
+        /* The funnel experiment diagram */
+        .funnel-experiment { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .funnel-experiment h3 { font-style: normal; color: var(--brand-blue); margin: 0 0 16px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.06em; }
+        .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 16px; }
+        .rule-card { border-radius: 8px; padding: 14px 16px; font-size: 0.88em; line-height: 1.5; }
+        .rule-card .rule-num { font-weight: 900; font-size: 1.1em; margin-bottom: 4px; }
+        .rule-card.r1 { background: #f0fdf4; border: 1px solid var(--green); }
+        .rule-card.r1 .rule-num { color: var(--green); }
+        .rule-card.r2 { background: #fff8f0; border: 1px solid var(--orange); }
+        .rule-card.r2 .rule-num { color: var(--orange); }
+        .rule-card.r3 { background: #fff5f5; border: 1px solid var(--red); }
+        .rule-card.r3 .rule-num { color: var(--red); }
+        .rule-card.r4 { background: #faf5ff; border: 1px solid var(--purple); }
+        .rule-card.r4 .rule-num { color: var(--purple); }
+        .rule-card p { color: var(--text); margin: 0; }
+        .rule-card .rule-result { font-size: 0.85em; font-style: italic; margin-top: 6px; }
+        .rule-card.r1 .rule-result { color: var(--green); }
+        .rule-card.r2 .rule-result { color: var(--orange); }
+        .rule-card.r3 .rule-result { color: var(--red); }
+        .rule-card.r4 .rule-result { color: var(--purple); }
+
+
+
+        /* Callout boxes */
+        .callout { border-radius: 8px; padding: 18px 22px; margin: 24px 0; font-family: system-ui, sans-serif; }
+        .callout.blue { background: var(--brand-light); border-left: 5px solid var(--brand-mid); }
+        .callout.green { background: #f0fdf4; border-left: 5px solid var(--green); }
+        .callout.orange { background: #fff8f0; border-left: 5px solid var(--orange); }
+        .callout.red { background: #fff5f5; border-left: 5px solid var(--red); }
+        .callout.teal { background: #f0fdfa; border-left: 5px solid var(--teal); }
+        .callout strong { display: block; margin-bottom: 6px; font-size: 1em; }
+        .callout.blue strong { color: var(--brand-blue); }
+        .callout.green strong { color: var(--green); }
+        .callout.orange strong { color: var(--orange); }
+        .callout.red strong { color: var(--red); }
+        .callout.teal strong { color: var(--teal); }
+        .callout p { font-size: 0.95em; line-height: 1.65; margin: 0 0 8px; }
+        .callout p:last-child { margin: 0; }
+
+        .dark-box { background: #1e293b; border-radius: 8px; padding: 24px 28px; margin: 28px 0; color: white; font-family: system-ui, sans-serif; }
+        .dark-box h3 { color: #93c5fd; margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; }
+        .dark-box p { font-size: 0.97em; color: #e2e8f0; margin-bottom: 10px; line-height: 1.7; }
+        .dark-box p:last-child { margin-bottom: 0; }
+        .dark-box strong { color: white; }
+        .dark-box .quote { font-size: 1.05em; font-style: italic; color: #bfdbfe; border-left: 3px solid #3b82f6; padding-left: 16px; margin: 14px 0; }
+
+        /* Examples table */
+        .examples-table { width: 100%; border-collapse: collapse; font-family: system-ui, sans-serif; font-size: 0.9em; margin: 24px 0; }
+        .examples-table th { background: var(--brand-blue); color: white; padding: 10px 14px; text-align: left; }
+        .examples-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+        .examples-table tr:nth-child(even) { background: var(--brand-light); }
+        .examples-table tr:last-child td { border-bottom: none; }
+
+        /* Nav grid */
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 32px 0; }
+        .nav-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; text-decoration: none; display: block; transition: box-shadow 0.15s; font-family: system-ui, sans-serif; }
+        .nav-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+        .nav-card .nav-tag { font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 6px; }
+        .nav-card h3 { color: var(--brand-blue); font-size: 0.95em; margin: 0 0 4px; line-height: 1.3; font-style: normal; }
+        .nav-card p { color: var(--muted); font-size: 0.85em; margin: 0; line-height: 1.4; }
+
+        .toc-details { margin: 0 0 28px 0; border: 1px solid var(--border); border-radius: 8px; font-family: system-ui, sans-serif; background: white; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: bold; color: var(--brand-blue); font-size: 0.95em; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+        .toc-details summary::-webkit-details-marker { display: none; }
+        .toc-details summary:hover { background: var(--brand-light); border-radius: 8px; }
+        .toc-details[open] summary { border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; }
+        .toc-inner { padding: 6px 18px 16px; }
+        .toc-inner ol { margin: 10px 0 0 1.2em; line-height: 2.1; }
+        .toc-inner ol li { font-size: 0.92em; }
+        .toc-inner ol li a { color: var(--brand-mid); text-decoration: none; }
+        .toc-inner ol li a:hover { text-decoration: underline; }
+
+        /* WECO zones diagram */
+        .weco-zones { display: flex; flex-direction: column; gap: 0; margin: 24px 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); font-family: system-ui, sans-serif; }
+        .weco-zone { display: flex; align-items: center; gap: 0; }
+        .weco-label { width: 80px; min-width: 80px; text-align: center; font-size: 0.78em; font-weight: 700; padding: 10px 6px; }
+        .weco-bar { flex: 1; padding: 10px 16px; font-size: 0.88em; line-height: 1.4; }
+        .weco-zone.za-upper .weco-label { background: #fee2e2; color: var(--red); }
+        .weco-zone.za-upper .weco-bar { background: #fff5f5; color: #7f1d1d; border-left: 3px solid var(--red); }
+        .weco-zone.zb-upper .weco-label { background: #ffedd5; color: #c2410c; }
+        .weco-zone.zb-upper .weco-bar { background: #fff7ed; color: #7c2d12; border-left: 3px solid #f97316; }
+        .weco-zone.zc-upper .weco-label { background: #fef9c3; color: #854d0e; }
+        .weco-zone.zc-upper .weco-bar { background: #fefce8; color: #713f12; border-left: 3px solid #eab308; }
+        .weco-zone.centre { background: #f0fdf4; }
+        .weco-zone.centre .weco-label { background: #dcfce7; color: var(--green); font-size: 0.85em; }
+        .weco-zone.centre .weco-bar { background: #f0fdf4; color: #14532d; border-left: 3px solid var(--green); font-weight: 600; }
+        .weco-zone.zc-lower .weco-label { background: #fef9c3; color: #854d0e; }
+        .weco-zone.zc-lower .weco-bar { background: #fefce8; color: #713f12; border-left: 3px solid #eab308; }
+        .weco-zone.zb-lower .weco-label { background: #ffedd5; color: #c2410c; }
+        .weco-zone.zb-lower .weco-bar { background: #fff7ed; color: #7c2d12; border-left: 3px solid #f97316; }
+        .weco-zone.za-lower .weco-label { background: #fee2e2; color: var(--red); }
+        .weco-zone.za-lower .weco-bar { background: #fff5f5; color: #7f1d1d; border-left: 3px solid var(--red); }
+        /* WECO rules grid */
+        .weco-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 24px 0; }
+        .weco-rule { border-radius: 8px; padding: 16px 18px; font-family: system-ui, sans-serif; }
+        .weco-rule.r1 { background: #fff5f5; border: 1px solid var(--red); border-left: 4px solid var(--red); }
+        .weco-rule.r2 { background: #fff7ed; border: 1px solid #f97316; border-left: 4px solid #f97316; }
+        .weco-rule.r3 { background: #fefce8; border: 1px solid #eab308; border-left: 4px solid #eab308; }
+        .weco-rule.r4 { background: #f0fdf4; border: 1px solid var(--green); border-left: 4px solid var(--green); }
+        .weco-rule .wr-label { font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+        .weco-rule.r1 .wr-label { color: var(--red); }
+        .weco-rule.r2 .wr-label { color: #c2410c; }
+        .weco-rule.r3 .wr-label { color: #854d0e; }
+        .weco-rule.r4 .wr-label { color: var(--green); }
+        .weco-rule .wr-rule { font-weight: 700; font-size: 0.95em; margin-bottom: 6px; color: var(--brand-blue); }
+        .weco-rule p { font-size: 0.88em; line-height: 1.55; margin: 0; color: var(--text); }
+
+        .page-footer { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+        .note { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); font-style: italic; background: white; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin: 16px 0; }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Concepts <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <a href="why-nothing-changes.html">Why nothing changes</a>
+                <a href="joiner-levels-of-fix.html">Joiner levels of fix</a>
+                <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>
+                <a href="pdsa-cycle.html">PDSA cycle</a>
+                <a href="types-of-measures.html">Types of measures</a>
+                <a href="model-for-improvement.html">Model for Improvement</a>
+                <a href="tampering-and-impatience.html" style="font-weight:600;color:#002d5b;">Tampering &amp; Impatience</a>
+            </div>
+        </div>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Articles <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <div class="menu-section">NHS Healthcare</div>
+                <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; Why nothing has worked</a>
+                <a href="dementia-diagnosis-rate.html">Dementia &mdash; The 66% target</a>
+                <a href="gp-appointments-analysis.html">GP appointments</a>
+                <a href="never-events-wrong-route.html">Never events &mdash; Wrong route</a>
+                <a href="anticoag-safety.html">Anticoagulation safety</a>
+                <a href="sepsis-six-does-public-data-show-whether-it-worked.html">Sepsis Six</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Environment &amp; Policy</div>
+                <a href="ulez-london-air-quality.html">ULEZ &mdash; Air quality</a>
+                <a href="the-grid-fixed-itself.html">The Grid fixed itself</a>
+                <a href="uk-gdp-analysis.html">UK GDP analysis</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Industrial</div>
+                <a href="hydrogen-plant-cusum.html">Hydrogen plant CUSUM</a>
+            </div>
+        </div>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Concepts</a> &rsaquo; Tampering &amp; Impatience</div>
+    <div class="page-flag">&#9888;&#65039; Improvement Concepts &mdash; Failure Mode</div>
+    <h1>Tampering, Impatience, and the Western Electric Rules</h1>
+    <p class="page-intro">Tampering is adjusting a system that is behaving normally, in response to variation that is simply part of how the system works &mdash; treating common cause variation as though it were a signal requiring action. It is one of the most destructive management behaviours in any improvement programme, in any setting. It makes things worse. And it is almost universal. The Western Electric Rules (WECO) provide the precise statistical answer to the question tampering arises from: <em>when exactly is it right to act?</em></p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-definition">What tampering is</a></li>
+                <li><a href="#section-two-types">Common cause and special cause variation</a></li>
+                <li><a href="#section-funnel">Deming&rsquo;s funnel experiment</a></li>
+                <li><a href="#section-warfarin">Joiner&rsquo;s worked example &mdash; warfarin and INR</a></li>
+                <li><a href="#section-impatience">Impatience &mdash; the second form of tampering</a></li>
+                <li><a href="#section-political">The political cycle as a tampering machine</a></li>
+                <li><a href="#section-cusum">How Bootstrap CUSUM prevents tampering</a></li>
+                <li><a href="#section-examples">Tampering in practice &mdash; worked examples</a></li>
+                <li><a href="#section-weco">The Western Electric Rules (WECO) &mdash; when it is right to act</a></li>
+                <li><a href="#section-test">The tampering test &mdash; four questions</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-definition">What tampering is</h2>
+
+    <div class="definition-box">
+        <div class="def-label">&#128218; Definition &mdash; W. Edwards Deming</div>
+        <div class="def-term">Tampering</div>
+        <div class="def-text">Adjusting a process or system in response to variation that is common cause &mdash; normal, inherent, expected variation that is part of how the system works &mdash; as though that variation were a specific, assignable, special cause requiring action. Tampering does not improve the system. It adds variation. It makes the output worse.</div>
+        <div class="def-source">Deming, W.E. <em>Out of the Crisis.</em> MIT Press, 1982. Chapter 11. &nbsp;&middot;&nbsp; Deming, W.E. <em>The New Economics.</em> MIT Press, 1994. Chapter 7.</div>
+    </div>
+
+    <p>The definition contains the key distinction: the same action &mdash; adjusting a process &mdash; is correct management when applied to special cause variation, and tampering when applied to common cause variation. What makes it tampering is not the action itself. It is the misidentification of the source of variation.</p>
+
+    <p>Deming demonstrated this with a physical experiment. He demonstrated it mathematically. And Brian <a href="joiner-levels-of-fix.html">Joiner</a>, in <em>Fourth Generation Management</em> (Chapter 8, &ldquo;The Price of Ignorance,&rdquo; page 128), uses anticoagulation management &mdash; warfarin dosing in response to INR readings &mdash; as his worked example. Not because anticoagulation is an unusual case. Because it is the clearest possible illustration of a universal problem.</p>
+
+    <hr>
+
+    <h2 id="section-two-types">Common cause and special cause variation</h2>
+
+    <p>Every process produces variation. The critical question is: what is the source of that variation? <a href="deming-14-points.html">Deming</a>, following Shewhart, identified two fundamentally different sources.</p>
+
+    <div class="funnel-wrap">
+        <div class="funnel-card common">
+            <div class="fc-label">&#9679; Common Cause Variation</div>
+            <h3>Normal system noise</h3>
+            <p>Variation inherent to the system as designed. Predictable, stable, and expected. Produced by the hundreds of small factors that are part of how the process works &mdash; none of them large enough to identify individually.</p>
+            <p>Cannot be reduced by reacting to individual results. Can only be reduced by changing the system itself.</p>
+            <div class="fc-action">&#10003; Correct response: leave the process alone. Change the system if the level of variation is unacceptable.</div>
+        </div>
+        <div class="funnel-card special">
+            <div class="fc-label">&#9679; Special Cause Variation</div>
+            <h3>A specific, assignable signal</h3>
+            <p>Variation from a specific, identifiable cause that is not part of normal system operation. Unpredictable. Represents something genuinely different happening. Detectable with statistical tools as a point outside the natural process limits.</p>
+            <p>Should be investigated and addressed specifically.</p>
+            <div class="fc-action">&#9888; Correct response: investigate, find the specific cause, and act on it.</div>
+        </div>
+    </div>
+
+    <p>The management error that produces tampering is confusing the two. A result comes in that looks bad. The natural response is to act &mdash; to adjust, correct, intervene. If the result reflects a special cause, that action is appropriate. If it reflects common cause variation &mdash; normal system noise &mdash; the action makes things worse. The system was not doing anything unusual. The intervention introduces a new disturbance on top of the natural variation.</p>
+
+    <div class="callout red">
+        <strong>The asymmetry of the error</strong>
+        <p>Failing to act on a special cause allows one specific problem to persist. Acting on common cause variation &mdash; tampering &mdash; adds new variation to a system that was already behaving normally. Tampering systematically increases the spread of outcomes over time. The more frequently a manager tampers, the worse the process performs. This is Deming&rsquo;s central point: it is not that intervention is wrong. It is that intervention applied to the wrong type of variation is actively harmful &mdash; and more intervention of the wrong type produces more harm.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-funnel">Deming&rsquo;s funnel experiment</h2>
+
+    <p>Deming demonstrated tampering physically with a funnel, a marble, and a target on a table. The marble is dropped through the funnel repeatedly. The goal is to hit the target. Four rules are tested:</p>
+
+    <div class="funnel-experiment">
+        <h3>&#127919; The Funnel Experiment &mdash; Four Rules</h3>
+        <p style="font-family:system-ui,sans-serif;font-size:0.9em;color:var(--muted);margin-bottom:16px;">Each rule describes how the funnel position is adjusted after each drop, based on where the marble landed. The experiment demonstrates what happens to the spread of outcomes under each rule.</p>
+        <div class="rules-grid">
+            <div class="rule-card r1">
+                <div class="rule-num">Rule 1</div>
+                <p>Leave the funnel fixed over the target. Make no adjustments regardless of where each marble lands.</p>
+                <div class="rule-result">Result: Minimum spread. The stable, optimal outcome. This is what &ldquo;leave common cause variation alone&rdquo; means.</div>
+            </div>
+            <div class="rule-card r2">
+                <div class="rule-num">Rule 2</div>
+                <p>After each drop, move the funnel by the distance the marble missed the target, in the opposite direction. Compensate for each miss.</p>
+                <div class="rule-result">Result: Spread increases by &radic;2 compared to Rule 1. Compensating for common cause variation makes it worse.</div>
+            </div>
+            <div class="rule-card r3">
+                <div class="rule-num">Rule 3</div>
+                <p>After each drop, move the funnel to be directly over where the marble landed, then aim for the target from there.</p>
+                <div class="rule-result">Result: Spread increases without bound. The process drifts further from the target with every adjustment.</div>
+            </div>
+            <div class="rule-card r4">
+                <div class="rule-num">Rule 4</div>
+                <p>After each drop, move the funnel to exactly where the marble landed. Each outcome sets the new starting point.</p>
+                <div class="rule-result">Result: Explosive divergence. The process drifts to infinity. Each adjustment compounds the previous error.</div>
+            </div>
+        </div>
+    </div>
+
+    <p>Rules 2, 3, and 4 are all forms of tampering. Each produces a worse outcome than Rule 1, which is simply to leave the system alone. The experiment makes the mathematical fact visceral: <strong>acting on common cause variation always increases spread.</strong></p>
+
+    <p>Rules 3 and 4 have direct organisational equivalents. Rule 3 is a manager who &ldquo;corrects&rdquo; each outcome by adjusting the process to the last result &mdash; chasing noise. Rule 4 is an organisation that uses the last outcome as the new target &mdash; copying the last period&rsquo;s performance as the new standard. Both produce progressive deterioration.</p>
+
+    <hr>
+
+    <h2 id="section-warfarin">Joiner&rsquo;s worked example &mdash; warfarin and INR</h2>
+
+    <p>Brian Joiner, in <em>Fourth Generation Management</em> (Chapter 8: &ldquo;The Price of Ignorance,&rdquo; page 128), uses anticoagulation management as his worked example of tampering. The choice is precise: it is a clinical setting where the consequences of both tampering <em>and</em> under-responding are potentially fatal, which makes the stakes visible in a way that abstract examples cannot.</p>
+
+    <p>Warfarin is an anticoagulant with a narrow therapeutic range. For most indications, the target International Normalised Ratio (INR) is 2.0 to 3.0. Below 2.0, the patient is under-anticoagulated &mdash; at increased risk of clot. Above 3.0 (and especially above 4.0), the patient is over-anticoagulated &mdash; at increased risk of bleeding. Achieving the right INR for each patient requires regular monitoring and periodic dose adjustment.</p>
+
+    <p>The clinical challenge is distinguishing when an INR reading requires a dose adjustment from when it is simply common cause variation around the patient&rsquo;s natural therapeutic level.</p>
+
+    <div style="margin:28px 0;">
+        <svg viewBox="0 0 720 340" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif" style="border-radius:10px;overflow:hidden;">
+
+            <!-- Background zones -->
+            <!-- Special cause upper highway (above 3.0) -->
+            <rect x="0" y="0" width="720" height="68" fill="#fee2e2"/>
+            <!-- Common cause highway (2.0 to 3.0) -->
+            <rect x="0" y="68" width="720" height="136" fill="#f0fdf4"/>
+            <!-- Special cause lower highway (below 2.0) -->
+            <rect x="0" y="204" width="720" height="136" fill="#fee2e2"/>
+
+            <!-- Zone labels on left -->
+            <!-- Special cause upper label -->
+            <rect x="0" y="0" width="148" height="68" fill="#fca5a5" opacity="0.5"/>
+            <text x="74" y="28" text-anchor="middle" fill="#7f1d1d" font-weight="700" font-size="11">SPECIAL CAUSE</text>
+            <text x="74" y="44" text-anchor="middle" fill="#7f1d1d" font-weight="700" font-size="11">HIGHWAY</text>
+            <text x="74" y="59" text-anchor="middle" fill="#991b1b" font-size="10">&#9650; Above UCL</text>
+
+            <!-- Common cause label -->
+            <rect x="0" y="68" width="148" height="136" fill="#86efac" opacity="0.4"/>
+            <text x="74" y="120" text-anchor="middle" fill="#14532d" font-weight="900" font-size="13">COMMON CAUSE</text>
+            <text x="74" y="138" text-anchor="middle" fill="#14532d" font-weight="900" font-size="13">HIGHWAY</text>
+            <text x="74" y="156" text-anchor="middle" fill="#166534" font-size="10">Normal variation</text>
+            <text x="74" y="170" text-anchor="middle" fill="#166534" font-size="10">Leave alone</text>
+            <text x="74" y="184" text-anchor="middle" fill="#166534" font-size="10">(Rule 1)</text>
+
+            <!-- Special cause lower label -->
+            <rect x="0" y="204" width="148" height="136" fill="#fca5a5" opacity="0.5"/>
+            <text x="74" y="250" text-anchor="middle" fill="#7f1d1d" font-weight="700" font-size="11">SPECIAL CAUSE</text>
+            <text x="74" y="266" text-anchor="middle" fill="#7f1d1d" font-weight="700" font-size="11">HIGHWAY</text>
+            <text x="74" y="282" text-anchor="middle" fill="#991b1b" font-size="10">&#9660; Below LCL</text>
+
+            <!-- Y axis labels (INR values) -->
+            <text x="155" y="12" fill="#64748b" font-size="11" text-anchor="middle">4.0</text>
+            <text x="155" y="46" fill="#64748b" font-size="11" text-anchor="middle">3.5</text>
+            <text x="155" y="72" fill="#991b1b" font-size="11" font-weight="700" text-anchor="middle">3.0 UCL</text>
+            <text x="155" y="110" fill="#64748b" font-size="11" text-anchor="middle">2.7</text>
+            <text x="155" y="140" fill="#166534" font-size="11" font-weight="700" text-anchor="middle">2.5 mean</text>
+            <text x="155" y="170" fill="#64748b" font-size="11" text-anchor="middle">2.3</text>
+            <text x="155" y="208" fill="#991b1b" font-size="11" font-weight="700" text-anchor="middle">2.0 LCL</text>
+            <text x="155" y="248" fill="#64748b" font-size="11" text-anchor="middle">1.5</text>
+
+            <!-- UCL and LCL lines -->
+            <line x1="165" y1="68" x2="720" y2="68" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,3"/>
+            <line x1="165" y1="204" x2="720" y2="204" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,3"/>
+            <!-- Mean line -->
+            <line x1="165" y1="136" x2="720" y2="136" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+            <!-- X axis positions: weeks 1-14 at x = 180,230,280,330,380,430,480,530,580,620,650,675,695,710 -->
+            <!-- INR readings: common cause variation staying within highway
+                 Wk1:2.5(136) Wk2:2.6(123) Wk3:2.4(149) Wk4:2.7(110) Wk5:2.5(136) Wk6:2.3(163)
+                 Wk7:2.6(123) Wk8:2.5(136) Wk9:2.4(149) Wk10:2.6(123) Wk11:2.5(136)
+                 Then Wk12:2.9(89 - Rule2 warning) Wk13:2.8(102) Wk14:3.4(29 - Rule1 breach) -->
+
+            <!-- Line connecting points -->
+            <polyline points="180,136 230,123 280,149 330,110 380,136 430,163 480,123 530,136 580,149 620,123"
+                      fill="none" stroke="#0056b3" stroke-width="2"/>
+            <!-- Warning zone line -->
+            <polyline points="620,123 660,89 695,102"
+                      fill="none" stroke="#f97316" stroke-width="2" stroke-dasharray="5,3"/>
+            <!-- Breach line -->
+            <polyline points="695,102 715,29"
+                      fill="none" stroke="#ef4444" stroke-width="2.5"/>
+
+            <!-- Common cause points (blue) -->
+            <circle cx="180" cy="136" r="6" fill="#0056b3" stroke="white" stroke-width="1.5"/>
+            <circle cx="230" cy="123" r="6" fill="#0056b3" stroke="white" stroke-width="1.5"/>
+            <circle cx="280" cy="149" r="6" fill="#0056b3" stroke="white" stroke-width="1.5"/>
+            <circle cx="330" cy="110" r="6" fill="#0056b3" stroke="white" stroke-width="1.5"/>
+            <circle cx="380" cy="136" r="6" fill="#0056b3" stroke="white" stroke-width="1.5"/>
+            <circle cx="430" cy="163" r="6" fill="#0056b3" stroke="white" stroke-width="1.5"/>
+            <circle cx="480" cy="123" r="6" fill="#0056b3" stroke="white" stroke-width="1.5"/>
+            <circle cx="530" cy="136" r="6" fill="#0056b3" stroke="white" stroke-width="1.5"/>
+            <circle cx="580" cy="149" r="6" fill="#0056b3" stroke="white" stroke-width="1.5"/>
+            <circle cx="620" cy="123" r="6" fill="#0056b3" stroke="white" stroke-width="1.5"/>
+
+            <!-- Rule 2 warning points (orange) -->
+            <circle cx="660" cy="89" r="7" fill="#f97316" stroke="white" stroke-width="2"/>
+            <circle cx="695" cy="102" r="7" fill="#f97316" stroke="white" stroke-width="2"/>
+
+            <!-- Rule 1 breach point (red, larger) -->
+            <circle cx="715" cy="29" r="9" fill="#ef4444" stroke="white" stroke-width="2.5"/>
+            <text x="715" y="22" text-anchor="middle" fill="#991b1b" font-size="10" font-weight="700">!</text>
+
+            <!-- Annotations -->
+            <!-- Common cause annotation -->
+            <rect x="240" y="220" width="170" height="38" rx="4" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="325" y="235" text-anchor="middle" fill="#14532d" font-size="10" font-weight="700">Common cause highway</text>
+            <text x="325" y="250" text-anchor="middle" fill="#14532d" font-size="10">Normal variation &mdash; do not adjust</text>
+            <line x1="325" y1="220" x2="380" y2="163" stroke="#16a34a" stroke-width="1" stroke-dasharray="3,2"/>
+
+            <!-- Rule 2 annotation -->
+            <rect x="590" y="50" width="110" height="32" rx="4" fill="white" stroke="#f97316" stroke-width="1.5"/>
+            <text x="645" y="63" text-anchor="middle" fill="#c2410c" font-size="10" font-weight="700">Rule 2 signal</text>
+            <text x="645" y="76" text-anchor="middle" fill="#c2410c" font-size="10">Investigate</text>
+            <line x1="645" y1="82" x2="660" y2="89" stroke="#f97316" stroke-width="1" stroke-dasharray="3,2"/>
+
+            <!-- Rule 1 annotation -->
+            <rect x="580" y="8" width="100" height="20" rx="4" fill="#ef4444"/>
+            <text x="630" y="21" text-anchor="middle" fill="white" font-size="10" font-weight="700">Rule 1 &mdash; Act now</text>
+
+            <!-- X axis label -->
+            <text x="440" y="330" text-anchor="middle" fill="#64748b" font-size="11">&#8592; weeks &#8594;</text>
+
+            <!-- Joiner attribution -->
+            <text x="720" y="330" text-anchor="end" fill="#94a3b8" font-size="9" font-style="italic">After Joiner, Fourth Generation Management, Ch.8</text>
+        </svg>
+        <p style="font-family:system-ui,sans-serif;font-size:0.85em;color:var(--muted);font-style:italic;margin-top:8px;text-align:center;">Joiner&rsquo;s Common Cause Highway and Special Cause Highway &mdash; INR time series. Blue points: common cause variation within the highway, do not adjust. Orange points: Rule 2 signal, investigate. Red point: Rule 1 breach, act. Source: Joiner, <em>Fourth Generation Management</em>, Chapter 8, p.128.</p>
+    </div>
+
+    <p>The natural INR variation for a patient on a stable warfarin dose will fluctuate around their individual therapeutic level. Diet, illness, other medications, and activity all produce day-to-day variation. Most of this variation is common cause &mdash; it is the expected noise of the system. A reading of 2.3 one week and 2.7 the next does not indicate that the dose needs changing. It indicates the system is working normally.</p>
+
+    <div class="callout red">
+        <strong>What tampering looks like in anticoagulation management</strong>
+        <p>A patient on warfarin has a stable INR around 2.5 &mdash; well within the 2.0&ndash;3.0 range. One week the reading is 2.8. The clinician, seeing it has risen, reduces the dose slightly. The next reading is 2.1. The clinician, seeing it has fallen, increases the dose. The next reading is 2.9. The clinician reduces the dose again. Each adjustment is a rational response to the last reading. Each adjustment is tampering &mdash; acting on common cause variation. The actual effect is to introduce dose variation on top of the natural INR variation, increasing the amplitude of fluctuation. Over time, the INR becomes less stable, not more &mdash; and the risk of both clotting and bleeding events increases.</p>
+        <p>Joiner&rsquo;s point in Chapter 8 is precise: the patient would have better outcomes if the dose had never been changed. The variation was common cause. The correct response was Rule 1: leave the process alone.</p>
+    </div>
+
+    <p>The special cause equivalent is different and important. If a patient&rsquo;s INR suddenly rises to 4.5 after years of stability at 2.5, that is a special cause signal. Something specific has changed &mdash; a new medication interaction, a change in diet, a minor illness. This warrants investigation and a specific response. The distinction between the two cases is not intuitive from looking at a single reading. It requires a statistical framework for distinguishing common cause from special cause variation &mdash; which is precisely what <a href="three-charts-three-stories.html">Bootstrap CUSUM</a> and the <a href="three-charts-three-stories.html">X-mR control chart</a> provide.</p>
+
+    <div class="callout teal">
+        <strong>What Bootstrap CUSUM shows about the warfarin residual population</strong>
+        <p>At the population level, the <a href="anticoag-safety.html">anticoagulation safety article</a> on this site applies Bootstrap CUSUM to NHS adverse event data across the transition from warfarin to direct oral anticoagulants (DOACs). The analysis finds three structural change points: an initial rise in adverse events as DOACs arrived before renal contraindications were fully understood; a doubling of prescription volumes following NICE mandate; and a structural fall in DOAC adverse event rates following the EMA renal dosing label update. The warfarin residual population &mdash; those who remain on warfarin rather than switching to DOACs &mdash; is now a smaller, more carefully managed group. Bootstrap CUSUM on the residual warfarin adverse event rate shows the structural shift. What Joiner identified at the individual patient level &mdash; the cost of tampering with INR readings within the natural process limits &mdash; is now visible in aggregate as the difference between well-managed and poorly-managed anticoagulation systems.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-impatience">Impatience &mdash; the second form of tampering</h2>
+
+    <p>The funnel experiment addresses tampering in response to individual results. There is a second, equally destructive form: tampering in response to the lag between an intervention and its measurable effect. This is impatience &mdash; and it operates on a longer time scale than the funnel experiment, but with equally predictable consequences.</p>
+
+    <p>Every structural intervention takes time to produce a measurable result. The lag depends on the mechanism:</p>
+
+    <div style="overflow-x:auto; margin:24px 0;">
+        <table class="examples-table">
+            <thead>
+                <tr>
+                    <th>Intervention type</th>
+                    <th>Mechanism</th>
+                    <th>Expected lag to Bootstrap CUSUM change point</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Economic price signal</td>
+                    <td>Acts through market immediately; operators respond within months</td>
+                    <td><strong>1&ndash;2 years</strong> (carbon price floor: change point at 2013, policy from April 2013)</td>
+                </tr>
+                <tr>
+                    <td>Clinical protocol rollout</td>
+                    <td>Acts through training, compliance, and cohort turnover</td>
+                    <td><strong>3&ndash;5 years</strong> (time for intervention to reach sufficient scale and patient cohorts to turn over)</td>
+                </tr>
+                <tr>
+                    <td>Workforce development</td>
+                    <td>Acts through training pipeline; new staff enter practice years after training begins</td>
+                    <td><strong>7&ndash;10 years</strong> (a decision to expand Old Age Psychiatry training produces consultants 7&ndash;10 years later)</td>
+                </tr>
+                <tr>
+                    <td>Infrastructure investment</td>
+                    <td>Acts through capital build, commissioning, and capacity ramp-up</td>
+                    <td><strong>5&ndash;8 years</strong> (memory clinic capacity: planning, build, recruitment, operational ramp)</td>
+                </tr>
+                <tr>
+                    <td>Fleet / technology transition</td>
+                    <td>Acts through replacement cycle as old stock retires</td>
+                    <td><strong>10&ndash;15 years</strong> (EV transition: 35 million vehicles replacing at ~2.5 million per year)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>Impatience is applying the logic of tampering to this lag: seeing that the outcome measure has not yet moved, concluding the intervention has failed, and introducing a new intervention before the first one has had time to work. Each new intervention resets the lag clock. The system never receives the sustained, stable conditions it needs to produce a measurable result. Each iteration is recorded as a policy failure. The actual failure is the confusion between the expected lag and evidence of failure.</p>
+
+    <div class="dark-box">
+        <h3>&#9200; The tampering clock reset</h3>
+        <p class="quote">&ldquo;Constancy of purpose toward improvement of product and service.&rdquo; &mdash; Deming&rsquo;s First Point, <em>Out of the Crisis</em></p>
+        <p>Deming&rsquo;s First Point is constancy of purpose &mdash; not because steadiness is a virtue in itself, but because structural change requires time, and time requires sustained commitment. The political pressure to act &mdash; to be seen to be responding &mdash; produces the opposite of constancy. Each new government, each new leadership team, each new review cycle introduces a new intervention. Each introduction is a tampering event. The lag clock resets. Nothing is ever given long enough to work.</p>
+        <p><strong>The dementia diagnosis story is the clearest example.</strong> The PM&rsquo;s Challenge ran from 2012 to 2015. The diagnosis rate reached the 66.7% target in November 2015. When COVID collapsed the rate in 2021, the response was a series of short-term initiatives rather than addressing the structural constraint &mdash; memory clinic capacity &mdash; that determined whether the rate could be sustained. Five years later the rate is still below the target. Not because the interventions were wrong. Because each was applied and removed before the system had time to respond to the previous one. See <a href="dementia-diagnosis-rate.html" style="color:#93c5fd;">the dementia analysis</a> for the full Bootstrap CUSUM picture.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-political">The political cycle as a tampering machine</h2>
+
+    <p>The four-year electoral cycle produces tampering almost automatically. A structural intervention with a 7&ndash;10 year lag will show no measurable result within a parliamentary term. The government that made the decision will not receive the credit for the outcome. The next government inherits the system without the context. The intervention is cancelled, replaced, or redirected. The lag clock resets.</p>
+
+    <p>This is not a failure of individual politicians. It is a system design problem &mdash; exactly what <a href="deming-14-points.html">Deming</a> would predict. The incentive structure of the political system rewards visible short-term action over invisible long-term effectiveness. Layer 3 interventions (changing parameters, adjusting incentives) produce visible activity within weeks. Layer 1 system redesign produces measurable results in years. The political system reliably selects for tampering.</p>
+
+    <div class="callout orange">
+        <strong>The tampering signature in Bootstrap CUSUM</strong>
+        <p>When a system has been subjected to repeated tampering &mdash; successive interventions each applied before the previous one had time to work &mdash; Bootstrap CUSUM produces a characteristic flat line. Not because nothing changed. Because the changes cancelled each other out. The NHS A&amp;E data shows this precisely: 15 years, more than 20 policy interventions, and Bootstrap CUSUM at 99.7% confidence finds four structural stages of decline and not one upward change point. The interventions are not invisible in the data because they had no effect. They are invisible because each was reversed or superseded before a structural change could consolidate. See <a href="why-nothing-has-worked-nhs-ae-performance.html">the A&amp;E analysis</a>.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">How Bootstrap CUSUM prevents tampering</h2>
+
+    <p><a href="three-charts-three-stories.html">Bootstrap CUSUM</a> is the statistical tool that makes the tampering distinction objective. It answers precisely the question that tampering arises from: has the process structurally changed, or is this variation I am looking at simply common cause noise?</p>
+
+    <p>A Bootstrap CUSUM change point at 95% or 99.7% confidence is a statistically defensible signal that something genuinely changed &mdash; that a structural shift occurred, that the process mean permanently moved. The absence of a change point, in a series with adequate data, is equally informative: the process has not structurally changed, and any variation being observed is common cause noise. Responding to it is tampering.</p>
+
+    <div class="callout green">
+        <strong>Bootstrap CUSUM as the anti-tampering tool</strong>
+        <p>Pre-specifying a Bootstrap CUSUM change point as the test of whether an intervention worked removes the subjective element that enables tampering. If the change point does not appear within the expected lag window, the correct conclusion is not &ldquo;the intervention failed&rdquo; &mdash; it is &ldquo;the evidence is not yet sufficient to declare success or failure.&rdquo; That is a different conclusion, and it leads to a different action: maintain the intervention, monitor, and apply Bootstrap CUSUM again in the next period. Tampering would be: the outcome measure has not moved within two years, therefore the intervention failed, therefore we will replace it with a new one. Bootstrap CUSUM replaces that subjective judgement with a pre-committed statistical test. The data either crosses the threshold or it does not. If it does not, the intervention continues. The clock is not reset.</p>
+        <p>Used prospectively as the Study step of <a href="pdsa-cycle.html">PDSA</a>, Bootstrap CUSUM is the operational implementation of Deming&rsquo;s distinction between common cause and special cause variation &mdash; applied to the question of whether an improvement programme is working.</p>
+    </div>
+
+    <p>Applied to the warfarin INR case: an X-mR control chart on a patient&rsquo;s INR time series defines the natural process limits for that individual patient. Readings within those limits are common cause variation &mdash; Rule 1, leave alone. Readings outside those limits, or a Bootstrap CUSUM change point in the series, are special cause signals warranting investigation and a specific response. The statistical tool does the work that clinical judgement alone cannot reliably do: it distinguishes signal from noise.</p>
+
+    <hr>
+
+    <h2 id="section-examples">Tampering in practice &mdash; worked examples</h2>
+
+    <div style="overflow-x:auto; margin:24px 0;">
+        <table class="examples-table">
+            <thead>
+                <tr>
+                    <th>Setting</th>
+                    <th>The variation observed</th>
+                    <th>The tampering response</th>
+                    <th>What Bootstrap CUSUM shows</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Anticoagulation</strong> &mdash; warfarin INR</td>
+                    <td>INR reading of 2.8 when the patient&rsquo;s natural level is 2.5 &mdash; common cause fluctuation</td>
+                    <td>Dose reduced. Next reading 2.1. Dose increased. Oscillation introduced on top of natural variation.</td>
+                    <td>No change point in the INR series &mdash; common cause variation throughout. Dose changes added variation. <a href="anticoag-safety.html">Anticoag analysis.</a></td>
+                </tr>
+                <tr>
+                    <td><strong>A&amp;E performance</strong> &mdash; NHS</td>
+                    <td>Four-hour performance dips in December &mdash; seasonal, predictable, common cause</td>
+                    <td>New winter plan introduced. New targets set. New reporting requirements. Each intervention overlaps the last.</td>
+                    <td>One stage of structural decline across 15 years. No upward change point from any intervention. <a href="why-nothing-has-worked-nhs-ae-performance.html">A&amp;E analysis.</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Dementia diagnosis</strong> &mdash; EDDR</td>
+                    <td>Monthly EDDR fluctuates within natural process limits around 65&ndash;67%</td>
+                    <td>Monthly performance meetings, GP-level targets, incentive adjustments in response to individual months below the mean.</td>
+                    <td>One stage, mean 65.39%, N=9 annual observations. Common cause variation around a stable mean. <a href="dementia-diagnosis-rate.html">Dementia analysis.</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Sales performance</strong> &mdash; any organisation</td>
+                    <td>Monthly sales figure down 8% from last month &mdash; within historical variation</td>
+                    <td>Urgent review meeting. Sales team restructured. New commission structure introduced. Training programme mandated.</td>
+                    <td>If no Bootstrap CUSUM change point in the sales series, the 8% fall was common cause. All interventions are tampering and add cost without changing the trend.</td>
+                </tr>
+                <tr>
+                    <td><strong>Transport emissions</strong> &mdash; UK policy</td>
+                    <td>Year-on-year transport emissions fluctuate within &plusmn;5% depending on economic activity</td>
+                    <td>New fuel duty rates, new vehicle standards, new emission zones introduced in response to individual years of rising emissions.</td>
+                    <td>No structural change point at 95% confidence across 34 years. Policy interventions are acting on common cause variation within an unchanged system. <a href="the-grid-fixed-itself.html">Carbon analysis.</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+
+    <h2 id="section-weco">The Western Electric Rules &mdash; when it is right to act</h2>
+
+    <p>Knowing that tampering means acting on common cause variation is necessary but not sufficient. The practical question is: how do you know, in the moment, whether what you are looking at is common cause noise or a genuine signal? This is where the Western Electric Company Rules &mdash; WECO rules, also called control chart detection rules &mdash; provide the operational answer.</p>
+
+    <p>The WECO rules were developed by engineers at the Western Electric Company and published in the <em>Statistical Quality Control Handbook</em> (1956). They divide a control chart into three zones on each side of the mean, based on standard deviations, and define specific patterns that cross the threshold from common cause variation into statistically significant signals warranting investigation.</p>
+
+    <h3>The three zones</h3>
+
+    <div class="weco-zones">
+        <div class="weco-zone za-upper">
+            <div class="weco-label">Zone A<br>+3&sigma;</div>
+            <div class="weco-bar">Upper Control Limit &mdash; 3 standard deviations above the mean. Any single point here is a special cause signal.</div>
+        </div>
+        <div class="weco-zone zb-upper">
+            <div class="weco-label">Zone B<br>+2&sigma;</div>
+            <div class="weco-bar">2 standard deviations above the mean. Occasional points here are common cause. A pattern of points here is not.</div>
+        </div>
+        <div class="weco-zone zc-upper">
+            <div class="weco-label">Zone C<br>+1&sigma;</div>
+            <div class="weco-bar">1 standard deviation above the mean. Most points in a stable process will fall in Zone C or within it.</div>
+        </div>
+        <div class="weco-zone centre">
+            <div class="weco-label">Centre<br>Mean</div>
+            <div class="weco-bar">The process mean &mdash; the expected value for a stable, in-control process.</div>
+        </div>
+        <div class="weco-zone zc-lower">
+            <div class="weco-label">Zone C<br>&minus;1&sigma;</div>
+            <div class="weco-bar">1 standard deviation below the mean.</div>
+        </div>
+        <div class="weco-zone zb-lower">
+            <div class="weco-label">Zone B<br>&minus;2&sigma;</div>
+            <div class="weco-bar">2 standard deviations below the mean.</div>
+        </div>
+        <div class="weco-zone za-lower">
+            <div class="weco-label">Zone A<br>&minus;3&sigma;</div>
+            <div class="weco-bar">Lower Control Limit &mdash; 3 standard deviations below the mean. Any single point here is a special cause signal.</div>
+        </div>
+    </div>
+
+    <h3>The four core WECO rules</h3>
+
+    <p>Each rule defines a specific pattern that constitutes a statistically significant signal &mdash; a result that is unlikely to arise by chance in a stable process and therefore warrants investigation. Crucially, these rules define <em>precisely</em> when it is right to act. Acting outside these rules &mdash; responding to results that do not trigger any rule &mdash; is tampering.</p>
+
+    <div class="weco-rules">
+        <div class="weco-rule r1">
+            <div class="wr-label">&#9679; Rule 1 &mdash; Zone A</div>
+            <div class="wr-rule">1 out of 1 beyond &plusmn;3&sigma;</div>
+            <p>A single point outside the upper or lower control limit (beyond 3 standard deviations from the mean). The most obvious signal. Probability of occurring by chance in a stable process: approximately 1 in 370. Always warrants investigation.</p>
+        </div>
+        <div class="weco-rule r2">
+            <div class="wr-label">&#9679; Rule 2 &mdash; Zone B</div>
+            <div class="wr-rule">2 out of 3 consecutive beyond &plusmn;2&sigma;</div>
+            <p>Two of the last three consecutive points fall in Zone B or beyond (more than 2 standard deviations from the mean), on the same side. Probability approximately 1 in 89. The process is drifting. A shift may be occurring even though no single point has broken the control limit.</p>
+        </div>
+        <div class="weco-rule r3">
+            <div class="wr-label">&#9679; Rule 3 &mdash; Zone C</div>
+            <div class="wr-rule">4 out of 5 consecutive beyond &plusmn;1&sigma;</div>
+            <p>Four of the last five consecutive points fall beyond Zone C (more than 1 standard deviation from the mean), on the same side. Probability approximately 1 in 32. A subtle but consistent shift &mdash; the process is running off-centre even though individual points look unremarkable.</p>
+        </div>
+        <div class="weco-rule r4">
+            <div class="wr-label">&#9679; Rule 4 &mdash; Run rule</div>
+            <div class="wr-rule">8 consecutive points on one side of the mean</div>
+            <p>Eight or more consecutive points all above or all below the centre line (the mean), without necessarily reaching Zone B or A. Probability approximately 1 in 256. The process has shifted to a new mean even though the individual points appear within limits. This is the rule most likely to detect a genuine step-change.</p>
+        </div>
+    </div>
+
+    <div class="callout blue">
+        <strong>The WECO rules applied to warfarin INR</strong>
+        <p>A patient&rsquo;s INR series has a stable mean of 2.5 with a standard deviation of 0.2. The control limits are therefore approximately 1.9 (lower, &minus;3&sigma;) and 3.1 (upper, +3&sigma;). Zone B limits are 2.1 and 2.9. Zone C limits are 2.3 and 2.7.</p>
+        <p><strong>Common cause &mdash; do not adjust:</strong> A reading of 2.8 (Zone C upper) after several readings around 2.5. One point in Zone C on one side is entirely expected. Adjusting the dose in response is tampering.</p>
+        <p><strong>Rule 2 signal &mdash; investigate:</strong> Readings of 2.8, 2.5, 2.9 on consecutive weeks. Two of the last three are in Zone B or beyond. Something may be changing &mdash; a new food interaction, a missed dose, a minor illness. Investigate before adjusting.</p>
+        <p><strong>Rule 1 signal &mdash; act:</strong> A reading of 3.4 (above the upper control limit). This is a Zone A signal. A specific cause is likely. Investigate immediately &mdash; this is the appropriate response to special cause variation, not tampering.</p>
+        <p>The rules make the boundary between tampering and appropriate action precise rather than judgement-dependent. A clinician who adjusts warfarin only when a WECO rule fires is acting on evidence. A clinician who adjusts in response to any reading above 2.7 is tampering &mdash; even if the intent is correct.</p>
+    </div>
+
+    <div class="callout teal">
+        <strong>WECO rules and Bootstrap CUSUM &mdash; complementary tools</strong>
+        <p>The WECO rules and Bootstrap CUSUM answer related but different questions. The WECO rules ask: <em>does any individual reading or short pattern constitute a signal right now?</em> Bootstrap CUSUM asks: <em>has the underlying process mean permanently shifted?</em> For a patient&rsquo;s INR series, the WECO rules detect acute events (a new drug interaction, a missed dose) that may require an immediate response. Bootstrap CUSUM detects whether the patient&rsquo;s long-run therapeutic level has genuinely moved to a new mean &mdash; which would warrant a permanent dose recalibration rather than a temporary adjustment.</p>
+        <p>Neither tool alone is sufficient. WECO rules without Bootstrap CUSUM will miss a gradual drift that never produces a dramatic single reading. Bootstrap CUSUM without WECO rules will miss an acute event that resolves before it produces a change point. Together they cover both the short-run signal detection and the long-run structural change question.</p>
+    </div>
+
+    <div class="callout orange">
+        <strong>&#9888;&#65039; The software flags &mdash; the clinician decides</strong>
+        <p>Well-designed anticoagulation management software applies the WECO rules automatically, flagging signals when Rules 1, 2, or 3 fire. When a signal fires, the software highlights it and raises the question &mdash; it does not prescribe the action. This is the correct design. The decision to adjust a warfarin dose belongs to the clinician who knows the full context: what else changed recently, whether the patient has a new prescription, whether a procedure was performed, whether the reading is consistent with a reported dietary change. The software removes the statistical ambiguity &mdash; it tells the clinician whether the variation crosses a threshold that is unlikely to be common cause noise. It does not replace the clinical judgement about what to do next.</p>
+        <p>This distinction matters precisely because of tampering. Software that <em>recommends</em> a dose adjustment on every WECO signal would itself be a tampering machine &mdash; it would prompt adjustments on patterns that are statistically unusual but clinically explicable. Software that presents the signal and waits for the clinician to evaluate it preserves the judgement layer that Deming argued was essential. The Western Electric Rules define the threshold for raising the question. They do not define the answer. The clinician who adjusts a dose without a WECO signal firing is tampering. The clinician who adjusts without investigating the cause of a genuine signal is reacting without understanding. Both are management failures. The rules delineate the space between them.</p>
+        <p>The clinical safety of this design principle has been validated. Multi-centred randomised controlled trials, developed with expert physicians, have demonstrated that WECO-rule-based anticoagulation management software &mdash; where the software flags and the clinician decides &mdash; is both safe and clinically effective. The RCT evidence is the answer to the question that Deming&rsquo;s framework raises but cannot answer on its own: not just whether the design principle is theoretically correct, but whether it produces better patient outcomes in practice. It does.</p>
+    </div>
+
+    <p class="note">&#128218; <strong>Source:</strong> Western Electric Company. <em>Statistical Quality Control Handbook.</em> 1956. The four rules described above are the core detection tests. Additional rules exist (such as 15 consecutive points in Zone C, or 8 points with none in Zone C) but the four described are the most widely used and most relevant to the tampering concept. See also: Montgomery, D.C. <em>Introduction to Statistical Quality Control.</em> Wiley, 2009.</p>
+
+    <h2 id="section-test">The tampering test &mdash; four questions</h2>
+
+    <p>Before acting on any result that looks bad, four questions distinguish appropriate action from tampering:</p>
+
+    <div class="dark-box">
+        <h3>&#128221; The four questions</h3>
+        <p><strong>1. Is this result outside the natural process limits?</strong> Apply an X-mR control chart or Bootstrap CUSUM to the historical series. Does this result fall outside the upper or lower natural process limit? If no: it is common cause variation. Rule 1. Leave it alone.</p>
+        <p style="margin-top:10px;"><strong>2. Has the process structurally changed?</strong> Has Bootstrap CUSUM detected a new stage &mdash; a permanent shift in the process mean &mdash; coinciding with or immediately before this result? If no: the process is behaving normally. Any result within the natural limits is expected.</p>
+        <p style="margin-top:10px;"><strong>3. If I am about to act &mdash; can I identify the specific cause?</strong> Special cause variation has a specific, assignable cause. If you cannot name the specific thing that changed to produce this result, there is no specific cause to act on. Acting without a specific identified cause is tampering by definition.</p>
+        <p style="margin-top:10px;"><strong>4. Is the intervention being considered within the expected lag window?</strong> If a structural intervention was implemented less than [expected lag] periods ago, the absence of a Bootstrap CUSUM change point is not evidence of failure. It is the expected state. The correct action is to continue the intervention and monitor &mdash; not to replace it.</p>
+        <p style="margin-top:14px;" class="quote">&ldquo;If you can&rsquo;t describe what you are doing as a process, you don&rsquo;t know what you&rsquo;re doing.&rdquo; &mdash; W. Edwards Deming</p>
+    </div>
+
+    <hr>
+
+    <h2>Related concepts and articles</h2>
+    <div class="nav-grid">
+        <a href="model-for-improvement.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Model for Improvement</h3>
+            <p>The Study phase of PDSA is where tampering is prevented — by pre-specifying the Bootstrap CUSUM test before the data is collected.</p>
+        </a>
+        <a href="pdsa-cycle.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>PDSA Cycle</h3>
+            <p>The Act phase must be informed by the Study phase. Acting before Study is complete is tampering at the improvement cycle level.</p>
+        </a>
+        <a href="deming-14-points.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Deming&rsquo;s 14 Points</h3>
+            <p>Point 1 (constancy of purpose) is the organisational antidote to impatience tampering. Point 11 (eliminate numerical quotas) removes the trigger for operational tampering.</p>
+        </a>
+        <a href="types-of-measures.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Types of Measures</h3>
+            <p>Using the wrong type of measure — process measures instead of outcome measures — is one of the structural causes of impatience tampering.</p>
+        </a>
+        <a href="anticoag-safety.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; Patient Safety</div>
+            <h3>Anticoagulation Safety</h3>
+            <p>Joiner&rsquo;s worked example in context — Bootstrap CUSUM on NHS anticoagulation adverse event data across the warfarin-to-DOAC transition.</p>
+        </a>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; NHS Policy</div>
+            <h3>NHS A&amp;E &mdash; Why Nothing Has Worked</h3>
+            <p>The signature of repeated tampering in Bootstrap CUSUM data — 15 years of policy interventions, no upward change point at 99.7% confidence.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Primary sources:</strong> Deming, W.E. <em>Out of the Crisis.</em> MIT Press, 1982. Chapter 11 &mdash; the funnel experiment and tampering. &nbsp;&middot;&nbsp; Deming, W.E. <em>The New Economics.</em> MIT Press, 1994. Chapter 7.</p>
+        <p style="margin-top:8px;"><strong>Joiner warfarin example:</strong> Joiner, B.L. <em>Fourth Generation Management.</em> McGraw-Hill, 1994. Chapter 8: &ldquo;The Price of Ignorance,&rdquo; page 128. The anticoagulation management scenario as a worked example of tampering.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+</body>
+</html>
