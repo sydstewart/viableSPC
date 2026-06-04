@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright Spots and Positive Deviance — StepChangeAnalysis.com</title>
+    <meta name="description" content="Bright Spots explained — positive deviance as special cause variation. How Bootstrap CUSUM identifies genuine outliers worth replicating, not just units at the high end of common cause noise. Practical framework for improvement.">
+    <meta name="keywords" content="bright spots improvement, positive deviance healthcare, bright spots Chip Heath, finding what works, positive outliers improvement, Bootstrap CUSUM bright spots, special cause positive variation">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:   #002d5b;
+            --brand-mid:    #0056b3;
+            --brand-light:  #e9f2ff;
+            --text:         #1e293b;
+            --muted:        #64748b;
+            --border:       #e2e8f0;
+            --bg:           #f8f9fa;
+            --green:        #198754;
+            --orange:       #e67e22;
+            --red:          #c0392b;
+            --teal:         #0e7490;
+            --purple:       #7c3aed;
+            --gold:         #d97706;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-nav { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; padding: 6px 10px; border-radius: 4px; }
+        .header-nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+        .header-nav a.active { color: white; font-weight: 700; background: rgba(255,255,255,0.15); }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-btn { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; background: none; border: none; cursor: pointer; padding: 6px 10px; border-radius: 4px; display: flex; align-items: center; gap: 4px; }
+        .nav-dropdown-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+        .nav-dropdown-btn .arrow { font-size: 0.7em; transition: transform 0.2s; }
+        .nav-dropdown:hover .arrow { transform: rotate(180deg); }
+        .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); min-width: 220px; z-index: 200; padding: 12px 0 6px; margin-top: 0; }
+        .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+        .nav-dropdown-menu::before { content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
+        .nav-dropdown-menu a { display: block; color: #1e293b; font-family: system-ui, sans-serif; font-size: 0.85em; padding: 8px 16px; text-decoration: none; white-space: nowrap; border-radius: 0; background: none; }
+        .nav-dropdown-menu a:hover { background: #e9f2ff; color: #002d5b; }
+        .nav-dropdown-menu .menu-section { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; padding: 8px 16px 4px; }
+        .nav-dropdown-menu .menu-divider { border: none; border-top: 1px solid #e2e8f0; margin: 4px 0; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        @media (max-width: 600px) { .header-nav { display: none; } }
+
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .page-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+        h1 { font-size: clamp(1.8em, 4vw, 2.6em); line-height: 1.2; color: var(--brand-blue); margin-bottom: 16px; font-weight: bold; }
+        .page-intro { font-size: 1.05em; color: var(--muted); font-style: italic; margin-bottom: 12px; border-left: 4px solid var(--gold); padding-left: 16px; line-height: 1.7; }
+        .page-meta { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
+        h2 { font-size: 1.3em; color: var(--brand-blue); margin: 40px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.05em; color: var(--brand-blue); margin: 24px 0 10px; font-style: italic; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        strong { color: var(--brand-blue); }
+        hr { border: none; border-top: 3px solid var(--brand-light); margin: 48px 0; }
+
+        /* Definition box */
+        .definition-box { background: #fffbeb; border: 3px solid var(--gold); border-radius: 10px; padding: 24px 28px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .definition-box .def-label { font-size: 0.72em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+        .definition-box .def-term { font-size: 1.5em; font-weight: 900; color: var(--brand-blue); margin-bottom: 12px; line-height: 1.2; }
+        .definition-box .def-text { font-size: 1.0em; color: var(--text); line-height: 1.7; margin-bottom: 10px; }
+        .definition-box .def-source { font-size: 0.85em; color: var(--muted); font-style: italic; }
+
+        /* The lucky vs structural comparison */
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
+        @media (max-width: 640px) { .comparison-grid { grid-template-columns: 1fr; } }
+        .cg-card { border-radius: 10px; padding: 20px 22px; font-family: system-ui, sans-serif; }
+        .cg-card.lucky { background: #fff8f0; border: 2px solid var(--orange); }
+        .cg-card.structural { background: #f0fdf4; border: 2px solid var(--green); }
+        .cg-card .cg-label { font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+        .cg-card.lucky .cg-label { color: var(--orange); }
+        .cg-card.structural .cg-label { color: var(--green); }
+        .cg-card h3 { font-style: normal; margin: 0 0 10px; font-size: 1.05em; }
+        .cg-card.lucky h3 { color: #4a3000; }
+        .cg-card.structural h3 { color: #14532d; }
+        .cg-card ul { font-size: 0.9em; padding-left: 16px; line-height: 1.8; }
+        .cg-card.lucky ul { color: #4a3000; }
+        .cg-card.structural ul { color: #166534; }
+        .cg-card .cg-verdict { font-size: 0.88em; font-weight: 700; padding: 8px 12px; border-radius: 6px; margin-top: 12px; display: block; }
+        .cg-card.lucky .cg-verdict { background: #ffedd5; color: #7c2d12; }
+        .cg-card.structural .cg-verdict { background: #dcfce7; color: #14532d; }
+
+        /* Investigation framework */
+        .investigation-steps { display: flex; flex-direction: column; gap: 0; margin: 28px 0; }
+        .inv-step { display: flex; gap: 0; align-items: stretch; }
+        .inv-num { background: var(--brand-blue); color: white; font-family: system-ui, sans-serif; font-size: 1.3em; font-weight: 900; width: 52px; min-width: 52px; display: flex; align-items: center; justify-content: center; }
+        .inv-body { flex: 1; padding: 16px 20px; border: 1px solid var(--border); border-left: none; background: white; }
+        .inv-step:not(:last-child) .inv-body { border-bottom: none; }
+        .inv-step:first-child .inv-num { border-radius: 8px 0 0 0; }
+        .inv-step:last-child .inv-num { border-radius: 0 0 0 8px; }
+        .inv-step:first-child .inv-body { border-radius: 0 8px 0 0; }
+        .inv-step:last-child .inv-body { border-radius: 0 0 8px 0; }
+        .inv-body .step-title { font-family: system-ui, sans-serif; font-weight: 700; color: var(--brand-blue); font-size: 0.95em; margin-bottom: 6px; }
+        .inv-body p { font-size: 0.92em; line-height: 1.6; margin: 0; color: var(--text); }
+
+        /* Callouts */
+        .callout { border-radius: 8px; padding: 18px 22px; margin: 24px 0; font-family: system-ui, sans-serif; }
+        .callout.blue { background: var(--brand-light); border-left: 5px solid var(--brand-mid); }
+        .callout.green { background: #f0fdf4; border-left: 5px solid var(--green); }
+        .callout.orange { background: #fff8f0; border-left: 5px solid var(--orange); }
+        .callout.gold { background: #fffbeb; border-left: 5px solid var(--gold); }
+        .callout.teal { background: #f0fdfa; border-left: 5px solid var(--teal); }
+        .callout strong { display: block; margin-bottom: 6px; font-size: 1em; }
+        .callout.blue strong { color: var(--brand-blue); }
+        .callout.green strong { color: var(--green); }
+        .callout.orange strong { color: var(--orange); }
+        .callout.gold strong { color: var(--gold); }
+        .callout.teal strong { color: var(--teal); }
+        .callout p { font-size: 0.95em; line-height: 1.65; margin: 0 0 8px; }
+        .callout p:last-child { margin: 0; }
+
+        .dark-box { background: #f0f4f8; border: 3px solid #002d5b; border-radius: 8px; padding: 24px 28px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .dark-box h3 { color: #002d5b; margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; border-bottom: 2px solid #002d5b; padding-bottom: 8px; }
+        .dark-box p { font-size: 0.97em; color: #1e293b; margin-bottom: 10px; line-height: 1.7; }
+        .dark-box p:last-child { margin-bottom: 0; }
+        .dark-box strong { color: #002d5b; }
+        .dark-box a { color: #0056b3; text-decoration: underline; }
+        .dark-box a:hover { color: #002d5b; }
+        .dark-box .quote { font-size: 1.05em; font-style: italic; color: #0056b3; border-left: 4px solid #002d5b; padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 14px 0; background: white; }
+
+        /* Origin timeline */
+        .origin-timeline { margin: 24px 0; }
+        .ot-item { display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-start; font-family: system-ui, sans-serif; }
+        .ot-year { background: var(--brand-blue); color: white; font-weight: 700; font-size: 0.85em; padding: 4px 10px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+        .ot-content { font-size: 0.92em; line-height: 1.6; color: var(--text); }
+        .ot-content strong { color: var(--brand-blue); }
+
+        /* Nav grid */
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 32px 0; }
+        .nav-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; text-decoration: none; display: block; transition: box-shadow 0.15s; font-family: system-ui, sans-serif; }
+        .nav-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+        .nav-card .nav-tag { font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 6px; }
+        .nav-card h3 { color: var(--brand-blue); font-size: 0.95em; margin: 0 0 4px; line-height: 1.3; font-style: normal; }
+        .nav-card p { color: var(--muted); font-size: 0.85em; margin: 0; line-height: 1.4; }
+
+        .toc-details { margin: 0 0 28px 0; border: 1px solid var(--border); border-radius: 8px; font-family: system-ui, sans-serif; background: white; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: bold; color: var(--brand-blue); font-size: 0.95em; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+        .toc-details summary::-webkit-details-marker { display: none; }
+        .toc-details summary:hover { background: var(--brand-light); border-radius: 8px; }
+        .toc-details[open] summary { border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; }
+        .toc-inner { padding: 6px 18px 16px; }
+        .toc-inner ol { margin: 10px 0 0 1.2em; line-height: 2.1; }
+        .toc-inner ol li { font-size: 0.92em; }
+        .toc-inner ol li a { color: var(--brand-mid); text-decoration: none; }
+        .toc-inner ol li a:hover { text-decoration: underline; }
+
+        .page-footer { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            body { font-size: 16px; }
+            .page-wrap { padding: 28px 20px 60px; }
+            .comparison-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            body { font-size: 16px; line-height: 1.7; }
+            .site-header { padding: 10px 16px; }
+            .header-nav { display: none; }
+            .page-wrap { padding: 20px 16px 48px; }
+            h1 { font-size: clamp(1.4em, 6vw, 2em); }
+            h2 { font-size: 1.15em; }
+            p { font-size: 1em; }
+            .comparison-grid, .nav-grid { grid-template-columns: 1fr; }
+            .inv-num { width: 40px; min-width: 40px; font-size: 1.1em; }
+            .dark-box, .callout { padding: 14px 16px; }
+        }
+        @media print {
+            .site-header, .header-nav, .header-tool-btn, .nav-grid, .toc-details { display: none !important; }
+            body { font-size: 12pt; color: black; background: white; }
+            .page-wrap { max-width: 100%; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Concepts <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <a href="why-nothing-changes.html">Why nothing changes</a>
+                <a href="joiner-levels-of-fix.html">Joiner levels of fix</a>
+                <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>
+                <a href="pdsa-cycle.html">PDSA cycle</a>
+                <a href="types-of-measures.html">Types of measures</a>
+                <a href="model-for-improvement.html">Model for Improvement</a>
+                <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>
+                <a href="variation-and-spc.html">Variation &amp; SPC</a>
+                <a href="bright-spots.html" style="font-weight:600;color:#002d5b;">Bright Spots</a>
+            </div>
+        </div>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Articles <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <div class="menu-section">NHS Healthcare</div>
+                <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; Why nothing has worked</a>
+                <a href="dementia-diagnosis-rate.html">Dementia &mdash; The 66% target</a>
+                <a href="gp-appointments-analysis.html">GP appointments</a>
+                <a href="never-events-wrong-route.html">Never events &mdash; Wrong route</a>
+                <a href="anticoag-safety.html">Anticoagulation safety</a>
+                <a href="sepsis-six-does-public-data-show-whether-it-worked.html">Sepsis Six</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Environment &amp; Policy</div>
+                <a href="ulez-london-air-quality.html">ULEZ &mdash; Air quality</a>
+                <a href="the-grid-fixed-itself.html">The Grid fixed itself</a>
+                <a href="uk-gdp-analysis.html">UK GDP analysis</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Industrial</div>
+                <a href="hydrogen-plant-cusum.html">Hydrogen plant CUSUM</a>
+            </div>
+        </div>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Concepts</a> &rsaquo; Bright Spots</div>
+    <div class="page-flag">&#127775; Improvement Concepts</div>
+    <h1>Bright Spots and Positive Deviance</h1>
+    <p class="page-intro">In any failing system, some units are succeeding. Not by chance &mdash; by doing something structurally different. A Bright Spot is not a unit at the high end of normal variation. It is a genuine statistical outlier: special cause variation on the positive side, produced by a different process or a different structure that is operating within the same nominal environment. Finding it, understanding it, and replicating it is one of the highest-leverage actions available in any improvement programme.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-definition">What a Bright Spot is</a></li>
+                <li><a href="#section-special-cause">Bright Spots as special cause variation</a></li>
+                <li><a href="#section-lucky-vs-structural">Lucky vs structural &mdash; the critical distinction</a></li>
+                <li><a href="#section-origin">Origin of the concept</a></li>
+                <li><a href="#section-cusum">How Bootstrap CUSUM identifies Bright Spots</a></li>
+                <li><a href="#section-investigation">The Bright Spots investigation framework</a></li>
+                <li><a href="#section-replication">From investigation to replication</a></li>
+                <li><a href="#section-examples">Bright Spots in the site articles</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-definition">What a Bright Spot is</h2>
+
+    <div class="definition-box">
+        <div class="def-label">&#127775; Definition</div>
+        <div class="def-term">Bright Spot</div>
+        <div class="def-text">A unit, team, site, pathway, or individual whose performance is statistically distinguishable from the rest of the system &mdash; not because of random good luck, but because something about how it is structured or how it operates is genuinely different. A Bright Spot is <strong>special cause variation on the positive side</strong>: a result that the system, operating normally, would not produce. It is worth investigating because the structural difference that produced it can potentially be identified, understood, and replicated.</div>
+        <div class="def-source">Concept originated with Zeitlin (1990). Operationalised by Sternin &amp; Sternin (1990s). Healthcare and organisational application: Pascale, Sternin &amp; Sternin, <em>The Power of Positive Deviance</em> (Harvard Business Press, 2010). Popularised as &ldquo;Bright Spots&rdquo;: Heath &amp; Heath, <em>Switch</em> (Random House, 2010).</div>
+    </div>
+
+    <p>The Bright Spots question is a deliberate inversion of the standard improvement question. Standard improvement analysis asks: <em>why is performance poor, and what interventions will raise it?</em> This leads to root cause analysis of failures, which is valuable but often produces system-level diagnoses without actionable local findings.</p>
+
+    <p>The Bright Spots question asks instead: <em>which units are already producing the outcome we want, what are they doing differently, and how do we replicate it?</em> This question is directly actionable. The answer is already in the system, working at scale, validated by real-world results. It does not need to be invented, piloted, or theorised. It needs to be found and replicated.</p>
+
+    <hr>
+
+    <h2 id="section-special-cause">Bright Spots as special cause variation</h2>
+
+    <p>The statistical foundation of the Bright Spots concept is precise. In the language of <a href="variation-and-spc.html">Statistical Process Control</a>, a Bright Spot is a unit whose performance represents <strong>positive special cause variation</strong> &mdash; a result that falls outside the upper natural process limits of the system, or that shows a Bootstrap CUSUM upward change point, indicating a permanent structural shift to a better level.</p>
+
+    <p>This framing matters because it distinguishes two things that look superficially similar but are fundamentally different:</p>
+
+    <div class="comparison-grid">
+        <div class="cg-card lucky">
+            <div class="cg-label">&#9888; High common cause performance</div>
+            <h3>The lucky unit</h3>
+            <ul>
+                <li>Performance is good this period</li>
+                <li>Result is within the natural process limits of the system</li>
+                <li>No Bootstrap CUSUM change point in its series</li>
+                <li>Will likely regress toward the system mean next period</li>
+                <li>Good fortune, not a different structure</li>
+            </ul>
+            <div class="cg-verdict">&#10060; Investigating and replicating this unit replicates luck. Not a Bright Spot.</div>
+        </div>
+        <div class="cg-card structural">
+            <div class="cg-label">&#9989; Positive special cause performance</div>
+            <h3>The genuine Bright Spot</h3>
+            <ul>
+                <li>Performance is consistently above the system upper control limit</li>
+                <li>Bootstrap CUSUM shows an upward change point at a specific date</li>
+                <li>The change persists across multiple periods</li>
+                <li>Something specific changed at a specific time</li>
+                <li>A different structure or process is operating</li>
+            </ul>
+            <div class="cg-verdict">&#9989; Investigating this unit finds a replicable structural difference. A genuine Bright Spot.</div>
+        </div>
+    </div>
+
+    <p>The distinction is not always obvious from a single period&rsquo;s data. A unit that appears to be performing exceptionally in one quarter may simply be at the top of common cause variation &mdash; it will return to average without any change in how it operates. A genuine Bright Spot maintains its exceptional performance over time because the structural difference that produces it is still in place.</p>
+
+    <hr>
+
+    <h2 id="section-lucky-vs-structural">Lucky vs structural &mdash; the critical distinction</h2>
+
+    <p><a href="deming-14-points.html">Deming</a>&rsquo;s 94% rule states that 94% of problems are caused by the system, not the people in it. The Bright Spots corollary is equally important: most of the variation in performance between units in the same system is also caused by the system &mdash; by differences in staffing models, process design, physical layout, team culture, leadership approach, or resource availability. These are structural differences, not individual talent differences.</p>
+
+    <div class="callout gold">
+        <strong>The question that changes everything</strong>
+        <p>Standard improvement analysis asks: <em>what are we doing wrong?</em> This focuses attention on failure modes, which are often system-level problems requiring system-level fixes with long lag times before measurable results.</p>
+        <p>The Bright Spots question asks: <em>who in this system is already doing it right, and what are they doing that others are not?</em> This focuses attention on existing solutions that are already working at scale, validated by real patient or operational outcomes, achievable with the same resources. The structural difference that produced the Bright Spot is the answer to the improvement question &mdash; it is not a theory to be tested but a practice to be understood and replicated.</p>
+    </div>
+
+    <p>The critical word is <em>structural</em>. A Bright Spot is not a unit with better staff, more funding, or easier patients. It is a unit that is doing something systematically different with the same or similar inputs. The structural difference might be:</p>
+
+    <ul style="margin: 0 0 20px 24px; line-height: 2; font-size: 1.05em;">
+        <li>A different sequence of steps in the care pathway</li>
+        <li>A different handover protocol that reduces information loss</li>
+        <li>A different team meeting structure that surfaces problems earlier</li>
+        <li>A physical layout change that reduces travel time and interruptions</li>
+        <li>A different approach to family communication that reduces anxiety and callbacks</li>
+        <li>A different discharge planning process that starts on admission rather than the day before</li>
+    </ul>
+
+    <p>In every case, the structural difference is something that can be described, understood, and taught. It is not a personality trait or a lucky circumstance. It is a replicable practice.</p>
+
+    <hr>
+
+    <h2 id="section-origin">Origin of the concept</h2>
+
+    <div class="origin-timeline">
+        <div class="ot-item">
+            <div class="ot-year">1990</div>
+            <div class="ot-content"><strong>Marian Zeitlin</strong> publishes <em>Positive Deviance in Child Nutrition</em> (UN University Press). Studying malnutrition in developing countries, Zeitlin asks why some children in desperately poor communities are well-nourished while their neighbours are not. The answer is in the specific practices of those families &mdash; not more resources, but different behaviours with the same constrained resources. The term &ldquo;positive deviance&rdquo; is coined: deviation from the norm in a positive direction.</div>
+        </div>
+        <div class="ot-item">
+            <div class="ot-year">1990s</div>
+            <div class="ot-content"><strong>Jerry and Monique Sternin</strong>, working with Save the Children in rural Vietnam, operationalise positive deviance as a change methodology. Rather than bringing in external solutions, they identify families whose children are well-nourished despite poverty, study what those families do differently, and facilitate community learning from those practices. Their pilot rehabilitates 93% of malnourished children and is scaled to 5 million families across Vietnam.</div>
+        </div>
+        <div class="ot-item">
+            <div class="ot-year">2010</div>
+            <div class="ot-content"><strong>Pascale, Sternin &amp; Sternin</strong> publish <em>The Power of Positive Deviance</em> (Harvard Business Press), bringing the methodology to healthcare and organisational improvement. The book documents applications in MRSA reduction, school dropout prevention, and female genital mutilation elimination &mdash; all using the same core approach: find the positive deviants within the system, understand what they do differently, facilitate community adoption.</div>
+        </div>
+        <div class="ot-item">
+            <div class="ot-year">2010</div>
+            <div class="ot-content"><strong>Chip and Dan Heath</strong> publish <em>Switch: How to Change Things When Change Is Hard</em> (Random House), popularising the same concept under the name &ldquo;Bright Spots&rdquo; for a general management audience. Their framing: <em>find the exceptions to the problem — the moments when the problem does not occur — and clone them.</em></div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">How Bootstrap CUSUM identifies Bright Spots</h2>
+
+    <p>Applied at the unit level across a system, <a href="three-charts-three-stories.html">Bootstrap CUSUM</a> is the most precise tool available for distinguishing genuine Bright Spots from lucky units. It does three things that ranking by average performance cannot do.</p>
+
+    <div class="dark-box">
+        <h3>&#128202; Three things Bootstrap CUSUM does that ranking cannot</h3>
+        <p><strong>1. Distinguishes special cause from common cause performance.</strong> A unit ranked first in this period&rsquo;s league table may simply be at the high end of common cause variation. Bootstrap CUSUM tests whether its performance is statistically distinguishable from the system distribution. A change point at 95% confidence or above is evidence that something genuinely structural is operating. A result within common cause limits &mdash; however impressive it looks in a ranking &mdash; is not a Bright Spot.</p>
+        <p style="margin-top:10px;"><strong>2. Dates the structural change precisely.</strong> When a unit&rsquo;s Bootstrap CUSUM shows a change point, it is dated to within weeks. This is the information that makes investigation productive. The question is: what changed in this unit in the 6&ndash;12 months before the change point? That window defines the investigation scope. Without a precise date, the investigation must cover the entire history of the unit &mdash; an unfocused exercise that rarely produces actionable findings.</p>
+        <p style="margin-top:10px;"><strong>3. Confirms persistence.</strong> A Bootstrap CUSUM change point that appears and holds &mdash; that does not dissolve as more data accumulates &mdash; confirms that the structural difference is ongoing. The practice is still in place. The replication target is a current, active system, not a historical artefact.</p>
+        <p style="margin-top:10px;" class="quote">&ldquo;The Bootstrap CUSUM change point is the evidence that warrants the investigation. Without it, you are studying luck. With it, you are studying structure.&rdquo;</p>
+    </div>
+
+    <p>The practical workflow is straightforward. Apply Bootstrap CUSUM to each unit&rsquo;s outcome series. Units with upward change points at 95% confidence or above, on a consistent positive trajectory, are candidates for Bright Spot investigation. Units whose good performance appears only in recent periods without a confirmed change point are candidates for watchful waiting &mdash; monitor another few periods before concluding the performance is structural.</p>
+
+    <hr>
+
+    <h2 id="section-investigation">The Bright Spots investigation framework</h2>
+
+    <p>Identifying a Bright Spot statistically is the beginning, not the end. The investigation that follows must answer a specific question: what is structurally different about how this unit operates? The following five-step framework makes that investigation systematic.</p>
+
+    <div class="investigation-steps">
+        <div class="inv-step">
+            <div class="inv-num">1</div>
+            <div class="inv-body">
+                <div class="step-title">Confirm the Bright Spot statistically</div>
+                <p>Apply Bootstrap CUSUM to the unit&rsquo;s outcome series. Confirm a change point at 95% confidence or above, in the direction of improvement, that has persisted across multiple periods. Note the precise date of the change point. This is the evidence that justifies the investigation. Without it, the investigation may be studying luck.</p>
+            </div>
+        </div>
+        <div class="inv-step">
+            <div class="inv-num">2</div>
+            <div class="inv-body">
+                <div class="step-title">Define the investigation window</div>
+                <p>The structural change that produced the Bootstrap CUSUM change point was introduced in the period before the change point appears in the data &mdash; typically 6 to 12 months earlier, depending on how quickly the change could affect the outcome measure. Focus the investigation on that window. What changed in this unit during that period? New leadership, new staffing model, new process, new physical layout, new equipment, new partnership with another team?</p>
+            </div>
+        </div>
+        <div class="inv-step">
+            <div class="inv-num">3</div>
+            <div class="inv-body">
+                <div class="step-title">Observe, do not just ask</div>
+                <p>The critical insight from the original Sternin work is that positive deviants often cannot articulate what they do differently &mdash; because what they do has become habitual and invisible to them. Asking &ldquo;why do you perform better?&rdquo; typically produces answers about staff motivation and team culture, not the specific structural practices that produce the outcome. The investigation must observe the process directly: shadow the team, map the workflow, time the steps. The structural difference will be visible in what people do, not always in what they say.</p>
+            </div>
+        </div>
+        <div class="inv-step">
+            <div class="inv-num">4</div>
+            <div class="inv-body">
+                <div class="step-title">Separate structure from context</div>
+                <p>Not every difference between a Bright Spot unit and the rest of the system is replicable. Some differences are context-specific: a particular geography, a building layout that cannot be changed, a patient population with unusual characteristics. The investigation must distinguish structural differences that can be replicated (a process step, a meeting format, a communication protocol) from contextual differences that cannot. The replication hypothesis is built on the former, not the latter.</p>
+            </div>
+        </div>
+        <div class="inv-step">
+            <div class="inv-num">5</div>
+            <div class="inv-body">
+                <div class="step-title">Test replication with Bootstrap CUSUM as the verdict</div>
+                <p>Introduce the identified structural practice to a second unit. Pre-specify the Bootstrap CUSUM prediction: we expect an upward change point in outcome measure Y within Z periods at W% confidence. Run Bootstrap CUSUM periodically as data accumulates. A confirmed change point in the replication unit is the evidence that the structural practice &mdash; not the context &mdash; produced the Bright Spot outcome. This is the <a href="pdsa-cycle.html">PDSA Study phase</a> made objective. Without a pre-specified prediction and a Bootstrap CUSUM test, the replication is not confirmed &mdash; it is claimed.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-replication">From investigation to replication</h2>
+
+    <p>The replication challenge is where most Bright Spots programmes fail. The structural difference is identified. A decision is made to roll it out. The rollout happens. Nothing changes. Three specific failure modes account for most of these outcomes.</p>
+
+    <div class="callout orange">
+        <strong>Replication failure mode 1 &mdash; Replicating the surface, not the structure</strong>
+        <p>A Bright Spot unit has a daily huddle at 8am that the team uses to surface problems before the day begins. The replication unit introduces a daily huddle at 8am. Outcomes do not change. The investigation missed what the huddle actually does: a specific protocol for raising patient safety concerns without hierarchy, which the Bright Spot team developed over 18 months and which is not captured in the description &ldquo;daily huddle.&rdquo; The structural element was the psychological safety protocol, not the meeting. Replication must go deep enough to capture the mechanism, not just the form.</p>
+    </div>
+
+    <div class="callout orange">
+        <strong>Replication failure mode 2 &mdash; Replicating without confirming</strong>
+        <p>The structural practice is rolled out across ten units simultaneously. No pre-specified Bootstrap CUSUM prediction is made. Six months later, some units appear to be performing better and some worse. Nobody knows whether any of the apparent improvements are genuine structural changes or common cause variation. The rollout is declared a success because some units look better. No one can say whether any of them actually are. Pre-specifying a Bootstrap CUSUM change point as the test of replication success removes this ambiguity entirely.</p>
+    </div>
+
+    <div class="callout orange">
+        <strong>Replication failure mode 3 &mdash; Replicating too fast</strong>
+        <p>The structural practice is confirmed in one unit and immediately rolled out to fifty. The lag between introduction and detectable Bootstrap CUSUM change point is 12 months. At month 6, when no change point has appeared, the programme is declared ineffective and cancelled. The intervention was working &mdash; it had not yet had time to produce a measurable result. The expected lag must be stated before rollout begins, and the commitment to maintain the intervention through the lag window must be made explicit. Without it, <a href="tampering-and-impatience.html">impatience tampering</a> is inevitable.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-examples">Bright Spots in the site articles</h2>
+
+    <div class="callout teal">
+        <strong>The Sepsis Six &mdash; a national null result that conceals Bright Spots</strong>
+        <p>Bootstrap CUSUM on national sepsis mortality data finds one stage and no change point across 22 years. This is not evidence that no trust improved. It is evidence that the national average did not structurally shift. Within that flat national picture, some trusts almost certainly show upward Bootstrap CUSUM change points in their in-hospital sepsis mortality &mdash; trusts whose bundle compliance reached consistent high levels before the others, or who introduced additional structural elements alongside the bundle. Those are the Bright Spots. The national null result tells you the average intervention did not structurally move the system. The Bright Spot analysis tells you which units proved that it could. See <a href="sepsis-six-does-public-data-show-whether-it-worked.html">the Sepsis Six article</a>.</p>
+    </div>
+
+    <div class="callout teal">
+        <strong>NHS A&amp;E &mdash; four stages of decline and an unanswered question</strong>
+        <p>Bootstrap CUSUM on national A&amp;E performance finds four structural stages of decline and no upward change point from any intervention across 15 years. The national picture is unambiguous. But within that national decline, some trusts will have maintained performance significantly above the national average &mdash; and some will show upward change points that the national series cannot detect. Identifying those trusts, dating their change points, and investigating what changed in the 6&ndash;12 months before each point is the most productive next step available in NHS A&amp;E improvement &mdash; more productive than another national policy intervention. See <a href="why-nothing-has-worked-nhs-ae-performance.html">the A&amp;E analysis</a>.</p>
+    </div>
+
+    <div class="callout teal">
+        <strong>UK carbon emissions &mdash; the carbon price floor as a systemic Bright Spot</strong>
+        <p>The electricity sector is the Bright Spot of the UK emissions picture: a 55.4% reduction at 99.8% confidence, against a transport sector showing no structural change at 95% across 34 years. The investigation question &mdash; what did electricity do differently? &mdash; is precisely answered: the carbon price floor changed the economics of the system for every generator simultaneously. That is the structural difference. Replicating it for transport means finding a mechanism that changes the economics of fossil fuel vehicles for every driver simultaneously &mdash; which is the logic behind the 2030 petrol and diesel ban. See <a href="the-grid-fixed-itself.html">the carbon emissions analysis</a>.</p>
+    </div>
+
+    <hr>
+
+    <h2>Related concepts</h2>
+    <div class="nav-grid">
+        <a href="variation-and-spc.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Variation &amp; SPC</h3>
+            <p>The statistical foundation — common cause vs special cause variation, and why Bright Spots are special cause on the positive side.</p>
+        </a>
+        <a href="three-charts-three-stories.html" class="nav-card">
+            <div class="nav-tag">Method</div>
+            <h3>Why Bootstrap CUSUM?</h3>
+            <p>The tool that distinguishes genuine Bright Spots from lucky units — dated change points at specified confidence levels.</p>
+        </a>
+        <a href="pdsa-cycle.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>PDSA Cycle</h3>
+            <p>Bright Spot replication is a PDSA cycle — the structural practice is the change theory, Bootstrap CUSUM is the Study step.</p>
+        </a>
+        <a href="tampering-and-impatience.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Tampering &amp; Impatience</h3>
+            <p>The most common reason Bright Spot replication fails — abandoning an intervention before the lag window has elapsed.</p>
+        </a>
+        <a href="joiner-levels-of-fix.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Joiner&rsquo;s Levels of Fix</h3>
+            <p>Bright Spot investigation identifies the structural difference — which Joiner level is it operating at? That determines replicability.</p>
+        </a>
+        <a href="sepsis-six-does-public-data-show-whether-it-worked.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; Patient Safety</div>
+            <h3>The Sepsis Six</h3>
+            <p>The national null result — and why the Bright Spot analysis within it is the more productive question.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Positive deviance origin:</strong> Zeitlin M, Ghassemi H, Mansour M. <em>Positive Deviance in Child Nutrition.</em> United Nations University Press, 1990.</p>
+        <p style="margin-top:8px;"><strong>Vietnam application and healthcare:</strong> Pascale RT, Sternin J, Sternin M. <em>The Power of Positive Deviance: How Unlikely Innovators Solve the World&rsquo;s Toughest Problems.</em> Harvard Business Press, 2010.</p>
+        <p style="margin-top:8px;"><strong>Bright Spots framing:</strong> Heath C, Heath D. <em>Switch: How to Change Things When Change Is Hard.</em> Random House, 2010.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+</body>
+</html>
