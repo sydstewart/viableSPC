@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/theory-of-constraints.html">
+    <title>Theory of Constraints — Goldratt's Five Focusing Steps — StepChangeAnalysis.com</title>
+    <meta name="description" content="Theory of Constraints explained — Goldratt's five focusing steps: Identify, Exploit, Subordinate, Elevate, Repeat. Every system has one binding constraint. Improving anything other than it improves nothing overall.">
+    <meta name="keywords" content="theory of constraints explained, Goldratt five focusing steps, identify exploit subordinate elevate, constraint management, TOC improvement, theory of constraints healthcare, binding constraint system">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:#002d5b; --brand-mid:#0056b3; --brand-light:#e9f2ff;
+            --text:#1e293b; --muted:#64748b; --border:#e2e8f0; --bg:#f8f9fa;
+            --green:#198754; --orange:#e67e22; --red:#c0392b; --teal:#0e7490; --purple:#7c3aed;
+        }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { font-family:Georgia,"Times New Roman",serif; background:var(--bg); color:var(--text); line-height:1.8; }
+        .site-header { background:var(--brand-blue); padding:14px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+        .site-header a { color:white; text-decoration:none; font-family:system-ui,sans-serif; font-size:1em; font-weight:bold; }
+        .header-nav { display:flex; gap:4px; align-items:center; flex-wrap:wrap; }
+        .header-nav a { color:rgba(255,255,255,0.85); font-family:system-ui,sans-serif; font-size:0.88em; font-weight:500; text-decoration:none; padding:6px 10px; border-radius:4px; }
+        .header-nav a:hover { color:white; background:rgba(255,255,255,0.1); }
+        .nav-dropdown { position:relative; }
+        .nav-dropdown-btn { color:rgba(255,255,255,0.85); font-family:system-ui,sans-serif; font-size:0.88em; font-weight:500; background:none; border:none; cursor:pointer; padding:6px 10px; border-radius:4px; display:flex; align-items:center; gap:4px; }
+        .nav-dropdown-btn:hover { color:white; background:rgba(255,255,255,0.1); }
+        .nav-dropdown-btn .arrow { font-size:0.7em; transition:transform 0.2s; }
+        .nav-dropdown:hover .arrow { transform:rotate(180deg); }
+        .nav-dropdown-menu { display:none; position:absolute; top:100%; left:0; background:white; border:1px solid #e2e8f0; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.12); min-width:220px; z-index:200; padding:12px 0 6px; }
+        .nav-dropdown:hover .nav-dropdown-menu { display:block; }
+        .nav-dropdown-menu::before { content:''; position:absolute; top:-8px; left:0; right:0; height:8px; }
+        .nav-dropdown-menu a { display:block; color:#1e293b; font-family:system-ui,sans-serif; font-size:0.85em; padding:8px 16px; text-decoration:none; }
+        .nav-dropdown-menu a:hover { background:#e9f2ff; color:#002d5b; }
+        .nav-dropdown-menu .menu-section { font-family:system-ui,sans-serif; font-size:0.72em; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#94a3b8; padding:8px 16px 4px; }
+        .nav-dropdown-menu .menu-divider { border:none; border-top:1px solid #e2e8f0; margin:4px 0; }
+        .header-tool-btn { background:var(--green); color:white; padding:8px 18px; border-radius:4px; font-family:system-ui,sans-serif; font-size:0.9em; font-weight:bold; }
+        .header-tool-btn:hover { background:#146c43; text-decoration:none !important; }
+        @media (max-width:600px) { .header-nav { display:none; } }
+
+        .page-wrap { max-width:860px; margin:0 auto; padding:40px 24px 80px; }
+        .breadcrumb { font-family:system-ui,sans-serif; font-size:0.82em; color:var(--muted); margin-bottom:24px; }
+        .breadcrumb a { color:var(--brand-mid); text-decoration:none; }
+        .page-flag { font-family:system-ui,sans-serif; font-size:0.8em; font-weight:bold; letter-spacing:0.12em; text-transform:uppercase; color:var(--brand-mid); margin-bottom:12px; }
+        h1 { font-size:clamp(1.8em,4vw,2.6em); line-height:1.2; color:var(--brand-blue); margin-bottom:16px; }
+        .page-intro { font-size:1.05em; color:var(--muted); font-style:italic; margin-bottom:12px; border-left:4px solid var(--brand-mid); padding-left:16px; line-height:1.7; }
+        .page-meta { font-family:system-ui,sans-serif; font-size:0.85em; color:var(--muted); margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+        h2 { font-size:1.3em; color:var(--brand-blue); margin:40px 0 14px; padding-bottom:6px; border-bottom:2px solid var(--brand-light); }
+        h3 { font-size:1.05em; color:var(--brand-blue); margin:24px 0 10px; font-style:italic; }
+        p { margin-bottom:1.2em; font-size:1.05em; }
+        strong { color:var(--brand-blue); }
+        hr { border:none; border-top:3px solid var(--brand-light); margin:48px 0; }
+        ul,ol { margin:0 0 1.2em 1.5em; }
+        li { margin-bottom:0.5em; font-size:1.05em; }
+
+        /* Five focusing steps */
+        .five-steps { margin:28px 0; }
+        .fs-step { display:flex; gap:0; margin-bottom:0; }
+        .fs-num { color:white; font-family:system-ui,sans-serif; font-weight:900; font-size:1.1em; width:56px; min-width:56px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px 8px; }
+        .fs-num span { font-size:0.55em; opacity:0.8; letter-spacing:0.1em; text-transform:uppercase; }
+        .fs-body { flex:1; padding:16px 20px; border:1px solid var(--border); border-left:none; background:white; }
+        .fs-step:not(:last-child) .fs-body { border-bottom:none; }
+        .fs-step:first-child .fs-num { border-radius:8px 0 0 0; }
+        .fs-step:last-child .fs-num { border-radius:0 0 0 8px; }
+        .fs-step:first-child .fs-body { border-radius:0 8px 0 0; }
+        .fs-step:last-child .fs-body { border-radius:0 0 8px 0; }
+        .fs-body h3 { font-style:normal; margin:0 0 6px; font-size:1em; color:var(--brand-blue); }
+        .fs-body p { font-size:0.95em; color:var(--text); line-height:1.6; margin:0 0 6px; }
+        .fs-body p:last-child { margin:0; }
+        .fs-step.s1 .fs-num { background:#0e7490; }
+        .fs-step.s2 .fs-num { background:var(--green); }
+        .fs-step.s3 .fs-num { background:var(--orange); }
+        .fs-step.s4 .fs-num { background:var(--purple); }
+        .fs-step.s5 .fs-num { background:var(--brand-blue); }
+
+        .callout { border-radius:8px; padding:18px 22px; margin:24px 0; font-family:system-ui,sans-serif; }
+        .callout.blue { background:var(--brand-light); border-left:5px solid var(--brand-mid); }
+        .callout.green { background:#f0fdf4; border-left:5px solid var(--green); }
+        .callout.orange { background:#fff8f0; border-left:5px solid var(--orange); }
+        .callout.red { background:#fff5f5; border-left:5px solid var(--red); }
+        .callout strong { display:block; margin-bottom:6px; }
+        .callout.blue strong { color:var(--brand-blue); }
+        .callout.green strong { color:var(--green); }
+        .callout.orange strong { color:var(--orange); }
+        .callout.red strong { color:var(--red); }
+        .callout p { font-size:0.95em; line-height:1.65; margin:0 0 8px; }
+        .callout p:last-child { margin:0; }
+
+        .info-box { background:#f0f4f8; border:3px solid var(--brand-blue); border-radius:8px; padding:24px 28px; margin:28px 0; font-family:system-ui,sans-serif; }
+        .info-box h3 { color:var(--brand-blue); margin:0 0 12px; font-size:1em; text-transform:uppercase; letter-spacing:0.08em; font-style:normal; border-bottom:2px solid var(--brand-blue); padding-bottom:8px; }
+        .info-box p { font-size:0.97em; color:var(--text); margin-bottom:10px; line-height:1.7; }
+        .info-box p:last-child { margin:0; }
+        .info-box strong { color:var(--brand-blue); }
+        .info-box a { color:var(--brand-mid); }
+
+        .nav-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:32px 0; }
+        .nav-card { background:white; border:1px solid var(--border); border-radius:8px; padding:16px 18px; text-decoration:none; display:block; transition:box-shadow 0.15s; font-family:system-ui,sans-serif; }
+        .nav-card:hover { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+        .nav-card .nav-tag { font-size:0.72em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--brand-mid); margin-bottom:6px; }
+        .nav-card h3 { color:var(--brand-blue); font-size:0.95em; margin:0 0 4px; line-height:1.3; font-style:normal; }
+        .nav-card p { color:var(--muted); font-size:0.85em; margin:0; line-height:1.4; }
+
+        .toc-details { margin:0 0 28px 0; border:1px solid var(--border); border-radius:8px; font-family:system-ui,sans-serif; background:white; }
+        .toc-details summary { padding:14px 18px; cursor:pointer; font-weight:bold; color:var(--brand-blue); font-size:0.95em; list-style:none; display:flex; align-items:center; gap:8px; }
+        .toc-details summary::-webkit-details-marker { display:none; }
+        .toc-details[open] summary { border-bottom:1px solid var(--border); }
+        .toc-inner { padding:6px 18px 16px; }
+        .toc-inner ol { margin:10px 0 0 1.2em; line-height:2.1; }
+        .toc-inner ol li a { color:var(--brand-mid); text-decoration:none; font-size:0.92em; }
+
+        .page-footer { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); font-family:system-ui,sans-serif; font-size:0.85em; color:var(--muted); }
+        .page-footer a { color:var(--brand-mid); }
+
+        @media (max-width:600px) {
+            body { font-size:16px; }
+            .site-header { padding:10px 16px; }
+            .header-nav { display:none; }
+            .page-wrap { padding:20px 16px 48px; }
+            h1 { font-size:clamp(1.4em,6vw,2em); }
+            .fs-step { flex-direction:column; }
+            .fs-num { width:100%; flex-direction:row; gap:8px; padding:10px 16px; border-radius:0; justify-content:flex-start; }
+            .fs-body { padding:14px 16px; }
+            .nav-grid { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Concepts <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <a href="why-nothing-changes.html">Why nothing changes</a>
+                <a href="joiner-levels-of-fix.html">Joiner levels of fix</a>
+                <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>
+                <a href="pdsa-cycle.html">PDSA cycle</a>
+                <a href="types-of-measures.html">Types of measures</a>
+                <a href="model-for-improvement.html">Model for Improvement</a>
+                <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>
+                <a href="variation-and-spc.html">Variation &amp; SPC</a>
+                <a href="bright-spots.html">Bright Spots</a>
+                <a href="five-whys.html">The 5 Whys</a>
+                <a href="root-cause-analysis.html">Root Cause Analysis</a>
+                <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a>
+                <a href="pick-model.html">The PICK Model</a>
+                <a href="theory-of-constraints.html" style="font-weight:600;color:#002d5b;">Theory of Constraints</a>
+                <a href="failure-demand.html">Failure Demand</a>
+                <a href="focus-and-prioritisation.html">Focus &amp; Prioritisation</a>
+                <a href="standardisation-vs-customisation.html">Standardisation vs Customisation</a>
+            </div>
+        </div>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Articles <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <div class="menu-section">NHS Healthcare</div>
+                <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; Why nothing has worked</a>
+                <a href="dementia-diagnosis-rate.html">Dementia &mdash; The 66% target</a>
+                <a href="gp-appointments-analysis.html">GP appointments</a>
+                <a href="never-events-wrong-route.html">Never events &mdash; Wrong route</a>
+                <a href="anticoag-safety.html">Anticoagulation safety</a>
+                <a href="sepsis-six-does-public-data-show-whether-it-worked.html">Sepsis Six</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Environment &amp; Policy</div>
+                <a href="ulez-london-air-quality.html">ULEZ &mdash; Air quality</a>
+                <a href="the-grid-fixed-itself.html">The Grid fixed itself</a>
+                <a href="uk-gdp-analysis.html">UK GDP analysis</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Industrial</div>
+                <a href="hydrogen-plant-cusum.html">Hydrogen plant CUSUM</a>
+            </div>
+        </div>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Concepts</a> &rsaquo; Theory of Constraints</div>
+    <div class="page-flag">&#128200; Improvement Concepts</div>
+    <h1>Theory of Constraints</h1>
+    <p class="page-intro">Every system has exactly one binding constraint at any given time &mdash; one factor that limits overall throughput more than any other. Improving anything other than that constraint does not improve system performance. It may improve local efficiency while leaving overall output unchanged. Goldratt&rsquo;s Theory of Constraints gives this observation a precise operational method: five focusing steps that direct all improvement energy at the one thing that actually matters.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-core">The core insight</a></li>
+                <li><a href="#section-five">The five focusing steps</a></li>
+                <li><a href="#section-throughput">Throughput vs local efficiency</a></li>
+                <li><a href="#section-types">Types of constraint</a></li>
+                <li><a href="#section-examples">In practice</a></li>
+                <li><a href="#section-cusum">Bootstrap CUSUM and the constraint</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-core">The core insight</h2>
+
+    <p>Eliyahu Goldratt introduced the Theory of Constraints (TOC) in his 1984 novel <em>The Goal</em>, co-authored with Jeff Cox. The central argument is precise: every system &mdash; a factory, a hospital, a software company, a government department &mdash; is limited in achieving its goal by a small number of constraints. At any given time, one constraint is binding: it determines the maximum throughput of the entire system regardless of what happens everywhere else.</p>
+
+    <p>The managerial implication is equally precise: if you improve a non-constraint, you improve nothing. The throughput of the system is determined by its constraint. Improving a step that is not the bottleneck simply means that step produces output faster &mdash; which then piles up in front of the constraint. Work-in-progress increases. Lead times lengthen. The organisation is busier than ever and no more effective.</p>
+
+    <div class="callout orange">
+        <strong>The chain analogy</strong>
+        <p>A chain is as strong as its weakest link. Strengthening any link other than the weakest does not increase the strength of the chain &mdash; it just means more links are now stronger than necessary. Identifying and strengthening the weakest link is the only action that matters. Once it is no longer the weakest, a new weakest link emerges &mdash; and that becomes the new focus. This is the entire theory in one image.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-five">The five focusing steps</h2>
+
+    <p>Goldratt&rsquo;s operational method for applying TOC is a five-step cycle. The cycle repeats indefinitely because elevating a constraint creates a new constraint elsewhere &mdash; improvement is continuous, not terminal.</p>
+
+    <div class="five-steps">
+        <div class="fs-step s1">
+            <div class="fs-num"><span>Step</span>1</div>
+            <div class="fs-body">
+                <h3>Identify the constraint</h3>
+                <p>Find the one element that limits overall system throughput. Where does work pile up? Where is the queue longest? Where does everything else wait? In a service organisation, the constraint is often a person, a decision, or a system that everything must pass through. In manufacturing, it is the slowest machine or the highest-utilisation workstation.</p>
+                <p>Bootstrap CUSUM on the output measure helps here: a flat line means the system is constrained at a stable level. The constraint is the reason the line is flat rather than rising.</p>
+            </div>
+        </div>
+        <div class="fs-step s2">
+            <div class="fs-num"><span>Step</span>2</div>
+            <div class="fs-body">
+                <h3>Exploit the constraint</h3>
+                <p>Get maximum output from the constraint without spending money. Before investing in more capacity, ensure the constraint is not being wasted. Is the constraint idle for any part of the working day? Is it processing work that does not need to go through it? Is it being starved of input by upstream variability? Exploitation means making the most of what you already have.</p>
+                <p>In a knowledge work context: is the constrained person spending time on meetings, emails, and administrative work that could be handled by someone else? Every hour the constraint spends on non-constraint work is an hour of throughput permanently lost.</p>
+            </div>
+        </div>
+        <div class="fs-step s3">
+            <div class="fs-num"><span>Step</span>3</div>
+            <div class="fs-body">
+                <h3>Subordinate everything else to the constraint</h3>
+                <p>This is the hardest step and the one most often skipped. Every non-constraint in the system should operate at the pace of the constraint &mdash; not at its own maximum pace. Running non-constraints at full speed simply builds inventory in front of the constraint and creates the illusion of productivity.</p>
+                <p>In practice this means: the Goalie team handles all inbound work so the Builders are never interrupted. The support library handles repetitive queries so the constraint (developer time) is never consumed by failure demand. Every role in the system is subordinated to protecting the constraint&rsquo;s productive time.</p>
+            </div>
+        </div>
+        <div class="fs-step s4">
+            <div class="fs-num"><span>Step</span>4</div>
+            <div class="fs-body">
+                <h3>Elevate the constraint</h3>
+                <p>If exploitation and subordination are not sufficient to meet demand, invest in expanding the constraint. Hire more people, add equipment, redesign the process to increase throughput at the bottleneck. Elevation is the step that requires resource commitment &mdash; which is why Steps 2 and 3 must come first. Elevating before exploiting wastes money. Elevating before subordinating means the new capacity is immediately consumed by the same inefficiencies that constrained the old capacity.</p>
+            </div>
+        </div>
+        <div class="fs-step s5">
+            <div class="fs-num"><span>Step</span>5</div>
+            <div class="fs-body">
+                <h3>Repeat &mdash; do not let inertia become the constraint</h3>
+                <p>When a constraint is elevated, it is no longer the bottleneck. A new constraint emerges somewhere else in the system. Return to Step 1 immediately. The most dangerous outcome of successfully elevating a constraint is declaring victory and stopping &mdash; because inertia and the policies built around the old constraint will then become the new binding limitation.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-throughput">Throughput vs local efficiency</h2>
+
+    <p>TOC introduces a precise accounting framework that conflicts directly with standard cost accounting. Standard cost accounting rewards local efficiency: every workstation should be busy, every person should be utilised, every resource should run at capacity. TOC argues this is exactly wrong.</p>
+
+    <p><strong>Throughput</strong> is the rate at which the system generates money (or value) through sales. It is the only metric that matters for system performance.</p>
+
+    <p><strong>Inventory</strong> (work-in-progress, queue length) is money tied up inside the system. High inventory is a symptom of a constraint downstream, not a sign of productivity upstream.</p>
+
+    <p><strong>Operating expense</strong> is the cost of converting inventory into throughput.</p>
+
+    <p>The goal is to increase throughput while reducing inventory and operating expense. Local efficiency measures &mdash; utilisation rates, individual productivity metrics &mdash; can be maximised while throughput falls, because they measure activity at non-constraints rather than flow through the constraint. <a href="deming-14-points.html">Deming&rsquo;s Point 11</a> makes the same argument: eliminate numerical quotas that measure activity rather than results.</p>
+
+    <hr>
+
+    <h2 id="section-types">Types of constraint</h2>
+
+    <p>Constraints are not always physical bottlenecks. Goldratt identified several categories:</p>
+
+    <ul>
+        <li><strong>Physical constraint:</strong> A machine, a person, a space, a piece of equipment whose capacity limits throughput. The most visible type.</li>
+        <li><strong>Policy constraint:</strong> A rule, procedure, or habit that prevents the system from operating at its potential. Often harder to see than physical constraints because policies feel like good management. A rule that requires every customer request to be handled individually rather than batched is a policy constraint. A requirement that only the most senior person can approve a decision is a policy constraint.</li>
+        <li><strong>Market constraint:</strong> Demand is lower than the system&rsquo;s capacity. The constraint is external &mdash; not enough customers or orders. The correct response is to increase demand (marketing, new markets, new products) rather than improve internal efficiency.</li>
+        <li><strong>Knowledge constraint:</strong> The system lacks the information or skill to proceed. Common in knowledge work organisations &mdash; the constraint is not capacity but expertise or understanding.</li>
+    </ul>
+
+    <div class="callout blue">
+        <strong>The most common constraint in knowledge work organisations</strong>
+        <p>In professional services, software companies, healthcare teams, and policy organisations, the constraint is almost always a <strong>policy constraint</strong> masquerading as a capacity problem. The senior person is overloaded &mdash; but the reason they are overloaded is a policy (implicit or explicit) that everything significant must go through them. The fix is not to make that person work harder. It is to change the policy: define what can be handled without them, build the systems that enable others to handle it, and protect their time for the work that only they can do.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-examples">In practice</h2>
+
+    <p>The worked example from the <a href="improvement-method.html">7-step improvement method</a> illustrates TOC directly. A specialist software company has a growth constraint: new work is replacing losses but not exceeding them. The constraint analysis finds that everything routes through the same expert people &mdash; the Boss for sales, the developers for both support and new product work.</p>
+
+    <p>Applying the five steps:</p>
+
+    <ol style="margin:16px 0 20px 24px;line-height:2.2;">
+        <li><strong>Identify:</strong> Developer time is the constraint. Support calls, implementation queries, and new product development all compete for the same resource. Support and implementation win because they are urgent. New product development loses because it is important but not urgent.</li>
+        <li><strong>Exploit:</strong> Reduce the waste of constraint time. Scripted restart procedures handle the 172 most common support cases without developer involvement. A help library allows customers to self-serve. Each script and library article returns hours of developer time without adding headcount.</li>
+        <li><strong>Subordinate:</strong> Goalies handle all inbound contact. Builders (developers) never answer a support call. The Investigator owns the learning loop &mdash; analysing support patterns, directing the library, escalating only what genuinely requires developer expertise. Every role is designed around protecting the constraint.</li>
+        <li><strong>Elevate:</strong> Once exploitation and subordination are in place, the Toolmaker role adds development capacity ring-fenced from operational work. Elevation only after Steps 2 and 3.</li>
+        <li><strong>Repeat:</strong> Once developer capacity is freed, the new constraint becomes sales &mdash; the Boss is the only sales channel. The Blueprint product and the Investigator are the response to that next constraint.</li>
+    </ol>
+
+    <hr>
+
+    <h2 id="section-cusum">Bootstrap CUSUM and the constraint</h2>
+
+    <div class="info-box">
+        <h3>&#128202; How Bootstrap CUSUM locates the constraint in data</h3>
+        <p><strong>A flat Bootstrap CUSUM line on the outcome measure is the signature of an unaddressed constraint.</strong> If new contract value has been flat for three years despite multiple improvement initiatives, the constraint has not been addressed. Each initiative improved a non-constraint &mdash; it created local efficiency while leaving the bottleneck unchanged.</p>
+        <p style="margin-top:10px;"><strong>A Bootstrap CUSUM upward change point on the outcome measure confirms that the constraint was elevated.</strong> When the right intervention was made &mdash; exploiting, subordinating, and elevating the actual constraint &mdash; throughput increased and a change point appeared in the outcome series. The date of the change point should coincide with the intervention that addressed the constraint, not with earlier interventions that addressed non-constraints.</p>
+        <p style="margin-top:10px;"><strong>Bootstrap CUSUM on component measures identifies where the constraint is.</strong> If support cases fall (change point down) at the same time as new contract value rises (change point up), that confirms that reducing failure demand on the constraint released the capacity that produced the growth. The two change points together are the evidence of the mechanism.</p>
+        <p style="margin-top:10px;">See <a href="three-charts-three-stories.html">Three Charts, Three Stories</a> for how Bootstrap CUSUM makes these structural shifts visible in ways that conventional averages and trend lines cannot.</p>
+    </div>
+
+    <div class="callout blue" style="margin-top:32px;">
+        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
+        <p>This concept connects directly to Step 4 of the <a href="improvement-method.html">7-step improvement method</a>. See <a href="why-nothing-changes.html">Why Nothing Changes</a> for the broader diagnostic framework, or <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a> for Goldratt&rsquo;s related logical framework.</p>
+    </div>
+
+    <h2>Related concepts</h2>
+    <div class="nav-grid">
+        <a href="necessary-but-not-sufficient.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Necessary But Not Sufficient</h3>
+            <p>Goldratt&rsquo;s companion framework — identifying all the necessary conditions before declaring a solution sufficient.</p>
+        </a>
+        <a href="focus-and-prioritisation.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Focus &amp; Prioritisation</h3>
+            <p>The discipline of working exclusively on the constraint — why spreading effort produces less improvement than concentrating it.</p>
+        </a>
+        <a href="joiner-levels-of-fix.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Joiner&rsquo;s Levels of Fix</h3>
+            <p>TOC identifies the constraint. Joiner determines whether the fix operates at the right level to hold.</p>
+        </a>
+        <a href="improvement-method.html" class="nav-card">
+            <div class="nav-tag">Method</div>
+            <h3>The 7-Step Improvement Method</h3>
+            <p>Step 4 — finding the dominant constraint — is where TOC sits in the practical improvement cycle.</p>
+        </a>
+        <a href="failure-demand.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Failure Demand</h3>
+            <p>Seddon&rsquo;s concept — demand created by failure. Failure demand consumes constraint capacity without generating value.</p>
+        </a>
+        <a href="why-nothing-changes.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Why Nothing Changes</h3>
+            <p>The diagnostic framework that precedes constraint identification — three signals that tell you whether more effort is the answer.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Primary source:</strong> Goldratt E, Cox J. <em>The Goal.</em> North River Press, 1984. &nbsp;&middot;&nbsp; Goldratt E. <em>It&rsquo;s Not Luck.</em> North River Press, 1994. &nbsp;&middot;&nbsp; Goldratt E. <em>Critical Chain.</em> North River Press, 1997.</p>
+        <p style="margin-top:8px;"><strong>Five focusing steps:</strong> Goldratt E. <em>The Goal, 2nd edition.</em> North River Press, 1992.</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+</main>
+</body>
+</html>

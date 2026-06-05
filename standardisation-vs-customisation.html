@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/standardisation-vs-customisation.html">
+    <title>Standardisation vs Customisation — Portfolio Policy and the Scalability Decision — StepChangeAnalysis.com</title>
+    <meta name="description" content="Standardisation vs customisation explained — the customisation trap, portfolio policy, and the scalability decision. Why each bespoke request feels like revenue but adds variety the system cannot absorb. How the Innovator's Solution and Bright Spots point to the standardised product.">
+    <meta name="keywords" content="standardisation vs customisation, product portfolio policy, customisation trap service business, scalable product model, when to standardise a product, variety Ashby law, innovator's solution Christensen">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:#002d5b; --brand-mid:#0056b3; --brand-light:#e9f2ff;
+            --text:#1e293b; --muted:#64748b; --border:#e2e8f0; --bg:#f8f9fa;
+            --green:#198754; --orange:#e67e22; --red:#c0392b; --teal:#0e7490; --purple:#7c3aed;
+        }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { font-family:Georgia,"Times New Roman",serif; background:var(--bg); color:var(--text); line-height:1.8; }
+        .site-header { background:var(--brand-blue); padding:14px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+        .site-header a { color:white; text-decoration:none; font-family:system-ui,sans-serif; font-size:1em; font-weight:bold; }
+        .header-nav { display:flex; gap:4px; align-items:center; flex-wrap:wrap; }
+        .header-nav a { color:rgba(255,255,255,0.85); font-family:system-ui,sans-serif; font-size:0.88em; font-weight:500; text-decoration:none; padding:6px 10px; border-radius:4px; }
+        .header-nav a:hover { color:white; background:rgba(255,255,255,0.1); }
+        .nav-dropdown { position:relative; }
+        .nav-dropdown-btn { color:rgba(255,255,255,0.85); font-family:system-ui,sans-serif; font-size:0.88em; font-weight:500; background:none; border:none; cursor:pointer; padding:6px 10px; border-radius:4px; display:flex; align-items:center; gap:4px; }
+        .nav-dropdown-btn:hover { color:white; background:rgba(255,255,255,0.1); }
+        .nav-dropdown-btn .arrow { font-size:0.7em; transition:transform 0.2s; }
+        .nav-dropdown:hover .arrow { transform:rotate(180deg); }
+        .nav-dropdown-menu { display:none; position:absolute; top:100%; left:0; background:white; border:1px solid #e2e8f0; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.12); min-width:220px; z-index:200; padding:12px 0 6px; }
+        .nav-dropdown:hover .nav-dropdown-menu { display:block; }
+        .nav-dropdown-menu::before { content:''; position:absolute; top:-8px; left:0; right:0; height:8px; }
+        .nav-dropdown-menu a { display:block; color:#1e293b; font-family:system-ui,sans-serif; font-size:0.85em; padding:8px 16px; text-decoration:none; }
+        .nav-dropdown-menu a:hover { background:#e9f2ff; color:#002d5b; }
+        .nav-dropdown-menu .menu-section { font-family:system-ui,sans-serif; font-size:0.72em; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#94a3b8; padding:8px 16px 4px; }
+        .nav-dropdown-menu .menu-divider { border:none; border-top:1px solid #e2e8f0; margin:4px 0; }
+        .header-tool-btn { background:var(--green); color:white; padding:8px 18px; border-radius:4px; font-family:system-ui,sans-serif; font-size:0.9em; font-weight:bold; }
+        .header-tool-btn:hover { background:#146c43; text-decoration:none !important; }
+        @media (max-width:600px) { .header-nav { display:none; } }
+
+        .page-wrap { max-width:860px; margin:0 auto; padding:40px 24px 80px; }
+        .breadcrumb { font-family:system-ui,sans-serif; font-size:0.82em; color:var(--muted); margin-bottom:24px; }
+        .breadcrumb a { color:var(--brand-mid); text-decoration:none; }
+        .page-flag { font-family:system-ui,sans-serif; font-size:0.8em; font-weight:bold; letter-spacing:0.12em; text-transform:uppercase; color:var(--brand-mid); margin-bottom:12px; }
+        h1 { font-size:clamp(1.8em,4vw,2.6em); line-height:1.2; color:var(--brand-blue); margin-bottom:16px; }
+        .page-intro { font-size:1.05em; color:var(--muted); font-style:italic; margin-bottom:12px; border-left:4px solid var(--brand-mid); padding-left:16px; line-height:1.7; }
+        .page-meta { font-family:system-ui,sans-serif; font-size:0.85em; color:var(--muted); margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+        h2 { font-size:1.3em; color:var(--brand-blue); margin:40px 0 14px; padding-bottom:6px; border-bottom:2px solid var(--brand-light); }
+        p { margin-bottom:1.2em; font-size:1.05em; }
+        strong { color:var(--brand-blue); }
+        hr { border:none; border-top:3px solid var(--brand-light); margin:48px 0; }
+        ul,ol { margin:0 0 1.2em 1.5em; }
+        li { margin-bottom:0.5em; font-size:1.05em; }
+
+        /* Comparison grid */
+        .compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:28px 0; }
+        @media (max-width:640px) { .compare-grid { grid-template-columns:1fr; } }
+        .cg-card { border-radius:10px; padding:22px 24px; font-family:system-ui,sans-serif; }
+        .cg-card.custom { background:#fff5f5; border:2px solid var(--red); }
+        .cg-card.standard { background:#f0fdf4; border:2px solid var(--green); }
+        .cg-card .cgc-label { font-size:0.72em; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; }
+        .cg-card.custom .cgc-label { color:var(--red); }
+        .cg-card.standard .cgc-label { color:var(--green); }
+        .cg-card h3 { font-style:normal; margin:0 0 10px; font-size:1.05em; }
+        .cg-card.custom h3 { color:var(--red); }
+        .cg-card.standard h3 { color:var(--green); }
+        .cg-card ul { font-size:0.9em; padding-left:16px; line-height:1.8; }
+        .cg-card.custom ul { color:#7f1d1d; }
+        .cg-card.standard ul { color:#14532d; }
+
+        .callout { border-radius:8px; padding:18px 22px; margin:24px 0; font-family:system-ui,sans-serif; }
+        .callout.blue { background:var(--brand-light); border-left:5px solid var(--brand-mid); }
+        .callout.green { background:#f0fdf4; border-left:5px solid var(--green); }
+        .callout.orange { background:#fff8f0; border-left:5px solid var(--orange); }
+        .callout.red { background:#fff5f5; border-left:5px solid var(--red); }
+        .callout strong { display:block; margin-bottom:6px; }
+        .callout.blue strong { color:var(--brand-blue); }
+        .callout.green strong { color:var(--green); }
+        .callout.orange strong { color:var(--orange); }
+        .callout.red strong { color:var(--red); }
+        .callout p { font-size:0.95em; line-height:1.65; margin:0 0 8px; }
+        .callout p:last-child { margin:0; }
+
+        .info-box { background:#f0f4f8; border:3px solid var(--brand-blue); border-radius:8px; padding:24px 28px; margin:28px 0; font-family:system-ui,sans-serif; }
+        .info-box h3 { color:var(--brand-blue); margin:0 0 12px; font-size:1em; text-transform:uppercase; letter-spacing:0.08em; font-style:normal; border-bottom:2px solid var(--brand-blue); padding-bottom:8px; }
+        .info-box p { font-size:0.97em; color:var(--text); margin-bottom:10px; line-height:1.7; }
+        .info-box p:last-child { margin:0; }
+        .info-box strong { color:var(--brand-blue); }
+        .info-box a { color:var(--brand-mid); }
+
+        .nav-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:32px 0; }
+        .nav-card { background:white; border:1px solid var(--border); border-radius:8px; padding:16px 18px; text-decoration:none; display:block; transition:box-shadow 0.15s; font-family:system-ui,sans-serif; }
+        .nav-card:hover { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+        .nav-card .nav-tag { font-size:0.72em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--brand-mid); margin-bottom:6px; }
+        .nav-card h3 { color:var(--brand-blue); font-size:0.95em; margin:0 0 4px; line-height:1.3; font-style:normal; }
+        .nav-card p { color:var(--muted); font-size:0.85em; margin:0; line-height:1.4; }
+
+        .toc-details { margin:0 0 28px 0; border:1px solid var(--border); border-radius:8px; font-family:system-ui,sans-serif; background:white; }
+        .toc-details summary { padding:14px 18px; cursor:pointer; font-weight:bold; color:var(--brand-blue); font-size:0.95em; list-style:none; display:flex; align-items:center; gap:8px; }
+        .toc-details summary::-webkit-details-marker { display:none; }
+        .toc-details[open] summary { border-bottom:1px solid var(--border); }
+        .toc-inner { padding:6px 18px 16px; }
+        .toc-inner ol { margin:10px 0 0 1.2em; line-height:2.1; }
+        .toc-inner ol li a { color:var(--brand-mid); text-decoration:none; font-size:0.92em; }
+
+        .page-footer { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); font-family:system-ui,sans-serif; font-size:0.85em; color:var(--muted); }
+        .page-footer a { color:var(--brand-mid); }
+
+        @media (max-width:600px) {
+            body { font-size:16px; }
+            .site-header { padding:10px 16px; }
+            .header-nav { display:none; }
+            .page-wrap { padding:20px 16px 48px; }
+            h1 { font-size:clamp(1.4em,6vw,2em); }
+            .compare-grid, .nav-grid { grid-template-columns:1fr; }
+            .info-box, .callout { padding:14px 16px; }
+        }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Concepts <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <a href="why-nothing-changes.html">Why nothing changes</a>
+                <a href="joiner-levels-of-fix.html">Joiner levels of fix</a>
+                <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>
+                <a href="pdsa-cycle.html">PDSA cycle</a>
+                <a href="types-of-measures.html">Types of measures</a>
+                <a href="model-for-improvement.html">Model for Improvement</a>
+                <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>
+                <a href="variation-and-spc.html">Variation &amp; SPC</a>
+                <a href="bright-spots.html">Bright Spots</a>
+                <a href="five-whys.html">The 5 Whys</a>
+                <a href="root-cause-analysis.html">Root Cause Analysis</a>
+                <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a>
+                <a href="pick-model.html">The PICK Model</a>
+                <a href="theory-of-constraints.html">Theory of Constraints</a>
+                <a href="failure-demand.html">Failure Demand</a>
+                <a href="focus-and-prioritisation.html">Focus &amp; Prioritisation</a>
+                <a href="standardisation-vs-customisation.html" style="font-weight:600;color:#002d5b;">Standardisation vs Customisation</a>
+            </div>
+        </div>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Articles <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <div class="menu-section">NHS Healthcare</div>
+                <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; Why nothing has worked</a>
+                <a href="dementia-diagnosis-rate.html">Dementia &mdash; The 66% target</a>
+                <a href="gp-appointments-analysis.html">GP appointments</a>
+                <a href="never-events-wrong-route.html">Never events &mdash; Wrong route</a>
+                <a href="anticoag-safety.html">Anticoagulation safety</a>
+                <a href="sepsis-six-does-public-data-show-whether-it-worked.html">Sepsis Six</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Environment &amp; Policy</div>
+                <a href="ulez-london-air-quality.html">ULEZ &mdash; Air quality</a>
+                <a href="the-grid-fixed-itself.html">The Grid fixed itself</a>
+                <a href="uk-gdp-analysis.html">UK GDP analysis</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Industrial</div>
+                <a href="hydrogen-plant-cusum.html">Hydrogen plant CUSUM</a>
+            </div>
+        </div>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Concepts</a> &rsaquo; Standardisation vs Customisation</div>
+    <div class="page-flag">&#128200; Improvement Concepts</div>
+    <h1>Standardisation vs Customisation</h1>
+    <p class="page-intro">Every request for customisation feels like revenue. In a service business under financial pressure, saying yes to bespoke work keeps the lights on. But each customisation adds variety the system must absorb &mdash; variety that consumes the constraint, creates unpredictable delivery, generates disproportionate support demand, and makes it impossible to scale. Standardisation is not about turning customers away. It is about designing a product that delivers genuine value without requiring bespoke effort every time.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-trap">The customisation trap</a></li>
+                <li><a href="#section-variety">Variety and the constraint</a></li>
+                <li><a href="#section-innovators">The Innovator&rsquo;s Solution &mdash; Christensen</a></li>
+                <li><a href="#section-lead-users">Lead users &mdash; von Hippel</a></li>
+                <li><a href="#section-blueprint">From Bright Spot to Blueprint</a></li>
+                <li><a href="#section-policy">Writing a portfolio policy</a></li>
+                <li><a href="#section-cusum">Bootstrap CUSUM and the standardisation shift</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-trap">The customisation trap</h2>
+
+    <p>The customisation trap is a specific pattern that affects service businesses, software companies, professional services firms, and any organisation that delivers value through expert people rather than manufactured products. It works like this:</p>
+
+    <ol style="margin:16px 0 20px 24px;line-height:2.2;">
+        <li>A customer requests a variation from the standard offering. The request is reasonable. The commercial pressure to say yes is high.</li>
+        <li>The organisation says yes. The work is done. The customer is satisfied. Revenue is recorded.</li>
+        <li>The customisation creates a new support obligation. The bespoke configuration must be maintained, upgraded, and troubleshot separately from the standard product.</li>
+        <li>The next customer requests a different customisation. Yes again. Another variant in the installed base.</li>
+        <li>Over time, the installed base contains dozens or hundreds of variants. Each is subtly different. Each requires specialist knowledge to support. The total support burden grows faster than the customer base.</li>
+        <li>Developer time is consumed maintaining variants rather than improving the core product. New sales require the same bespoke work as old sales. The organisation cannot scale because every sale is effectively a new project.</li>
+    </ol>
+
+    <div class="callout red">
+        <strong>Saying yes is a survival reflex that becomes a structural constraint</strong>
+        <p>At the individual transaction level, each customisation is rational: it generates revenue, satisfies a customer, and keeps a relationship intact. At the system level, the cumulative effect is to add variety the system cannot absorb. Ashby&rsquo;s Law of Requisite Variety states that only variety can absorb variety &mdash; a system can only manage the variety in its environment if it has equivalent internal variety. A small expert team does not have the internal variety to manage 44 product variants. It can manage one standard product with well-defined configuration options.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-variety">Variety and the constraint</h2>
+
+    <p>From a <a href="theory-of-constraints.html">Theory of Constraints</a> perspective, customisation is a constraint multiplier. Each additional variant in the installed base:</p>
+
+    <ul>
+        <li>Increases the knowledge required to support the base (constraint on Goalie effectiveness)</li>
+        <li>Increases the scope of regression testing for upgrades (constraint on Toolmaker throughput)</li>
+        <li>Increases the time required to scope new projects accurately (constraint on sales conversion)</li>
+        <li>Creates hidden implementation complexity that only becomes visible mid-project (constraint on delivery)</li>
+    </ul>
+
+    <p>The last point is the most damaging. Customisation requests that appear simple at the scoping stage frequently reveal hidden complexity during implementation &mdash; integration requirements that were not anticipated, configuration conflicts, data migration issues. The project expands. The developer is locked into delivery. New sales wait. The constraint is consumed by complexity that was accepted for a fraction of its true cost.</p>
+
+    <hr>
+
+    <h2 id="section-innovators">The Innovator&rsquo;s Solution &mdash; Christensen</h2>
+
+    <p>Clayton Christensen, in <em>The Innovator&rsquo;s Solution</em> (2003), identifies the pattern by which successful disruptors enter markets. The insight relevant to standardisation decisions is this: the disruptive new product is not a stripped-down, cheaper version of the incumbent&rsquo;s premium offering. It is a simpler, more focused product that does fewer things &mdash; but does the most important thing reliably, affordably, and without requiring specialist expertise to implement or maintain.</p>
+
+    <p>The incumbent&rsquo;s response to the disruptor is almost always to add features, increase customisation, and move further upmarket toward the most demanding customers. This is rational for the incumbent&rsquo;s existing customer base &mdash; and it is the mechanism by which the disruptor takes the mainstream market while the incumbent retreats to an ever-smaller segment of high-complexity, high-cost bespoke work.</p>
+
+    <p>The standardisation decision &mdash; deliberately simplifying the offer, defining a fixed scope, and delivering it repeatably &mdash; is the Innovator&rsquo;s Solution applied to the organisation itself. It sacrifices the most complex and demanding work (which is also the most constraint-intensive) to capture the larger, simpler, faster-growing market segment that the current offer is too expensive and too slow to serve.</p>
+
+    <hr>
+
+    <h2 id="section-lead-users">Lead users &mdash; von Hippel</h2>
+
+    <p>Eric von Hippel&rsquo;s lead user research identifies a paradox in product development: the most valuable insights for mainstream product design come from users at the extreme end of the adoption curve &mdash; users who are ahead of market trends and have already found workarounds to problems that mainstream users have not yet encountered.</p>
+
+    <p>In a B2B software context, the lead users are the customers who are getting exceptional results from the product &mdash; the <a href="bright-spots.html">Bright Spots</a> in the customer base. They have typically adapted the product in specific ways, developed their own processes around it, and found use cases that the developer did not anticipate. They are the early evidence of where the mainstream market will be in two to three years.</p>
+
+    <p>Von Hippel&rsquo;s corrected insight for the standardisation decision: lead user behaviour is the source of the standardised product hypothesis, not the source of the next bespoke feature request. The question is not &ldquo;what does this lead user want us to build for them?&rdquo; but &ldquo;what are they doing that we could pre-configure for everyone?&rdquo; Their bespoke adaptation becomes the next standard configuration option. Their workaround becomes the next built-in feature. Their exceptional results become the standard outcome.</p>
+
+    <hr>
+
+    <h2 id="section-blueprint">From Bright Spot to Blueprint</h2>
+
+    <p>The path from customisation trap to standardised offer follows a specific discovery sequence:</p>
+
+    <div class="compare-grid">
+        <div class="cg-card custom">
+            <div class="cgc-label">&#10060; Customisation model</div>
+            <h3>Every sale is a project</h3>
+            <ul>
+                <li>Scope defined per customer</li>
+                <li>Implementation requires specialist knowledge</li>
+                <li>Delivery time: months</li>
+                <li>Support burden: high per customer</li>
+                <li>Sales cycle: long (risk-averse buyers)</li>
+                <li>Cannot delegate delivery</li>
+                <li>Cannot scale without headcount</li>
+            </ul>
+        </div>
+        <div class="cg-card standard">
+            <div class="cgc-label">&#9989; Blueprint model</div>
+            <h3>Every sale is a configuration</h3>
+            <ul>
+                <li>Scope fixed in advance</li>
+                <li>Implementation follows a defined script</li>
+                <li>Delivery time: weeks</li>
+                <li>Support burden: low and predictable</li>
+                <li>Sales cycle: short (low risk, low price)</li>
+                <li>Delivery can be delegated to implementers</li>
+                <li>Scales without proportional headcount</li>
+            </ul>
+        </div>
+    </div>
+
+    <p>The Blueprint is not invented from theory. It is discovered from the installed base by asking: which customers are achieving the best outcomes, with the least implementation complexity, at the lowest ongoing support cost? What do they have in common? What configuration choices did they make? What business process did they bring to the implementation? The answers to these questions define the Blueprint &mdash; the standardised offer that delivers the best-case outcome for the easiest-to-serve segment of the market.</p>
+
+    <p>This is <a href="bright-spots.html">Bright Spots</a> applied to the customer base rather than to internal operations. The Bootstrap CUSUM question: which customers have shown a structural upward change point in their key outcome metrics since adopting the product? Those are the Bright Spots. Their configuration and their process are the Blueprint hypothesis.</p>
+
+    <hr>
+
+    <h2 id="section-policy">Writing a portfolio policy</h2>
+
+    <p>A portfolio policy makes the standardisation decision explicit, written, and enforced at the scoping stage rather than the delivery stage. It answers three questions:</p>
+
+    <ul>
+        <li><strong>What we deliver:</strong> a specific description of the standardised offer &mdash; what is included, what configuration options exist, what is out of scope.</li>
+        <li><strong>What we do not deliver:</strong> an explicit list of the customisation types that are no longer accepted, with a brief rationale. This is the Kill list from the <a href="pick-model.html">PICK model</a> applied at the product level.</li>
+        <li><strong>How we handle requests outside scope:</strong> a clear process for declining or redirecting out-of-scope requests without losing the customer relationship. This might include a referral to a partner, a scoped custom engagement at premium pricing, or a roadmap commitment for future inclusion.</li>
+    </ul>
+
+    <div class="info-box">
+        <h3>&#128202; The portfolio policy as a constraint protection mechanism</h3>
+        <p>A written portfolio policy is the organisational implementation of TOC Step 3: subordinate everything to the constraint. Every out-of-scope request accepted is a constraint-consumption event. The policy makes the decision in advance, removes case-by-case deliberation, and protects the constraint from the cumulative effect of individually rational but systemically destructive yes decisions.</p>
+        <p style="margin-top:10px;">The policy also changes the sales dynamic. A clearly defined, fixed-scope product is easier to sell to risk-averse buyers because the risk is explicit and bounded. A bespoke project carries open-ended risk for the buyer &mdash; the final cost, the delivery timeline, and the outcome are all uncertain. The Blueprint&rsquo;s constraints are its selling points to the right market segment.</p>
+        <p style="margin-top:10px;">Bootstrap CUSUM on implementation completion time, support cases per customer, and customer satisfaction should all show downward change points after the portfolio policy is implemented &mdash; as the high-complexity, high-support-burden customisation work exits the pipeline and is replaced by repeatable Blueprint deliveries.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">Bootstrap CUSUM and the standardisation shift</h2>
+
+    <p>The standardisation shift produces a specific signature across multiple Bootstrap CUSUM series:</p>
+
+    <ul>
+        <li><strong>Implementation time per project</strong> &mdash; downward change point as Blueprint deliveries replace bespoke projects</li>
+        <li><strong>Support cases per customer</strong> &mdash; downward change point as predictable, well-documented configurations replace one-off solutions</li>
+        <li><strong>Sales cycle length</strong> &mdash; downward change point as fixed-scope offers reduce buyer risk and accelerate decisions</li>
+        <li><strong>New contract value</strong> &mdash; upward change point as faster, lower-cost deliveries increase throughput</li>
+    </ul>
+
+    <p>The four change points together, coinciding with the portfolio policy implementation, are the statistical confirmation that the standardisation decision produced the structural shift. Pre-specify all four predictions before implementing the policy. The Study step of the <a href="pdsa-cycle.html">PDSA cycle</a> is not &ldquo;does it feel like things are better?&rdquo; It is: which of the four change points have appeared, and in which order?</p>
+
+    <div class="callout blue" style="margin-top:32px;">
+        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
+        <p>Standardisation vs customisation sits at Step 5 (complete solution) and Step 6 (PICK/portfolio policy) of the <a href="improvement-method.html">7-step improvement method</a>. See <a href="focus-and-prioritisation.html">Focus &amp; Prioritisation</a> for the role design that makes standardisation operationally achievable, and <a href="theory-of-constraints.html">Theory of Constraints</a> for the throughput framework.</p>
+    </div>
+
+    <h2>Related concepts</h2>
+    <div class="nav-grid">
+        <a href="theory-of-constraints.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Theory of Constraints</h3>
+            <p>Customisation is a constraint multiplier. Each variant adds variety the system must absorb at the expense of constraint capacity.</p>
+        </a>
+        <a href="bright-spots.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Bright Spots</h3>
+            <p>The Blueprint is discovered, not invented — by finding which customers achieve the best outcomes at the lowest complexity and studying what they do differently.</p>
+        </a>
+        <a href="focus-and-prioritisation.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Focus &amp; Prioritisation</h3>
+            <p>Portfolio policy is the written commitment that makes the Kill discipline systemic rather than case-by-case.</p>
+        </a>
+        <a href="failure-demand.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Failure Demand</h3>
+            <p>Bespoke configurations generate disproportionate failure demand — support cases for one-off implementations that no script can handle.</p>
+        </a>
+        <a href="necessary-but-not-sufficient.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Necessary But Not Sufficient</h3>
+            <p>Defining the Blueprint is necessary. Portfolio policy is necessary. Goldie/Builder shielding is necessary. All three together are sufficient for scale.</p>
+        </a>
+        <a href="improvement-method.html" class="nav-card">
+            <div class="nav-tag">Method</div>
+            <h3>The 7-Step Improvement Method</h3>
+            <p>The standardisation decision belongs in Step 5 (complete solution) — as a necessary condition for the goal, verified by Bootstrap CUSUM in Step 7.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Innovator&rsquo;s Solution:</strong> Christensen C, Raynor M. <em>The Innovator&rsquo;s Solution.</em> Harvard Business School Press, 2003.</p>
+        <p style="margin-top:8px;"><strong>Lead users:</strong> Von Hippel E. <em>The Sources of Innovation.</em> Oxford University Press, 1988. &nbsp;&middot;&nbsp; Von Hippel E. <em>Democratizing Innovation.</em> MIT Press, 2005.</p>
+        <p style="margin-top:8px;"><strong>Requisite variety:</strong> Ashby W.R. <em>An Introduction to Cybernetics.</em> Chapman &amp; Hall, 1956.</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+</main>
+</body>
+</html>
