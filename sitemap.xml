@@ -198,4 +198,17 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://stepchangeanalysis.com/pick-model.html</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stepchangeanalysis.com/improvement-method.html</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
 </urlset>

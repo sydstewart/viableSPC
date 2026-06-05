@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/improvement-method.html">
+    <title>A 7-Step Method for Making Improvements That Stick — StepChangeAnalysis.com</title>
+    <meta name="description" content="A practical 7-step improvement method — from listing symptoms and measuring the problem, through root cause analysis and prioritisation, to a PDSA cycle verified by Bootstrap CUSUM. Simple, structured, and applicable to any organisation.">
+    <meta name="keywords" content="how to make improvements that stick, improvement method steps, root cause analysis improvement cycle, PDSA Bootstrap CUSUM, how to fix persistent problems, improvement framework healthcare business">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:   #002d5b;
+            --brand-mid:    #0056b3;
+            --brand-light:  #e9f2ff;
+            --text:         #1e293b;
+            --muted:        #64748b;
+            --border:       #e2e8f0;
+            --bg:           #f8f9fa;
+            --green:        #198754;
+            --orange:       #e67e22;
+            --red:          #c0392b;
+            --teal:         #0e7490;
+            --purple:       #7c3aed;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .header-nav { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; padding: 6px 10px; border-radius: 4px; }
+        .header-nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-btn { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; background: none; border: none; cursor: pointer; padding: 6px 10px; border-radius: 4px; display: flex; align-items: center; gap: 4px; }
+        .nav-dropdown-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+        .nav-dropdown-btn .arrow { font-size: 0.7em; transition: transform 0.2s; }
+        .nav-dropdown:hover .arrow { transform: rotate(180deg); }
+        .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); min-width: 220px; z-index: 200; padding: 12px 0 6px; }
+        .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+        .nav-dropdown-menu::before { content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
+        .nav-dropdown-menu a { display: block; color: #1e293b; font-family: system-ui, sans-serif; font-size: 0.85em; padding: 8px 16px; text-decoration: none; }
+        .nav-dropdown-menu a:hover { background: #e9f2ff; color: #002d5b; }
+        .nav-dropdown-menu .menu-section { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; padding: 8px 16px 4px; }
+        .nav-dropdown-menu .menu-divider { border: none; border-top: 1px solid #e2e8f0; margin: 4px 0; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        @media (max-width: 600px) { .header-nav { display: none; } }
+
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        .page-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+        h1 { font-size: clamp(1.8em, 4vw, 2.6em); line-height: 1.2; color: var(--brand-blue); margin-bottom: 16px; }
+        .page-intro { font-size: 1.05em; color: var(--muted); font-style: italic; margin-bottom: 12px; border-left: 4px solid var(--green); padding-left: 16px; line-height: 1.7; }
+        .page-meta { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
+        h2 { font-size: 1.3em; color: var(--brand-blue); margin: 40px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.05em; color: var(--brand-blue); margin: 24px 0 10px; font-style: italic; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        strong { color: var(--brand-blue); }
+        hr { border: none; border-top: 3px solid var(--brand-light); margin: 48px 0; }
+        ul, ol { margin: 0 0 1.2em 1.5em; }
+        li { margin-bottom: 0.5em; font-size: 1.05em; }
+
+        /* Step cards — the heart of the page */
+        .step-card { display: flex; gap: 0; margin-bottom: 16px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: white; }
+        .step-num { background: var(--brand-blue); color: white; font-family: system-ui, sans-serif; font-weight: 900; font-size: 1.8em; width: 64px; min-width: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px 8px; }
+        .step-num .step-label { font-size: 0.4em; font-weight: 400; opacity: 0.7; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; }
+        .step-body { flex: 1; padding: 20px 24px; }
+        .step-body h3 { font-style: normal; margin: 0 0 8px; font-size: 1.1em; color: var(--brand-blue); }
+        .step-body p { font-size: 0.97em; color: var(--text); line-height: 1.65; margin: 0 0 10px; }
+        .step-body p:last-of-type { margin-bottom: 0; }
+        .step-body .step-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .step-body .tool-link { font-family: system-ui, sans-serif; font-size: 0.8em; background: var(--brand-light); color: var(--brand-mid); padding: 4px 10px; border-radius: 4px; text-decoration: none; font-weight: 600; }
+        .step-body .tool-link:hover { background: var(--brand-mid); color: white; }
+
+        /* Step colours */
+        .step-card.s1 .step-num { background: var(--teal); }
+        .step-card.s2 .step-num { background: var(--brand-blue); }
+        .step-card.s3 .step-num { background: #7c3aed; }
+        .step-card.s4 .step-num { background: var(--orange); }
+        .step-card.s5 .step-num { background: #0e7490; }
+        .step-card.s6 .step-num { background: var(--green); }
+        .step-card.s7 .step-num { background: var(--brand-mid); }
+
+        /* Worked example box */
+        .example-box { background: #fffbeb; border: 3px solid #d97706; border-radius: 10px; padding: 24px 28px; margin: 32px 0; font-family: system-ui, sans-serif; }
+        .example-box .ex-label { font-size: 0.72em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #d97706; margin-bottom: 10px; }
+        .example-box h3 { color: var(--brand-blue); font-style: normal; margin: 0 0 12px; font-size: 1.05em; }
+        .example-box p { font-size: 0.95em; color: var(--text); line-height: 1.7; margin-bottom: 10px; }
+        .example-box p:last-child { margin: 0; }
+        .example-box strong { color: var(--brand-blue); }
+
+        /* Callouts */
+        .callout { border-radius: 8px; padding: 18px 22px; margin: 24px 0; font-family: system-ui, sans-serif; }
+        .callout.blue { background: var(--brand-light); border-left: 5px solid var(--brand-mid); }
+        .callout.green { background: #f0fdf4; border-left: 5px solid var(--green); }
+        .callout.red { background: #fff5f5; border-left: 5px solid var(--red); }
+        .callout strong { display: block; margin-bottom: 6px; }
+        .callout.blue strong { color: var(--brand-blue); }
+        .callout.green strong { color: var(--green); }
+        .callout.red strong { color: var(--red); }
+        .callout p { font-size: 0.95em; line-height: 1.65; margin: 0 0 8px; }
+        .callout p:last-child { margin: 0; }
+
+        .info-box { background: #f0f4f8; border: 3px solid var(--brand-blue); border-radius: 8px; padding: 24px 28px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .info-box h3 { color: var(--brand-blue); margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; border-bottom: 2px solid var(--brand-blue); padding-bottom: 8px; }
+        .info-box p { font-size: 0.97em; color: var(--text); margin-bottom: 10px; line-height: 1.7; }
+        .info-box p:last-child { margin: 0; }
+        .info-box strong { color: var(--brand-blue); }
+        .info-box a { color: var(--brand-mid); }
+
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px; margin: 32px 0; }
+        .nav-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; text-decoration: none; display: block; transition: box-shadow 0.15s; font-family: system-ui, sans-serif; }
+        .nav-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+        .nav-card .nav-tag { font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 6px; }
+        .nav-card h3 { color: var(--brand-blue); font-size: 0.95em; margin: 0 0 4px; line-height: 1.3; font-style: normal; }
+        .nav-card p { color: var(--muted); font-size: 0.85em; margin: 0; line-height: 1.4; }
+
+        .page-footer { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+
+        @media (max-width: 900px) { body { font-size: 16px; } .page-wrap { padding: 28px 20px 60px; } }
+        @media (max-width: 600px) {
+            body { font-size: 16px; }
+            .site-header { padding: 10px 16px; }
+            .header-nav { display: none; }
+            .page-wrap { padding: 20px 16px 48px; }
+            h1 { font-size: clamp(1.4em, 6vw, 2em); }
+            .step-card { flex-direction: column; }
+            .step-num { width: 100%; min-width: unset; flex-direction: row; gap: 8px; padding: 12px 16px; font-size: 1.4em; justify-content: flex-start; }
+            .step-body { padding: 16px; }
+            .nav-grid { grid-template-columns: 1fr; }
+            .info-box, .callout, .example-box { padding: 14px 16px; }
+        }
+        @media print {
+            .site-header, .header-nav, .header-tool-btn, .nav-grid { display: none !important; }
+            body { font-size: 12pt; color: black; background: white; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Concepts <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <a href="why-nothing-changes.html">Why nothing changes</a>
+                <a href="joiner-levels-of-fix.html">Joiner levels of fix</a>
+                <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>
+                <a href="pdsa-cycle.html">PDSA cycle</a>
+                <a href="types-of-measures.html">Types of measures</a>
+                <a href="model-for-improvement.html">Model for Improvement</a>
+                <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>
+                <a href="variation-and-spc.html">Variation &amp; SPC</a>
+                <a href="bright-spots.html">Bright Spots</a>
+                <a href="five-whys.html">The 5 Whys</a>
+                <a href="root-cause-analysis.html">Root Cause Analysis</a>
+                <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a>
+                <a href="pick-model.html">The PICK Model</a>
+            </div>
+        </div>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Articles <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <div class="menu-section">NHS Healthcare</div>
+                <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; Why nothing has worked</a>
+                <a href="dementia-diagnosis-rate.html">Dementia &mdash; The 66% target</a>
+                <a href="gp-appointments-analysis.html">GP appointments</a>
+                <a href="never-events-wrong-route.html">Never events &mdash; Wrong route</a>
+                <a href="anticoag-safety.html">Anticoagulation safety</a>
+                <a href="sepsis-six-does-public-data-show-whether-it-worked.html">Sepsis Six</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Environment &amp; Policy</div>
+                <a href="ulez-london-air-quality.html">ULEZ &mdash; Air quality</a>
+                <a href="the-grid-fixed-itself.html">The Grid fixed itself</a>
+                <a href="uk-gdp-analysis.html">UK GDP analysis</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Industrial</div>
+                <a href="hydrogen-plant-cusum.html">Hydrogen plant CUSUM</a>
+            </div>
+        </div>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Start here</a> &rsaquo; The Improvement Method</div>
+    <div class="page-flag">&#9989; A Practical Method</div>
+    <h1>Making Improvements That Stick</h1>
+    <p class="page-intro">Most improvement efforts fail not because the people involved lacked effort or intelligence, but because the method was incomplete. They fixed the symptom, not the cause. They fixed the cause at the wrong level. They fixed it correctly but never verified the fix worked. This seven-step method closes all three gaps &mdash; and it works in any organisation, in any sector.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Practical method &nbsp;&middot;&nbsp; June 2026</div>
+
+    <div class="callout blue">
+        <strong>The core principle</strong>
+        <p>Every persistent problem exists because the system is designed &mdash; intentionally or not &mdash; to produce it. Fixing the person, the team, or the process without fixing the system produces temporary relief and permanent recurrence. <a href="why-nothing-changes.html">Why nothing changes</a> explains the diagnostic framework. This page explains what to do about it.</p>
+    </div>
+
+    <hr>
+
+    <h2>The seven steps</h2>
+
+    <div class="step-card s1">
+        <div class="step-num"><span class="step-label">Step</span>1</div>
+        <div class="step-body">
+            <h3>List every symptom</h3>
+            <p>Write down every problem, recurring issue, and unexplained variation you experience. Don&rsquo;t filter yet &mdash; don&rsquo;t decide what is important and what is not. Capture everything: customer complaints, error rates, staff turnover, missed deadlines, lost sales, support calls, rework, delays. Get it all on paper.</p>
+            <p>Look hardest at where outcomes vary most for no obvious reason. High variation in outcomes for similar inputs is the diagnostic clue that the system is dependent on individuals rather than design &mdash; and that a structural fix is available.</p>
+        </div>
+    </div>
+
+    <div class="step-card s2">
+        <div class="step-num"><span class="step-label">Step</span>2</div>
+        <div class="step-body">
+            <h3>Measure your biggest issue over time</h3>
+            <p>For your most significant problem, find a number that tracks it over time &mdash; monthly sales, support cases per month, error rate, on-time delivery percentage, customer complaints per quarter. Plot it as a time series and run it through <a href="index.html">Bootstrap CUSUM</a>.</p>
+            <p>This step answers the question that most organisations skip: is this problem getting worse, staying flat, or gradually improving? A flat Bootstrap CUSUM line means the problem is stable at a level you don&rsquo;t want &mdash; it has been like this for years and will continue unless the system changes. An upward change point means something made it worse at a specific date &mdash; find out what changed then.</p>
+            <div class="step-tools">
+                <a href="index.html" class="tool-link">&#9654; Bootstrap CUSUM tool</a>
+                <a href="three-charts-three-stories.html" class="tool-link">Why Bootstrap CUSUM?</a>
+                <a href="types-of-measures.html" class="tool-link">Types of measures</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-card s3">
+        <div class="step-num"><span class="step-label">Step</span>3</div>
+        <div class="step-body">
+            <h3>Find the root cause</h3>
+            <p>For each significant issue, trace the causal chain back to its root. For a straightforward problem with a clear sequence of causes, use the <a href="five-whys.html">5 Whys</a> &mdash; ask why five times until you reach the underlying system condition. For a complex problem with multiple contributing factors, use a <a href="root-cause-analysis.html">fishbone diagram</a> to map all the possible causes across categories before investigating which ones are active.</p>
+            <p>The most important rule: keep going past &ldquo;human error.&rdquo; Human error is a symptom, not a cause. The root cause is the system condition that made the error easy to commit and hard to catch. Apply the <a href="joiner-levels-of-fix.html">Joiner test</a> at the end: is the proposed fix at the output level, the process level, or the system level? If it is not at the system level, ask whether a deeper cause exists.</p>
+            <div class="step-tools">
+                <a href="five-whys.html" class="tool-link">The 5 Whys</a>
+                <a href="root-cause-analysis.html" class="tool-link">Root Cause Analysis</a>
+                <a href="joiner-levels-of-fix.html" class="tool-link">Joiner&rsquo;s Levels of Fix</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-card s4">
+        <div class="step-num"><span class="step-label">Step</span>4</div>
+        <div class="step-body">
+            <h3>Find the dominant constraint</h3>
+            <p>Review your full list of root causes and look for the one that keeps appearing across multiple problems. That is your <strong>constraint</strong> &mdash; the single condition that, if addressed, would unlock improvement across the widest range of issues simultaneously. It is often something you do not have rather than something wrong that needs stopping: a missing role, a missing system, a missing decision that has never been made, a missing feedback loop.</p>
+            <p>Addressing anything other than the constraint improves things at the margins. Addressing the constraint changes the system. Look for what is already working well despite the constraints &mdash; those <a href="bright-spots.html">Bright Spots</a> are operating differently, and understanding how tells you what the constraint actually is.</p>
+            <div class="step-tools">
+                <a href="why-nothing-changes.html" class="tool-link">Why Nothing Changes</a>
+                <a href="bright-spots.html" class="tool-link">Bright Spots</a>
+                <a href="necessary-but-not-sufficient.html" class="tool-link">Necessary But Not Sufficient</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-card s5">
+        <div class="step-num"><span class="step-label">Step</span>5</div>
+        <div class="step-body">
+            <h3>Design a complete solution</h3>
+            <p>Generate possible solutions to the constraint and the root causes. Then apply the <a href="necessary-but-not-sufficient.html">necessary but not sufficient</a> test to each one: is this solution sufficient on its own, or does it only remove one obstacle while others remain? A training programme alone is rarely sufficient. A new process alone is rarely sufficient. A technology alone is rarely sufficient.</p>
+            <p>Ask: what are <em>all</em> the necessary conditions for the goal? Which are currently met? Which are not? A complete solution addresses all the unmet necessary conditions, not just the most obvious one. <a href="deming-14-points.html">Deming</a> and <a href="tampering-and-impatience.html">Goldratt</a> both made the same point: technology, process, and measurement must all change together. Change any two and the third pulls the system back.</p>
+            <div class="step-tools">
+                <a href="necessary-but-not-sufficient.html" class="tool-link">Necessary But Not Sufficient</a>
+                <a href="deming-14-points.html" class="tool-link">Deming&rsquo;s 14 Points</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-card s6">
+        <div class="step-num"><span class="step-label">Step</span>6</div>
+        <div class="step-body">
+            <h3>Prioritise with PICK</h3>
+            <p>You will have more possible solutions than capacity to implement them. Sort them using the <a href="pick-model.html">PICK model</a> &mdash; a simple 2x2 matrix of impact versus effort. <strong>Implement</strong> high-impact, low-effort ideas immediately. <strong>Challenge</strong> yourself to find a way to deliver high-impact, high-effort ideas &mdash; plan these carefully with a PDSA cycle. <strong>Possible</strong> means do it if you have spare capacity. <strong>Kill</strong> means stop &mdash; including stopping things already in progress that are low impact and high effort.</p>
+            <p>Be ruthless about Kill. The effort saved by stopping a low-impact activity is capacity for the high-impact ones. This is the discipline that makes the difference between an organisation that is perpetually busy but not improving, and one that is focused and making structural change.</p>
+            <div class="step-tools">
+                <a href="pick-model.html" class="tool-link">The PICK Model</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-card s7">
+        <div class="step-num"><span class="step-label">Step</span>7</div>
+        <div class="step-body">
+            <h3>Plan, Do, Study, Act</h3>
+            <p>Take your prioritised solutions through a <a href="pdsa-cycle.html">PDSA cycle</a>. <strong>Plan:</strong> state clearly what you predict will happen and by when. Pick a specific outcome measure and pre-specify the Bootstrap CUSUM change point you expect. <strong>Do:</strong> implement the change, on a small scale first where possible. <strong>Study:</strong> run Bootstrap CUSUM on the outcome measure. Has a structural change point appeared? <strong>Act:</strong> if yes, scale up. If no, the root cause analysis was incomplete &mdash; return to Step 3.</p>
+            <p>The Study step is where most improvement cycles break down. Without a pre-specified Bootstrap CUSUM test, any result can be interpreted as success. The pre-commitment is what makes the verdict honest &mdash; and honest verdicts are what produce learning rather than confirmation bias.</p>
+            <div class="step-tools">
+                <a href="pdsa-cycle.html" class="tool-link">PDSA Cycle</a>
+                <a href="index.html" class="tool-link">&#9654; Bootstrap CUSUM tool</a>
+                <a href="model-for-improvement.html" class="tool-link">Model for Improvement</a>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>A worked example &mdash; the growth problem</h2>
+
+    <div class="example-box">
+        <div class="ex-label">&#128218; Worked example</div>
+        <h3>A specialist software company with a growth constraint</h3>
+        <p>Consider a specialist healthcare software company: 40+ years established, profitable, strong customer base. Revenue from new work is replacing losses from market erosion &mdash; EMR displacement and reduced patient populations have shrunk the addressable market for the legacy product. New work is keeping pace with the losses, but not yet exceeding them. The same people and resources need to generate more new work than the base is losing. That is the improvement problem.</p>
+        <p><strong>Step 1 — List symptoms:</strong> No net revenue growth for several years. High support burden from a large installed base. Sales cycles of 3+ years. New product development slow. Boss is the sole sales channel. Every urgent support call takes a developer away from new work.</p>
+        <p><strong>Step 2 — Measure:</strong> Bootstrap CUSUM on monthly support cases shows a flat line &mdash; the support burden has been stable for years, meaning it is a system characteristic, not a recent deterioration. Bootstrap CUSUM on new contract value shows the same pattern &mdash; flat. The system is in balance but not growing.</p>
+        <p><strong>Step 3 — Root cause:</strong> 5 Whys applied to &ldquo;why is new contract value not growing?&rdquo; reaches a single answer: <em>everything routes through the same expert humans.</em> Sales requires the Boss. Support requires the developers. New product work requires the developers. All three compete for the same constrained resource. The system cannot grow without resolving the routing problem.</p>
+        <p><strong>Step 4 — Dominant constraint:</strong> No scalable operating model. The constraint is not capability &mdash; the team is skilled. It is the absence of a structure that separates the work: someone to own the operational machine so the Boss can focus on growth, and toolmakers ring-fenced from support so new work can proceed.</p>
+        <p><strong>Step 5 — Complete solution:</strong> Applying the necessary but not sufficient test: a new role (Investigator) is necessary but not sufficient. Toolmakers ring-fenced is necessary but not sufficient. A scripted support library that reduces inbound calls is necessary but not sufficient. A new market Blueprint product is necessary but not sufficient. All five necessary conditions must be met simultaneously &mdash; any two or three deliver partial benefit but not the structural change in growth rate.</p>
+        <p><strong>Step 6 — PICK:</strong> The Investigator appointment is Implement &mdash; high impact, low effort relative to its unlock value. The support library is Implement. The toolmaker ring-fence is Implement. The Blueprint product is Challenge &mdash; high impact but requires sustained focused development. The US market expansion is Challenge. Legacy product retirement planning is Possible. Continuing to customise on request without a scoping process is Kill.</p>
+        <p><strong>Step 7 — PDSA:</strong> Pre-specified Bootstrap CUSUM prediction: we expect an upward change point in new contract value within 18 months of the Investigator appointment, at 90% confidence. The Study step is not &ldquo;does it feel like things are improving?&rdquo; It is: has a Bootstrap CUSUM change point appeared in the new contract value series?</p>
+    </div>
+
+    <hr>
+
+    <h2>Why this method works when others do not</h2>
+
+    <div class="callout red">
+        <strong>The three failure modes this method prevents</strong>
+        <p><strong>Fixing the symptom, not the cause.</strong> Step 3 (root cause) and Step 4 (dominant constraint) prevent this by requiring the causal chain to be traced to the system level before solutions are designed.</p>
+        <p><strong>Fixing the cause at the wrong level.</strong> The Joiner test in Step 3 and the necessary/sufficient check in Step 5 prevent this. A fix that addresses the right cause at the wrong level (output or process rather than system) will not stick.</p>
+        <p><strong>Never verifying the fix worked.</strong> Step 7 prevents this. The pre-specified Bootstrap CUSUM test is the commitment that makes the verdict honest. Without it, confirmation bias will always find evidence of success.</p>
+    </div>
+
+    <div class="info-box">
+        <h3>&#128200; The full concept library behind this method</h3>
+        <p>Each step of this method draws on a body of thinking developed over decades. The concept pages on this site explain each element in depth &mdash; with the theory, the worked examples, and the specific failure modes to avoid. The method above is the practical sequence. The concept pages are the depth behind each step.</p>
+        <p style="margin-top:10px;">Step 1 &rarr; <a href="why-nothing-changes.html">Why Nothing Changes</a> &nbsp;&middot;&nbsp; Step 2 &rarr; <a href="variation-and-spc.html">Variation &amp; SPC</a> + <a href="three-charts-three-stories.html">Bootstrap CUSUM</a> &nbsp;&middot;&nbsp; Step 3 &rarr; <a href="five-whys.html">5 Whys</a> + <a href="root-cause-analysis.html">RCA</a> + <a href="joiner-levels-of-fix.html">Joiner</a> &nbsp;&middot;&nbsp; Step 4 &rarr; <a href="bright-spots.html">Bright Spots</a> &nbsp;&middot;&nbsp; Step 5 &rarr; <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a> &nbsp;&middot;&nbsp; Step 6 &rarr; <a href="pick-model.html">PICK Model</a> &nbsp;&middot;&nbsp; Step 7 &rarr; <a href="pdsa-cycle.html">PDSA</a> + <a href="model-for-improvement.html">Model for Improvement</a></p>
+    </div>
+
+    <h2>Start here</h2>
+    <div class="nav-grid">
+        <a href="index.html" class="nav-card">
+            <div class="nav-tag">Free Tool</div>
+            <h3>&#9654; Bootstrap CUSUM Tool</h3>
+            <p>Step 2 starts here. Paste your monthly data and find out whether your problem is stable, worsening, or already improving.</p>
+        </a>
+        <a href="why-nothing-changes.html" class="nav-card">
+            <div class="nav-tag">Diagnosis</div>
+            <h3>Why Nothing Changes</h3>
+            <p>The diagnostic framework — three signals that tell you whether more effort is the answer or whether the system needs to change.</p>
+        </a>
+        <a href="five-whys.html" class="nav-card">
+            <div class="nav-tag">Concept — Step 3</div>
+            <h3>The 5 Whys</h3>
+            <p>The simplest root cause tool. Five questions. Most analyses stop too early — here is how to reach the system level.</p>
+        </a>
+        <a href="pick-model.html" class="nav-card">
+            <div class="nav-tag">Concept — Step 6</div>
+            <h3>The PICK Model</h3>
+            <p>Impact vs effort. Which ideas to implement immediately, which to plan carefully, and which to kill.</p>
+        </a>
+        <a href="pdsa-cycle.html" class="nav-card">
+            <div class="nav-tag">Concept — Step 7</div>
+            <h3>PDSA Cycle</h3>
+            <p>How to test and verify that the fix worked — with a pre-specified Bootstrap CUSUM prediction before you start.</p>
+        </a>
+        <a href="necessary-but-not-sufficient.html" class="nav-card">
+            <div class="nav-tag">Concept — Step 5</div>
+            <h3>Necessary But Not Sufficient</h3>
+            <p>Why one fix is rarely enough — and how to design a solution that is collectively sufficient to produce the result.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Theoretical foundations:</strong> Deming, W.E. <em>Out of the Crisis.</em> MIT Press, 1982. &nbsp;&middot;&nbsp; Joiner, B.L. <em>Fourth Generation Management.</em> McGraw-Hill, 1994. &nbsp;&middot;&nbsp; Goldratt, E. <em>The Goal.</em> North River Press, 1984. &nbsp;&middot;&nbsp; Langley et al. <em>The Improvement Guide.</em> Jossey-Bass, 2009.</p>
+        <p style="margin-top:8px;"><strong>PICK model:</strong> Lockheed Martin Lean Six Sigma. NHS Institute for Innovation and Improvement.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+</main>
+</body>
+</html>

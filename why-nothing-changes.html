@@ -171,118 +171,6 @@
             .level { grid-template-columns: 100px 1fr; }
             .header-nav { display: none; }
         }
-    
-        /* ============================================================
-           RESPONSIVE — mobile, tablet, print
-           ============================================================ */
-
-        /* Tablet (601px – 900px) */
-        @media (max-width: 900px) {
-            body { font-size: 16px; }
-            .article-wrap, .page-wrap { padding: 28px 20px 60px; }
-            h1, .article-title { font-size: clamp(1.5em, 5vw, 2.2em); }
-            h2 { font-size: 1.2em; }
-            /* Tables — make them scroll horizontally */
-            .data-table-wrap, .numbers-box, table { overflow-x: auto; display: block; }
-            .numbers-box table, .data-table, .examples-table,
-            .inputs-table { display: block; overflow-x: auto; white-space: nowrap; }
-            /* Grids — 2 columns max on tablet */
-            .summary-grid, .measure-grid, .question-grid,
-            .nav-grid, .rules-grid, .weco-rules { grid-template-columns: 1fr 1fr; }
-            .lead-lag-box { grid-template-columns: 1fr 1fr; }
-            /* PDSA wrap — stack vertically */
-            .pdsa-wrap { flex-direction: column; align-items: center; }
-            /* Funnel wrap — stack */
-            .funnel-wrap { flex-direction: column; }
-        }
-
-        /* Mobile (max 600px) */
-        @media (max-width: 600px) {
-            body { font-size: 16px; line-height: 1.7; }
-
-            /* Header */
-            .site-header { padding: 10px 16px; gap: 8px; }
-            .header-nav { display: none; }
-            .header-tool-btn { font-size: 0.85em; padding: 7px 14px; }
-
-            /* Page wraps */
-            .article-wrap, .page-wrap { padding: 20px 16px 48px; }
-            .article-wrap { max-width: 100%; }
-
-            /* Typography */
-            h1, .article-title { font-size: clamp(1.4em, 6vw, 2em); }
-            h2 { font-size: 1.15em; margin: 32px 0 12px; }
-            h3 { font-size: 1em; }
-            p { font-size: 1em; }
-
-            /* Tables — horizontal scroll, min readable size */
-            table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch;
-                    white-space: nowrap; font-size: 0.82em; }
-            .data-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .numbers-box { padding: 10px 12px; overflow-x: auto; }
-            .numbers-box table { font-size: 0.8em; }
-            .numbers-box th, .numbers-box td { padding: 7px 10px; }
-            .examples-table, .inputs-table { font-size: 0.8em; }
-            /* Allow table cell text to wrap on mobile for readability */
-            .examples-table td, .inputs-table td { white-space: normal; min-width: 100px; }
-
-            /* Grids — single column */
-            .summary-grid, .measure-grid, .question-grid,
-            .nav-grid, .rules-grid, .weco-rules,
-            .lead-lag-box, .chart-pair, .funnel-wrap { grid-template-columns: 1fr;
-                                                         flex-direction: column; }
-
-            /* Summary/card boxes */
-            .summary-grid > div, .measure-grid > div { min-width: unset; }
-
-            /* PDSA diagram and wrap */
-            .pdsa-wrap { flex-direction: column; align-items: center; gap: 16px; }
-            .pdsa-svg { max-width: 260px; }
-            .pdsa-detail { min-width: unset; width: 100%; }
-
-            /* Concept page zone diagrams */
-            .weco-zones { font-size: 0.85em; }
-            .weco-label { width: 60px; min-width: 60px; font-size: 0.72em; }
-
-            /* Dark boxes */
-            .dark-box { padding: 18px 16px; }
-            .dark-box p { font-size: 0.92em; }
-
-            /* Callout boxes */
-            .callout, .finding-box, .callout-box,
-            .deming-box, .analysis-box { padding: 14px 16px; }
-
-            /* Article summary box grids */
-            div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
-
-            /* Breadcrumb */
-            .breadcrumb { font-size: 0.78em; }
-
-            /* Cycles row — scroll */
-            .cycles-row { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-            /* Three questions */
-            .three-questions .q-number { width: 44px; min-width: 44px; font-size: 1.2em; }
-
-            /* WECO zones diagram labels */
-            .weco-label { padding: 8px 4px; }
-
-            /* Chart figures */
-            .chart-figure img, .chart-figure svg { width: 100%; height: auto; }
-
-            /* Footer */
-            .page-footer, .article-footer { font-size: 0.8em; }
-            .page-footer ul, .article-footer ul { padding-left: 14px; }
-        }
-
-        /* Print */
-        @media print {
-            .site-header, .header-nav, .header-tool-btn,
-            .nav-grid, .toc-details, .cta-box { display: none !important; }
-            body { font-size: 12pt; color: black; background: white; }
-            .article-wrap, .page-wrap { max-width: 100%; padding: 0; }
-            a { color: black; }
-        }
     </style>
 </head>
 <body>
@@ -307,6 +195,7 @@
                 <a href="five-whys.html">The 5 Whys</a>
                 <a href="root-cause-analysis.html">Root Cause Analysis</a>
                 <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a>
+                <a href="pick-model.html">The PICK Model</a>
             </div>
         </div>
         <div class="nav-dropdown">
@@ -387,89 +276,16 @@
     <p>If the honest answer is the second: stop. Diagnose. The constraint is not effort. Find what the constraint actually is &mdash; then direct persistence at the right thing, not at repeating the same action with more energy.</p>
 
     <!-- ── SECTION 2: FIVE STAGES ── -->
-    <h2>Finding the root cause &mdash; a five-stage method</h2>
+    <h2 id="section-method">From diagnosis to action</h2>
 
-    <p>This is not an analytical technique. It is a question discipline &mdash; a structured sequence of obvious questions that the system is not designed to ask of itself. Each stage builds on the previous. The diagnosis is in the answers, not in the frameworks.</p>
+    <p>Recognising the signals above tells you that the system needs to change. The next question is how &mdash; precisely and systematically. The <a href="improvement-method.html">seven-step improvement method</a> on this site takes you from listing symptoms, through root cause analysis and prioritisation, to a PDSA cycle verified by Bootstrap CUSUM. Each step builds on the diagnostic framework described on this page.</p>
 
-    <div class="alert-blue">
-        <strong>The root cause is often an absence, not a fault.</strong> The instinct is to look for something wrong that needs stopping. But in most persistent organisational problems, the root cause is <em>something absent that needs building</em> &mdash; a missing role, a missing policy, a missing process that forces everything to route through whatever is available. Look for the structural absence before looking for the fault.
+    <div style="background:#f0fdf4;border:2px solid #198754;border-radius:8px;padding:20px 24px;margin:24px 0;font-family:system-ui,sans-serif;">
+        <strong style="display:block;margin-bottom:8px;color:#14532d;font-size:1em;">&#9989; The 7-step improvement method</strong>
+        <p style="font-size:0.95em;color:#14532d;line-height:1.65;margin:0;">A practical, structured cycle that closes the three most common improvement gaps: fixing the symptom instead of the cause, fixing the cause at the wrong level, and never verifying the fix worked. <a href="improvement-method.html" style="color:#198754;font-weight:700;">Read the full method &rarr;</a></p>
     </div>
 
-    <ol class="stages">
-
-        <li class="stage-item">
-            <div class="stage-num">1</div>
-            <div class="stage-body">
-                <div class="stage-title">Gather the data &mdash; before naming the problem</div>
-                <p class="stage-desc">List every symptom, recurring problem, and unexplained variation. <strong>Look hardest at where outcomes vary most for no obvious reason</strong> &mdash; that variation is Deming's diagnostic clue. High outcome variation is the fingerprint of a system dependent on people rather than design. Do not explain anything yet.</p>
-                <ul class="stage-qs">
-                    <li>What keeps happening that should not keep happening?</li>
-                    <li>Where do outcomes vary most &mdash; some go well, some go badly, for no obvious reason?</li>
-                    <li>What decisions wait for one specific person before they can move?</li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="stage-item">
-            <div class="stage-num">2</div>
-            <div class="stage-body">
-                <div class="stage-title">Find the root cause &mdash; or the structural absence</div>
-                <p class="stage-desc">Look for the single condition &mdash; one sentence &mdash; that makes all symptoms simultaneously inevitable. Test it three ways: does every symptom necessarily follow from it (necessity test)? Would most symptoms disappear if it were eliminated (removal test)? Do insiders nod when they hear it, rather than argue (recognition test)?</p>
-                <ul class="stage-qs">
-                    <li>What single condition, if true, would make every symptom on the list necessarily follow?</li>
-                    <li>What is absent that, if it existed, would make most symptoms disappear?</li>
-                    <li>When you describe this root cause to someone inside &mdash; do they nod, or argue?</li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="stage-item">
-            <div class="stage-num">3</div>
-            <div class="stage-body">
-                <div class="stage-title">Find the loop &mdash; why does it keep recurring?</div>
-                <p class="stage-desc">Every persistent problem has a reinforcing loop &mdash; a point where a consequence of the problem feeds back and makes the original condition worse or harder to fix. This is why the short-term fix always relieves the pressure to make the fundamental fix. Find the loop in plain language &mdash; no diagram needed.</p>
-                <ul class="stage-qs">
-                    <li>What does this problem directly produce? What do those consequences produce?</li>
-                    <li>Does any consequence eventually make the original problem worse or harder to fix?</li>
-                    <li>What short-term fix relieves the pressure &mdash; and how does that fix prevent the fundamental fix from ever being made?</li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="stage-item">
-            <div class="stage-num">4</div>
-            <div class="stage-body">
-                <div class="stage-title">Separate causes from consequences</div>
-                <p class="stage-desc">Most symptom lists contain genuine structural causes mixed with consequences of the system that are being treated as independent problems. Treating a consequence as a root cause produces an intervention aimed at the wrong level. The definitive test is simple.</p>
-                <ul class="stage-qs">
-                    <li>Would this symptom exist if the root cause did not exist?</li>
-                    <li>If we fixed this tomorrow, would the root cause keep producing it?</li>
-                    <li>Is this a description of what someone does &mdash; or what the system produces?</li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="stage-item">
-            <div class="stage-num">5</div>
-            <div class="stage-body">
-                <div class="stage-title">Sequence the structural response</div>
-                <p class="stage-desc">Design one intervention per structural cause. Then ask: which interventions must precede which? The sequence is a logical dependency &mdash; each intervention creates the conditions the next one requires. Not a list of good ideas. A dependency map.</p>
-                <ul class="stage-qs">
-                    <li>Does this intervention require another to be working before it can succeed?</li>
-                    <li>What is the prediction &mdash; what will change, by how much, within how many weeks?</li>
-                    <li>What would we need to see to conclude it is not working &mdash; and what would we do then?</li>
-                </ul>
-            </div>
-        </li>
-
-    </ol>
-
-    <div class="alert-teal">
-        <strong>The full question set.</strong> The complete diagnostic question set &mdash; 54 questions across all five stages, the Joiner check, Goldratt's five focusing steps, and the lead user validation questions &mdash; is available as a structured reference. <a href="glossary.html">See the glossary for framework definitions &rsaquo;</a>
-    </div>
-
-    <!-- ── SECTION 3: JOINER ── -->
-    <h2>Is the intervention deep enough to hold? &mdash; <a href="joiner-levels-of-fix.html" style="color:var(--brand-blue);text-decoration:none;">Joiner&rsquo;s levels</a></h2>
+<h2>Is the intervention deep enough to hold? &mdash; <a href="joiner-levels-of-fix.html" style="color:var(--brand-blue);text-decoration:none;">Joiner&rsquo;s levels</a></h2>
 
     <p>Before designing any intervention, classify it. This is the question that determines whether a change will hold or revert. Most improvement programmes fail not because the intervention was wrong but because it was aimed at the wrong depth. A Level 1 or Level 2 intervention aimed at a Level 3 problem will produce temporary improvement followed by reversion, every time, regardless of how well it is implemented.</p>
 
