@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/root-cause-analysis.html">
+    <title>Root Cause Analysis — Tools, Techniques and When to Use Them — StepChangeAnalysis.com</title>
+    <meta name="description" content="Root cause analysis explained — the fishbone (Ishikawa) diagram, fault tree analysis, the 5 Whys, and when to use each. Why finding the root cause is necessary but not sufficient — and how Bootstrap CUSUM verifies whether the fix worked.">
+    <meta name="keywords" content="root cause analysis explained, RCA healthcare, fishbone diagram explained, Ishikawa diagram, root cause analysis tools improvement, fault tree analysis, cause and effect diagram">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:   #002d5b;
+            --brand-mid:    #0056b3;
+            --brand-light:  #e9f2ff;
+            --text:         #1e293b;
+            --muted:        #64748b;
+            --border:       #e2e8f0;
+            --bg:           #f8f9fa;
+            --green:        #198754;
+            --orange:       #e67e22;
+            --red:          #c0392b;
+            --teal:         #0e7490;
+            --purple:       #7c3aed;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-nav { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; padding: 6px 10px; border-radius: 4px; }
+        .header-nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+        .header-nav a.active { color: white; font-weight: 700; background: rgba(255,255,255,0.15); }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-btn { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; background: none; border: none; cursor: pointer; padding: 6px 10px; border-radius: 4px; display: flex; align-items: center; gap: 4px; }
+        .nav-dropdown-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+        .nav-dropdown-btn .arrow { font-size: 0.7em; transition: transform 0.2s; }
+        .nav-dropdown:hover .arrow { transform: rotate(180deg); }
+        .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); min-width: 220px; z-index: 200; padding: 12px 0 6px; margin-top: 0; }
+        .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+        .nav-dropdown-menu::before { content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
+        .nav-dropdown-menu a { display: block; color: #1e293b; font-family: system-ui, sans-serif; font-size: 0.85em; padding: 8px 16px; text-decoration: none; white-space: nowrap; border-radius: 0; background: none; }
+        .nav-dropdown-menu a:hover { background: #e9f2ff; color: #002d5b; }
+        .nav-dropdown-menu .menu-section { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; padding: 8px 16px 4px; }
+        .nav-dropdown-menu .menu-divider { border: none; border-top: 1px solid #e2e8f0; margin: 4px 0; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        @media (max-width: 600px) { .header-nav { display: none; } }
+
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .page-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 12px; }
+        h1 { font-size: clamp(1.8em, 4vw, 2.6em); line-height: 1.2; color: var(--brand-blue); margin-bottom: 16px; font-weight: bold; }
+        .page-intro { font-size: 1.05em; color: var(--muted); font-style: italic; margin-bottom: 12px; border-left: 4px solid var(--brand-mid); padding-left: 16px; line-height: 1.7; }
+        .page-meta { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
+        h2 { font-size: 1.3em; color: var(--brand-blue); margin: 40px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.05em; color: var(--brand-blue); margin: 24px 0 10px; font-style: italic; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        strong { color: var(--brand-blue); }
+        hr { border: none; border-top: 3px solid var(--brand-light); margin: 48px 0; }
+        ul, ol { margin: 0 0 1.2em 1.5em; }
+        li { margin-bottom: 0.5em; font-size: 1.05em; }
+
+        /* Tool comparison cards */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; margin: 28px 0; }
+        .tool-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; font-family: system-ui, sans-serif; border-top: 4px solid var(--brand-mid); }
+        .tool-card.fishbone { border-top-color: var(--teal); }
+        .tool-card.five-whys { border-top-color: var(--orange); }
+        .tool-card.fault-tree { border-top-color: var(--purple); }
+        .tool-card.swarm { border-top-color: var(--green); }
+        .tool-card .tc-label { font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; color: var(--muted); }
+        .tool-card.fishbone .tc-label { color: var(--teal); }
+        .tool-card.five-whys .tc-label { color: var(--orange); }
+        .tool-card.fault-tree .tc-label { color: var(--purple); }
+        .tool-card.swarm .tc-label { color: var(--green); }
+        .tool-card h3 { font-style: normal; margin: 0 0 8px; font-size: 1em; color: var(--brand-blue); }
+        .tool-card p { font-size: 0.88em; color: var(--text); line-height: 1.55; margin: 0 0 8px; }
+        .tool-card .tc-use { font-size: 0.82em; font-style: italic; color: var(--muted); }
+        .tool-card .tc-limit { font-size: 0.82em; color: var(--red); margin-top: 4px; }
+
+        /* Fishbone SVG diagram */
+        .fishbone-wrap { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 28px 0; overflow-x: auto; }
+
+        /* Callouts */
+        .callout { border-radius: 8px; padding: 18px 22px; margin: 24px 0; font-family: system-ui, sans-serif; }
+        .callout.blue { background: var(--brand-light); border-left: 5px solid var(--brand-mid); }
+        .callout.green { background: #f0fdf4; border-left: 5px solid var(--green); }
+        .callout.orange { background: #fff8f0; border-left: 5px solid var(--orange); }
+        .callout.red { background: #fff5f5; border-left: 5px solid var(--red); }
+        .callout.teal { background: #f0fdfa; border-left: 5px solid var(--teal); }
+        .callout strong { display: block; margin-bottom: 6px; font-size: 1em; }
+        .callout.blue strong { color: var(--brand-blue); }
+        .callout.green strong { color: var(--green); }
+        .callout.orange strong { color: var(--orange); }
+        .callout.red strong { color: var(--red); }
+        .callout.teal strong { color: var(--teal); }
+        .callout p { font-size: 0.95em; line-height: 1.65; margin: 0 0 8px; }
+        .callout p:last-child { margin: 0; }
+
+        /* Info box */
+        .info-box { background: #f0f4f8; border: 3px solid var(--brand-blue); border-radius: 8px; padding: 24px 28px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .info-box h3 { color: var(--brand-blue); margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; border-bottom: 2px solid var(--brand-blue); padding-bottom: 8px; }
+        .info-box p { font-size: 0.97em; color: var(--text); margin-bottom: 10px; line-height: 1.7; }
+        .info-box p:last-child { margin-bottom: 0; }
+        .info-box strong { color: var(--brand-blue); }
+        .info-box a { color: var(--brand-mid); }
+
+        /* Comparison table */
+        .compare-table { width: 100%; border-collapse: collapse; font-family: system-ui, sans-serif; font-size: 0.9em; margin: 24px 0; }
+        .compare-table th { background: var(--brand-blue); color: white; padding: 10px 14px; text-align: left; }
+        .compare-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+        .compare-table tr:nth-child(even) { background: var(--brand-light); }
+        .compare-table tr:last-child td { border-bottom: none; }
+
+        /* Nav grid */
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px; margin: 32px 0; }
+        .nav-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; text-decoration: none; display: block; transition: box-shadow 0.15s; font-family: system-ui, sans-serif; }
+        .nav-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+        .nav-card .nav-tag { font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 6px; }
+        .nav-card h3 { color: var(--brand-blue); font-size: 0.95em; margin: 0 0 4px; line-height: 1.3; font-style: normal; }
+        .nav-card p { color: var(--muted); font-size: 0.85em; margin: 0; line-height: 1.4; }
+
+        .toc-details { margin: 0 0 28px 0; border: 1px solid var(--border); border-radius: 8px; font-family: system-ui, sans-serif; background: white; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: bold; color: var(--brand-blue); font-size: 0.95em; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+        .toc-details summary::-webkit-details-marker { display: none; }
+        .toc-details summary:hover { background: var(--brand-light); border-radius: 8px; }
+        .toc-details[open] summary { border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; }
+        .toc-inner { padding: 6px 18px 16px; }
+        .toc-inner ol { margin: 10px 0 0 1.2em; line-height: 2.1; }
+        .toc-inner ol li { font-size: 0.92em; }
+        .toc-inner ol li a { color: var(--brand-mid); text-decoration: none; }
+        .toc-inner ol li a:hover { text-decoration: underline; }
+
+        .page-footer { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+
+        @media (max-width: 900px) { body { font-size: 16px; } .page-wrap { padding: 28px 20px 60px; } }
+        @media (max-width: 600px) {
+            body { font-size: 16px; line-height: 1.7; }
+            .site-header { padding: 10px 16px; }
+            .header-nav { display: none; }
+            .page-wrap { padding: 20px 16px 48px; }
+            h1 { font-size: clamp(1.4em, 6vw, 2em); }
+            h2 { font-size: 1.15em; }
+            p { font-size: 1em; }
+            .tools-grid, .nav-grid { grid-template-columns: 1fr; }
+            table { display: block; overflow-x: auto; font-size: 0.82em; }
+            .info-box, .callout { padding: 14px 16px; }
+        }
+        @media print {
+            .site-header, .header-nav, .header-tool-btn, .nav-grid, .toc-details { display: none !important; }
+            body { font-size: 12pt; color: black; background: white; }
+            .page-wrap { max-width: 100%; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Concepts <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <a href="why-nothing-changes.html">Why nothing changes</a>
+                <a href="joiner-levels-of-fix.html">Joiner levels of fix</a>
+                <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>
+                <a href="pdsa-cycle.html">PDSA cycle</a>
+                <a href="types-of-measures.html">Types of measures</a>
+                <a href="model-for-improvement.html">Model for Improvement</a>
+                <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>
+                <a href="variation-and-spc.html">Variation &amp; SPC</a>
+                <a href="bright-spots.html">Bright Spots</a>
+                <a href="five-whys.html">The 5 Whys</a>
+                <a href="root-cause-analysis.html" style="font-weight:600;color:#002d5b;">Root Cause Analysis</a>
+            </div>
+        </div>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Articles <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <div class="menu-section">NHS Healthcare</div>
+                <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; Why nothing has worked</a>
+                <a href="dementia-diagnosis-rate.html">Dementia &mdash; The 66% target</a>
+                <a href="gp-appointments-analysis.html">GP appointments</a>
+                <a href="never-events-wrong-route.html">Never events &mdash; Wrong route</a>
+                <a href="anticoag-safety.html">Anticoagulation safety</a>
+                <a href="sepsis-six-does-public-data-show-whether-it-worked.html">Sepsis Six</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Environment &amp; Policy</div>
+                <a href="ulez-london-air-quality.html">ULEZ &mdash; Air quality</a>
+                <a href="the-grid-fixed-itself.html">The Grid fixed itself</a>
+                <a href="uk-gdp-analysis.html">UK GDP analysis</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Industrial</div>
+                <a href="hydrogen-plant-cusum.html">Hydrogen plant CUSUM</a>
+            </div>
+        </div>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Concepts</a> &rsaquo; Root Cause Analysis</div>
+    <div class="page-flag">&#128200; Improvement Concepts</div>
+    <h1>Root Cause Analysis</h1>
+    <p class="page-intro">Root cause analysis (RCA) is the family of structured techniques used to identify why a problem occurred &mdash; not just what happened, but why the system produced that outcome. Finding the root cause is necessary but not sufficient. The fix must operate at the right level of the system, and Bootstrap CUSUM must verify that it worked.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what">What root cause analysis is</a></li>
+                <li><a href="#section-tools">The RCA tool family</a></li>
+                <li><a href="#section-fishbone">The fishbone (Ishikawa) diagram</a></li>
+                <li><a href="#section-when">When to use which tool</a></li>
+                <li><a href="#section-necessary">Finding the root cause is necessary but not sufficient</a></li>
+                <li><a href="#section-nhs">RCA in the NHS &mdash; why it frequently fails to prevent recurrence</a></li>
+                <li><a href="#section-cusum">Closing the loop with Bootstrap CUSUM</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what">What root cause analysis is</h2>
+
+    <p>Root cause analysis is a structured investigation methodology applied after an adverse event, near-miss, or persistent problem. Its purpose is to identify the fundamental cause &mdash; the root cause &mdash; that, if addressed, would prevent recurrence. Not the proximate cause (what immediately triggered the event), not the contributing factors (what made it worse), but the underlying condition that made the event possible.</p>
+
+    <p>The distinction matters because most organisations respond to problems at the proximate cause level. A patient falls: the immediate response is to put up the bed rails. A medication error occurs: the immediate response is to retrain the nurse. These responses address the proximate cause &mdash; they may prevent this specific event in this specific way, but they leave the underlying condition unchanged. The next event of the same type will occur through a slightly different proximate cause, and the cycle repeats.</p>
+
+    <div class="callout blue">
+        <strong>Root cause vs proximate cause vs contributing factor</strong>
+        <p><strong>Proximate cause:</strong> The immediate trigger of the event. What happened just before the adverse outcome. A necessary but not sufficient explanation &mdash; it tells you the mechanism but not the cause.</p>
+        <p><strong>Contributing factor:</strong> A condition that increased the likelihood or severity of the event but did not directly cause it. Fatigue, understaffing, poor lighting, time pressure. Important context but not the root cause.</p>
+        <p><strong>Root cause:</strong> The fundamental system condition without which the event either could not have occurred or would have been far less likely. Addressing the root cause prevents recurrence of the entire class of events, not just this specific instance.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-tools">The RCA tool family</h2>
+
+    <p>Several complementary tools exist for root cause analysis. Each is suited to different types of problems and different organisational contexts.</p>
+
+    <div class="tools-grid">
+        <div class="tool-card five-whys">
+            <div class="tc-label">&#9679; Linear chains</div>
+            <h3>The 5 Whys</h3>
+            <p>Ask why five times to trace a linear causal chain from symptom to root cause. Simple, fast, requires no special equipment. Developed by Toyota.</p>
+            <div class="tc-use">Best for: single-cause problems with a clear causal chain. Process failures where one thing led to another.</div>
+            <div class="tc-limit">Limitation: produces a single causal chain. Misses multiple interacting causes. Different teams reach different answers.</div>
+        </div>
+        <div class="tool-card fishbone">
+            <div class="tc-label">&#9679; Multiple causes</div>
+            <h3>Fishbone (Ishikawa) Diagram</h3>
+            <p>Maps multiple categories of potential causes onto a diagram shaped like a fishbone, with the problem at the head. Developed by Kaoru Ishikawa at Kawasaki in the 1960s.</p>
+            <div class="tc-use">Best for: complex problems with multiple contributing causes across different categories. Team-based analysis sessions.</div>
+            <div class="tc-limit">Limitation: generates hypotheses, not confirmed causes. Requires follow-up investigation to verify which branches are active.</div>
+        </div>
+        <div class="tool-card fault-tree">
+            <div class="tc-label">&#9679; System failures</div>
+            <h3>Fault Tree Analysis (FTA)</h3>
+            <p>Top-down logical diagram that maps all possible combinations of failures that could produce an undesired top event. Uses Boolean logic gates (AND, OR). Standard in aerospace and nuclear industries.</p>
+            <div class="tc-use">Best for: safety-critical systems where all failure pathways must be identified and quantified. High-consequence, low-frequency events.</div>
+            <div class="tc-limit">Limitation: complex and time-intensive. Requires detailed system knowledge. Overkill for most healthcare improvement work.</div>
+        </div>
+        <div class="tool-card swarm">
+            <div class="tc-label">&#9679; Near-misses</div>
+            <h3>Significant Event Analysis (SEA)</h3>
+            <p>A reflective, team-based review of significant events &mdash; including near-misses and good outcomes &mdash; to learn from what happened. Standard in UK primary care.</p>
+            <div class="tc-use">Best for: primary care and community settings. Learning from both adverse events and positive outcomes. Building a culture of reflection.</div>
+            <div class="tc-limit">Limitation: variable quality depending on team facilitation skills. Can become a tick-box exercise without strong facilitation.</div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-fishbone">The fishbone (Ishikawa) diagram</h2>
+
+    <p>The fishbone diagram &mdash; also called the Ishikawa diagram or cause-and-effect diagram &mdash; was developed by Kaoru Ishikawa at Kawasaki Heavy Industries in the 1960s and is now used across healthcare, manufacturing, and service industries worldwide. It provides a structured way to brainstorm and organise potential causes across multiple categories simultaneously.</p>
+
+    <div class="fishbone-wrap">
+        <svg viewBox="0 0 720 320" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+            <!-- Spine -->
+            <line x1="80" y1="160" x2="620" y2="160" stroke="#002d5b" stroke-width="3"/>
+            <!-- Problem box -->
+            <rect x="620" y="130" width="90" height="60" rx="6" fill="#002d5b"/>
+            <text x="665" y="153" text-anchor="middle" fill="white" font-size="10" font-weight="700">PROBLEM</text>
+            <text x="665" y="167" text-anchor="middle" fill="white" font-size="10" font-weight="700">STATEMENT</text>
+            <text x="665" y="181" text-anchor="middle" fill="#93c5fd" font-size="9">Effect</text>
+            <!-- Arrow head -->
+            <polygon points="618,155 608,148 608,162" fill="#002d5b"/>
+
+            <!-- Top branches -->
+            <!-- Branch 1: People (top left) -->
+            <line x1="180" y1="160" x2="240" y2="80" stroke="#0e7490" stroke-width="2.5"/>
+            <rect x="148" y="55" width="90" height="32" rx="5" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
+            <text x="193" y="68" text-anchor="middle" fill="#0e7490" font-size="11" font-weight="700">People</text>
+            <text x="193" y="82" text-anchor="middle" fill="#0e7490" font-size="9">Skills, training, staffing</text>
+            <!-- Sub-bones top left -->
+            <line x1="200" y1="135" x2="240" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="220" y1="148" x2="240" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <!-- Branch 2: Process (top centre) -->
+            <line x1="340" y1="160" x2="380" y2="80" stroke="#198754" stroke-width="2.5"/>
+            <rect x="308" y="55" width="90" height="32" rx="5" fill="#f0fdf4" stroke="#198754" stroke-width="2"/>
+            <text x="353" y="68" text-anchor="middle" fill="#198754" font-size="11" font-weight="700">Process</text>
+            <text x="353" y="82" text-anchor="middle" fill="#198754" font-size="9">Steps, procedures</text>
+            <line x1="355" y1="135" x2="380" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="365" y1="148" x2="380" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <!-- Branch 3: Equipment (top right) -->
+            <line x1="500" y1="160" x2="530" y2="80" stroke="#7c3aed" stroke-width="2.5"/>
+            <rect x="468" y="55" width="90" height="32" rx="5" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+            <text x="513" y="68" text-anchor="middle" fill="#7c3aed" font-size="11" font-weight="700">Equipment</text>
+            <text x="513" y="82" text-anchor="middle" fill="#7c3aed" font-size="9">Tools, technology</text>
+            <line x1="510" y1="135" x2="530" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="518" y1="148" x2="530" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <!-- Bottom branches -->
+            <!-- Branch 4: Environment (bottom left) -->
+            <line x1="180" y1="160" x2="240" y2="240" stroke="#e67e22" stroke-width="2.5"/>
+            <rect x="148" y="235" width="90" height="32" rx="5" fill="#fff8f0" stroke="#e67e22" stroke-width="2"/>
+            <text x="193" y="248" text-anchor="middle" fill="#e67e22" font-size="11" font-weight="700">Environment</text>
+            <text x="193" y="262" text-anchor="middle" fill="#e67e22" font-size="9">Workplace, culture</text>
+            <line x1="200" y1="185" x2="240" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="220" y1="172" x2="240" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <!-- Branch 5: Management (bottom centre) -->
+            <line x1="340" y1="160" x2="380" y2="240" stroke="#c0392b" stroke-width="2.5"/>
+            <rect x="308" y="235" width="90" height="32" rx="5" fill="#fff5f5" stroke="#c0392b" stroke-width="2"/>
+            <text x="353" y="248" text-anchor="middle" fill="#c0392b" font-size="11" font-weight="700">Management</text>
+            <text x="353" y="262" text-anchor="middle" fill="#c0392b" font-size="9">Decisions, resources</text>
+            <line x1="355" y1="185" x2="380" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="365" y1="172" x2="380" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <!-- Branch 6: Materials (bottom right) -->
+            <line x1="500" y1="160" x2="530" y2="240" stroke="#0056b3" stroke-width="2.5"/>
+            <rect x="468" y="235" width="90" height="32" rx="5" fill="#e9f2ff" stroke="#0056b3" stroke-width="2"/>
+            <text x="513" y="248" text-anchor="middle" fill="#0056b3" font-size="11" font-weight="700">Materials</text>
+            <text x="513" y="262" text-anchor="middle" fill="#0056b3" font-size="9">Supplies, information</text>
+            <line x1="510" y1="185" x2="530" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="518" y1="172" x2="530" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <!-- Start point label -->
+            <text x="70" y="155" text-anchor="middle" fill="#64748b" font-size="10">Start</text>
+            <text x="70" y="168" text-anchor="middle" fill="#64748b" font-size="10">here</text>
+
+            <!-- Title -->
+            <text x="360" y="16" text-anchor="middle" fill="#002d5b" font-size="12" font-weight="700">Fishbone (Ishikawa) Diagram &mdash; 6M Categories</text>
+            <text x="360" y="30" text-anchor="middle" fill="#64748b" font-size="10">Each branch is a category of potential causes. Sub-bones are specific causes within that category.</text>
+
+            <!-- Legend -->
+            <text x="80" y="305" fill="#64748b" font-size="9">&#9650; Top branches: above the spine &nbsp;&nbsp; &#9660; Bottom branches: below the spine &nbsp;&nbsp; Each sub-bone is a specific hypothesis to investigate</text>
+        </svg>
+    </div>
+
+    <h3>The 6M categories</h3>
+    <p>The most widely used fishbone structure in manufacturing and healthcare uses six categories &mdash; the 6Ms. In healthcare the categories are sometimes adapted to the 4Ps (People, Process, Place, Policy) or to specific clinical frameworks.</p>
+
+    <div style="overflow-x:auto; margin:16px 0;">
+        <table class="compare-table">
+            <thead>
+                <tr><th>Category</th><th>Manufacturing original</th><th>Healthcare equivalent</th><th>Examples of causes</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Man / People</strong></td><td>Operator skills, training</td><td>Staff knowledge, fatigue, communication</td><td>Insufficient training, unclear roles, handover failures</td></tr>
+                <tr><td><strong>Machine / Equipment</strong></td><td>Tools, machinery</td><td>Medical devices, IT systems, connectors</td><td>Equipment not available, alert fatigue, incompatible connectors</td></tr>
+                <tr><td><strong>Method / Process</strong></td><td>Procedures, work instructions</td><td>Clinical protocols, care pathways</td><td>No standard procedure, procedure not followed, outdated guideline</td></tr>
+                <tr><td><strong>Material</strong></td><td>Raw materials, components</td><td>Medications, supplies, patient information</td><td>Look-alike/sound-alike drugs, missing information, supply chain failures</td></tr>
+                <tr><td><strong>Measurement</strong></td><td>Inspection methods</td><td>Monitoring, audit, reporting</td><td>No monitoring system, measurement error, metric not tracked</td></tr>
+                <tr><td><strong>Mother Nature / Environment</strong></td><td>Temperature, humidity</td><td>Ward culture, staffing levels, time pressure</td><td>Understaffing, interruptions, normalisation of deviance</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-when">When to use which tool</h2>
+
+    <div style="overflow-x:auto; margin:24px 0;">
+        <table class="compare-table">
+            <thead>
+                <tr><th>Situation</th><th>Recommended tool</th><th>Why</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Single adverse event with a clear sequence of events</td>
+                    <td><a href="five-whys.html">5 Whys</a></td>
+                    <td>Fast, simple, follows the causal chain directly</td>
+                </tr>
+                <tr>
+                    <td>Complex event with multiple contributing causes across different departments or systems</td>
+                    <td>Fishbone diagram</td>
+                    <td>Captures multiple categories simultaneously, good for team sessions</td>
+                </tr>
+                <tr>
+                    <td>Recurring pattern of similar events across multiple sites or time periods</td>
+                    <td>Bootstrap CUSUM + RCA</td>
+                    <td>CUSUM identifies the pattern and dates it; RCA explains the cause</td>
+                </tr>
+                <tr>
+                    <td>Safety-critical system where all failure pathways must be mapped</td>
+                    <td>Fault tree analysis</td>
+                    <td>Systematic, quantifiable, maps all pathways including combinations</td>
+                </tr>
+                <tr>
+                    <td>Learning from near-misses in primary care or community settings</td>
+                    <td>Significant Event Analysis</td>
+                    <td>Reflective format, culturally accessible, covers positive events too</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-necessary">Finding the root cause is necessary but not sufficient</h2>
+
+    <p>Root cause analysis is widely assumed to lead naturally to prevention. Find the cause, fix the cause, prevent recurrence. In practice the chain frequently breaks at the third link. Two specific failures account for most of this.</p>
+
+    <p><strong>The fix operates at the wrong level.</strong> The RCA correctly identifies the root cause at the system level. The fix is implemented at the process or output level because the system-level fix is too expensive, too slow, or outside the authority of the team conducting the analysis. The root cause remains unchanged. The event recurs through a different proximate cause. Another RCA is conducted. The pattern repeats. <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a> is the diagnostic tool for this failure: if the fix is at Level 1 or Level 2 but the root cause is at Level 3, the fix will not prevent recurrence.</p>
+
+    <p><strong>The fix is never verified.</strong> The fix is implemented and assumed to work. No pre-specified outcome measure was defined before the fix. No Bootstrap CUSUM prediction was made. When the next review occurs, the team reports that the action was completed &mdash; not that the outcome changed. Completing an action and changing an outcome are not the same thing. Without a pre-specified test, the improvement is asserted rather than confirmed.</p>
+
+    <div class="callout red">
+        <strong>The NHS RCA cycle that produces no change</strong>
+        <p>A Never Event occurs. An RCA is conducted. A corrective action plan is produced. The actions are completed and signed off. The event occurs again the following year. Another RCA is conducted. The same root causes are identified. A similar action plan is produced. This cycle, documented in multiple NHS investigations, is the direct consequence of RCA without Joiner-level awareness and without Bootstrap CUSUM verification. The root cause is found, a Level 1 or Level 2 fix is applied, the system remains unchanged, and the event recurs. <a href="never-events-wrong-route.html">Bootstrap CUSUM on NHS Never Events data</a> shows the result: 17.5 events per year, unchanged for 15 years, across thousands of individual RCA investigations.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-nhs">RCA in the NHS &mdash; why it frequently fails to prevent recurrence</h2>
+
+    <p>The NHS conducts thousands of Root Cause Analyses every year through the Serious Incident framework, the Patient Safety Incident Response Framework (PSIRF), and clinical audit processes. The volume of RCA activity is not in question. The effectiveness is.</p>
+
+    <p>Three structural features of NHS RCA produce the recurring-event pattern:</p>
+
+    <p><strong>1. Individual event focus without pattern analysis.</strong> Each RCA analyses one specific event. The systemic pattern &mdash; that the same type of event recurs at the same rate year after year &mdash; is visible only when multiple events are analysed as a series. Bootstrap CUSUM on the series answers the question that individual RCA cannot: has the rate of this type of event structurally changed? If it has not, the individual RCAs have not produced system change.</p>
+
+    <p><strong>2. Action completion measured, not outcome change.</strong> NHS governance frameworks typically require trusts to report that RCA actions have been completed. They do not require trusts to demonstrate that completing those actions changed the outcome. The accountability framework measures activity, not effect. This is precisely the <a href="types-of-measures.html">process measure vs outcome measure</a> confusion: completing an action plan is a process measure. Reducing the event rate is an outcome measure. The NHS reports the former and calls it improvement.</p>
+
+    <p><strong>3. PSIRF and the shift toward system learning.</strong> The Patient Safety Incident Response Framework (2022) is a genuine improvement on previous frameworks. It explicitly moves away from individual RCA of every serious incident toward a system-level analysis of themes and patterns. It is the right direction. The analytical tool that makes system-level pattern analysis rigorous &mdash; Bootstrap CUSUM applied to the event series &mdash; is not yet routinely used within it.</p>
+
+    <hr>
+
+    <h2 id="section-cusum">Closing the loop with Bootstrap CUSUM</h2>
+
+    <div class="info-box">
+        <h3>&#128202; The complete RCA + Bootstrap CUSUM cycle</h3>
+        <p><strong>Step 1 — Identify the pattern with Bootstrap CUSUM.</strong> Apply Bootstrap CUSUM to the event rate series (incidents per month, adverse events per quarter, never events per year). If the process is stable with no change point, individual events are common cause variation — the system is producing them routinely. This tells you the problem is systemic, not episodic. If an upward change point appears, something specific changed and made things worse. Date the change point — that narrows the investigation window.</p>
+        <p style="margin-top:10px;"><strong>Step 2 — Identify the root cause with RCA.</strong> Use the <a href="five-whys.html">5 Whys</a> or fishbone diagram to trace the causal chain. Apply the Joiner test at the end: is the proposed fix at Level 1 (output), Level 2 (process), or Level 3 (system)? If it is at Level 1 or 2, ask whether a Level 3 cause exists that the analysis has not yet reached.</p>
+        <p style="margin-top:10px;"><strong>Step 3 — Implement a Level 3 fix.</strong> The fix must address the root cause at the system level. Physical redesign where possible (making the wrong action impossible), structural change where physical redesign is not feasible, economic or accountability mechanism change where structural redesign is not feasible.</p>
+        <p style="margin-top:10px;"><strong>Step 4 — Pre-specify the Bootstrap CUSUM test.</strong> Before implementing the fix, state in writing: we expect a Bootstrap CUSUM change point in [outcome measure — the event rate series] within [Z] time periods at [Y]% confidence. This is the commitment that makes the verification step meaningful.</p>
+        <p style="margin-top:10px;"><strong>Step 5 — Verify with Bootstrap CUSUM.</strong> Run Bootstrap CUSUM on the event rate series periodically after the fix. When a downward change point appears at the predicted confidence level, the fix is confirmed. When it does not appear within the expected lag window, the root cause analysis was incomplete — return to Step 2.</p>
+    </div>
+
+    <hr>
+
+    <h2>Related concepts</h2>
+    <div class="nav-grid">
+        <a href="five-whys.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>The 5 Whys</h3>
+            <p>The simplest RCA tool — asking why five times to reach the root cause. Includes the Never Events worked example.</p>
+        </a>
+        <a href="joiner-levels-of-fix.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Joiner&rsquo;s Levels of Fix</h3>
+            <p>The test that determines whether the RCA fix will prevent recurrence — or just delay the next event.</p>
+        </a>
+        <a href="pdsa-cycle.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>PDSA Cycle</h3>
+            <p>RCA is the Plan phase theory of change. Bootstrap CUSUM is the Study phase verification. PDSA is the framework that connects them.</p>
+        </a>
+        <a href="types-of-measures.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Types of Measures</h3>
+            <p>Action completion is a process measure. Event rate reduction is an outcome measure. NHS RCA typically reports the former.</p>
+        </a>
+        <a href="never-events-wrong-route.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; Patient Safety</div>
+            <h3>Never Events &mdash; Wrong Route</h3>
+            <p>Thousands of RCAs. No structural change in the event rate. Bootstrap CUSUM shows what happens when RCA never reaches Level 3.</p>
+        </a>
+        <a href="variation-and-spc.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Variation &amp; SPC</h3>
+            <p>RCA analyses individual events. SPC analyses patterns. A stable event rate with no change point means the system is producing events routinely — individual RCA misses this entirely.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Fishbone diagram:</strong> Ishikawa, K. <em>Introduction to Quality Control.</em> 3A Corporation, 1990. Original development at Kawasaki Heavy Industries, 1960s.</p>
+        <p style="margin-top:8px;"><strong>5 Whys:</strong> Ohno, T. <em>Toyota Production System.</em> Productivity Press, 1978.</p>
+        <p style="margin-top:8px;"><strong>NHS PSIRF:</strong> NHS England. <em>Patient Safety Incident Response Framework.</em> 2022. <a href="https://www.england.nhs.uk/patient-safety/incident-response-framework/">england.nhs.uk</a></p>
+        <p style="margin-top:8px;"><strong>Joiner levels of fix:</strong> Joiner, B.L. <em>Fourth Generation Management.</em> McGraw-Hill, 1994.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+</body>
+</html>

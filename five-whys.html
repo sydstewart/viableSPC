@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/five-whys.html">
+    <title>The 5 Whys — Root Cause Analysis Technique — StepChangeAnalysis.com</title>
+    <meta name="description" content="The 5 Whys explained — Sakichi Toyoda's technique for finding the root cause of a problem by asking why five times. Why most 5 Whys analyses stop too early, and how Joiner's Levels of Fix determines whether the answer is good enough.">
+    <meta name="keywords" content="5 whys explained, five whys root cause analysis, 5 whys technique NHS, Toyota 5 whys, why why analysis, 5 whys examples, root cause analysis tools">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:   #002d5b;
+            --brand-mid:    #0056b3;
+            --brand-light:  #e9f2ff;
+            --text:         #1e293b;
+            --muted:        #64748b;
+            --border:       #e2e8f0;
+            --bg:           #f8f9fa;
+            --green:        #198754;
+            --orange:       #e67e22;
+            --red:          #c0392b;
+            --teal:         #0e7490;
+            --purple:       #7c3aed;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Georgia, "Times New Roman", serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .site-header { background: var(--brand-blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .site-header a { color: white; text-decoration: none; font-family: system-ui, sans-serif; font-size: 1em; font-weight: bold; }
+        .site-header a:hover { text-decoration: underline; }
+        .header-nav { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; padding: 6px 10px; border-radius: 4px; }
+        .header-nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+        .header-nav a.active { color: white; font-weight: 700; background: rgba(255,255,255,0.15); }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-btn { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; background: none; border: none; cursor: pointer; padding: 6px 10px; border-radius: 4px; display: flex; align-items: center; gap: 4px; }
+        .nav-dropdown-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+        .nav-dropdown-btn .arrow { font-size: 0.7em; transition: transform 0.2s; }
+        .nav-dropdown:hover .arrow { transform: rotate(180deg); }
+        .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); min-width: 220px; z-index: 200; padding: 12px 0 6px; margin-top: 0; }
+        .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+        .nav-dropdown-menu::before { content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
+        .nav-dropdown-menu a { display: block; color: #1e293b; font-family: system-ui, sans-serif; font-size: 0.85em; padding: 8px 16px; text-decoration: none; white-space: nowrap; border-radius: 0; background: none; }
+        .nav-dropdown-menu a:hover { background: #e9f2ff; color: #002d5b; }
+        .nav-dropdown-menu .menu-section { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; padding: 8px 16px 4px; }
+        .nav-dropdown-menu .menu-divider { border: none; border-top: 1px solid #e2e8f0; margin: 4px 0; }
+        .header-tool-btn { background: var(--green); color: white; padding: 8px 18px; border-radius: 4px; font-family: system-ui, sans-serif; font-size: 0.9em; font-weight: bold; }
+        .header-tool-btn:hover { background: #146c43; text-decoration: none !important; }
+        @media (max-width: 600px) { .header-nav { display: none; } }
+
+        .page-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+        .breadcrumb { font-family: system-ui, sans-serif; font-size: 0.82em; color: var(--muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--brand-mid); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .page-flag { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 12px; }
+        h1 { font-size: clamp(1.8em, 4vw, 2.6em); line-height: 1.2; color: var(--brand-blue); margin-bottom: 16px; font-weight: bold; }
+        .page-intro { font-size: 1.05em; color: var(--muted); font-style: italic; margin-bottom: 12px; border-left: 4px solid var(--brand-mid); padding-left: 16px; line-height: 1.7; }
+        .page-meta { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
+        h2 { font-size: 1.3em; color: var(--brand-blue); margin: 40px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--brand-light); }
+        h3 { font-size: 1.05em; color: var(--brand-blue); margin: 24px 0 10px; font-style: italic; }
+        p { margin-bottom: 1.2em; font-size: 1.05em; }
+        strong { color: var(--brand-blue); }
+        hr { border: none; border-top: 3px solid var(--brand-light); margin: 48px 0; }
+        ul, ol { margin: 0 0 1.2em 1.5em; }
+        li { margin-bottom: 0.5em; font-size: 1.05em; }
+
+        /* The 5 Whys chain diagram */
+        .why-chain { margin: 28px 0; }
+        .why-step { display: flex; gap: 0; margin-bottom: 0; }
+        .why-num { background: var(--brand-blue); color: white; font-family: system-ui, sans-serif; font-weight: 900; font-size: 0.85em; width: 52px; min-width: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 4px; }
+        .why-num .wn-label { font-size: 0.7em; opacity: 0.7; letter-spacing: 0.06em; }
+        .why-num .wn-num { font-size: 1.4em; }
+        .why-body { flex: 1; padding: 14px 18px; border: 1px solid var(--border); border-left: none; background: white; }
+        .why-step:not(:last-child) .why-body { border-bottom: none; }
+        .why-step:first-child .why-num { border-radius: 8px 0 0 0; }
+        .why-step:last-child .why-num { border-radius: 0 0 0 8px; }
+        .why-step:first-child .why-body { border-radius: 0 8px 0 0; }
+        .why-step:last-child .why-body { border-radius: 0 0 8px 0; }
+        .why-body .wb-q { font-family: system-ui, sans-serif; font-size: 0.8em; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+        .why-body .wb-a { font-size: 0.97em; color: var(--text); line-height: 1.55; }
+        .why-body .wb-level { font-family: system-ui, sans-serif; font-size: 0.78em; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-top: 6px; display: inline-block; }
+        .why-step.l1 .why-num { background: var(--red); }
+        .why-step.l1 .why-body { background: #fff5f5; border-color: #fecaca; }
+        .why-step.l1 .wb-level { background: #fee2e2; color: var(--red); }
+        .why-step.l2 .why-num { background: var(--orange); }
+        .why-step.l2 .why-body { background: #fff8f0; border-color: #fed7aa; }
+        .why-step.l2 .wb-level { background: #ffedd5; color: #c2410c; }
+        .why-step.l3 .why-num { background: var(--green); }
+        .why-step.l3 .why-body { background: #f0fdf4; border-color: #bbf7d0; }
+        .why-step.l3 .wb-level { background: #dcfce7; color: var(--green); }
+        .why-arrow { font-size: 1.2em; color: var(--muted); text-align: center; padding: 4px 0; font-family: system-ui; }
+
+        /* Stopping too early box */
+        .stop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 16px; margin: 24px 0; }
+        .stop-card { border-radius: 8px; padding: 18px 20px; font-family: system-ui, sans-serif; }
+        .stop-card.too-early { background: #fff5f5; border: 2px solid var(--red); }
+        .stop-card.correct { background: #f0fdf4; border: 2px solid var(--green); }
+        .stop-card .sc-label { font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+        .stop-card.too-early .sc-label { color: var(--red); }
+        .stop-card.correct .sc-label { color: var(--green); }
+        .stop-card h3 { font-style: normal; margin: 0 0 8px; font-size: 1em; }
+        .stop-card.too-early h3 { color: var(--red); }
+        .stop-card.correct h3 { color: var(--green); }
+        .stop-card p { font-size: 0.9em; line-height: 1.6; margin: 0; }
+        .stop-card.too-early p { color: #7f1d1d; }
+        .stop-card.correct p { color: #14532d; }
+
+        /* Callouts */
+        .callout { border-radius: 8px; padding: 18px 22px; margin: 24px 0; font-family: system-ui, sans-serif; }
+        .callout.blue { background: var(--brand-light); border-left: 5px solid var(--brand-mid); }
+        .callout.green { background: #f0fdf4; border-left: 5px solid var(--green); }
+        .callout.orange { background: #fff8f0; border-left: 5px solid var(--orange); }
+        .callout.red { background: #fff5f5; border-left: 5px solid var(--red); }
+        .callout.teal { background: #f0fdfa; border-left: 5px solid var(--teal); }
+        .callout strong { display: block; margin-bottom: 6px; font-size: 1em; }
+        .callout.blue strong { color: var(--brand-blue); }
+        .callout.green strong { color: var(--green); }
+        .callout.orange strong { color: var(--orange); }
+        .callout.red strong { color: var(--red); }
+        .callout.teal strong { color: var(--teal); }
+        .callout p { font-size: 0.95em; line-height: 1.65; margin: 0 0 8px; }
+        .callout p:last-child { margin: 0; }
+
+        /* Info box — replaces dark box */
+        .info-box { background: #f0f4f8; border: 3px solid var(--brand-blue); border-radius: 8px; padding: 24px 28px; margin: 28px 0; font-family: system-ui, sans-serif; }
+        .info-box h3 { color: var(--brand-blue); margin: 0 0 12px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; border-bottom: 2px solid var(--brand-blue); padding-bottom: 8px; }
+        .info-box p { font-size: 0.97em; color: var(--text); margin-bottom: 10px; line-height: 1.7; }
+        .info-box p:last-child { margin-bottom: 0; }
+        .info-box strong { color: var(--brand-blue); }
+        .info-box a { color: var(--brand-mid); }
+        .info-box .quote { font-size: 1.05em; font-style: italic; color: var(--brand-mid); border-left: 4px solid var(--brand-blue); padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 14px 0; background: white; }
+
+        /* Nav grid */
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px; margin: 32px 0; }
+        .nav-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; text-decoration: none; display: block; transition: box-shadow 0.15s; font-family: system-ui, sans-serif; }
+        .nav-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+        .nav-card .nav-tag { font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-mid); margin-bottom: 6px; }
+        .nav-card h3 { color: var(--brand-blue); font-size: 0.95em; margin: 0 0 4px; line-height: 1.3; font-style: normal; }
+        .nav-card p { color: var(--muted); font-size: 0.85em; margin: 0; line-height: 1.4; }
+
+        .toc-details { margin: 0 0 28px 0; border: 1px solid var(--border); border-radius: 8px; font-family: system-ui, sans-serif; background: white; }
+        .toc-details summary { padding: 14px 18px; cursor: pointer; font-weight: bold; color: var(--brand-blue); font-size: 0.95em; list-style: none; display: flex; align-items: center; gap: 8px; user-select: none; }
+        .toc-details summary::-webkit-details-marker { display: none; }
+        .toc-details summary:hover { background: var(--brand-light); border-radius: 8px; }
+        .toc-details[open] summary { border-bottom: 1px solid var(--border); border-radius: 8px 8px 0 0; }
+        .toc-inner { padding: 6px 18px 16px; }
+        .toc-inner ol { margin: 10px 0 0 1.2em; line-height: 2.1; }
+        .toc-inner ol li { font-size: 0.92em; }
+        .toc-inner ol li a { color: var(--brand-mid); text-decoration: none; }
+        .toc-inner ol li a:hover { text-decoration: underline; }
+
+        .page-footer { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); }
+        .page-footer a { color: var(--brand-mid); }
+
+        /* Responsive */
+        @media (max-width: 900px) { body { font-size: 16px; } .page-wrap { padding: 28px 20px 60px; } }
+        @media (max-width: 600px) {
+            body { font-size: 16px; line-height: 1.7; }
+            .site-header { padding: 10px 16px; }
+            .header-nav { display: none; }
+            .page-wrap { padding: 20px 16px 48px; }
+            h1 { font-size: clamp(1.4em, 6vw, 2em); }
+            h2 { font-size: 1.15em; }
+            p { font-size: 1em; }
+            .stop-grid, .nav-grid { grid-template-columns: 1fr; }
+            .why-num { width: 40px; min-width: 40px; }
+            .info-box, .callout { padding: 14px 16px; }
+        }
+        @media print {
+            .site-header, .header-nav, .header-tool-btn, .nav-grid, .toc-details { display: none !important; }
+            body { font-size: 12pt; color: black; background: white; }
+            .page-wrap { max-width: 100%; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Concepts <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <a href="why-nothing-changes.html">Why nothing changes</a>
+                <a href="joiner-levels-of-fix.html">Joiner levels of fix</a>
+                <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>
+                <a href="pdsa-cycle.html">PDSA cycle</a>
+                <a href="types-of-measures.html">Types of measures</a>
+                <a href="model-for-improvement.html">Model for Improvement</a>
+                <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>
+                <a href="variation-and-spc.html">Variation &amp; SPC</a>
+                <a href="bright-spots.html">Bright Spots</a>
+                <a href="five-whys.html" style="font-weight:600;color:#002d5b;">The 5 Whys</a>
+                <a href="root-cause-analysis.html">Root Cause Analysis</a>
+            </div>
+        </div>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Articles <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <div class="menu-section">NHS Healthcare</div>
+                <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; Why nothing has worked</a>
+                <a href="dementia-diagnosis-rate.html">Dementia &mdash; The 66% target</a>
+                <a href="gp-appointments-analysis.html">GP appointments</a>
+                <a href="never-events-wrong-route.html">Never events &mdash; Wrong route</a>
+                <a href="anticoag-safety.html">Anticoagulation safety</a>
+                <a href="sepsis-six-does-public-data-show-whether-it-worked.html">Sepsis Six</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Environment &amp; Policy</div>
+                <a href="ulez-london-air-quality.html">ULEZ &mdash; Air quality</a>
+                <a href="the-grid-fixed-itself.html">The Grid fixed itself</a>
+                <a href="uk-gdp-analysis.html">UK GDP analysis</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Industrial</div>
+                <a href="hydrogen-plant-cusum.html">Hydrogen plant CUSUM</a>
+            </div>
+        </div>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Concepts</a> &rsaquo; The 5 Whys</div>
+    <div class="page-flag">&#128200; Improvement Concepts</div>
+    <h1>The 5 Whys</h1>
+    <p class="page-intro">The 5 Whys is the simplest and most widely used root cause analysis technique. Ask why five times and you will reach the root cause of almost any problem. But most analyses stop at Why 2 or Why 3 &mdash; at the process level &mdash; when the real answer lies in the system. Knowing when to stop is as important as knowing how to start.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-origin">Origin and method</a></li>
+                <li><a href="#section-how">How to run a 5 Whys</a></li>
+                <li><a href="#section-example">Worked example &mdash; NHS Never Events</a></li>
+                <li><a href="#section-joiner">The Joiner test &mdash; which level did you reach?</a></li>
+                <li><a href="#section-stopping">Why most 5 Whys stop too early</a></li>
+                <li><a href="#section-limitations">Limitations of the 5 Whys</a></li>
+                <li><a href="#section-cusum">The 5 Whys and Bootstrap CUSUM</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-origin">Origin and method</h2>
+
+    <p>The 5 Whys was developed by Sakichi Toyoda, the founder of Toyota Industries, in the early twentieth century and became a central element of the Toyota Production System in the 1950s. It was adopted by Toyota as a standard problem-solving technique and popularised in the West through Taiichi Ohno&rsquo;s <em>Toyota Production System</em> (1978) and later through the lean manufacturing movement.</p>
+
+    <p>The method is deliberately simple: when a problem occurs, ask <em>why</em> it happened. Take the answer and ask <em>why</em> again. Repeat five times. The principle is that surface symptoms have proximate causes, proximate causes have underlying causes, and underlying causes have root causes &mdash; and that five iterations is typically sufficient to reach a cause that is actionable and preventive rather than merely corrective.</p>
+
+    <div class="callout blue">
+        <strong>Taiichi Ohno&rsquo;s original example</strong>
+        <p><strong>Problem:</strong> The robot stopped.</p>
+        <p><strong>Why 1:</strong> The circuit overloaded, causing a fuse to blow. &nbsp;<strong>Why 2:</strong> There was insufficient lubrication on the bearings. &nbsp;<strong>Why 3:</strong> The oil pump on the robot was not circulating sufficient oil. &nbsp;<strong>Why 4:</strong> The pump intake was clogged with metal shavings. &nbsp;<strong>Why 5:</strong> There was no strainer fitted to the pump.</p>
+        <p><strong>Fix:</strong> Attach a strainer to the pump. Replacing the fuse (Why 1) would have allowed the robot to restart but the problem would have recurred. Only the Why 5 answer prevents recurrence.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-how">How to run a 5 Whys</h2>
+
+    <p>The technique requires a clearly defined problem statement, a multidisciplinary team with direct knowledge of the process, and the discipline to keep asking why rather than accepting the first plausible answer. Five practical rules:</p>
+
+    <ol style="margin: 16px 0 20px 24px; line-height: 2.1; font-size: 1.05em;">
+        <li><strong>Start with a specific event, not a general problem.</strong> &ldquo;The patient received the wrong medication&rdquo; is specific. &ldquo;Medication errors are too high&rdquo; is not. A vague problem statement produces vague answers.</li>
+        <li><strong>Each answer must be based on evidence, not assumption.</strong> &ldquo;Because staff are careless&rdquo; is an assumption. &ldquo;Because the check step was skipped&rdquo; requires evidence that the check step was actually skipped in this specific case.</li>
+        <li><strong>Each why must follow logically from the previous answer.</strong> Read the chain backwards: &ldquo;Because of Why 5, Why 4 occurred. Because of Why 4, Why 3 occurred...&rdquo; If the chain does not read logically, an answer is missing or wrong.</li>
+        <li><strong>Keep asking until you reach something actionable that prevents recurrence.</strong> If the answer to Why 5 is still something you cannot change, keep going to Why 6 or Why 7. The number five is a guide, not a rule.</li>
+        <li><strong>Apply the Joiner test at the end.</strong> Is the fix at the output level, the process level, or the system level? If it is at the output or process level, ask whether a system-level cause exists that the analysis has not yet reached.</li>
+    </ol>
+
+    <hr>
+
+    <h2 id="section-example">Worked example &mdash; NHS Never Events</h2>
+
+    <p>Wrong-route medication administration has been classified as a Never Event &mdash; wholly preventable &mdash; since 2010. <a href="never-events-wrong-route.html">Bootstrap CUSUM on 15 years of NHS data</a> finds a flat process at 17.5 events per year with no structural change. The 5 Whys analysis of a single wrong-route event illustrates exactly why the flat line persists.</p>
+
+    <div class="why-chain">
+        <div class="why-step">
+            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">1</span></div>
+            <div class="why-body">
+                <div class="wb-q">Problem</div>
+                <div class="wb-a">A patient received an oral medication administered via the intrathecal route, causing serious harm.</div>
+            </div>
+        </div>
+        <div class="why-arrow">&#8595;</div>
+        <div class="why-step l1">
+            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">1</span></div>
+            <div class="why-body">
+                <div class="wb-q">Why did the patient receive medication via the wrong route?</div>
+                <div class="wb-a">The nurse administered the medication using the wrong connector.</div>
+                <span class="wb-level">Joiner Level 1 — output fix: retrain the nurse</span>
+            </div>
+        </div>
+        <div class="why-arrow">&#8595;</div>
+        <div class="why-step l1">
+            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">2</span></div>
+            <div class="why-body">
+                <div class="wb-q">Why did the nurse use the wrong connector?</div>
+                <div class="wb-a">The oral and intrathecal connectors are physically compatible &mdash; they fit together even though they should not be connected.</div>
+                <span class="wb-level">Joiner Level 1/2 — process fix: label connectors more clearly</span>
+            </div>
+        </div>
+        <div class="why-arrow">&#8595;</div>
+        <div class="why-step l2">
+            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">3</span></div>
+            <div class="why-body">
+                <div class="wb-q">Why are incompatible connectors physically compatible?</div>
+                <div class="wb-a">The procurement system has not standardised on ENFit connectors, which are physically incompatible and make wrong-route administration mechanically impossible.</div>
+                <span class="wb-level">Joiner Level 2 — process fix: change procurement policy</span>
+            </div>
+        </div>
+        <div class="why-arrow">&#8595;</div>
+        <div class="why-step l2">
+            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">4</span></div>
+            <div class="why-body">
+                <div class="wb-q">Why has the NHS not standardised on ENFit connectors?</div>
+                <div class="wb-a">The procurement decision requires a capital programme, a change management programme, and central NHS England commitment. These have not been authorised despite the recommendation existing since 2010.</div>
+                <span class="wb-level">Joiner Level 2/3 — system fix: authorise the capital programme</span>
+            </div>
+        </div>
+        <div class="why-arrow">&#8595;</div>
+        <div class="why-step l3">
+            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">5</span></div>
+            <div class="why-body">
+                <div class="wb-q">Why has a capital programme not been authorised in 14 years?</div>
+                <div class="wb-a">The system does not have a mechanism that connects the cost of Never Events (borne by individual trusts and patients) to the capital decision (made centrally). The decision-maker and the cost-bearer are different parts of the system with no feedback loop between them.</div>
+                <span class="wb-level">Joiner Level 3 — system fix: redesign the accountability structure</span>
+            </div>
+        </div>
+    </div>
+
+    <p>The NHS response to each wrong-route event has overwhelmingly operated at Why 1 and Why 2: retraining, revised checklists, new alert notices, updated frameworks. The Why 5 answer &mdash; the missing feedback loop between cost-bearer and decision-maker &mdash; has never been addressed. Bootstrap CUSUM shows the result: 17.5 events per year, flat, for 15 years.</p>
+
+    <hr>
+
+    <h2 id="section-joiner">The Joiner test &mdash; which level did you reach?</h2>
+
+    <p>The most important question at the end of any 5 Whys analysis is: at which level is the proposed fix operating? <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a> provides the test.</p>
+
+    <div class="stop-grid">
+        <div class="stop-card too-early">
+            <div class="sc-label">&#10060; Level 1 answer</div>
+            <h3>Fix the output</h3>
+            <p>The fix addresses the specific event that occurred. Retrain the individual, replace the fuse, reprimand the team. Prevents recurrence of this exact event in this exact way &mdash; but the system that allowed the event remains unchanged. A different person, a different day, a different event of the same type will recur.</p>
+        </div>
+        <div class="stop-card too-early">
+            <div class="sc-label">&#9888; Level 2 answer</div>
+            <h3>Fix the process</h3>
+            <p>The fix changes the process that allowed the problem. New procedure, new checklist, new training programme, new labelling. Reduces recurrence of this type of event &mdash; but the system that produced the faulty process remains unchanged. The process improvement may be absorbed, forgotten, or bypassed under pressure.</p>
+        </div>
+        <div class="stop-card correct">
+            <div class="sc-label">&#9989; Level 3 answer</div>
+            <h3>Fix the system</h3>
+            <p>The fix changes the system that produced the faulty process. Physical redesign, structural accountability change, economic mechanism change. Prevents the entire class of problems, not just this instance. Does not rely on individual behaviour or memory. This is where the 5 Whys should aim to reach.</p>
+        </div>
+    </div>
+
+    <div class="callout orange">
+        <strong>The test: would this fix work even if everyone forgot about it?</strong>
+        <p>A Level 3 fix works because it changes the system, not because people remember to apply it. ENFit connectors prevent wrong-route administration whether or not staff remember the training. A carbon price floor changes generator economics whether or not operators remember the policy intent. A Level 1 or Level 2 fix requires sustained human attention to maintain. Under pressure, in understaffed shifts, at 3am, the check gets skipped. The system was not redesigned. The event recurs.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-stopping">Why most 5 Whys stop too early</h2>
+
+    <p>In practice, most 5 Whys analyses in healthcare, industry, and policy stop at Why 2 or Why 3. There are three structural reasons for this.</p>
+
+    <p><strong>The person answer is satisfying.</strong> Why 1 almost always produces a person answer: someone did something wrong, skipped a step, misread a label. This answer feels complete and actionable. It names a cause and implies a fix (retrain, remind, reprimand). The discomfort of asking Why 2 &mdash; which often implicates the system or management &mdash; is avoided.</p>
+
+    <p><strong>The system answer is threatening.</strong> Why 4 and Why 5 answers frequently implicate management decisions, resource allocation, procurement policies, or organisational structures. These are uncomfortable findings for the people conducting the analysis, especially when those people are part of the management hierarchy. A 5 Whys that stops at Why 2 protects the institution. One that reaches Why 5 challenges it.</p>
+
+    <p><strong>The fix is outside the team&rsquo;s authority.</strong> A ward team can retrain a nurse. They cannot redesign the national procurement system. When the Why 5 answer requires an action that is beyond the team&rsquo;s authority, the analysis often retreats to a Why 2 or Why 3 answer that produces a fix the team can implement &mdash; even though that fix will not prevent recurrence.</p>
+
+    <div class="callout red">
+        <strong>The most dangerous stopping point: &ldquo;human error&rdquo;</strong>
+        <p><a href="deming-14-points.html">Deming</a> estimated 94% of problems are caused by the system, not the people. A 5 Whys that terminates at &ldquo;human error&rdquo; as the root cause has almost certainly stopped too early. Human error is not a root cause &mdash; it is a symptom. The root cause is the system condition that made the error easy to commit and difficult to catch. &ldquo;The nurse made an error&rdquo; answers nothing about why the system was designed so that the error was possible, likely, or uncaught. Asking why the error was possible, likely, and uncaught is where the 5 Whys should go.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-limitations">Limitations of the 5 Whys</h2>
+
+    <p>The 5 Whys is powerful for linear causal chains &mdash; where A caused B caused C caused D. It is less effective for complex systems where multiple interacting causes produce an outcome, and where the same outcome can arise from different causal paths. For those situations, a <a href="root-cause-analysis.html">fishbone (Ishikawa) diagram</a> or a <a href="causal-loop-diagrams.html">causal loop diagram</a> is more appropriate.</p>
+
+    <p>Three specific limitations worth noting:</p>
+
+    <ul>
+        <li><strong>Different teams reach different root causes.</strong> The 5 Whys is not deterministic. Two teams analysing the same event will often produce different Why chains depending on their knowledge, experience, and willingness to pursue uncomfortable answers. This is not a flaw in the technique &mdash; it reflects the fact that complex events typically have multiple contributing causes &mdash; but it means the result should be treated as a hypothesis to be tested, not a definitive finding.</li>
+        <li><strong>It analyses individual events, not patterns.</strong> The 5 Whys answers the question &ldquo;why did this event occur?&rdquo; It does not answer &ldquo;why does this type of event occur at this rate?&rdquo; For the second question, <a href="variation-and-spc.html">SPC analysis</a> and Bootstrap CUSUM are the appropriate tools.</li>
+        <li><strong>It does not verify that the fix worked.</strong> The 5 Whys identifies a root cause and implies a fix. It does not tell you whether the fix produced a genuine structural change in the outcome. That requires a pre-specified <a href="pdsa-cycle.html">PDSA Study phase</a> with Bootstrap CUSUM as the objective test.</li>
+    </ul>
+
+    <hr>
+
+    <h2 id="section-cusum">The 5 Whys and Bootstrap CUSUM</h2>
+
+    <p>The 5 Whys and Bootstrap CUSUM address different questions and operate on different timescales. Together they form a complete improvement cycle.</p>
+
+    <div class="info-box">
+        <h3>&#128202; How the two tools work together</h3>
+        <p><strong>Bootstrap CUSUM identifies that a problem exists and dates it precisely.</strong> A structural change point in a safety event series &mdash; an upward change point in a wrong-route medication series, a downward change point in a sepsis mortality series &mdash; tells you that something structurally changed at a specific time. It does not tell you what caused the change.</p>
+        <p style="margin-top:10px;"><strong>The 5 Whys identifies what caused the change.</strong> Once Bootstrap CUSUM has dated a change point, the 5 Whys investigation can be focused: what changed in this system in the 6&ndash;12 months before the change point? The date narrows the investigation window from the entire history of the system to a specific period. The causal chain revealed by the 5 Whys in that window is the hypothesis about what produced the change point.</p>
+        <p style="margin-top:10px;"><strong>Bootstrap CUSUM then verifies whether the fix worked.</strong> Once a Level 3 fix has been implemented (identified by the 5 Whys), pre-specify a Bootstrap CUSUM change point as the test: we expect an improvement in outcome measure Y within Z periods. When the change point appears, the fix is confirmed. When it does not appear, the Why 5 answer was incomplete and the analysis must continue.</p>
+        <p style="margin-top:10px;">This is the <a href="pdsa-cycle.html">PDSA cycle</a> made rigorous: the 5 Whys is the Plan phase theory of change, the fix is the Do phase, and Bootstrap CUSUM is the Study phase objective test. Without Bootstrap CUSUM, the Study phase is replaced by narrative &mdash; and any result can be declared success.</p>
+    </div>
+
+    <hr>
+
+    <h2>Related concepts</h2>
+    <div class="nav-grid">
+        <a href="root-cause-analysis.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Root Cause Analysis</h3>
+            <p>The broader family of RCA tools — fishbone diagrams, fault tree analysis, and when each is appropriate.</p>
+        </a>
+        <a href="joiner-levels-of-fix.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Joiner&rsquo;s Levels of Fix</h3>
+            <p>The test that determines whether your 5 Whys reached a deep enough answer — output, process, or system level.</p>
+        </a>
+        <a href="pdsa-cycle.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>PDSA Cycle</h3>
+            <p>The 5 Whys belongs in the Plan phase. Bootstrap CUSUM belongs in the Study phase. Together they close the loop.</p>
+        </a>
+        <a href="never-events-wrong-route.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; Patient Safety</div>
+            <h3>Never Events &mdash; Wrong Route</h3>
+            <p>15 years, 17.5 events per year, no change point. The Bootstrap CUSUM picture of a system whose 5 Whys never reached Why 5.</p>
+        </a>
+        <a href="variation-and-spc.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Variation &amp; SPC</h3>
+            <p>The 5 Whys analyses individual events. SPC analyses patterns. Both are needed for a complete picture.</p>
+        </a>
+        <a href="why-nothing-changes.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Why Nothing Changes</h3>
+            <p>Why Level 1 and Level 2 fixes dominate in practice — and why the system keeps producing the same problems.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Origin:</strong> Toyoda, S. Toyota Industries Corporation, early 20th century. Popularised by Ohno, T. <em>Toyota Production System.</em> Productivity Press, 1978.</p>
+        <p style="margin-top:8px;"><strong>Joiner levels of fix:</strong> Joiner, B.L. <em>Fourth Generation Management.</em> McGraw-Hill, 1994.</p>
+        <p style="margin-top:8px;"><strong>Deming 94% rule:</strong> Deming, W.E. <em>Out of the Crisis.</em> MIT Press, 1982.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+</body>
+</html>
