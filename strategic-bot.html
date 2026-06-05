@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/strategic-bot.html">
+    <title>Strategic Behaviour Over Time — Six Waves — StepChangeAnalysis.com</title>
+    <meta name="description" content="An interactive Behaviour Over Time chart showing six strategic waves building across a 5-year horizon. Click through each wave to see the full picture — from fixing the system to Blueprint growth outrunning base erosion.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:#002d5b; --brand-mid:#0056b3; --brand-light:#e9f2ff;
+            --text:#1e293b; --muted:#64748b; --border:#e2e8f0; --bg:#f8f9fa;
+            --green:#198754; --orange:#e67e22;
+        }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { font-family:system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+        .site-header { background:var(--brand-blue); padding:14px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+        .site-header a { color:white; text-decoration:none; font-size:1em; font-weight:bold; }
+        .header-tool-btn { background:var(--green); color:white; padding:8px 18px; border-radius:4px; font-size:0.9em; font-weight:bold; }
+
+        .page-wrap { max-width:900px; margin:0 auto; padding:40px 24px 80px; }
+        .breadcrumb { font-size:0.82em; color:var(--muted); margin-bottom:24px; }
+        .breadcrumb a { color:var(--brand-mid); text-decoration:none; }
+        h1 { font-size:clamp(1.6em,3.5vw,2.2em); color:var(--brand-blue); margin-bottom:12px; font-family:Georgia,serif; }
+        .page-intro { font-size:1em; color:var(--muted); font-style:italic; margin-bottom:24px; border-left:4px solid var(--brand-mid); padding-left:16px; line-height:1.7; font-family:Georgia,serif; }
+        p { margin-bottom:1em; font-size:1em; font-family:Georgia,serif; }
+
+        .bot-card { background:white; border:1px solid var(--border); border-radius:10px; padding:28px; margin:28px 0; }
+        .wave-legend { display:flex; flex-wrap:wrap; gap:8px 16px; margin-bottom:20px; }
+        .legend-item { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); transition:opacity 0.3s; }
+        .legend-item.inactive { opacity:0.25; }
+        .legend-dot { width:10px; height:10px; border-radius:2px; flex-shrink:0; }
+        .bot-controls { display:flex; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+        .bot-btn { padding:8px 20px; border-radius:6px; border:1px solid var(--border); background:white; color:var(--text); font-size:14px; cursor:pointer; font-family:system-ui,sans-serif; }
+        .bot-btn:hover { background:var(--brand-light); }
+        .bot-btn:disabled { opacity:0.35; cursor:default; }
+        .bot-btn.primary { background:var(--brand-blue); color:white; border-color:var(--brand-blue); }
+        .bot-btn.primary:hover { background:#003d7a; }
+        .step-label { font-size:13px; color:var(--muted); }
+        .chart-wrap { position:relative; width:100%; height:360px; }
+        .wave-desc { margin-top:16px; padding:12px 16px; border-radius:8px; border:1px solid var(--border); background:var(--bg); font-size:13px; color:var(--muted); min-height:48px; line-height:1.6; }
+        .wave-desc strong { color:var(--brand-blue); }
+
+        .step-integration { background:#fffbeb; border:2px solid #d97706; border-radius:8px; padding:18px 22px; margin:28px 0; }
+        .si-label { font-size:0.72em; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#d97706; margin-bottom:8px; font-family:system-ui,sans-serif; }
+        .step-integration p { font-size:0.95em; color:var(--text); line-height:1.65; margin:0 0 8px; font-family:system-ui,sans-serif; }
+        .step-integration a { color:var(--brand-mid); }
+        .step-tools { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+        .tool-link { font-family:system-ui,sans-serif; font-size:0.8em; background:var(--brand-light); color:var(--brand-mid); padding:4px 10px; border-radius:4px; text-decoration:none; font-weight:600; }
+        .tool-link:hover { background:var(--brand-mid); color:white; }
+
+        .page-footer { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); font-size:0.85em; color:var(--muted); font-family:system-ui,sans-serif; }
+        .page-footer a { color:var(--brand-mid); }
+
+        @media (max-width:600px) {
+            .page-wrap { padding:20px 16px 48px; }
+            .bot-card { padding:16px; }
+        }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="behaviour-over-time.html">Behaviour Over Time</a> &rsaquo; Strategic BOT</div>
+    <h1>Strategic Waves &mdash; Behaviour Over Time</h1>
+    <p class="page-intro">Six waves building across a five-year horizon &mdash; two resource conflicts, one critical enabling event. Click through each wave to see the full picture build up, from fixing the operational system to Blueprint growth outrunning base erosion.</p>
+
+    <div class="bot-card">
+        <div class="wave-legend" id="legend"></div>
+        <div class="bot-controls">
+            <button class="bot-btn" id="btn-back" disabled>&#8592; Back</button>
+            <button class="bot-btn primary" id="btn-next">Add next wave &#8594;</button>
+            <button class="bot-btn" id="btn-reset">Reset</button>
+            <span class="step-label" id="step-label">Wave 0 of 6</span>
+        </div>
+        <div class="chart-wrap">
+            <canvas id="bot-chart" role="img" aria-label="Strategic behaviour over time chart showing six waves across a 5-year horizon">Six waves: fix the system, reduce baseline drag, bright spots, blue ocean, new market opportunity, blueprint growth. Base erosion line runs throughout.</canvas>
+        </div>
+        <div class="wave-desc" id="wave-desc">Click <strong>Add next wave</strong> to begin building the strategy wave by wave.</div>
+    </div>
+
+    <div class="step-integration">
+        <div class="si-label">&#9654; Connection to the 7-Step Improvement Method</div>
+        <p>This BOT chart is the output of working through the <a href="improvement-method.html">7-step improvement method</a> applied to a specific growth constraint. The waves correspond directly to the steps:</p>
+        <p><strong>Step 1 (List symptoms)</strong> &rarr; base erosion line + flat new contract value. <strong>Step 2 (Measure)</strong> &rarr; Bootstrap CUSUM confirms stagnation pattern. <strong>Steps 3&ndash;4 (Root cause + constraint)</strong> &rarr; everything routes through the same people; no scalable operating model. <strong>Step 5 (Complete solution)</strong> &rarr; all six waves together are necessary and sufficient. <strong>Step 6 (PICK)</strong> &rarr; Wave 1 is Implement; Waves 5 and 6 are Challenge. <strong>Step 7 (PDSA)</strong> &rarr; Bootstrap CUSUM on new contract value at Year 3 is the pre-specified verdict.</p>
+        <div class="step-tools">
+            <a href="improvement-method.html" class="tool-link">The 7-Step Method</a>
+            <a href="behaviour-over-time.html" class="tool-link">Behaviour Over Time</a>
+            <a href="theory-of-constraints.html" class="tool-link">Theory of Constraints</a>
+            <a href="standardisation-vs-customisation.html" class="tool-link">Blueprint &amp; Portfolio Policy</a>
+            <a href="three-charts-three-stories.html" class="tool-link">Bootstrap CUSUM</a>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <p><a href="behaviour-over-time.html">Behaviour Over Time concepts</a> &nbsp;&middot;&nbsp; <a href="causal-loop-diagrams.html">Causal Loop Diagrams</a> &nbsp;&middot;&nbsp; <a href="improvement-method.html">The 7-Step Improvement Method</a></p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const quarters = ['Now','Q1','Q2','Q3','Q4','Y2','Y3','Y4','Y5'];
+const waves = [
+    { label:'W1 — Fix the system', color:'#185FA5', dash:[], desc:'<strong>Wave 1 — Fix the system:</strong> Investigator named, Toolmakers ring-fenced, Parking Lot active. No budget, no code. Peaks Q1 then becomes the new normal. The critical enabling event — without it every other wave stalls.', data:[0,9,7,6,5,4,3,2,2] },
+    { label:'W2 — Reduce baseline drag', color:'#0F6E56', dash:[6,3], desc:'<strong>Wave 2 — Reduce baseline drag:</strong> Restart scripts, Hold Monitor fix, help sheet library. 1,602 support hours falling. Converts structural fix into recovered Toolmaker capacity — every hour saved is an hour returned to building.', data:[8,7,6,4,3,2,1,1,1] },
+    { label:'W3 — Bright Spots & clinical voice', color:'#BA7517', dash:[4,4], desc:'<strong>Wave 3 — Bright Spots &amp; clinical voice:</strong> Find customers who caught medication errors. Chief Pharmacist to Chief Pharmacist. Social proof non-clinicians cannot create. Compounds slowly then accelerates.', data:[1,1,2,3,4,5,7,8,9] },
+    { label:'W4 — Blue Ocean discovery', color:'#7F77DD', dash:[8,3], desc:'<strong>Wave 4 — Blue Ocean discovery:</strong> Nine JTBD conversations — care homes, pharmacies, GP clusters, CQC pressure. Tests whether the market constraint is real or a framing and price-point problem. Boss-owned.', data:[2,4,6,7,6,4,3,2,2] },
+    { label:'W5 — New market opportunity', color:'#A32D2D', dash:[2,3], desc:'<strong>Wave 5 — New market opportunity:</strong> The highest-value opportunity in the portfolio — active now and demanding Boss attention. Relationship-led, Toolmaker-dependent build. One large contract could exceed the entire current base. Must not be a background activity.', data:[3,4,5,6,7,8,9,10,10] },
+    { label:'W6 — Blueprint growth', color:'#3B6D11', dash:[12,4], desc:'<strong>Wave 6 — Blueprint growth:</strong> Utility library built, Implementers install, team sells without Boss, support base compounds. Must outrun base erosion by Year 3 or the five-year picture turns negative.', data:[0,0,1,2,3,5,7,9,10] }
+];
+const erosion = { label:'Base erosion', color:'#888780', dash:[3,3], data:[10,9.5,9,8.5,8,7,6,5,4] };
+let step = 0;
+
+const legendEl = document.getElementById('legend');
+waves.forEach((w,i) => {
+    const d = document.createElement('div');
+    d.className = 'legend-item inactive'; d.id = 'leg-'+i;
+    d.innerHTML = `<span class="legend-dot" style="background:${w.color}"></span>${w.label}`;
+    legendEl.appendChild(d);
+});
+const el = document.createElement('div');
+el.className = 'legend-item inactive'; el.id = 'leg-e';
+el.innerHTML = `<span class="legend-dot" style="background:${erosion.color};opacity:0.5"></span>Base erosion`;
+legendEl.appendChild(el);
+
+const chart = new Chart(document.getElementById('bot-chart').getContext('2d'), {
+    type:'line', data:{ labels:quarters, datasets:[] },
+    options:{ responsive:true, maintainAspectRatio:false, animation:{ duration:600 },
+        plugins:{ legend:{ display:false }, tooltip:{ mode:'index', intersect:false, backgroundColor:'rgba(20,20,20,0.9)', padding:10 } },
+        scales:{
+            x:{ grid:{ color:'rgba(0,0,0,0.06)' }, ticks:{ color:'#888', font:{size:12} } },
+            y:{ min:0, max:12, grid:{ color:'rgba(0,0,0,0.06)' }, ticks:{ color:'#888', font:{size:12}, callback:v=>['Low','','','Med','','','','High','','','','','Peak'][v]||'' } }
+        }
+    }
+});
+
+function update() {
+    document.getElementById('btn-back').disabled = step===0;
+    document.getElementById('btn-next').disabled = step>=waves.length;
+    document.getElementById('step-label').textContent = `Wave ${step} of ${waves.length}`;
+    chart.data.datasets = [];
+    if(step>0) chart.data.datasets.push({ label:erosion.label, data:erosion.data, borderColor:erosion.color, backgroundColor:'transparent', borderWidth:1.5, borderDash:erosion.dash, pointRadius:0, fill:false, tension:0.3 });
+    for(let i=0;i<step;i++) chart.data.datasets.push({ label:waves[i].label, data:waves[i].data, borderColor:waves[i].color, backgroundColor:waves[i].color+'18', borderWidth:2, borderDash:waves[i].dash, pointRadius:3, pointBackgroundColor:waves[i].color, fill:false, tension:0.4 });
+    chart.update();
+    waves.forEach((w,i) => document.getElementById('leg-'+i).className='legend-item'+(i<step?'':' inactive'));
+    document.getElementById('leg-e').className='legend-item'+(step>0?'':' inactive');
+    document.getElementById('wave-desc').innerHTML = step===0 ? 'Click <strong>Add next wave</strong> to begin building the strategy wave by wave.' : waves[step-1].desc;
+}
+document.getElementById('btn-next').addEventListener('click',()=>{ if(step<waves.length){step++;update();} });
+document.getElementById('btn-back').addEventListener('click',()=>{ if(step>0){step--;update();} });
+document.getElementById('btn-reset').addEventListener('click',()=>{ step=0;update(); });
+update();
+</script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/innovators-dilemma.html">
+    <title>The Innovator's Dilemma — Christensen, Von Hippel, and the Expert Trap — StepChangeAnalysis.com</title>
+    <meta name="description" content="The Innovator's Dilemma explained — Christensen's framework for why successful organisations fail to create the next product. Von Hippel's lead users as Bright Spots. The five Expert Traps that defeat repeated attempts at new product development.">
+    <meta name="keywords" content="innovators dilemma Christensen explained, disruptive innovation, innovator's dilemma healthcare software, lead users von Hippel, expert trap product development, disruptive innovation examples, why new products fail established companies">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:#002d5b; --brand-mid:#0056b3; --brand-light:#e9f2ff;
+            --text:#1e293b; --muted:#64748b; --border:#e2e8f0; --bg:#f8f9fa;
+            --green:#198754; --orange:#e67e22; --red:#c0392b; --teal:#0e7490; --purple:#7c3aed;
+        }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { font-family:Georgia,"Times New Roman",serif; background:var(--bg); color:var(--text); line-height:1.8; }
+        .site-header { background:var(--brand-blue); padding:14px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+        .site-header a { color:white; text-decoration:none; font-family:system-ui,sans-serif; font-size:1em; font-weight:bold; }
+        .header-nav { display:flex; gap:4px; align-items:center; flex-wrap:wrap; }
+        .header-nav a { color:rgba(255,255,255,0.85); font-family:system-ui,sans-serif; font-size:0.88em; font-weight:500; text-decoration:none; padding:6px 10px; border-radius:4px; }
+        .header-nav a:hover { color:white; background:rgba(255,255,255,0.1); }
+        .nav-dropdown { position:relative; }
+        .nav-dropdown-btn { color:rgba(255,255,255,0.85); font-family:system-ui,sans-serif; font-size:0.88em; font-weight:500; background:none; border:none; cursor:pointer; padding:6px 10px; border-radius:4px; display:flex; align-items:center; gap:4px; }
+        .nav-dropdown-btn:hover { color:white; background:rgba(255,255,255,0.1); }
+        .nav-dropdown-btn .arrow { font-size:0.7em; transition:transform 0.2s; }
+        .nav-dropdown:hover .arrow { transform:rotate(180deg); }
+        .nav-dropdown-menu { display:none; position:absolute; top:100%; left:0; background:white; border:1px solid #e2e8f0; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.12); min-width:220px; z-index:200; padding:12px 0 6px; }
+        .nav-dropdown:hover .nav-dropdown-menu { display:block; }
+        .nav-dropdown-menu::before { content:''; position:absolute; top:-8px; left:0; right:0; height:8px; }
+        .nav-dropdown-menu a { display:block; color:#1e293b; font-family:system-ui,sans-serif; font-size:0.85em; padding:8px 16px; text-decoration:none; }
+        .nav-dropdown-menu a:hover { background:#e9f2ff; color:#002d5b; }
+        .nav-dropdown-menu .menu-section { font-family:system-ui,sans-serif; font-size:0.72em; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#94a3b8; padding:8px 16px 4px; }
+        .nav-dropdown-menu .menu-divider { border:none; border-top:1px solid #e2e8f0; margin:4px 0; }
+        .header-tool-btn { background:var(--green); color:white; padding:8px 18px; border-radius:4px; font-family:system-ui,sans-serif; font-size:0.9em; font-weight:bold; }
+        .header-tool-btn:hover { background:#146c43; text-decoration:none !important; }
+        @media (max-width:600px) { .header-nav { display:none; } }
+
+        .page-wrap { max-width:860px; margin:0 auto; padding:40px 24px 80px; }
+        .breadcrumb { font-family:system-ui,sans-serif; font-size:0.82em; color:var(--muted); margin-bottom:24px; }
+        .breadcrumb a { color:var(--brand-mid); text-decoration:none; }
+        .page-flag { font-family:system-ui,sans-serif; font-size:0.8em; font-weight:bold; letter-spacing:0.12em; text-transform:uppercase; color:var(--red); margin-bottom:12px; }
+        h1 { font-size:clamp(1.8em,4vw,2.6em); line-height:1.2; color:var(--brand-blue); margin-bottom:16px; }
+        .page-intro { font-size:1.05em; color:var(--muted); font-style:italic; margin-bottom:12px; border-left:4px solid var(--red); padding-left:16px; line-height:1.7; }
+        .page-meta { font-family:system-ui,sans-serif; font-size:0.85em; color:var(--muted); margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--border); }
+        h2 { font-size:1.3em; color:var(--brand-blue); margin:40px 0 14px; padding-bottom:6px; border-bottom:2px solid var(--brand-light); }
+        p { margin-bottom:1.2em; font-size:1.05em; }
+        strong { color:var(--brand-blue); }
+        hr { border:none; border-top:3px solid var(--brand-light); margin:48px 0; }
+        ul,ol { margin:0 0 1.2em 1.5em; }
+        li { margin-bottom:0.5em; font-size:1.05em; }
+
+        /* Trap cards */
+        .trap-list { display:flex; flex-direction:column; gap:0; margin:28px 0; }
+        .trap-item { display:flex; gap:0; }
+        .trap-num { background:var(--red); color:white; font-family:system-ui,sans-serif; font-weight:900; font-size:1.1em; width:52px; min-width:52px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px 8px; }
+        .trap-num span { font-size:0.5em; opacity:0.8; letter-spacing:0.1em; text-transform:uppercase; }
+        .trap-body { flex:1; padding:16px 20px; border:1px solid var(--border); border-left:none; background:white; }
+        .trap-item:not(:last-child) .trap-body { border-bottom:none; }
+        .trap-item:first-child .trap-num { border-radius:8px 0 0 0; }
+        .trap-item:last-child .trap-num { border-radius:0 0 0 8px; }
+        .trap-item:first-child .trap-body { border-radius:0 8px 0 0; }
+        .trap-item:last-child .trap-body { border-radius:0 0 8px 0; }
+        .trap-body h3 { font-style:normal; margin:0 0 6px; font-size:1em; color:var(--red); }
+        .trap-body p { font-size:0.95em; color:var(--text); line-height:1.6; margin:0; }
+
+        /* Definition box */
+        .def-box { background:#fff5f5; border:3px solid var(--red); border-radius:10px; padding:24px 28px; margin:28px 0; font-family:system-ui,sans-serif; }
+        .def-box .def-label { font-size:0.72em; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--red); margin-bottom:10px; }
+        .def-box p { font-size:1.0em; color:var(--text); line-height:1.7; margin:0 0 10px; }
+        .def-box p:last-child { margin:0; }
+        .def-box strong { color:var(--brand-blue); }
+
+        /* Step integration */
+        .step-integration { background:#fffbeb; border:2px solid #d97706; border-radius:8px; padding:18px 22px; margin:28px 0; font-family:system-ui,sans-serif; }
+        .si-label { font-size:0.72em; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#d97706; margin-bottom:8px; }
+        .step-integration p { font-size:0.95em; color:var(--text); line-height:1.65; margin:0 0 8px; }
+        .step-integration p:last-child { margin:0; }
+        .step-integration a { color:var(--brand-mid); }
+        .step-tools { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+        .tool-link { font-family:system-ui,sans-serif; font-size:0.8em; background:var(--brand-light); color:var(--brand-mid); padding:4px 10px; border-radius:4px; text-decoration:none; font-weight:600; }
+        .tool-link:hover { background:var(--brand-mid); color:white; }
+
+        .callout { border-radius:8px; padding:18px 22px; margin:24px 0; font-family:system-ui,sans-serif; }
+        .callout.blue { background:var(--brand-light); border-left:5px solid var(--brand-mid); }
+        .callout.green { background:#f0fdf4; border-left:5px solid var(--green); }
+        .callout.red { background:#fff5f5; border-left:5px solid var(--red); }
+        .callout.teal { background:#f0fdfa; border-left:5px solid var(--teal); }
+        .callout strong { display:block; margin-bottom:6px; }
+        .callout.blue strong { color:var(--brand-blue); }
+        .callout.green strong { color:var(--green); }
+        .callout.red strong { color:var(--red); }
+        .callout.teal strong { color:var(--teal); }
+        .callout p { font-size:0.95em; line-height:1.65; margin:0 0 8px; }
+        .callout p:last-child { margin:0; }
+
+        .info-box { background:#f0f4f8; border:3px solid var(--brand-blue); border-radius:8px; padding:24px 28px; margin:28px 0; font-family:system-ui,sans-serif; }
+        .info-box h3 { color:var(--brand-blue); margin:0 0 12px; font-size:1em; text-transform:uppercase; letter-spacing:0.08em; font-style:normal; border-bottom:2px solid var(--brand-blue); padding-bottom:8px; }
+        .info-box p { font-size:0.97em; color:var(--text); margin-bottom:10px; line-height:1.7; }
+        .info-box p:last-child { margin:0; }
+        .info-box strong { color:var(--brand-blue); }
+        .info-box a { color:var(--brand-mid); }
+
+        .nav-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:32px 0; }
+        .nav-card { background:white; border:1px solid var(--border); border-radius:8px; padding:16px 18px; text-decoration:none; display:block; transition:box-shadow 0.15s; font-family:system-ui,sans-serif; }
+        .nav-card:hover { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+        .nav-card .nav-tag { font-size:0.72em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--brand-mid); margin-bottom:6px; }
+        .nav-card h3 { color:var(--brand-blue); font-size:0.95em; margin:0 0 4px; line-height:1.3; font-style:normal; }
+        .nav-card p { color:var(--muted); font-size:0.85em; margin:0; line-height:1.4; }
+
+        .toc-details { margin:0 0 28px 0; border:1px solid var(--border); border-radius:8px; font-family:system-ui,sans-serif; background:white; }
+        .toc-details summary { padding:14px 18px; cursor:pointer; font-weight:bold; color:var(--brand-blue); font-size:0.95em; list-style:none; display:flex; align-items:center; gap:8px; }
+        .toc-details summary::-webkit-details-marker { display:none; }
+        .toc-details[open] summary { border-bottom:1px solid var(--border); }
+        .toc-inner { padding:6px 18px 16px; }
+        .toc-inner ol { margin:10px 0 0 1.2em; line-height:2.1; }
+        .toc-inner ol li a { color:var(--brand-mid); text-decoration:none; font-size:0.92em; }
+
+        .page-footer { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); font-family:system-ui,sans-serif; font-size:0.85em; color:var(--muted); }
+        .page-footer a { color:var(--brand-mid); }
+
+        @media (max-width:600px) {
+            body { font-size:16px; }
+            .site-header { padding:10px 16px; }
+            .header-nav { display:none; }
+            .page-wrap { padding:20px 16px 48px; }
+            h1 { font-size:clamp(1.4em,6vw,2em); }
+            .trap-num { width:40px; min-width:40px; }
+            .nav-grid { grid-template-columns:1fr; }
+            .info-box, .callout, .step-integration { padding:14px 16px; }
+        }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Concepts <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <a href="why-nothing-changes.html">Why nothing changes</a>
+                <a href="joiner-levels-of-fix.html">Joiner levels of fix</a>
+                <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>
+                <a href="pdsa-cycle.html">PDSA cycle</a>
+                <a href="types-of-measures.html">Types of measures</a>
+                <a href="model-for-improvement.html">Model for Improvement</a>
+                <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>
+                <a href="variation-and-spc.html">Variation &amp; SPC</a>
+                <a href="bright-spots.html">Bright Spots</a>
+                <a href="five-whys.html">The 5 Whys</a>
+                <a href="root-cause-analysis.html">Root Cause Analysis</a>
+                <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a>
+                <a href="pick-model.html">The PICK Model</a>
+                <a href="theory-of-constraints.html">Theory of Constraints</a>
+                <a href="failure-demand.html">Failure Demand</a>
+                <a href="focus-and-prioritisation.html">Focus &amp; Prioritisation</a>
+                <a href="standardisation-vs-customisation.html">Standardisation vs Customisation</a>
+                <a href="behaviour-over-time.html">Behaviour Over Time</a>
+                <a href="causal-loop-diagrams.html">Causal Loop Diagrams</a>
+                <a href="innovators-dilemma.html" style="font-weight:600;color:#002d5b;">The Innovator&rsquo;s Dilemma</a>
+            </div>
+        </div>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Articles <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <div class="menu-section">NHS Healthcare</div>
+                <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; Why nothing has worked</a>
+                <a href="dementia-diagnosis-rate.html">Dementia &mdash; The 66% target</a>
+                <a href="gp-appointments-analysis.html">GP appointments</a>
+                <a href="never-events-wrong-route.html">Never events &mdash; Wrong route</a>
+                <a href="anticoag-safety.html">Anticoagulation safety</a>
+                <a href="sepsis-six-does-public-data-show-whether-it-worked.html">Sepsis Six</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Environment &amp; Policy</div>
+                <a href="ulez-london-air-quality.html">ULEZ &mdash; Air quality</a>
+                <a href="the-grid-fixed-itself.html">The Grid fixed itself</a>
+                <a href="uk-gdp-analysis.html">UK GDP analysis</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Industrial</div>
+                <a href="hydrogen-plant-cusum.html">Hydrogen plant CUSUM</a>
+            </div>
+        </div>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Concepts</a> &rsaquo; The Innovator&rsquo;s Dilemma</div>
+    <div class="page-flag">&#9888;&#65039; Improvement Concepts &mdash; Strategic</div>
+    <h1>The Innovator&rsquo;s Dilemma</h1>
+    <p class="page-intro">The old product line is profitable enough to keep demanding attention, but declining enough to eventually pull the business down with it. That is the dilemma. It has defeated companies far larger and better resourced. Every rational short-term decision &mdash; maintain the profitable base, customise to win the next deal, staff the support queue &mdash; accumulates into an irrational long-term outcome: the constraint on the future is the success of the past.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-christensen">Christensen&rsquo;s framework</a></li>
+                <li><a href="#section-dilemma">The dilemma stated precisely</a></li>
+                <li><a href="#section-traps">The five Expert Traps</a></li>
+                <li><a href="#section-von-hippel">Von Hippel and lead users</a></li>
+                <li><a href="#section-solution">The Innovator&rsquo;s Solution</a></li>
+                <li><a href="#section-seven-steps">Where this fits in the 7-step method</a></li>
+                <li><a href="#section-cusum">Bootstrap CUSUM signature</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-christensen">Christensen&rsquo;s framework</h2>
+
+    <p>Clayton Christensen, in <em>The Innovator&rsquo;s Dilemma</em> (Harvard Business School Press, 1997), documented a precise pattern: well-managed, successful companies, following rational management principles, consistently failed when facing disruptive new technologies or markets. Not because they made bad decisions. Because they made good decisions &mdash; the decisions that made sense given their existing customers, existing cost structures, and existing incentive systems.</p>
+
+    <p>The disruptive innovation typically starts in a market the incumbent does not serve &mdash; smaller customers, lower price points, simpler requirements. It is inferior on the metrics the incumbent&rsquo;s existing customers care about. So the incumbent ignores it. Rationally. The disruptor improves. The disruptor&rsquo;s market grows. The disruptor moves upmarket. By the time the incumbent responds, the disruptor has captured the mainstream market and the incumbent is retreating to a shrinking premium segment.</p>
+
+    <div class="def-box">
+        <div class="def-label">&#128218; The Dilemma</div>
+        <p>The incumbent cannot invest in the disruptive technology because its existing customers do not want it, its financial model does not support its margin structure, and its best people are rightly focused on serving the profitable existing base. Every correct short-term decision makes the long-term problem worse. The dilemma is that good management &mdash; listening to customers, focusing on high-margin work, investing in sustaining improvements &mdash; is precisely what causes failure in the face of disruption.</p>
+        <p><strong>Applied to any specialist service business:</strong> the profitable installed base demands attention. The high-complexity, high-margin bespoke work is where the expertise lives. The simpler, standardised new market looks less attractive. Every developer-hour spent on the base is a developer-hour not spent on the new product. The constraint compounds. The erosion continues. The new product never gets finished.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-dilemma">The dilemma stated precisely</h2>
+
+    <p>The dilemma is not a strategy failure. It is a system structure problem &mdash; which is why it recurs across industries, decades, and management generations. The same pattern appears in disk drive manufacturers (Christensen&rsquo;s original research), steel mills, telecommunications, publishing, and specialist B2B software companies. The structure is always the same:</p>
+
+    <ul style="line-height:2.2;">
+        <li>The existing product serves a demanding customer base that generates most of the revenue</li>
+        <li>That customer base pulls development effort toward complexity, customisation, and sustaining improvements</li>
+        <li>The new market requires simplicity, standardisation, and a lower price point</li>
+        <li>Simplicity and standardisation feel like going backwards to the people who built the complex product</li>
+        <li>The financial model rewards the complex product (higher margin per unit) over the simple one</li>
+        <li>The simple product never gets the sustained investment it needs before being deprioritised for the next urgent base maintenance request</li>
+    </ul>
+
+    <div class="callout red">
+        <strong>The reinforcing loop that sustains the dilemma</strong>
+        <p>In <a href="causal-loop-diagrams.html">Causal Loop Diagram</a> terms, the dilemma is a reinforcing loop: profitable base demands attention &rarr; best people work on base &rarr; new product underdeveloped &rarr; new product less competitive &rarr; more customisation required to win deals &rarr; more base complexity &rarr; more base demand for attention. Each cycle makes the constraint tighter. The loop does not break by itself. It requires a structural intervention &mdash; a deliberate decision to <a href="focus-and-prioritisation.html">shield the constraint</a> from the base and point it at the new product.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-traps">The five Expert Traps</h2>
+
+    <p>In any organisation caught in the Innovator&rsquo;s Dilemma, the same five traps recur. Each is rational in isolation. Together they make repeated attempts at new product development fail in the same way each time.</p>
+
+    <div class="trap-list">
+        <div class="trap-item">
+            <div class="trap-num"><span>Trap</span>1</div>
+            <div class="trap-body">
+                <h3>The Innovation Trap</h3>
+                <p>New product development is captured by the most demanding existing customers &mdash; the lead users who want more features, more complexity, more customisation. The product grows toward the expert end of the market. It becomes expensive to build, expensive to implement, and too complex for the simpler market segment it was meant to serve. Products slow down, features pile up unfinished, and the eventual product is a premium offering that competes on the old playing field rather than creating a new one.</p>
+            </div>
+        </div>
+        <div class="trap-item">
+            <div class="trap-num"><span>Trap</span>2</div>
+            <div class="trap-body">
+                <h3>The Customisation Trap</h3>
+                <p>Saying yes to bespoke requests is a survival reflex. Each customisation generates revenue and satisfies a customer. Each also adds a variant to the installed base that must be maintained, upgraded, and supported separately. Over time the base contains dozens of variants, each requiring specialist knowledge. Developer time is consumed by maintaining variants rather than building the new product. The <a href="standardisation-vs-customisation.html">customisation trap</a> is the operational expression of the Innovator&rsquo;s Dilemma at the project level.</p>
+            </div>
+        </div>
+        <div class="trap-item">
+            <div class="trap-num"><span>Trap</span>3</div>
+            <div class="trap-body">
+                <h3>The Quality Spiral</h3>
+                <p>As the installed base grows in complexity, the volume of advice-seeking support cases grows faster. Customers with complex, bespoke configurations need expert help for edge cases that no documentation covers. The support burden per customer rises. <a href="failure-demand.html">Failure demand</a> compounds. Developer time that should go to the new product is consumed by the quality maintenance demands of an increasingly complex base. Each new bespoke sale makes the spiral worse.</p>
+            </div>
+        </div>
+        <div class="trap-item">
+            <div class="trap-num"><span>Trap</span>4</div>
+            <div class="trap-body">
+                <h3>The Attention Trap</h3>
+                <p>The most senior, most expert person in the organisation is also the sole sales channel, the escalation point for complex support, the product vision holder, and the relationship manager for key accounts. Divided attention produces partial performance across all roles and excellent performance in none. The new product initiative that requires sustained, focused strategic thinking competes with operational urgency every day &mdash; and urgency always wins. This is the <a href="focus-and-prioritisation.html">constraint</a> that Newport&rsquo;s Deep Work identifies: creative work requires uninterrupted concentration, and the attention trap systematically destroys it.</p>
+            </div>
+        </div>
+        <div class="trap-item">
+            <div class="trap-num"><span>Trap</span>5</div>
+            <div class="trap-body">
+                <h3>The Dilemma Itself</h3>
+                <p>The profitable product prevents investment in the disruptive one. Not because the organisation does not understand the need. Because the financial model, the incentive structure, and the resource allocation process all rationally direct investment toward the highest-margin, most-certain work &mdash; which is always the existing product. The new product is always one deprioritisation away from another year of delay. The <a href="theory-of-constraints.html">constraint</a> is the structure of the organisation itself.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-integration">
+        <div class="si-label">&#9654; Connection to the 7-Step Method &mdash; Steps 1&ndash;4</div>
+        <p>In the <a href="improvement-method.html">7-step improvement method</a>, the five traps are the symptoms listed in <strong>Step 1</strong>. The <a href="behaviour-over-time.html">Behaviour Over Time chart</a> for each trap traces the decay or stagnation pattern. <strong>Steps 3 and 4</strong> (root cause and dominant constraint) converge on the same answer for all five traps: the absence of a structure that separates the people who maintain the existing product from the people who build the next one.</p>
+        <div class="step-tools">
+            <a href="improvement-method.html" class="tool-link">The 7-Step Method</a>
+            <a href="behaviour-over-time.html" class="tool-link">Behaviour Over Time</a>
+            <a href="causal-loop-diagrams.html" class="tool-link">Causal Loop Diagrams</a>
+            <a href="theory-of-constraints.html" class="tool-link">Theory of Constraints</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-von-hippel">Von Hippel and lead users</h2>
+
+    <p>Eric von Hippel&rsquo;s lead user research identifies a paradox that is directly relevant to the Innovator&rsquo;s Dilemma. Lead users &mdash; customers at the extreme end of the adoption curve who are ahead of market trends &mdash; are the source of the most valuable product insights. But they are also the source of the Innovation Trap.</p>
+
+    <p>The distinction that matters is the <em>direction</em> of the lead user&rsquo;s innovation. Von Hippel&rsquo;s original insight is that lead users who are pulling the product toward increasing complexity, customisation, and premium features are pointing at the incumbent&rsquo;s existing market &mdash; they want a better version of what already exists. That is a sustaining innovation path, not a disruptive one.</p>
+
+    <p>The lead users who point toward the disruptive opportunity are different: they are the customers getting <em>exceptional results with simpler configurations</em>. They have found ways to achieve the core outcome without the complexity. They are the <a href="bright-spots.html">Bright Spots</a> in the customer base &mdash; positive outliers whose results are statistically distinguishable from the mean, not because they have more resources or more customisation, but because they have found a simpler, more reliable approach.</p>
+
+    <div class="callout teal">
+        <strong>The corrected lead user question</strong>
+        <p>The wrong question: <em>what do our most demanding customers want us to build next?</em> This produces the Innovation Trap &mdash; more complexity, more features, more customisation.</p>
+        <p>The right question: <em>which customers are achieving the best outcomes with the simplest configurations, and what are they doing that others are not?</em> This produces the Blueprint hypothesis &mdash; the standardised offer that delivers value reliably, affordably, and without bespoke development.</p>
+        <p>Von Hippel corrected: lead user insight &rarr; Blueprint hypothesis &rarr; mainstream validation. Not lead user insight &rarr; bespoke feature build &rarr; premium product for existing market.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-solution">The Innovator&rsquo;s Solution</h2>
+
+    <p>Christensen&rsquo;s follow-up book, <em>The Innovator&rsquo;s Solution</em> (co-authored with Michael Raynor, 2003), identifies what successful disruptors do differently. The key insight is that the disruptive product is not a stripped-down, inferior version of the incumbent&rsquo;s premium offering &mdash; it is a product designed for a different job-to-be-done, at a price point that makes it accessible to customers who currently have no solution at all.</p>
+
+    <p>Applied to a specialist B2B service business, the Innovator&rsquo;s Solution has five characteristics:</p>
+
+    <ol style="line-height:2.2;margin:16px 0 20px 24px;">
+        <li><strong>Simpler, not stripped-down.</strong> The new product does fewer things, but does the most important thing reliably and without requiring expert implementation. It is not a worse version of the complex product. It is a better solution to a simpler problem.</li>
+        <li><strong>Fixed scope, not open-ended.</strong> Every sale is a configuration of a known product, not a scoping exercise for a new project. Delivery time is weeks, not months. Risk is bounded for the buyer.</li>
+        <li><strong>Priced for a different market.</strong> The new product targets customers who currently have no solution, not customers who could afford the premium product if they tried harder. The price point creates a new market rather than competing in the existing one.</li>
+        <li><strong>Validated by lead users, not designed for them.</strong> The customers whose simple configurations are producing exceptional results (the Bright Spots) are the validation of the Blueprint hypothesis, not the design brief for the next bespoke feature.</li>
+        <li><strong>Built by ring-fenced people.</strong> The new product cannot be built by the same people who maintain the existing product. The <a href="focus-and-prioritisation.html">shielding structure</a> &mdash; Goalies protecting Builders, Toolmakers ring-fenced from operational work &mdash; is the structural precondition for the Innovator&rsquo;s Solution to be built at all.</li>
+    </ol>
+
+    <hr>
+
+    <h2 id="section-seven-steps">Where this fits in the 7-step method</h2>
+
+    <div class="info-box">
+        <h3>&#128200; The Innovator&rsquo;s Dilemma in the improvement method</h3>
+        <p><strong>Step 1 (List symptoms)</strong> &mdash; The five traps are the symptom list. No net growth, high support burden, slow new product development, single sales channel, implementation complexity. Each symptom traces a recognisable pattern on the <a href="behaviour-over-time.html">BOT chart</a>: stagnation for revenue, decay for installed base value, stagnation for new contract value despite effort.</p>
+        <p style="margin-top:10px;"><strong>Step 2 (Measure)</strong> &mdash; Bootstrap CUSUM on new contract value confirms the stagnation pattern &mdash; flat for several years at an undesirable level. The dilemma has been active for longer than it feels. The flat line is its statistical signature.</p>
+        <p style="margin-top:10px;"><strong>Steps 3&ndash;4 (Root cause + constraint)</strong> &mdash; The <a href="causal-loop-diagrams.html">Causal Loop Diagram</a> of the five traps reveals the reinforcing loop. The dominant constraint is the absence of a structure that separates operational work from new product development. This is <a href="joiner-levels-of-fix.html">Level 3</a> &mdash; a system redesign, not a process fix.</p>
+        <p style="margin-top:10px;"><strong>Step 5 (Complete solution)</strong> &mdash; Applying the <a href="necessary-but-not-sufficient.html">necessary but not sufficient</a> test: the Investigator role is necessary. The Toolmaker ring-fence is necessary. The <a href="standardisation-vs-customisation.html">Blueprint product</a> is necessary. All together they are sufficient &mdash; they break the reinforcing loop by introducing a structural separation between the operations that sustain the dilemma and the development that resolves it.</p>
+        <p style="margin-top:10px;"><strong>Step 6 (PICK)</strong> &mdash; The Investigator appointment and Toolmaker ring-fence are Implement &mdash; high impact, low effort relative to their unlock value. The Blueprint is Challenge &mdash; broken into stages, each a complete PDSA cycle. The <a href="pick-model.html">Kill</a> item is unscoped customisation without a portfolio policy.</p>
+        <p style="margin-top:10px;"><strong>Step 7 (PDSA)</strong> &mdash; Pre-specify the Bootstrap CUSUM prediction: an upward change point in new contract value within 18&ndash;24 months of the structural separation. The Study step is not &ldquo;does it feel like we are making progress?&rdquo; It is: has a change point appeared?</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">Bootstrap CUSUM signature of the dilemma</h2>
+
+    <p>The Innovator&rsquo;s Dilemma has a specific Bootstrap CUSUM signature across multiple series simultaneously:</p>
+
+    <ul style="line-height:2.2;">
+        <li><strong>New contract value &mdash; stagnation pattern.</strong> Flat for years despite repeated initiatives. No upward change point. The reinforcing loop has neutralised each initiative before it could produce structural change.</li>
+        <li><strong>Support case volume &mdash; gradual upward drift or stagnation at high level.</strong> <a href="failure-demand.html">Failure demand</a> compounding as base complexity grows. The upward change point coincides with major customisation waves, not with improvement initiatives.</li>
+        <li><strong>New product release cadence &mdash; stagnation or intermittent bursts.</strong> New features appear and then stop as operational pressure pulls developers back. No sustained upward trajectory.</li>
+        <li><strong>Base revenue &mdash; slow decay.</strong> EMR displacement, regulatory change, demographic shifts. A gradual downward change point that is easy to deny for years before Bootstrap CUSUM makes it undeniable.</li>
+    </ul>
+
+    <p>The combined picture &mdash; four series, each showing its characteristic pattern &mdash; is the statistical portrait of a system caught in the Innovator&rsquo;s Dilemma. The diagnosis does not require a consultant. It requires Bootstrap CUSUM and the willingness to look at all four series together.</p>
+
+    <div class="callout blue" style="margin-top:32px;">
+        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
+        <p>The Innovator&rsquo;s Dilemma sits at Steps 1&ndash;4 of the <a href="improvement-method.html">7-step improvement method</a> &mdash; the diagnostic phase. See <a href="standardisation-vs-customisation.html">Standardisation vs Customisation</a> for the solution, <a href="focus-and-prioritisation.html">Focus &amp; Prioritisation</a> for the structural mechanism, and <a href="strategic-bot.html">the Strategic BOT chart</a> for the full picture of how the six solution waves build across a five-year horizon.</p>
+    </div>
+
+    <h2>Related concepts</h2>
+    <div class="nav-grid">
+        <a href="standardisation-vs-customisation.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Standardisation vs Customisation</h3>
+            <p>The customisation trap in operational detail — and the Blueprint as the Innovator's Solution applied to the product portfolio.</p>
+        </a>
+        <a href="bright-spots.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Bright Spots</h3>
+            <p>The corrected lead user question — find the customers getting exceptional results with simple configurations. They are pointing at the Blueprint, not the next bespoke feature.</p>
+        </a>
+        <a href="focus-and-prioritisation.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Focus &amp; Prioritisation</h3>
+            <p>The shielding structure that makes the Innovator's Solution buildable — separating operational work from new product development.</p>
+        </a>
+        <a href="causal-loop-diagrams.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Causal Loop Diagrams</h3>
+            <p>The reinforcing loop that sustains the dilemma — and why every intervention that doesn't break the loop fails in the same way.</p>
+        </a>
+        <a href="theory-of-constraints.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Theory of Constraints</h3>
+            <p>The constraint is the structure itself — the absence of separation between operational and developmental work. TOC provides the method for addressing it.</p>
+        </a>
+        <a href="strategic-bot.html" class="nav-card">
+            <div class="nav-tag">Interactive</div>
+            <h3>Strategic BOT Chart</h3>
+            <p>The six-wave response to the dilemma — click through each wave to see the full picture build across a five-year horizon.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Primary sources:</strong> Christensen C. <em>The Innovator&rsquo;s Dilemma.</em> Harvard Business School Press, 1997. &nbsp;&middot;&nbsp; Christensen C, Raynor M. <em>The Innovator&rsquo;s Solution.</em> Harvard Business School Press, 2003.</p>
+        <p style="margin-top:8px;"><strong>Lead users:</strong> Von Hippel E. <em>The Sources of Innovation.</em> Oxford University Press, 1988. &nbsp;&middot;&nbsp; Von Hippel E. <em>Democratizing Innovation.</em> MIT Press, 2005.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor W.A. Change-Point Analysis (2000).</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+</main>
+</body>
+</html>

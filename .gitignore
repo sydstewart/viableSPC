@@ -25,3 +25,4 @@ dist/
 # Worker source and intermediate files — protect IP
 worker-source.js
 worker.min.js
+worker.js
