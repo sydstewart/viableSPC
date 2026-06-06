@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/diagnostic-questions.html">
+    <title>Diagnostic Questions — A Question for Every Step — StepChangeAnalysis.com</title>
+    <meta name="description" content="54 diagnostic questions mapped exactly to the 7-step improvement method. Pre-step, symptoms, measurement, root cause, constraint, solution design, PICK, and PDSA. The questions the system is not designed to ask of itself.">
+    <meta name="keywords" content="diagnostic questions improvement method, root cause analysis questions, improvement facilitation questions, systems thinking questions, 7 step improvement questions, PDSA questions, PICK model questions">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <style>
+        :root {
+            --brand-blue:#002d5b; --brand-mid:#0056b3; --brand-light:#e9f2ff;
+            --text:#1e293b; --muted:#64748b; --border:#e2e8f0; --bg:#f8f9fa;
+            --green:#198754; --orange:#e67e22; --red:#c0392b; --teal:#0e7490; --purple:#7c3aed;
+        }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { font-family:Georgia,"Times New Roman",serif; background:var(--bg); color:var(--text); line-height:1.8; }
+        .site-header { background:var(--brand-blue); padding:14px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+        .site-header a { color:white; text-decoration:none; font-family:system-ui,sans-serif; font-size:1em; font-weight:bold; }
+        .header-nav { display:flex; gap:4px; align-items:center; flex-wrap:wrap; }
+        .header-nav a { color:rgba(255,255,255,0.85); font-family:system-ui,sans-serif; font-size:0.88em; font-weight:500; text-decoration:none; padding:6px 10px; border-radius:4px; }
+        .header-nav a:hover { color:white; background:rgba(255,255,255,0.1); }
+        .nav-dropdown { position:relative; }
+        .nav-dropdown-btn { color:rgba(255,255,255,0.85); font-family:system-ui,sans-serif; font-size:0.88em; font-weight:500; background:none; border:none; cursor:pointer; padding:6px 10px; border-radius:4px; display:flex; align-items:center; gap:4px; }
+        .nav-dropdown-btn:hover { color:white; background:rgba(255,255,255,0.1); }
+        .nav-dropdown-btn .arrow { font-size:0.7em; transition:transform 0.2s; }
+        .nav-dropdown:hover .arrow { transform:rotate(180deg); }
+        .nav-dropdown-menu { display:none; position:absolute; top:100%; left:0; background:white; border:1px solid #e2e8f0; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.12); min-width:220px; z-index:200; padding:12px 0 6px; }
+        .nav-dropdown:hover .nav-dropdown-menu { display:block; }
+        .nav-dropdown-menu::before { content:''; position:absolute; top:-8px; left:0; right:0; height:8px; }
+        .nav-dropdown-menu a { display:block; color:#1e293b; font-family:system-ui,sans-serif; font-size:0.85em; padding:8px 16px; text-decoration:none; }
+        .nav-dropdown-menu a:hover { background:#e9f2ff; color:#002d5b; }
+        .nav-dropdown-menu .menu-section { font-family:system-ui,sans-serif; font-size:0.72em; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#94a3b8; padding:8px 16px 4px; }
+        .nav-dropdown-menu .menu-divider { border:none; border-top:1px solid #e2e8f0; margin:4px 0; }
+        .header-tool-btn { background:var(--green); color:white; padding:8px 18px; border-radius:4px; font-family:system-ui,sans-serif; font-size:0.9em; font-weight:bold; }
+        .header-tool-btn:hover { background:#146c43; text-decoration:none !important; }
+        @media (max-width:600px) { .header-nav { display:none; } }
+
+        .page-wrap { max-width:900px; margin:0 auto; padding:40px 24px 80px; }
+        .breadcrumb { font-family:system-ui,sans-serif; font-size:0.82em; color:var(--muted); margin-bottom:24px; }
+        .breadcrumb a { color:var(--brand-mid); text-decoration:none; }
+        .page-flag { font-family:system-ui,sans-serif; font-size:0.8em; font-weight:bold; letter-spacing:0.12em; text-transform:uppercase; color:var(--brand-mid); margin-bottom:12px; }
+        h1 { font-size:clamp(1.8em,4vw,2.4em); line-height:1.2; color:var(--brand-blue); margin-bottom:16px; }
+        .page-intro { font-size:1.05em; color:var(--muted); font-style:italic; margin-bottom:12px; border-left:4px solid var(--brand-mid); padding-left:16px; line-height:1.7; }
+        .page-meta { font-family:system-ui,sans-serif; font-size:0.85em; color:var(--muted); margin-bottom:32px; padding-bottom:20px; border-bottom:2px solid var(--border); }
+        p { margin-bottom:1.2em; font-size:1.05em; }
+        strong { color:var(--brand-blue); }
+        hr { border:none; border-top:2px solid var(--border); margin:36px 0; }
+
+        /* Step section headers */
+        .q-section { margin:32px 0 0; }
+        .q-header { display:flex; align-items:baseline; gap:12px; padding:10px 16px; border-radius:6px; margin-bottom:4px; font-family:system-ui,sans-serif; }
+        .q-header h2 { font-size:1.05em; font-weight:700; margin:0; }
+        .q-header .step-tag { font-size:0.72em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
+        .q-header .step-link { font-size:0.82em; font-weight:500; margin-left:auto; }
+        .q-header .step-link a { text-decoration:none; }
+
+        /* Colour coding by step */
+        .pre .q-header   { background:#f0f4f8; border-left:5px solid var(--muted); }
+        .s1 .q-header    { background:#eff6ff; border-left:5px solid var(--teal); }
+        .s2 .q-header    { background:#f0fdf4; border-left:5px solid var(--green); }
+        .s3 .q-header    { background:#fff8f0; border-left:5px solid var(--orange); }
+        .s4 .q-header    { background:#fff5f5; border-left:5px solid var(--red); }
+        .joiner .q-header { background:#faf5ff; border-left:5px solid var(--purple); }
+        .goldratt .q-header { background:#fffbeb; border-left:5px solid #d97706; }
+        .s5 .q-header    { background:#f0fdfa; border-left:5px solid var(--teal); }
+        .s6 .q-header    { background:#fff7ed; border-left:5px solid var(--orange); }
+        .s7 .q-header    { background:#eff6ff; border-left:5px solid var(--brand-mid); }
+        .cross .q-header { background:var(--brand-light); border-left:5px solid var(--brand-mid); }
+        .lead .q-header  { background:#f0fdf4; border-left:5px solid var(--green); }
+
+        .pre .step-tag   { color:var(--muted); }
+        .s1 .step-tag    { color:var(--teal); }
+        .s2 .step-tag    { color:var(--green); }
+        .s3 .step-tag    { color:var(--orange); }
+        .s4 .step-tag    { color:var(--red); }
+        .joiner .step-tag { color:var(--purple); }
+        .goldratt .step-tag { color:#d97706; }
+        .s5 .step-tag    { color:var(--teal); }
+        .s6 .step-tag    { color:var(--orange); }
+        .s7 .step-tag    { color:var(--brand-mid); }
+        .cross .step-tag { color:var(--brand-mid); }
+        .lead .step-tag  { color:var(--green); }
+
+        .q-subtext { font-family:system-ui,sans-serif; font-size:0.88em; color:var(--muted); font-style:italic; padding:0 4px 10px; line-height:1.5; }
+
+        /* Question tables */
+        .q-table { width:100%; border-collapse:collapse; font-family:system-ui,sans-serif; font-size:0.87em; margin:0 0 8px; }
+        .q-table th { background:var(--brand-blue); color:white; padding:7px 12px; text-align:left; font-weight:600; }
+        .q-table td { padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.55; }
+        .q-table tr:nth-child(even) td { background:#f8fafc; }
+        .q-table tr:last-child td { border-bottom:none; }
+        .q-table td:first-child { font-weight:700; color:var(--brand-mid); white-space:nowrap; width:58px; }
+        .q-table td:nth-child(2) { font-style:italic; color:var(--text); }
+        .q-table td:nth-child(3) { color:var(--muted); font-size:0.9em; }
+
+        .callout { border-radius:8px; padding:16px 20px; margin:20px 0; font-family:system-ui,sans-serif; }
+        .callout.blue { background:var(--brand-light); border-left:5px solid var(--brand-mid); }
+        .callout strong { display:block; margin-bottom:6px; color:var(--brand-blue); }
+        .callout p { font-size:0.93em; line-height:1.6; margin:0 0 6px; }
+        .callout p:last-child { margin:0; }
+
+        .page-footer { margin-top:48px; padding-top:24px; border-top:2px solid var(--border); font-family:system-ui,sans-serif; font-size:0.85em; color:var(--muted); }
+        .page-footer a { color:var(--brand-mid); }
+
+        @media (max-width:900px) { body { font-size:17px; } .page-wrap { padding:28px 20px 60px; } }
+        @media (max-width:600px) {
+            body { font-size:16px; }
+            .site-header { padding:10px 16px; }
+            .header-nav { display:none; }
+            .page-wrap { padding:20px 16px 48px; }
+            h1 { font-size:clamp(1.4em,6vw,2em); }
+            .q-table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; min-width:320px; font-size:0.8em; }
+            .q-header { flex-wrap:wrap; }
+            .q-header .step-link { margin-left:0; }
+        }
+        @media print {
+            .site-header, .header-nav, .header-tool-btn { display:none !important; }
+            body { font-size:10pt; color:black; background:white; }
+            .q-header { page-break-after:avoid; }
+            tr { page-break-inside:avoid; }
+            .q-table td:nth-child(3) { display:none; }
+        }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+    <nav class="header-nav">
+        <a href="start-here.html">Start here</a>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Concepts <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <div class="menu-section">Why things fail</div>
+                <a href="why-nothing-changes.html">Why nothing changes</a>
+                <a href="joiner-levels-of-fix.html">Joiner levels of fix</a>
+                <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>
+                <a href="innovators-dilemma.html">The Innovator&rsquo;s Dilemma</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Measurement &amp; analysis</div>
+                <a href="types-of-measures.html">Types of measures</a>
+                <a href="variation-and-spc.html">Variation &amp; SPC</a>
+                <a href="behaviour-over-time.html">Behaviour Over Time</a>
+                <a href="causal-loop-diagrams.html">Causal Loop Diagrams</a>
+                <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Improvement method</div>
+                <a href="model-for-improvement.html">Model for Improvement</a>
+                <a href="pdsa-cycle.html">PDSA cycle</a>
+                <a href="five-whys.html">The 5 Whys</a>
+                <a href="root-cause-analysis.html">Root Cause Analysis</a>
+                <a href="bright-spots.html">Bright Spots</a>
+                <a href="pick-model.html">The PICK Model</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Systems &amp; constraints</div>
+                <a href="theory-of-constraints.html">Theory of Constraints</a>
+                <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a>
+                <a href="failure-demand.html">Failure Demand</a>
+                <a href="focus-and-prioritisation.html">Focus &amp; Prioritisation</a>
+                <a href="standardisation-vs-customisation.html">Standardisation vs Customisation</a>
+            </div>
+        </div>
+        <div class="nav-dropdown">
+            <button class="nav-dropdown-btn">Articles <span class="arrow">&#9660;</span></button>
+            <div class="nav-dropdown-menu">
+                <div class="menu-section">NHS Healthcare</div>
+                <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; Why nothing has worked</a>
+                <a href="dementia-diagnosis-rate.html">Dementia &mdash; The 66% target</a>
+                <a href="gp-appointments-analysis.html">GP appointments</a>
+                <a href="never-events-wrong-route.html">Never events &mdash; Wrong route</a>
+                <a href="anticoag-safety.html">Anticoagulation safety</a>
+                <a href="sepsis-six-does-public-data-show-whether-it-worked.html">Sepsis Six</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Environment &amp; Policy</div>
+                <a href="ulez-london-air-quality.html">ULEZ &mdash; Air quality</a>
+                <a href="the-grid-fixed-itself.html">The Grid fixed itself</a>
+                <a href="uk-gdp-analysis.html">UK GDP analysis</a>
+                <hr class="menu-divider">
+                <div class="menu-section">Industrial</div>
+                <a href="hydrogen-plant-cusum.html">Hydrogen plant CUSUM</a>
+            </div>
+        </div>
+        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="about.html">About</a>
+    </nav>
+    <a href="index.html" class="header-tool-btn">&#9654; Open the free tool</a>
+</header>
+
+<main class="page-wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="improvement-method.html">The 7-Step Method</a> &rsaquo; Diagnostic Questions</div>
+    <div class="page-flag">&#10067; Diagnostic Facilitation Guide</div>
+    <h1>The Right Questions</h1>
+    <p class="page-intro">None of these questions are technically difficult. What makes them powerful is not their complexity &mdash; it is that they are asked at all. The insider is too busy, too close, and too entangled to ask the question that would reveal the structure of the trap they are inside. Work through each section in order with the relevant step of the method. Do not rush to solutions. The diagnosis is in the answers.</p>
+    <div class="page-meta">Mapped to the <a href="improvement-method.html">7-step improvement method</a> &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; June 2026 &nbsp;&middot;&nbsp; <em>Print-friendly &mdash; use browser print for a clean A4 version</em></div>
+
+    <div class="callout blue">
+        <strong>How to use this page</strong>
+        <p>Each section corresponds exactly to one step of the <a href="improvement-method.html">7-step improvement method</a>. Use the coloured header links to jump between questions and the method page. Ask questions in order within each section. Write every answer down without editing &mdash; the questions that produce silence are the most important ones.</p>
+    </div>
+
+    <!-- PRE-STEP -->
+    <div class="q-section pre">
+        <div class="q-header">
+            <span class="step-tag">Before you start</span>
+            <h2>Is this a pattern or bad luck?</h2>
+            <span class="step-link"><a href="why-nothing-changes.html">&#8594; Why Nothing Changes</a></span>
+        </div>
+        <p class="q-subtext">Ask these before anything else. If the honest answer to P3 is &ldquo;we would produce the same outcome twice as fast&rdquo; — stop persisting and start diagnosing.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>P1</td><td>Is this failure happening in roughly the same way each time, despite different attempts to fix it?</td><td>If yes — the failure is structural, not situational</td></tr>
+                <tr><td>P2</td><td>Has effort increased over the past year while results have stayed the same or worsened?</td><td>If yes — effort is not the constraint. The system is.</td></tr>
+                <tr><td>P3</td><td>If we doubled our effort from tomorrow, would the result improve — or would we produce the same outcome twice as fast?</td><td>Separates effort problems from structural problems cleanly</td></tr>
+                <tr><td>P4</td><td>Does the solution feel obvious to insiders but invisible or uncompelling to outsiders?</td><td>If yes — there is likely a jobs mismatch or a perspective gap</td></tr>
+                <tr><td>P5</td><td>Are we persisting because the evidence supports it — or because stopping feels like failure?</td><td>Names the sunk cost dynamic before it closes the conversation</td></tr>
+                <tr><td>P6</td><td>What would we need to see in the next twelve weeks to justify continuing on the current path?</td><td>Forces a prediction. If no answer exists, there is no method — only hope.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- STEP 1 -->
+    <div class="q-section s1">
+        <div class="q-header">
+            <span class="step-tag">Step 1</span>
+            <h2>List every symptom</h2>
+            <span class="step-link"><a href="improvement-method.html">&#8594; 7-step method</a> &nbsp;&middot;&nbsp; <a href="behaviour-over-time.html">Behaviour Over Time</a></span>
+        </div>
+        <p class="q-subtext">Ask these of multiple people at different levels. Write every answer down without editing or filtering. More answers are better. Do not group yet &mdash; grouping is Step 3.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>S1.1</td><td>What keeps happening that should not keep happening?</td><td>Recurring problems — the fingerprint of structural causes</td></tr>
+                <tr><td>S1.2</td><td>What never happens that should be happening?</td><td>Missing capabilities — the fingerprint of structural absences</td></tr>
+                <tr><td>S1.3</td><td>What takes far longer or costs far more than it should?</td><td>Friction points — where the system works against itself</td></tr>
+                <tr><td>S1.4</td><td>Where do outcomes vary most — some go well, some go badly, for no obvious reason?</td><td>Variation hotspots — where the system depends on people rather than design</td></tr>
+                <tr><td>S1.5</td><td>What do you spend time on that you wish someone else could handle?</td><td>The routing problem made personal and specific</td></tr>
+                <tr><td>S1.6</td><td>What decisions wait for one specific person before they can move?</td><td>Names the single-node constraint directly</td></tr>
+                <tr><td>S1.7</td><td>What would you fix first if you had a free week and no one would push back?</td><td>Reveals what insiders already know but have stopped saying</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- STEP 2 -->
+    <div class="q-section s2">
+        <div class="q-header">
+            <span class="step-tag">Step 2</span>
+            <h2>Measure your biggest issue over time</h2>
+            <span class="step-link"><a href="index.html">&#8594; Bootstrap CUSUM tool</a> &nbsp;&middot;&nbsp; <a href="types-of-measures.html">Types of measures</a></span>
+        </div>
+        <p class="q-subtext">Before opening a spreadsheet, sketch the Behaviour Over Time chart first — what pattern do you expect to see? Then measure. These questions help you choose the right measure and interpret the result honestly.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>M2.1</td><td>What single number, if it changed, would tell us unambiguously whether this problem is getting better or worse?</td><td>Forces the outcome measure — avoids activity proxies</td></tr>
+                <tr><td>M2.2</td><td>How far back does the data go? Is the series long enough to show the pattern rather than recent noise?</td><td>Short series can't distinguish signal from variation</td></tr>
+                <tr><td>M2.3</td><td>Before running Bootstrap CUSUM — what pattern do we expect? Stagnation, decay, oscillation, or something else?</td><td>The pre-commitment that prevents reverse-engineering the result</td></tr>
+                <tr><td>M2.4</td><td>If the Bootstrap CUSUM shows no change point, what does that tell us about every initiative run in this period?</td><td>The flat line is the diagnosis: the constraint has not been addressed</td></tr>
+                <tr><td>M2.5</td><td>Are we measuring the outcome itself — or a proxy that could look good while the outcome worsens?</td><td>Distinguishes outcome measures from process measures</td></tr>
+                <tr><td>M2.6</td><td>What would a genuine improvement look like on this chart — and by when should we expect to see it?</td><td>The pre-specified prediction that Step 7 will test</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- STEP 3 -->
+    <div class="q-section s3">
+        <div class="q-header">
+            <span class="step-tag">Step 3</span>
+            <h2>Find the root cause</h2>
+            <span class="step-link"><a href="five-whys.html">&#8594; The 5 Whys</a> &nbsp;&middot;&nbsp; <a href="causal-loop-diagrams.html">Causal Loop Diagrams</a></span>
+        </div>
+        <p class="q-subtext">For each significant symptom, trace the causal chain back to its root. Then ask the loop questions — why does it keep happening? The loop is why every previous fix was temporary.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>S3.1</td><td>If this root cause is true, does every symptom on our list necessarily follow?</td><td>The necessity test — a genuine root explains everything</td></tr>
+                <tr><td>S3.2</td><td>If this root cause were eliminated tomorrow, which symptoms would disappear?</td><td>The removal test — if most disappear, the root is real</td></tr>
+                <tr><td>S3.3</td><td>Is this a description of what someone does — or a description of what the system produces?</td><td>Separates behaviour from structure. If it describes a person, go deeper.</td></tr>
+                <tr><td>S3.4</td><td>What does this problem directly produce — and what do those consequences produce?</td><td>Follow the consequence chain until it closes back on the original problem</td></tr>
+                <tr><td>S3.5</td><td>What short-term fix relieves the pressure to address the root — and how does that fix prevent the structural fix from ever being made?</td><td>The balancing loop that maintains the system at an undesirable level</td></tr>
+                <tr><td>S3.6</td><td>Where in the loop would an intervention break it most cleanly?</td><td>The leverage point — where the structural change needs to go</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- STEP 4 -->
+    <div class="q-section s4">
+        <div class="q-header">
+            <span class="step-tag">Step 4</span>
+            <h2>Find the dominant constraint</h2>
+            <span class="step-link"><a href="theory-of-constraints.html">&#8594; Theory of Constraints</a></span>
+        </div>
+        <p class="q-subtext">Go through the symptom list. For each item ask S4.4. If the answer is yes — it is a consequence, not a cause. What remains in the causes column is what the structural response must address.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>S4.1</td><td>Would this symptom exist if the root cause did not exist?</td><td>If no — it is a consequence, not a cause</td></tr>
+                <tr><td>S4.2</td><td>Is this a problem we could solve directly — or would solving it just create space for the same problem to refill?</td><td>Distinguishes treatable symptoms from structural outputs</td></tr>
+                <tr><td>S4.3</td><td>Are we treating this as a cause because it is the most visible — or because it is genuinely upstream?</td><td>Names the visibility bias that makes consequences look like causes</td></tr>
+                <tr><td>S4.4</td><td>If we fixed this tomorrow, would the root cause keep producing it?</td><td>The definitive test. If yes — it is a consequence, not a cause.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JOINER CHECK -->
+    <div class="q-section joiner" style="margin-top:16px;">
+        <div class="q-header">
+            <span class="step-tag">Step 4 check</span>
+            <h2>Is each intervention deep enough to hold?</h2>
+            <span class="step-link"><a href="joiner-levels-of-fix.html">&#8594; Joiner&rsquo;s Levels of Fix</a></span>
+        </div>
+        <p class="q-subtext">Apply these to every proposed intervention before designing anything. If the answer to J2 is &ldquo;people will try harder&rdquo; — it is not a method. Go back and find the Level 3 structural change.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>J1</td><td>Is this intervention aimed at the system — or at an individual behaving differently?</td><td>If the latter — it is Level 1 wearing Level 3 language. Redesign it.</td></tr>
+                <tr><td>J2</td><td>By what method will this intervention produce the improvement we are predicting?</td><td>Deming&rsquo;s test. If the answer is &ldquo;people will try harder&rdquo; — it is not a method.</td></tr>
+                <tr><td>J3</td><td>If we stopped this intervention tomorrow, would the problem return?</td><td>If yes — the intervention is not at the right level.</td></tr>
+                <tr><td>J4</td><td>Could a policy decision achieve the same result?</td><td>The policy shortcut — always ask this before designing something more complex.</td></tr>
+                <tr><td>J5</td><td>What is the prediction? What will change, by how much, within how many weeks?</td><td>Forces a testable commitment. Without it there is no method — only intention.</td></tr>
+                <tr><td>J6</td><td>What might get worse as a result of this intervention succeeding?</td><td>The balance measure question — names the unintended consequence before it happens.</td></tr>
+                <tr><td>J7</td><td>Does the team understand why this is happening — and have they been part of designing it?</td><td>All One Team. A correct intervention done <em>to</em> people fails. Done <em>with</em> people holds.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- GOLDRATT -->
+    <div class="q-section goldratt" style="margin-top:16px;">
+        <div class="q-header">
+            <span class="step-tag">Step 4 sequence</span>
+            <h2>Goldratt&rsquo;s five focusing steps</h2>
+            <span class="step-link"><a href="theory-of-constraints.html">&#8594; Theory of Constraints</a></span>
+        </div>
+        <p class="q-subtext">Ask in sequence before designing any structural intervention. G3 — subordinate — is the most commonly skipped and often produces immediate relief at zero cost.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>G1</td><td>What is the single constraint limiting the throughput of the whole system right now?</td><td>Identify — the one thing that, if it moved, would move everything else</td></tr>
+                <tr><td>G2</td><td>What already exists that we are not fully using?</td><td>Exploit — get the most from what is there before building anything new</td></tr>
+                <tr><td>G3</td><td>What are we currently doing that feeds the constraint — and can we stop?</td><td>Subordinate — often produces immediate relief at zero cost</td></tr>
+                <tr><td>G4</td><td>What investment would break the constraint if steps 2 and 3 are not enough?</td><td>Elevate — the structural intervention, sequenced correctly</td></tr>
+                <tr><td>G5</td><td>Now that this constraint has moved — what is the next one?</td><td>Repeat — the constraint always moves. Find it before it finds you.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- STEP 5 -->
+    <div class="q-section s5">
+        <div class="q-header">
+            <span class="step-tag">Step 5</span>
+            <h2>Design a complete solution</h2>
+            <span class="step-link"><a href="necessary-but-not-sufficient.html">&#8594; Necessary But Not Sufficient</a></span>
+        </div>
+        <p class="q-subtext">For every pair of proposed interventions, ask S5.1 and S5.2 to build the dependency map. Then for each individually, ask S5.3&ndash;S5.5 to define the PDSA cycle.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>S5.1</td><td>Does this intervention require another to be working before it can succeed?</td><td>Dependency — if yes, the other one comes first</td></tr>
+                <tr><td>S5.2</td><td>Would this intervention be undermined if a specific other one is not in place?</td><td>Fragility — names what the intervention depends on to hold</td></tr>
+                <tr><td>S5.3</td><td>What is the smallest version of this we could test in the next four to eight weeks?</td><td>The PDSA starting point — small scale, specific prediction, defined measure</td></tr>
+                <tr><td>S5.4</td><td>What would we expect to see if this is working — and by when?</td><td>The prediction. Written before implementation, not after.</td></tr>
+                <tr><td>S5.5</td><td>What would we need to see to conclude it is not working — and what would we do then?</td><td>Prevents the intervention being defended regardless of evidence</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- LEAD USER — between Step 5 and 6 -->
+    <div class="q-section lead" style="margin-top:16px;">
+        <div class="q-header">
+            <span class="step-tag">Step 5 check</span>
+            <h2>Lead user validation</h2>
+            <span class="step-link"><a href="innovators-dilemma.html">&#8594; Innovator&rsquo;s Dilemma</a> &nbsp;&middot;&nbsp; <a href="standardisation-vs-customisation.html">Blueprint</a></span>
+        </div>
+        <p class="q-subtext">Ask before the sunk cost closes the conversation — before the investment deepens, before the relationship makes honest evaluation uncomfortable.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>L1</td><td>Can we identify at least three other organisations with the same need who did not ask us to build this?</td><td>Whether the need is general or specific to this user</td></tr>
+                <tr><td>L2</td><td>What job does the mainstream market think it is hiring us to do — and is that the same job this lead user has?</td><td>The jobs mismatch test. Different jobs means no market at scale.</td></tr>
+                <tr><td>L3</td><td>What would the mainstream buyer need to stop doing, start doing, or pay for that they currently do not?</td><td>The switching cost. If large — adoption will be slow regardless of product quality.</td></tr>
+                <tr><td>L4</td><td>If we showed this to ten prospects who had never heard of us, how many would immediately understand the value?</td><td>The comprehension test. Fewer than half means the job framing is wrong.</td></tr>
+                <tr><td>L5</td><td>What is the smallest version of this we could test with a new customer — not the lead user — within ninety days?</td><td>Forces a market test rather than a development continuation</td></tr>
+                <tr><td>L6</td><td>What would we need to see from that test to justify scaling the investment?</td><td>The prediction. Written before the test. If no answer — there is no method, only hope.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- STEP 6 -->
+    <div class="q-section s6">
+        <div class="q-header">
+            <span class="step-tag">Step 6</span>
+            <h2>Prioritise with PICK</h2>
+            <span class="step-link"><a href="pick-model.html">&#8594; The PICK Model</a> &nbsp;&middot;&nbsp; <a href="focus-and-prioritisation.html">Focus &amp; Prioritisation</a></span>
+        </div>
+        <p class="q-subtext">You will have more possible solutions than capacity to implement them. These questions help score each initiative honestly and make the Kill decisions defensible.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>P6.1</td><td>If this initiative succeeds, what specifically changes in the outcome measure — and by how much?</td><td>Forces an impact estimate. Vague impact = low confidence = lower PICK score.</td></tr>
+                <tr><td>P6.2</td><td>What is the total effort required — including the hidden costs of distraction, coordination, and maintenance?</td><td>Real effort is almost always higher than estimated. Overestimate deliberately.</td></tr>
+                <tr><td>P6.3</td><td>If we stopped this initiative tomorrow, what capacity would be released — and what would we do with it?</td><td>Makes the opportunity cost of continuing explicit</td></tr>
+                <tr><td>P6.4</td><td>Does this initiative address the constraint — or a non-constraint? What evidence supports that?</td><td>Improving a non-constraint does not improve system throughput. Verify this first.</td></tr>
+                <tr><td>P6.5</td><td>Has this initiative been running for more than six months without a Bootstrap CUSUM change point? If so — is it working or are we persisting?</td><td>The sunk cost test applied to the portfolio</td></tr>
+                <tr><td>P6.6</td><td>For Challenge items: what is the first stage — the smallest version that delivers real value and can be tested within eight weeks?</td><td>Converts an intimidating large project into a manageable PDSA cycle</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- STEP 7 -->
+    <div class="q-section s7">
+        <div class="q-header">
+            <span class="step-tag">Step 7</span>
+            <h2>Plan, Do, Study, Act</h2>
+            <span class="step-link"><a href="pdsa-cycle.html">&#8594; PDSA Cycle</a> &nbsp;&middot;&nbsp; <a href="index.html">Bootstrap CUSUM tool</a></span>
+        </div>
+        <p class="q-subtext">The most important questions on this page. A PDSA without a pre-specified prediction is not a PDSA — it is an action with a description attached afterwards. Write the prediction before you start.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>What it reveals</th></tr></thead>
+            <tbody>
+                <tr><td>S7.1</td><td>What specifically do we predict will change — in which measure — by which date?</td><td>The Plan. Written now, not after the results are in.</td></tr>
+                <tr><td>S7.2</td><td>What Bootstrap CUSUM change point are we looking for — upward or downward, on which series, within how many periods?</td><td>Makes the prediction statistical and testable rather than impressionistic</td></tr>
+                <tr><td>S7.3</td><td>What would constitute a clear failure — and what would we do if we saw it?</td><td>The study question. Without a failure criterion, every result confirms the hypothesis.</td></tr>
+                <tr><td>S7.4</td><td>At what confidence level will we accept the Bootstrap CUSUM result as confirmation?</td><td>95% for routine monitoring; 99.7% before committing to irreversible action</td></tr>
+                <tr><td>S7.5</td><td>If the change point appears — what does the Act step look like? Scale, modify, or stop?</td><td>The decision rule, written before the result, not after</td></tr>
+                <tr><td>S7.6</td><td>If the change point does not appear within the predicted time — what does that tell us about the hypothesis?</td><td>The flat line is information. It means the constraint was not what we thought.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- CROSS-CUTTING -->
+    <div class="q-section cross">
+        <div class="q-header">
+            <span class="step-tag">Any step</span>
+            <h2>Questions that cut across everything</h2>
+            <span class="step-link"><em>Ask early. Hold the silence.</em></span>
+        </div>
+        <p class="q-subtext">These are not stage-specific. They unlock the whole conversation. The answer is always already there — the question creates permission to say it out loud.</p>
+        <table class="q-table">
+            <thead><tr><th>#</th><th>Question</th><th>Why it matters</th></tr></thead>
+            <tbody>
+                <tr><td>D1</td><td>Describe your perfect Tuesday.</td><td>Reveals the gap between what the role should be and what it actually is</td></tr>
+                <tr><td>D2</td><td>How much of your actual Tuesday do you spend on those things?</td><td>Makes the gap numerical. Removes the ability to say it is not that bad.</td></tr>
+                <tr><td>D3</td><td>What on this list requires you specifically — and what is here because the system routes it to you?</td><td>Separates the irreplaceable from the structural default</td></tr>
+                <tr><td>D4</td><td>If the system were designed differently, what would it do instead of routing this to you?</td><td>Moves from diagnosis to structural imagination</td></tr>
+                <tr><td>D5</td><td>How long has that been the case?</td><td>Names the duration of the constraint. Makes visible what has been normalised.</td></tr>
+                <tr><td>D6</td><td>What would need to be true for that to change?</td><td>The structural design question. Opens the conversation about what must be built.</td></tr>
+                <tr><td>D7</td><td>Is this a problem of effort — or a problem of design?</td><td>Separates the Level 1 response from the Level 3 one</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <div class="callout blue">
+        <strong>&#128221; The one-sentence version of the whole method</strong>
+        <p>Ask the right questions, in the right order, with someone who has the distance to ask them before the answers become too uncomfortable to act on &mdash; and you will find the root cause, understand why it keeps recurring, design the structural response at the right depth, and sequence the interventions so that each one creates the conditions the next one requires.</p>
+        <p style="margin-top:8px;"><a href="improvement-method.html">&#8592; Return to the 7-Step Improvement Method</a></p>
+    </div>
+
+    <footer class="page-footer">
+        <p>Question framework developed with reference to: Deming (Out of the Crisis), Joiner (Fourth Generation Management), Goldratt (The Goal), Senge (The Fifth Discipline), Christensen (The Innovator&rsquo;s Solution), Newport (Deep Work).</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+</main>
+</body>
+</html>

@@ -73,6 +73,7 @@
         .tl-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--brand-blue); border: 2px solid var(--brand-light); display: inline-block; margin-left: auto; position: absolute; left: 134px; top: 5px; }
         .tl-right { padding-left: 20px; }
         .tl-role { font-family: system-ui, sans-serif; font-size: 0.98em; font-weight: 700; color: var(--brand-blue); margin-bottom: 5px; }
+        .tl-org { font-family: system-ui, sans-serif; font-size: 0.85em; color: var(--muted); margin-bottom: 8px; font-style: italic; }
         .tl-body { font-size: 0.95em; color: var(--text); line-height: 1.65; margin: 0; }
         /* Profile card */
         .profile-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 28px 32px; margin: 32px 0; display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start; }
@@ -113,118 +114,6 @@
             .tl-dot { display: none; }
             .tl-right { padding-left: 0; }
             .header-nav { display: none; }
-        }
-    
-        /* ============================================================
-           RESPONSIVE — mobile, tablet, print
-           ============================================================ */
-
-        /* Tablet (601px – 900px) */
-        @media (max-width: 900px) {
-            body { font-size: 16px; }
-            .article-wrap, .page-wrap { padding: 28px 20px 60px; }
-            h1, .article-title { font-size: clamp(1.5em, 5vw, 2.2em); }
-            h2 { font-size: 1.2em; }
-            /* Tables — make them scroll horizontally */
-            .data-table-wrap, .numbers-box, table { overflow-x: auto; display: block; }
-            .numbers-box table, .data-table, .examples-table,
-            .inputs-table { display: block; overflow-x: auto; white-space: nowrap; }
-            /* Grids — 2 columns max on tablet */
-            .summary-grid, .measure-grid, .question-grid,
-            .nav-grid, .rules-grid, .weco-rules { grid-template-columns: 1fr 1fr; }
-            .lead-lag-box { grid-template-columns: 1fr 1fr; }
-            /* PDSA wrap — stack vertically */
-            .pdsa-wrap { flex-direction: column; align-items: center; }
-            /* Funnel wrap — stack */
-            .funnel-wrap { flex-direction: column; }
-        }
-
-        /* Mobile (max 600px) */
-        @media (max-width: 600px) {
-            body { font-size: 16px; line-height: 1.7; }
-
-            /* Header */
-            .site-header { padding: 10px 16px; gap: 8px; }
-            .header-nav { display: none; }
-            .header-tool-btn { font-size: 0.85em; padding: 7px 14px; }
-
-            /* Page wraps */
-            .article-wrap, .page-wrap { padding: 20px 16px 48px; }
-            .article-wrap { max-width: 100%; }
-
-            /* Typography */
-            h1, .article-title { font-size: clamp(1.4em, 6vw, 2em); }
-            h2 { font-size: 1.15em; margin: 32px 0 12px; }
-            h3 { font-size: 1em; }
-            p { font-size: 1em; }
-
-            /* Tables — horizontal scroll, min readable size */
-            table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch;
-                    white-space: nowrap; font-size: 0.82em; }
-            .data-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .numbers-box { padding: 10px 12px; overflow-x: auto; }
-            .numbers-box table { font-size: 0.8em; }
-            .numbers-box th, .numbers-box td { padding: 7px 10px; }
-            .examples-table, .inputs-table { font-size: 0.8em; }
-            /* Allow table cell text to wrap on mobile for readability */
-            .examples-table td, .inputs-table td { white-space: normal; min-width: 100px; }
-
-            /* Grids — single column */
-            .summary-grid, .measure-grid, .question-grid,
-            .nav-grid, .rules-grid, .weco-rules,
-            .lead-lag-box, .chart-pair, .funnel-wrap { grid-template-columns: 1fr;
-                                                         flex-direction: column; }
-
-            /* Summary/card boxes */
-            .summary-grid > div, .measure-grid > div { min-width: unset; }
-
-            /* PDSA diagram and wrap */
-            .pdsa-wrap { flex-direction: column; align-items: center; gap: 16px; }
-            .pdsa-svg { max-width: 260px; }
-            .pdsa-detail { min-width: unset; width: 100%; }
-
-            /* Concept page zone diagrams */
-            .weco-zones { font-size: 0.85em; }
-            .weco-label { width: 60px; min-width: 60px; font-size: 0.72em; }
-
-            /* Dark boxes */
-            .dark-box { padding: 18px 16px; }
-            .dark-box p { font-size: 0.92em; }
-
-            /* Callout boxes */
-            .callout, .finding-box, .callout-box,
-            .deming-box, .analysis-box { padding: 14px 16px; }
-
-            /* Article summary box grids */
-            div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
-
-            /* Breadcrumb */
-            .breadcrumb { font-size: 0.78em; }
-
-            /* Cycles row — scroll */
-            .cycles-row { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-            /* Three questions */
-            .three-questions .q-number { width: 44px; min-width: 44px; font-size: 1.2em; }
-
-            /* WECO zones diagram labels */
-            .weco-label { padding: 8px 4px; }
-
-            /* Chart figures */
-            .chart-figure img, .chart-figure svg { width: 100%; height: auto; }
-
-            /* Footer */
-            .page-footer, .article-footer { font-size: 0.8em; }
-            .page-footer ul, .article-footer ul { padding-left: 14px; }
-        }
-
-        /* Print */
-        @media print {
-            .site-header, .header-nav, .header-tool-btn,
-            .nav-grid, .toc-details, .cta-box { display: none !important; }
-            body { font-size: 12pt; color: black; background: white; }
-            .article-wrap, .page-wrap { max-width: 100%; padding: 0; }
-            a { color: black; }
         }
     </style>
 </head>
@@ -327,41 +216,77 @@
 
         <div class="tl-item">
             <div class="tl-left">
-                <span class="tl-period">12 years</span>
+                <span class="tl-period">1984 &ndash; present</span>
                 <span class="tl-dot"></span>
             </div>
             <div class="tl-right">
-                <div class="tl-role">Process engineer and plant manager &mdash; pharmaceutical-grade chemicals</div>
-                <p class="tl-body">Major chemicals company producing a high-specification chemical product with impurity limits at parts per million level. At ppm specifications, a process shift that standard control charts show as normal variation can be the difference between a product that meets specification and one that does not. First experience of CUSUM as a practical tool for detecting small, sustained shifts in process mean &mdash; shifts that are invisible in monthly averages, invisible on a run chart, but visible in the cumulative sum. The product was not pharmaceutical but the discipline was the same: tight specifications, high stakes, and a measurement method that had to be honest about what had actually changed.</p>
+                <div class="tl-role">Owner, Founder and Managing Director &mdash; 4S Information Systems Ltd (4S DAWN Clinical Software)</div>
+                <div class="tl-org">Milnthorpe, Cumbria, Lake District, UK</div>
+                <p class="tl-body">Provides decision support software and services supporting chronic disease patients taking potentially harmful medications, with the objectives of enhancing patient safety, quality of care and healthcare effectiveness. DAWN anticoagulation management software is used across the NHS and internationally. Over 40 years of building, improving and running a specialist clinical software business &mdash; navigating the Innovator&rsquo;s Dilemma from the inside, applying every concept on this site in the actual conditions they were designed for.</p>
             </div>
         </div>
 
         <div class="tl-item">
             <div class="tl-left">
-                <span class="tl-period">Plant manager</span>
+                <span class="tl-period">1981 &ndash; 1984</span>
                 <span class="tl-dot"></span>
             </div>
             <div class="tl-right">
-                <div class="tl-role">Major hazards installation &mdash; COMAH-regulated</div>
-                <p class="tl-body">Plant manager on a major hazards installation under COMAH (Control of Major Accident Hazards) regulations. The COMAH hierarchy of controls &mdash; elimination, engineering controls, administrative controls, training and procedure &mdash; is the same hierarchy that Joiner&rsquo;s levels of intervention describes for improvement work. The most durable fixes are structural. The least durable are behavioural. Major hazards management makes this undeniably clear because the consequences of relying on behaviour under pressure are visible and documented.</p>
+                <div class="tl-role">Strategic Data Planning and Database Consultant &mdash; Savant Enterprises</div>
+                <p class="tl-body">Strategic data planning and database consultancy for major organisations including ICI Pharmaceuticals (now AstraZeneca), Unilever, and British Nuclear Fuels. Provided training and consultancy in structured data planning, database design, and systems performance improvement.</p>
             </div>
         </div>
 
         <div class="tl-item">
             <div class="tl-left">
-                <span class="tl-period">40+ years</span>
+                <span class="tl-period">1978 &ndash; 1981</span>
                 <span class="tl-dot"></span>
             </div>
             <div class="tl-right">
-                <div class="tl-role">Clinical software company &mdash; high risk medication management</div>
-                <p class="tl-body">Founded and managed a clinical software company helping healthcare professionals manage patients taking high risk medications &mdash; anticoagulants, cytotoxics, immunosuppressants, biologics, and biosimilars &mdash; medications where the therapeutic window is narrow, the monitoring requirements are complex, and the consequences of a monitoring failure are serious and the consequences of a monitoring failure are serious. Customers include NHS trusts across the UK and major healthcare organisations in the US and Canada. Forty-plus years working alongside clinicians, pharmacists, and managers in different healthcare systems has made one pattern unmistakable: the clinical risk is the same wherever the patient is, the regulatory frameworks differ, but the underlying measurement question &mdash; has this patient&rsquo;s control structurally improved &mdash; is identical. So is the tool needed to answer it honestly.</p>
+                <div class="tl-role">Business Applications Analyst &mdash; ICI Petrochemicals Division</div>
+                <p class="tl-body">Planning systems for improved performance in chemical works. Member of a joint ICI&thinsp;/&thinsp;IBM study team for two years, working on the application of information systems to chemical plant operations and performance measurement. First systematic exposure to how data, decisions and operational systems interact in large continuous process environments.</p>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <span class="tl-period">1976 &ndash; 1979</span>
+                <span class="tl-dot"></span>
+            </div>
+            <div class="tl-right">
+                <div class="tl-role">Part-Time Tutor &mdash; The Open University</div>
+                <div class="tl-org">Systems Performance: Human Factors and Systems Failures Course</div>
+                <p class="tl-body">Concurrent with plant management at ICI. Tutored the Open University&rsquo;s systems performance course &mdash; a discipline covering human factors, system failure modes, and the gap between how systems are designed to work and how they actually behave under operational conditions. The course material shaped the diagnostic frameworks that inform this site: understanding failure as a property of systems, not of the people operating within them.</p>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <span class="tl-period">1970 &ndash; 1978</span>
+                <span class="tl-dot"></span>
+            </div>
+            <div class="tl-right">
+                <div class="tl-role">Plant and Production Manager (Various Positions) &mdash; ICI Petrochemicals Division</div>
+                <div class="tl-org">Ardeer, Scotland</div>
+                <p class="tl-body">Plant manager on various large continuous process plants including a Major Hazards Installation (COMAH-regulated). The hydrogen plant case study on this site &mdash; the 17% efficiency gap, the residual CUSUM monitoring system, the optical pyrometer corroboration &mdash; is from this period. Managing continuous processes operating around the clock with tight specifications and high operational stakes was where CUSUM became a practical tool rather than a statistical concept.</p>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <span class="tl-period">1968 &ndash; 1970</span>
+                <span class="tl-dot"></span>
+            </div>
+            <div class="tl-right">
+                <div class="tl-role">Works R&amp;D Engineer &mdash; ICI Dyestuffs Division</div>
+                <p class="tl-body">Process quality control and process improvement using CUSUMs and Statistical Process Control. First direct application of CUSUM in an industrial setting &mdash; monitoring product batch quality and process performance against specification. The fundamental question was the same one that runs through every article on this site: how do you distinguish a genuine process shift from background noise, and how quickly can you detect it?</p>
             </div>
         </div>
 
     </div>
 
     <blockquote>
-        The connection between detecting a process shift in a pharmaceutical plant and detecting whether an NHS improvement programme has worked is not metaphorical. It is the same statistical problem applied to the same kind of high-stakes outcome. The tool changed. The question did not.
+    &ldquo;The question I was trying to answer in 1968 &mdash; has this process genuinely changed, or is this variation just noise? &mdash; is the same question Bootstrap CUSUM answers in 2026. The data changes. The industries change. The computational tools change. The underlying question about what constitutes real evidence of change versus random variation is invariant. That question is what this site is about.&rdquo;
     </blockquote>
 
     <!-- WHY FREE -->

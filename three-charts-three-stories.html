@@ -258,7 +258,7 @@
 
         /* Tablet (601px – 900px) */
         @media (max-width: 900px) {
-            body { font-size: 16px; }
+            body { font-size: 17px; }
             .article-wrap, .page-wrap { padding: 28px 20px 60px; }
             h1, .article-title { font-size: clamp(1.5em, 5vw, 2.2em); }
             h2 { font-size: 1.2em; }
@@ -297,10 +297,10 @@
 
             /* Tables — horizontal scroll, min readable size */
             table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch;
-                    white-space: nowrap; font-size: 0.82em; }
+                    font-size: 0.82em; min-width: 320px; }
             .data-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
             .numbers-box { padding: 10px 12px; overflow-x: auto; }
-            .numbers-box table { font-size: 0.8em; }
+            .numbers-box table { font-size: 0.8em; min-width: 300px; white-space: nowrap; }
             .numbers-box th, .numbers-box td { padding: 7px 10px; }
             .examples-table, .inputs-table { font-size: 0.8em; }
             /* Allow table cell text to wrap on mobile for readability */
