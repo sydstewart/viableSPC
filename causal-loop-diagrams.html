@@ -271,92 +271,8 @@
     <p>Bootstrap CUSUM on NHS A&amp;E performance finds four structural stages of decline and not one upward change point across 15 years. The CLD explains why no intervention has produced a sustained improvement: each intervention activates a balancing loop that prevents the system from reaching a genuinely better state, while a reinforcing loop drives progressive deterioration.</p>
 
     <div class="cld-wrap">
-        <svg viewBox="0 0 700 320" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
-            <!-- Nodes -->
-            <!-- A&E waiting time (top centre) -->
-            <rect x="270" y="20" width="160" height="36" rx="6" fill="#fee2e2" stroke="#c0392b" stroke-width="2"/>
-            <text x="350" y="43" text-anchor="middle" fill="#7f1d1d" font-size="12" font-weight="700">A&amp;E waiting time</text>
-
-            <!-- Political pressure (right) -->
-            <rect x="520" y="110" width="150" height="36" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-            <text x="595" y="133" text-anchor="middle" fill="#7c2d12" font-size="12" font-weight="700">Political pressure</text>
-
-            <!-- New initiative (bottom right) -->
-            <rect x="490" y="230" width="160" height="36" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-            <text x="570" y="253" text-anchor="middle" fill="#7c2d12" font-size="12" font-weight="700">New initiative</text>
-
-            <!-- Short-term improvement (bottom centre) -->
-            <rect x="240" y="250" width="170" height="36" rx="6" fill="#f0fdf4" stroke="#198754" stroke-width="1.5"/>
-            <text x="325" y="268" text-anchor="middle" fill="#14532d" font-size="11" font-weight="700">Short-term</text>
-            <text x="325" y="281" text-anchor="middle" fill="#14532d" font-size="11" font-weight="700">improvement</text>
-
-            <!-- Structural capacity gap (bottom left) -->
-            <rect x="50" y="230" width="160" height="36" rx="6" fill="#fee2e2" stroke="#c0392b" stroke-width="2"/>
-            <text x="130" y="248" text-anchor="middle" fill="#7f1d1d" font-size="11" font-weight="700">Structural capacity</text>
-            <text x="130" y="261" text-anchor="middle" fill="#7f1d1d" font-size="11" font-weight="700">gap (unaddressed)</text>
-
-            <!-- Pressure to fix structurally (left) -->
-            <rect x="30" y="110" width="160" height="36" rx="6" fill="#e9f2ff" stroke="#0056b3" stroke-width="2"/>
-            <text x="110" y="128" text-anchor="middle" fill="#002d5b" font-size="11" font-weight="700">Pressure for</text>
-            <text x="110" y="141" text-anchor="middle" fill="#002d5b" font-size="11" font-weight="700">structural fix</text>
-
-            <!-- Arrows -->
-            <!-- Waiting time → Political pressure (+) -->
-            <line x1="430" y1="38" x2="520" y2="117" stroke="#f97316" stroke-width="1.8" marker-end="url(#arr-o)"/>
-            <text x="495" y="72" fill="#f97316" font-size="11" font-weight="700">+</text>
-
-            <!-- Political pressure → New initiative (+) -->
-            <line x1="570" y1="146" x2="570" y2="230" stroke="#f97316" stroke-width="1.8" marker-end="url(#arr-o)"/>
-            <text x="578" y="195" fill="#f97316" font-size="11" font-weight="700">+</text>
-
-            <!-- New initiative → Short-term improvement (+) -->
-            <line x1="490" y1="248" x2="415" y2="265" stroke="#198754" stroke-width="1.8" marker-end="url(#arr-g)"/>
-            <text x="460" y="260" fill="#198754" font-size="11" font-weight="700">+</text>
-
-            <!-- Short-term improvement → Waiting time (−) BALANCING -->
-            <path d="M 325,250 Q 325,130 330,56" fill="none" stroke="#0056b3" stroke-width="1.8" stroke-dasharray="6,3" marker-end="url(#arr-b)"/>
-            <text x="310" y="160" fill="#0056b3" font-size="11" font-weight="700">&minus;</text>
-
-            <!-- Short-term improvement → Political pressure (−) BALANCING: pressure reduces -->
-            <path d="M 415,260 Q 480,220 530,150" fill="none" stroke="#0056b3" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-b)"/>
-            <text x="488" y="200" fill="#0056b3" font-size="11" font-weight="700">&minus;</text>
-
-            <!-- Structural gap → Waiting time (+) REINFORCING -->
-            <path d="M 130,230 Q 130,80 270,38" fill="none" stroke="#c0392b" stroke-width="1.8" marker-end="url(#arr-r)"/>
-            <text x="130" y="150" fill="#c0392b" font-size="11" font-weight="700">+</text>
-
-            <!-- Pressure for structural fix → Structural gap (−) -->
-            <line x1="190" y1="135" x2="150" y2="230" stroke="#0056b3" stroke-width="1.5" marker-end="url(#arr-b)"/>
-            <text x="155" y="180" fill="#0056b3" font-size="11" font-weight="700">&minus;</text>
-
-            <!-- Short-term improvement kills pressure for structural fix -->
-            <path d="M 280,268 Q 160,260 190,148" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-m)"/>
-            <text x="195" y="218" fill="#64748b" font-size="10">&minus;</text>
-
-            <!-- Loop labels -->
-            <text x="570" y="195" text-anchor="middle" fill="#f97316" font-size="11" font-weight="900" font-style="italic">B1</text>
-            <text x="160" y="95" text-anchor="middle" fill="#c0392b" font-size="11" font-weight="900" font-style="italic">R1</text>
-
-            <!-- Arrow markers -->
-            <defs>
-                <marker id="arr-o" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L8,3 L0,6 Z" fill="#f97316"/>
-                </marker>
-                <marker id="arr-g" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L8,3 L0,6 Z" fill="#198754"/>
-                </marker>
-                <marker id="arr-b" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L8,3 L0,6 Z" fill="#0056b3"/>
-                </marker>
-                <marker id="arr-r" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L8,3 L0,6 Z" fill="#c0392b"/>
-                </marker>
-                <marker id="arr-m" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/>
-                </marker>
-            </defs>
-        </svg>
-        <figcaption>R1: Structural capacity gap &rarr; longer waits &rarr; more political pressure &rarr; new initiatives &rarr; short-term improvement &rarr; pressure reduces &rarr; structural fix never made &rarr; capacity gap persists (reinforcing). B1: Short-term improvement activates a balancing loop that relieves the pressure for structural change &mdash; preventing the system from ever reaching a genuinely better equilibrium.</figcaption>
+        <img src="images/ae-cld-diagram.png" alt="NHS A&amp;E causal loop diagram showing B1 balancing loop (nodes 1-2-3-4-1) and R1 reinforcing loop (nodes 1-2-3-4-5-6-1). The red arrow from node 4 short-term improvement to node 5 pressure for structural fix is the key mechanism — every short-term improvement reduces pressure for the structural fix, preventing the system from ever reaching a genuinely better state." style="width:100%;height:auto;border-radius:6px;">
+        <figcaption><strong>B1 Balancing loop (1&ndash;2&ndash;3&ndash;4&ndash;1, odd number of negative links):</strong> A&amp;E waiting time rises &rarr; political pressure builds &rarr; new initiative launched &rarr; short-term improvement occurs &rarr; waiting time falls temporarily &rarr; pressure reduces &rarr; structural fix never made &rarr; waiting time rises again. The loop maintains the system near an undesirable equilibrium. <strong>R1 Reinforcing loop (1&ndash;2&ndash;3&ndash;4&ndash;5&ndash;6&ndash;1, even count of opposite links):</strong> The structural fix path that <em>should</em> operate &mdash; but is blocked by the red arrow. Every short-term improvement reduces the pressure for a structural fix (node 4 &rarr; node 5), so structural change capacity (node 6) is never built. This is why Bootstrap CUSUM finds no upward change point across 15 years and 20+ interventions.</figcaption>
     </div>
 
     <p>The key structural feature is that short-term improvement <em>reduces</em> the pressure for structural change. Every time an initiative produces visible short-term results, the political urgency to make the hard structural investment (bed capacity, workforce, primary care access) is reduced. The system settles back to a slightly worse level than before. Over 15 years and 20+ initiatives, this produces the Bootstrap CUSUM signature: four stages of progressive decline, no upward change point.</p>
@@ -370,74 +286,8 @@
     <p>The <a href="standardisation-vs-customisation.html">customisation trap</a> is a reinforcing loop that progressively increases the constraint on developer time while appearing to generate revenue at each step. The CLD shows why saying yes to each individual customisation request is rational locally but destructive systemically.</p>
 
     <div class="cld-wrap">
-        <svg viewBox="0 0 680 280" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
-            <!-- Nodes in a clockwise loop -->
-            <!-- Customisation requests (top) -->
-            <rect x="240" y="15" width="190" height="36" rx="6" fill="#fee2e2" stroke="#c0392b" stroke-width="2"/>
-            <text x="335" y="38" text-anchor="middle" fill="#7f1d1d" font-size="12" font-weight="700">Customisation requests</text>
-
-            <!-- Bespoke configs in base (right top) -->
-            <rect x="490" y="100" width="170" height="36" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-            <text x="575" y="118" text-anchor="middle" fill="#7c2d12" font-size="11" font-weight="700">Bespoke configs</text>
-            <text x="575" y="131" text-anchor="middle" fill="#7c2d12" font-size="11" font-weight="700">in installed base</text>
-
-            <!-- Support burden per developer (right bottom) -->
-            <rect x="470" y="210" width="190" height="36" rx="6" fill="#fee2e2" stroke="#c0392b" stroke-width="2"/>
-            <text x="565" y="228" text-anchor="middle" fill="#7f1d1d" font-size="11" font-weight="700">Support burden</text>
-            <text x="565" y="241" text-anchor="middle" fill="#7f1d1d" font-size="11" font-weight="700">per developer</text>
-
-            <!-- Developer time for new product (bottom) -->
-            <rect x="220" y="225" width="190" height="36" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-            <text x="315" y="243" text-anchor="middle" fill="#7c2d12" font-size="11" font-weight="700">Developer time for</text>
-            <text x="315" y="256" text-anchor="middle" fill="#7c2d12" font-size="11" font-weight="700">new products</text>
-
-            <!-- Product competitiveness (left bottom) -->
-            <rect x="20" y="210" width="170" height="36" rx="6" fill="#f0fdf4" stroke="#198754" stroke-width="1.5"/>
-            <text x="105" y="228" text-anchor="middle" fill="#14532d" font-size="11" font-weight="700">Standard product</text>
-            <text x="105" y="241" text-anchor="middle" fill="#14532d" font-size="11" font-weight="700">competitiveness</text>
-
-            <!-- Sales pressure to customise (left top) -->
-            <rect x="20" y="100" width="170" height="36" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-            <text x="105" y="118" text-anchor="middle" fill="#7c2d12" font-size="11" font-weight="700">Sales pressure to</text>
-            <text x="105" y="131" text-anchor="middle" fill="#7c2d12" font-size="11" font-weight="700">customise to win</text>
-
-            <!-- Arrows clockwise -->
-            <!-- Requests → Bespoke configs (+) -->
-            <path d="M 430,33 Q 540,33 570,100" fill="none" stroke="#c0392b" stroke-width="1.8" marker-end="url(#arr-r2)"/>
-            <text x="520" y="60" fill="#c0392b" font-size="11" font-weight="700">+</text>
-
-            <!-- Bespoke configs → Support burden (+) -->
-            <line x1="575" y1="136" x2="568" y2="210" stroke="#c0392b" stroke-width="1.8" marker-end="url(#arr-r2)"/>
-            <text x="582" y="178" fill="#c0392b" font-size="11" font-weight="700">+</text>
-
-            <!-- Support burden → Developer time (−) -->
-            <line x1="470" y1="228" x2="410" y2="248" stroke="#c0392b" stroke-width="1.8" marker-end="url(#arr-r2)"/>
-            <text x="445" y="245" fill="#c0392b" font-size="11" font-weight="700">&minus;</text>
-
-            <!-- Developer time → Product competitiveness (+) -->
-            <line x1="220" y1="248" x2="190" y2="235" stroke="#198754" stroke-width="1.8" marker-end="url(#arr-g2)"/>
-            <text x="202" y="255" fill="#198754" font-size="11" font-weight="700">+</text>
-
-            <!-- Product competitiveness → Sales pressure (−) -->
-            <line x1="105" y1="210" x2="105" y2="136" stroke="#0056b3" stroke-width="1.8" marker-end="url(#arr-b2)"/>
-            <text x="112" y="178" fill="#0056b3" font-size="11" font-weight="700">&minus;</text>
-
-            <!-- Sales pressure → Requests (+) -->
-            <path d="M 105,100 Q 105,40 240,30" fill="none" stroke="#f97316" stroke-width="1.8" marker-end="url(#arr-o2)"/>
-            <text x="140" y="60" fill="#f97316" font-size="11" font-weight="700">+</text>
-
-            <!-- Loop label -->
-            <text x="335" y="145" text-anchor="middle" fill="#c0392b" font-size="14" font-weight="900" font-style="italic">R1</text>
-            <text x="335" y="162" text-anchor="middle" fill="#c0392b" font-size="10">Customisation trap</text>
-
-            <defs>
-                <marker id="arr-r2" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#c0392b"/></marker>
-                <marker id="arr-g2" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#198754"/></marker>
-                <marker id="arr-b2" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#0056b3"/></marker>
-                <marker id="arr-o2" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#f97316"/></marker>
-            </defs>
-        </svg>
-        <figcaption>R1: More customisation requests &rarr; more bespoke configs in base &rarr; higher support burden per developer &rarr; less time for new product development &rarr; lower standard product competitiveness &rarr; more sales pressure to customise to win deals &rarr; more customisation requests. A reinforcing loop that progressively worsens the constraint.</figcaption>
+        <img src="images/customisation-trap-cld.png" alt="Customisation trap causal loop diagram — R1 reinforcing loop showing six nodes: 1. Customisation requests, 2. Bespoke configs in installed base, 3. Support burden per developer, 4. Developer time for new products, 5. New marketable products with little customisation, 6. Sales pressure to customise to win. Two negative links at nodes 3-4 and 5-6 give an even count of opposite links confirming R1 reinforcing loop." style="width:100%;height:auto;border-radius:6px;">
+        <figcaption><strong>R1 Reinforcing loop (1&ndash;2&ndash;3&ndash;4&ndash;5&ndash;6&ndash;1, even count of opposite links):</strong> Customisation requests increase &rarr; bespoke configs in the installed base grow &rarr; support burden per developer rises &rarr; <em>(negative link)</em> developer time for new products falls &rarr; new marketable products with little customisation fall &rarr; <em>(negative link)</em> sales pressure to customise to win deals rises &rarr; customisation requests increase again. Two negative links, even count = reinforcing. Each cycle around the loop tightens the constraint: more support burden, less development capacity, weaker standard product, more pressure to customise. The loop does not break by itself &mdash; it requires a structural intervention such as a <a href="standardisation-vs-customisation.html">portfolio policy</a> that interrupts the link between sales pressure and customisation requests.</figcaption>
     </div>
 
     <p>The Bootstrap CUSUM signature of this loop unchecked is the decay pattern in new contract value and the stagnation pattern in support cases (they stay high rather than falling). Breaking the loop requires introducing a negative link: a <a href="standardisation-vs-customisation.html">portfolio policy</a> that interrupts the connection between sales pressure and customisation requests — replacing it with a connection to a standardised Blueprint offer instead.</p>
