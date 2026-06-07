@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://stepchangeanalysis.com/search-test.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Test — StepChangeAnalysis.com</title>
+    <style>
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { font-family:Georgia,serif; background:#f8f9fa; color:#1e293b; line-height:1.8; }
+        .site-header { background:#002d5b; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; }
+        .site-header a { color:white; text-decoration:none; font-family:system-ui,sans-serif; font-size:1em; font-weight:bold; }
+        h2 { font-size:1.4em; color:#002d5b; text-align:center; padding:32px 24px 8px; font-family:system-ui,sans-serif; }
+        p.intro { text-align:center; color:#64748b; font-family:system-ui,sans-serif; font-size:0.95em; padding:0 24px 24px; }
+        #search-section { max-width:820px; margin:0 auto; padding:0 24px 48px; }
+        .search-box { background:#f0f4f8; border:2px solid #0056b3; border-radius:10px; padding:24px 28px; margin-bottom:32px; font-family:system-ui,sans-serif; }
+        .search-label { font-size:0.8em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#0056b3; margin-bottom:12px; }
+        .search-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+        #sca-search-input { flex:1; min-width:200px; padding:11px 16px; border:2px solid #e2e8f0; border-radius:6px; font-size:0.97em; font-family:system-ui,sans-serif; color:#1e293b; background:white; outline:none; }
+        #sca-search-input:focus { border-color:#0056b3; box-shadow:0 0 0 3px rgba(0,86,179,0.12); }
+        #sca-search-clear { display:none; padding:11px 16px; background:#64748b; color:white; border:none; border-radius:6px; font-size:0.9em; font-family:system-ui,sans-serif; font-weight:600; cursor:pointer; }
+        #sca-search-clear:hover { background:#475569; }
+        #sca-search-status { font-size:0.85em; color:#64748b; margin-top:10px; min-height:1.2em; }
+        .sca-result-card { background:white; border:1px solid #e2e8f0; border-radius:10px; padding:20px 24px; margin-bottom:16px; font-family:system-ui,sans-serif; transition:box-shadow 0.15s; }
+        .sca-result-card:hover { box-shadow:0 4px 16px rgba(0,0,0,0.09); border-color:#0056b3; }
+        .sca-result-flag { font-size:0.75em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#0056b3; margin-bottom:6px; }
+        .sca-result-title { font-size:1.05em; font-weight:700; color:#002d5b; margin-bottom:6px; line-height:1.3; }
+        .sca-result-title a { color:#002d5b; text-decoration:none; }
+        .sca-result-title a:hover { text-decoration:underline; }
+        .sca-result-summary { font-size:0.9em; color:#475569; line-height:1.6; margin-bottom:12px; }
+        .sca-result-summary mark, .sca-result-keywords mark { background:#fef9c3; color:#713f12; padding:1px 3px; border-radius:3px; font-weight:600; }
+        .sca-result-keywords { font-size:0.8em; color:#94a3b8; margin-bottom:12px; }
+        .sca-result-actions { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+        .sca-result-btn { display:inline-block; background:#0056b3; color:white; padding:7px 16px; border-radius:6px; font-size:0.88em; font-weight:700; text-decoration:none; }
+        .sca-result-btn:hover { background:#004494; }
+        .sca-result-btn-section { display:inline-block; background:#f0f4f8; color:#0056b3; border:1px solid #0056b3; padding:7px 14px; border-radius:6px; font-size:0.85em; font-weight:600; text-decoration:none; }
+        .sca-result-btn-section:hover { background:#e0ebff; }
+        .sca-no-results { text-align:center; padding:32px; color:#64748b; font-family:system-ui,sans-serif; font-size:0.95em; background:#f8f9fa; border-radius:8px; border:1px solid #e2e8f0; }
+    
+        /* ============================================================
+           RESPONSIVE — mobile, tablet, print
+           ============================================================ */
+
+        /* Tablet (601px – 900px) */
+        @media (max-width: 900px) {
+            body { font-size: 17px; }
+            .article-wrap, .page-wrap { padding: 28px 20px 60px; }
+            h1, .article-title { font-size: clamp(1.5em, 5vw, 2.2em); }
+            h2 { font-size: 1.2em; }
+            /* Tables — make them scroll horizontally */
+            .data-table-wrap, .numbers-box, table { overflow-x: auto; display: block; }
+            .numbers-box table, .data-table, .examples-table,
+            .inputs-table { display: block; overflow-x: auto; white-space: nowrap; }
+            /* Grids — 2 columns max on tablet */
+            .summary-grid, .measure-grid, .question-grid,
+            .nav-grid, .rules-grid, .weco-rules { grid-template-columns: 1fr 1fr; }
+            .lead-lag-box { grid-template-columns: 1fr 1fr; }
+            /* PDSA wrap — stack vertically */
+            .pdsa-wrap { flex-direction: column; align-items: center; }
+            /* Funnel wrap — stack */
+            .funnel-wrap { flex-direction: column; }
+        }
+
+        /* Mobile (max 600px) */
+        @media (max-width: 600px) {
+            body { font-size: 16px; line-height: 1.7; }
+
+            /* Header */
+            .site-header { padding: 10px 16px; gap: 8px; }
+            .header-nav { display: none; }
+            .header-tool-btn { font-size: 0.85em; padding: 7px 14px; }
+
+            /* Page wraps */
+            .article-wrap, .page-wrap { padding: 20px 16px 48px; }
+            .article-wrap { max-width: 100%; }
+
+            /* Typography */
+            h1, .article-title { font-size: clamp(1.4em, 6vw, 2em); }
+            h2 { font-size: 1.15em; margin: 32px 0 12px; }
+            h3 { font-size: 1em; }
+            p { font-size: 1em; }
+
+            /* Tables — horizontal scroll, min readable size */
+            table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch;
+                    font-size: 0.82em; min-width: 320px; }
+            .data-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .numbers-box { padding: 10px 12px; overflow-x: auto; }
+            .numbers-box table { font-size: 0.8em; min-width: 300px; white-space: nowrap; }
+            .numbers-box th, .numbers-box td { padding: 7px 10px; }
+            .examples-table, .inputs-table { font-size: 0.8em; }
+            /* Allow table cell text to wrap on mobile for readability */
+            .examples-table td, .inputs-table td { white-space: normal; min-width: 100px; }
+
+            /* Grids — single column */
+            .summary-grid, .measure-grid, .question-grid,
+            .nav-grid, .rules-grid, .weco-rules,
+            .lead-lag-box, .chart-pair, .funnel-wrap { grid-template-columns: 1fr;
+                                                         flex-direction: column; }
+
+            /* Summary/card boxes */
+            .summary-grid > div, .measure-grid > div { min-width: unset; }
+
+            /* PDSA diagram and wrap */
+            .pdsa-wrap { flex-direction: column; align-items: center; gap: 16px; }
+            .pdsa-svg { max-width: 260px; }
+            .pdsa-detail { min-width: unset; width: 100%; }
+
+            /* Concept page zone diagrams */
+            .weco-zones { font-size: 0.85em; }
+            .weco-label { width: 60px; min-width: 60px; font-size: 0.72em; }
+
+            /* Dark boxes */
+            .dark-box { padding: 18px 16px; }
+            .dark-box p { font-size: 0.92em; }
+
+            /* Callout boxes */
+            .callout, .finding-box, .callout-box,
+            .deming-box, .analysis-box { padding: 14px 16px; }
+
+            /* Article summary box grids */
+            div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+
+            /* Breadcrumb */
+            .breadcrumb { font-size: 0.78em; }
+
+            /* Cycles row — scroll */
+            .cycles-row { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+            /* Three questions */
+            .three-questions .q-number { width: 44px; min-width: 44px; font-size: 1.2em; }
+
+            /* WECO zones diagram labels */
+            .weco-label { padding: 8px 4px; }
+
+            /* Chart figures */
+            .chart-figure img, .chart-figure svg { width: 100%; height: auto; }
+
+            /* Footer */
+            .page-footer, .article-footer { font-size: 0.8em; }
+            .page-footer ul, .article-footer ul { padding-left: 14px; }
+        }
+
+        /* Print */
+        @media print {
+            .site-header, .header-nav, .header-tool-btn,
+            .nav-grid, .toc-details, .cta-box { display: none !important; }
+            body { font-size: 12pt; color: black; background: white; }
+            .article-wrap, .page-wrap { max-width: 100%; padding: 0; }
+            a { color: black; }
+        }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <a href="index.html">&#128202; StepChangeAnalysis.com</a>
+</header>
+<nav class="mobile-nav" aria-label="Mobile navigation">
+    <a href="index.html">&#9654; Tool</a>
+    <a href="start-here.html">Start here</a>
+    <a href="improvement-method.html">7 Steps</a>
+    <a href="why-nothing-changes.html">Concepts</a>
+    <a href="about.html">About</a>
+</nav>
+<h2>Search preview</h2>
+<p class="intro">Try: <strong>Deming</strong> · <strong>Meadows</strong> · <strong>Joiner</strong> · <strong>PDSA</strong> · <strong>levels of intervention</strong> · <strong>how to read CUSUM</strong> · <strong>constraint</strong> · <strong>governance</strong> · <strong>catalyst</strong></p>
+
+<div id="search-section">
+    <div class="search-box">
+        <div class="search-label">&#128269; Search all articles</div>
+        <div class="search-row">
+            <input type="text" id="sca-search-input"
+                placeholder="Try: CUSUM, Deming, A&amp;E, carbon, Meadows, PDSA, governance…"
+                autocomplete="off" spellcheck="false">
+            <button id="sca-search-clear" onclick="scaClear()">Clear</button>
+        </div>
+        <div id="sca-search-status"></div>
+    </div>
+    <div id="sca-results" style="display:none;"></div>
+</div>
+
+<script>
+(function() {
+    let scaIndex = null, scaTimer = null;
+
+    fetch('search-index.json')
+        .then(r => r.json())
+        .then(data => { scaIndex = data.articles; })
+        .catch(() => { document.getElementById('sca-search-status').textContent = 'Search index could not be loaded.'; });
+
+    document.getElementById('sca-search-input').addEventListener('input', function() {
+        clearTimeout(scaTimer);
+        scaTimer = setTimeout(() => scaSearch(this.value), 180);
+    });
+    document.getElementById('sca-search-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') scaClear();
+    });
+
+    window.scaClear = function() {
+        document.getElementById('sca-search-input').value = '';
+        document.getElementById('sca-results').style.display = 'none';
+        document.getElementById('sca-results').innerHTML = '';
+        document.getElementById('sca-search-status').textContent = '';
+        document.getElementById('sca-search-clear').style.display = 'none';
+        document.getElementById('sca-search-input').focus();
+    };
+
+    window.scaSearch = function(query) {
+        const q = query.trim().toLowerCase();
+        const statusEl = document.getElementById('sca-search-status');
+        const resultsEl = document.getElementById('sca-results');
+        const clearBtn  = document.getElementById('sca-search-clear');
+
+        if (!q || q.length < 2) {
+            resultsEl.style.display = 'none';
+            resultsEl.innerHTML = '';
+            statusEl.textContent = '';
+            clearBtn.style.display = 'none';
+            return;
+        }
+        if (!scaIndex) { statusEl.textContent = 'Loading search index…'; return; }
+
+        clearBtn.style.display = 'inline-block';
+
+        // Split into individual terms, ignore short stop-words
+        const stopWords = new Set(['of','is','to','in','at','a','an','the','and','or','for','on','by','as','it','its']);
+        const terms = q.split(/\s+/).filter(t => t.length >= 3 && !stopWords.has(t));
+        const fullPhrase = q.trim(); // also search for the complete phrase
+
+        const scored = scaIndex.map(article => {
+            let score = 0;
+            const matchedKeywords = [];
+            let bestAnchor = null;
+            let bestAnchorLabel = null;
+            let bestAnchorScore = 0;
+
+            const searchable = {
+                title:    article.title.toLowerCase(),
+                flag:     (article.flag || '').toLowerCase(),
+                summary:  (article.summary || '').toLowerCase(),
+                subtitle: (article.subtitle || '').toLowerCase(),
+                keywords: (article.keywords || []).map(k => k.toLowerCase())
+            };
+
+            // ── Phrase match (highest priority) ──────────────────────────
+            if (fullPhrase.length >= 3) {
+                if (searchable.title.includes(fullPhrase))    score += 20;
+                if (searchable.flag.includes(fullPhrase))     score += 12;
+                if (searchable.summary.includes(fullPhrase))  score += 10;
+                searchable.keywords.forEach((kw, i) => {
+                    if (kw.includes(fullPhrase)) {
+                        score += 8;
+                        const orig = article.keywords[i];
+                        if (!matchedKeywords.includes(orig)) matchedKeywords.push(orig);
+                    }
+                });
+                // Phrase anchor match
+                const anchors = article.anchors || {};
+                Object.keys(anchors).forEach(anchorKey => {
+                    if (anchorKey.toLowerCase().includes(fullPhrase)) {
+                        const anchorScore = anchorKey.length + 100; // phrase beats word
+                        if (anchorScore > bestAnchorScore) {
+                            bestAnchorScore = anchorScore;
+                            bestAnchor = anchors[anchorKey];
+                            bestAnchorLabel = anchorKey;
+                        }
+                    }
+                });
+            }
+
+            // ── Individual word matches (lower priority) ──────────────────
+            terms.forEach(term => {
+                if (searchable.title.includes(term))    score += 6;
+                if (searchable.flag.includes(term))     score += 4;
+                if (searchable.summary.includes(term))  score += 3;
+                searchable.keywords.forEach((kw, i) => {
+                    if (kw.includes(term)) {
+                        score += 2;
+                        const orig = article.keywords[i];
+                        if (!matchedKeywords.includes(orig)) matchedKeywords.push(orig);
+                    }
+                });
+                if (searchable.subtitle.includes(term)) score += 1;
+
+                // Word-level anchor match
+                const anchors = article.anchors || {};
+                Object.keys(anchors).forEach(anchorKey => {
+                    if (anchorKey.toLowerCase().includes(term)) {
+                        const anchorScore = anchorKey.length;
+                        if (anchorScore > bestAnchorScore) {
+                            bestAnchorScore = anchorScore;
+                            bestAnchor = anchors[anchorKey];
+                            bestAnchorLabel = anchorKey;
+                        }
+                    }
+                });
+            });
+
+            return { article, score, matchedKeywords, bestAnchor, bestAnchorLabel };
+        }).filter(r => r.score > 0).sort((a, b) => b.score - a.score);
+
+        if (scored.length === 0) {
+            statusEl.textContent = 'No articles found for "' + query + '"';
+            resultsEl.innerHTML = '<div class="sca-no-results">No articles matched <strong>"' + escHtml(query) + '"</strong>.<br>Try: CUSUM, Deming, Meadows, Joiner, NHS, carbon, GDP, sepsis, governance, PDSA…</div>';
+            resultsEl.style.display = 'block';
+            return;
+        }
+
+        statusEl.textContent = scored.length + ' article' + (scored.length > 1 ? 's' : '') + ' found for "' + query + '"';
+
+        resultsEl.innerHTML = scored.map(({article, matchedKeywords, bestAnchor, bestAnchorLabel}) => {
+            let summary = escHtml(article.summary || '');
+            // Highlight full phrase first, then individual terms
+            const highlightTerms = fullPhrase.length >= 3
+                ? [fullPhrase, ...terms.filter(t => !fullPhrase.includes(t))]
+                : terms;
+            highlightTerms.forEach(term => {
+                summary = summary.replace(new RegExp('(' + escRegex(term) + ')', 'gi'), '<mark>$1</mark>');
+            });
+
+            const kwHtml = matchedKeywords.slice(0, 6).map(kw => {
+                let k = escHtml(kw);
+                highlightTerms.forEach(term => { k = k.replace(new RegExp('(' + escRegex(term) + ')', 'gi'), '<mark>$1</mark>'); });
+                return k;
+            }).join(' &nbsp;·&nbsp; ');
+
+            const articleUrl = escHtml(article.url);
+            const sectionUrl = bestAnchor ? articleUrl + '#' + bestAnchor : null;
+
+            // Get human-readable section name from the anchor id
+            // Human-readable section name lookup
+            const sectionLabels = {
+                'section-bundle': 'The Sepsis Six Bundle',
+                'section-measuring': 'Measuring Sepsis',
+                'section-cusum': 'CUSUM Analysis',
+                'section-ratio': 'The Key Ratio',
+                'section-deming': "Deming's Critique",
+                'section-bright-spots': 'Bright Spots',
+                'section-broader-lesson': 'The Broader Lesson',
+                'section-revolution': 'The DOAC Revolution',
+                'section-right-question': 'The Right Question',
+                'section-timeline': 'Policy Timeline',
+                'section-data': 'What the Data Shows',
+                'section-stroke-rates': 'Stroke Rates',
+                'section-warfarin-paradox': 'The Warfarin Paradox',
+                'section-what-cusum-adds': 'What CUSUM Adds',
+                'section-wholly-preventable': 'Wholly Preventable',
+                'section-root-cause': 'Root Cause',
+                'section-alcoa': "O'Neill at Alcoa",
+                'section-system-change': 'Genuine System Change',
+                'section-levels-of-fix': 'Joiner: Levels of Fix',
+                'section-conclusion': "Deming's Conclusion",
+                'section-debate': 'The Policy Debate',
+                'section-four-stages': 'Four Stages',
+                'section-findings': 'Key Findings',
+                'section-post-covid': 'Post-COVID',
+                'section-health': 'Health Impact',
+                'section-other-cities': 'Other Cities',
+                'section-three-charts': 'Three Charts',
+                'section-target': 'The Four-Hour Target',
+                'section-constraint': 'The Real Constraint',
+                'section-managers': 'For NHS Managers',
+                'section-lag': 'Policy Lag & Tampering',
+                'section-attendance': 'Inappropriate Attendance',
+                'section-policy-worked': 'The Policy That Worked',
+                'section-claim': 'The 53% Claim',
+                'section-total': 'Total Emissions',
+                'section-electricity': 'Electricity',
+                'section-transport': 'Transport',
+                'section-why-failed': 'Why Transport Failed',
+                'section-consumption': 'Consumption Emissions',
+                'section-three-series': 'Three Series',
+                'frameworks': 'Meadows, Joiner & COMAH',
+                'section-what-to-do': 'What Governments Should Do',
+                'section-problem': 'The Problem',
+                'section-clue': 'The Clue',
+                'section-monitoring-challenge': 'Monitoring Challenge',
+                'section-residual-cusum': 'Residual CUSUM',
+                'section-scenario1': 'Sudden Catalyst Damage',
+                'section-scenario2': 'Slow Degradation',
+                'section-scenario3': 'The Combined Scenario',
+                'section-practical': 'Pen & Paper System',
+                'section-applications': 'Broader Applications',
+                'section-baseline': 'Establishing the Baseline',
+                'section-turn-length': 'Turn Length',
+                'section-confidence': 'Confidence Level',
+                'section-downloads': 'Download Data Files',
+                'section-intro': 'Introduction',
+                'section-dataset': 'The Dataset',
+                'section-xmr': 'X-mR Chart',
+                'section-runchart': 'Run Chart',
+                'section-reading-cusum': 'How to Read the CUSUM Line',
+                'section-why-bootstrap': 'Why Bootstrap CUSUM?',
+                'section-comparison': 'Three-Chart Comparison',
+                'section-when-to-use': 'When to Use Each Chart',
+                'section-retro-pro': 'Retrospective vs Prospective',
+                'section-convergence': 'Bootstrap Convergence',
+                'section-ig': 'Information Governance',
+                'section-conventional': 'The Conventional Story',
+                'section-wrong-question': 'The Wrong Question',
+                'section-right-question': 'The Right Question',
+                'section-robustness': 'Robustness Check',
+                'section-implications': 'Economic Implications',
+                'section-try-it': 'Try It Yourself',
+                'section-closing': 'The Closing Thought'
+            };
+            const sectionName = bestAnchor ? (sectionLabels[bestAnchor] || bestAnchor.replace('section-','').replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase())) : null;
+
+            return '<div class="sca-result-card">' +
+                '<div class="sca-result-flag">' + escHtml(article.flag || '') + '</div>' +
+                '<div class="sca-result-title"><a href="' + articleUrl + '">' + escHtml(article.title) + '</a></div>' +
+                '<div class="sca-result-summary">' + summary + '</div>' +
+                (kwHtml ? '<div class="sca-result-keywords">Matched: ' + kwHtml + '</div>' : '') +
+                '<div class="sca-result-actions">' +
+                '<a href="' + articleUrl + '" class="sca-result-btn">Read the article &rarr;</a>' +
+                (sectionUrl ? '<a href="' + sectionUrl + '" class="sca-result-btn-section">&#8595; Jump to: ' + escHtml(sectionName) + '</a>' : '') +
+                '</div>' +
+                '</div>';
+        }).join('');
+
+        resultsEl.style.display = 'block';
+    };
+
+    function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function escRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+})();
+</script>
+</body>
+</html>
