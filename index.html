@@ -226,114 +226,17 @@
             .article-wrap, .page-wrap { max-width: 100%; padding: 0; }
             a { color: black; }
         }
-        /* ── Site navigation ── */
-        .header-nav { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
-        .header-nav a { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; text-decoration: none; padding: 6px 10px; border-radius: 4px; }
-        .header-nav a:hover { color: white; background: rgba(255,255,255,0.1); text-decoration: none; }
-        .nav-dropdown { position: relative; }
-        .nav-dropdown-btn { color: rgba(255,255,255,0.85); font-family: system-ui, sans-serif; font-size: 0.88em; font-weight: 500; background: none; border: none; cursor: pointer; padding: 6px 10px; border-radius: 4px; display: flex; align-items: center; gap: 4px; }
-        .nav-dropdown-btn:hover { color: white; background: rgba(255,255,255,0.1); }
-        .nav-dropdown-btn .arrow { font-size: 0.7em; transition: transform 0.2s; }
-        .nav-dropdown:hover .arrow { transform: rotate(180deg); }
-        .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); min-width: 220px; z-index: 9999; padding: 12px 0 6px; margin-top: 0; }
-        .nav-dropdown:hover .nav-dropdown-menu { display: block; }
-        .nav-dropdown-menu::before { content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
-        .nav-dropdown-menu a { display: block; color: #1e293b; font-family: system-ui, sans-serif; font-size: 0.85em; padding: 8px 16px; text-decoration: none; white-space: nowrap; }
-        .nav-dropdown-menu a:hover { background: #e9f2ff; color: #002d5b; }
-        .nav-dropdown-menu .menu-section { font-family: system-ui, sans-serif; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; padding: 8px 16px 4px; }
-        .nav-dropdown-menu .menu-divider { border: none; border-top: 1px solid #e2e8f0; margin: 4px 0; }
-        /* Mobile nav strip — shown at 600px and below */
-        .mobile-nav { display: none; background: #001f3f; padding: 8px 12px; gap: 6px; flex-wrap: wrap; }
-        .mobile-nav a { color: rgba(255,255,255,0.9); font-family: system-ui, sans-serif; font-size: 0.82em; font-weight: 500; text-decoration: none; padding: 6px 10px; border-radius: 4px; background: rgba(255,255,255,0.1); white-space: nowrap; }
-        .mobile-nav a:hover { background: rgba(255,255,255,0.2); }
-        @media (max-width: 600px) {
-            .header-nav { display: none; }
-            .mobile-nav { display: flex; }
-        }
-        @media print {
-            .header-nav, .mobile-nav, .header-tool-btn { display: none !important; }
-        }
-    </style>
+</style>
 </head>
 <body>
 
-    <!-- ── Site Nav Bar ── -->
-    <style>
-        .sca-nav{background:#002d5b;padding:10px 4px;margin:-20px -20px 16px -20px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-family:system-ui,sans-serif;position:relative;z-index:500;}
-        .sca-nav a{color:rgba(255,255,255,0.85);font-size:0.88em;font-weight:500;text-decoration:none;padding:6px 10px;border-radius:4px;white-space:nowrap;}
-        .sca-nav a:hover{color:white;background:rgba(255,255,255,0.1);}
-        .sca-nav .brand{color:white;font-weight:bold;font-size:1em;padding:6px 12px;}
-        .sca-dd{position:relative;}
-        .sca-dd-btn{color:rgba(255,255,255,0.85);font-family:system-ui,sans-serif;font-size:0.88em;font-weight:500;background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:4px;white-space:nowrap;}
-        .sca-dd-btn:hover{color:white;background:rgba(255,255,255,0.1);}
-        .sca-menu{display:none!important;position:absolute;top:100%;left:0;background:white;border:1px solid #e2e8f0;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.15);min-width:220px;z-index:9999;padding:6px 0;}
-        .sca-dd.open .sca-menu{display:block!important;}
-        .sca-menu a{display:block!important;color:#1e293b!important;font-family:system-ui,sans-serif;font-size:0.85em;padding:8px 16px;text-decoration:none;white-space:nowrap;background:none!important;}
-        .sca-menu a:hover{background:#e9f2ff!important;color:#002d5b!important;}
-        .sca-menu .sca-sect{font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;padding:8px 16px 4px;display:block;}
-        .sca-menu hr{border:none;border-top:1px solid #e2e8f0;margin:4px 0;}
-    </style>
-    <div class="sca-nav">
-        <a href="index.html" class="brand">&#128202; StepChangeAnalysis.com</a>
-        <a href="start-here.html">Start here</a>
-        <div class="sca-dd">
-            <button class="sca-dd-btn">Concepts &#9660;</button>
-            <div class="sca-menu">
-                <a href="why-nothing-changes.html">Why nothing changes</a>
-                <a href="joiner-levels-of-fix.html">Joiner levels of fix</a>
-                <a href="deming-14-points.html">Deming&rsquo;s 14 Points</a>
-                <a href="pdsa-cycle.html">PDSA cycle</a>
-                <a href="types-of-measures.html">Types of measures</a>
-                <a href="model-for-improvement.html">Model for Improvement</a>
-                <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>
-                <a href="variation-and-spc.html">Variation &amp; SPC</a>
-                <a href="bright-spots.html">Bright Spots</a>
-                <a href="five-whys.html">The 5 Whys</a>
-                <a href="root-cause-analysis.html">Root Cause Analysis</a>
-                <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a>
-                <a href="pick-model.html">The PICK Model</a>
-            </div>
-        </div>
-        <div class="sca-dd">
-            <button class="sca-dd-btn">Articles &#9660;</button>
-            <div class="sca-menu">
-                <span class="sca-sect">NHS Healthcare</span>
-                <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E &mdash; Why nothing has worked</a>
-                <a href="dementia-diagnosis-rate.html">Dementia &mdash; The 66% target</a>
-                <a href="gp-appointments-analysis.html">GP appointments</a>
-                <a href="never-events-wrong-route.html">Never events &mdash; Wrong route</a>
-                <a href="anticoag-safety.html">Anticoagulation safety</a>
-                <a href="sepsis-six-does-public-data-show-whether-it-worked.html">Sepsis Six</a>
-                <hr>
-                <span class="sca-sect">Environment &amp; Policy</span>
-                <a href="ulez-london-air-quality.html">ULEZ &mdash; Air quality</a>
-                <a href="the-grid-fixed-itself.html">The Grid fixed itself</a>
-                <a href="uk-gdp-analysis.html">UK GDP analysis</a>
-                <hr>
-                <span class="sca-sect">Industrial</span>
-                <a href="hydrogen-plant-cusum.html">Hydrogen plant CUSUM</a>
-            </div>
-        </div>
-        <a href="three-charts-three-stories.html">Why Bootstrap CUSUM?</a>
-        <a href="glossary.html">Glossary</a>
-        <a href="about.html">About</a>
+    
+
+    <!-- ── Site bar ── -->
+    <div style="background:#002d5b;padding:8px 20px;margin:-20px -20px 16px -20px;display:flex;align-items:center;justify-content:space-between;font-family:system-ui,sans-serif;">
+        <span style="color:white;font-weight:bold;font-size:1em;">&#128202; StepChangeAnalysis.com</span>
+        <a href="start-here.html" style="color:rgba(255,255,255,0.85);font-size:0.88em;font-weight:500;text-decoration:none;padding:6px 12px;border-radius:4px;background:rgba(255,255,255,0.1);">&#9664; Start here &amp; Concepts</a>
     </div>
-    <script>
-    (function(){
-        document.querySelectorAll('.sca-dd-btn').forEach(function(btn){
-            btn.addEventListener('click', function(e){
-                e.stopPropagation();
-                var dd = btn.parentElement;
-                var wasOpen = dd.classList.contains('open');
-                document.querySelectorAll('.sca-dd').forEach(function(d){ d.classList.remove('open'); });
-                if(!wasOpen){ dd.classList.add('open'); }
-            });
-        });
-        document.addEventListener('click', function(){
-            document.querySelectorAll('.sca-dd').forEach(function(d){ d.classList.remove('open'); });
-        });
-    })();
-    </script>
 
     <!-- ── App Header ── -->
     <div class="app-header">
@@ -753,6 +656,12 @@
         });
     })();
     </script>
+
+    <!-- ── Site bar ── -->
+    <div style="background:#002d5b;padding:8px 20px;margin:-20px -20px 16px -20px;display:flex;align-items:center;justify-content:space-between;font-family:system-ui,sans-serif;">
+        <span style="color:white;font-weight:bold;font-size:1em;">&#128202; StepChangeAnalysis.com</span>
+        <a href="start-here.html" style="color:rgba(255,255,255,0.85);font-size:0.88em;font-weight:500;text-decoration:none;padding:6px 12px;border-radius:4px;background:rgba(255,255,255,0.1);">&#9664; Start here &amp; Concepts</a>
+    </div>
 
     <!-- ── App Header ── -->
     <div class="app-header">
