@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/interpret-results.html">
+    <title>How to Interpret Bootstrap CUSUM Results — StepChangeAnalysis.com</title>
+    <meta name="description" content="How to read Bootstrap CUSUM output honestly — what change detected means, what no change detected means, how to distinguish signal from noise, and the most common interpretation mistakes.">
+    <meta name="keywords" content="interpret Bootstrap CUSUM results, change detected meaning, no change detected, SPC interpretation, signal vs noise improvement, false alarm CUSUM, how to read change point analysis">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="page-wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Interpret results</div>
+    <div class="page-flag">&#128200; Reading your results honestly</div>
+    <h1>How to Interpret Bootstrap CUSUM Results</h1>
+    <p class="page-intro">The tool has run. You have a chart. Now what does it actually mean &mdash; and what are the most common ways people misread it? This page is your guide to honest interpretation: understanding what change detected means, what no change detected means, and how to avoid the reactions that make things worse.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Interpretation guide &nbsp;&middot;&nbsp; June 2026</div>
+
+    <!-- Read this first -->
+    <div class="read-first">
+        <div class="rf-label">&#128218; Read this first</div>
+        <h2>Why Bootstrap CUSUM? The three-charts explainer</h2>
+        <p>Before interpreting your results, it helps to understand what Bootstrap CUSUM is detecting that standard run charts and control charts miss. The same data looks completely different through three different lenses &mdash; and only one of them tells you whether the system has structurally changed.</p>
+        <a href="three-charts-three-stories.html">Three charts, three stories &mdash; read this before interpreting your results &rarr;</a>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-three-outcomes">The three possible outcomes</a></li>
+                <li><a href="#section-detected">Change detected &mdash; what it means</a></li>
+                <li><a href="#section-no-change">No change detected &mdash; what it means</a></li>
+                <li><a href="#section-pitfalls">Common interpretation pitfalls</a></li>
+                <li><a href="#section-signal-noise">Signal vs noise &mdash; the core distinction</a></li>
+                <li><a href="#section-seasonality">Seasonality and patterns</a></li>
+                <li><a href="#section-multiple">Multiple change points</a></li>
+                <li><a href="#section-concepts">Concepts that support interpretation</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-three-outcomes">The three possible outcomes</h2>
+
+    <p>Every Bootstrap CUSUM run produces one of three results. Each one leads to a different next action. The links below go to the <a href="what-to-do-next.html">What to do next</a> page where each pathway is developed in full.</p>
+
+    <div class="outcome-grid">
+        <a href="what-to-do-next.html#path-detected" class="outcome-card detected">
+            <div class="oc-label">&#9989; Outcome A</div>
+            <h3>Change detected</h3>
+            <p>The Bootstrap CUSUM has found a structural change point &mdash; a permanent shift in the process mean at a specific date, confirmed at your chosen confidence level.</p>
+            <span class="oc-link">What to do next &rarr;</span>
+        </a>
+        <a href="what-to-do-next.html#path-no-change" class="outcome-card no-change">
+            <div class="oc-label">&#9888; Outcome B</div>
+            <h3>No change detected</h3>
+            <p>The process has not structurally shifted. This is not failure &mdash; it is honest information. The most common and most important result to interpret correctly.</p>
+            <span class="oc-link">What to do next &rarr;</span>
+        </a>
+        <a href="what-to-do-next.html#path-data" class="outcome-card data-issue">
+            <div class="oc-label">&#10060; Outcome C</div>
+            <h3>Data not usable</h3>
+            <p>The data series has a problem &mdash; too short, wrong frequency, missing values, date format issues &mdash; that prevents a reliable result.</p>
+            <span class="oc-link">How to fix it &rarr;</span>
+        </a>
+    </div>
+
+    <hr>
+
+    <h2 id="section-detected">Change detected &mdash; what it means</h2>
+
+    <p>A change point means the Bootstrap CUSUM algorithm has found statistical evidence that the process mean shifted permanently at a specific date, at your chosen confidence level (typically 90% or 95%). This is a strong result. It means the system &mdash; not just the data &mdash; appears to have moved to a new level.</p>
+
+    <p><strong>What to check first:</strong> Is the change in the direction you expected? An upward change point in a measure you are trying to reduce is bad news, not good. A downward change point in harm events is what a successful intervention looks like.</p>
+
+    <p><strong>When did the change happen?</strong> The date of the change point is as important as the fact of change. If the change point precedes your intervention by several months, something else caused it &mdash; and your intervention may be receiving credit it does not deserve. If it follows your intervention with a lag of several months, that is consistent with a genuine structural response, since most system-level changes take time to propagate through the process.</p>
+
+    <div class="callout green">
+        <strong>The ULEZ lesson on attribution</strong>
+        <p>Bootstrap CUSUM applied to London air quality data found that the structural improvement in NO2 levels appeared approximately 18 months <em>before</em> the ULEZ was introduced. The intervention received credit for a change that had already occurred. This is the attribution problem in practice: without Bootstrap CUSUM, before-and-after comparisons will always find improvement in the period after an intervention, even when the improvement predates it. See the <a href="ulez-london-air-quality.html">ULEZ analysis</a> for the full data.</p>
+    </div>
+
+    <p><strong>Is the change sustained?</strong> A single change point followed by a return to the previous level is not a structural improvement &mdash; it is a temporary excursion. Run the full series including post-intervention data to confirm the new level is holding.</p>
+
+    <p><strong>What caused the change?</strong> Change detected is the beginning of the investigation, not the end. The Bootstrap CUSUM tells you that something changed and when. It does not tell you what changed or why. The next step is causal investigation: what was different in the system at or before that change point date? See <a href="what-to-do-next.html#path-detected">What to do next: change detected</a> for the full decision pathway.</p>
+
+    <hr>
+
+    <h2 id="section-no-change">No change detected &mdash; what it means</h2>
+
+    <p>This is the result that most improvement programmes dread &mdash; and the result they most need. No change detected means the Bootstrap CUSUM has found no statistical evidence that the process mean has shifted. The system is producing the same distribution of results it was producing before the intervention.</p>
+
+    <p>This is not the same as saying nothing happened. It means that whatever happened did not produce a structural shift detectable at your chosen confidence level. There are several possible explanations:</p>
+
+    <ul style="line-height: 2.2;">
+        <li><strong>The intervention was real but too recent.</strong> System-level changes have lag times. If you are looking at data from the first three months after a structural intervention, the change point may not yet be visible. Set a review date rather than acting now.</li>
+        <li><strong>The intervention addressed the wrong level.</strong> A training programme, a policy, or a checklist rarely produces a structural change in outcome measures. The intervention may have improved compliance without changing the system that produces the outcome. See <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a>.</li>
+        <li><strong>The measure is wrong.</strong> You may be measuring a process metric rather than an outcome metric. A process metric can improve while the outcome is unchanged. The question to ask: does this measure capture what the system is actually for?</li>
+        <li><strong>The theory was incomplete.</strong> The intervention addressed one necessary condition but not all of them. The necessary/sufficient test was not applied. See <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a>.</li>
+        <li><strong>The constraint was not addressed.</strong> You improved something that is not the bottleneck. See <a href="theory-of-constraints.html">Theory of Constraints</a>.</li>
+    </ul>
+
+    <div class="callout orange">
+        <strong>The most important rule: do not tamper</strong>
+        <p>The most dangerous response to &ldquo;no change detected&rdquo; is to immediately launch a new initiative. Deming called this tampering: reacting to a result as if it is a signal when it may simply be the system behaving as it always has. Tampering adds variation to the system and makes future signals harder to detect. The correct response to no change detected is to <strong>decide deliberately</strong> &mdash; either wait with a pre-committed review date, or return to Step 3 of the <a href="improvement-method.html">7-step method</a> and revisit the root cause analysis. See <a href="what-to-do-next.html#path-no-change">What to do next: no change detected</a> for the full decision pathway.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-pitfalls">Common interpretation pitfalls</h2>
+
+    <div class="pitfall-list">
+        <div class="pitfall-item">
+            <div class="pitfall-num"><span>Pitfall</span>1</div>
+            <div class="pitfall-body">
+                <h3>Declaring success from a single good month</h3>
+                <p>A single month that is better than average is almost always common cause variation &mdash; the normal fluctuation of a stable process. Bootstrap CUSUM requires a sustained shift across multiple data points before confirming a change point. A single good result is noise. Acting on it as if it is signal is the definition of tampering. Wait for the Bootstrap CUSUM to confirm the change before declaring success or scaling up.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num"><span>Pitfall</span>2</div>
+            <div class="pitfall-body">
+                <h3>Attributing a change point to the most recent intervention</h3>
+                <p>If a change point appears in your data, the temptation is to attribute it to whatever intervention is most prominent in the narrative. But the change point date is the evidence &mdash; and the causal investigation must start from that date, not from the intervention date. Work backwards from the change point: what was different in the system at that time? Multiple things will have changed simultaneously. The Bootstrap CUSUM tells you <em>when</em>; the investigation must establish <em>why</em>.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num"><span>Pitfall</span>3</div>
+            <div class="pitfall-body">
+                <h3>Using too short a data series</h3>
+                <p>Bootstrap CUSUM requires enough data to distinguish a genuine change from normal variation. As a general rule, fewer than 20 data points produces unreliable results for most processes &mdash; the algorithm cannot accumulate enough evidence. If your series is short, the result is inconclusive rather than &ldquo;no change.&rdquo; Extend the series if possible, or reduce the frequency (use quarterly instead of monthly) to get more historical data points.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num"><span>Pitfall</span>4</div>
+            <div class="pitfall-body">
+                <h3>Conflating process metrics with outcome metrics</h3>
+                <p>A process metric measures whether the process was followed. An outcome metric measures whether the system is producing the right result for the people it serves. Bootstrap CUSUM on a process metric will detect when the process changed. It will not tell you whether patient outcomes, customer experience, or system performance changed. Run Bootstrap CUSUM on the outcome measure. Process improvement without outcome improvement is activity without impact. See <a href="types-of-measures.html">Types of measures</a>.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num"><span>Pitfall</span>5</div>
+            <div class="pitfall-body">
+                <h3>Stopping the analysis at the first change point</h3>
+                <p>A data series can contain multiple change points. An improvement followed by a deterioration followed by another improvement will show three change points. If you run Bootstrap CUSUM only on the period after your intervention, you may miss a preceding deterioration that inflates the apparent magnitude of the improvement, or a subsequent reversal that undermines it. Always run the full available series and examine all change points in context.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num"><span>Pitfall</span>6</div>
+            <div class="pitfall-body">
+                <h3>Ignoring the confidence level</h3>
+                <p>Bootstrap CUSUM reports change points at a specified confidence level &mdash; typically 90% or 95%. A 90% confidence level means there is a 10% probability that the detected change is a false positive. If you are making a significant resource or policy decision, use 95%. If you are making a preliminary assessment to guide further investigation, 90% is reasonable. Never treat a 90% confidence result as certain &mdash; and never treat &ldquo;below the threshold&rdquo; as certain absence of change.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-signal-noise">Signal vs noise &mdash; the core distinction</h2>
+
+    <p>Every data series contains two things mixed together: signal (genuine information about the state of the system) and noise (random variation around the process mean). The fundamental challenge of improvement measurement is separating them. Standard charts make this separation poorly. Bootstrap CUSUM makes it well.</p>
+
+    <p>Signal is a structural shift &mdash; the process has moved to a new mean and is likely to stay there. Noise is variation around an unchanged mean &mdash; some months are higher, some lower, but the underlying system has not changed. Acting on noise as if it were signal (tampering) adds more variation to the system. Ignoring signal because it looks like noise (failure to act) means genuine improvements or deteriorations go unrecognised and unconfirmed.</p>
+
+    <p>The Bootstrap CUSUM algorithm accumulates evidence of change over time. A single data point far from the mean is not enough to confirm a change point &mdash; it could be an outlier. A sustained series of data points consistently above (or below) the previous mean, accumulating evidence in the CUSUM statistic, is what triggers the change point detection. This is why Bootstrap CUSUM is more sensitive to real change and more robust against false alarms than visual inspection of a run chart.</p>
+
+    <div class="callout blue">
+        <strong>The Deming funnel experiment</strong>
+        <p>Deming demonstrated the cost of confusing signal and noise with his funnel experiment. A ball is dropped through a funnel onto a target. If you move the funnel to compensate for each previous miss (Rule 3 or Rule 4 tampering), the balls scatter more widely than if you leave the funnel fixed (Rule 1). The same principle applies to improvement: reacting to each month&rsquo;s result as if it contains a signal produces a more variable system than leaving it alone. <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a> develops this in full.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-seasonality">Seasonality and patterns</h2>
+
+    <p>Many processes have seasonal patterns &mdash; NHS A&amp;E attendance peaks in winter, retail sales peak in December, agricultural yields vary by season. Seasonal variation is common cause variation: it is a predictable feature of the process, not a signal of structural change.</p>
+
+    <p>Bootstrap CUSUM on a series with strong seasonality will sometimes detect the seasonal peak as a change point if the series is short. The practical check: does the apparent change point occur at the same time each year? If so, it is probably seasonal rather than structural. Options for handling seasonality include using annual rather than monthly data (which averages out seasonal variation), using seasonally adjusted data, or running Bootstrap CUSUM on a longer series where seasonal patterns are clearly visible as recurring cycles rather than structural shifts.</p>
+
+    <p>The safest approach for seasonal series is to run Bootstrap CUSUM on annual totals or annual averages rather than monthly data. This removes seasonal noise and makes genuine structural changes more visible.</p>
+
+    <hr>
+
+    <h2 id="section-multiple">Multiple change points</h2>
+
+    <p>A data series that spans several years may contain multiple structural changes: a deterioration, then an improvement, then a further deterioration. Bootstrap CUSUM detects all of them if the series is long enough. Reading a multi-change-point result requires placing each change point in its chronological context:</p>
+
+    <ul style="line-height: 2.2;">
+        <li><strong>What was happening in the system at the time of each change point?</strong> Policy changes, funding changes, staffing changes, external events &mdash; all are candidates. The change point narrows the investigation window; your knowledge of context fills in what happened.</li>
+        <li><strong>Is the overall trend positive or negative across all change points?</strong> Four change points that alternate up-down-up-down may represent a system oscillating around its mean rather than improving. Four upward change points represent genuine sustained improvement. The cumulative direction matters as much as any individual change point.</li>
+        <li><strong>What is the current level relative to the starting point?</strong> A series that improved, then deteriorated, may now be at a lower level than it started despite showing a recent improvement change point. Bootstrap CUSUM shows the changes; you must judge the absolute level.</li>
+    </ul>
+
+    <p>The <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E analysis</a> is the most detailed worked example of a multi-change-point series on this site: 15 years of monthly data, four structural stages, and no upward change point despite multiple policy interventions.</p>
+
+    <hr>
+
+    <h2 id="section-concepts">Concepts that support interpretation</h2>
+
+    <div class="nav-grid">
+        <a href="tampering-and-impatience.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Tampering &amp; Impatience</h3>
+            <p>The most common misreading of "no change detected" — and why acting on it immediately makes the system worse.</p>
+        </a>
+        <a href="variation-and-spc.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Variation &amp; SPC</h3>
+            <p>Common cause vs special cause variation — the theoretical foundation for understanding what Bootstrap CUSUM is detecting.</p>
+        </a>
+        <a href="behaviour-over-time.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Behaviour Over Time</h3>
+            <p>How to read a time series as a systems story rather than as a sequence of individual data points.</p>
+        </a>
+        <a href="types-of-measures.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Types of Measures</h3>
+            <p>Process metrics vs outcome metrics — why running Bootstrap CUSUM on the wrong measure produces the wrong answer.</p>
+        </a>
+        <a href="three-charts-three-stories.html" class="nav-card">
+            <div class="nav-tag">Explainer</div>
+            <h3>Three Charts, Three Stories</h3>
+            <p>The same data through a run chart, a control chart, and Bootstrap CUSUM — why only one of them tells you whether the system changed.</p>
+        </a>
+        <a href="what-to-do-next.html" class="nav-card">
+            <div class="nav-tag">Next step</div>
+            <h3>What to Do Next</h3>
+            <p>The three-pathway decision guide — change detected, no change detected, or data problem. Where to go after interpretation.</p>
+        </a>
+    </div>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
