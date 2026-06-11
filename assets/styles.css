@@ -1274,3 +1274,91 @@ mark {
     padding-top: 16px;
     margin-top: 8px;
 }
+
+
+/* ── 36. Diagnostic Questions page ───────────────────────── */
+.q-section {
+    margin: 0 0 32px;
+}
+.q-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--brand-blue);
+}
+.q-header h2 {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 1.15em;
+    color: var(--brand-blue);
+    flex: 1;
+}
+.step-tag {
+    font-family: system-ui, sans-serif;
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--brand-blue);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+.step-link {
+    font-family: system-ui, sans-serif;
+    font-size: 0.82em;
+    color: var(--muted);
+    white-space: nowrap;
+}
+.step-link a { color: var(--brand-mid); text-decoration: none; }
+.step-link a:hover { text-decoration: underline; }
+.q-subtext {
+    font-family: system-ui, sans-serif;
+    font-size: 0.88em;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0 0 12px;
+    line-height: 1.6;
+}
+.q-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: system-ui, sans-serif;
+    font-size: 0.88em;
+    margin: 0 0 8px;
+}
+.q-table th {
+    background: var(--brand-blue);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.85em;
+}
+.q-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+}
+.q-table tr:last-child td { border-bottom: none; }
+.q-table td:first-child {
+    font-weight: 700;
+    color: var(--brand-blue);
+    width: 52px;
+    min-width: 52px;
+    white-space: nowrap;
+}
+.q-table tr:nth-child(even) td { background: #fafbfc; }
+
+/* Mobile — make q-table scroll horizontally */
+@media (max-width: 600px) {
+    .q-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.82em; }
+    .q-header { flex-direction: column; gap: 6px; }
+    .step-link { white-space: normal; }
+}
