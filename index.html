@@ -12,8 +12,10 @@
         body { font-family: system-ui, sans-serif; padding: 20px; max-width: 1200px; margin: auto; background-color: #f8f9fa; }
 
         /* ── Header bar ── */
-        .app-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-        .app-header h1 { margin: 0; font-size: 1.4em; color: #002d5b; }
+        .app-header { display: flex; flex-direction: column; margin-top: 8px; margin-bottom: 20px; gap: 4px; }
+        .header-tool-btn { display: none; }
+        .app-header h2 { margin: 0 0 2px 0; font-size: 1.4em; color: #002d5b; }
+        .app-tagline { margin: 0 0 12px 0; font-size: 1.00em; color: #64748b; font-weight: 400; }
         .header-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
         .btn-scanner { padding: 8px 16px; background: #198754; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.9em; }
         .btn-scanner:hover { background: #146c43; }
@@ -114,135 +116,78 @@
         /* ── Error banner ── */
         #error-banner { display: none; background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 12px 16px; margin-bottom: 15px; font-size: 0.9em; color: #664d03; }
         #error-banner a { color: #0056b3; cursor: pointer; text-decoration: underline; }
-    
-        /* ============================================================
-           RESPONSIVE — mobile, tablet, print
-           ============================================================ */
 
-        /* Tablet (601px – 900px) */
+        /* ── Responsive ── */
         @media (max-width: 900px) {
             body { font-size: 17px; }
             .article-wrap, .page-wrap { padding: 28px 20px 60px; }
             h1, .article-title { font-size: clamp(1.5em, 5vw, 2.2em); }
             h2 { font-size: 1.2em; }
-            /* Tables — make them scroll horizontally */
             .data-table-wrap, .numbers-box, table { overflow-x: auto; display: block; }
-            .numbers-box table, .data-table, .examples-table,
-            .inputs-table { display: block; overflow-x: auto; white-space: nowrap; }
-            /* Grids — 2 columns max on tablet */
-            .summary-grid, .measure-grid, .question-grid,
-            .nav-grid, .rules-grid, .weco-rules { grid-template-columns: 1fr 1fr; }
+            .numbers-box table, .data-table, .examples-table, .inputs-table { display: block; overflow-x: auto; white-space: nowrap; }
+            .summary-grid, .measure-grid, .question-grid, .nav-grid, .rules-grid, .weco-rules { grid-template-columns: 1fr 1fr; }
             .lead-lag-box { grid-template-columns: 1fr 1fr; }
-            /* PDSA wrap — stack vertically */
             .pdsa-wrap { flex-direction: column; align-items: center; }
-            /* Funnel wrap — stack */
             .funnel-wrap { flex-direction: column; }
         }
 
-        /* Mobile (max 600px) */
         @media (max-width: 600px) {
             body { font-size: 16px; line-height: 1.7; }
-
-            /* Header */
             .site-header { padding: 10px 16px; gap: 8px; }
             .header-nav { display: none; }
             .header-tool-btn { font-size: 0.85em; padding: 7px 14px; }
-
-            /* Page wraps */
             .article-wrap, .page-wrap { padding: 20px 16px 48px; }
             .article-wrap { max-width: 100%; }
-
-            /* Typography */
             h1, .article-title { font-size: clamp(1.4em, 6vw, 2em); }
             h2 { font-size: 1.15em; margin: 32px 0 12px; }
             h3 { font-size: 1em; }
             p { font-size: 1em; }
-
-            /* Tables — horizontal scroll, min readable size */
-            table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch;
-                    font-size: 0.82em; min-width: 320px; }
+            table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 0.82em; min-width: 320px; }
             .data-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
             .numbers-box { padding: 10px 12px; overflow-x: auto; }
             .numbers-box table { font-size: 0.8em; min-width: 300px; white-space: nowrap; }
             .numbers-box th, .numbers-box td { padding: 7px 10px; }
             .examples-table, .inputs-table { font-size: 0.8em; }
-            /* Allow table cell text to wrap on mobile for readability */
             .examples-table td, .inputs-table td { white-space: normal; min-width: 100px; }
-
-            /* Grids — single column */
-            .summary-grid, .measure-grid, .question-grid,
-            .nav-grid, .rules-grid, .weco-rules,
-            .lead-lag-box, .chart-pair, .funnel-wrap { grid-template-columns: 1fr;
-                                                         flex-direction: column; }
-
-            /* Summary/card boxes */
+            .summary-grid, .measure-grid, .question-grid, .nav-grid, .rules-grid, .weco-rules, .lead-lag-box, .chart-pair, .funnel-wrap { grid-template-columns: 1fr; flex-direction: column; }
             .summary-grid > div, .measure-grid > div { min-width: unset; }
-
-            /* PDSA diagram and wrap */
             .pdsa-wrap { flex-direction: column; align-items: center; gap: 16px; }
             .pdsa-svg { max-width: 260px; }
             .pdsa-detail { min-width: unset; width: 100%; }
-
-            /* Concept page zone diagrams */
             .weco-zones { font-size: 0.85em; }
             .weco-label { width: 60px; min-width: 60px; font-size: 0.72em; }
-
-            /* Dark boxes */
             .dark-box { padding: 18px 16px; }
             .dark-box p { font-size: 0.92em; }
-
-            /* Callout boxes */
-            .callout, .finding-box, .callout-box,
-            .deming-box, .analysis-box { padding: 14px 16px; }
-
-            /* Article summary box grids */
+            .callout, .finding-box, .callout-box, .deming-box, .analysis-box { padding: 14px 16px; }
             div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
-
-            /* Breadcrumb */
             .breadcrumb { font-size: 0.78em; }
-
-            /* Cycles row — scroll */
             .cycles-row { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-            /* Three questions */
             .three-questions .q-number { width: 44px; min-width: 44px; font-size: 1.2em; }
-
-            /* WECO zones diagram labels */
             .weco-label { padding: 8px 4px; }
-
-            /* Chart figures */
             .chart-figure img, .chart-figure svg { width: 100%; height: auto; }
-
-            /* Footer */
             .page-footer, .article-footer { font-size: 0.8em; }
             .page-footer ul, .article-footer ul { padding-left: 14px; }
+            .header-buttons { gap: 6px; }
+            .btn-scanner, .btn-help, .btn-feedback, .btn-articles { font-size: 0.82em; padding: 7px 12px; }
         }
 
-        /* Print */
         @media print {
-            .site-header, .header-nav, .header-tool-btn,
-            .nav-grid, .toc-details, .cta-box { display: none !important; }
+            .site-header, .header-nav, .header-tool-btn, .nav-grid, .toc-details, .cta-box { display: none !important; }
             body { font-size: 12pt; color: black; background: white; }
             .article-wrap, .page-wrap { max-width: 100%; padding: 0; }
             a { color: black; }
         }
-</style>
+    </style>
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 
-
-
-    <!-- ── Site bar ── -->
-    <div style="background:#002d5b;padding:8px 20px;margin:-20px -20px 16px -20px;display:flex;align-items:center;justify-content:space-between;font-family:system-ui,sans-serif;">
-        <span style="color:white;font-weight:bold;font-size:1em;">&#128202; StepChangeAnalysis.com</span>
-        <a href="start-here.html" style="color:rgba(255,255,255,0.85);font-size:0.88em;font-weight:500;text-decoration:none;padding:6px 12px;border-radius:4px;background:rgba(255,255,255,0.1);">&#9664; Start here &amp; Concepts</a>
-    </div>
+<div id="site-header"></div>
 
     <!-- ── App Header ── -->
     <div class="app-header">
-      <h1>&#128202; StepChangeAnalysis.com — StepChange Analyzer</h1>
-<p style="margin:2px 0 0;font-size:0.78em;color:#64748b;font-weight:400;font-style:italic;">Method: Bootstrap CUSUM (change-point detection)</p>
-<p style="margin:2px 0 0;font-size:0.82em;color:#64748b;font-weight:400;">Built for healthcare improvers who need honest evidence of change &nbsp;&middot;&nbsp; Test your data, avoid tampering, know what to do when nothing changes.</p>
+        <h2>&#128202; StepChangeAnalysis.com &mdash; StepChange Analyzer</h2>
+        <p class="app-tagline">Built for healthcare improvers who need honest evidence of change &nbsp;&middot;&nbsp; Test your data, avoid tampering, know what to do when nothing changes.</p>
         <div class="header-buttons">
             <button class="btn-scanner" onclick="window.location.href='start-here.html'" style="background:#7c3aed;">&#128161; Start here</button>
             <button class="btn-scanner" onclick="window.open('scanner.html', '_blank')">&#128269; Data Validator</button>
@@ -272,13 +217,11 @@
 
     <!-- ── Controls Panel ── -->
     <div id="controls">
-
         <div class="title-row">
             <label>Chart Title:</label>
             <input type="text" id="chartTitleInput" placeholder="Title will appear here after analysis..." />
             <div id="chartFileInfo"></div>
         </div>
-
         <div class="settings-row">
             <div class="control-group"><label>X-Axis (Date):</label><select id="xColSelect"></select></div>
             <div class="control-group"><label>Y-Axis (Value):</label><select id="yColSelect"></select></div>
@@ -304,13 +247,11 @@
                 <label style="font-weight: normal; margin-top: 10px;"><input type="checkbox" id="showSDCheckbox"> Show 3SD Limits</label>
             </div>
         </div>
-
         <div class="button-row">
             <button id="recalcBtn">Recalculate Chart</button>
             <button id="exportPngBtn" style="display:none;">&#8675; Export PNG</button>
             <button id="exportPdfBtn" style="display:none;">&#8675; Export PDF</button>
         </div>
-
     </div>
 
     <!-- ── Summary Bar ── -->
@@ -365,75 +306,61 @@
     <div class="articles-section">
         <h2>&#128240; Articles &amp; Case Studies</h2>
         <div class="articles-grid">
-
-
-
-                                  <a href="dementia-diagnosis-rate.html" class="article-card">
+            <a href="dementia-diagnosis-rate.html" class="article-card">
                 <div class="article-card-tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</div>
                 <h3>The 66% Target: What the Dementia Diagnosis Data Actually Shows</h3>
                 <p>England exceeded the dementia diagnosis target from 2017&ndash;2020. Then COVID produced the largest single-year fall in the series. Bootstrap CUSUM finds one stage, mean 65.39%. By March 2025 England is still 1.1 percentage points below a target set in 2012.</p>
             </a>
-
             <a href="gp-appointments-analysis.html" class="article-card">
                 <div class="article-card-tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</div>
                 <h3>More GP Appointments Recorded, Fewer Patients Feeling Seen</h3>
                 <p>Bootstrap CUSUM on 80 months of NHS GP appointments data finds one finding that cuts through the political noise: GP doctor contact rates have not changed since 2018. The system grew. The GP contact rate didn&rsquo;t. A system problem, not a people problem.</p>
             </a>
-
             <a href="three-charts-three-stories.html" class="article-card">
                 <div class="article-card-tag" style="color:#0056b3;">Healthcare Quality Improvement</div>
                 <h3>Same Data, Three Charts, Three Very Different Stories</h3>
                 <p>How X-mR, Run Chart, and Bootstrap CUSUM tell radically different stories from 488 weeks of clinical data &mdash; and why it matters for governance reporting.</p>
             </a>
-
             <a href="uk-gdp-analysis.html" class="article-card">
                 <div class="article-card-tag" style="color:#c0392b;">&#127468;&#127463; Economic Analysis</div>
                 <h3>The Chart That Changes How You See 77 Years of UK Economic History</h3>
                 <p>What Bootstrap CUSUM reveals about the long deceleration of UK GDP &mdash; and why conventional analysis has been telling us the wrong story.</p>
             </a>
-
             <a href="hydrogen-plant-cusum.html" class="article-card">
                 <div class="article-card-tag" style="color:#198754;">&#9881;&#65039; Industrial Process Monitoring</div>
                 <h3>The Hydrogen Plant Problem &mdash; How Residual CUSUM Catches What Other Charts Miss</h3>
                 <p>Two identical plants, a 17% efficiency gap, and the residual CUSUM monitoring system &mdash; built on one reading per shift, pen and paper &mdash; that solved it.</p>
             </a>
-
             <a href="why-nothing-has-worked-nhs-ae-performance.html" class="article-card">
                 <div class="article-card-tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</div>
                 <h3>Why Nothing Has Worked: NHS A&amp;E and the Promise That Wasn&rsquo;t Kept</h3>
                 <p>Bootstrap CUSUM applied to 15 years of monthly data reveals four structural stages of decline. Not one policy intervention is detectable as an improvement. Tony Blair promised four-hour waits in 2000. Twenty-five years later, performance is worse.</p>
             </a>
-
             <a href="ulez-london-air-quality.html" class="article-card">
                 <div class="article-card-tag" style="color:#0e7490;">&#127807; Environment &amp; Policy</div>
                 <h3>ULEZ Worked &mdash; But Not When Anyone Expected</h3>
                 <p>Bootstrap CUSUM on a decade of Marylebone Road NO2 data finds the ULEZ signal appeared 18 months before the scheme launched. But the biggest single change was COVID &mdash; and the London-wide expansion improved air quality at a site already in the zone for four years.</p>
             </a>
-
             <a href="anticoag-safety.html" class="article-card">
                 <div class="article-card-tag" style="color:#7c3aed;">&#128138; Healthcare &amp; Patient Safety</div>
                 <h3>More Patients, Fewer Bleeds? What the Data Shows About Anticoagulation Safety Since DOACs Arrived</h3>
                 <p>Bootstrap CUSUM finds three structural change points in NHS anticoagulation safety data. The DOAC adverse event rate fell 96% from peak. But even by 2019, half of DOAC prescriptions were still not adjusted for renal function. The improvement is real. The job is not done.</p>
             </a>
-
             <a href="never-events-wrong-route.html" class="article-card">
                 <div class="article-card-tag" style="color:#c0392b;">&#128138; Patient Safety &middot; Never Events</div>
                 <h3>Wholly Preventable: Ten Years of a Never Event That Never Stopped</h3>
                 <p>The engineering solution has existed since 2010. The NHS declared wrong-route medication administration &ldquo;wholly preventable.&rdquo; Bootstrap CUSUM on six years of Never Events data finds one stage, no change point, mean 17.5 per year. Paul O&rsquo;Neill fixed this at Alcoa. The difference is method.</p>
             </a>
-
             <a href="the-grid-fixed-itself.html" class="article-card">
                 <div class="article-card-tag" style="color:#0e7490;">&#127807; Environment &amp; Policy</div>
                 <h3>The Grid Fixed Itself. Transport Didn&rsquo;t.</h3>
                 <p>The UK cut emissions 53% since 1990. Bootstrap CUSUM identifies three causes: energy market liberalisation (1998), the global financial crisis (2008), and the carbon price floor (2015). Only the last is climate policy. Transport shows no structural change at 95% confidence across 34 years.</p>
             </a>
-
             <a href="sepsis-six-does-public-data-show-whether-it-worked.html" class="article-card">
                 <div class="article-card-tag" style="color:#7c3aed;">&#128138; Patient Safety &middot; Clinical QI</div>
                 <h3>The Sepsis Six: Does Public Data Show Whether It Worked?</h3>
                 <p>Six bedside actions. 96% of NHS hospitals. 37 countries. Bootstrap CUSUM on 22 years of ONS mortality data finds one stage and no change point in either clinical series. But the ratio between the two series shows a structural change point in 2013 at 95.5% confidence &mdash; the year the CQUIN coding incentive was introduced. Better coding. Not better outcomes. Not worse. The study step of PDSA was never completed.</p>
             </a>
-
         </div>
     </div>
 
@@ -441,62 +368,17 @@
     <div class="articles-modal-overlay" id="articlesModal" onclick="if(event.target===this)this.classList.remove('active')">
         <div class="articles-modal-box">
             <h3>&#128240; Articles &amp; Case Studies</h3>
-
-                        <a href="dementia-diagnosis-rate.html">
-                <span class="tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</span>
-                <span class="title">The 66% Target: What the Dementia Diagnosis Data Actually Shows</span>
-            </a>
-
-            <a href="gp-appointments-analysis.html">
-                <span class="tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</span>
-                <span class="title">More GP Appointments Recorded, Fewer Patients Feeling Seen</span>
-            </a>
-
-            <a href="three-charts-three-stories.html">
-                <span class="tag" style="color:#0056b3;">Healthcare Quality Improvement</span>
-                <span class="title">Same Data, Three Charts, Three Very Different Stories</span>
-            </a>
-
-            <a href="uk-gdp-analysis.html">
-                <span class="tag" style="color:#c0392b;">&#127468;&#127463; Economic Analysis</span>
-                <span class="title">The Chart That Changes How You See 77 Years of UK Economic History</span>
-            </a>
-
-            <a href="hydrogen-plant-cusum.html">
-                <span class="tag" style="color:#198754;">&#9881;&#65039; Industrial Process Monitoring</span>
-                <span class="title">The Hydrogen Plant Problem &mdash; How Residual CUSUM Catches What Other Charts Miss</span>
-            </a>
-
-            <a href="why-nothing-has-worked-nhs-ae-performance.html">
-                <span class="tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</span>
-                <span class="title">Why Nothing Has Worked: NHS A&amp;E and the Promise That Wasn&rsquo;t Kept</span>
-            </a>
-
-            <a href="ulez-london-air-quality.html">
-                <span class="tag" style="color:#0e7490;">&#127807; Environment &amp; Policy</span>
-                <span class="title">ULEZ Worked &mdash; But Not When Anyone Expected</span>
-            </a>
-
-            <a href="anticoag-safety.html">
-                <span class="tag" style="color:#7c3aed;">&#128138; Healthcare &amp; Patient Safety</span>
-                <span class="title">More Patients, Fewer Bleeds? Anticoagulation Safety Since DOACs Arrived</span>
-            </a>
-
-            <a href="never-events-wrong-route.html">
-                <span class="tag" style="color:#c0392b;">&#128138; Patient Safety &middot; Never Events</span>
-                <span class="title">Wholly Preventable: Ten Years of a Never Event That Never Stopped</span>
-            </a>
-
-            <a href="the-grid-fixed-itself.html">
-                <span class="tag" style="color:#0e7490;">&#127807; Environment &amp; Policy</span>
-                <span class="title">The Grid Fixed Itself. Transport Didn&rsquo;t.</span>
-            </a>
-
-            <a href="sepsis-six-does-public-data-show-whether-it-worked.html">
-                <span class="tag" style="color:#7c3aed;">&#128138; Patient Safety &middot; Clinical QI</span>
-                <span class="title">The Sepsis Six: Does Public Data Show Whether It Worked?</span>
-            </a>
-
+            <a href="dementia-diagnosis-rate.html"><span class="tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</span><span class="title">The 66% Target: What the Dementia Diagnosis Data Actually Shows</span></a>
+            <a href="gp-appointments-analysis.html"><span class="tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</span><span class="title">More GP Appointments Recorded, Fewer Patients Feeling Seen</span></a>
+            <a href="three-charts-three-stories.html"><span class="tag" style="color:#0056b3;">Healthcare Quality Improvement</span><span class="title">Same Data, Three Charts, Three Very Different Stories</span></a>
+            <a href="uk-gdp-analysis.html"><span class="tag" style="color:#c0392b;">&#127468;&#127463; Economic Analysis</span><span class="title">The Chart That Changes How You See 77 Years of UK Economic History</span></a>
+            <a href="hydrogen-plant-cusum.html"><span class="tag" style="color:#198754;">&#9881;&#65039; Industrial Process Monitoring</span><span class="title">The Hydrogen Plant Problem &mdash; How Residual CUSUM Catches What Other Charts Miss</span></a>
+            <a href="why-nothing-has-worked-nhs-ae-performance.html"><span class="tag" style="color:#c0392b;">&#127973;&#65039; NHS Healthcare Policy</span><span class="title">Why Nothing Has Worked: NHS A&amp;E and the Promise That Wasn&rsquo;t Kept</span></a>
+            <a href="ulez-london-air-quality.html"><span class="tag" style="color:#0e7490;">&#127807; Environment &amp; Policy</span><span class="title">ULEZ Worked &mdash; But Not When Anyone Expected</span></a>
+            <a href="anticoag-safety.html"><span class="tag" style="color:#7c3aed;">&#128138; Healthcare &amp; Patient Safety</span><span class="title">More Patients, Fewer Bleeds? Anticoagulation Safety Since DOACs Arrived</span></a>
+            <a href="never-events-wrong-route.html"><span class="tag" style="color:#c0392b;">&#128138; Patient Safety &middot; Never Events</span><span class="title">Wholly Preventable: Ten Years of a Never Event That Never Stopped</span></a>
+            <a href="the-grid-fixed-itself.html"><span class="tag" style="color:#0e7490;">&#127807; Environment &amp; Policy</span><span class="title">The Grid Fixed Itself. Transport Didn&rsquo;t.</span></a>
+            <a href="sepsis-six-does-public-data-show-whether-it-worked.html"><span class="tag" style="color:#7c3aed;">&#128138; Patient Safety &middot; Clinical QI</span><span class="title">The Sepsis Six: Does Public Data Show Whether It Worked?</span></a>
         </div>
     </div>
 
@@ -505,7 +387,6 @@
         <div class="modal-box">
             <button class="modal-close" onclick="document.getElementById('helpModal').classList.remove('active')">&#10005;</button>
             <h2>&#128202; StepChange Analyzer &mdash; Help</h2>
-
             <h3>Preparing your CSV file</h3>
             <p>Your CSV must have at least two columns: a date column and a numeric value column. The analyser runs an automatic data quality check when you upload &mdash; if it detects blanks, zeros, or missing date periods it will show a yellow warning banner. A few common issues to avoid:</p>
             <ul>
@@ -514,93 +395,31 @@
                 <li><b>Mixed date formats</b> &mdash; ensure all dates in the date column use the same format throughout. The Data Validator will flag inconsistencies.</li>
                 <li><b>Unsupported date formats</b> &mdash; financial year formats like "2004-05" are not supported. Convert to a proper date (e.g. 01/04/2004) before uploading.</li>
             </ul>
-
             <h3>&#9888;&#65039; Missing data: zeros and blanks</h3>
             <p>Missing values in your data can significantly affect stage means and confidence levels. There are two distinct cases to be aware of:</p>
             <ul>
-                <li><b>Case 1 &mdash; The row is omitted entirely from the CSV.</b> If a monitoring station, sensor, or recording system simply produces no entry for a period, the CSV will skip that date. The tool treats each row as the next observation in sequence. A small number of omitted rows has minimal effect. A large number of omitted rows compresses the time axis and may cause change points to be dated incorrectly. Check that your data has no unexpected date gaps before uploading.</li>
-                <li><b>Case 2 &mdash; A blank cell is present in the value column.</b> This is the more dangerous case. When a monitoring station is offline or a value is unavailable, some data sources record the period but leave the value blank. Depending on how the CSV was saved, a blank cell may be read by the tool as zero. A zero in a value column &mdash; particularly for a metric that should never reach zero, such as NO2 concentration, temperature, or a count &mdash; will severely depress the stage mean and may create false change points. <b>Before uploading, filter your data in Excel and delete any rows where the value column is blank or zero when zero is not a valid measurement.</b></li>
+                <li><b>Case 1 &mdash; The row is omitted entirely from the CSV.</b> The tool treats each row as the next observation in sequence. A large number of omitted rows compresses the time axis and may cause change points to be dated incorrectly.</li>
+                <li><b>Case 2 &mdash; A blank cell is present in the value column.</b> A blank cell may be read by the tool as zero, which will severely depress the stage mean and may create false change points. <b>Before uploading, filter your data in Excel and delete any rows where the value column is blank or zero when zero is not a valid measurement.</b></li>
             </ul>
-            <p><b>Best practice:</b> Before uploading any CSV, open it in Excel, sort by the value column, and check the lowest values. Any unexpected zeros or blanks should be investigated and removed if they represent missing readings rather than genuine zero measurements.</p>
-
             <h3>Getting Started</h3>
-            <p>Prepare your data as a CSV file with at least two columns: a <b>date column</b> and a <b>numeric value column</b>. Then drag and drop the file onto the upload area, or click to browse. If you don't have a CSV ready, download one of the sample datasets from the upload area to try the tool straight away.</p>
-
+            <p>Prepare your data as a CSV file with at least two columns: a <b>date column</b> and a <b>numeric value column</b>. Then drag and drop the file onto the upload area, or click to browse.</p>
             <h3>Settings</h3>
             <ul>
-                <li><b>X-Axis (Date):</b> Select the column containing your dates.</li>
-                <li><b>Y-Axis (Value):</b> Select the column containing your numeric data.</li>
-                <li><b>Date Style:</b> Choose the format that matches your date column.</li>
-                <li><b>Start / End Date:</b> Optionally filter your data to a specific date range.</li>
                 <li><b>Turn Length:</b> Minimum number of points required in a segment before a change point can be detected. Default 5.</li>
                 <li><b>Loops:</b> Number of bootstrap resamples. 1,000 is fast; use 5,000&ndash;10,000 for governance reports.</li>
                 <li><b>Conf %:</b> Minimum confidence level required to declare a change point. 90% = sensitive; 95% = standard; 99.7% = conservative.</li>
                 <li><b>Show 3SD Limits:</b> Adds &plusmn;3 standard deviation bands to the Step Change chart.</li>
             </ul>
-
-            <h3>Chart Types</h3>
-            <ul>
-                <li><b>Step Change Analysis:</b> Bootstrap CUSUM &mdash; detects multiple sequential step-changes with confidence levels. Main governance chart.</li>
-                <li><b>Stage Summary:</b> Table showing each stage with start date, end date, mean, SD, confidence level, and % change from previous stage.</li>
-                <li><b>X-mR Chart:</b> Shewhart Individuals and Moving Range chart. Shows UNPL, LNPL, and URL control limits.</li>
-                <li><b>Run Chart:</b> Plots data against the median. Highlights runs of 6+ consecutive points above or below the median.</li>
-                <li><b>CUSUM Chart:</b> The raw cumulative sum of deviations from the overall mean.</li>
-                <li><b>Raw Data:</b> The original data points with no analysis overlay.</li>
-            </ul>
-
-            <h3>Interactive Chart Controls</h3>
-            <p>All charts are fully interactive. Here's what you can do:</p>
-            <ul>
-                <li><b>Hide / show a trace:</b> Click any item in the chart legend to hide or show that line.</li>
-                <li><b>Zoom in:</b> Click and drag on the chart area. Double-click to zoom back out.</li>
-                <li><b>Pan:</b> Click the pan icon in the toolbar, then drag the chart left or right.</li>
-                <li><b>Hover for values:</b> Hover over any point to see the exact date and value.</li>
-            </ul>
-            <p><i>Note: The <b>Export PNG</b> button produces a higher quality image with stats and settings metadata &mdash; use this for reports rather than the camera icon.</i></p>
-
-            <h3>Exporting</h3>
-            <p>Use <b>Export PNG</b> to save the current chart as an image. Use <b>Export PDF</b> to generate a formatted report suitable for board papers and governance submissions.</p>
-
-            <h3>Data Validator</h3>
-            <p>If your analysis produces unexpected results, or if you see a data quality warning after uploading, click <b>Data Validator</b> to run a full diagnostic scan on your CSV. The validator checks for:</p>
-            <ul>
-                <li><b>Blank values</b> &mdash; missing readings that may be interpreted as zero, depressing stage means and creating false change points.</li>
-                <li><b>Zero values</b> &mdash; readings recorded as 0 that may represent monitoring outages rather than genuine zero measurements.</li>
-                <li><b>Missing periods in the date sequence</b> &mdash; gaps in the sequence cause change points to be dated incorrectly, because the CUSUM treats each row as the next consecutive observation regardless of the actual time gap.</li>
-                <li><b>Out-of-order dates</b> &mdash; rows not in chronological sequence, which cause a spider-web chart pattern.</li>
-                <li><b>Unrecognised date formats</b> &mdash; dates the analyser cannot parse.</li>
-                <li><b>Column structure errors</b> &mdash; unquoted commas in numeric values corrupting the CSV structure.</li>
-            </ul>
-            <p><b>Note:</b> The analyser also runs an automatic pre-flight check when you upload a CSV and when you change the X or Y column selection. If blanks, zeros, or date gaps are detected, a yellow warning banner will appear with a link to the Data Validator.</p>
-
             <h3>Privacy</h3>
             <p>Your CSV file never leaves your computer. All analysis runs entirely in your browser. No data is uploaded to any server. No login required.</p>
-
             <h3>About the method</h3>
             <p>Bootstrap CUSUM step-change analysis is a distribution-free method for detecting structural changes in time series data. It does not assume normality, making it particularly suited to healthcare safety data, incident counts, and other right-skewed metrics.</p>
-
-            <h3>When Bootstrap CUSUM works best</h3>
-            <p>Bootstrap CUSUM answers: <b>"has the underlying mean level of this process permanently shifted?"</b> It works best on:</p>
-            <ul>
-                <li><b>Support or incident counts</b> &mdash; where training or system improvements produce lasting reductions</li>
-                <li><b>Prescribing volumes or error rates</b> &mdash; where a clinical intervention permanently shifts the baseline</li>
-                <li><b>Any data where improvements are expected to be sustained</b>, not temporary</li>
-            </ul>
-
-            <h3>When you may see "1 distinct stage"</h3>
-            <ul>
-                <li><b>The data is cyclical or mean-reverting</b> &mdash; e.g. annual GDP growth rates naturally oscillate around a long-run mean.</li>
-                <li><b>The confidence threshold is too high</b> &mdash; try lowering Conf % to 95% or 90%.</li>
-                <li><b>The dataset is too short</b> &mdash; fewer than 20&ndash;30 observations.</li>
-                <li><b>The Turn Length is too high</b> &mdash; try reducing from 5 to 3.</li>
-                <li><b>Genuine stability</b> &mdash; the process may simply not have changed.</li>
-            </ul>
-
             <p style="font-size:0.85em; color:#888; margin-top:20px;">Based on Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). Implemented at StepChangeAnalysis.com.</p>
         </div>
     </div>
 
     <script src="app.js"></script>
+    <script src="assets/site-chrome.js"></script>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>

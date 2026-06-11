@@ -1004,7 +1004,8 @@ code { font-family: monospace; background: #f1f5f9; padding: 2px 6px; border-rad
     .sopk-grid,
     .subopt-grid { grid-template-columns: 1fr; }
     .path-section { padding: 20px 18px; }
-    .fix-table { font-size: 0.8em; }
+    .fix-table { font-size: 0.8em; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .fix-table td:first-child { width: auto; min-width: 120px; }
     .numbers-box table { font-size: 0.82em; }
     .numbers-box td, .numbers-box th { padding: 8px 10px; }
 }
@@ -1263,3 +1264,13 @@ mark {
     font-weight: 700;
 }
 .mobile-nav .mobile-tool-link:hover { background: #146c43; }
+
+
+/* ── 35. Right Questions page ─────────────────────────────── */
+.diagnostic-question + .diagnostic-question,
+.question-item + .question-item,
+.rq-item + .rq-item {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 8px;
+}
