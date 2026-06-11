@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/seasonality-mistaken-for-improvement.html">
+    <title>Seasonality Mistaken for Improvement — StepChangeAnalysis.com</title>
+    <meta name="description" content="How seasonal patterns fool standard charts into showing improvement that isn't there — and how Bootstrap CUSUM helps you tell the difference. With NHS examples.">
+    <meta name="keywords" content="seasonality improvement measurement, seasonal variation NHS, before after comparison seasonal, Bootstrap CUSUM seasonality, false improvement seasonal data, winter summer NHS performance">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="interpret-results.html">Interpret results</a> &rsaquo; Seasonality</div>
+    <div class="page-flag">&#128197; Interpretation guide</div>
+    <h1>Seasonality Mistaken for Improvement</h1>
+    <p class="page-intro">Seasonal variation is the most common source of false improvement signals in healthcare data. A programme launched in winter looks successful by spring — not because anything changed, but because spring always looks better than winter. This page explains how to recognise seasonal patterns, why standard charts miss them, and what to do.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Interpretation guide &nbsp;&middot;&nbsp; June 2026</div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what">What seasonal variation is</a></li>
+                <li><a href="#section-trap">The seasonal trap in improvement work</a></li>
+                <li><a href="#section-nhs">NHS examples</a></li>
+                <li><a href="#section-checks">Quick checks — is this seasonal or structural?</a></li>
+                <li><a href="#section-cusum">How Bootstrap CUSUM handles seasonality</a></li>
+                <li><a href="#section-fixes">What to do with seasonal data</a></li>
+                <li><a href="#section-concepts">Related concepts</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what">What seasonal variation is</h2>
+
+    <p>Seasonal variation is predictable, recurring fluctuation caused by the time of year — not by any change in the underlying system. It is common cause variation: the normal noise of a stable process that happens to follow a calendar pattern.</p>
+
+    <p>In healthcare, seasonal patterns are pervasive. NHS A&amp;E attendance peaks in winter and is lower in summer. Infection rates follow seasonal cycles. Referral volumes vary by month. Mental health presentations peak at predictable times of year. Respiratory admissions rise in cold weather. These patterns have been present for decades. They are features of the system, not signals that the system has changed.</p>
+
+    <div class="callout blue">
+        <strong>The key test</strong>
+        <p>Seasonal variation passes the same-time-last-year test: compare this January to last January, not this January to last October. If the difference disappears when you compare like-for-like months, you are looking at seasonal variation, not structural change.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-trap">The seasonal trap in improvement work</h2>
+
+    <p>The seasonal trap is one of the most common and most damaging measurement errors in healthcare improvement. It works like this:</p>
+
+    <div class="pitfall-list">
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--orange);"><span>Step</span>1</div>
+            <div class="pitfall-body">
+                <h3>A programme launches in autumn or winter</h3>
+                <p>Most NHS improvement programmes launch at the start of a financial year (April) or after a winter crisis (January–March). Both are near-seasonal lows for many metrics.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--orange);"><span>Step</span>2</div>
+            <div class="pitfall-body">
+                <h3>The metric improves over the following months</h3>
+                <p>Of course it does — because spring and summer follow winter. The metric was always going to improve. The improvement is entirely seasonal.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--orange);"><span>Step</span>3</div>
+            <div class="pitfall-body">
+                <h3>The improvement is attributed to the programme</h3>
+                <p>A before-and-after comparison between winter and summer shows a statistically significant improvement. The programme is declared a success. Resources are committed to scaling it up.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--orange);"><span>Step</span>4</div>
+            <div class="pitfall-body">
+                <h3>The following winter, performance deteriorates again</h3>
+                <p>The team concludes that implementation has slipped, or that the programme needs reinforcing. More effort is applied. The seasonal cycle repeats. The programme is never properly evaluated because the measurement tool cannot separate the programme's effect from the season.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="callout orange">
+        <strong>The cost of the seasonal trap</strong>
+        <p>Programmes declared successful on seasonal data continue to receive investment long after they should have been evaluated honestly. Programmes that genuinely work are credited for seasonal gains they did not produce, making their actual effect invisible. And the seasonal trap compounds: once a false success is on record, the organisation has a vested interest in the narrative — making honest re-evaluation politically difficult. See <a href="false-alarms-in-performance-charts.html">False Alarms in Performance Charts</a> for the broader pattern.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-nhs">NHS examples</h2>
+
+    <h3>NHS A&amp;E four-hour performance</h3>
+    <p>NHS A&amp;E four-hour performance follows a strong seasonal pattern: performance is consistently lower in winter (December–February) and higher in summer (June–August). The difference between a winter low and a summer high can be 5–10 percentage points. Any improvement programme launched in January and evaluated in June will appear successful purely from this seasonal recovery — regardless of whether anything structurally changed. The Bootstrap CUSUM analysis of 15 years of A&amp;E data on this site finds no upward change point across 184 monthly observations despite multiple interventions — precisely because the seasonal appearance of improvement was never genuine structural change. See <a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E</a>.</p>
+
+    <h3>Infection rates</h3>
+    <p>Healthcare-associated infection rates tend to be lower in summer and higher in winter, partly reflecting seasonal variation in respiratory and gastrointestinal pathogens circulating in the community. An infection control programme launched in spring and evaluated after three months will almost always show improvement. Whether that improvement represents genuine structural change — or the seasonal decline that was already happening — can only be answered by comparing to the same period in previous years, or by running Bootstrap CUSUM on the full annual series.</p>
+
+    <h3>Referral volumes and waiting times</h3>
+    <p>GP referral volumes and outpatient waiting times vary substantially by month, with predictable dips around August (junior doctor changeover, holiday period) and peaks in autumn and early spring. A waiting list reduction programme evaluated across the August dip will show improvement that reverses in September regardless of the programme's actual effect.</p>
+
+    <hr>
+
+    <h2 id="section-checks">Quick checks — is this seasonal or structural?</h2>
+
+    <p>Before drawing any conclusions from an improvement in your data, run these checks:</p>
+
+    <div class="wait-box">
+        <div class="wb-label">&#9989; The same-time-last-year test</div>
+        <h3>Compare this month to the same month last year — not to last month.</h3>
+        <p>If performance in April this year is better than April last year — that is potentially genuine. If performance in April this year is better than February this year — that may simply be April being better than February, as it always is.</p>
+    </div>
+
+    <ul style="line-height:2.2;margin-top:20px;">
+        <li><strong>Does the pattern repeat each year?</strong> Plot three or more years of monthly data. If the peaks and troughs occur at the same time each year, you are looking at seasonality. A genuine structural improvement shifts the whole curve up or down permanently — it does not just move one season's result.</li>
+        <li><strong>Does the change point date coincide with a season rather than an intervention?</strong> If Bootstrap CUSUM places a change point in January or February — and your programme launched in October — the change point may be the start of a seasonal recovery, not the effect of your programme. Check whether the same pattern appears in earlier years without any intervention.</li>
+        <li><strong>Does the improvement reverse the following year at the same time?</strong> If performance improves from January to June, then deteriorates from October to December, and this pattern repeats year after year — you are inside a seasonal cycle, not a structural improvement.</li>
+        <li><strong>Is the series long enough to show multiple cycles?</strong> You need at least two full annual cycles (24 monthly observations) to reliably distinguish seasonal variation from structural change. With fewer observations, Bootstrap CUSUM may detect a seasonal high as a change point.</li>
+    </ul>
+
+    <hr>
+
+    <h2 id="section-cusum">How Bootstrap CUSUM handles seasonality</h2>
+
+    <p>Bootstrap CUSUM is more robust to seasonality than visual inspection or before-and-after comparison — but it is not immune. Understanding how it interacts with seasonal data prevents misinterpretation.</p>
+
+    <p><strong>On a short series with strong seasonality</strong>, Bootstrap CUSUM may detect the seasonal peak as a change point. This is not a bug — it is the algorithm doing its job correctly on data that contains a sustained deviation from the process mean. The seasonal peak genuinely is a sustained deviation. The question is whether it is a recurring seasonal deviation or a new structural level.</p>
+
+    <p><strong>The practical check</strong>: run Bootstrap CUSUM on the full available series — not just the recent period. If the algorithm finds change points at the same time each year (e.g. every November and every May), those are seasonal boundaries, not structural ones. If a change point appears once and the new level is sustained across subsequent seasons — including the winter that follows — it is likely structural.</p>
+
+    <p><strong>The best approach for highly seasonal series</strong> is one of these three options:</p>
+
+    <div class="callout green">
+        <strong>Option 1 — Use annual data</strong>
+        <p>Run Bootstrap CUSUM on annual totals or annual averages rather than monthly data. This removes seasonal variation entirely — the annual mean is the same regardless of which month you are in. A genuine structural improvement will shift the annual mean. Seasonal variation cancels out within each year.</p>
+    </div>
+
+    <div class="callout blue" style="margin-top:12px;">
+        <strong>Option 2 — Compare same months across years</strong>
+        <p>Run Bootstrap CUSUM separately on January data across multiple years, February data across multiple years, and so on. Each month-series removes the seasonal effect and shows whether that month is genuinely improving year-on-year. This requires more years of data but gives the most precise picture.</p>
+    </div>
+
+    <div class="callout blue" style="margin-top:12px;">
+        <strong>Option 3 — Use seasonally adjusted data</strong>
+        <p>If you have access to seasonally adjusted figures (NHS England publishes these for some metrics), use those as your Bootstrap CUSUM input. Seasonally adjusted data removes the predictable seasonal component, leaving only the underlying trend and any structural changes.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-fixes">What to do with seasonal data</h2>
+
+    <ul style="line-height:2.2;">
+        <li><strong>Set a same-season review date.</strong> If you launch an intervention in January, do not evaluate it in June. Evaluate it next January — the same season, one year on. That comparison removes the seasonal confound entirely.</li>
+        <li><strong>Pre-specify the comparison.</strong> Before implementation, write down exactly what comparison you will make to declare success. Same month, same season, or full-year average? Writing it down before the data arrives prevents cherry-picking the period that looks best.</li>
+        <li><strong>Do not launch and evaluate in the same season.</strong> A programme that launches in winter and is evaluated the following summer is almost guaranteed to show improvement. This is not evidence — it is the calendar.</li>
+        <li><strong>Use at least two full years of post-intervention data.</strong> A genuine structural improvement should be visible in year two as well as year one. If the improvement is present in year one but absent in year two at the same season, it was either seasonal or a one-off event.</li>
+        <li><strong>Run Bootstrap CUSUM on annual data first.</strong> If the annual series shows a change point, investigate whether the monthly series confirms it. If the monthly series shows a change point but the annual series does not, suspect seasonality.</li>
+    </ul>
+
+    <hr>
+
+    <h2 id="section-concepts">Related concepts</h2>
+
+    <div class="nav-grid">
+        <a href="interpret-results.html" class="nav-card">
+            <div class="nav-tag">Hub page</div>
+            <h3>Interpret Results</h3>
+            <p>The full guide to reading Bootstrap CUSUM output — all three outcomes, pitfalls, multiple change points.</p>
+        </a>
+        <a href="false-alarms-in-performance-charts.html" class="nav-card">
+            <div class="nav-tag">Related guide</div>
+            <h3>False Alarms in Performance Charts</h3>
+            <p>The broader pattern of acting on noise — seasonality is the most common source of false alarms in NHS data.</p>
+        </a>
+        <a href="variation-and-spc.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Variation &amp; SPC</h3>
+            <p>Common cause vs special cause variation — seasonal variation is common cause variation that follows a calendar pattern.</p>
+        </a>
+        <a href="tampering-and-impatience.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Tampering &amp; Impatience</h3>
+            <p>Acting on seasonal improvement as if it were structural — then acting again when it reverses — is tampering at organisational scale.</p>
+        </a>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="nav-card">
+            <div class="nav-tag">Example</div>
+            <h3>NHS A&amp;E — Why Nothing Has Worked</h3>
+            <p>15 years of monthly data. No upward change point. The seasonal trap played out at national scale across 25 years of policy.</p>
+        </a>
+        <a href="index.html" class="nav-card">
+            <div class="nav-tag">Free tool</div>
+            <h3>&#9654; Open the StepChange Analyzer</h3>
+            <p>Run Bootstrap CUSUM on annual data to remove seasonal noise — or on the full series to see whether change points recur seasonally.</p>
+        </a>
+    </div>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
