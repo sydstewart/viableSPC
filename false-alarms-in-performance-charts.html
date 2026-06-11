@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/false-alarms-in-performance-charts.html">
+    <title>False Alarms in Performance Charts — StepChangeAnalysis.com</title>
+    <meta name="description" content="What a false alarm is, what it costs improvement teams, and the decision rules that tell you when to wait vs investigate. Part of the Bootstrap CUSUM interpretation guide.">
+    <meta name="keywords" content="false alarm performance chart, acting on noise improvement, tampering false positive, SPC false alarm, Bootstrap CUSUM interpretation, when to wait vs investigate">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="interpret-results.html">Interpret results</a> &rsaquo; False alarms</div>
+    <div class="page-flag">&#9888; Interpretation guide</div>
+    <h1>False Alarms in Performance Charts</h1>
+    <p class="page-intro">A false alarm is when a chart appears to show improvement — or deterioration — but the system has not actually changed. Acting on a false alarm is one of the most common and most costly mistakes in improvement work. This page explains what causes them, what they cost, and the decision rules that protect you from reacting to noise.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Interpretation guide &nbsp;&middot;&nbsp; June 2026</div>
+    <div style="margin-top:8px;margin-bottom:4px;font-family:system-ui,sans-serif;font-size:0.92em;color:#475569;"><strong style="color:#002d5b;">Method:</strong> Bootstrap CUSUM &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what">What a false alarm is</a></li>
+                <li><a href="#section-cost">What false alarms cost improvement teams</a></li>
+                <li><a href="#section-causes">The three most common causes</a></li>
+                <li><a href="#section-rules">Decision rules: when to wait vs investigate</a></li>
+                <li><a href="#section-cusum">How Bootstrap CUSUM reduces false alarms</a></li>
+                <li><a href="#section-concepts">Related concepts</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what">What a false alarm is</h2>
+
+    <p>A false alarm occurs when a measurement appears to signal a genuine change in performance — but the underlying system has not actually shifted. The data moved. The process did not.</p>
+
+    <p>In statistical terms, a false alarm is a Type I error: declaring that something changed when it did not. Every measurement system has a false alarm rate — the probability that normal variation will be misread as a signal. Standard run charts and RAG status reports have high false alarm rates because they are designed to be sensitive, not specific. They flag a lot of things. Most of those flags are noise.</p>
+
+    <div class="callout blue">
+        <strong>The classic example</strong>
+        <p>A ward's infection rate drops from 4.2 to 2.8 per 1,000 bed days in a single month. The improvement team celebrates, writes it up, and begins planning how to scale the intervention. Three months later the rate is back at 4.1. Nothing changed — the drop was within the normal variation of a stable process. The team acted on a false alarm, consumed resources, and undermined confidence in the measurement system.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cost">What false alarms cost improvement teams</h2>
+
+    <p>False alarms are not just a statistical inconvenience. They have real organisational costs that compound over time:</p>
+
+    <div class="pitfall-list">
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--orange);"><span>Cost</span>1</div>
+            <div class="pitfall-body">
+                <h3>Tampering — making the system worse</h3>
+                <p>When teams react to a false alarm by changing the process, they introduce variation into a system that was stable. Deming called this tampering. The funnel experiment demonstrates it precisely: adjusting the process in response to each result produces more variation, not less. A system subjected to repeated tampering becomes harder to improve because the signal is buried in the noise that tampering created. See <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a>.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--orange);"><span>Cost</span>2</div>
+            <div class="pitfall-body">
+                <h3>Resource waste on interventions that were not needed</h3>
+                <p>Every false alarm that triggers an improvement programme consumes time, money, and attention that could have been directed at a genuine problem. In NHS quality improvement, where improvement capacity is limited and demand is high, the opportunity cost of false alarms is significant. Teams that habitually chase noise have less capacity to address genuine structural problems.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--orange);"><span>Cost</span>3</div>
+            <div class="pitfall-body">
+                <h3>Loss of trust in measurement</h3>
+                <p>When an improvement team declares success and the metric reverts, or when successive initiatives appear to produce results that then disappear, staff learn to distrust the measurement system. This makes future improvement work harder: people discount signals that might be genuine because they have been burned by false alarms before. The measurement system loses credibility precisely when it most needs it.</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--orange);"><span>Cost</span>4</div>
+            <div class="pitfall-body">
+                <h3>Improvement fatigue</h3>
+                <p>Teams that repeatedly respond to false alarms experience improvement fatigue: the exhaustion of sustained effort that produces no lasting change. This is one of the most underestimated costs of poor measurement. When people believe their efforts are not working, they disengage — making genuine improvement harder to achieve even when the right intervention is eventually found.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-causes">The three most common causes</h2>
+
+    <h3>1. Comparing a single good month to the previous month</h3>
+    <p>A single data point better than the previous one is almost never a signal. In a stable process, roughly half of all months will be above the process mean and half below. A single better month is exactly what you would expect from normal variation. The trap is that the human eye is pattern-seeking: it wants to attribute the good month to whatever intervention is most salient in the narrative. <strong>One data point is not a change point.</strong></p>
+
+    <h3>2. Before-and-after comparisons with a short post-intervention window</h3>
+    <p>Before-and-after comparisons produce false alarms when the comparison window is too short. If an intervention was implemented in January and you compare December to February, you are comparing two single months separated by a process change — but both months are subject to normal variation. A better February proves nothing. Bootstrap CUSUM requires a sustained shift across multiple data points before confirming a change point. This is not a limitation — it is the design.</p>
+
+    <h3>3. Seasonal patterns misread as improvement</h3>
+    <p>Many healthcare metrics have strong seasonal patterns: A&amp;E performance worsens in winter, infection rates vary by season, referral volumes peak at certain times of year. A seasonal improvement in spring that is compared to a winter baseline will almost always appear as genuine improvement — even if the underlying system has not changed at all. For seasonal series, always compare like-for-like: the same month in successive years, or annual averages. See <a href="seasonality-mistaken-for-improvement.html">Seasonality Mistaken for Improvement</a>.</p>
+
+    <hr>
+
+    <h2 id="section-rules">Decision rules: when to wait vs investigate</h2>
+
+    <p>The practical challenge is not understanding false alarms in theory — it is knowing what to do in real time when a metric moves. These decision rules give you a defensible framework:</p>
+
+    <div class="wait-box">
+        <div class="wb-label">&#9989; Default rule</div>
+        <h3>One or two data points in a different direction: wait and measure. Do not act.</h3>
+        <p>A single month better or worse than average is noise until proven otherwise. The burden of proof is on the signal, not on the null hypothesis. Document the result, note any contextual factors, set a review date, and continue measuring. Acting on one data point is tampering by definition.</p>
+    </div>
+
+    <div class="callout green" style="margin-top:16px;">
+        <strong>When Bootstrap CUSUM confirms a change point:</strong> investigate. The algorithm has accumulated evidence across multiple data points and found a sustained shift at your chosen confidence level. This is not a false alarm — it is a genuine signal. Go to <a href="what-to-do-next.html#path-detected">Path A: Change detected</a>.
+    </div>
+
+    <div class="callout orange" style="margin-top:12px;">
+        <strong>When Bootstrap CUSUM finds no change point:</strong> default to waiting. The system is behaving as it always has. Do not launch a new initiative in response to recent variation. Go to <a href="what-to-do-next.html#path-no-change">Path B: No change detected</a>.
+    </div>
+
+    <p style="margin-top:24px;">For cases where you are not sure whether a result is a false alarm or a genuine early signal, ask these three questions:</p>
+
+    <ul style="line-height:2.2;">
+        <li><strong>Is this sustained across multiple consecutive data points?</strong> One point is noise. Three or more consecutive points consistently above or below the mean, accumulating evidence in the CUSUM statistic, may be a genuine shift.</li>
+        <li><strong>Does the change point date match the intervention date?</strong> If Bootstrap CUSUM places the change point weeks before your intervention, something else caused it. The intervention is receiving credit for a change it did not produce.</li>
+        <li><strong>Is there a plausible mechanism?</strong> Can you explain, in system terms, why this intervention would produce a structural change in this measure at this time? If the mechanism is not clear, the change point may be genuine but unattributed — which is still useful information, but not evidence that your intervention worked.</li>
+    </ul>
+
+    <hr>
+
+    <h2 id="section-cusum">How Bootstrap CUSUM reduces false alarms</h2>
+
+    <p>Bootstrap CUSUM is specifically designed to reduce false alarms without sacrificing sensitivity to genuine change. It does this in two ways:</p>
+
+    <p><strong>Evidence accumulation.</strong> Rather than evaluating each data point independently, Bootstrap CUSUM accumulates deviations from the process mean over time. A single outlier barely moves the CUSUM statistic. A sustained series of consistently above-average results accumulates into a genuine signal. This is why Bootstrap CUSUM is more sensitive to real change and more resistant to false alarms than visual inspection of a run chart or a Shewhart chart that evaluates each point independently.</p>
+
+    <p><strong>Bootstrapped confidence levels.</strong> The decision threshold for declaring a change point is not assumed from theory — it is calculated by resampling the actual data thousands of times. The confidence level tells you the probability that the detected change is genuine rather than a random feature of the data. At 95% confidence, there is a 5% probability of a false positive. At 99.7%, that probability falls to 0.3% — 1 in 370.</p>
+
+    <div class="callout blue">
+        <strong>The false alarm rate at different confidence levels</strong>
+        <p>90% confidence: 1 in 10 detected change points may be false alarms — suitable for early warning, not governance decisions. 95% confidence: 1 in 20 — standard working threshold for improvement programmes. 99.7% confidence: 1 in 370 — use when a false positive would trigger a costly or irreversible decision. The confidence level is your dial for controlling the trade-off between sensitivity and false alarm rate.</p>
+    </div>
+
+    <p>No method eliminates false alarms entirely. But Bootstrap CUSUM gives you a statistically defensible, data-derived threshold rather than a visual impression — which is the difference between honest measurement and wishful thinking.</p>
+
+    <hr>
+
+    <h2 id="section-concepts">Related concepts</h2>
+
+    <div class="nav-grid">
+        <a href="interpret-results.html" class="nav-card">
+            <div class="nav-tag">Hub page</div>
+            <h3>Interpret Results</h3>
+            <p>The full guide to reading Bootstrap CUSUM output — all three outcomes, common pitfalls, seasonality, multiple change points.</p>
+        </a>
+        <a href="tampering-and-impatience.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Tampering &amp; Impatience</h3>
+            <p>Why acting on a false alarm makes the system worse — Deming's funnel experiment in full.</p>
+        </a>
+        <a href="variation-and-spc.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Variation &amp; SPC</h3>
+            <p>Common cause vs special cause variation — the theoretical foundation for understanding what a false alarm actually is.</p>
+        </a>
+        <a href="seasonality-mistaken-for-improvement.html" class="nav-card">
+            <div class="nav-tag">Related guide</div>
+            <h3>Seasonality Mistaken for Improvement</h3>
+            <p>The most common source of false alarms in NHS data — and how to tell the difference.</p>
+        </a>
+        <a href="what-to-do-next.html#path-no-change" class="nav-card">
+            <div class="nav-tag">Next step</div>
+            <h3>No Change Detected — What to Do</h3>
+            <p>When Bootstrap CUSUM finds no change point, here is the decision pathway that prevents tampering.</p>
+        </a>
+        <a href="index.html" class="nav-card">
+            <div class="nav-tag">Free tool</div>
+            <h3>&#9654; Open the StepChange Analyzer</h3>
+            <p>Run Bootstrap CUSUM on your own data — find out whether your results are signal or noise.</p>
+        </a>
+    </div>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
