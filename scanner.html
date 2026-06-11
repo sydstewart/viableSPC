@@ -10,8 +10,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .header-tool-btn { display: none; }
+    </style>
 </head>
 <body>
+
+<div id="site-header"></div>
 
 <nav class="navbar navbar-dark py-3 shadow-sm">
     <div class="container">
@@ -213,7 +218,6 @@
             const rowNum = index + 2;
             let rowHasError = false;
 
-            // Check A & B: Date column
             const dVal = row[x] ? row[x].toString().trim() : "";
             if (dVal === "" || dVal === "-") {
                 stats.blanks++; rowHasError = true;
@@ -236,19 +240,16 @@
                         logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date is out of chronological order.</span>';
                         logHtml += '<span class="suggestion-tip">&#128161; Sort data by date ascending in Excel before saving as CSV.</span>';
                     } else if (lastTS > 0) {
-                        // Detect frequency from first two valid timestamps
                         const gap = ts - lastTS;
                         if (detectedFreqMs === 0 && gap > 0) {
                             detectedFreqMs = gap;
                         } else if (detectedFreqMs > 0 && gap > 0) {
-                            // Allow ±10% tolerance for month length variation
                             const tolerance = detectedFreqMs * 0.4;
                             if (gap > detectedFreqMs + tolerance) {
-                                // Gap is larger than expected — missing dates
                                 const expectedCount = Math.round(gap / detectedFreqMs) - 1;
                                 stats.missingDates += expectedCount; rowHasError = true;
                                 logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date gap detected: ' + expectedCount + ' expected period' + (expectedCount > 1 ? 's' : '') + ' missing between "' + lastDateStr + '" and "' + dVal + '".</span>';
-                                logHtml += '<span class="suggestion-tip">&#128161; Missing periods in the sequence cause change points to be dated incorrectly. If these are genuine gaps (monitoring outage), add rows with the missing dates and a value of N/A then remove them, or note the gap in your analysis.</span>';
+                                logHtml += '<span class="suggestion-tip">&#128161; Missing periods in the sequence cause change points to be dated incorrectly.</span>';
                             }
                         }
                     }
@@ -257,13 +258,11 @@
                 }
             }
 
-            // Check D, E & G: Value column — blank, non-numeric, and zero
             const rawM = row[y] ? row[y].toString().trim() : "";
             if (rawM === "") {
-                // Case 2: blank cell — may be read as zero by the analyser
                 stats.badNumbers++; rowHasError = true;
                 logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Value is blank (missing reading).</span>';
-                logHtml += '<span class="suggestion-tip">&#128161; Delete this row entirely. A blank value may be treated as zero by the analyser, depressing the stage mean and creating false change points.</span>';
+                logHtml += '<span class="suggestion-tip">&#128161; Delete this row entirely. A blank value may be treated as zero by the analyser.</span>';
             } else {
                 let cleanM = rawM.replace(/\s+/g,'');
                 if (cleanM.includes(',')) cleanM = isEuro ? cleanM.replace(/\./,'').replace(',','.') : cleanM.replace(/,/g,'');
@@ -272,18 +271,16 @@
                     logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; "' + rawM + '" is not a valid number.</span>';
                     logHtml += '<span class="suggestion-tip">&#128161; Remove units, symbols, or text from the value column.</span>';
                 } else if (parseFloat(cleanM) === 0) {
-                    // Check G: Zero value — warn unless zero is a plausible measurement
                     stats.zeroValues++; rowHasError = true;
                     logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Value is zero &mdash; possible missing reading recorded as 0.</span>';
-                    logHtml += '<span class="suggestion-tip">&#128161; If this is a monitoring station outage (e.g. air quality, sensor data), delete this row. A genuine zero is rare for most measured metrics. Zero values depress the stage mean and may create false change points.</span>';
+                    logHtml += '<span class="suggestion-tip">&#128161; If this is a monitoring outage, delete this row. Zero values depress the stage mean.</span>';
                 }
             }
 
-            // Check F: Column count
             if (row['__parsed_extra']) {
                 stats.columnErrors++; rowHasError = true;
                 logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Too many columns &mdash; commas in numeric values may be unquoted.</span>';
-                logHtml += '<span class="suggestion-tip">&#128161; In Excel: remove comma separators from numbers (format as plain number) before saving as CSV.</span>';
+                logHtml += '<span class="suggestion-tip">&#128161; In Excel: remove comma separators from numbers before saving as CSV.</span>';
             }
 
             if (!rowHasError) stats.clean++;
@@ -294,16 +291,15 @@
 
         let warnings = "";
         if (stats.outOfOrder > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.outOfOrder + ' out-of-order rows</strong> — sort by date ascending in Excel.</div>';
-        if (stats.missingDates > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.missingDates + ' missing period' + (stats.missingDates > 1 ? 's' : '') + ' detected in date sequence</strong> — gaps in the date sequence cause change points to be dated incorrectly. The CUSUM treats each row as the next consecutive observation regardless of the actual date gap. Check the audit log below for the exact missing dates.</div>';
-        if (stats.columnErrors > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.columnErrors + ' column structure errors</strong> — unquoted commas in numeric values. Remove thousands separators from numbers in Excel.</div>';
-        if (stats.zeroValues > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.zeroValues + ' zero values detected</strong> — these may be missing readings recorded as 0. Zero values depress stage means and can create false change points. Delete rows where zero means "no data".</div>';
+        if (stats.missingDates > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.missingDates + ' missing period' + (stats.missingDates > 1 ? 's' : '') + ' detected</strong> — gaps cause change points to be dated incorrectly.</div>';
+        if (stats.columnErrors > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.columnErrors + ' column structure errors</strong> — unquoted commas in numeric values.</div>';
+        if (stats.zeroValues > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.zeroValues + ' zero values detected</strong> — may be missing readings recorded as 0.</div>';
 
         summaryArea.className = 'summary-box shadow-sm' + (isClean && !preCheckWarnings ? ' clean' : '');
         summaryArea.innerHTML =
             '<h5 class="fw-bold mb-3" style="color:' + (isClean && !preCheckWarnings ? '#198754' : '#dc3545') + '">' +
             (isClean && !preCheckWarnings ? '&#9989; Validation Summary &mdash; No Issues Found' : '&#10060; Validation Summary &mdash; Issues Detected') + '</h5>' +
-            preCheckWarnings +
-            warnings +
+            preCheckWarnings + warnings +
             '<div class="d-flex flex-wrap gap-2 mt-3">' +
             '<span class="stat-badge">&#128308; ' + stats.blanks + ' Blank Values</span>' +
             '<span class="stat-badge">&#128993; ' + stats.zeroValues + ' Zero Values</span>' +
@@ -321,7 +317,7 @@
 
         auditLog.innerHTML = logHtml ||
             '<span class="success-text">&#9989; VALIDATION COMPLETE &mdash; NO ISSUES FOUND.</span>' +
-            '<span class="info-text">Your CSV is ready for the StepChangeAnalysis.com Analyzer.</span>' +
+            '<span class="info-text">Your CSV is ready for the StepChange Analyzer.</span>' +
             '<span class="info-text">Total rows scanned: ' + rawData.length + '</span>';
 
         resultsSection.scrollIntoView({ behavior: 'smooth' });
@@ -349,16 +345,13 @@
             '.stat-badge{display:inline-block;padding:2px 8px;background:#e2e8f0;border-radius:4px;margin-right:6px;font-weight:bold;font-size:9.5pt}' +
             'hr{border:none;border-top:1px solid #ddd;margin:12px 0}.btn{display:none}' +
             '@media print{body{margin:15px}}' +
-            '</style></head><body>' +
-            '<h2>&#128202; StepChangeAnalysis.com &#8212; Validation Report</h2>' +
-            '<div class="meta">Generated: ' + dateStr + ' &nbsp;|&nbsp; ' + fileInfo + '</div>' +
-            '<div class="summary">' + summary + '</div>' +
-            '<div class="log">' + logText + '</div>' +
-            '<script>window.onload=function(){window.print();}<\/script>' +
-            '
-<div id="site-footer"></div>
-<script src="assets/site-chrome.js"></script>
-</body></html>'
+            '<\/style><\/head><body>' +
+            '<h2>&#128202; StepChangeAnalysis.com &#8212; Validation Report<\/h2>' +
+            '<div class="meta">Generated: ' + dateStr + ' &nbsp;|&nbsp; ' + fileInfo + '<\/div>' +
+            '<div class="summary">' + summary + '<\/div>' +
+            '<div class="log">' + logText + '<\/div>' +
+            '<script>window.onload=function(){window.print();};<\/script>' +
+            '<\/body><\/html>'
         );
         win.document.close();
     }
@@ -373,5 +366,7 @@
         gtag('config', 'G-NZLMMS3ZGG');
     </script>
 
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
 </body>
 </html>

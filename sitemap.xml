@@ -1,291 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Tool / Home -->
-  <url>
-    <loc>https://stepchangeanalysis.com/</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <!-- Core tool pages -->
+  <url><loc>https://stepchangeanalysis.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://stepchangeanalysis.com/scanner.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
-  <!-- Core framework pages -->
-  <url>
-    <loc>https://stepchangeanalysis.com/start-here.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <!-- Spine / hub pages -->
+  <url><loc>https://stepchangeanalysis.com/start-here.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://stepchangeanalysis.com/interpret-results.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://stepchangeanalysis.com/what-to-do-next.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://stepchangeanalysis.com/improvement-method.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 
-  <url>
-    <loc>https://stepchangeanalysis.com/why-nothing-changes.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <!-- Gap / interpretation pages -->
+  <url><loc>https://stepchangeanalysis.com/false-alarms-in-performance-charts.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/seasonality-mistaken-for-improvement.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 
-  <url>
-    <loc>https://stepchangeanalysis.com/three-charts-three-stories.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <!-- Concepts — Why things fail -->
+  <url><loc>https://stepchangeanalysis.com/why-nothing-changes.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/joiner-levels-of-fix.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/deming-14-points.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/innovators-dilemma.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/compliance-trap.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/common-traps.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
-  <!-- Tier 3 concept pages — new this session -->
-  <url>
-    <loc>https://stepchangeanalysis.com/joiner-levels-of-fix.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Concepts — Measurement -->
+  <url><loc>https://stepchangeanalysis.com/types-of-measures.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/variation-and-spc.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/behaviour-over-time.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/causal-loop-diagrams.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/tampering-and-impatience.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
-  <url>
-    <loc>https://stepchangeanalysis.com/deming-14-points.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Concepts — Improvement method -->
+  <url><loc>https://stepchangeanalysis.com/model-for-improvement.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/pdsa-cycle.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/five-whys.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/root-cause-analysis.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/bright-spots.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/pick-model.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
-  <url>
-    <loc>https://stepchangeanalysis.com/pdsa-cycle.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Concepts — Systems & constraints -->
+  <url><loc>https://stepchangeanalysis.com/theory-of-constraints.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/necessary-but-not-sufficient.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/failure-demand.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/focus-and-prioritisation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/standardisation-vs-customisation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/ashbys-law.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/systems-thinking.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Examples — Healthcare -->
+  <url><loc>https://stepchangeanalysis.com/why-nothing-has-worked-nhs-ae-performance.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/dementia-diagnosis-rate.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/gp-appointments-analysis.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/never-events-wrong-route.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/anticoag-safety.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/sepsis-six-does-public-data-show-whether-it-worked.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Examples — Policy & Environment -->
+  <url><loc>https://stepchangeanalysis.com/ulez-london-air-quality.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/the-grid-fixed-itself.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/uk-gdp-analysis.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Examples — Industrial -->
+  <url><loc>https://stepchangeanalysis.com/hydrogen-plant-cusum.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Explainers -->
+  <url><loc>https://stepchangeanalysis.com/three-charts-three-stories.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/diagnostic-questions.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
   <!-- Reference -->
-  <url>
-    <loc>https://stepchangeanalysis.com/glossary.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/about.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- NHS Healthcare articles -->
-  <url>
-    <loc>https://stepchangeanalysis.com/dementia-diagnosis-rate.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/gp-appointments-analysis.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/why-nothing-has-worked-nhs-ae-performance.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/never-events-wrong-route.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/anticoag-safety.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/sepsis-six-does-public-data-show-whether-it-worked.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Environment & Policy articles -->
-  <url>
-    <loc>https://stepchangeanalysis.com/the-grid-fixed-itself.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/ulez-london-air-quality.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/uk-gdp-analysis.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Industrial article -->
-  <url>
-    <loc>https://stepchangeanalysis.com/hydrogen-plant-cusum.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- New concept pages — June 2026 -->
-  <url>
-    <loc>https://stepchangeanalysis.com/types-of-measures.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/model-for-improvement.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/tampering-and-impatience.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/variation-and-spc.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/bright-spots.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/five-whys.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/root-cause-analysis.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/necessary-but-not-sufficient.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/pick-model.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://stepchangeanalysis.com/improvement-method.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/theory-of-constraints.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/failure-demand.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/focus-and-prioritisation.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/standardisation-vs-customisation.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/behaviour-over-time.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/causal-loop-diagrams.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/strategic-bot.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/innovators-dilemma.html</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/diagnostic-questions.html</loc>
-    <lastmod>2026-06-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/compliance-trap.html</loc>
-    <lastmod>2026-06-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://stepchangeanalysis.com/ashbys-law.html</loc>
-    <lastmod>2026-06-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <url><loc>https://stepchangeanalysis.com/glossary.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 
 </urlset>
