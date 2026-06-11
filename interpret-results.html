@@ -26,22 +26,47 @@
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Interpret results</div>
     <div class="page-flag">&#128200; Reading your results honestly</div>
     <h1>How to Interpret Bootstrap CUSUM Results</h1>
-    <p class="page-intro">The tool has run. You have a chart. Now what does it actually mean &mdash; and what are the most common ways people misread it? This page is your guide to honest interpretation: understanding what change detected means, what no change detected means, and how to avoid the reactions that make things worse.</p>
-    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Interpretation guide &nbsp;&middot;&nbsp; June 2026</div>
 
-    <!-- Read this first -->
+    <!-- 1-screen promise -->
+    <div style="background:var(--brand-blue);color:white;border-radius:10px;padding:22px 28px;margin:0 0 28px;font-family:system-ui,sans-serif;">
+        <p style="font-size:1.15em;font-weight:700;color:white;margin:0 0 6px;line-height:1.4;">Interpret structural change honestly. Avoid tampering. Know what to do next.</p>
+        <p style="font-size:0.92em;color:rgba(255,255,255,0.8);margin:0;line-height:1.6;">The tool has given you a result. This page tells you what it means — and what the most dangerous misreadings are. Choose your outcome below, then follow the pathway.</p>
+    </div>
+
+    <!-- Three outcomes panel -->
+    <div class="outcome-grid">
+        <a href="what-to-do-next.html#path-detected" class="outcome-card detected">
+            <div class="oc-label">&#9989; Outcome A</div>
+            <h3>Change detected</h3>
+            <p>A structural shift confirmed at your confidence level. Now investigate when, why, and whether it is sustained.</p>
+            <span class="oc-link">What to do next &rarr;</span>
+        </a>
+        <a href="what-to-do-next.html#path-no-change" class="outcome-card no-change">
+            <div class="oc-label">&#9888; Outcome B</div>
+            <h3>No change detected</h3>
+            <p>The most common and most important result to get right. Default to waiting — do not tamper.</p>
+            <span class="oc-link">Decide what to do &rarr;</span>
+        </a>
+        <a href="what-to-do-next.html#path-data" class="outcome-card data-issue">
+            <div class="oc-label">&#10060; Outcome C</div>
+            <h3>Inconclusive or data problem</h3>
+            <p>Too few points, date format issues, missing values, or mixed frequencies. Fix the data and re-run.</p>
+            <span class="oc-link">How to fix it &rarr;</span>
+        </a>
+    </div>
+
+    <!-- Read this first box — after outcomes panel -->
     <div class="read-first">
-        <div class="rf-label">&#128218; Read this first</div>
-        <h2>Why Bootstrap CUSUM? The three-charts explainer</h2>
-        <p>Before interpreting your results, it helps to understand what Bootstrap CUSUM is detecting that standard run charts and control charts miss. The same data looks completely different through three different lenses &mdash; and only one of them tells you whether the system has structurally changed.</p>
-        <a href="three-charts-three-stories.html">Three charts, three stories &mdash; read this before interpreting your results &rarr;</a>
+        <div class="rf-label">&#128218; Read this first if you are new to Bootstrap CUSUM</div>
+        <h2>Three charts, three very different stories</h2>
+        <p>The same data looks completely different through a run chart, a control chart, and Bootstrap CUSUM &mdash; and only one of them tells you whether the system has structurally changed. Takes 5 minutes and makes everything below easier to read.</p>
+        <a href="three-charts-three-stories.html">Three charts, three stories &rarr;</a>
     </div>
 
     <details class="toc-details">
         <summary>&#9776;&nbsp; Contents</summary>
         <div class="toc-inner">
             <ol>
-                <li><a href="#section-three-outcomes">The three possible outcomes</a></li>
                 <li><a href="#section-detected">Change detected &mdash; what it means</a></li>
                 <li><a href="#section-no-change">No change detected &mdash; what it means</a></li>
                 <li><a href="#section-pitfalls">Common interpretation pitfalls</a></li>
@@ -52,33 +77,6 @@
             </ol>
         </div>
     </details>
-
-    <h2 id="section-three-outcomes">The three possible outcomes</h2>
-
-    <p>Every Bootstrap CUSUM run produces one of three results. Each one leads to a different next action. The links below go to the <a href="what-to-do-next.html">What to do next</a> page where each pathway is developed in full.</p>
-
-    <div class="outcome-grid">
-        <a href="what-to-do-next.html#path-detected" class="outcome-card detected">
-            <div class="oc-label">&#9989; Outcome A</div>
-            <h3>Change detected</h3>
-            <p>The Bootstrap CUSUM has found a structural change point &mdash; a permanent shift in the process mean at a specific date, confirmed at your chosen confidence level.</p>
-            <span class="oc-link">What to do next &rarr;</span>
-        </a>
-        <a href="what-to-do-next.html#path-no-change" class="outcome-card no-change">
-            <div class="oc-label">&#9888; Outcome B</div>
-            <h3>No change detected</h3>
-            <p>The process has not structurally shifted. This is not failure &mdash; it is honest information. The most common and most important result to interpret correctly.</p>
-            <span class="oc-link">What to do next &rarr;</span>
-        </a>
-        <a href="what-to-do-next.html#path-data" class="outcome-card data-issue">
-            <div class="oc-label">&#10060; Outcome C</div>
-            <h3>Data not usable</h3>
-            <p>The data series has a problem &mdash; too short, wrong frequency, missing values, date format issues &mdash; that prevents a reliable result.</p>
-            <span class="oc-link">How to fix it &rarr;</span>
-        </a>
-    </div>
-
-    <hr>
 
     <h2 id="section-detected">Change detected &mdash; what it means</h2>
 
@@ -161,7 +159,7 @@
         <div class="pitfall-item">
             <div class="pitfall-num"><span>Pitfall</span>6</div>
             <div class="pitfall-body">
-                <h3>Ignoring the confidence level</h3>
+                <h3>Treating a 90% confidence result as certain</h3>
                 <p>Bootstrap CUSUM reports change points at a specified confidence level &mdash; typically 90% or 95%. A 90% confidence level means there is a 10% probability that the detected change is a false positive. If you are making a significant resource or policy decision, use 95%. If you are making a preliminary assessment to guide further investigation, 90% is reasonable. Never treat a 90% confidence result as certain &mdash; and never treat &ldquo;below the threshold&rdquo; as certain absence of change.</p>
             </div>
         </div>
@@ -211,6 +209,11 @@
     <h2 id="section-concepts">Concepts that support interpretation</h2>
 
     <div class="nav-grid">
+        <a href="three-charts-three-stories.html" class="nav-card">
+            <div class="nav-tag">Explainer</div>
+            <h3>Three Charts, Three Stories</h3>
+            <p>Why Bootstrap CUSUM detects what run charts and control charts miss — the essential explainer before interpreting any result.</p>
+        </a>
         <a href="tampering-and-impatience.html" class="nav-card">
             <div class="nav-tag">Concept</div>
             <h3>Tampering &amp; Impatience</h3>
@@ -221,20 +224,15 @@
             <h3>Variation &amp; SPC</h3>
             <p>Common cause vs special cause variation — the theoretical foundation for understanding what Bootstrap CUSUM is detecting.</p>
         </a>
-        <a href="behaviour-over-time.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Behaviour Over Time</h3>
-            <p>How to read a time series as a systems story rather than as a sequence of individual data points.</p>
-        </a>
         <a href="types-of-measures.html" class="nav-card">
             <div class="nav-tag">Concept</div>
             <h3>Types of Measures</h3>
             <p>Process metrics vs outcome metrics — why running Bootstrap CUSUM on the wrong measure produces the wrong answer.</p>
         </a>
-        <a href="three-charts-three-stories.html" class="nav-card">
-            <div class="nav-tag">Explainer</div>
-            <h3>Three Charts, Three Stories</h3>
-            <p>The same data through a run chart, a control chart, and Bootstrap CUSUM — why only one of them tells you whether the system changed.</p>
+        <a href="behaviour-over-time.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Behaviour Over Time</h3>
+            <p>How to read a time series as a systems story — including how to spot seasonality and structural patterns.</p>
         </a>
         <a href="what-to-do-next.html" class="nav-card">
             <div class="nav-tag">Next step</div>

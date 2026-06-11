@@ -16,7 +16,7 @@
         gtag("config", "G-NZLMMS3ZGG");
     </script>
 
- <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 
@@ -26,12 +26,12 @@
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; What to do next</div>
     <div class="page-flag">&#128073; Decision guide &mdash; three pathways</div>
     <h1>What to Do Next</h1>
-    <p class="page-intro">You have run Bootstrap CUSUM on your data. The result points you to one of three pathways. Each one leads to a different decision and a different next action. This page gives you the complete decision guide for each outcome &mdash; including the pathway that most improvement tools skip entirely: what to do when nothing has changed.</p>
+    <p class="page-intro">You have run Bootstrap CUSUM. Pick your result below. Each pathway gives you the next 3&ndash;5 actions &mdash; not theory, just what to do.</p>
     <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Decision guide &nbsp;&middot;&nbsp; June 2026</div>
 
     <div class="callout blue">
         <strong>Not sure how to read your result?</strong>
-        <p>Before choosing a pathway, make sure you are interpreting your Bootstrap CUSUM output correctly. Visit <a href="interpret-results.html">Interpret results</a> for the full guide &mdash; including common pitfalls, seasonality, multiple change points, and the difference between signal and noise.</p>
+        <p>Visit <a href="interpret-results.html">Interpret results</a> first &mdash; common pitfalls, seasonality, multiple change points, and the difference between signal and noise.</p>
     </div>
 
     <!-- Path selector -->
@@ -57,90 +57,84 @@
     <div class="path-section detected" id="path-detected">
         <div class="ps-label">&#9989; Path A</div>
         <h2>Change detected</h2>
-        <p>Bootstrap CUSUM has found a structural change point in your data series &mdash; a permanent shift in the process mean at a specific date, confirmed at your chosen confidence level. This is strong evidence that something in the system changed. Now the work is to understand what, why, and whether it is sustained.</p>
+        <p>Bootstrap CUSUM has confirmed a structural shift. Something in the system changed. Now do these five things.</p>
 
         <ul class="action-list">
             <li>
                 <div class="step-dot">1</div>
-                <div><strong>Note the change point date precisely.</strong> The date the Bootstrap CUSUM identifies is the point at which the accumulated evidence of change becomes statistically significant. The actual cause will typically predate this by weeks or months &mdash; that is normal. Your investigation window is the period leading up to the change point date, not the date itself.</div>
+                <div><strong>Check the direction.</strong> Is this an improvement or a deterioration? An upward change point in harm events is a warning. A downward change point in waiting times is success. Read the direction before drawing any conclusions.</div>
             </li>
             <li>
                 <div class="step-dot">2</div>
-                <div><strong>Determine the direction.</strong> Is this a change you wanted (improvement) or did not want (deterioration)? An upward change point in harm events or complaints is a warning, not a success. A downward change point in error rates or waiting times is what success looks like. Make sure you are reading the direction correctly before drawing any conclusions.</div>
+                <div><strong>Investigate what changed in the weeks before the change point date.</strong> The CUSUM dates the confirmation &mdash; the actual cause predates it by weeks or months. List everything that changed in the system around that time: staffing, process, policy, external events. Use <a href="five-whys.html">5 Whys</a> to trace the cause.</div>
             </li>
             <li>
                 <div class="step-dot">3</div>
-                <div><strong>Investigate what changed in the system at that time.</strong> What was different about the system in the period leading up to the change point? Policy changes, staffing changes, process redesigns, external events &mdash; all are candidates. List everything that changed around that time. The Bootstrap CUSUM narrows the investigation window; your knowledge of context provides the explanation. Use <a href="five-whys.html">5 Whys</a> or a <a href="root-cause-analysis.html">fishbone diagram</a> to trace the cause.</div>
+                <div><strong>Confirm the change is sustained.</strong> Re-run Bootstrap CUSUM on the full series including recent data. A temporary excursion that reverts is not structural improvement. You want the new level to be holding.</div>
             </li>
             <li>
                 <div class="step-dot">4</div>
-                <div><strong>Check whether the change is sustained.</strong> Run Bootstrap CUSUM on the full series including all available post-change-point data. A temporary excursion followed by return to the previous level is not a structural improvement. Sustained change at the new level, confirmed by the Bootstrap CUSUM continuing to accumulate evidence, is what you are looking for.</div>
+                <div><strong>Document the mechanism, not just the correlation.</strong> Why did this work? Was it a <a href="joiner-levels-of-fix.html">Level 3 fix</a>? Did it address the <a href="theory-of-constraints.html">dominant constraint</a>? Write it down &mdash; that is what makes the learning transferable to other settings.</div>
             </li>
             <li>
                 <div class="step-dot">5</div>
-                <div><strong>If the change was caused by your intervention:</strong> confirm the mechanism. Why did this intervention work when others did not? What was different about it &mdash; was it at a higher <a href="joiner-levels-of-fix.html">Joiner level</a>? Did it address the <a href="theory-of-constraints.html">dominant constraint</a>? Document the causal mechanism, not just the correlation between the intervention and the change point. That documentation is what makes the learning transferable.</div>
-            </li>
-            <li>
-                <div class="step-dot">6</div>
-                <div><strong>If the change was <em>not</em> caused by your intervention:</strong> treat this as important information. Something else changed the system &mdash; find out what. Understanding unintended changes is often more valuable than understanding intended ones, because it reveals what the system actually responds to. Check whether your intended intervention has yet produced its own change point &mdash; it may simply not have appeared yet.</div>
-            </li>
-            <li>
-                <div class="step-dot">7</div>
-                <div><strong>If this was a deterioration change point:</strong> return to Step 1 of the <a href="improvement-method.html">7-step method</a>. List the symptoms. Find the root cause of the deterioration. Identify the constraint. Design a structural fix. Do not tamper by launching multiple simultaneous responses.</div>
+                <div><strong>Keep monitoring.</strong> Run Bootstrap CUSUM on the same measure every 6 months. A new change point in the wrong direction is your early warning of regression. The earlier you catch it, the more options you have.</div>
             </li>
         </ul>
 
         <div class="callout green">
-            <strong>Re-run the tool regularly</strong>
-            <p>A confirmed improvement change point is not a reason to stop monitoring. Run Bootstrap CUSUM on the same outcome measure at regular intervals &mdash; every six months is a reasonable cadence for most improvement programmes. Sustained improvement should continue to show the same change point. A new downward change point after a period of improvement is an early warning of regression &mdash; and the earlier it is detected, the more options you have.</p>
+            <strong>If it was a deterioration change point</strong>
+            <p>Return to Step 1 of the <a href="improvement-method.html">7-step method</a>. List symptoms, find root cause, identify constraint, design a structural fix. Do not launch multiple simultaneous responses &mdash; that is tampering.</p>
         </div>
     </div>
 
     <!-- PATH B: NO CHANGE DETECTED -->
     <div class="path-section no-change" id="path-no-change">
         <div class="ps-label">&#9888; Path B &mdash; The critical pathway</div>
-        <h2>No change detected &mdash; decide deliberately, do not tamper</h2>
-        <p>Bootstrap CUSUM has found no statistical evidence of a structural shift in your data series. The system is producing the same distribution of results it was producing before. This is the most common result for improvement interventions &mdash; and the result that is most often mishandled.</p>
-        <p>The wrong response is to immediately launch a new initiative. The right response is to <strong>decide deliberately</strong> from the three options below.</p>
+        <h2>No change detected</h2>
 
         <!-- The wait box — the differentiator -->
         <div class="wait-box">
-            <div class="wb-label">&#9200; Option 1 &mdash; Your key differentiator</div>
-            <h3>Decide to wait &mdash; with a pre-committed review date</h3>
-            <p>If you believe the intervention was structurally correct but may not yet have had time to work, the right decision is to wait &mdash; deliberately, with a specific review date pre-committed and documented.</p>
-            <p>This is not passive. It is an active decision that prevents tampering and protects the intervention from political pressure to &ldquo;do something.&rdquo; To make this decision defensible, document the following before the review date:</p>
+            <div class="wb-label">&#9200; The default action</div>
+            <h3>If there is no signal, default to waiting and measuring &mdash; do not turn the dials just to show activity.</h3>
+            <p>This is not passive. It is the active decision that prevents tampering. Document it formally so it is defensible:</p>
             <ol>
-                <li>The intervention that was made and when</li>
-                <li>The outcome measure being tracked and the current Bootstrap CUSUM result</li>
-                <li>The expected mechanism by which the intervention should produce a change point</li>
-                <li>The review date (typically 6&ndash;12 months for system-level changes)</li>
-                <li>The pre-committed decision rule: &ldquo;If no change point appears by [date], we will return to Step 3 of the 7-step method&rdquo;</li>
+                <li>What intervention was made and when</li>
+                <li>What outcome measure you are tracking</li>
+                <li>Your review date &mdash; typically 6&ndash;12 months after implementation</li>
+                <li>Your pre-committed rule: <em>"If no change point by [date], return to Step 3"</em></li>
             </ol>
-            <p>This pre-commitment is what makes the wait decision honest. Without it, &ldquo;wait&rdquo; becomes indefinite delay. With it, waiting is a disciplined hypothesis: the intervention should work by this mechanism, and we will know by this date whether it did. See <a href="tampering-and-impatience.html" style="color:#7dd3fc;">Tampering &amp; Impatience</a> for why this matters.</p>
+            <p>Without a documented review date, "wait" becomes indefinite delay. With one, it is a disciplined hypothesis.</p>
         </div>
+
+        <p style="font-family:system-ui,sans-serif;font-size:0.95em;color:var(--text);margin:20px 0 8px;"><strong style="color:var(--brand-blue);">If the review date has passed and there is still no signal, choose one of these:</strong></p>
 
         <ul class="action-list">
             <li>
+                <div class="step-dot">1</div>
+                <div><strong>Return to root cause.</strong> Go back to <a href="improvement-method.html">Step 3 of the 7-step method</a>. Did the analysis stop at "human error"? Was the Joiner test applied? Was the fix at Level 1 or 2 rather than Level 3? A flat CUSUM after genuine implementation is almost always a root cause problem, not an implementation problem.</div>
+            </li>
+            <li>
                 <div class="step-dot">2</div>
-                <div><strong>Option 2 — Return to Step 3: revisit the root cause analysis.</strong> If the review date has passed and no change point has appeared, the intervention did not address the structural root cause. Return to <a href="improvement-method.html#step3">Step 3 of the 7-step method</a>. Ask: did the root cause analysis stop too early? Did it stop at &ldquo;human error&rdquo; rather than the system condition that made the error easy to commit? Was the Joiner test applied to the proposed fix? Was the fix at Level 1 (output) or Level 2 (process) rather than Level 3 (system)? A flat Bootstrap CUSUM after a genuine implementation effort is almost always a root cause analysis problem, not an implementation problem.</div>
+                <div><strong>Check the measure.</strong> Are you tracking an outcome metric or a process metric? A process can improve while the outcome stays flat. Ask: does this measure capture what the system is actually for? See <a href="types-of-measures.html">Types of measures</a>.</div>
             </li>
             <li>
                 <div class="step-dot">3</div>
-                <div><strong>Option 3 — Improve the measure.</strong> If you are confident the root cause analysis was correct but the Bootstrap CUSUM is not detecting a change, the measure may be wrong. Is this an outcome measure or a process measure? A process that improves without producing a change in the outcome measure has improved locally but not systemically. Check: does this measure capture what the system is actually for? If the measure is a proxy, is it a valid proxy? See <a href="types-of-measures.html">Types of measures</a> for the full framework.</div>
+                <div><strong>Check the theory.</strong> Did the intervention address all necessary conditions, or just one? See <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a>. Did it address the dominant constraint, or something upstream of it? See <a href="theory-of-constraints.html">Theory of Constraints</a>.</div>
             </li>
         </ul>
 
         <div class="callout orange">
-            <strong>Why &ldquo;no change detected&rdquo; is the most valuable result</strong>
-            <p>A flat Bootstrap CUSUM line after an intervention is honest information that most measurement systems cannot provide. Standard before-and-after comparisons will almost always find some improvement &mdash; because the comparison window is chosen to show one. Bootstrap CUSUM is indifferent to the narrative. It finds what the data contains. A flat line tells you the system has not changed, which tells you to look harder at the cause, not harder at the intervention. Organisations that use Bootstrap CUSUM consistently develop a much clearer understanding of what actually changes their systems &mdash; because they stop receiving credit for changes that did not occur.</p>
+            <strong>Why this is the most valuable result</strong>
+            <p>A flat CUSUM line is honest information most measurement systems cannot provide. Standard before-and-after comparisons almost always find improvement &mdash; because the window is chosen to show one. Bootstrap CUSUM is indifferent to the narrative. Organisations that use it consistently stop receiving credit for changes that did not occur &mdash; and start understanding what actually moves their systems.</p>
         </div>
     </div>
 
     <!-- PATH C: DATA PROBLEM -->
     <div class="path-section data-fix" id="path-data">
         <div class="ps-label">&#10060; Path C</div>
-        <h2>Data not usable &mdash; fix and re-run</h2>
-        <p>The Bootstrap CUSUM result is unreliable because of a problem with the data series. This is not a failure &mdash; it is a diagnostic. The table below maps the most common data problems to their fixes.</p>
+        <h2>Data problem &mdash; fix and re-run</h2>
+        <p>The result is unreliable because of a problem with the data series. The table below maps the most common problems to their fixes.</p>
 
         <table class="fix-table">
             <thead>
@@ -152,31 +146,31 @@
             <tbody>
                 <tr>
                     <td>Fewer than 20 data points</td>
-                    <td>Extend the historical series if available. If not, reduce frequency &mdash; use quarterly instead of monthly to get more historical points. As a last resort, use annual data, which removes seasonal variation and extends effective history.</td>
+                    <td>Extend the historical series. If not possible, reduce frequency &mdash; quarterly instead of monthly gives more historical points. Annual data removes seasonal variation and extends effective history further.</td>
                 </tr>
                 <tr>
-                    <td>Missing values (gaps in the series)</td>
-                    <td>For occasional gaps (1&ndash;2 points), interpolate using the average of the surrounding values. For longer gaps, split the series and run Bootstrap CUSUM on each continuous segment separately. Do not fill gaps with zeros unless zero is a genuine observed value.</td>
+                    <td>Missing values (gaps)</td>
+                    <td>For 1&ndash;2 gaps, interpolate using the average of surrounding values. For longer gaps, split the series and run Bootstrap CUSUM on each segment separately. Never fill gaps with zeros unless zero is a genuine observed value.</td>
                 </tr>
                 <tr>
                     <td>Date format not recognised</td>
-                    <td>Use ISO format: YYYY-MM-DD (e.g. 2024-03-01). Avoid formats that are ambiguous between UK and US date conventions (03/04/2024 could be 3 April or 4 March). If using monthly data, use the first day of each month as the date.</td>
+                    <td>Use ISO format: YYYY-MM-DD (e.g. 2024-03-01). For monthly data, use the first day of each month. Avoid DD/MM/YYYY &mdash; ambiguous between UK and US conventions.</td>
                 </tr>
                 <tr>
-                    <td>Mixed frequencies (some monthly, some quarterly)</td>
-                    <td>Standardise to a single frequency before running. If you have quarterly data for some periods and monthly for others, either aggregate everything to quarterly or split the series at the point where frequency changes.</td>
+                    <td>Mixed frequencies</td>
+                    <td>Standardise to a single frequency before running. Aggregate everything to quarterly, or split the series at the point where frequency changes.</td>
                 </tr>
                 <tr>
-                    <td>Extreme outliers distorting the baseline</td>
-                    <td>Identify the outlier and its cause. If the outlier is a genuine one-off event unrelated to the system (e.g. COVID lockdown period), consider running Bootstrap CUSUM on the series excluding that period, and note the exclusion explicitly. Never remove outliers without documenting why.</td>
+                    <td>Extreme outlier distorting the baseline</td>
+                    <td>Identify the cause. If it is a genuine one-off (e.g. COVID lockdown), run Bootstrap CUSUM excluding that period and note the exclusion explicitly. Never remove outliers without documenting why.</td>
                 </tr>
                 <tr>
-                    <td>Series too short after an intervention</td>
-                    <td>If the intervention was recent (less than 6 months ago), there may simply not be enough post-intervention data for Bootstrap CUSUM to detect a change point even if one exists. Set a review date and re-run in 6 months. Do not interpret &ldquo;too soon to tell&rdquo; as &ldquo;no change.&rdquo;</td>
+                    <td>Too soon after an intervention</td>
+                    <td>Less than 6 months of post-intervention data is not enough. Set a review date and re-run then. Do not interpret "too soon to tell" as "no change."</td>
                 </tr>
                 <tr>
-                    <td>Denominator changes mid-series</td>
-                    <td>If the measure is a rate (e.g. events per 1,000 patients) and the denominator changed (e.g. patient population grew), the series is not directly comparable across the denominator change. Recalculate all values using a consistent denominator, or split the series at the point of change.</td>
+                    <td>Denominator changed mid-series</td>
+                    <td>If it is a rate and the denominator changed (e.g. patient population grew), recalculate all values using a consistent denominator, or split the series at the point of change.</td>
                 </tr>
             </tbody>
         </table>
@@ -184,15 +178,15 @@
         <ul class="action-list">
             <li>
                 <div class="step-dot">1</div>
-                <div><strong>Fix the specific problem identified above.</strong> Make only the minimum change needed to produce a usable series. Document every change you make to the data and why.</div>
+                <div><strong>Fix the specific problem above.</strong> Make only the minimum change needed. Document every change to the data and why.</div>
             </li>
             <li>
                 <div class="step-dot">2</div>
-                <div><strong>Re-run Bootstrap CUSUM on the corrected series.</strong> The result on the corrected series is your real result. If it shows a change point, go to Path A. If it shows no change, go to Path B.</div>
+                <div><strong>Re-run Bootstrap CUSUM.</strong> Change point found → go to Path A. No change → go to Path B.</div>
             </li>
             <li>
                 <div class="step-dot">3</div>
-                <div><strong>Consider whether the measure itself is the problem.</strong> Sometimes a data quality problem reveals a deeper issue: the measure was never properly operationally defined, the collection process was inconsistent, or the measure was a proxy that no longer reflects what you care about. See <a href="types-of-measures.html">Types of measures</a> for the framework for choosing and defining outcome measures that will be reliable over time.</div>
+                <div><strong>If problems keep appearing, reconsider the measure itself.</strong> The data quality issue may be a symptom that the measure was never properly defined. See <a href="types-of-measures.html">Types of measures</a>.</div>
             </li>
         </ul>
     </div>
@@ -204,62 +198,36 @@
     <div style="background: white; border: 2px solid var(--border); border-radius: 10px; padding: 28px; margin: 0 0 32px; font-family: system-ui, sans-serif; overflow-x: auto;">
         <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;width:100%;display:block;margin:0 auto;" role="img" aria-label="Decision flowchart: Run Bootstrap CUSUM leads to three outcomes: change detected, no change detected, data problem">
             <defs>
-                <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
-                </marker>
-                <marker id="arrg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L0,6 L8,3 z" fill="#198754"/>
-                </marker>
-                <marker id="arro" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L0,6 L8,3 z" fill="#e67e22"/>
-                </marker>
-                <marker id="arrr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                    <path d="M0,0 L0,6 L8,3 z" fill="#c0392b"/>
-                </marker>
+                <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#64748b"/></marker>
+                <marker id="arrg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#198754"/></marker>
+                <marker id="arro" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#e67e22"/></marker>
+                <marker id="arrr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c0392b"/></marker>
             </defs>
-
-            <!-- Run tool box -->
             <rect x="240" y="10" width="220" height="48" rx="8" fill="#002d5b"/>
             <text x="350" y="30" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">Run Bootstrap CUSUM</text>
             <text x="350" y="48" font-family="system-ui,sans-serif" font-size="10" fill="rgba(255,255,255,0.8)" text-anchor="middle">on your outcome measure</text>
-
-            <!-- Arrow down -->
             <line x1="350" y1="58" x2="350" y2="88" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
-
-            <!-- Decision diamond -->
             <polygon points="350,90 460,130 350,170 240,130" fill="#f0f4f8" stroke="#64748b" stroke-width="2"/>
             <text x="350" y="124" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#1e293b" text-anchor="middle">What did</text>
             <text x="350" y="140" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#1e293b" text-anchor="middle">it find?</text>
-
-            <!-- Arrow left: Change detected -->
             <line x1="240" y1="130" x2="130" y2="130" stroke="#198754" stroke-width="2" marker-end="url(#arrg)"/>
             <text x="183" y="122" font-family="system-ui,sans-serif" font-size="10" fill="#198754" text-anchor="middle" font-weight="600">Change</text>
             <text x="183" y="135" font-family="system-ui,sans-serif" font-size="10" fill="#198754" text-anchor="middle" font-weight="600">detected</text>
-
-            <!-- Arrow right: Data problem -->
             <line x1="460" y1="130" x2="570" y2="130" stroke="#c0392b" stroke-width="2" marker-end="url(#arrr)"/>
             <text x="517" y="122" font-family="system-ui,sans-serif" font-size="10" fill="#c0392b" text-anchor="middle" font-weight="600">Data</text>
             <text x="517" y="135" font-family="system-ui,sans-serif" font-size="10" fill="#c0392b" text-anchor="middle" font-weight="600">problem</text>
-
-            <!-- Arrow down: No change -->
             <line x1="350" y1="170" x2="350" y2="210" stroke="#e67e22" stroke-width="2" marker-end="url(#arro)"/>
             <text x="370" y="195" font-family="system-ui,sans-serif" font-size="10" fill="#e67e22" font-weight="600">No change</text>
-
-            <!-- Change detected box -->
             <rect x="10" y="100" width="120" height="60" rx="8" fill="#f0fdf4" stroke="#198754" stroke-width="2"/>
             <text x="70" y="125" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#198754" text-anchor="middle">Investigate &amp;</text>
             <text x="70" y="140" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#198754" text-anchor="middle">confirm cause</text>
             <text x="70" y="155" font-family="system-ui,sans-serif" font-size="9" fill="#14532d" text-anchor="middle">Path A above</text>
-
-            <!-- No change box (with three sub-options) -->
             <rect x="240" y="210" width="220" height="96" rx="8" fill="#fff8f0" stroke="#e67e22" stroke-width="2"/>
             <text x="350" y="232" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#92400e" text-anchor="middle">Choose deliberately:</text>
             <text x="350" y="250" font-family="system-ui,sans-serif" font-size="9.5" fill="#1e293b" text-anchor="middle">1. Wait with review date (don&rsquo;t tamper)</text>
             <text x="350" y="266" font-family="system-ui,sans-serif" font-size="9.5" fill="#1e293b" text-anchor="middle">2. Return to root cause (Step 3)</text>
             <text x="350" y="282" font-family="system-ui,sans-serif" font-size="9.5" fill="#1e293b" text-anchor="middle">3. Improve the measure</text>
             <text x="350" y="298" font-family="system-ui,sans-serif" font-size="9" fill="#92400e" text-anchor="middle">Path B above</text>
-
-            <!-- Data fix box -->
             <rect x="570" y="100" width="120" height="60" rx="8" fill="#fff5f5" stroke="#c0392b" stroke-width="2"/>
             <text x="630" y="125" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#c0392b" text-anchor="middle">Fix data,</text>
             <text x="630" y="140" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#c0392b" text-anchor="middle">re-run</text>
@@ -278,22 +246,22 @@
         <a href="improvement-method.html" class="nav-card">
             <div class="nav-tag">Method</div>
             <h3>The 7-Step Method</h3>
-            <p>When "no change detected" sends you back to root cause — this is where to go. Steps 3 and 4 are the most common points of failure.</p>
+            <p>When "no change detected" sends you back to root cause — Steps 3 and 4 are the most common points of failure.</p>
         </a>
         <a href="tampering-and-impatience.html" class="nav-card">
             <div class="nav-tag">Concept</div>
             <h3>Tampering &amp; Impatience</h3>
-            <p>Why the "decide to wait" option is harder than it sounds — and why it is almost always the right one when the intervention was structurally correct.</p>
+            <p>Why "decide to wait" is harder than it sounds — and why it is almost always right when the intervention was structurally correct.</p>
         </a>
         <a href="joiner-levels-of-fix.html" class="nav-card">
             <div class="nav-tag">Concept</div>
             <h3>Joiner&rsquo;s Levels of Fix</h3>
-            <p>The most common reason Bootstrap CUSUM finds no change: the intervention was at Level 1 or 2, not Level 3. How to diagnose which level your fix was at.</p>
+            <p>The most common reason Bootstrap CUSUM finds no change: the fix was at Level 1 or 2, not Level 3.</p>
         </a>
         <a href="types-of-measures.html" class="nav-card">
             <div class="nav-tag">Concept</div>
             <h3>Types of Measures</h3>
-            <p>Process vs outcome measures — and why running Bootstrap CUSUM on the wrong one produces the wrong answer.</p>
+            <p>Process vs outcome measures — why running Bootstrap CUSUM on the wrong one produces the wrong answer.</p>
         </a>
         <a href="index.html" class="nav-card">
             <div class="nav-tag">Free tool</div>
@@ -301,7 +269,6 @@
             <p>Back to the tool — re-run with corrected data, a longer series, or a different outcome measure.</p>
         </a>
     </div>
-
 
 </main>
 
