@@ -1466,3 +1466,263 @@ mark {
 .navbar.navbar-dark {
     background-color: #1e293b !important;
 }
+
+
+/* ── 38. Frameworks comparison table (joiner-levels-of-fix.html) ── */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    margin: 24px 0;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+.comparison-table th {
+    background: var(--brand-blue);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.88em;
+    line-height: 1.4;
+    vertical-align: top;
+}
+.comparison-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+    color: var(--text);
+}
+.comparison-table tr:last-child td { border-bottom: none; }
+.comparison-table .framework-col {
+    font-size: 0.9em;
+    color: var(--text);
+}
+.comparison-table .framework-col em {
+    display: block;
+    color: var(--muted);
+    font-size: 0.9em;
+    margin-top: 3px;
+}
+/* Row colour coding by level */
+.comparison-table .row-l1 td { background: #fff5f5; }
+.comparison-table .row-l2 td { background: #fff8f0; }
+.comparison-table .row-l3 td { background: #f0f9ff; }
+.comparison-table .row-l3d td { background: #f0fdf4; }
+.comparison-table .row-l1 td:first-child { border-left: 4px solid var(--red); font-weight: 700; color: var(--red); }
+.comparison-table .row-l2 td:first-child { border-left: 4px solid var(--orange); font-weight: 700; color: #92400e; }
+.comparison-table .row-l3 td:first-child { border-left: 4px solid var(--brand-mid); font-weight: 700; color: var(--brand-blue); }
+.comparison-table .row-l3d td:first-child { border-left: 4px solid var(--green); font-weight: 700; color: #166534; }
+
+/* Mobile — stack as cards */
+@media (max-width: 700px) {
+    .comparison-table thead { display: none; }
+    .comparison-table,
+    .comparison-table tbody,
+    .comparison-table tr,
+    .comparison-table td { display: block; width: 100%; box-sizing: border-box; }
+    .comparison-table tr {
+        border-radius: 8px;
+        margin-bottom: 12px;
+        border: 1px solid var(--border);
+        overflow: hidden;
+    }
+    .comparison-table .row-l1,
+    .comparison-table .row-l2,
+    .comparison-table .row-l3,
+    .comparison-table .row-l3d { background: transparent; }
+    .comparison-table td {
+        border-bottom: 1px solid var(--border);
+        padding: 10px 14px;
+        font-size: 0.88em;
+    }
+    .comparison-table td:last-child { border-bottom: none; }
+    .comparison-table .row-l1 td:first-child,
+    .comparison-table .row-l2 td:first-child,
+    .comparison-table .row-l3 td:first-child,
+    .comparison-table .row-l3d td:first-child {
+        font-size: 1em;
+        padding: 12px 14px;
+    }
+    .comparison-table .row-l1 td { background: #fff5f5; }
+    .comparison-table .row-l2 td { background: #fff8f0; }
+    .comparison-table .row-l3 td { background: #f0f9ff; }
+    .comparison-table .row-l3d td { background: #f0fdf4; }
+}
+
+
+/* ── 39. Joiner levels page specific classes ─────────────── */
+
+/* Level stack cards */
+.level-stack { margin: 28px 0; }
+.level-card {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 2px solid var(--border);
+    background: white;
+}
+.level-card.l1  { border-color: var(--red); }
+.level-card.l2  { border-color: var(--orange); }
+.level-card.l3  { border-color: var(--brand-mid); }
+.level-card.l3d { border-color: var(--green); }
+.level-header { display: flex; gap: 0; }
+.level-badge {
+    width: 80px;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 8px;
+    text-align: center;
+    font-family: system-ui, sans-serif;
+}
+.level-card.l1  .level-badge { background: var(--red); }
+.level-card.l2  .level-badge { background: var(--orange); }
+.level-card.l3  .level-badge { background: var(--brand-mid); }
+.level-card.l3d .level-badge { background: var(--green); }
+.level-tag {
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 4px;
+}
+.level-name {
+    font-size: 0.78em;
+    font-weight: 700;
+    color: white;
+    line-height: 1.3;
+}
+.level-body { flex: 1; padding: 20px 24px; }
+.level-body p { font-size: 0.95em; line-height: 1.7; margin-bottom: 10px; color: var(--text); }
+.level-body p:last-child { margin: 0; }
+
+/* Critical box */
+.critical-box {
+    background: #fff5f5;
+    border: 2px solid var(--red);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 24px 0;
+    font-family: system-ui, sans-serif;
+}
+.critical-box .cb-label {
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+}
+.critical-box p { font-size: 0.97em; color: var(--text); line-height: 1.7; margin: 0; font-weight: 600; }
+
+/* Policy box */
+.policy-box {
+    background: #fffbeb;
+    border: 2px solid #d97706;
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 28px 0;
+    font-family: system-ui, sans-serif;
+}
+.policy-box .pb-label {
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #d97706;
+    margin-bottom: 8px;
+}
+.policy-box .pb-title {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--brand-blue);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+.policy-box p { font-size: 0.95em; color: var(--text); line-height: 1.7; margin: 0 0 10px; }
+.policy-box p:last-child { margin: 0; }
+.policy-box ul { font-size: 0.95em; color: var(--text); line-height: 1.8; margin: 8px 0 10px 1.4em; }
+
+/* Source grid (four frameworks) */
+.source-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+.source-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    border-top: 4px solid var(--brand-blue);
+}
+.source-card.meadows { border-top-color: var(--green); }
+.source-card.comah   { border-top-color: var(--orange); }
+.source-card.deming  { border-top-color: var(--purple); }
+.source-card .sc-label {
+    font-family: system-ui, sans-serif;
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+}
+.source-card .sc-title {
+    font-family: system-ui, sans-serif;
+    font-size: 0.92em;
+    font-weight: 700;
+    color: var(--brand-blue);
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+.source-card p { font-size: 0.88em; color: var(--text); line-height: 1.6; margin: 0; }
+
+/* Blockquote */
+blockquote {
+    border-left: 4px solid var(--brand-mid);
+    margin: 28px 0;
+    padding: 16px 20px;
+    background: var(--brand-light);
+    border-radius: 0 8px 8px 0;
+    font-size: 1.05em;
+    line-height: 1.7;
+    color: var(--brand-blue);
+}
+blockquote strong { color: var(--brand-blue); }
+blockquote.warning {
+    background: #fff5f5;
+    border-left-color: var(--red);
+    color: var(--text);
+}
+
+/* Alert teal */
+.alert-teal {
+    background: #f0f9ff;
+    border-left: 4px solid var(--teal);
+    padding: 16px 20px;
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+    font-family: system-ui, sans-serif;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+.alert-teal a { color: var(--brand-mid); }
+
+/* Mobile — level cards stack */
+@media (max-width: 600px) {
+    .level-header { flex-direction: column; }
+    .level-badge { width: 100%; min-width: unset; flex-direction: row; gap: 10px; padding: 10px 16px; justify-content: flex-start; }
+    .level-name { font-size: 0.9em; }
+    .level-body { padding: 14px 16px; }
+    .source-grid { grid-template-columns: 1fr; }
+}
