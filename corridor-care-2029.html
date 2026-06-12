@@ -78,6 +78,7 @@
                 <li><a href="#section-joiner">Joiner analysis — what level is each initiative?</a></li>
                 <li><a href="#section-constraint">The real constraint: where the system boundary lies</a></li>
                 <li><a href="#section-history">What 15 years of A&amp;E data tells us</a></li>
+                <li><a href="#section-measures">How will they know if it is working? — types of measures</a></li>
                 <li><a href="#section-prediction">The pre-committed prediction</a></li>
                 <li><a href="#section-what-would-work">What would actually produce a change point</a></li>
             </ol>
@@ -168,11 +169,68 @@
 
     <h2 id="section-constraint">The real constraint: where the system boundary lies</h2>
 
-    <p><a href="theory-of-constraints.html">Goldratt&rsquo;s Theory of Constraints</a> states that in any system there is always one binding constraint — one weakest link — that limits the throughput of the whole. Improving anything other than the constraint produces minimal improvement in system throughput. The constraint on NHS A&amp;E performance — and on corridor care specifically — is not emergency department capacity, not staffing levels in A&amp;E, and not patient flow within the hospital. It is <strong>the number of acute beds occupied by patients who are medically fit for discharge but have nowhere safe to go.</strong></p>
+    <p><a href="theory-of-constraints.html">Goldratt&rsquo;s Theory of Constraints</a> states that in any system there is always one binding constraint — one weakest link — that limits the throughput of the whole. Improving anything other than the constraint produces minimal improvement in system throughput. But Goldratt also insists on precision: identify the constraint, do not assume it. The case for discharge capacity as the current binding constraint is evidence-based — but it deserves scrutiny.</p>
 
-    <p>By 2024, approximately 13,700 acute beds per day were occupied by patients in this category — patients awaiting a care home placement, a package of domiciliary care, an intermediate care bed, or a social care assessment. Each of those beds is a bed that cannot receive a patient from A&amp;E. Each bed that cannot be freed is a patient who remains in A&amp;E, and each patient who remains in A&amp;E beyond the space available is a patient in a corridor.</p>
+    <h3>Are there other constraints?</h3>
 
-    <p>This constraint lies <strong>outside the system boundary of any individual NHS trust.</strong> Care home capacity is commissioned by local authorities. Domiciliary care workforce is employed by private providers. Intermediate care beds are often jointly funded between NHS and local authority. The hospital cannot directly control the rate at which these constraints are relieved. This is precisely the situation that Joiner described as requiring a Level 3 system fix — but where the &ldquo;system&rdquo; that needs changing is a multi-organisational system spanning NHS, local government, and private providers.</p>
+    <p>There are several plausible constraints on A&amp;E performance and corridor care. The table below maps each against the evidence, the system boundary it sits in, and the lag before any intervention would produce a detectable Bootstrap CUSUM change point.</p>
+
+    <div class="numbers-box joiner-table">
+        <table>
+            <thead><tr>
+                <th>Candidate constraint</th>
+                <th>Evidence it is binding</th>
+                <th>System boundary</th>
+                <th>Lag to change point</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Blocked acute beds (DTOC)</strong></td>
+                    <td>13,700 beds/day occupied by medically fit patients. Direct physical link to A&amp;E waits — each blocked bed is one fewer destination for an A&amp;E patient. NHS England DTOC data confirms sustained high level. <strong>Strongest evidence.</strong></td>
+                    <td>Crosses trust boundary into social care (local authority)</td>
+                    <td>6&ndash;18 months after sustained DTOC reduction</td>
+                </tr>
+                <tr>
+                    <td><strong>Lack of GP out-of-hours access</strong></td>
+                    <td>Contributes to A&amp;E demand (inflow) not corridor care (outflow). Addressing GP access would reduce attendances but not necessarily unblock beds. Acts on a different part of the system.</td>
+                    <td>Primary care — NHS but separate commissioning</td>
+                    <td>2&ndash;5 years (workforce pipeline)</td>
+                </tr>
+                <tr>
+                    <td><strong>Hospital capacity — built environment</strong></td>
+                    <td>Real but slow to address. RAAC concrete crisis removed beds in some trusts. New hospital programme is 10&ndash;15 year horizon. Acts on bed numbers not bed blockage.</td>
+                    <td>Inside trust boundary but capital-constrained</td>
+                    <td>10&ndash;15 years (capital build)</td>
+                </tr>
+                <tr>
+                    <td><strong>Demand peaks — winter, ageing population</strong></td>
+                    <td>Seasonal variation is real and predictable. But the system has always had seasonal peaks — the question is why the corridor care floor has risen across all seasons, not just winter. Demand growth alone does not explain the structural deterioration.</td>
+                    <td>External — demographic and epidemiological</td>
+                    <td>Not addressable directly; managed through capacity planning</td>
+                </tr>
+                <tr>
+                    <td><strong>Failure of prevention — falls, stroke, heart attack</strong></td>
+                    <td>Genuine. Preventable emergency admissions consume around 20% of acute bed capacity. But the prevention pipeline has a 5&ndash;20 year lag. Real structural opportunity — not the current binding constraint for 2029.</td>
+                    <td>Public health — local authority and NHS primary care</td>
+                    <td>5&ndash;20 years (prevention lag)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>Why DTOC is the current binding constraint for corridor care specifically</strong>
+        <p>The other constraints listed above are real and important — but they are constraints on A&amp;E <em>demand</em> (inflow) or on long-term capacity. Corridor care is a direct consequence of blocked <em>outflow</em>: patients who have been seen, treated, and are ready to leave but cannot. The physical mechanism is precise — a patient cannot move from A&amp;E to an acute ward if the ward bed is occupied by a medically fit patient who cannot go home. No improvement to GP access, prevention, or hospital build programme resolves that specific blockage. DTOC is the binding constraint for corridor care in 2024&ndash;2029. Prevention is the right investment for 2030&ndash;2040.</p>
+    </div>
+
+    <div class="callout orange">
+        <strong>Goldratt&rsquo;s Step 5 — the constraint will move</strong>
+        <p>You are right to flag this. Goldratt&rsquo;s fifth focusing step is &ldquo;repeat — do not let inertia become the next constraint.&rdquo; If the discharge constraint is genuinely elevated — if social care capacity grows structurally — the binding constraint will move. It may become GP access, or acute bed capacity, or prevention failure, or workforce. The Bootstrap CUSUM prediction framework handles this: as one change point appears in corridor care rates, you immediately ask what the next flat line is pointing to. The method is continuous, not a one-time test.</p>
+    </div>
+
+    <p>By 2024, approximately 13,700 acute beds per day were occupied by patients awaiting discharge. Each of those beds is a bed that cannot receive a patient from A&amp;E. Each bed that cannot be freed is a patient who remains in A&amp;E, and each patient who remains in A&amp;E beyond the space available is a patient in a corridor.</p>
+
+    <p>This constraint lies <strong>outside the system boundary of any individual NHS trust.</strong> Care home capacity is commissioned by local authorities. Domiciliary care workforce is employed by private providers. Intermediate care beds are often jointly funded between NHS and local authority. The hospital cannot directly control the rate at which these constraints are relieved.</p>
 
     <p>This is where <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a> becomes critical. A Level 3 fix is necessary — but it is not sufficient on its own. You also need the <strong>authority to act</strong> at that level. A hospital chief executive has authority at Level 2 — they can change processes within their organisation. Level 3 requires authority at Integrated Care System (ICS) level, or government level, to change the structural conditions that span organisational boundaries.</p>
 
@@ -357,6 +415,75 @@
         <p>When corridor care data becomes available at national level and with sufficient historical depth, the appropriate Bootstrap CUSUM test is straightforward: run the algorithm on corridor care hours per 1,000 emergency admissions, monthly, from the baseline period through to December 2029. Set confidence at 95%. Use 5,000 bootstrap loops.</p>
         <p style="margin-top:10px;">A genuine structural improvement will produce an upward change point — a sustained, statistically significant shift to a lower rate of corridor care — dated to within weeks of the intervention that caused it. If the discharge constraint is addressed structurally, the change point will appear in the discharge capacity data first, and in the corridor care data with a lag of several months.</p>
         <p style="margin-top:10px;">If the constraint is not addressed, the Bootstrap CUSUM will show a flat line — or a line that improves seasonally in summer and deteriorates in winter, producing no net structural change point. That flat line is not a failure of measurement. It is the honest answer to an honest question.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-measures">How will they know if it is working? — types of measures</h2>
+
+    <p>One of the most common failures in NHS improvement programmes is evaluating success against the wrong type of measure. The corridor care programme is at particular risk — because the most visible measures (corridor care hours reported, GIRFT teams deployed) are <a href="types-of-measures.html">process measures</a>, not outcome measures. And the outcome measure has a significant lag behind the leading indicators that signal whether structural change is actually occurring.</p>
+
+    <h3>A note on DTOC — the metric has changed</h3>
+
+    <p>The original Delayed Transfer of Care (DTOC) metric was paused in March 2020 during COVID and has not been reinstated. <strong>The DTOC metric is no longer being collected.</strong> The last publication was for delays occurring in February 2020.</p>
+
+    <p>The current replacement is the <strong>No Criteria to Reside (NCR)</strong> measure — patients in acute beds who no longer meet the clinical criteria to remain in hospital. The total number of patients ready to leave hospital but delayed has increased by 43% from 8,545 patients per day in June 2021 to 9,933 per day in June 2025. At its peak in January 2024, there were 14,096 patients delayed in hospital.</p>
+
+    <p>There is also an important measurement caution: in practice, every trust is free to decide how to measure its discharge delay figures — such figures cannot meaningfully be added together and do not provide a sound basis for policy proposals without standardisation. Inconsistent definitions mean Bootstrap CUSUM applied to this series may produce unreliable change points. Standardising the NCR definition across all trusts is itself a necessary condition for the measurement system to work.</p>
+
+    <div class="numbers-box joiner-table">
+        <table>
+            <thead><tr>
+                <th>Measure</th>
+                <th>Type</th>
+                <th>What it tells you</th>
+                <th>Bootstrap CUSUM test</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>No Criteria to Reside (NCR) patients per day</strong></td>
+                    <td><span class="type-badge badge-lead">Lead indicator</span></td>
+                    <td>Replacement for DTOC — patients medically fit but still in acute beds. Published monthly in the NHS Acute Discharge SitRep. Should fall structurally before corridor care improves. Currently 9,933 per day (June 2025) and rising.</td>
+                    <td>Run Bootstrap CUSUM monthly on NCR patients/day. A downward change point here is the first evidence the discharge constraint is moving. Expect 6&ndash;12 month lag before corridor care follows.</td>
+                </tr>
+                <tr>
+                    <td><strong>Social care capacity — packages commissioned</strong></td>
+                    <td><span class="type-badge badge-lead">Lead indicator</span></td>
+                    <td>Whether the social care system is structurally expanding. Domiciliary care packages, intermediate care beds, care home placements. If these are not growing, NCR cannot fall sustainably.</td>
+                    <td>Run Bootstrap CUSUM on local authority social care commissioning data. An upward change point here predicts a future NCR change point.</td>
+                </tr>
+                <tr>
+                    <td><strong>GIRFT compliance / SDEC utilisation</strong></td>
+                    <td><span class="type-badge badge-process">Process measure</span></td>
+                    <td>Whether the programme is being delivered. A change point in compliance not followed by a change point in NCR or corridor care confirms the intervention was at the wrong level.</td>
+                    <td>Bootstrap CUSUM on compliance is informative but not sufficient. Process improvement without outcome improvement is the clearest signal the constraint has not been addressed.</td>
+                </tr>
+                <tr>
+                    <td><strong>Corridor care hours per 1,000 emergency admissions</strong></td>
+                    <td><span class="type-badge badge-lag">Outcome measure (lag)</span></td>
+                    <td>The primary outcome measure. Lags behind leading indicators by 6&ndash;18 months. Must be sustained across two full winters to confirm structural rather than seasonal improvement.</td>
+                    <td>Bootstrap CUSUM at 95% confidence, monthly, through December 2029. A downward change point sustained across winter 2028&ndash;29 is the confirmation of genuine structural improvement.</td>
+                </tr>
+                <tr>
+                    <td><strong>30-day emergency readmission rate</strong></td>
+                    <td><span class="type-badge badge-balancing">Balancing measure</span></td>
+                    <td>If corridor care falls because patients are discharged earlier but readmission rises, the system has traded one problem for another. Published quarterly by NHS England.</td>
+                    <td>Run Bootstrap CUSUM alongside corridor care. An upward change point in readmissions coinciding with a downward corridor care change point signals unsafe discharge, not genuine improvement.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ambulance handover delays</strong></td>
+                    <td><span class="type-badge badge-balancing">Balancing measure</span></td>
+                    <td>If corridor care reduces but ambulances queue outside longer, the problem has moved not solved. Ambulance handover time is the upstream balancing measure. Published weekly by NHS England.</td>
+                    <td>Correlated improvement in both is genuine system improvement. Corridor care improving while handover worsens is redistribution of the problem.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>The correct sequence of change points</strong>
+        <p>If the corridor care programme is genuinely working, Bootstrap CUSUM should detect change points in this order: <strong>(1)</strong> Social care capacity upward change point &rarr; <strong>(2)</strong> NCR patients/day downward change point (6&ndash;12 months later) &rarr; <strong>(3)</strong> Corridor care hours downward change point (6&ndash;12 months after that). Simultaneously: readmission rates and ambulance handover times should hold flat or improve.</p>
+        <p style="margin-top:8px;">If the corridor care change point appears without the NCR change point appearing first, suspect seasonal variation, definition change, or redistribution of the problem rather than structural improvement. The leading indicator is the honest test. See <a href="types-of-measures.html">Types of Measures</a> for the full framework.</p>
     </div>
 
     <hr>
