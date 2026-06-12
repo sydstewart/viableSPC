@@ -3041,3 +3041,110 @@ blockquote.warning {
     .point-body { padding: 14px 16px; }
     .summary-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
+
+
+/* ── 56. Corridor care — mobile card stacking for wide tables ── */
+
+/* Helper mixin: stack any table as labelled cards */
+@media (max-width: 700px) {
+
+    /* Constraints table — 4 cols: Candidate / Evidence / Boundary / Lag */
+    .constraints-table { overflow: visible !important; }
+    .constraints-table table,
+    .constraints-table tbody { display: block !important; min-width: unset !important; }
+    .constraints-table thead { display: none !important; }
+    .constraints-table tr {
+        display: block !important;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 12px;
+        padding: 12px 14px;
+        background: white;
+    }
+    .constraints-table td {
+        display: block !important;
+        padding: 4px 0 !important;
+        border: none !important;
+        background: transparent !important;
+        font-size: 0.88em;
+        line-height: 1.6;
+    }
+    .constraints-table td:first-child {
+        font-size: 1em !important;
+        font-weight: 700;
+        color: var(--brand-blue);
+        padding-bottom: 8px !important;
+        border-bottom: 1px solid var(--border) !important;
+        margin-bottom: 6px;
+    }
+    .constraints-table td:nth-child(2)::before { content: "Evidence: "; font-weight:700; color:var(--muted); font-size:0.82em; }
+    .constraints-table td:nth-child(3)::before { content: "Boundary: "; font-weight:700; color:var(--muted); font-size:0.82em; display:block; margin-top:4px; }
+    .constraints-table td:nth-child(4)::before { content: "Lag: "; font-weight:700; color:var(--muted); font-size:0.82em; display:block; margin-top:4px; }
+
+    /* Measures table — 4 cols: Measure / Type / What it tells you / Bootstrap test */
+    .measures-table { overflow: visible !important; }
+    .measures-table table,
+    .measures-table tbody { display: block !important; min-width: unset !important; }
+    .measures-table thead { display: none !important; }
+    .measures-table tr {
+        display: block !important;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 12px;
+        padding: 12px 14px;
+        background: white;
+    }
+    .measures-table td {
+        display: block !important;
+        padding: 4px 0 !important;
+        border: none !important;
+        background: transparent !important;
+        font-size: 0.88em;
+        line-height: 1.6;
+    }
+    .measures-table td:first-child {
+        font-size: 1em !important;
+        font-weight: 700;
+        color: var(--brand-blue);
+        padding-bottom: 8px !important;
+        border-bottom: 1px solid var(--border) !important;
+        margin-bottom: 6px;
+    }
+    .measures-table td:nth-child(2) { margin: 4px 0; }
+    .measures-table td:nth-child(3)::before { content: "What it tells you: "; font-weight:700; color:var(--muted); font-size:0.82em; display:block; margin-top:4px; }
+    .measures-table td:nth-child(4)::before { content: "Bootstrap CUSUM test: "; font-weight:700; color:var(--muted); font-size:0.82em; display:block; margin-top:6px; font-style:italic; }
+    .measures-table td:nth-child(4) { color:var(--muted); font-style:italic; }
+
+    /* Barriers table — 3 cols: Barrier / Why / What would change it */
+    .barriers-table { overflow: visible !important; }
+    .barriers-table table,
+    .barriers-table tbody { display: block !important; min-width: unset !important; }
+    .barriers-table thead { display: none !important; }
+    .barriers-table tr {
+        display: block !important;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 12px;
+        padding: 12px 14px;
+        background: white;
+    }
+    .barriers-table td {
+        display: block !important;
+        padding: 4px 0 !important;
+        border: none !important;
+        background: transparent !important;
+        font-size: 0.88em;
+        line-height: 1.6;
+    }
+    .barriers-table td:first-child {
+        font-size: 1em !important;
+        font-weight: 700;
+        color: var(--brand-blue);
+        padding-bottom: 8px !important;
+        border-bottom: 1px solid var(--border) !important;
+        margin-bottom: 6px;
+    }
+    .barriers-table td:nth-child(2)::before { content: "Why it exists: "; font-weight:700; color:var(--muted); font-size:0.82em; }
+    .barriers-table td:nth-child(3)::before { content: "What would change it: "; font-weight:700; color:var(--green); font-size:0.82em; display:block; margin-top:6px; }
+    .barriers-table td:nth-child(3) { color: #166534; }
+}
