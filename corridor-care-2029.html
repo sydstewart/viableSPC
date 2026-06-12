@@ -315,12 +315,12 @@
             <line x1="130" y1="224" x2="130" y2="288" stroke="#002d5b" stroke-width="1.5" marker-end="url(#arr-b)"/>
             <text x="138" y="260" font-family="system-ui,sans-serif" font-size="9" fill="#002d5b" font-weight="600">+</text>
 
-            <!-- Arrows CROSSING THE BOUNDARY -->
-            <line x1="360" y1="152" x2="458" y2="152" stroke="#c0392b" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-r)"/>
-            <text x="400" y="145" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b" font-weight="700" text-anchor="middle">causes</text>
+            <!-- Arrows CROSSING THE BOUNDARY — social care insufficient capacity causes blocked beds -->
+            <line x1="458" y1="152" x2="362" y2="152" stroke="#c0392b" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-r)"/>
+            <text x="408" y="145" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b" font-weight="700" text-anchor="middle">causes</text>
 
-            <line x1="458" y1="200" x2="362" y2="178" stroke="#e67e22" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-o)"/>
-            <text x="408" y="196" font-family="system-ui,sans-serif" font-size="9" fill="#e67e22" font-weight="700" text-anchor="middle">drives</text>
+            <line x1="360" y1="178" x2="458" y2="198" stroke="#e67e22" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-o)"/>
+            <text x="408" y="196" font-family="system-ui,sans-serif" font-size="9" fill="#e67e22" font-weight="700" text-anchor="middle">reflected in</text>
 
             <!-- Arrows WITHIN social care -->
             <line x1="560" y1="124" x2="560" y2="178" stroke="#e67e22" stroke-width="1.5" marker-end="url(#arr-o)"/>
@@ -344,7 +344,7 @@
             <text x="290" y="368" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b" text-anchor="middle" font-weight="700">&#9650; The binding constraint</text>
 
         </svg>
-        <p style="font-family:system-ui,sans-serif;font-size:0.82em;color:var(--muted);margin:10px 0 0;line-height:1.5;"><strong>Reading the diagram:</strong> Blue boxes and arrows are within the NHS trust boundary. Orange boxes and arrows are within the social care boundary. <strong>Dashed red/orange arrows crossing the boundary</strong> are the causal links that drive corridor care — blocked beds caused by insufficient discharge capacity. The red-outlined box is the binding constraint. A Level 3 fix must cross the system boundary — which requires authority that no individual NHS trust possesses.</p>
+        <p style="font-family:system-ui,sans-serif;font-size:0.82em;color:var(--muted);margin:10px 0 0;line-height:1.5;"><strong>Reading the diagram:</strong> Blue boxes and arrows are within the NHS trust boundary. Orange boxes and arrows are within the social care boundary. <strong>The dashed red arrow crossing the boundary points from social care (insufficient capacity) into the NHS (blocked acute beds)</strong> — insufficient social care capacity is the cause; blocked beds are the effect. The orange dashed arrow shows blocked beds being reflected back in the DTOC data. The red-outlined box is the binding constraint. A Level 3 fix must cross the system boundary — which requires authority that no individual NHS trust possesses.</p>
     </div></p>
 
     <div class="callout orange">
@@ -421,7 +421,7 @@
 
     <h2 id="section-measures">How will they know if it is working? — types of measures</h2>
 
-    <p>One of the most common failures in NHS improvement programmes is evaluating success against the wrong type of measure. The corridor care programme is at particular risk — because the most visible measures (corridor care hours reported, GIRFT teams deployed) are <a href="types-of-measures.html">process measures</a>, not outcome measures. And the outcome measure has a significant lag behind the leading indicators that signal whether structural change is actually occurring.</p>
+    <p>One of the most common failures in NHS improvement programmes is evaluating success against the wrong type of measure. The corridor care programme is at particular risk — because the most visible measures (corridor care hours reported, GIRFT teams deployed) are <a href="types-of-measures.html">process measures</a>, not outcome measures. And the outcome measure has a significant lag behind the leading indicators that signal whether structural change is actually occurring. The distinction between <a href="types-of-measures.html">outcome measures, process measures, and balancing measures</a> — and between lead and lag indicators — determines whether the programme can honestly claim success in 2029.</p>
 
     <h3>A note on DTOC — the metric has changed</h3>
 
@@ -522,6 +522,13 @@
         <h2>Test this analysis with your own data</h2>
         <p>NHS England publishes delayed transfer of care data monthly. Upload it to the StepChange Analyzer and run Bootstrap CUSUM — the constraint that drives corridor care is visible in that data, and the change point (if one appears) will date the structural improvement precisely.</p>
         <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="types-of-measures.html">Types of Measures — Outcome, Process and Balancing</a></h3>
+        <p>The framework behind the measures table above — why process measures are not outcome measures, why balancing measures are almost always neglected, and how Bootstrap CUSUM fits into the Study phase of PDSA.</p>
+        <a href="types-of-measures.html" class="btn">Read the concept &rarr;</a>
     </div>
 
     <div class="related-box">

@@ -2063,14 +2063,19 @@ blockquote.warning {
 
 /* wait-box on mobile — prevent overflow */
 @media (max-width: 600px) {
+    .wait-box { padding: 18px 16px; overflow: hidden; }
     .wait-box ol, .wait-box ul {
-        padding-left: 1.2em;
-        margin-left: 0;
+        padding-left: 1.4em;
+        margin: 8px 0 12px;
     }
-    .wait-box { padding: 18px 16px; }
-    .wait-box p, .wait-box li {
-        font-size: 0.9em;
+    .wait-box li {
+        font-size: 0.88em;
         line-height: 1.65;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        margin-bottom: 6px;
+    }
+    .wait-box p, .wait-box h3 {
         word-break: break-word;
         overflow-wrap: break-word;
     }
