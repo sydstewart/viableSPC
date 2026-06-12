@@ -1552,6 +1552,13 @@ mark {
     .comparison-table .row-l2 td { background: #fff8f0; }
     .comparison-table .row-l3 td { background: #f0f9ff; }
     .comparison-table .row-l3d td { background: #f0fdf4; }
+    /* Column labels shown as small caps above each cell */
+    .comparison-table td:nth-child(2)::before { content: "Meadows"; display: block; font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .comparison-table td:nth-child(3)::before { content: "COMAH / Controls"; display: block; font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .comparison-table td:nth-child(4)::before { content: "Deming"; display: block; font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .comparison-table td:nth-child(5)::before { content: "Durability"; display: block; font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    /* Deming table (3 cols) */
+    .comparison-table td:nth-child(2):only-of-type::before { content: none; }
 }
 
 
