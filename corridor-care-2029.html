@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/corridor-care-2029.html">
+    <title>Corridor Care 2029 — What Bootstrap CUSUM Will and Won't Find — StepChangeAnalysis.com</title>
+    <meta name="description" content="The UK government aims to eradicate corridor care by 2029. Bootstrap CUSUM applied to the four initiatives asks the question in advance: which of these will produce a structural change point — and which won't, and why.">
+    <meta name="keywords" content="corridor care NHS 2029, NHS A&E improvement, SDEC UTC corridor care, Bootstrap CUSUM NHS policy, Joiner levels NHS, discharge capacity NHS, structural change NHS">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="why-nothing-has-worked-nhs-ae-performance.html">Articles &rsaquo; NHS Healthcare</a> &rsaquo; Corridor Care 2029</div>
+    <div class="article-flag">&#127973;&#65039; NHS Healthcare Policy &middot; Prospective Analysis</div>
+
+    <h1>Corridor Care 2029 — What Bootstrap CUSUM Will and Won&rsquo;t Find</h1>
+    <p class="article-subtitle">The UK government has stated its ambition to virtually eliminate corridor care by the end of this Parliament &mdash; without a specific measurable threshold. Four initiatives have been announced. Bootstrap CUSUM applied to each one in advance &mdash; before the data arrives &mdash; asks which will produce a structural change point and which will not. The pre-committed prediction is made here, in 2026, so the data can test it honestly &mdash; regardless of how the political claim is framed.</p>
+    <div class="article-meta">By Syd Stewart, Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; June 2026 &nbsp;&middot;&nbsp; Data sources: NHS England, GIRFT, RCEM</div>
+    <div style="margin-top:8px;margin-bottom:4px;font-family:system-ui,sans-serif;font-size:0.92em;color:#475569;"><strong style="color:#002d5b;">Method:</strong> Bootstrap CUSUM &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <div style="margin:0 0 36px;font-family:system-ui,sans-serif;">
+        <details style="border:1px solid var(--border);border-radius:8px;background:white;">
+            <summary style="padding:12px 16px;cursor:pointer;font-weight:700;color:var(--brand-blue);font-size:0.88em;list-style:none;display:flex;align-items:center;gap:8px;">&#128218;&nbsp; Acronyms used in this article</summary>
+            <div style="padding:8px 16px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:4px 24px;font-size:0.85em;line-height:1.8;">
+                <div><strong>NHS</strong> — National Health Service</div>
+                <div><strong>A&amp;E</strong> — Accident &amp; Emergency (emergency department)</div>
+                <div><strong>GIRFT</strong> — Getting It Right First Time (NHS England improvement programme)</div>
+                <div><strong>SDEC</strong> — Same Day Emergency Care</div>
+                <div><strong>UTC</strong> — Urgent Treatment Centre</div>
+                <div><strong>RCEM</strong> — Royal College of Emergency Medicine</div>
+                <div><strong>ICS</strong> — Integrated Care System (NHS + local authority partnership body)</div>
+                <div><strong>DTOC</strong> — Delayed Transfer of Care (patient medically fit but awaiting discharge)</div>
+                <div><strong>MHCLG</strong> — Ministry of Housing, Communities and Local Government</div>
+                <div><strong>COMAH</strong> — Control of Major Accident Hazards (safety engineering regulation)</div>
+                <div><strong>CUSUM</strong> — Cumulative Sum (the statistical method in the StepChange Analyzer)</div>
+            </div>
+        </details>
+    </div>
+
+    <!-- Summary box -->
+    <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; Article Summary</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--brand-blue);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The commitment</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">NHS England has committed to virtually eliminating corridor care by 2029 using four initiatives: GIRFT specialist teams, a national 45-minute definition, 40 new SDEC/UTC facilities, and a £250m discharge fund.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--orange);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The Joiner analysis</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Three of the four initiatives are Level 1 or Level 2 interventions — they measure and improve processes within existing system boundaries. The root cause sits outside those boundaries: insufficient social care discharge capacity.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--red);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The pre-committed prediction</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Bootstrap CUSUM on corridor care rates in 2029 will not show a structural improvement change point unless the discharge constraint is addressed at system level. The history of 15 years of A&amp;E data supports this prediction.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">What would constitute genuine change</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">A structural improvement would require: sustained increase in community and intermediate care capacity, shared ICS budgets for discharge, and a measurable reduction in delayed transfer of care bed-days — not just in corridor care hours.</div>
+            </div>
+        </div>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what">What corridor care is and why it matters</a></li>
+                <li><a href="#section-initiatives">The four initiatives — what they are</a></li>
+                <li><a href="#section-joiner">Joiner analysis — what level is each initiative?</a></li>
+                <li><a href="#section-constraint">The real constraint: where the system boundary lies</a></li>
+                <li><a href="#section-history">What 15 years of A&amp;E data tells us</a></li>
+                <li><a href="#section-prediction">The pre-committed prediction</a></li>
+                <li><a href="#section-what-would-work">What would actually produce a change point</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what">What corridor care is and why it matters</h2>
+
+    <p>Corridor care is the practice of treating patients in clinical spaces not designed or equipped for patient care — corridors, waiting areas, converted storage rooms, and ambulance bays. NHS England defines it formally as any patient kept in an inappropriate clinical space for 45 minutes or longer. By 2025, it had become routine across English hospitals in winter months: not an exceptional event to be reported but a standard operating mode to be managed.</p>
+
+    <p>The consequences are clinical as well as operational. Patients in corridors have less privacy, less access to call systems, less regular nursing observation, and higher rates of deterioration. Staff working in corridor conditions experience higher rates of moral injury and burnout. The practice represents a visible, measurable failure of the NHS to provide basic standards of care — and it is the downstream symptom of a system constraint that has been building for over a decade.</p>
+
+    <div class="callout blue">
+        <strong>Why corridor care is the right metric to measure</strong>
+        <p>Corridor care hours per 1,000 emergency admissions is a better outcome measure than the four-hour A&amp;E target for one important reason: it is harder to game. The four-hour target can be managed by changing definitions, adjusting recording practices, or discharging patients to inappropriate settings to hit the clock. Corridor care is visible, physical, and defined by a specific threshold. Bootstrap CUSUM applied to this metric will give a cleaner signal.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-initiatives">The four initiatives — what they are</h2>
+
+    <div class="timeline-box">
+        <h3>&#128337; The corridor care programme — four components</h3>
+        <div class="timeline-item">
+            <span class="timeline-date">Initiative 1</span>
+            <span class="timeline-text"><strong>GIRFT specialist teams deployed to worst-affected trusts.</strong> Getting It Right First Time (GIRFT) teams — specialist clinicians and operational experts commissioned by NHS England — are being sent directly to the NHS trusts with the highest corridor care rates to implement tailored operational standards and improve patient flow.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">Initiative 2</span>
+            <span class="timeline-text"><strong>National corridor care definition and mandatory reporting.</strong> A formal definition (45 minutes in an inappropriate clinical space) has been established. Trusts are required to record and publish corridor care data, creating national accountability and enabling benchmarking.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">Initiative 3</span>
+            <span class="timeline-text"><strong>40 new and expanded SDEC and UTC facilities.</strong> Same Day Emergency Care (SDEC) units treat patients who would previously have required overnight admission. Urgent Treatment Centres (UTCs) divert lower-acuity patients away from major A&amp;Es. 40 new or expanded facilities are planned.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">Initiative 4</span>
+            <span class="timeline-text"><strong>£250m discharge fund — faster, safer hospital discharge.</strong> Funding targeted at speeding up the movement of patients from emergency departments into acute wards, and from acute wards into community and social care settings. Specifically aimed at reducing Delayed Transfers of Care (DTOC) — patients occupying acute beds when medically fit for discharge.</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-joiner">Joiner analysis — what level is each initiative?</h2>
+
+    <p>Brian Joiner&rsquo;s three levels of fix provide a precise framework for predicting which interventions will produce lasting structural change and which will not. <strong>Level 1</strong> fixes the output — it addresses the symptom. <strong>Level 2</strong> fixes the process — it changes how work is done within the existing system. <strong>Level 3</strong> fixes the system — it changes the structural conditions that cause the process to fail. Only Level 3 fixes produce the kind of permanent shift that Bootstrap CUSUM will detect as a statistically significant change point.</p>
+
+    <p>Joiner&rsquo;s framework does not stand alone. Meadows&rsquo; leverage points and the COMAH hierarchy of controls reach the same conclusion from different disciplines: the higher the level of intervention, the more structural the change, and the more lasting the effect. The table in <a href="why-nothing-changes.html">Why Most Improvement Fails</a> maps all three frameworks against each other — showing how Joiner&rsquo;s Level 1 corresponds to Meadows&rsquo; parameter adjustments (her lowest leverage point) and to COMAH&rsquo;s Layer 4 (training and procedure). All three frameworks agree: corridor care will not be eliminated by training, reporting, or process adjustment. It requires a structural intervention at the level where the constraint actually sits.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Initiative</th>
+                <th>Joiner Level</th>
+                <th>Why</th>
+                <th>Bootstrap CUSUM prediction</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>National definition &amp; mandatory reporting</strong></td>
+                    <td><strong style="color:var(--red);">Level 1</strong></td>
+                    <td>Measures and records the output. Creates accountability and enables benchmarking — both necessary but not sufficient. Does not provide any mechanism for reducing corridor care. A measurement system cannot change what it measures.</td>
+                    <td>No change point. Reporting may improve data quality and produce an apparent increase in recorded corridor care as under-reporting is corrected — which would show as a deterioration change point, not an improvement.</td>
+                </tr>
+                <tr>
+                    <td><strong>GIRFT specialist teams</strong></td>
+                    <td><strong style="color:var(--orange);">Level 2</strong></td>
+                    <td>Fixes processes within individual trusts. Addresses legitimate variation in how trusts manage patient flow — some trusts genuinely do this better than others. Correct diagnosis of local variation. Does not address the system-level discharge constraint that drives corridor care nationally.</td>
+                    <td>May produce change points at individual trust level in the best-performing cases. National aggregate is unlikely to show a structural change point because the programme addresses variance around the mean, not the mean itself.</td>
+                </tr>
+                <tr>
+                    <td><strong>40 new SDEC/UTC facilities</strong></td>
+                    <td><strong style="color:var(--orange);">Level 2</strong></td>
+                    <td>Redirects demand flows within the existing system. SDECs genuinely reduce unnecessary admissions for appropriate patients. UTCs divert lower-acuity patients. The RCEM — Royal College of Emergency Medicine, the professional body for emergency medicine doctors — has correctly noted that these do not address the bed-blocking that causes corridor care — they reduce inflow but the overflow occurs because of blocked outflow.</td>
+                    <td>May produce a small improvement change point if SDEC capacity is genuinely additional and correctly commissioned. UTCs are unlikely to produce a change point in corridor care specifically — they address a different patient cohort from those causing corridor care.</td>
+                </tr>
+                <tr>
+                    <td><strong>£250m discharge fund</strong></td>
+                    <td><strong style="color:var(--brand-mid);">Level 2–3 attempt</strong></td>
+                    <td>This is where Level 3 lives — the discharge constraint IS the structural cause of corridor care. Whether this initiative reaches Level 3 depends entirely on whether the funding creates structural additional capacity (care home beds, domiciliary care workers, intermediate care beds) or simply purchases temporary relief within existing capacity. One-off capital funding rarely creates sustainable structural change in social care.</td>
+                    <td>The only initiative with the potential to produce a genuine national change point — but only if the funding creates structural additional discharge capacity that is sustained beyond the funding period. Previous discharge funding rounds (2021, 2022, 2023) did not produce lasting structural change in delayed transfer of care rates.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-constraint">The real constraint: where the system boundary lies</h2>
+
+    <p><a href="theory-of-constraints.html">Goldratt&rsquo;s Theory of Constraints</a> states that in any system there is always one binding constraint — one weakest link — that limits the throughput of the whole. Improving anything other than the constraint produces minimal improvement in system throughput. The constraint on NHS A&amp;E performance — and on corridor care specifically — is not emergency department capacity, not staffing levels in A&amp;E, and not patient flow within the hospital. It is <strong>the number of acute beds occupied by patients who are medically fit for discharge but have nowhere safe to go.</strong></p>
+
+    <p>By 2024, approximately 13,700 acute beds per day were occupied by patients in this category — patients awaiting a care home placement, a package of domiciliary care, an intermediate care bed, or a social care assessment. Each of those beds is a bed that cannot receive a patient from A&amp;E. Each bed that cannot be freed is a patient who remains in A&amp;E, and each patient who remains in A&amp;E beyond the space available is a patient in a corridor.</p>
+
+    <p>This constraint lies <strong>outside the system boundary of any individual NHS trust.</strong> Care home capacity is commissioned by local authorities. Domiciliary care workforce is employed by private providers. Intermediate care beds are often jointly funded between NHS and local authority. The hospital cannot directly control the rate at which these constraints are relieved. This is precisely the situation that Joiner described as requiring a Level 3 system fix — but where the &ldquo;system&rdquo; that needs changing is a multi-organisational system spanning NHS, local government, and private providers.</p>
+
+    <p>This is where <a href="necessary-but-not-sufficient.html">Necessary But Not Sufficient</a> becomes critical. A Level 3 fix is necessary — but it is not sufficient on its own. You also need the <strong>authority to act</strong> at that level. A hospital chief executive has authority at Level 2 — they can change processes within their organisation. Level 3 requires authority at Integrated Care System (ICS) level, or government level, to change the structural conditions that span organisational boundaries.</p>
+
+    <div class="callout orange">
+        <strong>&#9888;&#65039; The critical principle — why Level 3 is so rare</strong>
+        <p>The higher the level of intervention, the more effective it is — and the more politically difficult, controversial, and threatening to existing power structures it becomes. This is not a coincidence. Level 3 interventions redistribute authority, change who decides things, and challenge the structures that currently exist. That is precisely why organisations under pressure default to Level 1 and Level 2: they are accessible, immediate, and politically safe. See <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a> for the full analysis.</p>
+    </div>
+
+    <p>But &ldquo;authority&rdquo; is too polite a word for what is actually required. The real barrier is <strong>political fiefdoms.</strong> NHS trusts, local authorities, care home providers and domiciliary care agencies are separate legal entities with separate budgets, separate political masters, and entirely separate incentive structures. A local authority chief executive has no financial reason to spend its social care budget faster to relieve pressure on an NHS trust — those are different budget lines, different ministers, different electoral accountability. The NHS trust bears the cost of corridor care in operational terms; the local authority bears the cost of social care in financial terms. These incentives are structurally misaligned.</p>
+
+    <p>Meadows identified this as one of her highest leverage points precisely because it is so rarely accessible: the goals and rules of the system are set by whoever has authority over the system boundary. When the constraint crosses a political boundary, the intervention requires not just a different kind of actor but a different kind of political will — and a willingness to pool budgets, accountability and risk across organisations that have every structural reason to protect their own boundary.</p>
+
+    <p>The ICS model was created precisely to solve this problem. But without:</p>
+    <ul style="line-height:2.2;">
+        <li><strong>Pooled budgets</strong> — not &ldquo;aligned&rdquo; budgets, but genuinely shared financial risk for delayed transfers</li>
+        <li><strong>A single accountable officer</strong> for both NHS and social care discharge outcomes</li>
+        <li><strong>A social care workforce plan</strong> at national scale, equivalent to NHS workforce planning</li>
+        <li><strong>Legal accountability</strong> for delayed transfers — not just data reporting obligations</li>
+    </ul>
+    <p>&hellip;the ICS is a governance structure sitting on top of unchanged fiefdoms. The Toyota analogy only works if Toyota actually controls the supplier relationship — through investment, shared planning, and shared consequences. An ICS that has no control over local authority social care spending is not Toyota. It is a committee meeting between organisations with opposing budget incentives.</p>
+
+    <p>The causal loop diagram below shows where the system boundary lies and why it is so difficult to cross.</p>
+
+    <!-- CLD showing system boundary -->
+    <div style="background:white;border:2px solid var(--border);border-radius:10px;padding:24px;margin:24px 0;overflow-x:auto;">
+        <div style="font-family:system-ui,sans-serif;font-size:0.8em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:12px;">&#128200; Causal Loop Diagram — The corridor care system boundary</div>
+        <svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;width:100%;display:block;margin:0 auto;" role="img" aria-label="Causal loop diagram showing the corridor care system boundary between NHS hospital and social care">
+            <defs>
+                <marker id="arr-b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#002d5b"/></marker>
+                <marker id="arr-r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c0392b"/></marker>
+                <marker id="arr-g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#198754"/></marker>
+                <marker id="arr-o" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#e67e22"/></marker>
+            </defs>
+
+            <!-- System boundary box: NHS Trust -->
+            <rect x="20" y="20" width="380" height="370" rx="12" fill="#e9f2ff" stroke="#0056b3" stroke-width="2" stroke-dasharray="6,4"/>
+            <text x="32" y="42" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#0056b3" letter-spacing="0.05em">NHS TRUST BOUNDARY</text>
+            <text x="32" y="56" font-family="system-ui,sans-serif" font-size="9" fill="#0056b3" opacity="0.7">(hospital management has authority here)</text>
+
+            <!-- System boundary box: Social Care -->
+            <rect x="430" y="20" width="270" height="370" rx="12" fill="#fff8f0" stroke="#e67e22" stroke-width="2" stroke-dasharray="6,4"/>
+            <text x="442" y="42" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e67e22" letter-spacing="0.05em">SOCIAL CARE BOUNDARY</text>
+            <text x="442" y="56" font-family="system-ui,sans-serif" font-size="9" fill="#e67e22" opacity="0.7">(local authority / private providers)</text>
+
+            <!-- NHS nodes -->
+            <rect x="60" y="80" width="140" height="44" rx="8" fill="white" stroke="#0056b3" stroke-width="1.5"/>
+            <text x="130" y="97" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#002d5b" text-anchor="middle">A&amp;E attendances</text>
+            <text x="130" y="112" font-family="system-ui,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">(rising demand)</text>
+
+            <rect x="60" y="180" width="140" height="44" rx="8" fill="white" stroke="#0056b3" stroke-width="1.5"/>
+            <text x="130" y="197" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#002d5b" text-anchor="middle">A&amp;E bed waits</text>
+            <text x="130" y="212" font-family="system-ui,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">(patients in corridors)</text>
+
+            <rect x="220" y="130" width="140" height="44" rx="8" fill="white" stroke="#c0392b" stroke-width="2"/>
+            <text x="290" y="147" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#c0392b" text-anchor="middle">Blocked acute beds</text>
+            <text x="290" y="162" font-family="system-ui,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">(medically fit, can't leave)</text>
+
+            <rect x="60" y="290" width="140" height="44" rx="8" fill="white" stroke="#0056b3" stroke-width="1.5"/>
+            <text x="130" y="307" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#002d5b" text-anchor="middle">Staff pressure</text>
+            <text x="130" y="322" font-family="system-ui,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">&amp; moral injury</text>
+
+            <!-- Social care nodes -->
+            <rect x="460" y="80" width="200" height="44" rx="8" fill="white" stroke="#e67e22" stroke-width="1.5"/>
+            <text x="560" y="97" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#92400e" text-anchor="middle">Care home / domiciliary</text>
+            <text x="560" y="112" font-family="system-ui,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">care capacity</text>
+
+            <rect x="460" y="180" width="200" height="44" rx="8" fill="white" stroke="#e67e22" stroke-width="1.5"/>
+            <text x="560" y="197" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#92400e" text-anchor="middle">Delayed transfers</text>
+            <text x="560" y="212" font-family="system-ui,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">of care (DTOC)</text>
+
+            <rect x="460" y="290" width="200" height="44" rx="8" fill="white" stroke="#e67e22" stroke-width="1.5"/>
+            <text x="560" y="307" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#92400e" text-anchor="middle">Social care workforce</text>
+            <text x="560" y="322" font-family="system-ui,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">shortage</text>
+
+            <!-- Arrows WITHIN NHS boundary -->
+            <line x1="130" y1="124" x2="130" y2="178" stroke="#002d5b" stroke-width="1.5" marker-end="url(#arr-b)"/>
+            <text x="138" y="155" font-family="system-ui,sans-serif" font-size="9" fill="#002d5b" font-weight="600">+</text>
+
+            <line x1="200" y1="202" x2="222" y2="158" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arr-r)"/>
+            <text x="198" y="182" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b" font-weight="600">+</text>
+
+            <line x1="130" y1="224" x2="130" y2="288" stroke="#002d5b" stroke-width="1.5" marker-end="url(#arr-b)"/>
+            <text x="138" y="260" font-family="system-ui,sans-serif" font-size="9" fill="#002d5b" font-weight="600">+</text>
+
+            <!-- Arrows CROSSING THE BOUNDARY -->
+            <line x1="360" y1="152" x2="458" y2="152" stroke="#c0392b" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-r)"/>
+            <text x="400" y="145" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b" font-weight="700" text-anchor="middle">causes</text>
+
+            <line x1="458" y1="200" x2="362" y2="178" stroke="#e67e22" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-o)"/>
+            <text x="408" y="196" font-family="system-ui,sans-serif" font-size="9" fill="#e67e22" font-weight="700" text-anchor="middle">drives</text>
+
+            <!-- Arrows WITHIN social care -->
+            <line x1="560" y1="124" x2="560" y2="178" stroke="#e67e22" stroke-width="1.5" marker-end="url(#arr-o)"/>
+            <text x="568" y="155" font-family="system-ui,sans-serif" font-size="9" fill="#e67e22" font-weight="600">insufficient</text>
+
+            <line x1="560" y1="224" x2="560" y2="288" stroke="#e67e22" stroke-width="1.5" marker-end="url(#arr-o)"/>
+            <text x="568" y="260" font-family="system-ui,sans-serif" font-size="9" fill="#e67e22" font-weight="600">worsened by</text>
+
+            <!-- Reinforcing loop label -->
+            <text x="130" y="375" font-family="system-ui,sans-serif" font-size="9" fill="#0056b3" text-anchor="middle" font-style="italic">Reinforcing loop R1</text>
+            <text x="130" y="387" font-family="system-ui,sans-serif" font-size="8" fill="#64748b" text-anchor="middle">(more waits → more pressure → harder to fix)</text>
+
+            <!-- Boundary crossing label -->
+            <text x="408" y="245" font-family="system-ui,sans-serif" font-size="9" fill="#7c3aed" text-anchor="middle" font-weight="700">⬆ System</text>
+            <text x="408" y="257" font-family="system-ui,sans-serif" font-size="9" fill="#7c3aed" text-anchor="middle" font-weight="700">boundary</text>
+            <text x="408" y="269" font-family="system-ui,sans-serif" font-size="8" fill="#7c3aed" text-anchor="middle">Level 3 fix must</text>
+            <text x="408" y="281" font-family="system-ui,sans-serif" font-size="8" fill="#7c3aed" text-anchor="middle">cross this line</text>
+
+            <!-- Key constraint highlight -->
+            <rect x="220" y="128" width="144" height="48" rx="8" fill="none" stroke="#c0392b" stroke-width="3"/>
+            <text x="290" y="368" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b" text-anchor="middle" font-weight="700">&#9650; The binding constraint</text>
+
+        </svg>
+        <p style="font-family:system-ui,sans-serif;font-size:0.82em;color:var(--muted);margin:10px 0 0;line-height:1.5;"><strong>Reading the diagram:</strong> Blue boxes and arrows are within the NHS trust boundary. Orange boxes and arrows are within the social care boundary. <strong>Dashed red/orange arrows crossing the boundary</strong> are the causal links that drive corridor care — blocked beds caused by insufficient discharge capacity. The red-outlined box is the binding constraint. A Level 3 fix must cross the system boundary — which requires authority that no individual NHS trust possesses.</p>
+    </div></p>
+
+    <div class="callout orange">
+        <strong>The Toyota lesson applied to NHS discharge</strong>
+        <p>Toyota&rsquo;s answer to the supplier boundary problem is instructive. Toyota does not treat its Tier 1 suppliers as external entities to be managed at arm&rsquo;s length. It sends engineers into supplier plants, shares production planning upstream, and treats supplier performance as its own performance. The supplier is inside the system boundary, not outside it.</p>
+        <p style="margin-top:8px;">The NHS equivalent would be Integrated Care Systems (ICSs) in which NHS trusts, local authorities, and social care providers operate with shared budgets, shared capacity planning, and shared accountability for delayed transfers of care. The ICS model exists on paper. Without shared budgets and genuine shared accountability, the Toyota principle is not being applied — the social care constraint remains external to the hospital&rsquo;s system boundary, and corridor care remains the predictable result.</p>
+    </div>
+
+    <h3>Why local authorities will not share budgets — the structural reasons</h3>
+
+    <p>The question is worth answering precisely, because &ldquo;political fiefdoms&rdquo; can sound like a criticism of individuals. It is not. The barriers are structural, not personal.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr><th>Barrier</th><th>Why it exists</th><th>What would change it</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Different electoral accountability</strong></td>
+                    <td>A council chief executive answers to councillors who answer to local voters. Those voters care about schools, roads, housing and social care — not NHS corridor waits. Spending social care money faster to help an NHS trust produces no political benefit for the council.</td>
+                    <td>Shared public accountability for delayed transfers — published at ICS level, not just reported internally.</td>
+                </tr>
+                <tr>
+                    <td><strong>Different financial risk</strong></td>
+                    <td>Many local authorities are effectively insolvent or close to it. A pooled budget with the NHS means shared financial risk. If NHS demand spikes, the council shares the cost. Council finance directors will refuse this without cast-iron protections.</td>
+                    <td>Ring-fenced pooled budgets with defined NHS/council contribution ratios set nationally, not negotiated locally.</td>
+                </tr>
+                <tr>
+                    <td><strong>Different legal accountability</strong></td>
+                    <td>NHS trusts are accountable to NHS England. Local authorities are accountable to the Ministry of Housing, Communities and Local Government (MHCLG). Different legislation, different inspectors, different definitions of duty of care. A shared budget creates unclear legal liability.</td>
+                    <td>A single legal framework for integrated discharge — not yet legislated.</td>
+                </tr>
+                <tr>
+                    <td><strong>Asymmetric benefit</strong></td>
+                    <td>The NHS gets the operational benefit of faster discharge — corridor care reduces, A&amp;E performance improves. The council bears the cost of the care home place, the domiciliary care package, or the intermediate care bed. Benefits to NHS; costs to council.</td>
+                    <td>Financial transfer from NHS to council for every delayed transfer day — making the cost of inaction visible to the body that controls the solution.</td>
+                </tr>
+                <tr>
+                    <td><strong>Historical cost-shunting</strong></td>
+                    <td>NHS and local government have a long history of each sector trying to move costs onto the other&rsquo;s budget. Social care teams have learned to be cautious about accepting patients who will then require ongoing council-funded packages. The relationship is structurally adversarial regardless of individual goodwill.</td>
+                    <td>Sustained multi-year partnership with shared consequences — not achievable in a single Parliament without structural reform.</td>
+                </tr>
+                <tr>
+                    <td><strong>Workforce is not shared</strong></td>
+                    <td>Social care workers are employed by the council or private providers. NHS pay, terms and conditions, training standards and management are entirely separate. A pooled budget does not create a shared workforce — it creates a shared pot of money with two separate management hierarchies trying to control it.</td>
+                    <td>National pay framework for social care workers — equivalent to NHS pay scales. Currently absent.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>The Secretary of State point — a single title is not the same as single accountability</strong>
+        <p>Since January 2018, the UK has had a single Secretary of State for Health <em>and</em> Social Care — a change made by Theresa May&rsquo;s government precisely to integrate the two systems. It is now eight years later. The corridor care crisis deepened throughout that period. The combined title did not resolve the structural misalignment because the underlying financial and legal separation between NHS trusts and local authorities was unchanged. A ministerial title is not a system change. It is, in Joiner&rsquo;s terms, a Level 1 intervention &mdash; a label on the output &mdash; applied to a Level 3 structural problem.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-history">What 15 years of A&amp;E data tells us</h2>
+
+    <p>The Bootstrap CUSUM analysis of NHS A&amp;E four-hour performance from 2010 to 2026 — published in full on this site — finds four structural stages of decline across 184 monthly observations. Not one of the policy interventions implemented in that period is visible as an upward change point at 99.7% statistical confidence. The trajectory is one of sustained, structural deterioration punctuated by seasonal variation.</p>
+
+    <p>This is not a failure of clinical staff. It is not a failure of management effort. It is the predictable result of applying Level 1 and Level 2 interventions to a system whose constraint sits at Level 3 — and whose Level 3 constraint lies outside the boundary of the organisations being held accountable for the output.</p>
+
+    <p>The corridor care programme is structurally similar to every previous A&amp;E intervention. The national definition and reporting (Initiative 1) echoes the four-hour target itself — a measurement system applied to a structural problem. The GIRFT specialist teams (Initiative 2) echo the multiple &ldquo;improvement programmes&rdquo; and &ldquo;turnaround teams&rdquo; deployed to struggling trusts since 2015. The SDEC/UTC expansion (Initiative 3) echoes the &ldquo;alternatives to A&amp;E&rdquo; strategy pursued since 2019. The discharge fund (Initiative 4) echoes the winter discharge funding rounds of 2021, 2022, and 2023 — none of which produced a lasting structural change in delayed transfer of care rates.</p>
+
+    <div class="dark-box">
+        <h3>&#128202; The Bootstrap CUSUM test for 2029</h3>
+        <p>When corridor care data becomes available at national level and with sufficient historical depth, the appropriate Bootstrap CUSUM test is straightforward: run the algorithm on corridor care hours per 1,000 emergency admissions, monthly, from the baseline period through to December 2029. Set confidence at 95%. Use 5,000 bootstrap loops.</p>
+        <p style="margin-top:10px;">A genuine structural improvement will produce an upward change point — a sustained, statistically significant shift to a lower rate of corridor care — dated to within weeks of the intervention that caused it. If the discharge constraint is addressed structurally, the change point will appear in the discharge capacity data first, and in the corridor care data with a lag of several months.</p>
+        <p style="margin-top:10px;">If the constraint is not addressed, the Bootstrap CUSUM will show a flat line — or a line that improves seasonally in summer and deteriorates in winter, producing no net structural change point. That flat line is not a failure of measurement. It is the honest answer to an honest question.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-prediction">The pre-committed prediction</h2>
+
+    <p>This article makes the following pre-committed prediction, written in June 2026, before the outcome data is available:</p>
+
+    <div class="wait-box">
+        <div class="wb-label">&#128221; Pre-committed prediction — June 2026</div>
+        <h3>Bootstrap CUSUM on national corridor care rates will not show a structural improvement change point by December 2029 unless the discharge constraint is addressed at system level.</h3>
+        <p>Specifically:</p>
+        <ol>
+            <li>The national definition and reporting initiative will not produce a change point — it will improve data quality but not the underlying rate.</li>
+            <li>The GIRFT specialist team programme may produce change points at individual trust level but will not produce a national structural change point.</li>
+            <li>The SDEC/UTC expansion may produce a small improvement change point in total emergency admissions but not in corridor care specifically — because corridor care is driven by blocked outflow, not excess inflow.</li>
+            <li>The £250m discharge fund will produce temporary relief. If it does not create structural additional social care capacity that is sustained beyond the funding period, it will not produce a lasting change point. Previous equivalent funding rounds did not.</li>
+        </ol>
+        <p style="margin-top:12px;"><strong>The prediction will be wrong</strong> if the ICS model genuinely delivers shared budgets and shared accountability for delayed transfers of care, and if the discharge fund creates structural — not temporary — additional social care capacity. In that case, Bootstrap CUSUM should detect a change point in delayed transfer of care bed-days first, followed by a change point in corridor care rates with a lag of 6&ndash;12 months.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-what-would-work">What would actually produce a change point</h2>
+
+    <p>This is not a counsel of despair. The analysis above identifies precisely what structural change would look like — and therefore what would need to be true for Bootstrap CUSUM to find an improvement change point by 2029.</p>
+
+    <ul style="line-height:2.2;">
+        <li><strong>A sustained increase in community and intermediate care capacity.</strong> Not one-off funded beds, but a structural expansion of the workforce and physical capacity to receive medically fit patients from acute hospitals. This requires multi-year funding commitments to local authorities and the social care workforce, not one-off discharge grants.</li>
+        <li><strong>Shared ICS budgets for discharge pathways.</strong> The Toyota principle applied: if the hospital and the local authority share accountability and share the financial consequences of delayed transfers, the discharge constraint moves inside the system boundary. Without shared budgets, the incentive structures remain misaligned.</li>
+        <li><strong>A measurable reduction in delayed transfer of care bed-days.</strong> This is the leading indicator. If Bootstrap CUSUM on delayed transfer of care data shows a structural downward change point — sustained across multiple months and surviving into the following winter — the corridor care change point should follow. If the leading indicator does not move, the lagging indicator will not move either.</li>
+        <li><strong>A Joiner Level 3 redesign of the discharge pathway itself.</strong> Not faster processing of the existing pathway but a structural redesign: default discharge to community settings with acute readmission as the exception, rather than default acute admission with community discharge as the bureaucratic challenge.</li>
+    </ul>
+
+    <div class="cta-box">
+        <h2>Test this analysis with your own data</h2>
+        <p>NHS England publishes delayed transfer of care data monthly. Upload it to the StepChange Analyzer and run Bootstrap CUSUM — the constraint that drives corridor care is visible in that data, and the change point (if one appears) will date the structural improvement precisely.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E Performance 2010&ndash;2026</a></h3>
+        <p>The full Bootstrap CUSUM analysis of 15 years of monthly NHS A&amp;E data — four structural stages of decline, and not one policy intervention visible as an improvement change point.</p>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a></h3>
+        <p>The framework that explains why Level 1 and 2 interventions applied to a Level 3 structural problem produce a flat Bootstrap CUSUM line.</p>
+        <a href="joiner-levels-of-fix.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="theory-of-constraints.html">Theory of Constraints</a></h3>
+        <p>Goldratt&rsquo;s framework — the discharge constraint drives corridor care. Improving anything other than the constraint produces minimal improvement in throughput.</p>
+        <a href="theory-of-constraints.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Corridor care definition:</strong> NHS England, &ldquo;Principles for Providing Patient Care in Corridors,&rdquo; 2026. <a href="https://www.england.nhs.uk/long-read/principles-for-providing-patient-care-in-corridors/" target="_blank">england.nhs.uk</a></p>
+        <p style="margin-top:8px;"><strong>GIRFT programme:</strong> Getting It Right First Time, Corridor Care Improvement Guide, March 2026. <a href="https://gettingitrightfirsttime.co.uk/wp-content/uploads/2026/03/Corridor-Care-Improvement-Guide-Final-March-2026-V2.pdf" target="_blank">gettingitrightfirsttime.co.uk</a></p>
+        <p style="margin-top:8px;"><strong>RCEM response to UTC expansion:</strong> Royal College of Emergency Medicine, press release, 2026. <a href="https://rcem.ac.uk/press-release/urgent-treatment-centre-plans-not-the-answer-to-end-shameful-corridor-care-but-efforts-on-improving-ownership-of-the-problem-within-trusts-welcome/" target="_blank">rcem.ac.uk</a></p>
+        <p style="margin-top:8px;"><strong>Discharge funding:</strong> UK Government, &ldquo;Up to £250 million to speed up hospital discharge,&rdquo; 2026. <a href="https://www.gov.uk/government/news/up-to-250-million-to-speed-up-hospital-discharge" target="_blank">gov.uk</a></p>
+        <p style="margin-top:8px;"><strong>Joiner, B.L.:</strong> <em>Fourth Generation Management.</em> McGraw-Hill, 1994.</p>
+        <p style="margin-top:8px;"><strong>Goldratt, E.M.:</strong> <em>The Goal.</em> North River Press, 1984.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982.</p>
+        <p style="margin-top:8px;"><strong>Meadows, D.H.:</strong> <em>Thinking in Systems.</em> Chelsea Green Publishing, 2008. Leverage points: places to intervene in a system — parameter adjustments (Level 9, least effective) through paradigm change (Level 2, most effective).</p>
+        <p style="margin-top:8px;"><strong>COMAH:</strong> Control of Major Accident Hazards Regulations 2015, enforced by the UK Health and Safety Executive. The hierarchy of controls (Layer 4: training and procedure &rarr; Layer 1: elimination) provides the safety engineering equivalent of Joiner&rsquo;s levels and Meadows&rsquo; leverage points. All three frameworks converge: structural change requires intervention at the highest layer/level/leverage point accessible.</p>
+        <p style="margin-top:8px;"><strong>Method:</strong> Bootstrap CUSUM step-change analysis. Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
