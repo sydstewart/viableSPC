@@ -1993,3 +1993,78 @@ blockquote.warning {
     .bridge-grid { grid-template-columns: 1fr; }
     .bridge-arrow { transform: rotate(90deg); }
 }
+
+
+/* ── 41. Corridor care article mobile fixes ──────────────── */
+
+/* Joiner 4-column table — stacks as cards on mobile */
+@media (max-width: 700px) {
+    .joiner-table table thead { display: none; }
+    .joiner-table table,
+    .joiner-table tbody,
+    .joiner-table tr,
+    .joiner-table td { display: block; width: 100%; box-sizing: border-box; }
+    .joiner-table tr {
+        border-bottom: 3px solid var(--border);
+        padding: 14px 0;
+        margin-bottom: 4px;
+    }
+    .joiner-table tr:last-child { border-bottom: none; }
+    .joiner-table td {
+        padding: 6px 14px;
+        border: none;
+        font-size: 0.88em;
+        line-height: 1.6;
+    }
+    .joiner-table td:first-child {
+        font-size: 1em;
+        font-weight: 700;
+        color: var(--brand-blue);
+        padding-bottom: 4px;
+    }
+    .joiner-table td:nth-child(2)::before {
+        content: "Joiner level: ";
+        font-weight: 700;
+        color: var(--muted);
+        font-size: 0.85em;
+    }
+    .joiner-table td:nth-child(3)::before {
+        content: "Why: ";
+        font-weight: 700;
+        color: var(--muted);
+        font-size: 0.85em;
+        display: block;
+        margin-bottom: 2px;
+    }
+    .joiner-table td:nth-child(4)::before {
+        content: "Bootstrap CUSUM prediction: ";
+        font-weight: 700;
+        color: var(--muted);
+        font-size: 0.85em;
+        display: block;
+        margin-bottom: 2px;
+    }
+    .joiner-table td:nth-child(4) {
+        background: #f8fafc;
+        border-top: 1px solid var(--border);
+        padding-top: 8px;
+        margin-top: 4px;
+        font-style: italic;
+        color: var(--muted);
+    }
+}
+
+/* wait-box on mobile — prevent overflow */
+@media (max-width: 600px) {
+    .wait-box ol, .wait-box ul {
+        padding-left: 1.2em;
+        margin-left: 0;
+    }
+    .wait-box { padding: 18px 16px; }
+    .wait-box p, .wait-box li {
+        font-size: 0.9em;
+        line-height: 1.65;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+}
