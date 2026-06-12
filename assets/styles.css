@@ -1999,28 +1999,34 @@ blockquote.warning {
 
 /* Joiner 4-column table — stacks as cards on mobile */
 @media (max-width: 700px) {
-    .joiner-table table thead { display: none; }
-    .joiner-table table,
-    .joiner-table tbody,
-    .joiner-table tr,
-    .joiner-table td { display: block; width: 100%; box-sizing: border-box; }
+    .joiner-table { overflow: visible !important; }
+    .joiner-table table { display: block !important; width: 100% !important; }
+    .joiner-table table thead { display: none !important; }
+    .joiner-table tbody { display: block !important; width: 100% !important; }
     .joiner-table tr {
+        display: block !important;
+        width: 100% !important;
         border-bottom: 3px solid var(--border);
         padding: 14px 0;
         margin-bottom: 4px;
+        box-sizing: border-box;
     }
     .joiner-table tr:last-child { border-bottom: none; }
     .joiner-table td {
-        padding: 6px 14px;
-        border: none;
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding: 6px 14px !important;
+        border: none !important;
+        background: transparent !important;
         font-size: 0.88em;
         line-height: 1.6;
     }
     .joiner-table td:first-child {
-        font-size: 1em;
+        font-size: 1em !important;
         font-weight: 700;
         color: var(--brand-blue);
-        padding-bottom: 4px;
+        padding-bottom: 4px !important;
     }
     .joiner-table td:nth-child(2)::before {
         content: "Joiner level: ";
@@ -2036,6 +2042,14 @@ blockquote.warning {
         display: block;
         margin-bottom: 2px;
     }
+    .joiner-table td:nth-child(4) {
+        background: #f8fafc !important;
+        border-top: 1px solid var(--border) !important;
+        padding-top: 8px !important;
+        margin-top: 4px;
+        font-style: italic;
+        color: var(--muted);
+    }
     .joiner-table td:nth-child(4)::before {
         content: "Bootstrap CUSUM prediction: ";
         font-weight: 700;
@@ -2043,14 +2057,7 @@ blockquote.warning {
         font-size: 0.85em;
         display: block;
         margin-bottom: 2px;
-    }
-    .joiner-table td:nth-child(4) {
-        background: #f8fafc;
-        border-top: 1px solid var(--border);
-        padding-top: 8px;
-        margin-top: 4px;
-        font-style: italic;
-        color: var(--muted);
+        font-style: normal;
     }
 }
 
