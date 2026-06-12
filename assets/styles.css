@@ -350,6 +350,22 @@ code { font-family: monospace; background: #f1f5f9; padding: 2px 6px; border-rad
     margin: 24px 0;
     font-family: system-ui, sans-serif;
 }
+
+/* On mobile, switch to scroll rather than clip */
+@media (max-width: 700px) {
+    .numbers-box {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+    }
+    .numbers-box table {
+        min-width: 480px;
+    }
+    /* Wider tables need more room */
+    .numbers-box.joiner-table table {
+        min-width: 600px;
+    }
+}
 .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
 .numbers-box thead tr { background: var(--brand-blue); }
 .numbers-box th { color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
@@ -1997,13 +2013,16 @@ blockquote.warning {
 
 /* ── 41. Corridor care article mobile fixes ──────────────── */
 
-/* Joiner 4-column table — stacks as cards on mobile */
+/* The Joiner 4-col INITIATIVES table — stack as labelled cards on mobile.
+   Other .numbers-box tables on this page use the base scroll behaviour. */
 @media (max-width: 700px) {
-    .joiner-table { overflow: visible !important; }
-    .joiner-table table { display: block !important; width: 100% !important; }
-    .joiner-table table thead { display: none !important; }
-    .joiner-table tbody { display: block !important; width: 100% !important; }
-    .joiner-table tr {
+    /* Only apply card stacking to the initiatives table (first joiner-table).
+       The constraints, NCR measures and barriers tables scroll horizontally
+       via the base .numbers-box mobile rules. */
+    .joiner-table:first-of-type table thead { display: none !important; }
+    .joiner-table:first-of-type table,
+    .joiner-table:first-of-type tbody { display: block !important; width: 100% !important; min-width: unset !important; }
+    .joiner-table:first-of-type tr {
         display: block !important;
         width: 100% !important;
         border-bottom: 3px solid var(--border);
@@ -2011,8 +2030,8 @@ blockquote.warning {
         margin-bottom: 4px;
         box-sizing: border-box;
     }
-    .joiner-table tr:last-child { border-bottom: none; }
-    .joiner-table td {
+    .joiner-table:first-of-type tr:last-child { border-bottom: none; }
+    .joiner-table:first-of-type td {
         display: block !important;
         width: 100% !important;
         box-sizing: border-box;
@@ -2022,19 +2041,19 @@ blockquote.warning {
         font-size: 0.88em;
         line-height: 1.6;
     }
-    .joiner-table td:first-child {
+    .joiner-table:first-of-type td:first-child {
         font-size: 1em !important;
         font-weight: 700;
         color: var(--brand-blue);
         padding-bottom: 4px !important;
     }
-    .joiner-table td:nth-child(2)::before {
+    .joiner-table:first-of-type td:nth-child(2)::before {
         content: "Joiner level: ";
         font-weight: 700;
         color: var(--muted);
         font-size: 0.85em;
     }
-    .joiner-table td:nth-child(3)::before {
+    .joiner-table:first-of-type td:nth-child(3)::before {
         content: "Why: ";
         font-weight: 700;
         color: var(--muted);
@@ -2042,7 +2061,7 @@ blockquote.warning {
         display: block;
         margin-bottom: 2px;
     }
-    .joiner-table td:nth-child(4) {
+    .joiner-table:first-of-type td:nth-child(4) {
         background: #f8fafc !important;
         border-top: 1px solid var(--border) !important;
         padding-top: 8px !important;
@@ -2050,7 +2069,7 @@ blockquote.warning {
         font-style: italic;
         color: var(--muted);
     }
-    .joiner-table td:nth-child(4)::before {
+    .joiner-table:first-of-type td:nth-child(4)::before {
         content: "Bootstrap CUSUM prediction: ";
         font-weight: 700;
         color: var(--muted);
@@ -2377,15 +2396,8 @@ blockquote.warning {
 .alcoa-box p:last-child { margin: 0; }
 .alcoa-box strong { color: white; }
 
-/* Table overflow fix for this article — all numbers-box tables scroll on mobile */
+/* Table overflow — handled in base .numbers-box definition above */
 @media (max-width: 700px) {
-    .numbers-box {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    .numbers-box table {
-        min-width: 480px;
-    }
     .hierarchy-row {
         flex-direction: column;
         gap: 4px;
