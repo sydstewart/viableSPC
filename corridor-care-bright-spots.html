@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/corridor-care-bright-spots.html">
+    <title>Find What Works and Understand Why — Corridor Care Bright Spots and Deming's Question — StepChangeAnalysis.com</title>
+    <meta name="description" content="Watford General eliminated corridor care. Bootstrap CUSUM, Joiner's levels, and Deming's 'by what method?' applied to a genuine Bright Spot — and the honest questions the public picture doesn't yet answer.">
+    <meta name="keywords" content="corridor care bright spots NHS, Watford General corridor care, Deming by what method, Joiner levels NHS, Bootstrap CUSUM NHS trust, NHS improvement bright spots, what works NHS corridor care">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="corridor-care-2029.html">Articles &rsaquo; Corridor Care 2029</a> &rsaquo; Bright Spots</div>
+    <div class="article-flag">&#127973;&#65039; NHS Healthcare &middot; Bright Spots &middot; Prospective Analysis</div>
+
+    <h1>Find What Works and Understand Why</h1>
+    <p class="article-subtitle">Watford General Hospital went from one of the worst corridor care trusts in England to zero corridor care through a winter of record demand. This article applies Deming&rsquo;s question &mdash; <em>by what method?</em> &mdash; to what they did, and Bootstrap CUSUM to the honest test of whether it is structural. The public picture is not yet complete. But what is visible is analytically rich.</p>
+    <div class="article-meta">By Syd Stewart, Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; June 2026 &nbsp;&middot;&nbsp; Sources: ITV News, NHS England</div>
+    <div style="margin-top:8px;margin-bottom:4px;font-family:system-ui,sans-serif;font-size:0.92em;color:#475569;"><strong style="color:#002d5b;">Method:</strong> Bootstrap CUSUM &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <!-- Summary -->
+    <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:28px 0;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; Article summary</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:16px;">
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--brand-blue);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The candidate Bright Spot</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Watford General: from 28 patients in corridors daily to zero corridor care through a winter of record demand. ITV News and NHS England have published the account. One winter is not Bootstrap CUSUM confirmation &mdash; but it is a candidate worth examining carefully.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">By what method?</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Every intervention Watford made maps onto Joiner&rsquo;s Level 3 or Level 3 Deep &mdash; and every one was within the CEO&rsquo;s authority. None required government action, social care reform, or additional funding.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--orange);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The incomplete picture</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">The public sources describe what changed inside the hospital. The discharge data that would tell us whether the external constraint was also addressed is not yet in the public domain. Bootstrap CUSUM on the right outcome measures will answer this honestly.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--brand-mid);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">The pre-committed prediction</div>
+                <div style="font-size:0.9em;color:var(--text);line-height:1.6;">Bootstrap CUSUM on Watford&rsquo;s trust-level data should show confirmed downward change points in corridor care hours, patient safety events, and staff sickness absence &mdash; sustained across two winters &mdash; if the change is structural.</div>
+            </div>
+        </div>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-brightspots">What is a Bright Spot?</a></li>
+                <li><a href="#section-filter">Bootstrap CUSUM as the honest Bright Spot filter</a></li>
+                <li><a href="#section-watford">Watford General &mdash; the candidate Bright Spot</a></li>
+                <li><a href="#section-method">By what method? &mdash; Joiner and Deming applied</a></li>
+                <li><a href="#section-authority">What is within any CEO&rsquo;s authority</a></li>
+                <li><a href="#section-deming">Would Deming have approved?</a></li>
+                <li><a href="#section-measures">The correct outcome measures</a></li>
+                <li><a href="#section-incomplete">What the public picture does not yet tell us</a></li>
+                <li><a href="#section-prediction">The pre-committed prediction</a></li>
+                <li><a href="#section-scale">One trust and the national constraint</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-brightspots">What is a Bright Spot?</h2>
+
+    <p>A Bright Spot is a part of a system that is performing significantly better than the rest &mdash; and doing so with the same or similar resources, constraints, and context. The concept, developed by Chip and Dan Heath in <em>Switch</em> (2010) and grounded in the positive deviance methodology of Jerry Sternin, starts from a simple premise: if someone has already solved the problem you are trying to solve, find them and understand what they did.</p>
+
+    <p>The improvement community has adopted Bright Spots thinking as a complement to root cause analysis. Where root cause analysis asks <em>what is going wrong?</em>, Bright Spots asks <em>what is going right, and why?</em> Both questions are necessary. The Bright Spots question is particularly valuable in complex systems where the constraints are widely shared but some actors are navigating them more successfully than others.</p>
+
+    <p>For corridor care, the relevant question is: among English NHS trusts facing the same discharge constraint, the same demand pressures, and the same funding environment, are any of them significantly better at protecting patients from corridor care &mdash; and if so, by what method?</p>
+
+    <div class="callout blue">
+        <strong>Deming&rsquo;s view of Bright Spots thinking</strong>
+        <p>Deming would have had a nuanced response. He would agree with the core impulse: find what works and understand why. His System of Profound Knowledge demands exactly this &mdash; understanding the system that produced the good result, not just the result itself. But he would distrust the league table method of identifying Bright Spots &mdash; ranking trusts and calling the top performers successful. His Point 11 warns explicitly against this: the top performer in a ranking may simply be in the upper tail of common cause variation. They are not necessarily doing anything different. The honest Bright Spot test is not the league table position. It is Bootstrap CUSUM.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-filter">Bootstrap CUSUM as the honest Bright Spot filter</h2>
+
+    <p>The improvement community typically identifies Bright Spots through three methods: league table rankings, before-and-after comparisons, and case studies. All three have limitations that Deming would recognise immediately.</p>
+
+    <p>League table rankings find the current top performer &mdash; but do not distinguish genuine structural improvement from a trust currently in the upper tail of natural variation. A trust at the top of this year&rsquo;s league table may simply have had a better-than-average winter. Next year they may be average again. No system change occurred. Bootstrap CUSUM distinguishes these cases: a genuine structural change produces a confirmed change point; natural variation does not.</p>
+
+    <p>Before-and-after comparisons almost always show improvement &mdash; because the comparison window is usually chosen after the result is known. <a href="false-alarms-in-performance-charts.html">False Alarms in Performance Charts</a> covers this in detail. Bootstrap CUSUM is indifferent to the narrative. It asks only whether the underlying process mean has permanently shifted.</p>
+
+    <p>Case studies describe what was done &mdash; but without the statistical test, any improvement can be attributed to any intervention. Bootstrap CUSUM dates the change point precisely. If the change point precedes the intervention, something else caused the improvement. If it follows the intervention by the expected lag, the causal link is supported.</p>
+
+    <div class="callout green">
+        <strong>The Bootstrap CUSUM Bright Spot test &mdash; applied at trust level</strong>
+        <p>A genuine Bright Spot should show: a confirmed downward change point in the outcome measure (corridor care hours per 1,000 emergency admissions), sustained across at least two full winters, at 95% confidence or above. The change point should be dated to within the expected lag of the intervention that caused it. Balancing measures (readmission rate, ambulance handover delays) should hold flat or improve. Leading indicators (No Criteria to Reside patients at trust level) should show a preceding downward change point if the discharge constraint was genuinely addressed.</p>
+        <p style="margin-top:8px;">Without this test, a Bright Spot is a compelling story. With it, a Bright Spot is evidence.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-watford">Watford General &mdash; the candidate Bright Spot</h2>
+
+    <p>West Hertfordshire Teaching Hospitals NHS Trust &mdash; Watford General Hospital &mdash; is the strongest candidate for a genuine corridor care Bright Spot in England. In 2023, a Channel 4 Dispatches documentary showed up to 28 patients on trolleys in corridors seven days a week. By May 2026, ITV News was given exclusive access to report zero corridor care despite record winter demand, and the trust had moved from 102nd in national A&amp;E league tables to the top 10.</p>
+
+    <p>Two public sources describe what the trust did. The NHS England case study, published June 2026, provides the concise account. The ITV News report, broadcast 19 May 2026, adds the operational detail and the voices of the people involved. Together they give a clearer picture of the method than is typical for NHS improvement case studies.</p>
+
+    <div class="dark-box">
+        <h3>&#128202; What the sources say Watford did</h3>
+        <p><strong style="color:white;">NHS England case study (June 2026):</strong> <em style="color:rgba(255,255,255,0.85);">&ldquo;West Hertfordshire Teaching Hospitals NHS Trust treated corridor care as a whole-hospital problem, not just an emergency department issue. Senior leaders took clear ownership, increased their visibility during busy periods, including evenings and weekends, and set firm standards around patient dignity and safety. The trust focused on improving how patients moved through the hospital &mdash; speeding up discharge decisions, strengthening multidisciplinary working, and holding teams accountable for long stays. Improvement was framed around patient safety and staff wellbeing, not just performance targets, which helped bring staff on board.&rdquo;</em></p>
+        <p style="margin-top:14px;"><strong style="color:white;">ITV News &mdash; Rachel Thorman, Chief Operating Officer:</strong> <em style="color:rgba(255,255,255,0.85);">&ldquo;Data analysis has played a big part in the hospital&rsquo;s success. They now have a control room with floor-to-ceiling screens displaying real-time data on patients and bed availability. They have even borrowed techniques from Heathrow Airport to transform how patients flow through the hospital.&rdquo;</em></p>
+        <p style="margin-top:14px;"><strong style="color:white;">ITV News &mdash; Kelly McGovern, Chief Nurse:</strong> <em style="color:rgba(255,255,255,0.85);">&ldquo;The number one thing that we&rsquo;ve changed here is the culture &mdash; the culture of accepting.&rdquo;</em></p>
+        <p style="margin-top:8px;"><em style="color:rgba(255,255,255,0.85);">&ldquo;It&rsquo;s actually soul destroying to be nursing in a corridor, so we&rsquo;ve allowed our staff to say it&rsquo;s not okay and we won&rsquo;t continue to do it.&rdquo;</em></p>
+        <p style="margin-top:14px;"><strong style="color:white;">ITV News &mdash; Nurse EJ Llamas:</strong> <em style="color:rgba(255,255,255,0.85);">&ldquo;When you see patients suffering, I wasn&rsquo;t satisfied. I was giving them treatment, but not the holistic care I&rsquo;m meant to give.&rdquo;</em> (Had considered leaving the profession due to corridor care.)</p>
+    </div>
+
+    <p>These are the sources available to us. The trust gave ITV News exclusive access &mdash; they are proud of what they achieved and want others to learn from it. The analysis that follows applies Deming&rsquo;s &ldquo;by what method?&rdquo; to what those sources describe.</p>
+
+    <hr>
+
+    <h2 id="section-method">By what method? &mdash; Joiner and Deming applied</h2>
+
+    <p>&ldquo;By what method?&rdquo; is Deming&rsquo;s sharpest question. It demands the mechanism, not the result. It is not enough to say the corridors are clear. The question is: what specifically changed in the system that produced that outcome? Without the answer, the result is not transferable.</p>
+
+    <p>The sources give us five distinct methods. Each maps onto Joiner&rsquo;s levels of fix and onto specific Deming points. The table below applies both frameworks to each intervention.</p>
+
+    <div class="numbers-box joiner-table">
+        <table>
+            <thead><tr>
+                <th>What Watford did</th>
+                <th>Joiner level</th>
+                <th>Deming point</th>
+                <th>By what method?</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Rejected &ldquo;the culture of accepting&rdquo; &mdash; framed as patient safety and staff dignity, not a performance target</strong></td>
+                    <td><strong style="color:var(--green);">Level 3 Deep</strong><br><small>Paradigm change — changed the goal of the system</small></td>
+                    <td>Point 1 (constancy of purpose), Point 2 (adopt the new philosophy)</td>
+                    <td>A leadership decision. McGovern defined the new purpose explicitly and publicly. No external resource required.</td>
+                </tr>
+                <tr>
+                    <td><strong>&ldquo;We allowed our staff to say it&rsquo;s not okay&rdquo; &mdash; staff able to name the problem without fear</strong></td>
+                    <td><strong style="color:var(--green);">Level 3 Deep</strong><br><small>Changed the culture that normalised corridor care</small></td>
+                    <td>Point 8 (drive out fear), Point 12 (remove barriers to pride in workmanship)</td>
+                    <td>A cultural decision within the trust boundary. Created psychological safety for frontline staff to escalate. Made the problem visible.</td>
+                </tr>
+                <tr>
+                    <td><strong>Senior leaders present and visible evenings and weekends</strong></td>
+                    <td><strong style="color:var(--brand-mid);">Level 3</strong><br><small>Changed who is accountable and when</small></td>
+                    <td>Point 7 (institute leadership)</td>
+                    <td>A structural decision about how leaders spend their time. Signals that this is not a 9-to-5 management problem.</td>
+                </tr>
+                <tr>
+                    <td><strong>Whole-hospital accountability &mdash; not just A&amp;E&rsquo;s problem</strong></td>
+                    <td><strong style="color:var(--brand-mid);">Level 3</strong><br><small>Changed the accountability boundary</small></td>
+                    <td>Point 9 (break down barriers between departments)</td>
+                    <td>A structural decision that moved the problem from one department&rsquo;s inbox to the whole organisation&rsquo;s responsibility.</td>
+                </tr>
+                <tr>
+                    <td><strong>Real-time data control room with floor-to-ceiling screens &mdash; Heathrow Airport flow techniques</strong></td>
+                    <td><strong style="color:var(--orange);">Level 2&ndash;3</strong><br><small>Changed the information architecture</small></td>
+                    <td>Point 5 (improve constantly &mdash; requires seeing the system)</td>
+                    <td>An investment and operational decision. Made patient flow visible to everyone in real time. You cannot manage what you cannot see.</td>
+                </tr>
+                <tr>
+                    <td><strong>Multidisciplinary discharge decisions &mdash; teams held accountable for long stays</strong></td>
+                    <td><strong style="color:var(--orange);">Level 2&ndash;3</strong><br><small>Changed the discharge process</small></td>
+                    <td>Point 9 (break down barriers between departments)</td>
+                    <td>A process redesign within the trust boundary. Brought clinical and operational teams together around discharge rather than keeping them in separate tracks.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout green">
+        <strong>The pattern in the table</strong>
+        <p>Every intervention is Level 2-3 or above. None is Level 1 &mdash; none is simply measuring and recording the problem, setting a target, or applying pressure. What Watford did is structurally different from the typical response to corridor care. The pattern maps precisely onto what Deming described: change the goal, drive out fear, institute leadership, break down barriers, make the system visible.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-authority">What is within any CEO&rsquo;s authority</h2>
+
+    <p>Level 3 Deep interventions sound impossibly ambitious. The word &ldquo;paradigm change&rdquo; suggests something that takes decades and requires transformation programmes. Watford&rsquo;s experience suggests otherwise. Their Level 3 Deep interventions were specific, concrete, and within the authority of a trust chief nurse and CEO:</p>
+
+    <ul style="font-family:system-ui,sans-serif;line-height:2.2;">
+        <li><strong>Reframe the goal</strong> from &ldquo;manage corridor care safely&rdquo; to &ldquo;corridor care is a patient safety failure we will eliminate.&rdquo; This is a statement. A decision. It costs nothing except commitment.</li>
+        <li><strong>Allow staff to name the problem.</strong> &ldquo;We allowed our staff to say it&rsquo;s not okay.&rdquo; This is psychological safety created by leadership. It does not require a programme or a budget line.</li>
+        <li><strong>Be present when the problem is worst.</strong> Senior leaders in the hospital on evenings and weekends is a decision about how leaders spend their time, not a structural reform.</li>
+        <li><strong>Make the whole hospital own the problem.</strong> Corridor care is not A&amp;E&rsquo;s problem. Every ward that delays a discharge is contributing. Making that explicit is within a CEO&rsquo;s authority.</li>
+    </ul>
+
+    <p>The control room and real-time data infrastructure require investment. But the most powerful interventions &mdash; the Level 3 Deep ones &mdash; required no additional resource. They required a different kind of leadership will.</p>
+
+    <div class="callout blue">
+        <strong>Paul O&rsquo;Neill at Alcoa &mdash; the same principle, a different industry</strong>
+        <p>When Paul O&rsquo;Neill became CEO of Alcoa in 1987, his first address to Wall Street analysts announced that his priority was worker safety &mdash; not profits, not productivity, not shareholder returns. Analysts were baffled. Several called clients immediately and advised them to sell.</p>
+        <p style="margin-top:8px;">Within a year, Alcoa&rsquo;s profits hit a record high. By the time O&rsquo;Neill retired in 2000, net income had risen fivefold. Worker safety had become the mechanism through which everything else improved &mdash; because fixing safety required understanding and fixing processes, which reduced defects, which reduced waste.</p>
+        <p style="margin-top:8px;">O&rsquo;Neill did not focus on profits and achieve safety as a consequence. He focused on safety and achieved profits as a consequence. McGovern did not focus on the corridor care metric and achieve patient dignity. She focused on patient dignity and the metric followed. The direction of causation is the opposite of how most NHS improvement programmes are structured &mdash; and it is the direction Deming always recommended. See also: <a href="never-events-wrong-route.html">Never Events &mdash; Wrong Route</a>, which applies the O&rsquo;Neill lesson to NHS patient safety.</p>
+    </div>
+
+
+        <p>This is important to be clear about. The national discharge constraint &mdash; 9,933 patients per day medically fit but in acute beds, awaiting social care &mdash; applies to Watford as much as to any other trust. What Watford did was address everything within their boundary with unusual precision and commitment. The constraint that crosses the boundary into social care authority is addressed separately, at ICS or government level. Watford&rsquo;s Bright Spot is not a claim that the national problem is solved. It is a demonstration of what is possible within the boundary that a trust CEO controls. See <a href="corridor-care-2029.html">Corridor Care 2029</a> for the national constraint analysis.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-deming">Would Deming have approved?</h2>
+
+    <p>Deming would have had a characteristically nuanced response to Watford&rsquo;s story. He would strongly approve of some things and challenge others.</p>
+
+    <p><strong>He would approve of the goal.</strong> Watford framed the improvement around patient safety and staff dignity &mdash; not a performance target. This is precisely what Deming demanded: constancy of purpose aimed at the right thing. His Point 10 rejects slogans and targets as the goal. His Points 1 and 2 demand genuine commitment to quality as a purpose, not as a metric. McGovern&rsquo;s framing &mdash; &ldquo;soul destroying for staff&rdquo; and &ldquo;not the holistic care I&rsquo;m meant to give&rdquo; &mdash; is exactly what Deming meant by pride in workmanship. The league table position is a lagging consequence of doing the right thing, not the goal itself.</p>
+
+    <p><strong>He would approve of the real-time data.</strong> Deming&rsquo;s System of Profound Knowledge requires knowledge about variation &mdash; and you cannot understand variation in patient flow without seeing it. The control room with real-time screens is his Point 5 (improve constantly) made operational. He would recognise it immediately: make the system visible and the people in it can respond to what is actually happening rather than to yesterday&rsquo;s report.</p>
+
+    <p><strong>He would challenge the league table framing.</strong> &ldquo;Went from 102nd to top 10&rdquo; is precisely the kind of ranking comparison Deming distrusted. Not because the improvement is not real &mdash; but because ranking is not evidence. The honest question is not where Watford sits in the table. It is whether Bootstrap CUSUM on their data shows a structural change point. If it does, the improvement is real. If it does not, the ranking may reflect seasonal variation or short-run luck rather than a permanent shift in the system.</p>
+
+    <p><strong>He would ask &ldquo;by what method?&rdquo; about the discharge piece.</strong> The interventions described above address the internal system. Deming would want to know what happened to the external constraint. Did patients move to genuinely safe community settings? Or did they move to discharge lounges and virtual wards within the hospital boundary? The answer determines whether this is a genuine structural improvement or a brilliantly managed internal flow change. We return to this in Section 8.</p>
+
+    <hr>
+
+    <h2 id="section-measures">The correct outcome measures</h2>
+
+    <p>One of the most important insights from the Watford story is the choice of goal. They did not set out to improve their corridor care hours metric. They set out to stop harming patients and stop destroying their staff. The corridor care metric improved as a consequence.</p>
+
+    <p>This is Deming&rsquo;s lesson about measurement applied in practice: optimise the system, and the metrics will follow. Optimise the metrics, and the system will game them. The correct outcome measures for a genuine Bright Spot are not the target metrics &mdash; they are the patient safety and staff welfare indicators that motivated the improvement in the first place.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Measure</th>
+                <th>Type</th>
+                <th>What it tells you</th>
+                <th>Bootstrap CUSUM test</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Patient safety events in A&amp;E and wards</strong></td>
+                    <td><span class="type-badge badge-lag">Outcome</span></td>
+                    <td>Whether patients are genuinely safer. Corridor care causes deterioration, missed observations, and falls. A structural improvement in corridor care should produce a downward change point in patient safety events.</td>
+                    <td>Downward change point at 95% confidence, lagging corridor care improvement by 3&ndash;6 months.</td>
+                </tr>
+                <tr>
+                    <td><strong>Staff sickness absence and vacancy rate</strong></td>
+                    <td><span class="type-badge badge-lag">Outcome</span></td>
+                    <td>Whether the cultural change is embedded. McGovern identified moral injury as the driver &mdash; &ldquo;soul destroying to be nursing in a corridor.&rdquo; If that has genuinely changed, staff retention should improve. This is the honest test of whether Point 12 (pride in workmanship) has been restored.</td>
+                    <td>Downward change point in sickness absence, lagging cultural change by 6&ndash;12 months.</td>
+                </tr>
+                <tr>
+                    <td><strong>Patient satisfaction &mdash; Friends and Family Test A&amp;E scores</strong></td>
+                    <td><span class="type-badge badge-lag">Outcome</span></td>
+                    <td>Patient dignity and privacy are part of the clinical definition of corridor care harm. If patients are genuinely safer and better cared for, FFT scores should improve. Published monthly by NHS England.</td>
+                    <td>Upward change point in FFT scores, coinciding with or lagging corridor care improvement.</td>
+                </tr>
+                <tr>
+                    <td><strong>30-day emergency readmission rate</strong></td>
+                    <td><span class="type-badge badge-balancing">Balancing</span></td>
+                    <td>The key balancing measure for faster discharge. If corridor care fell because patients were discharged earlier but less safely, readmissions will rise. This is not a concern about Watford specifically &mdash; it is the standard balancing measure for any discharge-focused improvement.</td>
+                    <td>Should hold flat or fall. An upward change point coinciding with corridor care improvement signals unsafe discharge rather than genuine improvement.</td>
+                </tr>
+                <tr>
+                    <td><strong>Corridor care hours per 1,000 emergency admissions</strong></td>
+                    <td><span class="type-badge badge-process">Process measure</span></td>
+                    <td>The primary process measure &mdash; what the programme exists to change. Important, but note it is a process measure, not the outcome measure. Patient safety and staff welfare are the outcomes that motivated the improvement.</td>
+                    <td>Downward change point at 95% confidence, sustained across winter 2026&ndash;27 and winter 2027&ndash;28.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-incomplete">What the public picture does not yet tell us</h2>
+
+    <p>The ITV News report and the NHS England case study describe what changed inside Watford General. They are positive, well-sourced accounts that the trust actively shared with the public. But there is an important question that neither source answers directly: where did the patients go?</p>
+
+    <p>Deming&rsquo;s &ldquo;by what method?&rdquo; applied to the discharge piece requires us to ask: when a patient left the corridor, where did they go? There are three possibilities, each with different implications for whether the improvement is structural or fragile.</p>
+
+    <div class="callout blue">
+        <strong>Possibility A &mdash; Structural Level 3: discharged into safe community settings</strong>
+        <p>Patients moved faster into care homes, domiciliary care packages, or intermediate care. The external discharge constraint was partially addressed through better coordination with Hertfordshire County Council &mdash; which, notably, had already implemented 7-day social care working specifically to improve hospital discharge flow. If this is what happened, the No Criteria to Reside rate at West Hertfordshire trust level should show a downward change point preceding the corridor care improvement. This would be the strongest possible evidence of structural change.</p>
+    </div>
+
+    <div class="callout orange">
+        <strong>Possibility B &mdash; Internal redistribution: discharge lounges, virtual wards, step-down areas</strong>
+        <p>Patients moved from corridors to other internal spaces &mdash; discharge lounges, the trust&rsquo;s award-winning virtual hospital programme, step-down beds. Corridor care hours fell but the discharge constraint at system level was unchanged. This is a Level 2 fix &mdash; better internal flow management. Genuinely valuable for patients who would otherwise be in corridors. But fragile under higher demand, because the external constraint is still there.</p>
+    </div>
+
+    <div class="callout red">
+        <strong>The Fixes That Fail risk</strong>
+        <p>The Fixes That Fail archetype from Senge&rsquo;s <em>Fifth Discipline</em> describes exactly this situation: an intervention provides genuine short-term relief by managing the symptom, but the underlying constraint is unchanged. Each winter, the symptom returns &mdash; and each fix must work harder to manage it. The peaks grow over time. Bootstrap CUSUM on the national A&amp;E data shows exactly this pattern from 2010 to 2026. The honest question for Watford is: has the constraint been addressed, or brilliantly managed? The trust-level NCR data will answer this. That data is not yet available in the public domain.</p>
+    </div>
+
+    <p>This is not a criticism of Watford. It is the analytically honest question that the available evidence raises but does not yet answer. The trust has done something genuinely impressive. The question of how it was sustained at system level is the one we cannot yet answer from public sources &mdash; and it is the most important question for other trusts trying to replicate the method.</p>
+
+    <hr>
+
+    <h2 id="section-prediction">The pre-committed prediction &mdash; June 2026</h2>
+
+    <p>In the spirit of the site&rsquo;s commitment to pre-committed predictions &mdash; made before the data arrives &mdash; here is what Bootstrap CUSUM applied to Watford&rsquo;s trust-level data should show if the change is structural:</p>
+
+    <div class="wait-box">
+        <div class="wb-label">&#128221; Pre-committed prediction &mdash; June 2026</div>
+        <h3>Bootstrap CUSUM on West Hertfordshire Teaching Hospitals NHS Trust data will show the following if Watford&rsquo;s improvement is structural:</h3>
+        <ol>
+            <li><strong>Corridor care hours:</strong> a confirmed downward change point at 95% confidence, sustained across both winter 2026&ndash;27 and winter 2027&ndash;28. One winter is not structural proof.</li>
+            <li><strong>Patient safety events:</strong> a confirmed downward change point, lagging the corridor care change point by 3&ndash;6 months.</li>
+            <li><strong>Staff sickness absence:</strong> a downward change point, lagging the cultural change by 6&ndash;12 months.</li>
+            <li><strong>30-day readmissions:</strong> flat or downward. An upward change point here would indicate faster but less safe discharge.</li>
+            <li><strong>FFT patient satisfaction scores:</strong> an upward change point coinciding with or following the corridor care improvement.</li>
+        </ol>
+        <p style="margin-top:12px;"><strong>The critical additional test:</strong> if trust-level NCR data becomes available, it should show a downward change point <em>preceding</em> the corridor care change point. If NCR is flat while corridor care improves, the discharge constraint has been managed internally rather than genuinely addressed &mdash; and the Fixes That Fail risk is present.</p>
+        <p style="margin-top:12px;"><strong>The prediction will have been confirmed</strong> when Bootstrap CUSUM shows all five measures moving in the predicted direction, sustained across two full winters, with NCR data supporting rather than contradicting the picture.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-scale">One trust and the national constraint</h2>
+
+    <p>Watford&rsquo;s story is the most encouraging thing in the public domain on corridor care. But it is one trust out of 136 acute trusts in England, in a county with a relatively cooperative NHS-council relationship and an existing 7-day social care infrastructure. The national No Criteria to Reside figure was 9,933 patients per day as of June 2025 &mdash; and rising.</p>
+
+    <p>The Bright Spots lesson from Watford is not that the national problem is solved. It is that within the boundary of a single trust, significant Level 3 and Level 3 Deep change is achievable &mdash; without additional funding, without government reform, and without social care transformation. The constraint that crosses the organisational boundary into social care remains, and is addressed separately at ICS or national level.</p>
+
+    <p>For any trust CEO reading this, the question is not &ldquo;how do we become Watford?&rdquo; &mdash; that framing risks copying the form without understanding the method. Deming&rsquo;s question is the right one: by what method? The methods described above are transferable because they are not specific to Watford&rsquo;s geography, size, or patient population. They are applications of principles &mdash; Joiner&rsquo;s levels, Deming&rsquo;s 14 Points &mdash; that work because of what they are, not because of who applied them.</p>
+
+    <hr>
+
+    <div class="cta-box">
+        <h2>Apply Bootstrap CUSUM to your trust&rsquo;s data</h2>
+        <p>NHS England publishes corridor care, patient safety, and FFT data. Upload your trust&rsquo;s series to the StepChange Analyzer and run Bootstrap CUSUM &mdash; the method will tell you honestly whether a structural change point exists.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related article</div>
+        <h3><a href="corridor-care-2029.html">Corridor Care 2029 &mdash; What Bootstrap CUSUM Will and Won&rsquo;t Find</a></h3>
+        <p>The national picture: four initiatives, Joiner analysis of each, and the pre-committed prediction that Bootstrap CUSUM will not find a structural national improvement change point unless the discharge constraint is addressed at system level.</p>
+        <a href="corridor-care-2029.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related concept</div>
+        <h3><a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a></h3>
+        <p>The framework applied to Watford&rsquo;s interventions above &mdash; why Level 3 and Level 3 Deep interventions produce structural change when Level 1 and Level 2 do not.</p>
+        <a href="joiner-levels-of-fix.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related concept</div>
+        <h3><a href="deming-14-points.html">Deming&rsquo;s 14 Points</a></h3>
+        <p>Points 1, 2, 7, 8, 9, and 12 &mdash; the ones Watford applied &mdash; explained with NHS examples and Joiner level classifications.</p>
+        <a href="deming-14-points.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related concept</div>
+        <h3><a href="types-of-measures.html">Types of Measures</a></h3>
+        <p>Why corridor care hours is a process measure, not the outcome measure &mdash; and why patient safety events, staff retention, and FFT scores are the honest tests of whether Watford&rsquo;s change is genuine.</p>
+        <a href="types-of-measures.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Sources:</strong></p>
+        <p style="margin-top:6px;">NHS England, &ldquo;Watford trust tackled corridor care as a whole-hospital problem,&rdquo; June 2026. <a href="https://www.england.nhs.uk/the-best-of-the-nhs/cutting-waiting-times-for-planned-care/corridor-care-a-whole-hospital-problem/" target="_blank" rel="noopener">england.nhs.uk</a></p>
+        <p style="margin-top:6px;">ITV News, &ldquo;Inside the hospital that has abolished corridor care,&rdquo; 19 May 2026. <a href="https://www.itv.com/news/2026-05-19/inside-the-hospital-that-has-abolished-corridor-care" target="_blank" rel="noopener">itv.com</a></p>
+        <p style="margin-top:6px;">Hertfordshire County Council, &ldquo;Adult care services seven-day working implementation,&rdquo; Local Government Association case study. <a href="https://www.local.gov.uk/case-studies/hertfordshire-adult-care-services-seven-day-working-implementation" target="_blank" rel="noopener">local.gov.uk</a></p>
+        <p style="margin-top:10px;"><strong>Framework references:</strong> Joiner, B.L. <em>Fourth Generation Management.</em> McGraw-Hill, 1994 &middot; Deming, W.E. <em>Out of the Crisis.</em> MIT Press, 1982 &middot; Heath, C. &amp; Heath, D. <em>Switch.</em> Random House, 2010 &middot; Senge, P. <em>The Fifth Discipline.</em> Doubleday, 1990 &middot; Goldratt, E.M. <em>The Goal.</em> North River Press, 1984</p>
+        <p style="margin-top:10px;"><strong>Bootstrap CUSUM:</strong> Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). &copy; Syd Stewart 2026.</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
