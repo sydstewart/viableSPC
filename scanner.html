@@ -37,7 +37,7 @@
 
             <div class="mb-4 text-center">
                 <h2 class="fw-bold" style="color:var(--brand-blue);">CSV Data Validator</h2>
-                <p class="text-muted">Checks your CSV for date issues, missing values, zeros, column errors, and out-of-order rows. Your file never leaves your browser.</p>
+                <p class="text-muted">Checks your CSV for date issues, missing values, zeros, duplicate dates, column errors, and out-of-order rows. Save as CSV from <strong>Microsoft Excel</strong> (File &rarr; Save As &rarr; CSV) or <strong>Google Sheets</strong> (File &rarr; Download &rarr; CSV). Your file never leaves your browser.</p>
             </div>
 
             <div class="scanner-card p-4 mb-4">
@@ -176,9 +176,18 @@
         const dateFmt = document.getElementById('date-format').value;
 
         resultsSection.style.display = 'block';
-        let stats = { blanks:0, badFormats:0, badNumbers:0, zeroValues:0, outOfOrder:0, missingDates:0, columnErrors:0, clean:0 };
+
+        // ── Stats object — includes duplicateDates and rowCount ──
+        let stats = { blanks:0, badFormats:0, badNumbers:0, zeroValues:0, outOfOrder:0, missingDates:0, columnErrors:0, duplicateDates:0, mixedFormats:0, rowCount:0, clean:0 };
         let lastTS = 0, lastDateStr = "", detectedFreqMs = 0, logHtml = "";
         let preCheckWarnings = "";
+
+        // ── Duplicate date tracking ──
+        const seenDates = new Set();
+
+        // ── Mixed format tracking ──
+        // Track what format each row's date looks like
+        const formatCounts = { stdDate:0, iso:0, yearMonth:0, yearOnly:0 };
 
         const sampleRows = rawData.filter(r => r[x] || r[y]).slice(0, 5);
 
@@ -224,21 +233,45 @@
                 logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Date is empty &mdash; merged cell suspected.</span>';
                 logHtml += '<span class="suggestion-tip">&#128161; In Excel: unmerge cells and fill each row with its own date.</span>';
             } else {
-                const isStdDate  = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}/.test(dVal);
-                const isISO      = /^\d{4}-\d{2}-\d{2}/.test(dVal);
+                const isStdDate   = /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}/.test(dVal);
+                const isISO       = /^\d{4}-\d{2}-\d{2}/.test(dVal);
                 const isYearMonth = /^\d{4}-\d{2}$/.test(dVal) || /^\d{1,2}[\/\-]\d{4}$/.test(dVal);
-                const isYearOnly = /^\d{4}$/.test(dVal);
-                if (!isStdDate && !isISO && !isYearMonth && !isYearOnly) {
+                const isYearOnly  = /^\d{4}$/.test(dVal);
+                const isFinYear   = /^\d{4}[\/\-]\d{2}$/.test(dVal);
+
+                if (isFinYear) {
+                    stats.badFormats++; rowHasError = true;
+                    logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Financial year format not supported: "' + dVal + '"</span>';
+                    logHtml += '<span class="suggestion-tip">&#128161; Convert to a standard date: 01/04/2024 for financial year 2024/25. Excel formula: =DATE(LEFT(A2,4),4,1) converts the start year to 1 April of that year. See the Fix CSV guide for full instructions.</span>';
+                } else if (!isStdDate && !isISO && !isYearMonth && !isYearOnly) {
                     stats.badFormats++; rowHasError = true;
                     logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Unrecognised date format: "' + dVal + '"</span>';
                     logHtml += '<span class="suggestion-tip">&#128161; Supported: DD/MM/YYYY, MM/DD/YYYY, YYYY-MM-DD, YYYY-MM, MM/YYYY, YYYY</span>';
                 }
+
+                // ── Track format of this row ──
+                if (isISO) formatCounts.iso++;
+                else if (isStdDate) formatCounts.stdDate++;
+                else if (isYearMonth) formatCounts.yearMonth++;
+                else if (isYearOnly) formatCounts.yearOnly++;
+
+                // ── Mixed format detection ──
+                // If this row's format differs from the dominant format so far, warn
+                const dominant = Object.entries(formatCounts).sort((a,b) => b[1]-a[1])[0];
+                const thisFormat = isISO ? 'iso' : isStdDate ? 'stdDate' : isYearMonth ? 'yearMonth' : isYearOnly ? 'yearOnly' : 'unknown';
+                if (dominant[1] >= 3 && thisFormat !== 'unknown' && thisFormat !== dominant[0] && formatCounts[thisFormat] <= 2) {
+                    stats.mixedFormats++; rowHasError = true;
+                    logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Mixed date format: "' + dVal + '" uses a different format from most other rows (' + dominant[0] + ').</span>';
+                    logHtml += '<span class="suggestion-tip">&#128161; Standardise all dates to the same format before uploading. This row will not be parsed correctly and may cause wrong change point dates.</span>';
+                }
+
                 const ts = parseRowDate(dVal, dateFmt);
                 if (!isNaN(ts)) {
+                    // Out-of-order check
                     if (lastTS > 0 && ts < lastTS) {
                         stats.outOfOrder++; rowHasError = true;
-                        logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date is out of chronological order.</span>';
-                        logHtml += '<span class="suggestion-tip">&#128161; Sort data by date ascending in Excel before saving as CSV.</span>';
+                        logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date out of order: "' + dVal + '" is earlier than the previous row "' + lastDateStr + '".</span>';
+                        logHtml += '<span class="suggestion-tip">&#128161; Bootstrap CUSUM must run oldest to newest. In Excel: select all data, Data tab &rarr; Sort &rarr; your date column &rarr; Oldest to Newest. In Google Sheets: Data &rarr; Sort range &rarr; A to Z on the date column. Then re-save as CSV.</span>';
                     } else if (lastTS > 0) {
                         const gap = ts - lastTS;
                         if (detectedFreqMs === 0 && gap > 0) {
@@ -249,10 +282,19 @@
                                 const expectedCount = Math.round(gap / detectedFreqMs) - 1;
                                 stats.missingDates += expectedCount; rowHasError = true;
                                 logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date gap detected: ' + expectedCount + ' expected period' + (expectedCount > 1 ? 's' : '') + ' missing between "' + lastDateStr + '" and "' + dVal + '".</span>';
-                                logHtml += '<span class="suggestion-tip">&#128161; Missing periods in the sequence cause change points to be dated incorrectly.</span>';
+                                logHtml += '<span class="suggestion-tip">&#128161; Missing periods affect the stage mean as well as the change point date. A period with no readings is still a data point — add it with an interpolated value or genuine zero. See the Fix CSV guide for how to handle this correctly.</span>';
                             }
                         }
                     }
+
+                    // ── Duplicate date check ──
+                    if (seenDates.has(ts)) {
+                        stats.duplicateDates++;
+                        logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Duplicate date: "' + dVal + '" appears more than once.</span>';
+                        logHtml += '<span class="suggestion-tip">&#128161; If your data has multiple readings per day (e.g. hourly or shift data) this is expected — ignore this warning. If each row should represent a unique period (monthly, weekly), remove or merge duplicate rows. In Excel: Data &rarr; Remove Duplicates on the date column.</span>';
+                    }
+                    seenDates.add(ts);
+
                     lastTS = ts;
                     lastDateStr = dVal;
                 }
@@ -283,17 +325,28 @@
                 logHtml += '<span class="suggestion-tip">&#128161; In Excel: remove comma separators from numbers before saving as CSV.</span>';
             }
 
+            // ── Row count ──
+            stats.rowCount++;
             if (!rowHasError) stats.clean++;
         });
 
-        const totalErrors = stats.blanks + stats.badFormats + stats.badNumbers + stats.zeroValues + stats.outOfOrder + stats.missingDates + stats.columnErrors;
+        const totalErrors = stats.blanks + stats.badFormats + stats.badNumbers + stats.zeroValues + stats.outOfOrder + stats.missingDates + stats.columnErrors + stats.duplicateDates + stats.mixedFormats;
         const isClean = totalErrors === 0;
 
         let warnings = "";
-        if (stats.outOfOrder > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.outOfOrder + ' out-of-order rows</strong> — sort by date ascending in Excel.</div>';
+
+        // ── Duplicate date warning ──
+        if (stats.mixedFormats > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.mixedFormats + ' mixed date format' + (stats.mixedFormats > 1 ? 's' : '') + ' detected.</strong> Some rows use a different date format from the rest of the series (e.g. DD/MM/YYYY mixed with YYYY-MM). Standardise all dates to the same format before uploading.</div>';
+        if (stats.duplicateDates > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.duplicateDates + ' duplicate date' + (stats.duplicateDates > 1 ? 's' : '') + ' detected.</strong> If your data has multiple readings per day (e.g. hourly or shift data) this is expected. If each row should represent a unique period, remove or merge duplicate rows before analysing.</div>';
+
+        // ── Row count warning ──
+        if (stats.rowCount < 20) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>Only ' + stats.rowCount + ' data rows detected.</strong> Bootstrap CUSUM needs at least 20 rows for reliable results. Consider extending the series or switching to a lower frequency (e.g. quarterly instead of monthly).</div>';
+        else if (stats.rowCount < 30) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.rowCount + ' rows — borderline.</strong> 30+ rows is recommended for confident Bootstrap CUSUM results at 95% confidence.</div>';
+
+        if (stats.outOfOrder > 0)   warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.outOfOrder + ' out-of-order date' + (stats.outOfOrder > 1 ? 's' : '') + ' detected.</strong> Bootstrap CUSUM requires dates to run oldest to newest. In Excel: Data &rarr; Sort &rarr; Oldest to Newest on the date column. In Google Sheets: Data &rarr; Sort range &rarr; A to Z. Re-save as CSV before analysing.</div>';
         if (stats.missingDates > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.missingDates + ' missing period' + (stats.missingDates > 1 ? 's' : '') + ' detected</strong> — gaps cause change points to be dated incorrectly.</div>';
         if (stats.columnErrors > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.columnErrors + ' column structure errors</strong> — unquoted commas in numeric values.</div>';
-        if (stats.zeroValues > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.zeroValues + ' zero values detected</strong> — may be missing readings recorded as 0.</div>';
+        if (stats.zeroValues > 0)   warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.zeroValues + ' zero values detected</strong> — may be missing readings recorded as 0.</div>';
 
         summaryArea.className = 'summary-box shadow-sm' + (isClean && !preCheckWarnings ? ' clean' : '');
         summaryArea.innerHTML =
@@ -301,19 +354,22 @@
             (isClean && !preCheckWarnings ? '&#9989; Validation Summary &mdash; No Issues Found' : '&#10060; Validation Summary &mdash; Issues Detected') + '</h5>' +
             preCheckWarnings + warnings +
             '<div class="d-flex flex-wrap gap-2 mt-3">' +
-            '<span class="stat-badge">&#128308; ' + stats.blanks + ' Blank Values</span>' +
-            '<span class="stat-badge">&#128993; ' + stats.zeroValues + ' Zero Values</span>' +
-            '<span class="stat-badge">&#128308; ' + stats.missingDates + ' Missing Periods</span>' +
-            '<span class="stat-badge">&#128993; ' + stats.badFormats + ' Format Warnings</span>' +
-            '<span class="stat-badge">&#128308; ' + stats.badNumbers + ' Invalid Values</span>' +
-            '<span class="stat-badge">&#128993; ' + stats.outOfOrder + ' Out-of-Order Rows</span>' +
-            '<span class="stat-badge">&#128308; ' + stats.columnErrors + ' Column Errors</span>' +
+            '<span class="stat-badge">&#128308; ' + stats.blanks         + ' Blank Dates</span>' +
+            '<span class="stat-badge">&#128993; ' + stats.zeroValues     + ' Zero Values</span>' +
+            '<span class="stat-badge">&#128308; ' + stats.missingDates   + ' Missing Periods</span>' +
+            '<span class="stat-badge">&#128993; ' + stats.badFormats     + ' Format Warnings</span>' +
+            '<span class="stat-badge">&#128308; ' + stats.badNumbers     + ' Invalid Values</span>' +
+            '<span class="stat-badge">&#128993; ' + stats.outOfOrder     + ' Out-of-Order Rows</span>' +
+            '<span class="stat-badge">&#128308; ' + stats.columnErrors   + ' Column Errors</span>' +
+            '<span class="stat-badge">&#128308; ' + stats.mixedFormats   + ' Mixed Formats</span>' +
+            '<span class="stat-badge">&#128308; ' + stats.duplicateDates + ' Duplicate Dates</span>' +
+            '<span class="stat-badge">&#8505;&#65039; ' + stats.rowCount + ' Total Rows</span>' +
             '</div><hr>' +
             '<div class="fw-bold fs-5" style="color:' + (isClean ? '#198754' : '#444') + '">' +
             (isClean && !preCheckWarnings ? '&#9989; All ' + rawData.length + ' rows passed &mdash; ready for analysis.' :
                 stats.clean + ' / ' + rawData.length + ' rows are clean. Fix the issues above before analysing.') +
             '</div>' +
-            (isClean ? '' : '<div class="mt-3"><a href="index.html" class="btn btn-primary btn-sm">&#8592; Return to Analyzer</a></div>');
+            (isClean ? '' : '<div class="mt-3"><a href="fix-csv-date-format.html" class="btn btn-outline-primary btn-sm me-2">&#128214; Fix CSV guide</a><a href="index.html" class="btn btn-primary btn-sm">&#8592; Return to Analyzer</a></div>');
 
         auditLog.innerHTML = logHtml ||
             '<span class="success-text">&#9989; VALIDATION COMPLETE &mdash; NO ISSUES FOUND.</span>' +

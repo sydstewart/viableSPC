@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/fix-csv-date-format.html">
+    <title>Fix CSV Date Format for Bootstrap CUSUM — StepChangeAnalysis.com</title>
+    <meta name="description" content="How to prepare a CSV file for Bootstrap CUSUM analysis — date formats, missing values, merged cells, comma separators, and the Data Validator. Practical fixes for the most common upload problems.">
+    <meta name="keywords" content="CSV date format Bootstrap CUSUM, fix CSV for CUSUM, prepare data for Bootstrap CUSUM, NHS data CSV format, Excel to CSV for Bootstrap CUSUM, missing values CUSUM">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="what-to-do-next.html">What to do next</a> &rsaquo; Fix CSV date format</div>
+    <div class="page-flag">&#128193; Data preparation guide</div>
+    <h1>Fix Your CSV for Bootstrap CUSUM</h1>
+    <p class="page-intro">Bootstrap CUSUM needs two things from your CSV: a date column and a numeric value column. Most upload problems come from one of five causes — date format, missing values, merged cells, comma separators, or too few data points. This page fixes all five.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Data preparation guide &nbsp;&middot;&nbsp; June 2026</div>
+    <div style="margin-top:8px;margin-bottom:4px;font-family:system-ui,sans-serif;font-size:0.92em;color:#475569;"><strong style="color:#002d5b;">Method:</strong> Bootstrap CUSUM &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what">What is a CSV file?</a></li>
+                <li><a href="#section-structure">What the Analyzer needs</a></li>
+                <li><a href="#section-dates">Date formats — the most common problem</a></li>
+                <li><a href="#section-missing">Missing values — zeros and blanks</a></li>
+                <li><a href="#section-merged">Merged cells in Excel</a></li>
+                <li><a href="#section-commas">Numbers with comma separators</a></li>
+                <li><a href="#section-order">Date order — oldest to newest</a></li>
+                <li><a href="#section-minimum">Minimum data requirements</a></li>
+                <li><a href="#section-validator">Run the Data Validator first</a></li>
+                <li><a href="#section-checklist">Pre-upload checklist</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what">What is a CSV file?</h2>
+
+    <p>CSV stands for Comma-Separated Values. It is the simplest possible format for tabular data &mdash; plain text, one row per line, columns separated by commas. Every spreadsheet application can save as CSV &mdash; <strong>Microsoft Excel</strong>, <strong>Google Sheets</strong>, and LibreOffice all support it natively. Bootstrap CUSUM requires CSV because it runs entirely in your browser with no server &mdash; CSV is the universal format that any browser can read without plugins or uploads.</p>
+
+    <div class="callout blue">
+        <strong>Your data never leaves your computer</strong>
+        <p>The StepChange Analyzer runs entirely in your browser. When you upload a CSV, it is read locally by JavaScript &mdash; it is never sent to any server. This means you can safely use patient-level NHS data, commercially sensitive operational data, or any other confidential dataset without any information governance concern.</p>
+    </div>
+
+    <p><strong>Microsoft Excel:</strong> File &rarr; Save As &rarr; CSV (Comma delimited) (.csv) &nbsp;&middot;&nbsp; <strong>Google Sheets:</strong> File &rarr; Download &rarr; Comma-separated values (.csv) &nbsp;&middot;&nbsp; <strong>LibreOffice Calc:</strong> File &rarr; Save As &rarr; Text CSV (.csv) Open the saved file in a text editor (Notepad on Windows, TextEdit on Mac) and you will see the raw structure &mdash; this is useful for diagnosing problems.</p>
+
+    <hr>
+
+    <h2 id="section-structure">What the Analyzer needs</h2>
+
+    <p>The minimum requirement is two columns: a <strong>date column</strong> and a <strong>numeric value column</strong>. Column names go in the first row (the header). Everything else is optional.</p>
+
+    <div class="dark-box">
+        <h3>&#128203; The minimum valid CSV structure</h3>
+        <p style="font-family:monospace;font-size:0.95em;background:rgba(255,255,255,0.1);padding:14px 16px;border-radius:6px;line-height:2;color:white;">
+            Date,Value<br>
+            01/04/2020,142<br>
+            01/05/2020,138<br>
+            01/06/2020,151<br>
+            01/07/2020,144<br>
+            01/08/2020,139
+        </p>
+        <p style="margin-top:12px;">The Analyzer will detect the date column and value column automatically. Column names can be anything &mdash; <em>Month</em>, <em>Rate</em>, <em>Incidents</em>, <em>Admissions</em> &mdash; you select them from dropdown menus after upload. Extra columns are ignored.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-dates">Date formats — the most common problem</h2>
+
+    <p>The most common reason a CSV fails to analyse is an unrecognised date format. The Analyzer supports six formats. The safest is ISO format (<code>YYYY-MM-DD</code>) because it is unambiguous &mdash; but all six work if selected correctly in the Date Style dropdown.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Format</th>
+                <th>Example</th>
+                <th>When to use</th>
+                <th>Common mistake</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>YYYY-MM-DD</strong> (ISO)</td>
+                    <td><code>2024-03-01</code></td>
+                    <td>Always safe. Unambiguous. Recommended for monthly data — use the first of each month.</td>
+                    <td>Using 2024-03 without a day — add -01 to make it a valid date.</td>
+                </tr>
+                <tr>
+                    <td><strong>DD/MM/YYYY</strong> (UK)</td>
+                    <td><code>01/03/2024</code></td>
+                    <td>NHS data exported from most UK systems. Select &ldquo;DD/MM/YYYY (UK/EU)&rdquo; in Date Style.</td>
+                    <td>Excel auto-converting to MM/DD/YYYY on a US-locale machine. Check the first row.</td>
+                </tr>
+                <tr>
+                    <td><strong>MM/DD/YYYY</strong> (US)</td>
+                    <td><code>03/01/2024</code></td>
+                    <td>US system exports. Select &ldquo;MM/DD/YYYY (US)&rdquo; in Date Style.</td>
+                    <td>Confusing UK and US format when both are plausible (e.g. 01/03/2024 vs 03/01/2024).</td>
+                </tr>
+                <tr>
+                    <td><strong>YYYY-MM</strong> (Year-Month ISO)</td>
+                    <td><code>2024-03</code></td>
+                    <td>Monthly data without a day. ONS and NHS England often publish in this format.</td>
+                    <td>Mixing YYYY-MM and YYYY-MM-DD in the same column.</td>
+                </tr>
+                <tr>
+                    <td><strong>MM/YYYY</strong> (Year-Month UK)</td>
+                    <td><code>03/2024</code></td>
+                    <td>Some NHS data exports use this format for monthly returns.</td>
+                    <td>None specific &mdash; but select this explicitly, do not rely on auto-detect.</td>
+                </tr>
+                <tr>
+                    <td><strong>YYYY</strong> (Year only)</td>
+                    <td><code>2024</code></td>
+                    <td>Annual data series. GDP, annual mortality rates, yearly audit data.</td>
+                    <td>Mixing four-digit years with other formats in the same column.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout orange">
+        <strong>Financial year formats are not supported</strong>
+        <p>Formats like <code>2004-05</code> or <code>2023/24</code> (NHS financial year notation) are not recognised. Convert each financial year to a standard date before uploading &mdash; the start of the financial year is usually clearest: <code>01/04/2004</code> for 2004-05, <code>01/04/2023</code> for 2023/24.</p>
+        <p style="margin-top:8px;"><strong>Excel formula to convert from financial year notation:</strong> If your financial year is in cell A2 as <code>2004-05</code> or <code>2023/24</code>, use this formula to extract the start year and build a date:</p>
+        <div style="background:#1e293b;color:#93c5fd;font-family:monospace;font-size:0.9em;padding:12px 16px;border-radius:6px;margin-top:8px;overflow-x:auto;">
+            =DATE(LEFT(A2,4), 4, 1)
+        </div>
+        <p style="margin-top:8px;font-size:0.9em;color:var(--text);">This takes the first 4 characters (the start year) and builds 1 April of that year. Format the result column as <strong>DD/MM/YYYY</strong> before saving as CSV. For <code>2023/24</code> format, the formula is identical &mdash; <code>LEFT(A2,4)</code> extracts <code>2023</code> in both cases.</p>
+    </div>
+
+    <div class="callout red">
+        <strong>Mixed date formats in the same column</strong>
+        <p>If some rows use <code>01/03/2024</code> and others use <code>2024-03</code>, the Analyzer cannot parse all rows correctly. The rows in the minority format will return no timestamp &mdash; the out-of-order check will silently skip them, missing periods around them will go undetected, and the stage mean will be calculated on fewer points than it should be.</p>
+        <p style="margin-top:8px;">This is more common than it looks. NHS data exports sometimes switch format mid-series when a reporting system was upgraded, or when data from two different sources is merged into one spreadsheet.</p>
+        <p style="margin-top:8px;">The Data Validator detects mixed formats and flags the minority rows by row number. Once you know which rows are affected, standardise the entire column to one format before saving as CSV. The safest choice is always ISO (<code>YYYY-MM-DD</code> or <code>YYYY-MM</code>) because it is unambiguous regardless of locale.</p>
+        <p style="margin-top:8px;"><strong>Excel formula to convert DD/MM/YYYY to YYYY-MM-DD:</strong></p>
+        <div style="background:#1e293b;color:#93c5fd;font-family:monospace;font-size:0.9em;padding:12px 16px;border-radius:6px;margin:8px 0;overflow-x:auto;">
+            =TEXT(DATEVALUE(A2),"YYYY-MM-DD")
+        </div>
+        <p style="font-size:0.9em;">If the cell is already a real Excel date (not text), use: <code>=TEXT(A2,"YYYY-MM-DD")</code></p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-missing">Missing values — zeros and blanks</h2>
+
+    <p>Missing values are the second most common cause of incorrect results. There are two distinct cases and they require different fixes.</p>
+
+    <div class="callout red">
+        <strong>Case 1 &mdash; The row is omitted entirely from the CSV</strong>
+        <p>The Analyzer treats each row as the next observation in sequence. If your data has monthly observations but March 2022 is missing from the CSV entirely, the Analyzer will treat February 2022 and April 2022 as consecutive months. This compresses the time axis and may cause change points to be dated incorrectly.</p>
+        <p style="margin-top:8px;"><strong>A missing row may mean genuinely no readings that period &mdash; and that matters analytically.</strong> A month with no incidents, no referrals, or no activity is a real data point of zero (or near-zero). Omitting it removes that information from the stage mean calculation and makes the average appear higher than it was. For NHS safety data especially, a period of no reported events should be included, not silently dropped.</p>
+        <p style="margin-top:8px;"><strong>Fix:</strong> Add the missing row. If no measurement was taken, use the average of the surrounding two values as an estimate and note the interpolation. If genuinely zero events occurred, use zero and make sure zero is a valid observation for this metric. Do not simply leave the row out &mdash; the gap will distort both the stage mean and the change point date.</p>
+    </div>
+
+    <div class="callout red">
+        <strong>Case 2 &mdash; A blank cell in the value column</strong>
+        <p>A blank value cell may be read as zero. Zero is almost never a valid observation in NHS data &mdash; a month with zero incidents, zero admissions, or zero referrals is extremely rare and would be genuine data. A zero created by a blank cell will severely depress the stage mean and create false change points.</p>
+        <p style="margin-top:8px;"><strong>Fix:</strong> In Excel, filter the value column for blank or zero values before saving as CSV. Delete any row where zero is not a genuine observation. If the period genuinely had no events, use the Data Validator to confirm it before proceeding.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-merged">Merged cells in Excel</h2>
+
+    <p>Excel worksheets often use merged cells for formatting &mdash; a date label spanning multiple rows, or a quarter label covering three months. When saved as CSV, merged cells leave blank rows beneath them. The blank rows appear as missing values in the Analyzer.</p>
+
+    <div class="dark-box">
+        <h3>&#9881;&#65039; How to unmerge cells in Excel before saving as CSV</h3>
+        <p><strong>Step 1 &mdash;</strong> Select the entire date column (click the column header letter).</p>
+        <p style="margin-top:8px;"><strong>Step 2 &mdash;</strong> Home tab &rarr; Alignment group &rarr; click the dropdown arrow on &ldquo;Merge &amp; Center&rdquo; &rarr; select &ldquo;Unmerge Cells&rdquo;.</p>
+        <p style="margin-top:8px;"><strong>Step 3 &mdash;</strong> The unmerged cells below the original merged cell will now be blank. Select those blank cells and fill them with the correct date value (Ctrl+D fills down in Excel).</p>
+        <p style="margin-top:8px;"><strong>Step 4 &mdash;</strong> Save as CSV. Open in a text editor to verify every row has a date.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-commas">Numbers with comma separators</h2>
+
+    <p>Large numbers formatted with comma thousands separators &mdash; <code>1,234,567</code> &mdash; break the CSV structure because the comma is also the column separator. The Analyzer will read <code>1,234,567</code> as three separate columns: <code>1</code>, <code>234</code>, and <code>567</code>.</p>
+
+    <div class="dark-box">
+        <h3>&#9881;&#65039; How to remove comma separators in Excel before saving as CSV</h3>
+        <p><strong>Step 1 &mdash;</strong> Select the value column.</p>
+        <p style="margin-top:8px;"><strong>Step 2 &mdash;</strong> Right-click &rarr; Format Cells &rarr; Number &rarr; set Decimal Places to 0 &rarr; <strong>untick &ldquo;Use 1000 Separator (,)&rdquo;</strong>.</p>
+        <p style="margin-top:8px;"><strong>Step 3 &mdash;</strong> Save as CSV. Values should now appear as <code>1234567</code> without commas.</p>
+        <p style="margin-top:8px;">Alternatively: if your values are already quoted in the CSV (<code>&ldquo;1,234,567&rdquo;</code>), this is valid CSV and the Analyzer will parse it correctly &mdash; the quotes protect the comma within the value.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-order">Date order — oldest to newest</h2>
+
+    <p>Bootstrap CUSUM reads your CSV from top to bottom, treating each row as the next observation in time. The series <strong>must run from oldest date at the top to newest date at the bottom</strong>. If rows are in any other order &mdash; newest first, or randomly sorted &mdash; the CUSUM accumulation is meaningless and change points will be dated incorrectly or not found at all.</p>
+
+    <div class="callout red">
+        <strong>Why order matters — the CUSUM accumulation</strong>
+        <p>The CUSUM statistic accumulates deviations from the mean in sequence. If row 1 is April 2026 and row 2 is January 2019, the algorithm is accumulating a sum across time that is running backwards. The change point it detects will correspond to a position in your CSV rows, not to a real point in time. A chart that looks plausible may be completely wrong if the underlying row order is wrong.</p>
+        <p style="margin-top:8px;">The Data Validator detects out-of-order dates and flags them by row number. But it cannot fix the order for you &mdash; that requires sorting the data before saving as CSV.</p>
+    </div>
+
+    <div class="dark-box">
+        <h3>&#9881;&#65039; How to sort oldest to newest in Excel and Google Sheets</h3>
+        <p><strong>Microsoft Excel:</strong></p>
+        <p style="margin-top:6px;">Select the entire data range (including headers) &rarr; <strong>Data tab &rarr; Sort</strong> &rarr; Sort by your date column &rarr; Order: <strong>Oldest to Newest</strong> &rarr; OK. Then save as CSV.</p>
+        <p style="margin-top:10px;"><strong>Google Sheets:</strong></p>
+        <p style="margin-top:6px;">Select the entire data range &rarr; <strong>Data &rarr; Sort range &rarr; Advanced range sorting options</strong> &rarr; tick &ldquo;Data has header row&rdquo; &rarr; Sort by your date column &rarr; A &rarr; Z &rarr; Sort. Then File &rarr; Download &rarr; CSV.</p>
+        <p style="margin-top:10px;"><strong>Quick check before saving:</strong> Look at the first and last rows. The first row should be your earliest date. The last row should be your most recent date. If not, sort again.</p>
+    </div>
+
+    <div class="callout orange">
+        <strong>Data exported newest-first is a common trap</strong>
+        <p>Many NHS reporting systems and dashboards export data with the most recent period at the top &mdash; this makes sense for reading a table, but is wrong for Bootstrap CUSUM. Always check the sort order of any exported file before uploading. The Data Validator will flag out-of-order rows but will not automatically reverse the series for you.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-minimum">Minimum data requirements</h2>
+
+    <p>Bootstrap CUSUM requires a minimum number of data points to produce reliable results. Too few points and the algorithm cannot distinguish genuine structural change from normal variation.</p>
+
+    <div class="callout orange">
+        <strong>Duplicate dates</strong>
+        <p>If your data has <strong>multiple readings per day</strong> &mdash; hourly observations, shift data, or intraday measurements &mdash; duplicate dates are expected and correct. Bootstrap CUSUM will treat each row as a separate observation in sequence.</p>
+        <p style="margin-top:8px;">If each row is meant to represent a <strong>unique period</strong> (one row per month, one row per week) and the same date appears twice, Bootstrap CUSUM will produce incorrect stage means. This often happens when data is exported from reporting tools that aggregate differently across date ranges.</p>
+        <p style="margin-top:8px;"><strong>Fix for unintended duplicates:</strong> In Excel, sort by date and scan for repeated values, or use <strong>Data &rarr; Remove Duplicates</strong> on the date column. If both rows contain valid data, merge them (sum or average the values) into a single row before saving as CSV.</p>
+    </div>
+
+    <div class="signal-grid">
+        <div class="signal-card" style="border-top-color:var(--red);">
+            <div class="signal-num" style="color:var(--red);">Under 20</div>
+            <div class="signal-title">Not enough data</div>
+            <p class="signal-desc">Fewer than 20 data points is insufficient for Bootstrap CUSUM. The confidence levels will be unreliable. Options: extend the historical series, switch to a lower frequency (quarterly instead of monthly), or use the X-mR chart tab instead.</p>
+        </div>
+        <div class="signal-card" style="border-top-color:var(--orange);">
+            <div class="signal-num" style="color:var(--orange);">20&ndash;30</div>
+            <div class="signal-title">Minimum workable</div>
+            <p class="signal-desc">Borderline. Results are valid but confidence levels are sensitive to the exact number of points. Use 95% confidence rather than 99.7% at this length. Treat results as indicative rather than definitive.</p>
+        </div>
+        <div class="signal-card" style="border-top-color:var(--green);">
+            <div class="signal-num" style="color:var(--green);">30+</div>
+            <div class="signal-title">Good to go</div>
+            <p class="signal-desc">30 or more data points gives Bootstrap CUSUM reliable power at 95% confidence. 40+ points at 99.7% confidence. Monthly data going back 3&ndash;5 years is ideal for most NHS improvement applications.</p>
+        </div>
+    </div>
+
+    <div class="callout blue">
+        <strong>Too soon after an intervention?</strong>
+        <p>If you implemented an intervention less than 6 months ago, there may not be enough post-intervention data for Bootstrap CUSUM to detect a change point even if one has occurred. This is not a data problem &mdash; it is a timing problem. Set a review date and re-run when more data has accumulated. See <a href="decide-to-wait.html">Decide to wait</a> for the decision rules around review dates.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-validator">Run the Data Validator first</h2>
+
+    <p>Before uploading to the Analyzer, run your CSV through the <a href="scanner.html" target="_blank">Data Validator</a>. It checks for the most common problems automatically and gives you a specific diagnosis rather than a generic error message.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>What the Validator checks</th>
+                <th>What it finds</th>
+                <th>What to do</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Date format consistency</strong></td>
+                    <td>Mixed formats in the date column, unrecognised formats, financial year notation</td>
+                    <td>Standardise all dates to a single format. Use ISO (YYYY-MM-DD) if in doubt.</td>
+                </tr>
+                <tr>
+                    <td><strong>Missing date periods</strong></td>
+                    <td>Gaps in the date sequence — months or years missing from the series</td>
+                    <td>Add missing rows with interpolated or blank values.</td>
+                </tr>
+                <tr>
+                    <td><strong>Zero and blank values</strong></td>
+                    <td>Rows where the value column is zero or blank</td>
+                    <td>Delete rows where zero is not a genuine observation. Fill blanks or interpolate.</td>
+                </tr>
+                <tr>
+                    <td><strong>Column structure</strong></td>
+                    <td>Columns split by comma separators within values, extra columns, missing headers</td>
+                    <td>Remove comma separators from numeric values. Ensure first row is a header.</td>
+                </tr>
+                <tr>
+                    <td><strong>Duplicate dates</strong></td>
+                    <td>Rows where the same date appears more than once in the date column</td>
+                    <td>Sort by date in Excel, merge or delete duplicate rows. Use Data → Remove Duplicates.</td>
+                </tr>
+                <tr>
+                    <td><strong>Row count</strong></td>
+                    <td>Whether the series has at least 20 usable rows</td>
+                    <td>Extend the series or reduce frequency if under 20 rows.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-checklist">Pre-upload checklist</h2>
+
+    <div class="dark-box">
+        <h3>&#9989; Before you upload to the StepChange Analyzer</h3>
+        <p><strong style="color:white;">&#9744; Two columns minimum:</strong> a date column and a numeric value column. Headers in row 1.</p>
+        <p style="margin-top:10px;"><strong style="color:white;">&#9744; Dates are consistent:</strong> all rows use the same format. No financial year notation (2004-05). No blank date cells.</p>
+        <p style="margin-top:10px;"><strong style="color:white;">&#9744; No missing rows:</strong> every period in your series has a row, even if the value is estimated or interpolated.</p>
+        <p style="margin-top:10px;"><strong style="color:white;">&#9744; All dates use the same format:</strong> no mixing of DD/MM/YYYY with YYYY-MM in the same column. Use the Data Validator to detect mixed formats by row number.</p>
+        <p style="margin-top:10px;"><strong style="color:white;">&#9744; No duplicate dates:</strong> each date appears only once. Use Excel Data &rarr; Remove Duplicates on the date column to check.</p>
+        <p style="margin-top:10px;"><strong style="color:white;">&#9744; No blank or spurious zero values:</strong> any row where the value is blank or zero because of a data export issue has been deleted or filled.</p>
+        <p style="margin-top:10px;"><strong style="color:white;">&#9744; No comma separators in numbers:</strong> 1234567 not 1,234,567. Check in a text editor.</p>
+        <p style="margin-top:10px;"><strong style="color:white;">&#9744; No merged cells:</strong> all cells in the date column contain a value. Unmerged and filled in Excel before saving as CSV.</p>
+        <p style="margin-top:10px;"><strong style="color:white;">&#9744; At least 20 rows:</strong> ideally 30+. If fewer, consider quarterly instead of monthly frequency.</p>
+        <p style="margin-top:10px;"><strong style="color:white;">&#9744; Data Validator passed:</strong> run through <a href="scanner.html" target="_blank" style="color:#93c5fd;">scanner.html</a> with no errors before uploading to the Analyzer.</p>
+    </div>
+
+    <div class="cta-box">
+        <h2>Ready? Open the StepChange Analyzer</h2>
+        <p>Your CSV is prepared and the Data Validator has passed. Upload it to the Analyzer and run Bootstrap CUSUM.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="nav-grid">
+        <a href="scanner.html" class="nav-card" target="_blank">
+            <div class="nav-tag">Tool</div>
+            <h3>&#128269; Data Validator</h3>
+            <p>Run your CSV through the Data Validator before uploading — it checks dates, missing values, blank cells, and row count automatically.</p>
+        </a>
+        <a href="interpret-results.html" class="nav-card">
+            <div class="nav-tag">Next step</div>
+            <h3>Interpret Results</h3>
+            <p>Once your CSV uploads cleanly and Bootstrap CUSUM runs — how to read the output, understand confidence levels, and identify genuine change points.</p>
+        </a>
+        <a href="seasonality-mistaken-for-improvement.html" class="nav-card">
+            <div class="nav-tag">Common pitfall</div>
+            <h3>Seasonality Mistaken for Improvement</h3>
+            <p>A clean CSV with seasonal data can still produce misleading results. How to recognise and handle seasonal patterns before running Bootstrap CUSUM.</p>
+        </a>
+        <a href="false-alarms-in-performance-charts.html" class="nav-card">
+            <div class="nav-tag">Common pitfall</div>
+            <h3>False Alarms in Performance Charts</h3>
+            <p>How to distinguish genuine signals from common cause variation — and why most &ldquo;improvements&rdquo; visible in before-and-after charts are not structural change points.</p>
+        </a>
+        <a href="decide-to-wait.html" class="nav-card">
+            <div class="nav-tag">Decision guide</div>
+            <h3>Decide to Wait</h3>
+            <p>If Bootstrap CUSUM finds no change point — the decision rules, review dates, and how to defend the decision to wait rather than intervene again.</p>
+        </a>
+        <a href="types-of-measures.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Types of Measures</h3>
+            <p>Make sure you are running Bootstrap CUSUM on the right measure — outcome, process, or balancing — before preparing your CSV.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Tool:</strong> <a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based StepChange Analyzer (Bootstrap CUSUM &amp; X-mR) &middot; no data uploaded &middot; any sector</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). &copy; Syd Stewart 2026. <a href="glossary.html">Glossary</a> &middot; <a href="about.html">About</a></p>
+        <p style="margin-top:12px;border-top:1px solid #e2e8f0;padding-top:12px;">&#128172; <strong>Was this useful?</strong> &nbsp;<a href="https://docs.google.com/forms/d/e/1FAIpQLSeM9hZ75140SEKR0Mex4JvLEEdp9E8hq9w5Ug5ItDH9Qx5fkg/viewform?usp=publish-editor" target="_blank" rel="noopener" style="color:#0056b3;font-weight:600;">Share feedback or a question &rarr;</a> &nbsp;&middot;&nbsp; Takes 2 minutes &middot; helps improve the site</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
