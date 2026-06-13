@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/decide-to-wait.html">
+    <title>Decide to Wait — Don't Tamper When Bootstrap CUSUM Finds No Change — StepChangeAnalysis.com</title>
+    <meta name="description" content="When Bootstrap CUSUM finds no structural change, the default action is to wait and measure — not to intervene again. This page gives you the decision rules, the Bootstrap CUSUM evidence threshold, and the language to defend the decision to wait.">
+    <meta name="keywords" content="decide to wait improvement, don't tamper NHS, no change detected what to do, Bootstrap CUSUM no change, tampering improvement data, when to wait and measure, improvement decision rules">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="what-to-do-next.html">What to do next</a> &rsaquo; Decide to wait</div>
+    <div class="page-flag">&#9200; Decision guide &mdash; Path B</div>
+    <h1>Decide to Wait</h1>
+    <p class="page-intro">Bootstrap CUSUM found no structural change. The most important thing you can do now is nothing — deliberately, defensibly, with a review date. This page gives you the decision rules, the evidence threshold, and the language to hold the line when pressure mounts to act.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Decision guide &nbsp;&middot;&nbsp; June 2026</div>
+
+    <!-- THE CORE BOX -->
+    <div class="wait-box">
+        <div class="wb-label">&#9200; The default action when Bootstrap CUSUM finds no change</div>
+        <h3>If there is no signal, default to waiting and measuring &mdash; do not turn the dials just to show activity.</h3>
+        <p>This is not passive. It is the active decision that prevents the most common and most damaging error in improvement work: intervening again before the first intervention has had time to work. Deming called this tampering. Bootstrap CUSUM is the tool that tells you when you are in a tampering situation &mdash; and gives you the statistical evidence to defend the decision to wait.</p>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-why">Why waiting is the correct default</a></li>
+                <li><a href="#section-rules">The decision rules — when to wait, when to act</a></li>
+                <li><a href="#section-threshold">The Bootstrap CUSUM evidence threshold</a></li>
+                <li><a href="#section-document">How to document the decision to wait</a></li>
+                <li><a href="#section-pressure">When pressure mounts — how to defend the decision</a></li>
+                <li><a href="#section-when-act">When waiting is wrong — the three exceptions</a></li>
+                <li><a href="#section-review">Setting the review date</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-why">Why waiting is the correct default</h2>
+
+    <p>Every system produces variation. Some months are better than average. Some are worse. If you intervene every time a result is below your target or below the previous month, you are not responding to genuine deterioration &mdash; you are responding to noise. And each intervention adds new variation to the system, making the next period&rsquo;s results harder to interpret.</p>
+
+    <p>Deming called this <a href="tampering-and-impatience.html">tampering</a> &mdash; one of the most common and most damaging management behaviours in any organisation. The cost is real: wasted resource on interventions that were not needed, demoralised staff who are constantly told to change what they are doing, and a system whose underlying performance becomes impossible to read because it is always in the middle of another initiative.</p>
+
+    <div class="callout blue">
+        <strong>The funnel experiment &mdash; why tampering makes things worse</strong>
+        <p>Deming illustrated tampering with his funnel experiment. A marble dropped through a funnel lands near a target on a table. Common variation means it never lands in exactly the same spot twice. If you adjust the funnel position after each drop to correct for the last error, the marbles scatter further and further from the target. The adjustment &mdash; well-intentioned, apparently rational &mdash; creates more variation, not less. The correct response to common cause variation is to do nothing and let the system settle. The correct response to a genuine signal is to investigate and change the system. Bootstrap CUSUM distinguishes the two.</p>
+    </div>
+
+    <p>The flat Bootstrap CUSUM line is not bad news. It is honest information. It tells you that the variation you are seeing is common cause variation &mdash; the normal noise of a system operating at its current level. The underlying process has not changed. The correct response is to keep measuring, maintain your current intervention, and wait for the statistical evidence that the system has moved to a new level. If that evidence does not appear within your review window, you have learned something important: the intervention was not at the right level. That is the prompt to return to root cause &mdash; not to add more interventions on top of the one that is not yet confirmed as working.</p>
+
+    <hr>
+
+    <h2 id="section-rules">The decision rules — when to wait, when to act</h2>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Situation</th>
+                <th>Bootstrap CUSUM says</th>
+                <th>Correct action</th>
+                <th>Wrong action</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Result is below target but within normal variation</strong></td>
+                    <td>No change point. All points within natural process limits on X-mR chart.</td>
+                    <td><strong style="color:var(--green);">Wait.</strong> The system is operating normally. The target may be wrong, but the system has not changed.</td>
+                    <td>Launch a new initiative in response to a single bad month. This is tampering.</td>
+                </tr>
+                <tr>
+                    <td><strong>Result is worse than last month</strong></td>
+                    <td>No change point. Month-to-month variation is common cause.</td>
+                    <td><strong style="color:var(--green);">Wait.</strong> Last month being better than this month is expected. It does not mean the system has deteriorated.</td>
+                    <td>Hold a review meeting to identify what went wrong. Nothing went wrong that wasn't already happening.</td>
+                </tr>
+                <tr>
+                    <td><strong>Intervention was implemented 3 months ago — no change yet</strong></td>
+                    <td>No change point. Insufficient post-intervention data.</td>
+                    <td><strong style="color:var(--green);">Wait.</strong> Most interventions require 6&ndash;18 months before a structural change is detectable. Set a review date and monitor.</td>
+                    <td>Conclude the intervention failed and launch a replacement. The original may still be working.</td>
+                </tr>
+                <tr>
+                    <td><strong>Board is asking why results haven&rsquo;t improved after 6 months</strong></td>
+                    <td>No change point at 95% confidence. Possible movement at lower confidence.</td>
+                    <td><strong style="color:var(--brand-mid);">Report honestly.</strong> The Bootstrap CUSUM has not yet confirmed structural change. The pre-committed review date is [month]. You will report again then with the statistical evidence.</td>
+                    <td>Cherry-pick a favourable comparison period to show improvement. This undermines the credibility of every future result.</td>
+                </tr>
+                <tr>
+                    <td><strong>A single result breaches a threshold (outlier)</strong></td>
+                    <td>Single point outside natural process limits on X-mR. No sustained change point on Bootstrap CUSUM.</td>
+                    <td><strong style="color:var(--orange);">Investigate the single event.</strong> Find out what specifically happened in that period. This is a special cause &mdash; it has a specific, identifiable cause. Find it.</td>
+                    <td>Change the whole system in response to one outlier. The system did not change &mdash; one period was unusual.</td>
+                </tr>
+                <tr>
+                    <td><strong>Bootstrap CUSUM shows a change point — downward (harm)</strong></td>
+                    <td>Confirmed deterioration change point at 95% or above.</td>
+                    <td><strong style="color:var(--red);">Act.</strong> The system has structurally deteriorated. This is not variation. Return to Step 1 of the improvement method immediately.</td>
+                    <td>Wait. This is the one situation where waiting is wrong.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-threshold">The Bootstrap CUSUM evidence threshold</h2>
+
+    <p>The confidence level you set in Bootstrap CUSUM is your evidence threshold &mdash; the statistical bar that a change must clear before you declare it structural. Choosing the right threshold for your context is as important as choosing the right outcome measure.</p>
+
+    <div class="signal-grid">
+        <div class="signal-card" style="border-top-color:var(--orange);">
+            <div class="signal-num" style="color:var(--orange);">90%</div>
+            <div class="signal-title">Sensitive monitoring</div>
+            <p class="signal-desc">Use for early warning systems where the cost of missing a signal is high. Accept more false alarms in exchange for earlier detection. Appropriate for safety-critical metrics where early action prevents harm. A 90% change point is a signal to investigate, not to declare success.</p>
+        </div>
+        <div class="signal-card" style="border-top-color:var(--brand-mid);">
+            <div class="signal-num" style="color:var(--brand-mid);">95%</div>
+            <div class="signal-title">Standard improvement evidence</div>
+            <p class="signal-desc">The appropriate threshold for most improvement programme evaluation. A 95% change point means that if the process had not genuinely changed, you would see a false alarm of this size only 1 in 20 times. This is the threshold recommended for most NHS improvement reporting.</p>
+        </div>
+        <div class="signal-card" style="border-top-color:var(--green);">
+            <div class="signal-num" style="color:var(--green);">99.7%</div>
+            <div class="signal-title">High-stakes decisions</div>
+            <p class="signal-desc">Use before committing to irreversible action: scaling an intervention nationally, decommissioning a service, or making a major capital investment on the basis of improved performance. A 99.7% change point is rare false-alarm territory &mdash; you can be confident the system has genuinely moved.</p>
+        </div>
+    </div>
+
+    <div class="callout orange">
+        <strong>The waiting rule stated precisely</strong>
+        <p>Wait until Bootstrap CUSUM reaches your pre-committed confidence threshold &mdash; or until your review date, whichever comes first. At the review date, one of three things will be true:</p>
+        <p style="margin-top:8px;"><strong>1. Change point confirmed at your threshold.</strong> The intervention worked. Investigate the mechanism. Document it. Keep monitoring.</p>
+        <p style="margin-top:8px;"><strong>2. No change point, but approaching your threshold.</strong> The system may be moving slowly. Extend the review date by 6 months and monitor. Do not add further interventions.</p>
+        <p style="margin-top:8px;"><strong>3. No change point, no movement.</strong> The intervention did not produce structural change within the expected window. Return to root cause analysis. The constraint was not addressed at the right level. See <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a>.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-document">How to document the decision to wait</h2>
+
+    <p>The decision to wait is only defensible if it is documented before the pressure arrives. A verbal commitment to wait is not a commitment &mdash; it is an intention, and intentions bend under board pressure, political scrutiny, or the anxiety of a run of poor results. Write it down before the intervention is implemented.</p>
+
+    <div class="dark-box">
+        <h3>&#128221; The pre-committed waiting declaration</h3>
+        <p>Write this before implementation and share it with your governance group:</p>
+        <p style="margin-top:12px;font-style:italic;color:rgba(255,255,255,0.9);background:rgba(255,255,255,0.08);padding:16px;border-radius:6px;line-height:1.8;">
+            <strong style="color:white;font-style:normal;">Intervention:</strong> [Name the specific intervention]<br>
+            <strong style="color:white;font-style:normal;">Implemented:</strong> [Date]<br>
+            <strong style="color:white;font-style:normal;">Outcome measure:</strong> [The specific metric Bootstrap CUSUM will test]<br>
+            <strong style="color:white;font-style:normal;">Expected direction:</strong> [Up or down]<br>
+            <strong style="color:white;font-style:normal;">Confidence threshold:</strong> [90% / 95% / 99.7%]<br>
+            <strong style="color:white;font-style:normal;">Review date:</strong> [Date &mdash; typically 12&ndash;18 months after implementation]<br>
+            <strong style="color:white;font-style:normal;">Pre-committed rule:</strong> If Bootstrap CUSUM has not confirmed a change point at [threshold]% by [review date], we will return to Step 3 (root cause) rather than adding further interventions.
+        </p>
+        <p style="margin-top:12px;">This document does three things. It creates a pre-specified prediction that cannot be reverse-engineered after the results arrive. It gives you the language to resist pressure to intervene before the review date. And it records the hypothesis so that a future Bootstrap CUSUM change point &mdash; or absence of one &mdash; can be interpreted correctly.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-pressure">When pressure mounts — how to defend the decision</h2>
+
+    <p>The hardest moment is not choosing to wait. It is holding the decision when results look bad, when the board wants answers, and when colleagues are suggesting new initiatives. These are the responses that work.</p>
+
+    <div class="pitfall-list">
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--brand-blue);"><span>When</span></div>
+            <div class="pitfall-body">
+                <h3>&ldquo;Results are worse than last month &mdash; we need to do something&rdquo;</h3>
+                <p><strong>Response:</strong> &ldquo;Bootstrap CUSUM on the full series shows no structural change. Month-to-month variation of this size is expected. Adding an intervention now would be responding to noise, not to a genuine deterioration. Our review date is [date]. If the Bootstrap CUSUM shows a confirmed downward change point before then, we will act immediately.&rdquo;</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--brand-blue);"><span>When</span></div>
+            <div class="pitfall-body">
+                <h3>&ldquo;We have been waiting 6 months and nothing has changed&rdquo;</h3>
+                <p><strong>Response:</strong> &ldquo;That is correct &mdash; Bootstrap CUSUM has not yet confirmed a structural change point. Six months is within the expected lag for this type of intervention. Our pre-committed review date is [date]. If there is no change point by then, we will return to root cause analysis. Adding further interventions now would make it impossible to attribute any future change point to the original intervention.&rdquo;</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--brand-blue);"><span>When</span></div>
+            <div class="pitfall-body">
+                <h3>&ldquo;Other organisations are doing [new initiative] and getting results&rdquo;</h3>
+                <p><strong>Response:</strong> &ldquo;We would want to see the Bootstrap CUSUM analysis on their data before changing our approach. Before-and-after comparisons almost always show improvement &mdash; the question is whether the improvement is a genuine structural change point or seasonal variation in a short window. If their data shows a confirmed change point at 95% confidence sustained across two periods, that is evidence worth acting on. Otherwise we risk abandoning an intervention that may still be working.&rdquo;</p>
+            </div>
+        </div>
+        <div class="pitfall-item">
+            <div class="pitfall-num" style="background:var(--brand-blue);"><span>When</span></div>
+            <div class="pitfall-body">
+                <h3>&ldquo;The data shows improvement if we look at it this way&rdquo;</h3>
+                <p><strong>Response:</strong> &ldquo;The pre-committed test was Bootstrap CUSUM on [specific measure] at [confidence threshold]%. That test has not confirmed structural change. Choosing a different analysis after seeing the data is the measurement equivalent of moving the goalposts. Our credibility depends on the pre-committed test being the one we report, regardless of what it shows.&rdquo;</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-when-act">When waiting is wrong &mdash; the three exceptions</h2>
+
+    <p>Deciding to wait is the correct default when Bootstrap CUSUM finds no structural change. There are three situations where it is not correct.</p>
+
+    <div class="callout red">
+        <strong>Exception 1 &mdash; Bootstrap CUSUM confirms a deterioration change point</strong>
+        <p>A confirmed downward change point in a harm measure, or upward change point in a waiting time or error rate, is evidence that the system has structurally deteriorated. This is not variation. Act immediately. Return to Step 1 of the <a href="improvement-method.html">improvement method</a>. Do not wait for the review date.</p>
+    </div>
+
+    <div class="callout red">
+        <strong>Exception 2 &mdash; A single result breaches a safety threshold</strong>
+        <p>An X-mR chart signal &mdash; a single point outside the natural process limits &mdash; in a patient safety or clinical harm measure requires investigation even if Bootstrap CUSUM has not confirmed a structural change. The signal may be a one-off special cause event. Find its specific cause. This is different from tampering &mdash; you are investigating a specific event, not changing the system in response to variation.</p>
+    </div>
+
+    <div class="callout red">
+        <strong>Exception 3 &mdash; The review date has passed with no change point</strong>
+        <p>If the pre-committed review date has passed and Bootstrap CUSUM has not confirmed a structural change at your threshold, the correct action is to return to root cause analysis &mdash; not to keep waiting indefinitely. The flat line is information: the intervention was not at the right level, or did not address the dominant constraint. See <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a> and <a href="theory-of-constraints.html">Theory of Constraints</a> for the diagnostic framework.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-review">Setting the review date</h2>
+
+    <p>The review date is not arbitrary. It should be set based on the expected lag between the intervention and a detectable change in the outcome measure. Different types of intervention produce change point signals at different speeds.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Intervention type</th>
+                <th>Expected lag</th>
+                <th>Recommended review date</th>
+                <th>NHS example</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Engineering control / structural redesign</strong></td>
+                    <td>1&ndash;6 months</td>
+                    <td>6 months post-implementation</td>
+                    <td>NRFit connector mandate, ULEZ charging zone. If the system changed, the change point appears quickly.</td>
+                </tr>
+                <tr>
+                    <td><strong>Process change / pathway redesign</strong></td>
+                    <td>3&ndash;12 months</td>
+                    <td>12 months post-implementation</td>
+                    <td>New discharge pathway, revised sepsis bundle. Process changes take time to become routine across all shifts and staff.</td>
+                </tr>
+                <tr>
+                    <td><strong>Workforce or training intervention</strong></td>
+                    <td>6&ndash;18 months</td>
+                    <td>18 months post-implementation</td>
+                    <td>GP dementia awareness training. Training effects accumulate over referral cohorts and are slow to appear in outcome data.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cultural or leadership change</strong></td>
+                    <td>12&ndash;36 months</td>
+                    <td>24&ndash;36 months post-implementation</td>
+                    <td>Rejection of &ldquo;culture of accepting&rdquo; (Watford General). Culture changes are slow to stabilise and require sustained leadership to hold.</td>
+                </tr>
+                <tr>
+                    <td><strong>System capacity investment</strong></td>
+                    <td>12&ndash;36 months</td>
+                    <td>24 months post-investment</td>
+                    <td>New intermediate care beds. Capacity investments require commissioning, staffing, and patient pathway changes before the outcome measure moves.</td>
+                </tr>
+                <tr>
+                    <td><strong>Prevention programme</strong></td>
+                    <td>5&ndash;20 years</td>
+                    <td>Annual review with 5-year horizon</td>
+                    <td>Falls prevention, cardiac screening. Prevention effects are visible only when the cohort of prevented events is large enough to move the aggregate series.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>The mismatch trap &mdash; parliamentary cycles and improvement lags</strong>
+        <p>Most NHS improvement programmes operate on a political or financial cycle of 1&ndash;4 years. Most structural improvement interventions require 12&ndash;36 months before Bootstrap CUSUM can confirm a genuine change point. The mismatch between the political cycle and the improvement lag is one of the most reliable predictors of a flat Bootstrap CUSUM line &mdash; not because the intervention failed, but because it was abandoned or replaced before the evidence could appear. Pre-committing the review date in writing &mdash; and sharing it with the governance body &mdash; is the only practical protection against this trap.</p>
+    </div>
+
+    <div class="cta-box">
+        <h2>Run Bootstrap CUSUM on your outcome measure</h2>
+        <p>Upload your CSV to the StepChange Analyzer. The result will tell you whether to wait or act &mdash; and give you the confidence level and change point date to back the decision.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="nav-grid">
+        <a href="what-to-do-next.html" class="nav-card">
+            <div class="nav-tag">Hub page</div>
+            <h3>What to Do Next</h3>
+            <p>The three-pathway decision guide — change detected, no change detected, data problem. This page sits inside Path B.</p>
+        </a>
+        <a href="interpret-results.html" class="nav-card">
+            <div class="nav-tag">Previous step</div>
+            <h3>Interpret Results</h3>
+            <p>How to read your Bootstrap CUSUM output — signal vs noise, seasonality, multiple change points, false alarms.</p>
+        </a>
+        <a href="tampering-and-impatience.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Tampering &amp; Impatience</h3>
+            <p>Deming's analysis of why intervening on common cause variation makes things worse — the theoretical foundation for this page.</p>
+        </a>
+        <a href="false-alarms-in-performance-charts.html" class="nav-card">
+            <div class="nav-tag">Related guide</div>
+            <h3>False Alarms in Performance Charts</h3>
+            <p>What false alarms are, what they cost teams, and the decision rules for when to wait vs investigate.</p>
+        </a>
+        <a href="joiner-levels-of-fix.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Joiner&rsquo;s Levels of Fix</h3>
+            <p>If the review date passes with no change point, the most likely explanation is that the intervention was at Level 1 or 2 rather than Level 3.</p>
+        </a>
+        <a href="types-of-measures.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Types of Measures</h3>
+            <p>Make sure you are running Bootstrap CUSUM on an outcome measure, not a process measure — a flat process line does not mean a flat outcome line.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Deming:</strong> W. Edwards Deming. <em>Out of the Crisis.</em> MIT Press, 1982. The funnel experiment and the concept of tampering are described in Chapter 11.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
