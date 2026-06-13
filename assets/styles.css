@@ -351,19 +351,27 @@ code { font-family: monospace; background: #f1f5f9; padding: 2px 6px; border-rad
     font-family: system-ui, sans-serif;
 }
 
-/* On mobile, switch to scroll rather than clip.
-   Card-stacking tables override this with overflow:visible !important
-   and min-width:unset !important on their table elements. */
+/* On mobile: plain .numbers-box tables scroll horizontally.
+   Card-stacking tables (with specific class names) override below. */
 @media (max-width: 700px) {
-    .numbers-box {
+    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table) {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         border-radius: 8px;
     }
-    /* Only apply min-width scroll behaviour to tables that don't have
-       their own card-stacking rules (i.e. plain .numbers-box only) */
-    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table):not(.joiner-table) table {
+    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table) table {
         min-width: 480px;
+    }
+    /* Scroll hint — small label above wide tables */
+    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table)::before {
+        content: "← scroll →";
+        display: block;
+        text-align: center;
+        font-family: system-ui, sans-serif;
+        font-size: 0.72em;
+        color: var(--muted);
+        padding: 6px 0 2px;
+        letter-spacing: 0.05em;
     }
 }
 .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
@@ -3049,7 +3057,6 @@ blockquote.warning {
 @media (max-width: 700px) {
 
     /* Constraints table — 4 cols: Candidate / Evidence / Boundary / Lag */
-    .constraints-table { overflow: visible !important; }
     .constraints-table table,
     .constraints-table tbody { display: block !important; min-width: unset !important; }
     .constraints-table thead { display: none !important; }
@@ -3082,7 +3089,6 @@ blockquote.warning {
     .constraints-table td:nth-child(4)::before { content: "Lag: "; font-weight:700; color:var(--muted); font-size:0.82em; display:block; margin-top:4px; }
 
     /* Measures table — 4 cols: Measure / Type / What it tells you / Bootstrap test */
-    .measures-table { overflow: visible !important; }
     .measures-table table,
     .measures-table tbody { display: block !important; min-width: unset !important; }
     .measures-table thead { display: none !important; }
@@ -3116,7 +3122,6 @@ blockquote.warning {
     .measures-table td:nth-child(4) { color:var(--muted); font-style:italic; }
 
     /* Barriers table — 3 cols: Barrier / Why / What would change it */
-    .barriers-table { overflow: visible !important; }
     .barriers-table table,
     .barriers-table tbody { display: block !important; min-width: unset !important; }
     .barriers-table thead { display: none !important; }
@@ -3154,7 +3159,6 @@ blockquote.warning {
 @media (max-width: 700px) {
 
     /* Decision rules table — 4 cols: Situation / CUSUM says / Correct / Wrong */
-    .decision-rules-table { overflow: visible !important; }
     .decision-rules-table table,
     .decision-rules-table tbody { display: block !important; min-width: unset !important; }
     .decision-rules-table thead { display: none !important; }
@@ -3188,7 +3192,6 @@ blockquote.warning {
     .decision-rules-table td:nth-child(4) { color: var(--muted); font-style: italic; }
 
     /* Review date table — 4 cols: Intervention / Lag / Review date / Example */
-    .review-date-table { overflow: visible !important; }
     .review-date-table table,
     .review-date-table tbody { display: block !important; min-width: unset !important; }
     .review-date-table thead { display: none !important; }
