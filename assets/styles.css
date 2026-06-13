@@ -351,19 +351,19 @@ code { font-family: monospace; background: #f1f5f9; padding: 2px 6px; border-rad
     font-family: system-ui, sans-serif;
 }
 
-/* On mobile, switch to scroll rather than clip */
+/* On mobile, switch to scroll rather than clip.
+   Card-stacking tables override this with overflow:visible !important
+   and min-width:unset !important on their table elements. */
 @media (max-width: 700px) {
     .numbers-box {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         border-radius: 8px;
     }
-    .numbers-box table {
+    /* Only apply min-width scroll behaviour to tables that don't have
+       their own card-stacking rules (i.e. plain .numbers-box only) */
+    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table):not(.joiner-table) table {
         min-width: 480px;
-    }
-    /* Wider tables need more room */
-    .numbers-box.joiner-table table {
-        min-width: 600px;
     }
 }
 .numbers-box table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
