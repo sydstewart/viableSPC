@@ -55,6 +55,12 @@
         </a>
     </div>
 
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px;font-family:system-ui,sans-serif;font-size:0.92em;">
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;background:var(--brand-blue);color:white;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:700;">&#9654; Run Bootstrap CUSUM</a>
+        <a href="scanner.html" style="display:inline-flex;align-items:center;gap:6px;background:#198754;color:white;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:700;">&#128269; Data Validator</a>
+        <a href="fix-csv-date-format.html" style="display:inline-flex;align-items:center;gap:6px;background:#f0f4f8;color:var(--brand-blue);border:1px solid var(--border);padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:600;">&#128193; Fix CSV data</a>
+    </div>
+
     <!-- Read this first box — after outcomes panel -->
     <div class="read-first">
         <div class="rf-label">&#128218; Read this first if you are new to Bootstrap CUSUM</div>
@@ -119,6 +125,11 @@
     <hr>
 
     <h2 id="section-pitfalls">Common interpretation pitfalls</h2>
+
+    <div class="callout blue">
+        <strong>Results look surprising or wrong?</strong>
+        <p>Before re-interpreting, check the data. A surprising change point — especially one dated to an implausible period — is often caused by a data issue: mixed date formats, missing rows, a changed denominator, or an outlier. Run the <a href="scanner.html">Data Validator</a> on your CSV first, then re-run the Analyzer. See also <a href="fix-csv-date-format.html">Fix CSV date format</a> for the most common causes.</p>
+    </div>
 
     <div class="pitfall-list">
         <div class="pitfall-item">
