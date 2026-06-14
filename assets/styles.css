@@ -354,16 +354,16 @@ code { font-family: monospace; background: #f1f5f9; padding: 2px 6px; border-rad
 /* On mobile: plain .numbers-box tables scroll horizontally.
    Card-stacking tables (with specific class names) override below. */
 @media (max-width: 700px) {
-    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table) {
+    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table):not(.dementia-data-table):not(.dementia-stats-table) {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         border-radius: 8px;
     }
-    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table) table {
+    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table):not(.dementia-data-table):not(.dementia-stats-table) table {
         min-width: 480px;
     }
     /* Scroll hint — small label above wide tables */
-    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table)::before {
+    .numbers-box:not(.decision-rules-table):not(.review-date-table):not(.constraints-table):not(.measures-table):not(.barriers-table):not(.dementia-data-table):not(.dementia-stats-table)::before {
         content: "← scroll →";
         display: block;
         text-align: center;
