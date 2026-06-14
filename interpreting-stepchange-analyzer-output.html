@@ -166,12 +166,25 @@
     <div class="dark-box">
         <h3>&#128202; Reading the Stage Summary tab</h3>
         <p>The Stage Summary tab shows a table with one row per stage:</p>
-        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px;">
-        <p style="font-family:monospace;font-size:0.88em;background:rgba(255,255,255,0.1);padding:12px 14px;border-radius:6px;color:white;line-height:2;white-space:nowrap;min-width:500px;">
-            Stage | Start date | End date | N | Mean | SD | Change point date | Confidence<br>
-            1 &nbsp;&nbsp;&nbsp;| 2018-01 &nbsp;&nbsp;&nbsp;| 2021-06 &nbsp;| 42| 156.2| 12.4| &mdash; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &mdash;<br>
-            2 &nbsp;&nbsp;&nbsp;| 2021-07 &nbsp;&nbsp;&nbsp;| 2024-12 &nbsp;| 42| 121.7| 9.8 | 2021-07 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 99.7%
-        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:10px;margin-top:14px;">
+            <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px 16px;font-family:system-ui,sans-serif;">
+                <div style="font-size:0.72em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:8px;">Stage 1</div>
+                <div style="font-size:0.88em;color:rgba(255,255,255,0.9);line-height:1.8;">
+                    <span style="color:rgba(255,255,255,0.6);font-size:0.82em;">Dates:</span> 2018-01 &ndash; 2021-06<br>
+                    <span style="color:rgba(255,255,255,0.6);font-size:0.82em;">N:</span> 42<br>
+                    <span style="color:rgba(255,255,255,0.6);font-size:0.82em;">Mean:</span> 156.2 &nbsp;<span style="color:rgba(255,255,255,0.6);font-size:0.82em;">SD:</span> 12.4<br>
+                    <span style="color:rgba(255,255,255,0.6);font-size:0.82em;">Change point:</span> &mdash;
+                </div>
+            </div>
+            <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px 16px;font-family:system-ui,sans-serif;border:1px solid rgba(255,255,255,0.3);">
+                <div style="font-size:0.72em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:8px;">Stage 2 &mdash; new stage</div>
+                <div style="font-size:0.88em;color:rgba(255,255,255,0.9);line-height:1.8;">
+                    <span style="color:rgba(255,255,255,0.6);font-size:0.82em;">Dates:</span> 2021-07 &ndash; 2024-12<br>
+                    <span style="color:rgba(255,255,255,0.6);font-size:0.82em;">N:</span> 42<br>
+                    <span style="color:rgba(255,255,255,0.6);font-size:0.82em;">Mean:</span> 121.7 &nbsp;<span style="color:rgba(255,255,255,0.6);font-size:0.82em;">SD:</span> 9.8<br>
+                    <span style="color:rgba(255,255,255,0.6);font-size:0.82em;">Change point:</span> 2021-07 &nbsp;<strong style="color:#93c5fd;">99.7%</strong>
+                </div>
+            </div>
         </div>
         <p style="margin-top:12px;"><strong style="color:white;">Start and end dates</strong> &mdash; the date range of each stage.</p>
         <p style="margin-top:8px;"><strong style="color:white;">N</strong> &mdash; the number of data points in this stage. A stage with very few points (under 5&ndash;6) should be treated with caution &mdash; the mean estimate is based on limited data.</p>
