@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/interpreting-stepchange-analyzer-output.html">
+    <title>Interpreting StepChange Analyzer Output — What Each Number Means — StepChangeAnalysis.com</title>
+    <meta name="description" content="What every number in the StepChange Analyzer output means — stages, confidence levels, means, SD, turn length, loops, X-mR limits, and how to read the CUSUM chart. Practical guidance for healthcare improvers.">
+    <meta name="keywords" content="Bootstrap CUSUM output explained, what does confidence level mean CUSUM, stages Bootstrap CUSUM, turn length CUSUM, Bootstrap loops, X-mR UNPL LNPL, how to read CUSUM chart, StepChange Analyzer guide">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="interpret-results.html">Interpret results</a> &rsaquo; Interpreting the output</div>
+    <div class="page-flag">&#128202; Output guide &mdash; what every number means</div>
+    <h1>Interpreting StepChange Analyzer Output</h1>
+    <p class="page-intro">You have run the analysis. The Analyzer has produced numbers, a chart, and a summary bar. This page explains what each output means, what it is telling you about your data, and what to do with it.</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Output guide &nbsp;&middot;&nbsp; June 2026</div>
+    <div style="margin-top:8px;margin-bottom:4px;font-family:system-ui,sans-serif;font-size:0.92em;color:#475569;"><strong style="color:#002d5b;">Method:</strong> Bootstrap CUSUM &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <div class="dark-box">
+        <h3>&#128218; Five key terms in plain English</h3>
+        <p><strong style="color:white;">Mean (average)</strong> &mdash; the typical value of your data over a period. If your ward had 12, 15, 11, 14, and 13 incidents over five months, the mean is 13. The Bootstrap CUSUM uses the mean to ask: has the typical level permanently shifted upward or downward? A change in mean is a change in the underlying level of performance &mdash; not just a good or bad month.</p>
+        <p style="margin-top:12px;"><strong style="color:white;">Median (middle value)</strong> &mdash; the middle value when all your data points are arranged in order from lowest to highest. If you have 11 monthly values, the median is the 6th value &mdash; half the values are above it, half below. The median is used by run charts (see the Run Chart tab). It is more resistant to extreme outliers than the mean &mdash; one unusually high or low month shifts the mean but barely moves the median. The Bootstrap CUSUM uses the mean, not the median, because the mean captures the full magnitude of a shift rather than just its direction.</p>
+        <p style="margin-top:12px;"><strong style="color:white;">Standard deviation (SD) &mdash; the spread</strong> &mdash; how much your values vary around the mean. A small SD means values are consistent and predictable &mdash; close to the mean most of the time. A large SD means values are spread widely &mdash; some months much higher, some much lower. Two wards with the same mean but different SDs have very different processes: one is stable and predictable, the other is volatile. The ±3SD limits show the range within which almost all values (99.7%) would fall if the process were stable.</p>
+        <p style="margin-top:12px;"><strong style="color:white;">CUSUM (Cumulative Sum)</strong> &mdash; a running total of how far your values have drifted from the overall average. Imagine keeping a running score: every month your value is above the mean, add the difference; every month it is below, subtract it.</p>
+        <p style="margin-top:8px;color:rgba(255,255,255,0.88);">Three things to read on the green CUSUM line:</p>
+        <p style="margin-top:6px;color:rgba(255,255,255,0.88);"><strong style="color:white;">Slope &mdash; the steeper the line, the further from average.</strong> A steeply rising CUSUM means values are running well above the mean &mdash; the process is performing significantly better (or worse, depending on direction) than average. A gentle slope means values are only slightly above average. A flat CUSUM means the process is running right at its mean.</p>
+        <p style="margin-top:6px;color:rgba(255,255,255,0.88);"><strong style="color:white;">Direction &mdash; rising or falling.</strong> A rising CUSUM means values are consistently above the mean. A falling CUSUM means values are consistently below. The CUSUM cannot rise indefinitely &mdash; if the process returns to its mean, the slope flattens; if it falls below the mean, the CUSUM starts to fall.</p>
+        <p style="margin-top:6px;color:rgba(255,255,255,0.88);"><strong style="color:white;">Turning points &mdash; where the slope changes direction.</strong> A turning point on the CUSUM &mdash; where it shifts from rising to falling or vice versa &mdash; is where the algorithm looks for a potential step change. The Bootstrap test asks: is this turning point large enough to be unlikely by chance? If yes, it is declared a change point. The sharpness of the turn indicates how abruptly the process shifted.</p>
+        <p style="margin-top:8px;color:rgba(255,255,255,0.88);">If the CUSUM stays close to zero throughout, the process is varying randomly around its mean &mdash; no structural shift. The Bootstrap CUSUM finds the turning point where the drift became too large to be explained by random chance.</p>
+        <p style="margin-top:12px;"><strong style="color:white;">Bootstrap &mdash; the honest confidence test</strong> &mdash; the word &ldquo;bootstrap&rdquo; refers to the method used to calculate how confident the algorithm is in a detected change point. Here is the problem it solves: how do you know whether a change point is real or just a fluke of your particular dataset? The bootstrap method answers this by repeatedly shuffling your data into thousands of random sequences and asking: how often does a change point of this size appear purely by chance? If a change point of this size appears in only 1 in 20 random shuffles, the confidence level is 95%. If it appears in only 1 in 370 shuffles, the confidence is 99.7%. The more shuffles performed (the Loops setting), the more precise the estimate. This approach makes no assumptions about the shape of your data &mdash; it does not require a bell curve or any particular distribution &mdash; which makes it especially suited to NHS data, which is often skewed, counted, or bounded.</p>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-summary">The summary bar &mdash; the headline result</a></li>
+                <li><a href="#section-stages">Stages &mdash; what a structural change looks like</a></li>
+                <li><a href="#section-confidence">Confidence level &mdash; how sure is the algorithm?</a></li>
+                <li><a href="#section-mean-sd">Mean and SD &mdash; what the stages tell you</a></li>
+                <li><a href="#section-chart">Reading the Bootstrap CUSUM chart</a></li>
+                <li><a href="#section-xmr">The X-mR tab &mdash; individuals and moving range</a></li>
+                <li><a href="#section-runchart">The Run Chart tab &mdash; advantages and limitations</a></li>
+                <li><a href="#section-settings">Settings &mdash; turn length, loops, and confidence threshold</a></li>
+                <li><a href="#section-borderline">Borderline results &mdash; when the number is close</a></li>
+                <li><a href="#section-wrong">When the result looks wrong</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <hr>
+
+    <h2 id="section-summary">The summary bar &mdash; the headline result</h2>
+
+    <p>After the analysis runs, the summary bar appears above the chart. It contains the most important information in the output.</p>
+
+    <div class="dark-box">
+        <h3>&#128202; Example summary bar</h3>
+        <p style="font-family:monospace;font-size:0.95em;background:rgba(255,255,255,0.1);padding:14px 16px;border-radius:6px;color:white;line-height:2;">
+            <strong style="color:white;">2 stages detected at 99.7% confidence</strong><br>
+            N = 48 &nbsp;&nbsp;|&nbsp;&nbsp; Mean = 142.3 &nbsp;&nbsp;|&nbsp;&nbsp; SD = 18.7
+        </p>
+        <p style="margin-top:12px;"><strong style="color:white;">What each part means:</strong></p>
+        <p><strong style="color:white;">2 stages detected</strong> &mdash; the algorithm found one change point, dividing the series into two distinct stages with different means. A single change point creates two stages. Two change points create three stages.</p>
+        <p style="margin-top:8px;"><strong style="color:white;">at 99.7% confidence</strong> &mdash; this is the confidence level of the strongest change point detected. See <a href="#section-confidence" style="color:#93c5fd;">Confidence level</a> below.</p>
+        <p style="margin-top:8px;"><strong style="color:white;">N = 48</strong> &mdash; the number of data points the algorithm analysed. This should match the number of rows in your CSV minus any skipped rows.</p>
+        <p style="margin-top:8px;"><strong style="color:white;">Mean = 142.3</strong> &mdash; the overall mean of the entire series across all stages.</p>
+        <p style="margin-top:8px;"><strong style="color:white;">SD = 18.7</strong> &mdash; the standard deviation of the entire series. A large SD relative to the mean suggests high variation; a small SD suggests a stable process.</p>
+    </div>
+
+    <div class="callout blue">
+        <strong>If the summary bar says &ldquo;1 stage detected&rdquo;</strong>
+        <p>One stage means the algorithm found no structural change point in your data. The series has one mean throughout. This is a result, not an error &mdash; it is telling you that the process has not permanently shifted. See <a href="interpret-results.html#section-no-change">No change detected &mdash; what it means</a> for what to do next. See also <a href="decide-to-wait.html">Decide to wait</a> for the decision rules.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-stages">Stages &mdash; what a structural change looks like</h2>
+
+    <p>The Analyzer divides your time series into stages &mdash; periods where the process was running at a consistent level. Each stage has its own mean, shown as a horizontal stepped line on the Bootstrap CUSUM chart. The transition between stages is the change point &mdash; the date when the process permanently shifted to a new level.</p>
+
+    <div class="signal-grid">
+        <div class="signal-card" style="border-top-color:var(--green);">
+            <div class="signal-num" style="color:var(--green);">1 stage</div>
+            <div class="signal-title">No structural change</div>
+            <p class="signal-desc">The process has been running at one consistent level throughout the series. No permanent shift detected at your confidence threshold. The overall mean applies to the entire series. Common cause variation is present but no step change.</p>
+        </div>
+        <div class="signal-card" style="border-top-color:var(--brand-mid);">
+            <div class="signal-num" style="color:var(--brand-mid);">2 stages</div>
+            <div class="signal-title">One change point</div>
+            <p class="signal-desc">One structural change point found, dividing the series into two stages with different means. Stage 1 mean and Stage 2 mean are shown on the chart. The change point date is the transition between them. Was Stage 2 mean higher or lower than Stage 1?</p>
+        </div>
+        <div class="signal-card" style="border-top-color:var(--orange);">
+            <div class="signal-num" style="color:var(--orange);">3+ stages</div>
+            <div class="signal-title">Multiple change points</div>
+            <p class="signal-desc">Multiple structural changes found. Each stage has its own mean. Read the stages in sequence &mdash; is the trend consistently up, consistently down, or mixed? Multiple stages are common in long series or series spanning major system changes. See <a href="interpret-results.html#section-multiple">Multiple change points</a>.</p>
+        </div>
+    </div>
+
+    <div class="callout orange">
+        <strong>The stage count and the confidence level are separate things</strong>
+        <p>The number of stages tells you how many change points were found. The confidence level tells you how certain the algorithm is about the strongest one. A result of &ldquo;2 stages at 90% confidence&rdquo; means one change point was found, but the evidence is borderline &mdash; there is a 1-in-10 chance of this being a false alarm. A result of &ldquo;2 stages at 99.7% confidence&rdquo; means one change point was found with very strong evidence. See <a href="#section-confidence">Confidence level</a> below.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-confidence">Confidence level &mdash; how sure is the algorithm?</h2>
+
+    <p>The confidence level is the probability that the detected change point is genuine &mdash; that is, the probability that a change point of this size would not appear by chance in a stable process. It is calculated by the bootstrap resampling procedure: the algorithm shuffles the data thousands of times and measures how often a change point of this magnitude appears in the shuffled data. The confidence level is 100% minus the false alarm rate.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Confidence level</th>
+                <th>False alarm rate</th>
+                <th>What it means in practice</th>
+                <th>When to use</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>90%</strong></td>
+                    <td>1 in 10</td>
+                    <td>Sensitive. Will detect smaller changes but will also produce more false alarms. Every 10 stable series you test, one will show a spurious change point at this threshold.</td>
+                    <td>Early warning monitoring where missing a real signal is more costly than investigating a false one. Safety-critical monitoring.</td>
+                </tr>
+                <tr>
+                    <td><strong>95%</strong></td>
+                    <td>1 in 20</td>
+                    <td>Standard. The conventional threshold for most statistical analysis. A change point at 95% confidence is the equivalent of p&lt;0.05 in traditional statistics. Appropriate for most improvement programme evaluation.</td>
+                    <td>Most NHS improvement reporting. PDSA Study phase. Standard governance evidence.</td>
+                </tr>
+                <tr>
+                    <td><strong>99.7%</strong></td>
+                    <td>1 in 370</td>
+                    <td>Conservative. Equivalent to a three-sigma signal in statistical process control. Very unlikely to be a false alarm. Appropriate before making irreversible decisions based on the result.</td>
+                    <td>Before scaling nationally, decommissioning a service, or making major capital investment. High-stakes governance decisions.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>The confidence level in the summary bar is the threshold setting, not the result</strong>
+        <p>The Conf % setting in the controls panel is the <em>minimum</em> confidence level required for the algorithm to declare a change point. If you set 95% and the algorithm finds a change point at 97.3% confidence, the summary bar will report &ldquo;detected at 99.7% confidence&rdquo; &mdash; it reports the actual confidence level of the strongest change point found, not just whether it crossed your threshold. If no change point reaches your threshold, the result is &ldquo;1 stage&rdquo; regardless of any weaker signals present.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-mean-sd">Mean and SD &mdash; what the stages tell you</h2>
+
+    <p>Each stage has its own mean shown on the Bootstrap CUSUM chart as a horizontal stepped line. The Stage Summary tab shows the mean, standard deviation, and number of data points for each stage individually.</p>
+
+    <div class="dark-box">
+        <h3>&#128202; Reading the Stage Summary tab</h3>
+        <p>The Stage Summary tab shows a table with one row per stage:</p>
+        <p style="font-family:monospace;font-size:0.88em;background:rgba(255,255,255,0.1);padding:12px 14px;border-radius:6px;color:white;line-height:2;margin-top:10px;">
+            Stage | Start date | End date | N | Mean | SD | Change point date | Confidence<br>
+            1 &nbsp;&nbsp;&nbsp;| 2018-01 &nbsp;&nbsp;&nbsp;| 2021-06 &nbsp;| 42| 156.2| 12.4| &mdash; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &mdash;<br>
+            2 &nbsp;&nbsp;&nbsp;| 2021-07 &nbsp;&nbsp;&nbsp;| 2024-12 &nbsp;| 42| 121.7| 9.8 | 2021-07 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 99.7%
+        </p>
+        <p style="margin-top:12px;"><strong style="color:white;">Start and end dates</strong> &mdash; the date range of each stage.</p>
+        <p style="margin-top:8px;"><strong style="color:white;">N</strong> &mdash; the number of data points in this stage. A stage with very few points (under 5&ndash;6) should be treated with caution &mdash; the mean estimate is based on limited data.</p>
+        <p style="margin-top:8px;"><strong style="color:white;">Mean</strong> &mdash; the average value for this stage. Compare Stage 1 mean to Stage 2 mean to understand the direction and magnitude of the change.</p>
+        <p style="margin-top:8px;"><strong style="color:white;">SD</strong> &mdash; the standard deviation within this stage. A much lower SD in Stage 2 than Stage 1 suggests the process is more stable as well as having a different mean.</p>
+        <p style="margin-top:8px;"><strong style="color:white;">Change point date</strong> &mdash; the date the algorithm identifies as the structural transition. Note: the Bootstrap CUSUM dates the <em>confirmation</em> of the change &mdash; the actual cause may predate this by weeks or months. Investigate what changed in the system at or before this date.</p>
+        <p style="margin-top:8px;"><strong style="color:white;">Confidence</strong> &mdash; the confidence level of this specific change point.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-chart">Reading the Bootstrap CUSUM chart</h2>
+
+    <p>The Bootstrap CUSUM chart is the main output. It contains three elements that are easy to confuse.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Element</th>
+                <th>What it is</th>
+                <th>Read against</th>
+                <th>Common confusion</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Red line with dots</strong></td>
+                    <td>Your actual data &mdash; the values from your CSV, plotted over time</td>
+                    <td>Left axis (your data values)</td>
+                    <td>This IS your data. It is not the CUSUM. Each dot is one row of your CSV.</td>
+                </tr>
+                <tr>
+                    <td><strong>Green line</strong></td>
+                    <td>The Bootstrap CUSUM &mdash; the running cumulative sum of deviations from the overall mean</td>
+                    <td>Right axis (CUSUM value)</td>
+                    <td>This is NOT a second data series. When your values run above the mean the green line rises; when below the mean it falls. A near-vertical drop or rise is the CUSUM accumulating rapidly &mdash; not a data error.</td>
+                </tr>
+                <tr>
+                    <td><strong>Blue stepped line</strong></td>
+                    <td>The stage means &mdash; the mean value for each stage, shown as horizontal steps</td>
+                    <td>Left axis (your data values)</td>
+                    <td>Each step represents one stage. The vertical jump between steps is the magnitude of the structural change. Larger jumps = larger change.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout green">
+        <strong>Reading the green CUSUM line &mdash; slope and turning points are the story</strong>
+        <p><strong>Slope tells you how far from average:</strong> a steep rise means values are running well above the mean; a gentle rise means slightly above. A steep fall means well below the mean. A flat line means the process is running right at its overall mean.</p>
+        <p style="margin-top:8px;"><strong>Turning points indicate potential step changes:</strong> wherever the CUSUM changes direction &mdash; from rising to falling or vice versa &mdash; the algorithm examines whether the shift is large enough to be statistically significant. Each declared change point corresponds to a turning point on the CUSUM line. A sharp, abrupt turn indicates a sudden shift in the process; a gradual curve indicates a slower drift.</p>
+        <p style="margin-top:8px;"><strong>Change point date:</strong> the vertical step in the blue stage mean line marks the confirmed change point. It is positioned at the first data point of the new stage. Hover over the chart (on desktop) to see exact dates. On mobile, use the Stage Summary tab for precise dates.</p>
+    </div>
+
+    <div class="callout blue">
+        <strong>The CUSUM arrow guide &mdash; ↗ Above Avg &nbsp;|&nbsp; ↘ Below Avg &nbsp;|&nbsp; → On Avg</strong>
+        <p>The summary bar shows a small CUSUM guide with three arrows. These describe the direction the green CUSUM line is currently moving:</p>
+        <p style="margin-top:8px;"><strong>↗ Above Avg</strong> &mdash; the most recent values are running <em>above</em> the overall mean. The CUSUM is rising. If this continues, a new upward stage may be detected.</p>
+        <p style="margin-top:8px;"><strong>↘ Below Avg</strong> &mdash; the most recent values are running <em>below</em> the overall mean. The CUSUM is falling. If this continues, a new downward stage may be detected.</p>
+        <p style="margin-top:8px;"><strong>→ On Avg</strong> &mdash; the most recent values are close to the overall mean. The CUSUM is flat. The process is stable around its current level.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-xmr">The X-mR tab &mdash; individuals and moving range</h2>
+
+    <p>The X-mR tab shows two complementary charts. The Individuals chart (X chart) plots each data point against natural process limits. The Moving Range chart (mR chart) plots the difference between consecutive data points, with its own limit.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Output field</th>
+                <th>What it means</th>
+                <th>Signal if...</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>UNPL</strong> — Upper Natural Process Limit</td>
+                    <td>The upper boundary of expected variation. Calculated as mean + 3&times;estimated SD using the average moving range method. About 99.7% of data points from a stable process will fall below this line.</td>
+                    <td>A data point above this line is a special cause signal — something unusual happened in that period specifically.</td>
+                </tr>
+                <tr>
+                    <td><strong>LNPL</strong> — Lower Natural Process Limit</td>
+                    <td>The lower boundary of expected variation. Mean &minus; 3&times;estimated SD. Symmetric with the UNPL around the mean.</td>
+                    <td>A data point below this line is a special cause signal — unusually low performance or unusually low event rate for that period.</td>
+                </tr>
+                <tr>
+                    <td><strong>URL</strong> — Upper Range Limit</td>
+                    <td>The upper limit for the moving range chart — the maximum expected difference between consecutive data points in a stable process.</td>
+                    <td>A moving range above this line means the <em>rate of change</em> between two consecutive periods was unusually large — the system shifted abruptly rather than gradually.</td>
+                </tr>
+                <tr>
+                    <td><strong>Mean</strong></td>
+                    <td>The overall mean of the series used to calculate the X-mR limits. This is the same as the overall mean in the Bootstrap CUSUM summary bar.</td>
+                    <td>&mdash;</td>
+                </tr>
+                <tr>
+                    <td><strong>SD</strong></td>
+                    <td>The standard deviation estimated from the average moving range &mdash; not the same as the standard deviation calculated directly from the data. The moving range method is more robust to outliers and step changes.</td>
+                    <td>&mdash;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>Bootstrap CUSUM and X-mR answer different questions</strong>
+        <p>The Bootstrap CUSUM answers: <em>has the process permanently shifted to a new mean?</em> It looks at the whole series and finds structural step changes. The X-mR chart answers: <em>is any individual data point (or rate of change) outside the expected range for this process?</em> It identifies specific periods that were unusual. Use Bootstrap CUSUM for programme evaluation. Use X-mR to identify specific events worth investigating.</p>
+    </div>
+
+    <hr>
+
+    <hr>
+
+    <h2 id="section-runchart">The Run Chart tab &mdash; advantages and limitations</h2>
+
+    <p>The Run Chart tab plots your data over time with a median line. It applies standard run chart rules to detect non-random patterns &mdash; sustained runs above or below the median, or too few direction changes. Run charts are widely used in NHS quality improvement and will be familiar to many improvement practitioners.</p>
+
+    <div class="callout blue">
+        <strong>What a run chart detects</strong>
+        <p>Run chart rules look for patterns that are unlikely to occur by chance in a stable process. The most common rules are: six or more consecutive points on the same side of the median (a sustained shift); and five or more consecutive points all going in the same direction (a trend). These patterns suggest the process is no longer running randomly around its median &mdash; something may have changed.</p>
+    </div>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th></th>
+                <th>Run Chart</th>
+                <th>Bootstrap CUSUM</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Based on</strong></td>
+                    <td>Median</td>
+                    <td>Mean</td>
+                </tr>
+                <tr>
+                    <td><strong>Confidence level</strong></td>
+                    <td>Not provided &mdash; binary signal only</td>
+                    <td>Quantified (90%, 95%, 99.7%)</td>
+                </tr>
+                <tr>
+                    <td><strong>Change point date</strong></td>
+                    <td>Not precise &mdash; indicates a shift has occurred</td>
+                    <td>Dated precisely to the data point</td>
+                </tr>
+                <tr>
+                    <td><strong>Magnitude of change</strong></td>
+                    <td>Not quantified</td>
+                    <td>Stage means show size of shift</td>
+                </tr>
+                <tr>
+                    <td><strong>Multiple change points</strong></td>
+                    <td>Difficult &mdash; median shifts with data</td>
+                    <td>Handled cleanly as multiple stages</td>
+                </tr>
+                <tr>
+                    <td><strong>Minimum data needed</strong></td>
+                    <td>10&ndash;12 points for reliable rules</td>
+                    <td>20+ points recommended</td>
+                </tr>
+                <tr>
+                    <td><strong>Familiarity in NHS QI</strong></td>
+                    <td>Very high &mdash; widely taught and used</td>
+                    <td>Lower &mdash; less familiar but more rigorous</td>
+                </tr>
+                <tr>
+                    <td><strong>Best for</strong></td>
+                    <td>Real-time monitoring, clinical team communication, early-stage improvement</td>
+                    <td>Governance reporting, PDSA Study phase, programme evaluation</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout orange">
+        <strong>The run chart&rsquo;s key limitation &mdash; it cannot answer the governance question</strong>
+        <p>A run chart signal says &ldquo;something non-random is happening.&rdquo; It cannot say when the change occurred, how large it was, or how confident you can be that it is genuine rather than a false alarm. For a board report, a published evaluation, or a PDSA Study step, you need a dated change point with a confidence level. That is what Bootstrap CUSUM provides.</p>
+        <p style="margin-top:8px;">The practical approach: use the run chart for real-time monitoring and team communication &mdash; it is visual, intuitive, and familiar. Use Bootstrap CUSUM when you need the rigorous answer for governance or evaluation.</p>
+    </div>
+
+    <div class="callout green">
+        <strong>Advantages of run charts &mdash; where they excel</strong>
+        <p><strong>Familiarity:</strong> Most NHS QI practitioners know run charts. Presenting one to a clinical team requires no statistical explanation.</p>
+        <p style="margin-top:8px;"><strong>Early detection:</strong> Run chart rules can signal a shift before enough data exists for Bootstrap CUSUM to confirm it. Six consecutive points above the median can be detected with as few as 12 data points &mdash; Bootstrap CUSUM needs 20+ for reliable confidence estimates.</p>
+        <p style="margin-top:8px;"><strong>Real-time monitoring:</strong> Run charts work well when data arrives one point at a time &mdash; each new point either extends or breaks the current run.</p>
+        <p style="margin-top:8px;"><strong>No assumptions about distribution:</strong> Like Bootstrap CUSUM, run chart rules are non-parametric &mdash; they make no assumptions about the shape of your data. Both methods are suited to NHS data that does not follow a normal distribution.</p>
+    </div>
+
+    <h2 id="section-settings">Settings &mdash; turn length, loops, and confidence threshold</h2>
+
+    <p>Three settings control the analysis. Understanding what they do helps you choose the right values for your data.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Setting</th>
+                <th>Default</th>
+                <th>What it does</th>
+                <th>When to change it</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Turn Length</strong></td>
+                    <td>5</td>
+                    <td>The minimum number of data points required in a segment before a change point can be detected at either end of it. A turn length of 5 means no change point can be placed within the first or last 5 data points of any segment.</td>
+                    <td>Increase to 7 or 8 for short series (under 30 points) to reduce false alarms at the edges. Decrease to 3 or 4 for very long series (100+ points) where early change points matter. Do not set below 3.</td>
+                </tr>
+                <tr>
+                    <td><strong>Loops</strong></td>
+                    <td>1,000</td>
+                    <td>The number of bootstrap resamples used to calculate the confidence level. More loops = more stable confidence estimates but slower analysis. At 1,000 loops, confidence levels are accurate to roughly &plusmn;1&ndash;2 percentage points.</td>
+                    <td>Use 5,000&ndash;10,000 for governance reports or published results where precision matters. Use 1,000 for exploratory analysis. Do not use fewer than 500 &mdash; the confidence estimate becomes unreliable.</td>
+                </tr>
+                <tr>
+                    <td><strong>Conf %</strong></td>
+                    <td>99.7</td>
+                    <td>The minimum confidence level required to declare a change point. Change points below this threshold are not reported as structural changes.</td>
+                    <td>Lower to 95% for standard improvement evidence. Lower to 90% for sensitive early-warning monitoring. Raise to 99.7% for high-stakes irreversible decisions. See <a href="#section-confidence">Confidence level</a> above.</td>
+                </tr>
+                <tr>
+                    <td><strong>Show 3SD Limits</strong></td>
+                    <td>Off</td>
+                    <td>Adds &plusmn;3 standard deviation bands to the Step Change chart, calculated from the overall series SD. These are reference bands showing where 99.7% of values would fall if the process were stable at the overall mean.</td>
+                    <td>Useful for a quick visual overview of how spread the data is. Note these are <em>overall series</em> bands &mdash; if the series has multiple stages they straddle all stages and are less precise than the stage-specific X-mR limits on the X-mR tab. For rigorous signal detection, use the X-mR tab limits instead.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>3SD limits vs X-mR UNPL/LNPL &mdash; what is the difference?</strong>
+        <p>Both are &ldquo;&plusmn;3 standard deviation&rdquo; limits but they are calculated differently and answer different questions:</p>
+        <p style="margin-top:8px;"><strong>Show 3SD Limits (Step Change chart)</strong> &mdash; calculated from the simple standard deviation of the whole series. Applied as fixed bands across all stages. Quick to read but less sensitive to the stage structure of the data.</p>
+        <p style="margin-top:8px;"><strong>UNPL/LNPL (X-mR tab)</strong> &mdash; calculated from the average moving range (Shewhart method). More robust to outliers and step changes. The standard method for statistical process control. These are the limits recommended for identifying special cause signals.</p>
+        <p style="margin-top:8px;">Use the 3SD overlay for a quick visual sanity check. Use the X-mR tab limits for formal signal detection and governance reporting.</p>
+    </div>
+
+    <div class="callout green">
+        <strong>The width of the 3SD band tells you about variation &mdash; not just the mean</strong>
+        <p>The wider the ±3SD band, the greater the variation in your data. A narrow band means values cluster tightly around the mean &mdash; a stable, consistent process. A wide band means values are spread widely &mdash; a noisy or unstable process.</p>
+        <p style="margin-top:8px;">This matters for two reasons:</p>
+        <p style="margin-top:8px;"><strong>1. Detecting change in variation, not just mean.</strong> If your process has become more erratic over time &mdash; even if the mean has not shifted &mdash; a widening band is the visual signal. A structural change in variation (not just level) is worth investigating even if Bootstrap CUSUM finds no change point in the mean.</p>
+        <p style="margin-top:8px;"><strong>2. Understanding why the band may look misleadingly wide.</strong> If your series has two stages with different means, the overall SD used to calculate the 3SD band is inflated by the gap between Stage 1 and Stage 2 &mdash; even though within each stage the process may be quite consistent. This is why the X-mR limits (calculated from moving ranges, which are not affected by step changes between stages) give a cleaner picture of within-stage variation. A wide 3SD band alongside narrow X-mR limits is a good signal that the width is driven by the step change, not by genuine process instability.</p>
+    </div>
+
+    <div class="callout orange">
+        <strong>The default confidence threshold of 99.7% is conservative</strong>
+        <p>The Analyzer default is 99.7% &mdash; the three-sigma threshold. This is appropriate for high-stakes decisions but may miss genuine change points in shorter series or noisier data. For most NHS improvement programme evaluation, 95% is the appropriate standard. If you are getting &ldquo;1 stage&rdquo; results and suspect a genuine change has occurred, try lowering the confidence threshold to 95% and re-running. If a change point appears at 95% but not at 99.7%, it is a real signal but a weaker one &mdash; treat with appropriate caution.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-borderline">Borderline results &mdash; when the number is close</h2>
+
+    <p>Sometimes the confidence level sits close to a threshold &mdash; 93%, 96%, 98.5%. These borderline results require careful interpretation.</p>
+
+    <div class="callout blue">
+        <strong>A borderline result is information, not a failure</strong>
+        <p>A confidence level of 93% does not mean &ldquo;nearly significant.&rdquo; It means the algorithm found a change point, but the evidence is not yet strong enough to meet the 95% conventional threshold. This can happen for three reasons:</p>
+        <p style="margin-top:8px;"><strong>1. Insufficient data:</strong> Fewer than 20&ndash;30 data points means the bootstrap cannot estimate confidence levels reliably. The confidence figure understates the evidence. Add more data and re-run.</p>
+        <p style="margin-top:8px;"><strong>2. High process variation:</strong> If the series has high natural variation (large SD relative to the mean), a genuine step change may not reach 95% confidence until it has been sustained for longer. This is not a false alarm &mdash; it is the honest reflection of a noisy system.</p>
+        <p style="margin-top:8px;"><strong>3. A genuine borderline result:</strong> The change may be real but small. A 93% confidence change point is worth monitoring. Set a review date 6 months ahead and re-run with the extended series. If it is genuine, confidence will increase as more post-change data accumulates.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-wrong">When the result looks wrong</h2>
+
+    <p>If the Bootstrap CUSUM result seems implausible &mdash; a change point at an unexpected date, a very low or very high confidence, a stage mean that doesn&rsquo;t match what you know about the data &mdash; the most likely cause is a data problem rather than an algorithm problem.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Symptom</th>
+                <th>Most likely cause</th>
+                <th>Fix</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td>Change point at the very start or end of the series</td>
+                    <td>An outlier in the first or last few data points is distorting the mean for one stage</td>
+                    <td>Check first and last rows for zero values, blanks, or unusual spikes. Run the <a href="scanner.html">Data Validator</a>.</td>
+                </tr>
+                <tr>
+                    <td>Change point at a date when nothing happened</td>
+                    <td>Mixed date formats causing rows to be out of chronological order; or a missing period creating a false jump</td>
+                    <td>Check date format consistency and chronological order. Run the <a href="scanner.html">Data Validator</a>.</td>
+                </tr>
+                <tr>
+                    <td>Stage mean much higher or lower than expected</td>
+                    <td>A zero or blank value being read as a genuine observation, or a comma in a large number creating extra columns</td>
+                    <td>Filter value column for zeros and blanks. Check for comma separators in large numbers. See <a href="fix-csv-date-format.html">Fix CSV date format</a>.</td>
+                </tr>
+                <tr>
+                    <td>N is lower than expected</td>
+                    <td>Rows being skipped due to blank date cells, unrecognised date format, or header rows in the data</td>
+                    <td>Run the <a href="scanner.html">Data Validator</a>. Check that your date column is correctly selected in the dropdown.</td>
+                </tr>
+                <tr>
+                    <td>Always &ldquo;1 stage&rdquo; even when you expect a change</td>
+                    <td>Confidence threshold set too high (99.7%) for the amount of data; or fewer than 20 data points; or the change is genuine but common cause variation is masking it</td>
+                    <td>Try lowering Conf % to 95%. Check N &mdash; if under 20, extend the series. Consider whether the expected change was actually structural or may have been seasonal variation.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout green">
+        <strong>The Data Validator is the first step when results look wrong</strong>
+        <p>Run your CSV through the <a href="scanner.html">Data Validator</a> before adjusting settings or re-interpreting results. Most surprising outputs have a data cause that the Validator will identify and explain. Fix the data problem, re-run the Analyzer, and interpret the new result.</p>
+    </div>
+
+    <div class="cta-box">
+        <h2>Run Bootstrap CUSUM on your data</h2>
+        <p>Upload your CSV, run the analysis, and use this page to interpret every number in the output.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="nav-grid">
+        <a href="interpret-results.html" class="nav-card">
+            <div class="nav-tag">Hub page</div>
+            <h3>Interpret Results</h3>
+            <p>The three outcomes — change detected, no change detected, data problem — and what each one means for your improvement work.</p>
+        </a>
+        <a href="what-to-do-next.html" class="nav-card">
+            <div class="nav-tag">Next step</div>
+            <h3>What to Do Next</h3>
+            <p>Practical decision pathways for each Bootstrap CUSUM result. Three routes — one for each outcome.</p>
+        </a>
+        <a href="scanner.html" class="nav-card">
+            <div class="nav-tag">Tool</div>
+            <h3>&#128269; Data Validator</h3>
+            <p>When results look wrong, check the data first. The Validator identifies date format errors, missing values, and column problems before they distort your analysis.</p>
+        </a>
+        <a href="fix-csv-date-format.html" class="nav-card">
+            <div class="nav-tag">Guide</div>
+            <h3>Fix CSV Date Format</h3>
+            <p>How to prepare your data correctly — date formats, missing rows, merged cells, and the pre-upload checklist.</p>
+        </a>
+        <a href="three-charts-three-stories.html" class="nav-card">
+            <div class="nav-tag">Explainer</div>
+            <h3>Three Charts, Three Stories</h3>
+            <p>Why Bootstrap CUSUM, X-mR, and run charts tell different stories from the same data — and which one to trust for structural change detection.</p>
+        </a>
+        <a href="tampering-and-impatience.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Tampering &amp; Impatience</h3>
+            <p>Why &ldquo;1 stage&rdquo; is the result that most needs the right response &mdash; and why the wrong response makes things worse.</p>
+        </a>
+    </div>
+
+    <footer class="page-footer">
+        <p><strong>Method:</strong> Bootstrap CUSUM step-change analysis. Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><strong>X-mR control charts:</strong> Shewhart, W.A. <em>Economic Control of Quality of Manufactured Product.</em> Van Nostrand, 1931. Wheeler, D.J. <em>Understanding Variation.</em> SPC Press, 1993.</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
