@@ -3226,3 +3226,86 @@ blockquote.warning {
     .review-date-table td:nth-child(4)::before { content: "NHS example: "; font-weight:700; color:var(--muted); font-size:0.82em; display:block; margin-top:4px; font-style:italic; }
     .review-date-table td:nth-child(4) { color: var(--muted); font-style: italic; }
 }
+
+
+/* ── 58. dementia-diagnosis-rate.html — mobile table fixes ── */
+@media (max-width: 700px) {
+
+    /* Data table — 4 cols: Year / EDDR / X-mR signal / Context */
+    .dementia-data-table { overflow: visible !important; }
+    .dementia-data-table table,
+    .dementia-data-table tbody { display: block !important; min-width: unset !important; }
+    .dementia-data-table thead { display: none !important; }
+    .dementia-data-table tr {
+        display: block !important;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 10px;
+        padding: 10px 14px;
+        background: white;
+    }
+    .dementia-data-table tr.caution-row { background: #fff8f0; border-color: var(--orange); }
+    .dementia-data-table td {
+        display: block !important;
+        padding: 3px 0 !important;
+        border: none !important;
+        background: transparent !important;
+        font-size: 0.88em;
+        line-height: 1.6;
+    }
+    .dementia-data-table td:first-child {
+        font-size: 1.05em !important;
+        font-weight: 700;
+        color: var(--brand-blue);
+        padding-bottom: 6px !important;
+        border-bottom: 1px solid var(--border) !important;
+        margin-bottom: 4px;
+    }
+    .dementia-data-table td:nth-child(2)::before { content: "EDDR: "; font-weight:700; color:var(--muted); font-size:0.82em; }
+    .dementia-data-table td:nth-child(3)::before { content: "Signal: "; font-weight:700; color:var(--muted); font-size:0.82em; display:block; margin-top:3px; }
+    .dementia-data-table td:nth-child(4)::before { content: "Context: "; font-weight:700; color:var(--muted); font-size:0.82em; display:block; margin-top:3px; font-style:italic; }
+    .dementia-data-table td:nth-child(4) { color: var(--muted); font-style: italic; }
+
+    /* Stats table — 2 cols: Metric / Value */
+    .dementia-stats-table { overflow: visible !important; }
+    .dementia-stats-table table,
+    .dementia-stats-table tbody { display: block !important; min-width: unset !important; }
+    .dementia-stats-table thead { display: none !important; }
+    .dementia-stats-table tr {
+        display: flex !important;
+        gap: 8px;
+        justify-content: space-between;
+        padding: 8px 14px !important;
+        border-bottom: 1px solid var(--border);
+        background: white;
+    }
+    .dementia-stats-table tr.caution-row { background: #fff8f0; }
+    .dementia-stats-table tr.highlight { background: var(--brand-light); }
+    .dementia-stats-table td {
+        display: block !important;
+        padding: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        font-size: 0.88em;
+        line-height: 1.55;
+    }
+    .dementia-stats-table td:first-child { flex: 1; color: var(--text); }
+    .dementia-stats-table td:last-child { flex: 0 0 auto; font-weight: 700; color: var(--brand-blue); text-align: right; }
+
+    /* Measures table — inline styled, wrap in overflow */
+    .dementia-measures-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+    }
+    .dementia-measures-wrap::before {
+        content: "← scroll →";
+        display: block;
+        text-align: center;
+        font-family: system-ui, sans-serif;
+        font-size: 0.72em;
+        color: var(--muted);
+        padding: 4px 0;
+        letter-spacing: 0.05em;
+    }
+}
