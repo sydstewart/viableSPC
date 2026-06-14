@@ -69,7 +69,7 @@
 
     <div class="dark-box">
         <h3>&#128202; Example summary bar</h3>
-        <p style="font-family:monospace;font-size:0.95em;background:rgba(255,255,255,0.1);padding:14px 16px;border-radius:6px;color:white;line-height:2;">
+        <p style="font-family:monospace;font-size:0.95em;background:rgba(255,255,255,0.1);padding:14px 16px;border-radius:6px;color:white;line-height:2;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;">
             <strong style="color:white;">2 stages detected at 99.7% confidence</strong><br>
             N = 48 &nbsp;&nbsp;|&nbsp;&nbsp; Mean = 142.3 &nbsp;&nbsp;|&nbsp;&nbsp; SD = 18.7
         </p>
@@ -166,11 +166,13 @@
     <div class="dark-box">
         <h3>&#128202; Reading the Stage Summary tab</h3>
         <p>The Stage Summary tab shows a table with one row per stage:</p>
-        <p style="font-family:monospace;font-size:0.88em;background:rgba(255,255,255,0.1);padding:12px 14px;border-radius:6px;color:white;line-height:2;margin-top:10px;">
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px;">
+        <p style="font-family:monospace;font-size:0.88em;background:rgba(255,255,255,0.1);padding:12px 14px;border-radius:6px;color:white;line-height:2;white-space:nowrap;min-width:500px;">
             Stage | Start date | End date | N | Mean | SD | Change point date | Confidence<br>
             1 &nbsp;&nbsp;&nbsp;| 2018-01 &nbsp;&nbsp;&nbsp;| 2021-06 &nbsp;| 42| 156.2| 12.4| &mdash; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &mdash;<br>
             2 &nbsp;&nbsp;&nbsp;| 2021-07 &nbsp;&nbsp;&nbsp;| 2024-12 &nbsp;| 42| 121.7| 9.8 | 2021-07 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 99.7%
         </p>
+        </div>
         <p style="margin-top:12px;"><strong style="color:white;">Start and end dates</strong> &mdash; the date range of each stage.</p>
         <p style="margin-top:8px;"><strong style="color:white;">N</strong> &mdash; the number of data points in this stage. A stage with very few points (under 5&ndash;6) should be treated with caution &mdash; the mean estimate is based on limited data.</p>
         <p style="margin-top:8px;"><strong style="color:white;">Mean</strong> &mdash; the average value for this stage. Compare Stage 1 mean to Stage 2 mean to understand the direction and magnitude of the change.</p>
