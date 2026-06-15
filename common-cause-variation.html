@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/common-cause-variation.html">
+    <title>Common Cause Variation — Improving a Stable System — StepChangeAnalysis.com</title>
+    <meta name="description" content="Joiner's approach to common cause variation: when Bootstrap CUSUM shows no step change, the system is stable — but may be stable at the wrong level. Reducing common cause variation requires changing the system itself, not reacting to data points. Joiner's 'common cause highway', p.140.">
+    <meta name="keywords" content="common cause variation, special cause variation, Joiner, Deming, Bootstrap CUSUM, no change point, stable system, NHS improvement, system redesign, tampering">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Common Cause Variation</div>
+    <div class="article-flag">&#128202; Concept &middot; Variation Theory &middot; Path C</div>
+
+    <h1>Common Cause Variation — Improving a Stable System</h1>
+    <p class="article-subtitle">Bootstrap CUSUM has found no step change. The system is stable — fluctuating within a predictable range, but not structurally shifting. This is Joiner&rsquo;s &ldquo;common cause highway&rdquo; (p.140, <em>Fourth Generation Management</em>): the process is doing exactly what it is designed to do. If that level is unacceptable, the only way to improve it is to redesign the system. Do not tamper.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Source: Joiner, <em>Fourth Generation Management</em>, p.140 &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what-it-means">What &ldquo;no change detected&rdquo; means</a></li>
+                <li><a href="#section-highway">The common cause highway</a></li>
+                <li><a href="#section-do-not-tamper">The cardinal rule — do not tamper</a></li>
+                <li><a href="#section-how-to-improve">How to actually improve a stable system</a></li>
+                <li><a href="#section-cusum">Bootstrap CUSUM on a stable system</a></li>
+                <li><a href="#section-when-acceptable">When the stable level is acceptable</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what-it-means">What &ldquo;no change detected&rdquo; means</h2>
+
+    <p>When Bootstrap CUSUM finds no statistically significant change point, it is telling you that the process has been operating at a stable level throughout the period analysed. The variation you can see in the data — the monthly ups and downs — is common cause variation: the normal, expected output of a system behaving consistently with its own design.</p>
+
+    <p>This finding has two very different meanings depending on whether the stable level is acceptable or not.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Situation</th>
+                <th>What Bootstrap CUSUM shows</th>
+                <th>What it means</th>
+                <th>Correct response</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Stable at an acceptable level</strong></td>
+                    <td>No change point. Flat line. Variation within expected range.</td>
+                    <td>The system is performing as intended. Current conditions are sufficient.</td>
+                    <td>Hold the system stable. Monitor for future change points. Resist tampering. See <a href="#section-when-acceptable">below</a>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Stable at an unacceptable level</strong></td>
+                    <td>No change point. Flat line. But the flat line is at the wrong level — too high, too low, or too variable.</td>
+                    <td>The system is consistently producing poor results. This is what the system is designed to produce. Interventions so far have not changed the system — only added noise around the same mean.</td>
+                    <td>Redesign the system. The Joiner common cause highway approach applies. See <a href="#section-how-to-improve">below</a>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Intervention applied — still no change point</strong></td>
+                    <td>No change point after a programme, policy, or intervention was introduced.</td>
+                    <td>The intervention did not produce structural change. It was either at the wrong level (Level 1 or Level 2 response to a Level 3 constraint) or addressed the wrong constraint entirely.</td>
+                    <td>Apply <a href="joiner-levels-of-fix.html">Joiner&rsquo;s levels of fix</a>. Move up one level. Identify where the constraint actually sits. See also <a href="theory-of-constraints.html">Theory of Constraints</a>.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-highway">The common cause highway</h2>
+
+    <p>Joiner&rsquo;s metaphor on page 140 of <em>Fourth Generation Management</em> is the &ldquo;common cause highway&rdquo;: the system is on a road, and without a structural change, it will stay on that road. The lane may be wide or narrow (more or less variable) and the road may be heading in a direction you do not want — but the vehicle will not leave the road by itself. It will not improve spontaneously. And it will not respond to the driver reacting to every bump in the tarmac.</p>
+
+    <p>The highway metaphor makes three things precise:</p>
+
+    <ul style="line-height:2.2;">
+        <li><strong>The road is the system.</strong> The performance you observe is the output of the system&rsquo;s design — its processes, its incentive structures, its resources, its boundaries. To change where the road goes, you must change the road, not steer harder.</li>
+        <li><strong>The lane width is the common cause variation.</strong> Some systems have wide lanes — high month-to-month variability that is still predictable within a range. Others have narrow lanes — consistent and tightly controlled. Narrowing the lane (reducing variation) requires changing the system, not reacting to individual data points.</li>
+        <li><strong>Reacting to bumps is tampering.</strong> Every time a manager reacts to a single month&rsquo;s bad number with an intervention, they are steering in response to road texture rather than road direction. The cumulative effect of such reactions is to add variation — to widen the lane — without changing the direction of travel.</li>
+    </ul>
+
+    <div class="callout blue">
+        <strong>The NHS A&amp;E flat line — 15 years on the same road</strong>
+        <p>The Bootstrap CUSUM analysis of NHS A&amp;E four-hour performance from 2010 to 2026 finds four structural stages of decline — and not one improvement change point in 184 monthly observations. This is the common cause highway in practice: a system that has been subject to dozens of interventions, all of which produced noise around a deteriorating mean but none of which changed the structural constraint. The road has been heading downhill for 15 years. Steering harder has not changed that. See <a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked</a> for the full analysis.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-do-not-tamper">The cardinal rule — do not tamper</h2>
+
+    <p>Deming&rsquo;s funnel experiment is the clearest demonstration of tampering. A marble is dropped through a funnel onto a target. With no intervention, the marbles cluster around the target — common cause variation. If the operator adjusts the funnel after each drop to compensate for where the last marble landed, the marbles scatter further from the target with each adjustment. Tampering makes things worse.</p>
+
+    <p>In management terms, tampering is any intervention made in response to common cause variation — a data point that is within the system&rsquo;s normal range — treated as if it were a special cause requiring a specific response. The consequences are:</p>
+
+    <ul style="line-height:2.2;">
+        <li><strong>Increased variation.</strong> Each reaction adds noise. The system becomes less predictable, not more.</li>
+        <li><strong>False attribution.</strong> When the metric improves in the month after an intervention — as it statistically will do some of the time, by regression to the mean — the intervention is credited with an improvement it did not cause. This reinforces the behaviour of reacting to data.</li>
+        <li><strong>Staff demoralisation.</strong> Teams learn that every dip in performance triggers a management response. Data reporting becomes a political exercise in managing the reaction rather than an honest analysis of the system.</li>
+        <li><strong>Masking the real problem.</strong> Constant reactive interventions obscure the underlying stable level of the system. It becomes impossible to see the road clearly because the driver keeps adjusting.</li>
+    </ul>
+
+    <div class="callout orange">
+        <strong>&#9888;&#65039; The most common form of tampering in public services</strong>
+        <p>The monthly performance review that responds to every data point with an action plan is institutional tampering. If the metric is driven by common cause variation, the action plan addresses something that was not a signal — and the following month&rsquo;s data will produce a different &ldquo;problem&rdquo; requiring a different action plan. Bootstrap CUSUM applied to the metric will show a flat line throughout. No action plan has changed the system; they have merely generated activity in response to noise.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-how-to-improve">How to actually improve a stable system</h2>
+
+    <p>Reducing common cause variation — shifting the stable level of the system — requires structural change at the level where the system is actually designed. Joiner&rsquo;s levels of fix provide the framework: the question is not &ldquo;what can we do?&rdquo; but &ldquo;at what level does the constraint sit, and who has the authority to change it?&rdquo;</p>
+
+    <div class="timeline-box">
+        <h3>&#9654; The Joiner approach to improving a stable system</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 1</span>
+            <span class="timeline-text">
+                <strong>Confirm the system is stable.</strong> Bootstrap CUSUM shows no change point. The flat line is not caused by a special cause that has been normalised — it is genuine common cause variation. If there are recent definition changes, case-mix shifts, or data artefacts, rule those out first (see <a href="change-detected-what-next.html#section-checklist">the investigation checklist</a>).
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 2</span>
+            <span class="timeline-text">
+                <strong>Identify where the constraint sits.</strong> Apply <a href="theory-of-constraints.html">Goldratt&rsquo;s Theory of Constraints</a>: in any system there is one binding constraint limiting throughput. Improving anything other than the constraint produces minimal improvement in system output. The constraint may be inside the system boundary (addressable at Level 2) or outside it (requiring Level 3). Most flat lines in public service data are flat because the constraint is outside the boundary of the organisation being measured — and Level 1 and Level 2 responses cannot reach it.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 3</span>
+            <span class="timeline-text">
+                <strong>Design an intervention at the right level.</strong> Using <a href="joiner-levels-of-fix.html">Joiner&rsquo;s levels</a>: Level 1 fixes the output (temporary, does not change the system). Level 2 fixes the process within existing boundaries (reduces variation within the system). Level 3 fixes the system — changes the structural conditions, crosses organisational boundaries, addresses the constraint where it actually sits. Only a Level 3 intervention on a system-level constraint will produce a Bootstrap CUSUM change point.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 4</span>
+            <span class="timeline-text">
+                <strong>Implement the structural change and monitor with Bootstrap CUSUM.</strong> The pre-committed test: specify in advance what change point you expect (direction, approximate timing, magnitude) and on which metric the leading indicator should move first. Then run Bootstrap CUSUM as data arrives. A genuine structural change will produce a detectable change point. A Level 1 or Level 2 response to a Level 3 constraint will produce a flat line — or a temporary improvement that reverts within one to two seasons.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 5</span>
+            <span class="timeline-text">
+                <strong>Once a change point appears — standardise and hold.</strong> The system has moved to a new level. Standardise the conditions that produced the shift. Do not introduce further changes until the new level has been confirmed as stable through a full hard season. Then return to Step 1 at the new baseline.
+            </span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">Bootstrap CUSUM on a stable system</h2>
+
+    <p>Bootstrap CUSUM is at its most useful as a prospective monitoring tool on a system confirmed to be stable. Set a pre-committed confidence threshold (typically 95%). Upload data monthly as it arrives. The algorithm will detect the first structural change point — whether improvement or deterioration — against the clean, stable baseline. Because the baseline is stable, there is no ambiguity about attribution: whatever changed in the system at or just before the change point date is the candidate cause.</p>
+
+    <div class="dark-box">
+        <h3>&#128221; The pre-committed prediction on a stable system</h3>
+        <p>When a system is stable at an unacceptable level and a structural intervention is planned, make the prediction before the data arrives: state the direction of the expected change point, the metric it should appear in first (the leading indicator), the approximate timing, and the confidence threshold you will use as the test. This pre-commitment prevents the common error of interpreting any subsequent data movement — including random common cause fluctuation — as evidence that the intervention worked.</p>
+        <p style="margin-top:10px;">If the change point does not appear within the expected timeframe, the honest conclusion is that the intervention did not reach the constraint. Return to Step 2: re-examine where the constraint sits and move up a level. See <a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked</a> for what 15 years of this pattern looks like in NHS A&amp;E data.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-when-acceptable">When the stable level is acceptable</h2>
+
+    <p>Not every stable system needs to be improved. If Bootstrap CUSUM shows a flat line at a level that meets the purpose of the system — if the common cause variation is within acceptable bounds and the direction of travel is stable — the correct response is to hold it there and monitor.</p>
+
+    <p>The temptation to improve a system that is already performing acceptably is itself a form of tampering: introducing change for its own sake, or in response to external pressure to &ldquo;do something,&rdquo; risks destabilising a system that was working. Deming&rsquo;s formulation applies here too: &ldquo;if it ain&rsquo;t broke, don&rsquo;t fix it&rdquo; is not complacency — it is the correct response to a stable, acceptable system.</p>
+
+    <p>The monitoring task is to watch for the first sign that the stable level is shifting — an early change point in a leading indicator, a seasonal pattern that has become a structural trend. Bootstrap CUSUM running continuously on the metric will detect that shift before it becomes entrenched.</p>
+
+    <div class="cta-box">
+        <h2>Run Bootstrap CUSUM on your stable system</h2>
+        <p>Upload your time-series data. If the system is genuinely stable, Bootstrap CUSUM will confirm it with a flat line. If a structural shift has occurred that you have not yet detected — or if your intervention has finally produced a change point — the algorithm will find it and date it.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="special-cause-variation.html">Special Cause Variation — Eliminate It Before Improving the System</a></h3>
+        <p>The other side of the distinction: what special cause variation looks like, how Bootstrap CUSUM detects it, and Joiner&rsquo;s rule for the correct sequence.</p>
+        <a href="special-cause-variation.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a></h3>
+        <p>The framework for deciding at what level to intervene in a stable system performing at the wrong level — and why Level 1 and Level 2 responses to a Level 3 constraint produce a flat Bootstrap CUSUM line.</p>
+        <a href="joiner-levels-of-fix.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="theory-of-constraints.html">Theory of Constraints</a></h3>
+        <p>Goldratt&rsquo;s method for identifying the binding constraint before designing the intervention — the prerequisite to a Level 3 response that will actually produce a change point.</p>
+        <a href="theory-of-constraints.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E Performance 2010&ndash;2026</a></h3>
+        <p>The common cause highway in 15 years of NHS data: a system stable at a deteriorating level, and the pattern of Level 1 and Level 2 responses that produced no Bootstrap CUSUM improvement change point.</p>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Joiner, B.L.:</strong> <em>Fourth Generation Management.</em> McGraw-Hill, 1994. The common cause highway metaphor and the approach to improving a stable system are developed from p.140. Joiner&rsquo;s framework draws directly on Deming&rsquo;s teaching on variation and the two types of mistake.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. The funnel experiment (pp.327&ndash;332) is the definitive demonstration of tampering. Deming&rsquo;s fourteen points and the system of profound knowledge underpin the distinction between common and special cause variation.</p>
+        <p style="margin-top:8px;"><strong>Shewhart, W.A.:</strong> <em>Economic Control of Quality of Manufactured Product.</em> Van Nostrand, 1931. The original distinction between assignable causes and chance causes.</p>
+        <p style="margin-top:8px;"><strong>Goldratt, E.M.:</strong> <em>The Goal.</em> North River Press, 1984. Theory of Constraints — identifying the binding constraint before deciding where to intervene.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>

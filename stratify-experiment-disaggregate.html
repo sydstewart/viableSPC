@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/stratify-experiment-disaggregate.html">
+    <title>Stratify, Experiment, Disaggregate — Joiner&rsquo;s Three Strategies for Improving a Stable System — StepChangeAnalysis.com</title>
+    <meta name="description" content="Joiner's three strategies for improving a stable system in common cause variation: Stratify (find who is doing it better), Experiment (PDSA with pre-committed Bootstrap CUSUM predictions), Disaggregate (break the aggregate into its component mechanisms). How all three connect to Deming's System of Profound Knowledge and the PDSA cycle.">
+    <meta name="keywords" content="Joiner stratify experiment disaggregate, common cause variation improvement, Fourth Generation Management p141, PDSA Bootstrap CUSUM, Deming system of profound knowledge, stable system improvement, NHS improvement method">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Stratify, Experiment, Disaggregate</div>
+    <div class="article-flag">&#128202; Concept &middot; Improvement Method &middot; Joiner p.141</div>
+
+    <h1>Stratify, Experiment, Disaggregate</h1>
+    <p class="article-subtitle">When Bootstrap CUSUM shows a system is stable but performing at the wrong level, the instinct is to intervene harder. Joiner&rsquo;s answer — drawn from page 141 of <em>Fourth Generation Management</em> — is to think harder first. Three strategies, applied in sequence, reveal what the aggregate data conceals: where the variation comes from, which interventions actually move it, and which part of the process is driving the result you are trying to change.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Source: Joiner, <em>Fourth Generation Management</em>, p.141 &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <!-- Summary box -->
+    <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; The three strategies at a glance</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;">
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--brand-blue);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">1. Stratify</div>
+                <div style="font-size:0.88em;color:var(--text);line-height:1.6;">Break the aggregate into groups. Who is doing it better? By how much? Under what conditions? The answer tells you whether variation in the system is explained by differences between subgroups — and points to Bright Spots worth understanding.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--orange);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">2. Experiment</div>
+                <div style="font-size:0.88em;color:var(--text);line-height:1.6;">Test a change on a small scale with a pre-specified, measurable prediction. PDSA — Plan, Do, Study, Act. Bootstrap CUSUM is the Study step: it detects whether a genuine structural change point appeared, at the confidence level you committed to in advance.</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">3. Disaggregate</div>
+                <div style="font-size:0.88em;color:var(--text);line-height:1.6;">Divide the process into its component mechanisms. The aggregate metric combines multiple distinct pathways. Identifying which pathway is dominant — and treating it specifically — is more powerful than managing the total number.</div>
+            </div>
+        </div>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-context">The problem these strategies solve</a></li>
+                <li><a href="#section-stratify">Strategy 1 — Stratify</a></li>
+                <li><a href="#section-experiment">Strategy 2 — Experiment</a></li>
+                <li><a href="#section-disaggregate">Strategy 3 — Disaggregate</a></li>
+                <li><a href="#section-sequence">The sequence — how the three strategies work together</a></li>
+                <li><a href="#section-deming">The Deming connection — System of Profound Knowledge</a></li>
+                <li><a href="#section-pdsa">The PDSA connection — where Bootstrap CUSUM fits</a></li>
+                <li><a href="#section-examples">Applied examples</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-context">The problem these strategies solve</h2>
+
+    <p>A system is stable. Bootstrap CUSUM finds no change point. The process is producing consistent results — but at a level that is not good enough. Previous interventions have not moved it. The temptation is to try a bigger version of the same intervention, or to try several interventions simultaneously, or to commission a review.</p>
+
+    <p>Joiner&rsquo;s diagnosis is precise: the problem is not insufficient effort. It is insufficient <em>understanding</em>. The aggregate metric obscures three things that are essential for improvement — who is doing it differently, whether any tested change actually works, and which specific mechanism within the process is responsible for most of the problem.</p>
+
+    <p>Until all three questions are answered, any intervention is a guess. It may be a well-intentioned, evidence-informed guess — but it is still a guess. Stratify, Experiment, and Disaggregate replace guessing with knowing.</p>
+
+    <div class="callout blue">
+        <strong>Why aggregate data blocks improvement</strong>
+        <p>An aggregate metric — total wrong-route events, average A&amp;E waiting time, national adverse drug reaction rate — is a summary. Summaries are useful for tracking direction. They are useless for identifying causes. An aggregate that is stable in common cause variation is telling you the average of a set of processes that may be very different from each other. Some of those processes may be excellent. Some may be failing. The average obscures both. Stratification is the act of looking inside the average.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-stratify">Strategy 1 — Stratify</h2>
+
+    <p>Stratification means breaking the aggregate data into meaningful subgroups and asking whether the variation between those subgroups explains the overall result. The subgroups might be sites, teams, patient groups, time periods, geographies, product types, or any other dimension that might plausibly drive different performance.</p>
+
+    <div class="dark-box">
+        <h3>The stratification question</h3>
+        <p>If the aggregate metric is stable at an unacceptable level, ask: <strong>is everyone performing at this level, or does the aggregate conceal some units performing well and others performing badly?</strong></p>
+        <p style="margin-top:10px;">If performance is uniformly poor across all subgroups, the cause is in the shared system — the conditions, resources, or design that all subgroups have in common. The solution is a system redesign that reaches every subgroup simultaneously.</p>
+        <p style="margin-top:10px;">If performance varies significantly between subgroups, the cause is in what differentiates them. Some subgroups have found a way to perform better within the same overall system. Those subgroups are Bright Spots — and the question becomes: <em>what are they doing differently, and can it be standardised?</em></p>
+    </div>
+
+    <div class="timeline-box">
+        <h3>&#128270; How to stratify</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 1</span>
+            <span class="timeline-text">
+                <strong>Choose the stratification dimensions.</strong> Start with the dimensions most likely to explain variation: geography (site, region, trust), patient group (age, diagnosis, complexity), time (season, shift, day of week), and process pathway (route, channel, team). Do not stratify by everything at once — choose the two or three dimensions most plausible given what you know about the system.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 2</span>
+            <span class="timeline-text">
+                <strong>Run Bootstrap CUSUM on each subgroup separately.</strong> A change point that is invisible in the aggregate may be clearly visible in a subgroup. Equally, a change point that appears in the aggregate may be driven by a single outlier subgroup — detectable only by looking at each subgroup independently.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 3</span>
+            <span class="timeline-text">
+                <strong>Identify the Bright Spots.</strong> Which subgroups are performing significantly better than the aggregate? Are they sustaining that performance over time — a genuine structural difference, detectable as a consistently lower level in their Bootstrap CUSUM output — or is it a temporary fluctuation? A Bright Spot that is genuinely structurally different is worth studying. See <a href="bright-spots.html">Bright Spots</a> for the investigation framework.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 4</span>
+            <span class="timeline-text">
+                <strong>Ask what the Bright Spot is doing differently — and whether it can be standardised.</strong> Deming&rsquo;s question applies: &ldquo;by what method?&rdquo; A Bright Spot that cannot describe its own mechanism cannot be replicated. A Bright Spot that can describe a specific, transferable practice is the seed of the next experiment.
+            </span>
+        </div>
+    </div>
+
+    <div class="callout orange">
+        <strong>&#9888;&#65039; The stratification trap — explaining away variation</strong>
+        <p>Stratification can be used honestly or defensively. Honestly: to find subgroups that are performing better and understand why. Defensively: to explain away poor performance by finding a reason why &ldquo;our subgroup is different.&rdquo; The test is simple — does the stratification lead to a transferable insight that could improve the aggregate, or does it lead to a conclusion that nothing can be done? If the latter, the stratification is not analytical discipline. It is rationalisation.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-experiment">Strategy 2 — Experiment</h2>
+
+    <p>Experimentation is the act of testing a change on a small scale, with a pre-specified prediction, before implementing it at scale. It is the direct application of Deming&rsquo;s PDSA cycle — and it is the strategy most consistently absent from public sector improvement programmes, which tend to implement at scale first and evaluate (or not) afterwards.</p>
+
+    <p>The pre-specification is not a bureaucratic formality. It is the mechanism that makes the experiment honest. Without a pre-specified prediction, any subsequent data movement — including random common cause fluctuation — can be interpreted as evidence the intervention worked. This is the most common form of false attribution in improvement work, and it is almost invisible because it feels like rigour.</p>
+
+    <div class="dark-box">
+        <h3>&#128221; What a pre-specified experiment looks like</h3>
+        <p>Before implementing a change, state in writing:</p>
+        <ul style="margin-top:10px;line-height:2.2;">
+            <li><strong>What will change:</strong> the specific intervention, applied to which subgroup, starting when.</li>
+            <li><strong>What metric will move:</strong> the primary outcome measure — not a process measure, not a proxy, but the metric that matters.</li>
+            <li><strong>Which metric will move first:</strong> the leading indicator, if one exists — and the expected lag between the leading indicator change point and the outcome change point.</li>
+            <li><strong>The direction:</strong> up or down.</li>
+            <li><strong>The timing:</strong> within how many periods of the intervention start do you expect a Bootstrap CUSUM change point to be detectable?</li>
+            <li><strong>The confidence threshold:</strong> 90%, 95%, or 99% — and why.</li>
+            <li><strong>The balancing measures:</strong> what could get worse if this intervention works — and you will monitor those simultaneously.</li>
+        </ul>
+        <p style="margin-top:12px;">If the change point appears at the predicted time, in the predicted direction, in the predicted metric, at the predicted confidence level — and the balancing measures have not deteriorated — the experiment has produced genuine evidence. That is the Study step of PDSA. Act by standardising and scaling. Then Plan the next PDSA cycle.</p>
+        <p style="margin-top:10px;">If the change point does not appear: the intervention did not work at this level for this constraint. Return to Stratify or Disaggregate to refine the understanding before the next experiment. Do not scale the intervention.</p>
+    </div>
+
+    <div class="callout blue">
+        <strong>Bootstrap CUSUM is the Study step of PDSA</strong>
+        <p>The PDSA cycle is only as strong as its Study step. Without a rigorous method for detecting whether a change produced a genuine structural shift — rather than a temporary fluctuation or a seasonal effect — the Study step defaults to judgement: &ldquo;it feels like it worked&rdquo; or &ldquo;the numbers are better this month.&rdquo; Bootstrap CUSUM replaces that judgement with a pre-committed statistical test. It answers, at a specified confidence level, whether the data shows a structural change point — and it dates that change point so you can verify it coincides with the intervention. That is the Study step done properly.</p>
+    </div>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>PDSA phase</th>
+                <th>What it requires</th>
+                <th>Bootstrap CUSUM role</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Plan</strong></td>
+                    <td>A specific change, a specific prediction, a specific metric, a specific confidence threshold, a specific timeframe. Written down before implementation.</td>
+                    <td>Defines the test: which metric, which threshold, which timeframe. Without this, the Study step has no benchmark.</td>
+                </tr>
+                <tr>
+                    <td><strong>Do</strong></td>
+                    <td>Implement the change at small scale. Collect data consistently. Do not make additional changes during the Do phase — they muddy the baseline.</td>
+                    <td>Data is collected in the format required for Bootstrap CUSUM input: date and metric value, one row per period.</td>
+                </tr>
+                <tr>
+                    <td><strong>Study</strong></td>
+                    <td>Test the prediction against the data. Did a change point appear? When? In which metric? At what confidence level? Did balancing measures hold?</td>
+                    <td><strong>Bootstrap CUSUM is the Study step.</strong> Run the algorithm at the pre-specified confidence level. Compare the change point date to the intervention date. Check the direction. Check the balancing measures.</td>
+                </tr>
+                <tr>
+                    <td><strong>Act</strong></td>
+                    <td>If the change point confirmed the prediction: standardise and scale. If not: return to Plan with the new understanding. Do not scale an intervention that did not produce a confirmed change point.</td>
+                    <td>The change point date and magnitude inform the standardisation — you know exactly when the shift occurred and how large it was. Future monitoring runs Bootstrap CUSUM to detect any subsequent reversal.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-disaggregate">Strategy 3 — Disaggregate</h2>
+
+    <p>Disaggregation means dividing the process into its component mechanisms and managing those mechanisms separately. An aggregate metric — total events, overall rate, national average — is a sum of several distinct pathways, each with its own root cause and its own solution. Managing the total without understanding the components is managing the wrong thing.</p>
+
+    <p>Joiner&rsquo;s insight is that the dominant mechanism — the one pathway responsible for the majority of the total — is rarely obvious from the aggregate. It requires dividing the data by process type, route, mechanism, or cause until the dominant contributor is visible. Once visible, it can be addressed specifically. Fix the dominant mechanism and the aggregate will move. Fix a minor mechanism and the aggregate will barely shift, regardless of how successful the local intervention was.</p>
+
+    <div class="timeline-box">
+        <h3>&#9965;&#65039; How to disaggregate</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 1</span>
+            <span class="timeline-text">
+                <strong>Map the pathways that contribute to the aggregate metric.</strong> For a patient safety metric: list every distinct mechanism by which the adverse event can occur. For a waiting time metric: list every pathway through the system that contributes to total wait. For an error rate: list every step in the process where the error can originate. A fishbone diagram or process map is the right tool here — not statistical analysis. You need to understand the structure before you can measure the components.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 2</span>
+            <span class="timeline-text">
+                <strong>Measure each pathway separately.</strong> What proportion of the aggregate total does each pathway contribute? Run Bootstrap CUSUM on each pathway independently. A pathway that has already improved but is hidden in a stable aggregate is now visible. A pathway that is driving the aggregate upwards is now identifiable.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 3</span>
+            <span class="timeline-text">
+                <strong>Identify the dominant mechanism.</strong> Which pathway contributes the largest proportion of the total? This is the binding constraint within the process — the one that, if addressed, will move the aggregate most. In Goldratt&rsquo;s terms: this is where the constraint sits within the process itself, once the system boundary question has been answered.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 4</span>
+            <span class="timeline-text">
+                <strong>Design the intervention for the dominant mechanism — not the aggregate.</strong> An intervention designed for the aggregate metric is usually too broad to address any specific mechanism effectively. An intervention designed for the dominant pathway can be precise, testable, and measurable. Run the PDSA experiment on that specific pathway, with Bootstrap CUSUM on the pathway metric — not the aggregate — as the Study step.
+            </span>
+        </div>
+    </div>
+
+    <div class="callout orange">
+        <strong>&#9888;&#65039; The dominant mechanism trap — fixing the wrong pathway</strong>
+        <p>The most common disaggregation failure is addressing a visible or politically salient pathway rather than the dominant one. In NHS wrong-route medication errors, the NRFit connector mandate addressed neuraxial-to-IV misconnection — a real problem with a clear engineering solution, and one that generated significant advocacy. But 16 of 20 wrong-route events in 2023&ndash;24 were oral-to-IV: a different mechanism, a different root cause, a different solution. An intervention that successfully eliminates neuraxial-to-IV errors entirely would — if oral-to-IV is unchanged — reduce the aggregate by at most 20%. That is the dominant mechanism trap. Fix what is visible and politically tractable rather than what is driving the number.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-sequence">The sequence — how the three strategies work together</h2>
+
+    <p>The three strategies are not independent options — they are a sequence. Each one sets up the next, and skipping one reduces the precision of those that follow.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Stage</th>
+                <th>Strategy</th>
+                <th>Question answered</th>
+                <th>Output</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td><strong>Stratify</strong></td>
+                    <td>Is the variation between subgroups or within the system? Who is doing it better?</td>
+                    <td>Bright Spots to study. Hypothesis about what differentiates better-performing subgroups. Candidate intervention derived from observed practice, not theory.</td>
+                </tr>
+                <tr>
+                    <td><strong>2</strong></td>
+                    <td><strong>Experiment</strong></td>
+                    <td>Does the candidate intervention actually produce a structural change point when tested at small scale?</td>
+                    <td>A Bootstrap CUSUM-confirmed change point — or an honest null result that sends you back to the hypothesis. Either way, knowledge rather than assumption.</td>
+                </tr>
+                <tr>
+                    <td><strong>3</strong></td>
+                    <td><strong>Disaggregate</strong></td>
+                    <td>Which specific pathway or mechanism within the process is responsible for the dominant proportion of the aggregate result?</td>
+                    <td>A precisely targeted intervention designed for the dominant mechanism — not the aggregate. A PDSA experiment that can detect success or failure in the pathway metric specifically.</td>
+                </tr>
+                <tr>
+                    <td><strong>Repeat</strong></td>
+                    <td><strong>Iterate</strong></td>
+                    <td>Once a change point is confirmed in the dominant pathway, what is the next constraint?</td>
+                    <td>Return to Stratify at the new baseline. Goldratt&rsquo;s Step 5 applies: do not let inertia become the next constraint. The constraint will move.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-deming">The Deming connection — System of Profound Knowledge</h2>
+
+    <p>Joiner&rsquo;s three strategies are a direct application of Deming&rsquo;s System of Profound Knowledge — specifically its four components, each of which maps precisely onto the Stratify/Experiment/Disaggregate framework.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Deming&rsquo;s component</th>
+                <th>What it means</th>
+                <th>Where it appears in Joiner&rsquo;s three strategies</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Appreciation for a system</strong></td>
+                    <td>Understanding that outcomes are produced by the system, not by individuals. The system has structure, interdependencies, and boundaries. Improving it requires understanding those boundaries.</td>
+                    <td><strong>Disaggregate.</strong> Mapping the pathways within the process is the act of understanding the system&rsquo;s internal structure. Identifying the dominant mechanism is identifying where the system most needs to change.</td>
+                </tr>
+                <tr>
+                    <td><strong>Knowledge of variation</strong></td>
+                    <td>Distinguishing common cause variation (the system) from special cause variation (a specific event). Not reacting to common cause variation as if it were a special cause. Using statistical methods to tell the difference.</td>
+                    <td><strong>Experiment.</strong> Bootstrap CUSUM is the application of knowledge of variation to the Study step of PDSA — detecting whether a genuine structural shift has occurred or whether the observed change is within the system&rsquo;s normal common cause range.</td>
+                </tr>
+                <tr>
+                    <td><strong>Theory of knowledge</strong></td>
+                    <td>Knowledge requires a theory — a prediction that can be tested. Data alone is not knowledge. An observation that was not predicted in advance is not confirmed evidence. Improvement requires prediction, test, and update.</td>
+                    <td><strong>Experiment.</strong> The pre-specified prediction — direction, metric, timing, confidence threshold — is Deming&rsquo;s theory of knowledge applied to improvement. Without the pre-specification, the Study step has no theory to test.</td>
+                </tr>
+                <tr>
+                    <td><strong>Psychology</strong></td>
+                    <td>Understanding how people respond to measurement, management, and change. Fear of data produces gaming. Blame produces concealment. Intrinsic motivation produces genuine improvement.</td>
+                    <td><strong>Stratify.</strong> Finding Bright Spots — units that are performing better within the same system — is an act of positive psychology. It reframes the question from &ldquo;who is failing?&rdquo; to &ldquo;who has found a better way?&rdquo; That is a fundamentally different relationship between measurement and the people being measured.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-pdsa">The PDSA connection — where Bootstrap CUSUM fits</h2>
+
+    <p>The PDSA cycle and Joiner&rsquo;s three strategies are not parallel frameworks — PDSA is the operational container inside which Stratify, Experiment, and Disaggregate are run. Each strategy generates a PDSA cycle, and the cycles run in sequence.</p>
+
+    <div class="timeline-box">
+        <h3>&#128257; Three PDSA cycles — one for each strategy</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">PDSA 1</span>
+            <span class="timeline-text">
+                <strong>Stratify PDSA — find the Bright Spot.</strong><br><br>
+                <em>Plan:</em> Hypothesise which subgroup dimension is most likely to explain variation. Predict that at least one subgroup will show significantly better performance than the aggregate. Define &ldquo;significantly better&rdquo; in Bootstrap CUSUM terms: a sustained level at least X% below the aggregate, visible as a structurally different baseline.<br><br>
+                <em>Do:</em> Collect and disaggregate the data by the chosen dimension.<br><br>
+                <em>Study:</em> Run Bootstrap CUSUM on each subgroup. Is any subgroup genuinely structurally better? Is the difference sustained or a fluctuation?<br><br>
+                <em>Act:</em> If a Bright Spot is confirmed: investigate what it is doing differently. Produce a transferable hypothesis — a candidate intervention. If no Bright Spot: the variation is in the shared system, not between subgroups. Proceed to disaggregation.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">PDSA 2</span>
+            <span class="timeline-text">
+                <strong>Experiment PDSA — test the candidate intervention.</strong><br><br>
+                <em>Plan:</em> Define the intervention precisely. State the pre-specified prediction: which metric, which direction, within how many periods, at what confidence threshold. Define the balancing measures. Apply to a small number of sites or patients — enough to generate detectable data, small enough to limit harm if the intervention does not work.<br><br>
+                <em>Do:</em> Implement. Collect data. Make no other changes during the Do phase.<br><br>
+                <em>Study:</em> Run Bootstrap CUSUM at the pre-specified confidence threshold. Did the change point appear? When? Does the date match the intervention? Are balancing measures stable?<br><br>
+                <em>Act:</em> If confirmed: standardise the conditions that produced the change point. Prepare to scale. If not confirmed: return to Plan. What was wrong with the hypothesis? Was the intervention at the right level? Was the constraint correctly identified?
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">PDSA 3</span>
+            <span class="timeline-text">
+                <strong>Disaggregate PDSA — scale to the dominant mechanism.</strong><br><br>
+                <em>Plan:</em> Having confirmed the intervention works in the experiment, design the scaled application targeted at the dominant mechanism. Define the aggregate change point you expect as a result — the timing, direction, magnitude, and confidence threshold.<br><br>
+                <em>Do:</em> Implement at scale across the dominant pathway.<br><br>
+                <em>Study:</em> Run Bootstrap CUSUM on both the pathway metric and the aggregate. The pathway change point should appear first; the aggregate change point should follow with a lag proportional to the pathway&rsquo;s share of the aggregate.<br><br>
+                <em>Act:</em> If both change points confirmed: standardise, monitor, and return to Stratify at the new baseline. Identify the next dominant mechanism. If aggregate does not follow pathway: the pathway share of the aggregate was smaller than estimated, or a compensating adverse change occurred in another pathway. Disaggregate further.
+            </span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-examples">Applied examples</h2>
+
+    <div class="timeline-box">
+        <h3>&#128203; How the three strategies have been applied on this site</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Wrong-route medication errors</span>
+            <span class="timeline-text">
+                <strong>Stratify:</strong> Trust-level analysis would reveal whether wrong-route events are distributed uniformly across NHS trusts or concentrated in a minority. Trusts with zero sustained events over multiple years are the Bright Spots — they have achieved something within the same national system that others have not.<br><br>
+                <strong>Experiment:</strong> Any intervention — pharmacy unit-dose dispensing, separated storage, ENFit rollout — should be tested with a pre-specified Bootstrap CUSUM prediction on the pathway metric before national rollout. Previous mandates (NatSSIPs, MSO, colour coding) were implemented at scale without pre-specified predictions and are not detectable as change points in the aggregate data.<br><br>
+                <strong>Disaggregate:</strong> 16 of 20 wrong-route events in 2023&ndash;24 were oral-to-IV. The NRFit mandate addresses neuraxial-to-IV — a real problem, but not the dominant mechanism. Managing the aggregate number without addressing the oral-to-IV pathway specifically is addressing the wrong constraint. See <a href="never-events-wrong-route.html">Never Events — Wrong Route</a>.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Anticoagulation safety</span>
+            <span class="timeline-text">
+                <strong>Stratify:</strong> Regional variation in DOAC prescribing appropriateness ranges from 53% to 99% (Bassi 2020). The aggregate national figure conceals regions where almost all prescribing is appropriate alongside regions where half of it is not. The regions performing well are the Bright Spots — they have protocols, pharmacy review processes, or clinical leadership structures that others do not.<br><br>
+                <strong>Experiment:</strong> The COBRRA trial (NEJM, March 2026) is the correct form of this strategy — a pre-specified, controlled experiment testing apixaban versus rivaroxaban with a defined outcome measure. The Bootstrap CUSUM change point in DOAC-specific adverse drug reaction rates at 2016 corresponds to the ROCKET-AF controversy and the subsequent rivaroxaban-to-apixaban switch — a natural experiment with a dateable cause.<br><br>
+                <strong>Disaggregate:</strong> The aggregate adverse event rate combines events from inappropriate prescribing (wrong drug, wrong dose, wrong patient), monitoring failures (renal function not checked), and drug interactions (50% of DOACs not adjusted for renal function by 2019). Each has a different cause and a different solution. See <a href="anticoag-safety.html">Anticoagulation Safety</a>.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">NHS A&amp;E performance</span>
+            <span class="timeline-text">
+                <strong>Stratify:</strong> The national four-hour performance figure is the average of 136 NHS trusts, some of which consistently outperform the aggregate. Those trusts are the Bright Spots. The question is whether their performance is explained by case-mix (lower-acuity populations) or by genuinely transferable practice. Bootstrap CUSUM on individual trust data would separate structural outperformers from lucky averages.<br><br>
+                <strong>Experiment:</strong> No A&amp;E intervention in 15 years was implemented with a pre-specified Bootstrap CUSUM prediction. The consequence: not one improvement change point is detectable in 184 monthly observations. The absence of pre-specified predictions makes it impossible to know whether any intervention worked — or would have worked at a different scale or in a different context.<br><br>
+                <strong>Disaggregate:</strong> &ldquo;A&amp;E performance&rdquo; is an aggregate of at least four distinct bottlenecks: inflow (GP access failure, self-referral), triage and treatment capacity, acute bed availability, and discharge delay (DTOC/NCR). The dominant constraint — blocked discharge — sits outside the trust&rsquo;s system boundary. Improving any of the in-trust pathways without addressing discharge produces a pathway-level change point that does not appear in the aggregate. See <a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked</a>.
+            </span>
+        </div>
+    </div>
+
+    <div class="wait-box">
+        <div class="wb-label">&#128203; The three questions — applied to your system</div>
+        <h3>Before designing the next intervention, answer these in order:</h3>
+        <ol>
+            <li><strong>Stratify:</strong> Is anyone achieving significantly better results within this same system? Under what conditions? What are they doing differently? Run Bootstrap CUSUM on subgroup data before designing the intervention.</li>
+            <li><strong>Experiment:</strong> What specific, small-scale, pre-specified test would confirm whether the candidate intervention actually produces a structural change point? Write the prediction — direction, metric, timing, confidence threshold, balancing measures — before implementation.</li>
+            <li><strong>Disaggregate:</strong> Which specific pathway or mechanism within this process is responsible for the dominant proportion of the aggregate result? Is the planned intervention aimed at that pathway — or at a more visible but smaller contributor?</li>
+        </ol>
+        <p style="margin-top:12px;">If any of the three questions cannot be answered before implementation, the intervention is a guess. Stratify, Experiment, and Disaggregate replace guessing with knowing.</p>
+    </div>
+
+    <div class="cta-box">
+        <h2>Run the Experiment step</h2>
+        <p>Upload your subgroup or pathway data to the StepChange Analyzer. Run Bootstrap CUSUM at your pre-specified confidence threshold. The Study step of PDSA — done properly.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="common-cause-variation.html">Common Cause Variation — Improving a Stable System</a></h3>
+        <p>The theory behind why a stable system requires these three strategies — and why reacting to common cause variation without them produces tampering, not improvement.</p>
+        <a href="common-cause-variation.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Path C</div>
+        <h3><a href="no-change-what-next.html">No Change Detected: What to Do Next</a></h3>
+        <p>The decision guide for when Bootstrap CUSUM finds no step change — and how Stratify, Experiment, and Disaggregate fit into the diagnostic sequence.</p>
+        <a href="no-change-what-next.html" class="btn">Read the guide &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="pdsa-cycle.html">The PDSA Cycle</a></h3>
+        <p>Plan, Do, Study, Act — and where Bootstrap CUSUM sits in the Study step as the rigorous test of whether a genuine structural change occurred.</p>
+        <a href="pdsa-cycle.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="bright-spots.html">Bright Spots</a></h3>
+        <p>The investigation framework for Strategy 1 — how to study a Bright Spot rigorously enough to derive a transferable, testable intervention from it.</p>
+        <a href="bright-spots.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a></h3>
+        <p>The prerequisite framework — before applying the three strategies, confirm the intervention is being designed at the right level. Stratify, Experiment, and Disaggregate applied to a Level 1 or Level 2 response to a Level 3 constraint will not produce a change point.</p>
+        <a href="joiner-levels-of-fix.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="theory-of-constraints.html">Theory of Constraints</a></h3>
+        <p>Goldratt&rsquo;s method for identifying the binding constraint — the prerequisite to Disaggregate. Without knowing which constraint is binding, disaggregation may identify the dominant pathway but still address the wrong level.</p>
+        <a href="theory-of-constraints.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Applied Example</div>
+        <h3><a href="never-events-wrong-route.html">Never Events — Wrong Route: Ten Years of a Never Event That Never Stopped</a></h3>
+        <p>All three strategies applied to NHS wrong-route medication errors — including the dominant mechanism finding that 16 of 20 events in 2023&ndash;24 were oral-to-IV, not neuraxial.</p>
+        <a href="never-events-wrong-route.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Joiner, B.L.:</strong> <em>Fourth Generation Management: The New Business Consciousness.</em> McGraw-Hill, 1994. The three strategies — Stratify, Experiment, Disaggregate — are set out on p.141 as the approach to improving a stable system in common cause variation. The common cause highway metaphor is on p.140.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. The System of Profound Knowledge — Appreciation for a System, Knowledge of Variation, Theory of Knowledge, Psychology — is the intellectual foundation for all four components of the Joiner framework. The PDSA cycle and the requirement for pre-specified predictions are central to Deming&rsquo;s teaching on improvement.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>The New Economics for Industry, Government, Education.</em> MIT Press, 1993. The System of Profound Knowledge is set out in full in this later work, which refines and extends <em>Out of the Crisis.</em></p>
+        <p style="margin-top:8px;"><strong>Shewhart, W.A.:</strong> <em>Statistical Method from the Viewpoint of Quality Control.</em> Graduate School, Department of Agriculture, 1939. The original formulation of what became the PDSA cycle — Specification, Production, Inspection — later developed by Deming into Plan, Do, Study, Act.</p>
+        <p style="margin-top:8px;"><strong>Goldratt, E.M.:</strong> <em>The Goal.</em> North River Press, 1984. Theory of Constraints — the binding constraint is the one that, if addressed, produces the greatest improvement in system throughput. Disaggregation identifies the dominant mechanism within the process; Theory of Constraints identifies whether that mechanism is the binding constraint.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993). Used throughout as the Study step of PDSA — detecting structural change points at pre-specified confidence levels.</p>
+        <p style="margin-top:8px;"><strong>Applied references:</strong> Bassi et al. (2020) — regional variation in DOAC prescribing appropriateness. Burn et al. (2023) — renal adjustment failure rates. Malhotra et al. (2023) — inappropriate prescribing rates. COBRRA trial (NEJM, March 2026) — apixaban vs rivaroxaban. NHS England Never Events data 2023&ndash;24.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>

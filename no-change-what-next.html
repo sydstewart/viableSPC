@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/no-change-what-next.html">
+    <title>No Change Detected: What to Do Next — StepChangeAnalysis.com</title>
+    <meta name="description" content="Bootstrap CUSUM found no step change. Before reacting, three questions: is the system genuinely stable, is the stable level acceptable, and did your intervention actually reach the constraint? The decision guide for Path C.">
+    <meta name="keywords" content="Bootstrap CUSUM no change, no step change detected, stable system, common cause variation, Joiner, Deming, don't tamper, NHS improvement, system constraint">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="what-to-do-next.html">What to Do Next?</a> &rsaquo; Path C &mdash; No Change Detected</div>
+    <div class="article-flag">&#9654;&#65039; Path C &middot; No Change Detected</div>
+
+    <h1>No Change Detected: What to Do Next</h1>
+    <p class="article-subtitle">Bootstrap CUSUM found no statistically significant step change. Before reacting — or not reacting — three questions need honest answers: is the system genuinely stable, is that stable level acceptable, and if you applied an intervention, did it actually reach the constraint? The answers lead to very different next steps.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Method: Bootstrap CUSUM &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+
+    <div style="background:#fff8e1;border:2px solid #f59e0b;border-radius:10px;padding:18px 22px;margin:20px 0 28px;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#92400e;margin-bottom:10px;">&#9654; Key rule &mdash; no change detected</div>
+        <p style="margin:0 0 8px;font-size:0.97em;font-weight:700;color:#1a1a1a;line-height:1.55;">If no change is detected, default to waiting (don&rsquo;t tamper): set a review date, improve the theory/measure/test, and re-run after enough new data points.</p>
+        <p style="margin:0;font-size:0.88em;color:#78350f;line-height:1.65;">No change detected has five possible meanings &mdash; the system is stable and acceptable; a change point is forming but not yet confirmed; the intervention was at the wrong Joiner level; the wrong constraint was addressed; or the expected lag has not elapsed. Each has a different next step.</p>
+    </div>
+        <p style="margin:0 0 8px;font-size:1.0em;font-weight:700;color:#1a1a1a;line-height:1.5;">If Bootstrap CUSUM (StepChange Analyzer) finds no change point, the default action is: do not tamper. A flat line means the system is in common cause variation — reacting to it as if it were a special cause will increase instability, not reduce it.</p>
+        <p style="margin:0;font-size:0.85em;color:#78350f;line-height:1.6;">No change detected has five possible meanings: the system is stable and acceptable; a change point is approaching but not yet confirmed; the intervention addressed the wrong constraint; the intervention was at the wrong Joiner level; or the expected lag has not yet elapsed. Each has a different next step. Only one of them is 'do nothing'.</p>
+    </div>
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what-it-means">What &ldquo;no change detected&rdquo; means</a></li>
+                <li><a href="#section-first-checks">First checks — before reacting</a></li>
+                <li><a href="#section-three-situations">Which situation are you in?</a></li>
+                <li><a href="#section-intervention-failed">If you applied an intervention — why no change point?</a></li>
+                <li><a href="#section-rerun">Run it again — recommended re-tests</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what-it-means">What &ldquo;no change detected&rdquo; means</h2>
+
+    <p>A Bootstrap CUSUM result of no change point means the algorithm found no statistically significant, sustained shift from one stable level to another. The data has been fluctuating — but within the range that a stable system produces. In Joiner and Deming&rsquo;s terms, you are looking at <strong>common cause variation</strong>: the normal, expected output of a process behaving consistently with its own design.</p>
+
+    <p>This is not a failure of the method. It is an honest answer. The system has not structurally changed — and the method has correctly not detected a change that did not happen.</p>
+
+    <div class="callout blue">
+        <strong>No change detected is information — not absence of information</strong>
+        <p>A flat Bootstrap CUSUM line tells you the system is stable. Combined with knowledge of what interventions have been applied and when, it tells you whether those interventions reached the structural constraint or not. That is precise, actionable information — even if it is not the answer you wanted.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-first-checks">First checks — before reacting</h2>
+
+    <div class="timeline-box">
+        <h3>&#128270; Three questions to answer before acting</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Check 1</span>
+            <span class="timeline-text">
+                <strong>Is there enough data?</strong><br><br>
+                Bootstrap CUSUM needs sufficient data on both sides of any potential change point to detect it reliably. If your data series is short — fewer than 12&ndash;18 monthly observations, or fewer than 24 weekly observations — a genuine structural shift may not yet be detectable. The algorithm is conservative by design: it requires the post-shift period to be long enough to confirm the shift is sustained, not a fluctuation.<br><br>
+                If the data window is short: extend it. Upload more historical data if available, or wait and re-run as more observations accumulate. Do not conclude there is no change until you have sufficient data to detect one.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Check 2</span>
+            <span class="timeline-text">
+                <strong>Is a change point approaching but not yet confirmed?</strong><br><br>
+                Bootstrap CUSUM detects a change point only when the cumulative sum has crossed the statistical threshold with sufficient confidence. If the cumulative sum is trending strongly in one direction but has not yet crossed the threshold, a change point may be imminent — detectable in the next one to three periods as more data arrives.<br><br>
+                If this is the case: this is Path B — the &ldquo;decide to wait&rdquo; situation. See <a href="decide-to-wait.html">No change detected: decide to wait (don&rsquo;t tamper)</a> for the decision rules. The key principle is the same: do not intervene while waiting for a signal that may be forming.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Check 3</span>
+            <span class="timeline-text">
+                <strong>Is the system genuinely stable — or is there undetected special cause variation?</strong><br><br>
+                Before concluding the system is in common cause variation, check for special causes that the CUSUM may have absorbed without flagging as a structural shift. A spike followed immediately by an equal and opposite movement, for example, may cancel out in the cumulative sum without triggering a change point — but it is still a special cause event worth investigating.<br><br>
+                Plot the raw data alongside the CUSUM output. Any data point that looks dramatically out of range, or any sustained run in one direction that then reversed, warrants investigation as a potential special cause before treating the system as purely stable. See <a href="special-cause-variation.html">Special Cause Variation</a> for the full checklist.
+            </span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-three-situations">Which situation are you in?</h2>
+
+    <p>Once the three checks above are satisfied — sufficient data, not approaching a threshold, no hidden special causes — the &ldquo;no change detected&rdquo; result means one of three things. Identify which before deciding what to do next.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Situation</th>
+                <th>The signal</th>
+                <th>Correct response</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>A. Stable at an acceptable level — no intervention applied</strong></td>
+                    <td>The system is performing within the range you need. No change point is expected because nothing has changed — and nothing needs to.</td>
+                    <td><strong>Hold steady and monitor.</strong> Continue running Bootstrap CUSUM as data arrives. The next genuine change point — improvement or deterioration — will be detectable against this clean, stable baseline. Do not introduce changes in response to month-to-month fluctuation. See <a href="#section-acceptable">below</a>.</td>
+                </tr>
+                <tr>
+                    <td><strong>B. Stable at an acceptable level — intervention recently applied</strong></td>
+                    <td>A programme or change was introduced but no change point has appeared yet. The intervention may be too recent for the data to show a shift, or the system may need more time to respond.</td>
+                    <td><strong>Wait — do not tamper.</strong> Extending the observation window is the correct response. Adding further interventions before a change point is confirmed muddies the baseline and makes future attribution impossible. See <a href="decide-to-wait.html">decide to wait</a> for the decision rules on when to wait and when to act.</td>
+                </tr>
+                <tr>
+                    <td><strong>C. Stable at an unacceptable level — intervention applied, no change point</strong></td>
+                    <td>The system is consistently producing results below the required standard. An intervention was applied. Bootstrap CUSUM shows no change. The intervention did not reach the constraint.</td>
+                    <td><strong>Move up a level.</strong> The intervention was Level 1 or Level 2 applied to a Level 3 constraint — or it addressed the wrong constraint entirely. The investigation below applies. See <a href="#section-intervention-failed">why no change point appeared</a>.</td>
+                </tr>
+                <tr>
+                    <td><strong>D. Stable at an unacceptable level — no intervention applied</strong></td>
+                    <td>The system is performing poorly and has been doing so consistently. This is common cause variation at the wrong level — the system is doing exactly what it is designed to do, and the design is wrong.</td>
+                    <td><strong>Redesign the system.</strong> Joiner&rsquo;s common cause highway: you cannot improve the output without changing the system. See <a href="common-cause-variation.html">Common Cause Variation — Improving a Stable System</a> for the framework.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="section-acceptable" class="callout blue">
+        <strong>Situation A — holding a stable, acceptable system</strong>
+        <p>The temptation to &ldquo;do something&rdquo; with a system that is performing acceptably is itself a risk. Deming called reactions to common cause variation <strong>tampering</strong> — and demonstrated with the funnel experiment that tampering consistently makes a stable system worse, not better. Each intervention adds variation. The system becomes less predictable. Staff learn that numbers trigger reactions regardless of whether those numbers contain a real signal.</p>
+        <p style="margin-top:8px;">The correct action is to run Bootstrap CUSUM continuously as a monitoring tool. The next real change point — whether an improvement from a future initiative or a deterioration from an emerging constraint — will be detectable against the clean baseline. The flat line is not a problem. It is the condition that makes future change points interpretable.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-intervention-failed">If you applied an intervention — why no change point?</h2>
+
+    <p>An intervention that does not produce a Bootstrap CUSUM change point is not merely disappointing — it is precise, diagnostic information. Work through the following in order.</p>
+
+    <div class="timeline-box">
+        <h3>&#9874;&#65039; Diagnosing a failed intervention</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 1</span>
+            <span class="timeline-text">
+                <strong>Was the intervention aimed at the right constraint?</strong><br><br>
+                <a href="theory-of-constraints.html">Goldratt&rsquo;s Theory of Constraints</a> states that improving anything other than the binding constraint produces minimal improvement in system throughput. The most common reason an intervention produces no change point is that it addressed a non-binding constraint — a real problem, but not the one that is limiting system performance.<br><br>
+                Ask: what is the one thing, if resolved, that would most improve this metric? Is that the thing the intervention addressed? If not, the no-change result is the expected outcome. The intervention may have been worthwhile for other reasons — but it was not going to move this metric.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 2</span>
+            <span class="timeline-text">
+                <strong>Was the intervention at the right level?</strong><br><br>
+                Using <a href="joiner-levels-of-fix.html">Joiner&rsquo;s levels of fix</a>: Level 1 fixes the output (temporary symptom relief). Level 2 fixes the process within existing organisational boundaries. Level 3 fixes the system — changes structural conditions that may cross organisational or political boundaries.<br><br>
+                If the constraint sits at Level 3 but the intervention was at Level 1 or Level 2, no change point will appear in the outcome data. The process may have improved. The people implementing it may have worked harder. The metric will not have shifted — because the structural constraint was not reached. The NHS A&amp;E record is the clearest example: 15 years of Level 1 and Level 2 interventions applied to a Level 3 discharge constraint, with no improvement change point in 184 monthly observations. See <a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked</a>.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 3</span>
+            <span class="timeline-text">
+                <strong>Was it too soon? — the lag question</strong><br><br>
+                Some structural interventions take time to produce a detectable change point. Social care capacity changes take 6&ndash;18 months to appear in discharge data. Workforce pipeline changes take 2&ndash;5 years to appear in staffing ratios. Prevention programmes take 5&ndash;20 years to appear in emergency admissions. If the intervention genuinely addresses the right constraint at the right level, the lag before a Bootstrap CUSUM change point appears may be longer than the review window.<br><br>
+                Define the expected lag before implementing the intervention. If you are still within that lag window: wait, and re-run Bootstrap CUSUM as each period&rsquo;s data arrives. If you are well beyond the expected lag: the intervention has not reached the constraint.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 4</span>
+            <span class="timeline-text">
+                <strong>Was it implemented as intended?</strong><br><br>
+                A well-designed intervention at the right level applied to the right constraint can still fail to produce a change point if it was not implemented as intended. Check the process measures: did the intervention actually happen, at scale, consistently, for long enough? A partial implementation produces a partial signal — which Bootstrap CUSUM may correctly not flag as a structural change point, because the system did not structurally change.<br><br>
+                Run Bootstrap CUSUM on the process measures (implementation fidelity, coverage, compliance). If the process measures show no change point either, the intervention was not implemented. If they do show a change point but the outcome does not follow, the intervention was implemented but did not address the right constraint.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 5</span>
+            <span class="timeline-text">
+                <strong>Was the effect masked by an opposing change?</strong><br><br>
+                An improvement intervention applied at the same time as an adverse system change — increased demand, a workforce reduction, a new policy adding administrative burden — can produce two simultaneous change point signals that partially or fully cancel each other out. The CUSUM may show no net structural change even though both effects are real.<br><br>
+                Check whether any significant adverse changes were introduced around the same time as the intervention. If so, stratify where possible: run Bootstrap CUSUM on subgroups or sites that were exposed to the intervention but not to the adverse change, and compare.
+            </span>
+        </div>
+    </div>
+
+    <div class="dark-box">
+        <h3>&#128221; The pre-committed prediction — use it next time</h3>
+        <p>The most powerful use of Bootstrap CUSUM for interventions is prospective: before implementing, state explicitly what change point you expect — direction, the metric it should appear in first (the leading indicator), approximate timing, and the confidence threshold you will use as the test. This pre-commitment prevents the common error of interpreting any subsequent data movement as evidence the intervention worked.</p>
+        <p style="margin-top:10px;">If you did not make a pre-committed prediction before this intervention, make one for the next. A no-change result from a pre-committed prediction is unambiguous: the intervention did not produce what it was expected to produce at the level it was expected to produce it. That is honest and precise. Without the pre-commitment, a no-change result can always be explained away.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-rerun">Run it again — recommended re-tests</h2>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Re-test</th>
+                <th>Why</th>
+                <th>What to look for</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Extend the data window</strong></td>
+                    <td>A genuine structural shift may not yet be detectable if the post-intervention period is short. Add more historical data at the start, or wait for more observations at the end.</td>
+                    <td>Re-run monthly as data arrives. If a change point is forming, the cumulative sum will be trending consistently in one direction. If it is not trending, the intervention has not moved the system.</td>
+                </tr>
+                <tr>
+                    <td><strong>Lower the confidence threshold</strong></td>
+                    <td>A weak signal may not cross the 95% threshold but may be visible at 80% or 90%. This does not confirm a structural change — but it may indicate a marginal shift worth monitoring.</td>
+                    <td>A change point at 80% but not 95% is a weak signal. It may strengthen as more data arrives, or it may disappear. Do not act on it as if it were confirmed structural change.</td>
+                </tr>
+                <tr>
+                    <td><strong>Run on the leading indicator</strong></td>
+                    <td>If the outcome metric shows no change, check whether the leading indicator has moved. A change point in the lead indicator without a corresponding outcome change point indicates the causal chain is intact but the lag has not yet elapsed.</td>
+                    <td>Lead indicator change point present, outcome not yet changed: wait for the lag period. Neither changed: the intervention did not reach the constraint.</td>
+                </tr>
+                <tr>
+                    <td><strong>Stratify by subgroup or site</strong></td>
+                    <td>An aggregate no-change result may mask genuine change in a subgroup. Run Bootstrap CUSUM separately on sites, patient groups, or time periods where the intervention was applied most fully.</td>
+                    <td>Change point in high-fidelity implementation sites only: the intervention works but was not implemented consistently enough to move the aggregate. Change point nowhere: the intervention does not work at this level.</td>
+                </tr>
+                <tr>
+                    <td><strong>Run on process measures</strong></td>
+                    <td>Did the intervention actually happen? Run Bootstrap CUSUM on implementation data — training completion, protocol compliance, referral rates. A change point in process without a change point in outcome confirms the intervention was delivered but did not reach the constraint.</td>
+                    <td>No process change point: the intervention was not implemented. Process change point, no outcome change point: implemented but wrong level or wrong constraint.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>The honest summary — five possible conclusions from a no-change result</strong>
+        <p><strong>(1)</strong> The system is stable and acceptable — no action needed, monitor. &nbsp;<strong>(2)</strong> A change point is forming but not yet confirmed — wait, don&rsquo;t tamper. &nbsp;<strong>(3)</strong> The intervention addressed the wrong constraint — return to constraint identification. &nbsp;<strong>(4)</strong> The intervention was at the wrong level — move up a Joiner level. &nbsp;<strong>(5)</strong> The lag has not yet elapsed — wait for the expected timeframe before concluding failure. Only one of these requires doing nothing. The others each have a precise next step.</p>
+    </div>
+
+    <div class="cta-box">
+        <h2>Re-run the analysis</h2>
+        <p>Extend your data window, add the leading indicator series, or test at a different confidence threshold. Upload to the StepChange Analyzer and run Bootstrap CUSUM again.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="common-cause-variation.html">Common Cause Variation — Improving a Stable System</a></h3>
+        <p>The theory behind the no-change result: Joiner&rsquo;s common cause highway, Deming&rsquo;s funnel, and the five-step approach to improving a system that is stable at the wrong level.</p>
+        <a href="common-cause-variation.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Path B</div>
+        <h3><a href="decide-to-wait.html">No Change Detected: Decide to Wait (Don&rsquo;t Tamper)</a></h3>
+        <p>If a change point may be approaching — the cumulative sum is trending but has not yet crossed the threshold — this is the decision guide for when to wait and when to act.</p>
+        <a href="decide-to-wait.html" class="btn">Read the guide &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a></h3>
+        <p>The framework for diagnosing why an intervention produced no change point — and what level of response is actually required to reach the constraint.</p>
+        <a href="joiner-levels-of-fix.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="theory-of-constraints.html">Theory of Constraints</a></h3>
+        <p>Goldratt&rsquo;s method for identifying the binding constraint before designing an intervention — the prerequisite to an intervention that will actually produce a change point.</p>
+        <a href="theory-of-constraints.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="special-cause-variation.html">Special Cause Variation — Eliminate It Before Improving the System</a></h3>
+        <p>Before concluding a system is in pure common cause variation, rule out special causes that may be present but not flagged as change points.</p>
+        <a href="special-cause-variation.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E Performance 2010&ndash;2026</a></h3>
+        <p>The clearest case study in what a no-change result looks like across 184 monthly observations — and what 15 years of Level 1 and Level 2 interventions applied to a Level 3 constraint produces.</p>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Bootstrap CUSUM method:</strong> Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993). The change point date precision depends on data frequency: monthly data localises to within 2&ndash;4 weeks; weekly data to within 1&ndash;2 weeks.</p>
+        <p style="margin-top:8px;"><strong>Joiner, B.L.:</strong> <em>Fourth Generation Management.</em> McGraw-Hill, 1994. The common cause highway (p.140), the two mistakes of reacting to variation, and the levels of fix framework.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. The funnel experiment and the consequences of tampering with a stable system.</p>
+        <p style="margin-top:8px;"><strong>Goldratt, E.M.:</strong> <em>The Goal.</em> North River Press, 1984. Theory of Constraints — improving anything other than the binding constraint produces minimal improvement in throughput.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>

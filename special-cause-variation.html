@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/special-cause-variation.html">
+    <title>Special Cause Variation — Eliminate It Before Improving the System — StepChangeAnalysis.com</title>
+    <meta name="description" content="Joiner's rule: eliminate special cause variation before attempting to improve a stable system. What special cause variation is, how Bootstrap CUSUM detects it, and why acting on it before the system is stable is the prerequisite to any lasting improvement.">
+    <meta name="keywords" content="special cause variation, common cause variation, Joiner, Deming, Bootstrap CUSUM, step change, control chart, SPC, NHS improvement, process improvement">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Special Cause Variation</div>
+    <div class="article-flag">&#128202; Concept &middot; Variation Theory</div>
+
+    <h1>Special Cause Variation — Eliminate It Before Improving the System</h1>
+    <p class="article-subtitle">Joiner&rsquo;s rule, drawn from Deming and Shewhart: you must first eliminate special cause variation before attempting to improve a stable system. Acting on a special cause as if it were a systemic problem — or ignoring it and &ldquo;improving&rdquo; a system that is not yet stable — produces worse outcomes than doing nothing. The Bootstrap CUSUM step-change framework is built on this distinction.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Source: Joiner, <em>Fourth Generation Management</em>, p.138 &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-two-types">Two types of variation — and why the distinction matters</a></li>
+                <li><a href="#section-special-cause">What special cause variation looks like</a></li>
+                <li><a href="#section-joiner-rule">Joiner&rsquo;s rule — the correct sequence</a></li>
+                <li><a href="#section-cusum">How Bootstrap CUSUM detects special cause variation</a></li>
+                <li><a href="#section-mistakes">The two mistakes — and their consequences</a></li>
+                <li><a href="#section-then-what">Once special causes are eliminated — what next</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-two-types">Two types of variation — and why the distinction matters</h2>
+
+    <p>Every process produces variation. The critical question is not whether variation exists but what kind it is. Shewhart&rsquo;s original insight, developed by Deming and then by Joiner, is that variation comes from two fundamentally different sources — and they require fundamentally different responses.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Type</th>
+                <th>What it is</th>
+                <th>Source</th>
+                <th>Correct response</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Common cause variation</strong></td>
+                    <td>The normal, expected variation inherent in a stable system. The process is doing exactly what it is designed to do — and this is the result. Predictable within a range.</td>
+                    <td>The system itself — its design, its inputs, its structural conditions</td>
+                    <td>Do not tamper. To reduce it, you must change the system. See <a href="common-cause-variation.html">Joiner&rsquo;s approach to common cause variation</a>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Special cause variation</strong></td>
+                    <td>An unexpected, non-random signal that something <em>outside</em> the normal system has occurred. A spike, a shift, a one-off event. The process is behaving differently from its normal pattern.</td>
+                    <td>A specific, identifiable cause — an event, an error, a change in conditions — that is external to the system&rsquo;s normal operation</td>
+                    <td>Identify and address the specific cause. Do not change the system to accommodate it.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>The consequences of confusing the two are severe. Treating common cause variation as if it were a special cause — reacting to every dip and spike — is tampering: it adds variation to a stable system and makes performance worse. Treating special cause variation as if it were common cause — accepting an unusual event as &ldquo;just noise&rdquo; — means missing a signal that something specific has gone wrong or, occasionally, right.</p>
+
+    <hr>
+
+    <h2 id="section-special-cause">What special cause variation looks like</h2>
+
+    <p>Special cause variation appears as a data point or sequence of data points that cannot be explained by the system&rsquo;s normal behaviour. In Bootstrap CUSUM terms, it is a shift in the process mean — a change point — that is attributable to a specific, identifiable external event rather than to a structural change in the system itself.</p>
+
+    <div class="timeline-box">
+        <h3>&#128270; Common forms of special cause variation</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Spike</span>
+            <span class="timeline-text"><strong>A single extreme data point.</strong> One month&rsquo;s data is far outside the normal range — caused by an industrial action, a severe weather event, a system outage, or a data entry error. The process returns to its previous level in the following period. Bootstrap CUSUM will typically not flag a single spike as a structural change point; the algorithm is designed to detect sustained shifts, not one-off events.</span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step</span>
+            <span class="timeline-text"><strong>A sustained shift to a new level caused by a specific, identifiable event.</strong> A new system was introduced, a key staff member left, a supplier changed, a ward closed. The process has genuinely moved to a new level — but the cause is a specific event, not a system redesign. Bootstrap CUSUM will detect this as a change point. The investigation (see <a href="change-detected-what-next.html">Path A: What to do next</a>) determines whether the cause is a system improvement or a special cause that needs to be understood and, if adverse, corrected.</span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Trend</span>
+            <span class="timeline-text"><strong>A consistent drift in one direction over several periods.</strong> Not random fluctuation but a systematic movement — caused by cumulative degradation (equipment wearing out, staff attrition), cumulative improvement (learning curve effects), or an ongoing external pressure. Bootstrap CUSUM detects trend-driven change points as the cumulative sum crosses the threshold.</span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Artefact</span>
+            <span class="timeline-text"><strong>A special cause in the measurement system, not the underlying process.</strong> A change in how the data is coded, a new reporting system, a change in the definition of the metric. The process has not changed; the measurement of it has. This is the most dangerous special cause because it produces a genuine change point signal that has no operational meaning. See the <a href="change-detected-what-next.html#section-checklist">investigation checklist</a> for how to rule this out.</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-joiner-rule">Joiner&rsquo;s rule — the correct sequence</h2>
+
+    <p>Joiner states the rule precisely on page 138 of <em>Fourth Generation Management</em>: <strong>eliminate special cause variation before attempting to improve a stable system.</strong> The sequence matters. Trying to redesign a system that is not yet stable — that is still experiencing special cause events — produces unpredictable results, because you cannot measure the effect of your intervention against a baseline that keeps moving.</p>
+
+    <div class="dark-box">
+        <h3>The Joiner sequence</h3>
+        <p><strong>Step 1 — Detect.</strong> Is the variation in your data common cause or special cause? Use Bootstrap CUSUM or a control chart to determine whether the process is stable (common cause only) or unstable (one or more special causes present).</p>
+        <p style="margin-top:10px;"><strong>Step 2 — Address special causes first.</strong> If special causes are present, identify each one and address it specifically — don&rsquo;t change the system to accommodate it. Eliminate or standardise the special cause so the system returns to stable, predictable behaviour.</p>
+        <p style="margin-top:10px;"><strong>Step 3 — Confirm stability.</strong> Once special causes have been addressed, confirm the process is now stable — fluctuating within a predictable range with no further change points. Bootstrap CUSUM on recent data should show a flat line.</p>
+        <p style="margin-top:10px;"><strong>Step 4 — Then improve the system.</strong> Only now is a system-level improvement meaningful. You have a stable baseline to measure against. Any structural change you introduce will produce a detectable change point — and you will know it was your intervention that caused it, not a residual special cause.</p>
+    </div>
+
+    <div class="callout orange">
+        <strong>&#9888;&#65039; Why order matters — the baseline problem</strong>
+        <p>If you attempt a system improvement while special causes are still present, you cannot interpret the result. Suppose you introduce a new discharge protocol and the following month&rsquo;s data improves significantly. Was that your protocol — or the resolution of the industrial action that had been suppressing performance for the previous three months? Without first eliminating the special cause and stabilising the baseline, you cannot answer that question. Attribution is impossible. The improvement programme gets credited for a change it may not have caused, and the underlying structural issue remains unaddressed.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">How Bootstrap CUSUM detects special cause variation</h2>
+
+    <p>Bootstrap CUSUM is designed specifically to detect structural shifts — sustained moves from one stable level to another. Its relationship to special cause variation is precise:</p>
+
+    <ul style="line-height:2.2;">
+        <li><strong>Single spikes are not detected as change points.</strong> The cumulative sum algorithm requires a sustained shift to cross the detection threshold. A one-off extreme value contributes to the cumulative sum briefly but does not by itself trigger a change point. This is a feature, not a limitation: it prevents false positives from one-off events.</li>
+        <li><strong>Sustained special causes are detected as change points.</strong> If a special cause produces a lasting shift — a new ward closed, a new system introduced, a key dependency removed — Bootstrap CUSUM will detect this as a genuine change point. The investigation determines whether the cause is structural improvement or a specific addressable event.</li>
+        <li><strong>The change point date localises the special cause.</strong> Bootstrap CUSUM returns a date. That date is the starting point for identifying what changed. A special cause that predates the improvement programme by months is not the programme&rsquo;s doing — the date tells you that.</li>
+        <li><strong>Multiple change points may indicate multiple special causes.</strong> If Bootstrap CUSUM returns two or three change points in a short period, this may indicate a system that has been subject to several distinct special causes rather than a single structural improvement. Each change point deserves its own investigation.</li>
+    </ul>
+
+    <div class="callout blue">
+        <strong>The flat line is information too</strong>
+        <p>If Bootstrap CUSUM returns no change point, that is a finding: the system is stable. It may be stable at an unacceptably poor level — in which case the task is system redesign (see <a href="common-cause-variation.html">common cause variation</a>). Or it may be stable at an acceptable level — in which case the task is to hold it there and resist the temptation to tamper. A flat line from Bootstrap CUSUM on a stable system is not a failure of the method. It is the honest answer to an honest question.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-mistakes">The two mistakes — and their consequences</h2>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Mistake</th>
+                <th>What it looks like</th>
+                <th>Consequence</th>
+                <th>Joiner&rsquo;s term</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Mistake 1: Treating common cause as special cause</strong></td>
+                    <td>Reacting to every dip in the data with an intervention. Calling a meeting every time a metric falls below target. Changing the process in response to normal variation.</td>
+                    <td>Tampering. Each reaction adds variation to the system. Performance becomes less predictable, not more. Staff learn that the response to data is always an intervention — so data reporting becomes political rather than analytical.</td>
+                    <td>Tampering with a stable system</td>
+                </tr>
+                <tr>
+                    <td><strong>Mistake 2: Treating special cause as common cause</strong></td>
+                    <td>Accepting an unusual event as &ldquo;just noise.&rdquo; Not investigating a sustained shift. Attributing a genuine change point to random variation because it is inconvenient to investigate.</td>
+                    <td>Missing a signal. An improvement goes uncredited and unstandardised; it drifts back. A deterioration goes unaddressed; it compounds. Special causes that are not identified recur.</td>
+                    <td>Ignoring a signal in a changing system</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>Deming estimated that the majority of management interventions in organisations he studied were Mistake 1 — reactions to common cause variation treated as if they were special causes. The result was systems that were more variable than they needed to be, with staff who had learned that numbers trigger reactions regardless of whether those numbers contained a real signal.</p>
+
+    <hr>
+
+    <h2 id="section-then-what">Once special causes are eliminated — what next</h2>
+
+    <p>Once special cause variation has been identified and addressed, and the process is confirmed stable, you face a different question: is the stable level acceptable? Two paths follow.</p>
+
+    <div class="timeline-box">
+        <h3>&#9654; From stable system — two paths</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">If acceptable</span>
+            <span class="timeline-text"><strong>Hold the system stable and monitor.</strong> Use Bootstrap CUSUM as a monitoring tool. The next change point — whether improvement or deterioration — will be detectable against the clean, stable baseline. Do not introduce changes that are not improvements. Resist the pressure to &ldquo;do something&rdquo; in response to common cause fluctuations. See <a href="change-detected-what-next.html">Path A: Change Detected</a> for what to do when a future change point appears.</span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">If unacceptable</span>
+            <span class="timeline-text"><strong>The system is stable at the wrong level — now redesign it.</strong> This is the domain of <a href="common-cause-variation.html">common cause variation</a>. Reducing common cause variation requires changing the system itself — not reacting to individual data points. Joiner&rsquo;s levels of fix apply: the question is at what level the constraint sits and what authority is required to address it. See <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a> for the framework.</span>
+        </div>
+    </div>
+
+    <div class="cta-box">
+        <h2>Test your data for special cause variation</h2>
+        <p>Upload your time-series data to the StepChange Analyzer. Bootstrap CUSUM will detect whether a structural shift — a special cause step change — is present, and will date it precisely so you can investigate the cause.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="common-cause-variation.html">Joiner&rsquo;s Approach to Common Cause Variation — No Step Change</a></h3>
+        <p>The other side of the distinction: what to do when the system is stable but performing at an unacceptable level. Reducing common cause variation requires changing the system, not reacting to data points.</p>
+        <a href="common-cause-variation.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a></h3>
+        <p>Once the type of variation is identified, Joiner&rsquo;s levels determine the right level of response — fix the output, the process, or the system.</p>
+        <a href="joiner-levels-of-fix.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Path A</div>
+        <h3><a href="change-detected-what-next.html">Change Detected: What to Do Next</a></h3>
+        <p>Bootstrap CUSUM has found a change point. The full investigation checklist — direction, date, sustainability, artefact checks — before acting on the signal.</p>
+        <a href="change-detected-what-next.html" class="btn">Read the guide &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Joiner, B.L.:</strong> <em>Fourth Generation Management.</em> McGraw-Hill, 1994. The special cause / common cause sequence is set out on p.138. The two mistakes and their consequences are Joiner&rsquo;s framing, developed from Deming&rsquo;s original work on variation.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. The funnel experiment demonstrates the consequences of tampering with a stable system (Mistake 1).</p>
+        <p style="margin-top:8px;"><strong>Shewhart, W.A.:</strong> <em>Economic Control of Quality of Manufactured Product.</em> Van Nostrand, 1931. The original distinction between assignable causes (special causes) and chance causes (common causes).</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>

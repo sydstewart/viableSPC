@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/change-detected-what-next.html">
+    <title>Change Detected: What to Do Next — StepChangeAnalysis.com</title>
+    <meta name="description" content="Bootstrap CUSUM has detected a change point. Before celebrating or reacting, work through this checklist: confirm the direction, date, and sustainability of the change — then decide what to do next.">
+    <meta name="keywords" content="Bootstrap CUSUM change point, step change detected, change point investigation, NHS data analysis, improvement change point, deterioration change point, false alarm CUSUM">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="what-to-do-next.html">What to Do Next?</a> &rsaquo; Path A &mdash; Change Detected</div>
+    <div class="article-flag">&#9654;&#65039; Path A &middot; Change Detected</div>
+
+    <h1>Change Detected: What to Do Next</h1>
+    <p class="article-subtitle">Bootstrap CUSUM has found a statistically significant shift in your data — a change point. Before celebrating or reacting, three questions need honest answers: which direction did it move, does the date make sense, and is it sustained? The checklist below takes you through each one.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Method: Bootstrap CUSUM &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+
+    <div style="background:#fff8e1;border:2px solid #f59e0b;border-radius:10px;padding:18px 22px;margin:20px 0 28px;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#92400e;margin-bottom:10px;">&#9654; Key rule &mdash; change detected</div>
+        <p style="margin:0 0 8px;font-size:0.97em;font-weight:700;color:#1a1a1a;line-height:1.55;">If the StepChange Analyzer (Bootstrap CUSUM) detects a change point, investigate first: confirm direction, verify the date, rule out artefacts (changes in how the data was collected or defined), and check balancing measures to confirm the system improved rather than shifting harm elsewhere.</p>
+        <p style="margin:0;font-size:0.88em;color:#78350f;line-height:1.65;">A change point tells you that the system shifted and roughly when &mdash; not why. Attribution is your job. Choose the response level (Joiner 1/2/3) and re-test with Bootstrap CUSUM.</p>
+    </div>
+        <p style="margin:0 0 8px;font-size:1.0em;font-weight:700;color:#1a1a1a;line-height:1.5;">If Bootstrap CUSUM (StepChange Analyzer) detects a change point, the default action is to investigate — not to celebrate or react. Confirm the direction, verify the date against known events, rule out artefacts, and check balancing measures before attributing the change to any intervention.</p>
+        <p style="margin:0;font-size:0.85em;color:#78350f;line-height:1.6;">A change point tells you <em>that</em> the system shifted and approximately <em>when</em>. It does not tell you <em>why</em>. Attribution is your job. Apply Joiner's levels of fix to determine whether the response should be at Level 1, 2, or 3 — then re-test with Bootstrap CUSUM to confirm the response worked.</p>
+    </div>
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what-it-means">What &ldquo;change detected&rdquo; means</a></li>
+                <li><a href="#section-first-checks">First checks — before celebrating or reacting</a></li>
+                <li><a href="#section-checklist">Change point investigation checklist</a></li>
+                <li><a href="#section-what-next">What to do next</a></li>
+                <li><a href="#section-rerun">Run it again — recommended re-tests</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what-it-means">What &ldquo;change detected&rdquo; means</h2>
+
+    <p>A change point is a statistically significant, sustained shift from one stable level to another. The Bootstrap CUSUM algorithm has determined — at your chosen confidence threshold — that the data did not merely fluctuate randomly: something structural changed. The shift is real enough that it would be unlikely to appear by chance alone in a system that had stayed the same.</p>
+
+    <p>What it does <em>not</em> mean: the change was caused by what you think it was caused by. The algorithm identifies <em>that</em> a shift occurred and approximately <em>when</em>. It says nothing about <em>why</em>. Attribution is your job, not the algorithm&rsquo;s — and it is the step most often skipped.</p>
+
+    <div class="callout blue">
+        <strong>One change point is the beginning of the investigation, not the end</strong>
+        <p>A confirmed change point is the data telling you something real happened. The investigation starts with a date — and works backwards to ask what changed in the system at or just before that date. The checklist below is that investigation.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-first-checks">First checks — before celebrating or reacting</h2>
+
+    <div class="timeline-box">
+        <h3>&#128270; Three questions to answer before acting</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Check 1</span>
+            <span class="timeline-text">
+                <strong>Direction — is this an improvement or a deterioration?</strong>
+                Read the direction of the shift before anything else. A downward change point in a metric where lower is better (waiting times, error rates, corridor care hours) is an improvement signal. A downward change point in a metric where higher is better (throughput, capacity, survival rates) is a deterioration signal. Label it correctly. The temptation to interpret any change point as evidence of a programme&rsquo;s success is well-documented — and well-documented as wrong.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Check 2</span>
+            <span class="timeline-text">
+                <strong>Date — does the change point date make sense?</strong>
+                Bootstrap CUSUM dates the change point to within approximately one to four weeks of the actual structural shift (depending on data frequency). Ask: what intervention, event, or system change happened at or just before that date? If a plausible cause exists and is proximate to the date, that is consistent with attribution. If the date is months before or after any known intervention, something else caused the change — or the change point is an artefact. See the <a href="#section-checklist">investigation checklist</a> below.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Check 3</span>
+            <span class="timeline-text">
+                <strong>Sustainability — is it sustained?</strong>
+                A single month&rsquo;s data moving to a new level is not a change point; the algorithm accounts for this. But a change point detected on limited post-shift data may not survive its first hard season (for NHS data: the following winter; for educational data: the following exam cycle; for financial data: the following year-end). The change point date is provisional until it has been tested against conditions comparable to those that existed before the shift. If it holds through the hard season, it is sustained.
+            </span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-checklist">Change point investigation checklist</h2>
+
+    <p>Work through each item below for the change point date the algorithm returned. The goal is to distinguish a genuine structural shift in the system from four common false signals.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Item</th>
+                <th>What to look for</th>
+                <th>Signal if present</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. What changed in the system at or just before the change point date?</strong></td>
+                    <td>List every intervention, policy change, leadership change, capital investment, or operational change that was implemented in the 1&ndash;3 months before the change point date. One of these is the candidate cause. If none can be identified, the change point needs more investigation before attribution.</td>
+                    <td>If a credible intervention matches the date: genuine structural change is plausible. If no intervention matches: investigate artefact causes below.</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Definition or coding change?</strong></td>
+                    <td>Did the definition of what is being measured change around the change point date? Common examples: a new diagnostic code introduced, a reporting threshold revised, a data field redefined, a new IT system replacing an old one, a change in who submits the data. A definition change produces a change point in the data that has nothing to do with the underlying system.</td>
+                    <td>If a definition change coincides with the date: the change point is a measurement artefact. Rerun the analysis from the point where the new definition stabilised.</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Denominator shift?</strong></td>
+                    <td>If the metric is a rate (events per 1,000 admissions, per 100 procedures, per population), check whether the denominator changed. A fall in the denominator without a fall in the numerator produces an apparent rate increase; a rise in the denominator produces an apparent rate decrease. Both are artefacts.</td>
+                    <td>If the denominator shifted: replot numerator and denominator separately and check whether the numerator independently changed at the same point.</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Case-mix or population change?</strong></td>
+                    <td>Did the composition of the population being measured change? For NHS data: a change in referral patterns, a new pathway diverting a specific patient group, a demographic shift in the catchment. A case-mix change can produce a genuine change in the metric without any change in the process being measured.</td>
+                    <td>If case-mix shifted: stratify the data by patient group and rerun. A change point that disappears on stratification was a case-mix artefact.</td>
+                </tr>
+                <tr>
+                    <td><strong>5. Seasonal pattern or one-off event?</strong></td>
+                    <td>Check whether the change point coincides with a predictable seasonal transition (summer vs winter, academic year start, financial year) or a one-off event (industrial action, pandemic, severe weather). Bootstrap CUSUM is designed to detect structural shifts, not seasonal cycles — but a strong seasonal signal in limited data can sometimes produce a spurious change point at the seasonal boundary.</td>
+                    <td>If seasonal: run the analysis across a longer window spanning at least two full seasonal cycles. A genuine structural change point will be visible across both cycles; a seasonal artefact will not.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout orange">
+        <strong>&#9888;&#65039; The ULEZ timing lesson — attribution errors are common</strong>
+        <p>A change point in air quality data was attributed to a congestion or emissions zone policy. The change point date returned by the algorithm preceded the policy implementation date by several weeks. The actual cause was a change in monitoring station calibration protocol — a definition change — that happened to coincide with the policy debate. The policy was credited with an improvement it had not yet had time to cause. Attribution errors of this type are not rare: they are the default when investigators start from a desired conclusion rather than from the change point date. Start from the date. Work backwards.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-what-next">What to do next</h2>
+
+    <div class="timeline-box">
+        <h3>&#128200; Two paths from a confirmed change point</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">If improvement</span>
+            <span class="timeline-text">
+                <strong>First: is this a special cause step or a system improvement?</strong>
+                <br><br>
+                Joiner&rsquo;s rule (p.138, <em>Fourth Generation Management</em>) requires this question before any other response. A change point in the improvement direction could be either: a <strong>special cause</strong> — a one-off event, a new staff member, a temporary resource injection, a data artefact — or a genuine <strong>structural system improvement</strong>. The response to each is different, and confusing them is the most common error after a positive change point.
+                <br><br>
+                A special cause improvement should be identified, understood, and if possible standardised — but it does not mean the system has changed. Remove the special cause and the metric will drift back. A structural improvement means the system itself has changed; the new level should be self-sustaining once the conditions are standardised.
+                <br><br>
+                Use the <a href="special-cause-variation.html">special cause variation checklist</a> to determine which you are looking at: does the change point date correspond to a specific identifiable event (special cause), or to a redesign of the system&rsquo;s processes or structure (system improvement)? The investigation checklist above is the tool for this determination.
+                <br><br>
+                <strong>Then: hold steady, avoid tampering, and confirm across the next hard season.</strong>
+                <br><br>
+                Once the type of change is established, the correct response is to standardise the conditions that produced the shift and hold them stable while the new level is confirmed. The most common mistake is to intensify the intervention — Deming called this tampering: adding changes to a system that has already stabilised at a new level, introducing unnecessary variation.
+                <br><br>
+                Document exactly what changed and when, standardise the new process so it cannot drift back, and monitor through the next hard season before claiming the change is permanent. A genuine structural improvement will survive winter (or its equivalent). A temporary special cause improvement will not — and Bootstrap CUSUM will detect the reversal.
+                <br><br>
+                Also check your <a href="types-of-measures.html">balancing measures</a>. An improvement in one metric achieved by worsening another is not system improvement. It is redistribution.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">If deterioration</span>
+            <span class="timeline-text">
+                <strong>Triage, stabilise, then investigate the constraint or root cause.</strong>
+                <br><br>
+                A deterioration change point means the system has structurally shifted to a worse level. The immediate priority is to stop the deterioration from deepening — triage and stabilise. This is Joiner&rsquo;s Level 1 (fix the output) and is appropriate as an emergency response, not a permanent solution.
+                <br><br>
+                Once stabilised, the investigation turns to <em>why</em> the system shifted. Apply the <a href="#section-checklist">investigation checklist</a> above. Then apply <a href="joiner-levels-of-fix.html">Joiner&rsquo;s levels</a>: is the cause addressable within existing process boundaries (Level 2), or does it require a structural change that crosses organisational or system boundaries (Level 3)? A Level 2 response to a Level 3 cause will stabilise the metric temporarily and then see it deteriorate again — which Bootstrap CUSUM will detect as a flat line followed by a further downward change point.
+                <br><br>
+                See <a href="theory-of-constraints.html">Theory of Constraints</a> for the framework for identifying the binding constraint before intervening.
+            </span>
+        </div>
+    </div>
+
+    <div class="dark-box">
+        <h3>&#128221; The Deming question — &ldquo;By what method?&rdquo;</h3>
+        <p>Before claiming that a programme, policy, or intervention caused the change point, answer Deming&rsquo;s question precisely: by what method did it produce the effect? Describe the mechanism — the chain of cause and effect — that connects the intervention to the change point date and the magnitude of the shift. If the mechanism cannot be described, the attribution is a hypothesis, not a conclusion. The mechanism description is also your prediction for what will happen if the conditions are reversed — which is the test of whether you understand the cause or merely coincided with it.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-rerun">Run it again — recommended re-tests</h2>
+
+    <p>A single Bootstrap CUSUM run is a starting point. The following re-tests help confirm whether the change point is robust or sensitive to analytical choices.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Re-test</th>
+                <th>Why</th>
+                <th>What to look for</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Different confidence threshold</strong></td>
+                    <td>A change point detected at 95% confidence but not at 99% is a weaker signal than one that survives at 99%. A change point that only appears at 80% may be marginal. Test at 90%, 95%, and 99%.</td>
+                    <td>A robust change point survives across all three thresholds and returns approximately the same date. A fragile change point disappears or moves significantly as confidence rises.</td>
+                </tr>
+                <tr>
+                    <td><strong>Extend the window</strong></td>
+                    <td>Adding more post-change-point data strengthens or weakens the signal. If the change point was detected close to the end of your data series, it may not yet have enough evidence behind it to be confirmed structural.</td>
+                    <td>Re-run as new data arrives each month. A genuine structural shift will remain visible and its date will be stable. A borderline detection may disappear as more data reveals the shift was temporary.</td>
+                </tr>
+                <tr>
+                    <td><strong>Check balancing measures</strong></td>
+                    <td>Run Bootstrap CUSUM on the balancing measures identified for this metric. An improvement change point in the primary metric should not coincide with a deterioration change point in the balancing measure.</td>
+                    <td>If primary improves and balancing worsens at the same date: the problem has moved, not been solved. If both improve or both hold flat: the primary improvement is more credible.</td>
+                </tr>
+                <tr>
+                    <td><strong>Stratify by subgroup</strong></td>
+                    <td>If the metric is an aggregate, run Bootstrap CUSUM on the subgroup data separately (by site, by patient group, by season). A genuine structural change will usually be visible across most subgroups. A change point driven by one outlier subgroup is a different — and more limited — finding.</td>
+                    <td>Consistent change points across subgroups strengthen the aggregate finding. A change point in one subgroup only suggests the effect is local and the aggregate change point may be misleading.</td>
+                </tr>
+                <tr>
+                    <td><strong>Check the leading indicator</strong></td>
+                    <td>If a lead indicator exists for this metric, run Bootstrap CUSUM on it too. A genuine structural shift in an outcome measure should be preceded by a change point in the leading indicator — with a lag consistent with the known mechanism.</td>
+                    <td>Lead indicator change point before outcome change point, with the right lag: the causal chain is intact. Outcome change point without lead indicator change point: investigate alternative causes or artefacts.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>The correct sequence of questions</strong>
+        <p><strong>(1)</strong> Direction confirmed &rarr; <strong>(2)</strong> Date investigated against known events &rarr; <strong>(3)</strong> Artefact causes ruled out &rarr; <strong>(4)</strong> Mechanism described &rarr; <strong>(5)</strong> Balancing measures checked &rarr; <strong>(6)</strong> Confirmed across next hard season. Only after step 6 is the change point a defensible claim of sustained structural change. Steps 1&ndash;5 are the honest work between detection and conclusion.</p>
+    </div>
+
+    <div class="cta-box">
+        <h2>Re-run the analysis</h2>
+        <p>Upload your data with a longer window, a different confidence threshold, or your balancing measure series — and run Bootstrap CUSUM again to test the robustness of the change point.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="special-cause-variation.html">Special Cause Variation — Eliminate It Before Improving the System</a></h3>
+        <p>Joiner&rsquo;s rule: a detected change point may be a special cause event rather than a structural system improvement. The distinction determines the correct response — and confusing the two is the most common error after a positive change point.</p>
+        <a href="special-cause-variation.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="types-of-measures.html">Types of Measures — Outcome, Process and Balancing</a></h3>
+        <p>Why balancing measures are the most commonly neglected check after a change point — and how to select the right ones for your metric.</p>
+        <a href="types-of-measures.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a></h3>
+        <p>After a deterioration change point: the framework for deciding whether the cause sits inside or outside your system boundary — and what level of response is actually required.</p>
+        <a href="joiner-levels-of-fix.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="theory-of-constraints.html">Theory of Constraints</a></h3>
+        <p>Goldratt&rsquo;s framework for identifying the binding constraint before deciding where to intervene — the prerequisite to a Level 3 response.</p>
+        <a href="theory-of-constraints.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Article</div>
+        <h3><a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E Performance 2010&ndash;2026</a></h3>
+        <p>Fifteen years of change points — none of them improvement. The case study in what happens when the response to a deterioration change point remains at Level 1 and Level 2.</p>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="btn">Read the article &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Bootstrap CUSUM method:</strong> Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993). The change point date precision depends on data frequency: monthly data localises to within 2&ndash;4 weeks; weekly data to within 1&ndash;2 weeks.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. &ldquo;By what method?&rdquo; is Deming&rsquo;s challenge to any improvement claim that lacks a described mechanism.</p>
+        <p style="margin-top:8px;"><strong>Joiner, B.L.:</strong> <em>Fourth Generation Management.</em> McGraw-Hill, 1994. Levels of fix and the distinction between tampering and genuine improvement.</p>
+        <p style="margin-top:8px;"><strong>Goldratt, E.M.:</strong> <em>The Goal.</em> North River Press, 1984. Theory of Constraints and the five focusing steps.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
