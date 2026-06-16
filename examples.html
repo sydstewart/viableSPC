@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/examples.html">
+    <title>Examples — Bootstrap CUSUM Applied to Real Data — StepChangeAnalysis.com</title>
+    <meta name="description" content="Bootstrap CUSUM applied to real data across healthcare, policy, and industrial settings. Each example shows what a structural change point looks like — or what 15 years of flat line looks like — and what it means for improvement.">
+    <meta name="keywords" content="Bootstrap CUSUM examples, NHS change point analysis, corridor care analysis, ULEZ air quality CUSUM, never events data, anticoagulation safety data, step change real examples">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .filter-bar { display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 24px; font-family:system-ui,sans-serif; }
+        .filter-btn {
+            padding:8px 18px; border-radius:20px; border:2px solid var(--border);
+            background:white; color:var(--text); font-size:0.87em; font-weight:600;
+            cursor:pointer; transition:all 0.15s;
+        }
+        .filter-btn:hover { border-color:var(--brand-blue); color:var(--brand-blue); }
+        .filter-btn.active { background:var(--brand-blue); border-color:var(--brand-blue); color:white; }
+        .filter-btn[data-filter="healthcare"].active { background:#0056b3; border-color:#0056b3; }
+        .filter-btn[data-filter="policy"].active     { background:#166534; border-color:#166534; }
+        .filter-btn[data-filter="industrial"].active { background:#92400e; border-color:#92400e; }
+        .examples-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));
+            gap:16px; margin:0 0 32px;
+        }
+        .example-card {
+            text-decoration:none; color:inherit; display:block;
+            background:white; border:1px solid var(--border); border-radius:8px;
+            padding:20px 22px; transition:box-shadow 0.15s;
+        }
+        .example-card:hover { box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+        .example-card.hidden { display:none; }
+        .no-results {
+            display:none; grid-column:1/-1;
+            padding:32px; text-align:center;
+            color:var(--muted); font-family:system-ui,sans-serif; font-size:0.95em;
+        }
+        .sector-label {
+            font-size:0.7em; font-weight:700; letter-spacing:0.05em;
+            text-transform:uppercase; margin-bottom:4px;
+        }
+        .sector-label.healthcare { color:#0056b3; }
+        .sector-label.policy     { color:#166534; }
+        .sector-label.industrial { color:#92400e; }
+        .result-count {
+            font-family:system-ui,sans-serif; font-size:0.85em;
+            color:var(--muted); margin:0 0 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Examples</div>
+    <div class="article-flag">&#128202; Bootstrap CUSUM &middot; Real Data</div>
+
+    <h1>Examples</h1>
+    <p class="article-subtitle">Bootstrap CUSUM applied to real data across healthcare, policy, and industrial settings. Each example asks the same honest question: did a structural change point appear &mdash; and if so, when and why? Several show what 15 years of flat line looks like, and what that means for the interventions applied.</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin:16px 0 24px;font-family:system-ui,sans-serif;">
+        <a href="index.html" class="cta-btn">&#9654; Run Bootstrap CUSUM on your own data</a>
+        <a href="concepts.html" style="display:inline-block;padding:10px 20px;background:white;border:2px solid var(--brand-blue);border-radius:6px;color:var(--brand-blue);font-weight:600;font-size:0.92em;text-decoration:none;">Concepts</a>
+        <a href="improvement-method.html" style="display:inline-block;padding:10px 20px;background:white;border:2px solid var(--brand-blue);border-radius:6px;color:var(--brand-blue);font-weight:600;font-size:0.92em;text-decoration:none;">7-step method</a>
+    </div>
+
+    <!-- WHAT TO LOOK FOR -->
+    <div class="callout blue">
+        <strong>What to look for in each example</strong>
+        <p style="margin-top:10px;line-height:1.8;">
+            <strong>Change point present:</strong> the date Bootstrap CUSUM returns, what changed in the system at that date, and whether the change was structural or a special cause event.<br>
+            <strong>No change point:</strong> what that flat line means &mdash; stable at the wrong level &mdash; and which Joiner level the interventions applied were operating at.<br>
+            <strong>Balancing measures:</strong> whether an apparent improvement in one metric was accompanied by deterioration in another.<br>
+            <strong>Pre-committed predictions:</strong> where a prediction was made before the data arrived, the example tests it honestly.
+        </p>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar" role="group" aria-label="Filter examples by sector">
+        <button class="filter-btn active" data-filter="all">All examples <span id="count-all"></span></button>
+        <button class="filter-btn" data-filter="healthcare">&#127973;&#65039; Healthcare &amp; Patient safety <span id="count-healthcare"></span></button>
+        <button class="filter-btn" data-filter="policy">&#127757; Policy &amp; Environment <span id="count-policy"></span></button>
+        <button class="filter-btn" data-filter="industrial">&#9881;&#65039; Industrial <span id="count-industrial"></span></button>
+    </div>
+
+    <p class="result-count" id="result-count"></p>
+
+    <!-- UNIFIED EXAMPLES GRID -->
+    <div class="examples-grid" id="examples-grid">
+
+        <!-- ── HEALTHCARE ── -->
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="example-card" data-sector="healthcare">
+            <div class="sector-label healthcare">&#127973;&#65039; Healthcare &amp; Patient safety</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--red);margin-bottom:6px;">15 years &middot; No improvement change point</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">NHS A&amp;E &mdash; Why nothing has worked</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">184 monthly observations. Four structural stages of decline. Not one policy intervention visible as an improvement change point. The definitive case study in Level 1 and Level 2 responses applied to a Level 3 discharge constraint.</p>
+        </a>
+
+        <a href="corridor-care-2029.html" class="example-card" data-sector="healthcare">
+            <div class="sector-label healthcare">&#127973;&#65039; Healthcare &amp; Patient safety</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;">Prospective &middot; Pre-committed prediction</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">Corridor care 2029 &mdash; Prospective analysis</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">The government&rsquo;s four initiatives assessed before the data arrives. Which will produce a Bootstrap CUSUM change point by 2029 &mdash; and which won&rsquo;t, and why. The pre-committed prediction is made in 2026 so the data can test it honestly.</p>
+        </a>
+
+        <a href="corridor-care-bright-spots.html" class="example-card" data-sector="healthcare">
+            <div class="sector-label healthcare">&#127973;&#65039; Healthcare &amp; Patient safety</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Bright Spots &middot; Special cause positive</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">Corridor care &mdash; Bright Spots</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Watford General eliminated corridor care. Bootstrap CUSUM, Joiner&rsquo;s levels, and Deming&rsquo;s &ldquo;by what method?&rdquo; applied to the candidate Bright Spot &mdash; and the honest questions the public picture does not yet answer.</p>
+        </a>
+
+        <a href="never-events-wrong-route.html" class="example-card" data-sector="healthcare">
+            <div class="sector-label healthcare">&#127973;&#65039; Healthcare &amp; Patient safety</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--red);margin-bottom:6px;">10 years &middot; Dominant mechanism analysis</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">Never events &mdash; Wrong route</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Ten years of a never event that never stopped. Disaggregation reveals 16 of 20 events in 2023&ndash;24 were oral-to-IV &mdash; not the neuraxial pathway the NRFit mandate addressed. The dominant mechanism trap in practice.</p>
+        </a>
+
+        <a href="anticoag-safety.html" class="example-card" data-sector="healthcare">
+            <div class="sector-label healthcare">&#127973;&#65039; Healthcare &amp; Patient safety</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;">Change point detected &middot; Attribution analysis</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">Anticoagulation safety</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">A detectable change point in DOAC adverse reactions at 2016 corresponds to the rivaroxaban controversy. More patients, fewer bleeds &mdash; and the balancing measures that confirm whether improvement is real or redistributed.</p>
+        </a>
+
+        <a href="dementia-diagnosis-rate.html" class="example-card" data-sector="healthcare">
+            <div class="sector-label healthcare">&#127973;&#65039; Healthcare &amp; Patient safety</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:6px;">Target-driven &middot; Compliance trap</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">Dementia &mdash; The 66% target</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">What Bootstrap CUSUM shows when a government target drives a metric upward &mdash; and whether the change point corresponds to genuine improvement in care or to diagnostic pressure on clinicians.</p>
+        </a>
+
+        <a href="gp-appointments-analysis.html" class="example-card" data-sector="healthcare">
+            <div class="sector-label healthcare">&#127973;&#65039; Healthcare &amp; Patient safety</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:6px;">Demand &middot; Structural analysis</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">GP appointments</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Are GP appointment numbers genuinely falling, or is the denominator (registered patients) growing faster than supply? Bootstrap CUSUM on the rate, not the count, gives the honest answer.</p>
+        </a>
+
+        <a href="sepsis-six-does-public-data-show-whether-it-worked.html" class="example-card" data-sector="healthcare">
+            <div class="sector-label healthcare">&#127973;&#65039; Healthcare &amp; Patient safety</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:6px;">Intervention test &middot; Null result</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">Sepsis Six</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Does the public data show whether Sepsis Six worked? The national aggregate shows no change point &mdash; and why that null result is not evidence it failed, but evidence the aggregate is the wrong metric.</p>
+        </a>
+
+        <!-- ── POLICY ── -->
+        <a href="ulez-london-air-quality.html" class="example-card" data-sector="policy">
+            <div class="sector-label policy">&#127757; Policy &amp; Environment</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;">Attribution analysis &middot; Artefact risk</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">ULEZ &mdash; Air quality</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">A change point in London air quality data attributed to the ULEZ expansion &mdash; but the change point date precedes the policy by several weeks. Attribution errors in policy evaluation, and how Bootstrap CUSUM dates them precisely.</p>
+        </a>
+
+        <a href="the-grid-fixed-itself.html" class="example-card" data-sector="policy">
+            <div class="sector-label policy">&#127757; Policy &amp; Environment</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Change point detected &middot; System self-correction</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">The Grid fixed itself</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">A structural improvement change point in UK grid carbon intensity &mdash; before any single policy intervention could explain it. What happens when a system&rsquo;s incentive structure changes and the market responds faster than regulation.</p>
+        </a>
+
+        <a href="uk-gdp-analysis.html" class="example-card" data-sector="policy">
+            <div class="sector-label policy">&#127757; Policy &amp; Environment</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:6px;">Macro &middot; Structural stages</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">UK GDP analysis</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Bootstrap CUSUM on decades of UK GDP data finds the structural stages of growth and contraction &mdash; and dates them precisely enough to test political claims about which government caused which economic shift.</p>
+        </a>
+
+        <!-- ── INDUSTRIAL ── -->
+        <a href="hydrogen-plant-cusum.html" class="example-card" data-sector="industrial">
+            <div class="sector-label industrial">&#9881;&#65039; Industrial</div>
+            <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Process industry &middot; Change point confirmed</div>
+            <h3 style="margin:0 0 8px;font-size:1em;color:var(--brand-blue);">Hydrogen plant CUSUM</h3>
+            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Bootstrap CUSUM applied to a continuous industrial process &mdash; hydrogen plant efficiency over time. What a genuine process improvement change point looks like in production data, and how to distinguish it from seasonal and feedstock variation.</p>
+        </a>
+
+        <div class="no-results" id="no-results">No examples match this filter.</div>
+
+    </div>
+
+    <!-- SPINE FOOTER -->
+    <div class="callout blue" style="margin-top:16px;">
+        <strong>Run Bootstrap CUSUM on your own data</strong>
+        <p style="margin-top:10px;line-height:1.8;">Every example on this page was produced with the same free, browser-based tool. Upload a CSV of monthly or weekly data &mdash; no account required, no data uploaded to any server.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;">
+            <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+            <a href="interpret-results.html" style="display:inline-block;padding:9px 18px;background:white;border:2px solid var(--brand-blue);border-radius:6px;color:var(--brand-blue);font-weight:600;font-size:0.88em;text-decoration:none;">Interpret results</a>
+            <a href="what-to-do-next.html" style="display:inline-block;padding:9px 18px;background:white;border:2px solid var(--brand-blue);border-radius:6px;color:var(--brand-blue);font-weight:600;font-size:0.88em;text-decoration:none;">What to do next</a>
+        </div>
+    </div>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+
+<script>
+(function() {
+    var btns   = document.querySelectorAll('.filter-btn');
+    var cards  = document.querySelectorAll('.example-card');
+    var countEl = document.getElementById('result-count');
+    var noRes  = document.getElementById('no-results');
+
+    // Count per sector for button labels
+    var counts = { all: cards.length, healthcare: 0, policy: 0, industrial: 0 };
+    cards.forEach(function(c) { counts[c.dataset.sector]++; });
+    document.getElementById('count-all').textContent        = '(' + counts.all + ')';
+    document.getElementById('count-healthcare').textContent = '(' + counts.healthcare + ')';
+    document.getElementById('count-policy').textContent     = '(' + counts.policy + ')';
+    document.getElementById('count-industrial').textContent = '(' + counts.industrial + ')';
+
+    function updateCount(visible) {
+        countEl.textContent = visible === counts.all
+            ? 'Showing all ' + counts.all + ' examples'
+            : 'Showing ' + visible + ' of ' + counts.all + ' examples';
+    }
+    updateCount(counts.all);
+
+    btns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var filter = btn.dataset.filter;
+            // Update active button
+            btns.forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            // Show/hide cards
+            var visible = 0;
+            cards.forEach(function(card) {
+                if (filter === 'all' || card.dataset.sector === filter) {
+                    card.classList.remove('hidden');
+                    visible++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            noRes.style.display = visible === 0 ? 'block' : 'none';
+            updateCount(visible);
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
