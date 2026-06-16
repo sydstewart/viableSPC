@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/regression-to-the-mean.html">
+    <title>Regression to the Mean — Why Improvement After a Bad Period May Not Be Improvement — StepChangeAnalysis.com</title>
+    <meta name="description" content="Regression to the mean: an extreme result is likely to be followed by a more typical one, regardless of any intervention. Why this is the most commonly misattributed phenomenon in improvement work — and how Bootstrap CUSUM distinguishes genuine structural change from statistical inevitability.">
+    <meta name="keywords" content="regression to the mean, regression toward the mean, Galton, Deming, Bootstrap CUSUM, false improvement, statistical inevitability, NHS improvement, improvement claims, reversion to mediocrity">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Regression to the Mean</div>
+    <div class="article-flag">&#128202; Concept &middot; Statistical Phenomenon</div>
+
+    <h1>Regression to the Mean</h1>
+    <p class="article-subtitle">An extreme result — good or bad — is likely to be followed by a more typical one, regardless of any intervention. This is not a theory. It is a mathematical inevitability whenever measurement contains any random variation. It is also the most commonly misattributed phenomenon in improvement work: the reason treatment gets credit for recovery, inspections get credit for school improvement, and winter programmes get credit for spring.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <!-- KEY RULE BOX -->
+    <div style="background:#fff8e1;border:2px solid #f59e0b;border-radius:10px;padding:18px 22px;margin:20px 0 28px;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#92400e;margin-bottom:10px;">&#9654; Key rule &mdash; regression to the mean</div>
+        <p style="margin:0 0 8px;font-size:0.97em;font-weight:700;color:#1a1a1a;line-height:1.55;">Never attribute improvement after an extreme period to an intervention without first asking: would the data have returned toward average anyway? Regression to the mean produces improvement without any intervention at all.</p>
+        <p style="margin:0;font-size:0.88em;color:#78350f;line-height:1.65;">The only defence is a pre-committed prediction made before the intervention: specify the direction, metric, timing, and confidence threshold. If Bootstrap CUSUM (StepChange Analyzer) then detects a change point at the right time and in the right direction, the improvement is structural. If the metric simply drifts back toward average, regression to the mean was doing the work &mdash; not the intervention.</p>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what">What regression to the mean is</a></li>
+                <li><a href="#section-galton">Galton's discovery — heights and "reversion to mediocrity"</a></li>
+                <li><a href="#section-why">Why it happens — the mathematical inevitability</a></li>
+                <li><a href="#section-examples">Where it appears in improvement work</a></li>
+                <li><a href="#section-deming">The Deming connection — pre-committed predictions</a></li>
+                <li><a href="#section-cusum">How Bootstrap CUSUM distinguishes it from genuine change</a></li>
+                <li><a href="#section-mistakes">The two mistakes it causes</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what">What regression to the mean is</h2>
+
+    <p>When a random variable produces an extreme value — unusually high or unusually low — the next measurement of the same variable is likely to be closer to its long-run average. This happens not because anything changed, but because extreme values are, by definition, unlikely to be repeated. The more extreme the initial observation, the more strongly the next observation tends to regress toward the mean.</p>
+
+    <p>This applies in both directions. An exceptionally good month is likely to be followed by a less exceptional one. An exceptionally bad month is likely to be followed by a less bad one. Neither movement requires explanation. Neither reflects genuine structural change. Both are statistical inevitability.</p>
+
+    <div class="callout blue">
+        <strong>The formal definition</strong>
+        <p>In statistics, regression toward the mean is the phenomenon where if one sample of a random variable is extreme, the next sampling of the same random variable is likely to be closer to its mean. Furthermore, when many random variables are sampled and the most extreme results are intentionally selected, a second sampling of those selected variables will produce less extreme results &mdash; closer to the mean of all variables. <em>(Galton, 1886; formalised by Pearson, 1896.)</em></p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-galton">Galton's discovery — heights and "reversion to mediocrity"</h2>
+
+    <p>Francis Galton stumbled on the phenomenon in the 1880s while measuring the heights of parents and their adult children. He expected tall parents to produce tall children and short parents to produce short children — and they did. But not proportionally. Tall parents produced children who were tall, but not as tall as their parents. Short parents produced children who were short, but not as short as their parents. Every generation drifted back toward the population average.</p>
+
+    <p>Galton called it <strong>"reversion to mediocrity"</strong> — a wonderfully blunt description. He was puzzled by it, initially suspecting some biological force pulling generations toward average height. The truth, as Karl Pearson later formalised, was simpler and more fundamental: it was a mathematical property of any measurement that contains random variation. No biological mechanism was needed. The phenomenon emerged from the structure of the data itself.</p>
+
+    <p>The insight generalised far beyond heights. Anywhere a measurement has both a systematic component (the true underlying level) and a random component (noise, measurement error, natural fluctuation), extreme values will contain more random variation than typical values — and will therefore tend to be followed by less extreme ones.</p>
+
+    <hr>
+
+    <h2 id="section-why">Why it happens — the mathematical inevitability</h2>
+
+    <p>Consider a process with a true underlying mean of 100, subject to random monthly fluctuation of ±20. In any given month, the observed value might be 120 (extremely good) or 80 (extremely bad). Neither value reflects a change in the true underlying level — both reflect random variation around a stable mean.</p>
+
+    <p>If you observe a value of 120, what is the most likely next value? Not 120 again — extreme values are unlikely by definition. The most likely next value is something closer to 100. If you observe 80, the most likely next value is something closer to 100. The process has not changed. The true mean has not changed. Only the random component has varied.</p>
+
+    <p>The critical point: <strong>this happens regardless of what you do between the two measurements.</strong> If you intervene after the extreme value, the regression toward the mean will occur anyway — and your intervention will appear to have caused it.</p>
+
+    <div class="dark-box">
+        <h3>The clinical version — why treatments appear to work</h3>
+        <p>A patient develops a symptom severe enough to seek treatment. By definition, their symptom level at the point of seeking treatment is near its worst. The doctor prescribes a treatment. The symptom improves. The treatment receives the credit.</p>
+        <p style="margin-top:10px;">But consider the counterfactual: what would have happened without treatment? For many conditions, symptoms fluctuate naturally. A patient presenting at their worst is statistically likely to improve next week regardless of treatment — because extreme symptom levels are unlikely to persist. Regression to the mean is doing most of the work. The treatment gets the credit.</p>
+        <p style="margin-top:10px;">This is why randomised controlled trials require a control group. The control group experiences the same regression to the mean as the treatment group. Any additional improvement in the treatment group, beyond what the control group experienced, is attributable to the treatment. Without the control group, regression to the mean is invisible — and the treatment appears far more effective than it is.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-examples">Where it appears in improvement work</h2>
+
+    <div class="timeline-box">
+        <h3>&#128203; Common patterns in healthcare and public services</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">League tables</span>
+            <span class="timeline-text">
+                <strong>The worst-performing trust this year is unlikely to be the worst-performing trust next year.</strong> Not because it improved — but because its position at the bottom of the table reflects both its true performance and an element of random variation. Next year's random variation will produce a different configuration. The trust that was second-worst will appear at the bottom. The previous worst performer will appear to have "improved." Intervention teams dispatched to the worst performers will appear to have succeeded regardless of their actual effect.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Winter programmes</span>
+            <span class="timeline-text">
+                <strong>An unusually bad winter followed by an average winter looks like improvement.</strong> NHS winter programmes are routinely evaluated by comparing the intervention winter to the previous one. If the previous winter was exceptionally bad — a genuine outlier — the following winter will tend toward average regardless of any programme. The programme receives the credit. Bootstrap CUSUM on a longer series reveals whether the improvement is structural or a return to the previous stable level.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">School inspections</span>
+            <span class="timeline-text">
+                <strong>Schools are more likely to be inspected when performance is poor.</strong> Poor performance contains both a genuine component (the school is struggling) and a random component (an unusually bad year). After inspection, performance tends to improve — partly because of the inspection's effect, and partly because the random component regresses toward the mean. Studies attempting to separate the two effects consistently find that regression to the mean accounts for a significant proportion of the apparent improvement.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Patient safety incidents</span>
+            <span class="timeline-text">
+                <strong>A spike in never events triggers an investigation and an action plan.</strong> The following quarter shows fewer never events. The action plan appears to have worked. But never events are rare by definition — a quarterly spike is likely to contain a large random component. Regression toward the (low) mean was always likely regardless of any intervention. Without a pre-committed Bootstrap CUSUM prediction, the action plan gets the credit.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Individual performance</span>
+            <span class="timeline-text">
+                <strong>Praise and punishment appear to have opposite effects — but don't.</strong> Galton's insight generalised to human performance: after an exceptional performance, the next is likely to be more ordinary regardless of any feedback. After a poor performance, the next is likely to be better regardless of any feedback. This creates the illusion that praise makes people complacent (their next performance is worse) and criticism makes people try harder (their next performance is better). In reality, both are regression to the mean. The feedback is coincidental.
+            </span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-deming">The Deming connection — pre-committed predictions</h2>
+
+    <p>Deming understood regression to the mean as one of the central obstacles to honest improvement evaluation. His insistence on pre-committed predictions — stating in writing, before an intervention, what change you expect to see and when — is the direct methodological response to the problem.</p>
+
+    <p>Without a pre-committed prediction, any improvement after an intervention can be attributed to the intervention, even if regression to the mean is the actual mechanism. The improvement feels real, the attribution feels logical, and the learning is false. The same intervention will be repeated regardless of whether it actually worked — because the evidence of its working was an artefact of measurement, not a signal of structural change.</p>
+
+    <p>With a pre-committed prediction, regression to the mean is visible. If the prediction specifies that Bootstrap CUSUM should detect a change point at a particular confidence level within a particular timeframe — and the data instead shows a return toward average without crossing the detection threshold — the prediction has failed. The intervention did not produce structural change. That is honest information, however uncomfortable.</p>
+
+    <div class="callout orange">
+        <strong>&#9888;&#65039; The intervention that always works</strong>
+        <p>Any intervention applied immediately after an extreme bad result will appear to work, because regression to the mean will produce improvement regardless. This is why the most confident improvement claims are often the least reliable: they were made after unusually bad periods, applied an intervention, and observed the inevitable return toward average. The intervention receives permanent credit for a temporary statistical phenomenon. The same intervention applied to a system at its average level would show no effect at all &mdash; because there is no extreme value to regress from.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">How Bootstrap CUSUM distinguishes it from genuine change</h2>
+
+    <p>Regression to the mean produces a characteristic pattern in time-series data: a return from an extreme value toward the previous stable level. Bootstrap CUSUM distinguishes this from genuine structural change in a precise way.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Pattern</th>
+                <th>What it looks like in data</th>
+                <th>Bootstrap CUSUM result</th>
+                <th>What it means</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Regression to the mean</strong></td>
+                    <td>Extreme value followed by return toward previous stable level. The new level is approximately the same as the pre-intervention level.</td>
+                    <td>No change point. CUSUM shows a temporary excursion that returns to baseline. Or: a change point at the extreme value followed by a second change point as it regresses — ending at approximately the original mean.</td>
+                    <td>The system has not structurally changed. The extreme value was a fluctuation. The intervention (if any) did not produce lasting structural improvement.</td>
+                </tr>
+                <tr>
+                    <td><strong>Genuine structural improvement</strong></td>
+                    <td>Sustained shift to a new stable level that is different from the pre-intervention level. The improvement is maintained through subsequent periods including the next hard season.</td>
+                    <td>A single change point at the appropriate date, sustained. The new level does not return toward the previous mean. Confirmed across at least one full seasonal cycle.</td>
+                    <td>The system has structurally changed. The improvement is not a regression artefact — it is maintained when the random component fluctuates in both directions around the new mean.</td>
+                </tr>
+                <tr>
+                    <td><strong>Mixed — partial regression plus genuine improvement</strong></td>
+                    <td>Improvement after an extreme value, but stabilising at a level better than the pre-intervention baseline rather than returning to it fully.</td>
+                    <td>Change point detected, but the new mean is between the extreme value and the original baseline. Partial regression plus genuine structural shift.</td>
+                    <td>Both effects are present. The intervention produced real improvement, but some of the observed improvement is regression. Bootstrap CUSUM quantifies the genuine structural component.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-mistakes">The two mistakes it causes</h2>
+
+    <p>Regression to the mean produces two distinct errors in improvement work — one more common, one more costly.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Mistake</th>
+                <th>What happens</th>
+                <th>Consequence</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Crediting the intervention</strong><br><em>(most common)</em></td>
+                    <td>An intervention is applied after an extreme bad result. Performance improves (regresses toward mean). The intervention receives the credit. The same intervention is rolled out at scale and repeated in future.</td>
+                    <td>Resources and effort are invested in interventions that may have had no structural effect. The true cause of the extreme result remains unaddressed. The next extreme result produces the same pattern — and the same false attribution.</td>
+                </tr>
+                <tr>
+                    <td><strong>Discrediting a genuine improvement</strong><br><em>(less common, more costly)</em></td>
+                    <td>A genuine structural improvement is dismissed because it followed a bad period and therefore "must be regression to the mean." The intervention is not scaled or standardised.</td>
+                    <td>A real improvement is lost. The conditions that produced it are not preserved. Performance returns to the previous level — which then appears to confirm the original scepticism, completing a self-fulfilling cycle of under-investment in what actually works.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>Bootstrap CUSUM resolves both mistakes with the same mechanism: the pre-committed prediction combined with the change point test. A genuine structural improvement produces a sustained change point at the predicted time. Regression to the mean produces a temporary excursion without a sustained change point. The distinction is visible in the data if you look for it correctly.</p>
+
+    <div class="cta-box">
+        <h2>Test your data — genuine change or regression to the mean?</h2>
+        <p>Upload your time-series data to the StepChange Analyzer. If the improvement is structural, Bootstrap CUSUM will detect a sustained change point. If it is regression to the mean, the CUSUM will show a temporary excursion with no confirmed change point.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="common-cause-variation.html">Common Cause Variation — Improving a Stable System</a></h3>
+        <p>Regression to the mean is a property of common cause variation — the normal fluctuation of a stable system. Understanding the distinction between common and special cause variation is the foundation for interpreting it correctly.</p>
+        <a href="common-cause-variation.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="tampering-and-impatience.html">Tampering &amp; Impatience</a></h3>
+        <p>Reacting to a bad result by intervening — when the result was common cause variation that would have regressed anyway — is Deming's definition of tampering. The funnel experiment demonstrates the consequence.</p>
+        <a href="tampering-and-impatience.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="special-cause-variation.html">Special Cause Variation</a></h3>
+        <p>A genuine extreme result caused by a specific identifiable event — rather than random fluctuation — is a special cause. Bootstrap CUSUM distinguishes special cause signals from regression artefacts.</p>
+        <a href="special-cause-variation.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Where it appears</div>
+        <h3><a href="interpret-results.html">How to Interpret Bootstrap CUSUM Results</a></h3>
+        <p>Regression to the mean is one of five common ways well-intentioned improvement claims go wrong. The full interpretation guide — including how to distinguish genuine structural change from statistical artefacts.</p>
+        <a href="interpret-results.html" class="btn">Read the guide &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Galton, F.:</strong> &ldquo;Regression Towards Mediocrity in Hereditary Stature.&rdquo; <em>Journal of the Anthropological Institute of Great Britain and Ireland,</em> 15, 246&ndash;263, 1886. The original paper in which Galton identified and named the phenomenon, using height data from 928 adult children and their parents.</p>
+        <p style="margin-top:8px;"><strong>Pearson, K.:</strong> &ldquo;Mathematical Contributions to the Theory of Evolution.&rdquo; <em>Philosophical Transactions of the Royal Society,</em> 187, 253&ndash;318, 1896. Formalised Galton's observation as a general mathematical property of correlated variables.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. The pre-committed prediction as the methodological response to regression to the mean in improvement evaluation. The funnel experiment (pp.327&ndash;332) demonstrates the cost of reacting to common cause variation.</p>
+        <p style="margin-top:8px;"><strong>Kahneman, D.:</strong> <em>Thinking, Fast and Slow.</em> Farrar, Straus and Giroux, 2011. Chapter 17 — "Regression to the Mean" — is the clearest accessible treatment of why the phenomenon is so persistently misunderstood, including the praise/punishment example.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
