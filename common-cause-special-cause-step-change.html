@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/common-cause-special-cause-step-change.html">
+    <title>Common Cause vs Special Cause — Which Type of Variation Do You Have? — StepChangeAnalysis.com</title>
+    <meta name="description" content="Common cause vs special cause variation: the single most important distinction in improvement work. Which type do you have, how does Bootstrap CUSUM tell them apart, and what should you do next? The decision guide in plain language.">
+    <meta name="keywords" content="common cause variation, special cause variation, common cause vs special cause, step change test, Bootstrap CUSUM, SPC, Shewhart, Deming, tampering, NHS improvement, which type of variation">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Common Cause vs Special Cause</div>
+    <div class="article-flag">&#128202; Concept &middot; Variation Theory</div>
+
+    <h1>Common Cause vs Special Cause — Which Type of Variation Do You Have?</h1>
+    <p class="article-subtitle">The single most important distinction in improvement work. Confuse the two and every response you make will be wrong — either tampering with a stable system or ignoring a real signal. This page tells you which type you have, how the StepChange Analyzer (Bootstrap CUSUM) detects the difference, and exactly what to do next.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <!-- KEY RULE BOX -->
+    <div style="background:#fff8e1;border:2px solid #f59e0b;border-radius:10px;padding:18px 22px;margin:20px 0 28px;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#92400e;margin-bottom:10px;">&#9654; Key rule &mdash; common cause vs special cause</div>
+        <p style="margin:0 0 8px;font-size:0.97em;font-weight:700;color:#1a1a1a;line-height:1.55;">If the StepChange Analyzer (Bootstrap CUSUM) detects a change point, you have a special cause signal — something specific shifted the system. If it detects no change point, the variation is common cause — the system is stable and reacting to it will make things worse.</p>
+        <p style="margin:0;font-size:0.88em;color:#78350f;line-height:1.65;">The response to each type is opposite. Special cause: find and address the specific cause. Common cause: do not tamper — redesign the system or wait. Applying the wrong response to either type produces worse outcomes than doing nothing.</p>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-two-types">The two types — at a glance</a></li>
+                <li><a href="#section-how-to-tell">How to tell which type you have</a></li>
+                <li><a href="#section-two-mistakes">The two mistakes — and why both make things worse</a></li>
+                <li><a href="#section-what-next">What to do next — decision table</a></li>
+                <li><a href="#section-examples">Real examples</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-two-types">The two types — at a glance</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:16px;margin:20px 0 28px;font-family:system-ui,sans-serif;">
+        <div style="background:#e9f5ff;border:2px solid #0056b3;border-radius:10px;padding:20px 22px;">
+            <div style="font-weight:700;font-size:1.05em;color:#002d5b;margin-bottom:10px;">Common cause variation</div>
+            <p style="margin:0 0 10px;font-size:0.9em;line-height:1.7;color:#1a1a1a;">The normal, expected variation of a stable system. The process is doing exactly what it is designed to do. The ups and downs you see month to month are noise — predictable within a range, produced by the system itself.</p>
+            <div style="font-size:0.85em;line-height:1.8;color:#1a3a5c;">
+                <strong>Bootstrap CUSUM result:</strong> no change point<br>
+                <strong>System state:</strong> stable<br>
+                <strong>Correct response:</strong> do not tamper<br>
+                <strong>To improve:</strong> redesign the system
+            </div>
+        </div>
+        <div style="background:#fff0f0;border:2px solid #c0392b;border-radius:10px;padding:20px 22px;">
+            <div style="font-weight:700;font-size:1.05em;color:#7b1a1a;margin-bottom:10px;">Special cause variation</div>
+            <p style="margin:0 0 10px;font-size:0.9em;line-height:1.7;color:#1a1a1a;">A non-random signal that something specific changed. A sustained shift to a new level, a spike, a trend. Something outside the system&rsquo;s normal behaviour caused this — a specific, identifiable event.</p>
+            <div style="font-size:0.85em;line-height:1.8;color:#5c1a1a;">
+                <strong>Bootstrap CUSUM result:</strong> change point detected<br>
+                <strong>System state:</strong> shifting<br>
+                <strong>Correct response:</strong> investigate the cause<br>
+                <strong>To improve:</strong> address the specific cause
+            </div>
+        </div>
+    </div>
+
+    <p>The distinction was first made precisely by Walter Shewhart in 1931 — he called them &ldquo;chance causes&rdquo; and &ldquo;assignable causes.&rdquo; Deming developed it into a management principle. Joiner built it into a practical decision framework. The terminology has changed but the insight is the same: <strong>variation has two sources, and they require opposite responses.</strong></p>
+
+    <hr>
+
+    <h2 id="section-how-to-tell">How to tell which type you have</h2>
+
+    <p>The StepChange Analyzer (Bootstrap CUSUM) does this automatically. Upload your time-series data, run the analysis, and the result is unambiguous:</p>
+
+    <div class="timeline-box">
+        <h3>&#128202; Reading the Bootstrap CUSUM result</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Change point detected</span>
+            <span class="timeline-text">
+                <strong>You have a special cause signal.</strong> The cumulative sum crossed the statistical threshold — the system shifted from one stable level to another at a specific, dateable point. The algorithm returns that date. Your job is to investigate what changed in the system at or just before that date.<br><br>
+                The change point may be an improvement (the metric moved in the right direction) or a deterioration (it moved in the wrong direction). Both are special causes. Both require investigation before attribution — the date is the starting point, not the conclusion. Go to <a href="change-detected-what-next.html">Change detected: what to do next</a>.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">No change point</span>
+            <span class="timeline-text">
+                <strong>You have common cause variation.</strong> The system is stable — fluctuating within its normal range. The variation you can see is real but it is produced by the system itself, not by a specific external event.<br><br>
+                This has two very different meanings: the stable level may be acceptable (hold steady, monitor) or unacceptable (the system needs redesigning, not reacting to). In either case, do not tamper — launching a new intervention in response to a single bad month is reacting to noise. Go to <a href="no-change-what-next.html">No change detected: what to do next</a>.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Approaching threshold</span>
+            <span class="timeline-text">
+                <strong>A special cause may be forming — wait for confirmation.</strong> The cumulative sum is trending but has not yet crossed the threshold. Adding a new intervention now would muddy the signal. Set a review date and re-run as more data arrives. Go to <a href="decide-to-wait.html">No change detected: decide to wait</a>.
+            </span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-two-mistakes">The two mistakes — and why both make things worse</h2>
+
+    <p>Shewhart identified two types of error. Deming demonstrated both with the funnel experiment. They are not symmetric — Mistake 1 is far more common in practice — but both produce worse outcomes than the correct response.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Mistake</th>
+                <th>What it looks like</th>
+                <th>Why it makes things worse</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Mistake 1</strong><br>Treating common cause as special cause</td>
+                    <td>Reacting to every bad month with an action plan. Calling a meeting when the metric dips. Changing the process in response to normal fluctuation. Launching a new initiative because last quarter was worse than the previous one.</td>
+                    <td>Each reaction adds variation to a stable system — Deming called it tampering. The system becomes less predictable. Staff learn that numbers trigger reactions regardless of whether they contain a signal. Data reporting becomes political. Performance worsens on average.</td>
+                </tr>
+                <tr>
+                    <td><strong>Mistake 2</strong><br>Treating special cause as common cause</td>
+                    <td>Dismissing a genuine shift as &ldquo;just noise.&rdquo; Not investigating a sustained deterioration. Assuming a real improvement will sustain itself without standardising the conditions that caused it.</td>
+                    <td>A deterioration goes unaddressed and compounds. An improvement drifts back because its cause was never identified or standardised. Special causes that are not identified recur — sometimes repeatedly, sometimes with increasing severity.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>Why Mistake 1 is so persistent in public services</strong>
+        <p>Monthly performance reviews that respond to every data point with an action plan are institutional Mistake 1. The pressure to &ldquo;do something&rdquo; in response to a bad number is real and understandable — but if the number is common cause variation, any action taken is a reaction to noise. Bootstrap CUSUM applied to the metric will show a flat line throughout: no action plan has changed the system. The activity generated is real. The improvement is not.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-what-next">What to do next — decision table</h2>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Bootstrap CUSUM result</th>
+                <th>Type of variation</th>
+                <th>Stable level acceptable?</th>
+                <th>Next step</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Change point — improvement direction</strong></td>
+                    <td>Special cause</td>
+                    <td>Better than before</td>
+                    <td>Investigate the cause. Standardise if genuine. Check balancing measures. <a href="change-detected-what-next.html">Path A &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Change point — deterioration direction</strong></td>
+                    <td>Special cause</td>
+                    <td>Worse than before</td>
+                    <td>Investigate the cause. Triage and stabilise. Apply Joiner levels to find the right response level. <a href="change-detected-what-next.html">Path A &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><strong>No change point — stable at acceptable level</strong></td>
+                    <td>Common cause</td>
+                    <td>Yes</td>
+                    <td>Hold steady. Do not tamper. Monitor with Bootstrap CUSUM. <a href="decide-to-wait.html">Path B &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><strong>No change point — stable at unacceptable level</strong></td>
+                    <td>Common cause</td>
+                    <td>No</td>
+                    <td>Redesign the system — not the process. Stratify, experiment, disaggregate. <a href="no-change-what-next.html">Path C &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><strong>No change point — intervention recently applied</strong></td>
+                    <td>Common cause so far</td>
+                    <td>Unclear — too soon</td>
+                    <td>Wait. Do not add further interventions. Re-run as more data arrives. <a href="decide-to-wait.html">Path B &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><strong>No change point — multiple interventions applied</strong></td>
+                    <td>Common cause</td>
+                    <td>No</td>
+                    <td>Interventions have not reached the constraint. Move up a Joiner level. <a href="joiner-levels-of-fix.html">Joiner levels &rarr;</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-examples">Real examples</h2>
+
+    <div class="timeline-box">
+        <h3>&#128203; What each type looks like in practice</h3>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Special cause — improvement</span>
+            <span class="timeline-text">
+                <strong>NHS A&amp;E — the COVID effect.</strong> March 2020 produced a sharp downward change point in A&amp;E attendances — not because the system improved but because people stopped attending during the pandemic. Bootstrap CUSUM correctly detected this as a special cause shift. It was not a system improvement; it was an external event with a specific date. When the special cause was removed (restrictions lifted), the metric returned toward its previous level. The change point was real. The attribution — &ldquo;the system improved&rdquo; — would have been wrong.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Special cause — deterioration</span>
+            <span class="timeline-text">
+                <strong>DOAC adverse drug reactions — the rivaroxaban controversy.</strong> A detectable upward change point in DOAC-related adverse reactions at 2016 corresponds to the publication of concerns about rivaroxaban monitoring. A specific, dateable external event caused a sustained shift. The correct response was to investigate the specific cause (rivaroxaban monitoring failure) and address it specifically — not to redesign anticoagulation prescribing across the board. See <a href="anticoag-safety.html">Anticoagulation safety</a>.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Common cause — stable at wrong level</span>
+            <span class="timeline-text">
+                <strong>NHS A&amp;E four-hour performance 2012&ndash;2026.</strong> Bootstrap CUSUM on 184 monthly observations finds four structural stages of decline — each a special cause shift downward — but within each stage, the metric is in common cause variation: stable, predictable, unresponsive to the multiple Level 1 and Level 2 interventions applied. Each action plan, each improvement programme, each turnaround team produced activity but no change point. The system was stable at the wrong level. The correct response was system redesign at Level 3. The response applied was repeated Mistake 1. See <a href="why-nothing-has-worked-nhs-ae-performance.html">Why nothing has worked</a>.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Common cause — stable at acceptable level</span>
+            <span class="timeline-text">
+                <strong>A well-run process held stable.</strong> A pharmacy dispensing error rate has been at 0.3 per 1,000 items for 18 months. Bootstrap CUSUM shows no change point. The rate is within the acceptable threshold. The correct response is to continue monitoring — not to launch a new improvement programme because last month&rsquo;s rate was 0.4 and this month&rsquo;s was 0.2. Both are common cause variation. Reacting to either is tampering.
+            </span>
+        </div>
+    </div>
+
+    <div class="cta-box">
+        <h2>Run the test — find out which type you have</h2>
+        <p>Upload your time-series data to the StepChange Analyzer. Bootstrap CUSUM will detect whether a structural shift has occurred, date it precisely if so, and give you the unambiguous starting point for the right response.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Path A</div>
+        <h3><a href="change-detected-what-next.html">Change Detected: What to Do Next</a></h3>
+        <p>Bootstrap CUSUM found a change point — special cause variation confirmed. The full investigation checklist: direction, date, artefacts, balancing measures, Joiner level, re-test.</p>
+        <a href="change-detected-what-next.html" class="btn">Read the guide &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Path C</div>
+        <h3><a href="no-change-what-next.html">No Change Detected: What to Do Next</a></h3>
+        <p>Bootstrap CUSUM found no change point — common cause variation. Five possible meanings, each with a different next step. Includes the failed intervention diagnosis.</p>
+        <a href="no-change-what-next.html" class="btn">Read the guide &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Path B</div>
+        <h3><a href="decide-to-wait.html">No Change Detected: Decide to Wait (Don&rsquo;t Tamper)</a></h3>
+        <p>A change point may be forming but is not yet confirmed. The decision rules for when to wait and when to act — and why adding a new intervention now is almost always wrong.</p>
+        <a href="decide-to-wait.html" class="btn">Read the guide &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="bright-spots.html">Bright Spots — Positive Deviance</a></h3>
+        <p>A Bright Spot is a special cause in the improvement direction. When Bootstrap CUSUM on subgroup data shows one unit performing at a structurally different level from the aggregate, that is a special cause signal worth investigating — not celebrating and not ignoring.</p>
+        <a href="bright-spots.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Deep dive — special cause</div>
+        <h3><a href="special-cause-variation.html">Special Cause Variation — Eliminate It Before Improving the System</a></h3>
+        <p>Joiner&rsquo;s rule (p.138): the full treatment of what special cause variation is, its four forms, the correct sequence, and the two mistakes with their consequences.</p>
+        <a href="special-cause-variation.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Deep dive — common cause</div>
+        <h3><a href="common-cause-variation.html">Common Cause Variation — Improving a Stable System</a></h3>
+        <p>Joiner&rsquo;s common cause highway (p.140): why a stable system at the wrong level requires system redesign, not reaction — and the five-step approach to actually improving it.</p>
+        <a href="common-cause-variation.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="tampering-and-impatience.html">Tampering &amp; Impatience</a></h3>
+        <p>Deming&rsquo;s funnel experiment in full — and the management patterns that produce Mistake 1 at institutional scale.</p>
+        <a href="tampering-and-impatience.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Shewhart, W.A.:</strong> <em>Economic Control of Quality of Manufactured Product.</em> Van Nostrand, 1931. The original distinction between assignable causes (special causes) and chance causes (common causes) — the foundation of all statistical process control.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. The two types of mistake and the funnel experiment (pp.327&ndash;332). Deming estimated the majority of management interventions he observed were Mistake 1.</p>
+        <p style="margin-top:8px;"><strong>Joiner, B.L.:</strong> <em>Fourth Generation Management.</em> McGraw-Hill, 1994. The practical decision framework built on Shewhart and Deming: eliminate special causes (p.138), then improve the stable system (p.140) using stratify, experiment, disaggregate (p.141).</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993). Detects structural change points at pre-specified confidence levels — the computational tool for distinguishing common cause from special cause variation in time-series data.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>

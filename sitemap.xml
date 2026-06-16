@@ -17,6 +17,9 @@
   <url><loc>https://stepchangeanalysis.com/change-detected-what-next.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://stepchangeanalysis.com/special-cause-variation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
+  <!-- Bridge page -->
+  <url><loc>https://stepchangeanalysis.com/common-cause-special-cause-step-change.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
   <!-- Path C — No change detected -->
   <url><loc>https://stepchangeanalysis.com/no-change-what-next.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://stepchangeanalysis.com/common-cause-variation.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
