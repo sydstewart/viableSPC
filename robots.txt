@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /sample-data-uk.csv
+Disallow: /assets/
+
+Sitemap: https://stepchangeanalysis.com/sitemap.xml
