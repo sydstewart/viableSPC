@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/finding-the-real-constraint.html">
+    <title>Finding the Real Constraint — From Symptoms to Testable Plan — StepChangeAnalysis.com</title>
+    <meta name="description" content="Most improvement programmes fix the wrong constraint. Four traps cause misidentification every time. A practical six-phase process — drawing on TOC, TRIZ, SIT, and systems thinking — for finding the real constraint and designing a testable improvement plan.">
+    <meta name="keywords" content="finding the constraint, root cause analysis, TOC constraint identification, TRIZ contradiction, current reality tree, improvement planning, NHS constraint, Goldratt, Bootstrap CUSUM">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Finding the Real Constraint</div>
+    <div class="article-flag">&#128202; Concept &middot; Improvement Method &middot; Step 3 of 7</div>
+
+    <h1>Finding the Real Constraint</h1>
+    <p class="article-subtitle">Most improvement programmes address the wrong constraint. The result is effort, activity, and cost — with no detectable change in system throughput and no Bootstrap CUSUM change point. This page gives you a practical six-phase process for finding the real constraint before designing the solution — drawing on Goldratt&rsquo;s Theory of Constraints, TRIZ contradiction analysis, SIT, and systems thinking.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Fits between Step 3 and Step 4 of the <a href="improvement-method.html" style="color:#0056b3;">7-step improvement method</a></div>
+
+    <!-- KEY RULE BOX -->
+    <div style="background:#fff8e1;border:2px solid #f59e0b;border-radius:10px;padding:18px 22px;margin:20px 0 28px;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#92400e;margin-bottom:10px;">&#9654; Key rule &mdash; finding the real constraint</div>
+        <p style="margin:0 0 8px;font-size:0.97em;font-weight:700;color:#1a1a1a;line-height:1.55;">Before designing a solution, check the four traps: are you fixing the loudest symptom, a constraint outside your boundary, a constraint that has already moved, or an absence rather than a process failure? Designing a good solution for the wrong constraint produces a flat Bootstrap CUSUM line.</p>
+        <p style="margin:0;font-size:0.88em;color:#78350f;line-height:1.65;">The constraint and the contradiction are usually the same thing seen from different angles. If the problem has persisted despite repeated attempts to fix it, there is a structural contradiction keeping it in place. Name both sides of that contradiction before designing the solution.</p>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-traps">The four constraint traps</a></li>
+                <li><a href="#section-contradiction">The constraint is always a contradiction</a></li>
+                <li><a href="#section-process">The six-phase process</a></li>
+                <li><a href="#section-triz">TRIZ and SIT — the useful bits</a></li>
+                <li><a href="#section-tools">Other tools for finding the constraint</a></li>
+                <li><a href="#section-cusum">How Bootstrap CUSUM confirms you found the right one</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-traps">The four constraint traps</h2>
+
+    <p>These four patterns account for the majority of constraint misidentifications. Check each one explicitly before proceeding to solution design.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Trap</th>
+                <th>What it looks like</th>
+                <th>The test</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. The loudest symptom becomes the assumed constraint</strong></td>
+                    <td>The most visible, most complained-about problem gets the resources. A&amp;E waiting times are loud. Corridor care is visible. Ambulance handovers make headlines. But loudness is a function of where pain surfaces, not where the constraint sits. The discharge constraint is quiet — it lives in local authority budgets far from operational noise.</td>
+                    <td>Ask: <em>if we fixed this completely, what would system throughput do?</em> If the answer is "improve significantly" — it may be the constraint. If the answer is "we'd hit the next bottleneck within weeks" — it's a symptom, not the constraint.</td>
+                </tr>
+                <tr>
+                    <td><strong>2. The constraint is outside the organisational boundary</strong></td>
+                    <td>If the constraint sits in a partner organisation, a supplier, a regulator, or a different budget — it won't be identified because there's no authority over it. The instinct is to look inside your own boundary because that's where you have leverage. The system doesn't care about your boundary.</td>
+                    <td>Map the full value stream, not just your organisation's portion of it. Ask: <em>where does work accumulate — inside or outside our boundary?</em> If the largest queue is outside, the constraint is outside. A Level 3 fix is required.</td>
+                </tr>
+                <tr>
+                    <td><strong>3. The constraint has moved and nobody noticed</strong></td>
+                    <td>A previous improvement programme successfully elevated a constraint. The system improved. Then the constraint shifted to the next weakest link — but the programme continued targeting the original constraint. Effort is now applied to a non-constraint. Diminishing returns are blamed on the method, not the misidentification.</td>
+                    <td>Re-run the constraint identification process after every confirmed Bootstrap CUSUM improvement change point. Goldratt&rsquo;s Step 5: don&rsquo;t let inertia become the next constraint.</td>
+                </tr>
+                <tr>
+                    <td><strong>4. The constraint is an absence, not a process failure</strong></td>
+                    <td>Goldratt&rsquo;s framework focuses on process constraints — where work accumulates in a flow. But many modern constraints are structural absences: no shared budget mechanism, no scaleable operating system, no workforce pipeline, too much customisation preventing standardisation. These don&rsquo;t show up as queues. You have to ask for them explicitly.</td>
+                    <td>Ask: <em>what would need to exist that currently doesn&rsquo;t for this problem to dissolve?</em> If the answer is a new capability, a new structure, or a new relationship rather than a faster process — the constraint is an absence. Trimming (SIT) and the Ideal Final Result (TRIZ) are the right tools.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-contradiction">The constraint is always a contradiction</h2>
+
+    <p>This is the single most powerful insight from combining Goldratt with TRIZ. Every persistent constraint — one that has survived repeated improvement attempts — persists because of a structural contradiction: two requirements that appear mutually exclusive. The constraint is not just a bottleneck in a flow. It is a tension between two legitimate needs that the system cannot simultaneously satisfy.</p>
+
+    <div class="dark-box">
+        <h3>The standardisation/customisation contradiction</h3>
+        <p><em>&ldquo;We can&rsquo;t standardise because customers need the solution customised.&rdquo;</em></p>
+        <p style="margin-top:10px;">This contradiction appears constantly in product and service design. TRIZ&rsquo;s answer: resolve it in a different dimension. Standardise the platform, customise the configuration. Toyota standardises the production system while offering enormous model variety. The iPhone standardises the hardware platform while enabling infinite app customisation. The NHS equivalent: standardise the discharge pathway while locally configuring the care package.</p>
+        <p style="margin-top:10px;">The contradiction dissolves when you separate the levels at which standardisation and customisation apply. The constraint was not a process problem — it was an assumption that standardisation and customisation must apply to the same level of the system simultaneously.</p>
+    </div>
+
+    <div class="numbers-box" style="margin-top:24px;">
+        <table>
+            <thead><tr>
+                <th>Domain</th>
+                <th>The contradiction</th>
+                <th>The resolution</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>NHS discharge</strong></td>
+                    <td>NHS needs patients to leave faster AND local authorities need to control social care spending</td>
+                    <td>Shared budgets that make the cost of delayed discharge visible to both parties simultaneously — the contradiction dissolves when financial risk is shared rather than separated</td>
+                </tr>
+                <tr>
+                    <td><strong>Standardisation vs customisation</strong></td>
+                    <td>Business needs standardisation to scale AND customers need customisation for their context</td>
+                    <td>Standardise the platform/pathway; customise the configuration/parameters. Separate the levels at which each applies</td>
+                </tr>
+                <tr>
+                    <td><strong>Quality vs speed</strong></td>
+                    <td>Increasing speed appears to reduce quality AND improving quality appears to reduce speed</td>
+                    <td>Toyota resolved this by discovering that quality and speed are not in conflict when defects are eliminated at source — the contradiction was based on a false assumption about where quality is created</td>
+                </tr>
+                <tr>
+                    <td><strong>Centralisation vs local autonomy</strong></td>
+                    <td>Central control ensures consistency AND local autonomy enables responsiveness</td>
+                    <td>Centralise standards and accountability; decentralise method and delivery. The ICS model attempts this — it fails when accountability is centralised without shared financial risk</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>How to name the contradiction</strong>
+        <p>Use this sentence structure: <em>&ldquo;We need [A] because [reason A is necessary] AND we need [not-A] because [reason not-A is necessary].&rdquo;</em> If you cannot complete both sides of that sentence, you haven&rsquo;t found the contradiction yet. If you can complete both sides and both sound legitimate — you have found the constraint. The solution space lies in challenging the assumption that A and not-A cannot coexist.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-process">The six-phase process</h2>
+
+    <p>This process takes approximately 90 minutes with a team that has relevant knowledge of the system. It combines the most useful elements of Hurson&rsquo;s Think Better, Goldratt&rsquo;s thinking processes, and TRIZ contradiction analysis into a single practical sequence.</p>
+
+    <div class="timeline-box">
+
+        <div class="timeline-item">
+            <span class="timeline-date">Phase 1 &mdash; 20 min<br><em>Diverge</em></span>
+            <span class="timeline-text">
+                <strong>List every symptom — without filtering</strong><br><br>
+                Write every Undesirable Effect (UDE) on the board. No evaluation, no prioritising, no "we already know that one." Generate freely. Include symptoms that feel unrelated. Include symptoms from outside your organisational boundary.<br><br>
+                Then apply Hurson&rsquo;s four Cs: <strong>Cull</strong> (remove duplicates), <strong>Cluster</strong> (group related symptoms), <strong>Combine</strong> (merge overlapping ones), <strong>Clarify</strong> (rewrite vague ones as specific observable effects).<br><br>
+                One discipline: separate symptoms from causes. A symptom has something upstream causing it. A root cause has nothing upstream — it simply exists as a structural condition. Do not try to identify causes yet.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Phase 2 &mdash; 15 min<br><em>Converge</em></span>
+            <span class="timeline-text">
+                <strong>Find the clusters — what symptoms share a common cause?</strong><br><br>
+                Look at the clustered symptoms and ask: <em>what single cause, if true, would explain this whole cluster?</em> This is the Current Reality Tree in its simplest form — not the full formal tree, just the branching question.<br><br>
+                For each cluster, write a candidate root cause. Do not evaluate whether it is correct yet. You are generating candidate causes, not confirming them.<br><br>
+                Run the throughput test on each candidate: <em>if this cause were eliminated, which symptoms would resolve?</em> The candidate that resolves the most symptoms across the most clusters is the most likely root cause.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Phase 3 &mdash; 10 min<br><em>Converge</em></span>
+            <span class="timeline-text">
+                <strong>Check the four traps</strong><br><br>
+                Run the four-trap checklist against your candidate root cause before proceeding:<br><br>
+                1. Are we focusing on the loudest symptom rather than the binding constraint?<br>
+                2. Is the real constraint outside our organisational boundary?<br>
+                3. Has the constraint moved since we last looked?<br>
+                4. Is the constraint something we don&rsquo;t have rather than something we&rsquo;re doing wrong?<br><br>
+                If any trap fires, revise the candidate root cause before continuing.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Phase 4 &mdash; 15 min<br><em>Converge</em></span>
+            <span class="timeline-text">
+                <strong>Name the contradiction</strong><br><br>
+                Ask: <em>why has this constraint persisted despite previous attempts to fix it?</em> Complete the contradiction sentence: <em>&ldquo;We need [A] because [reason] AND we need [not-A] because [reason].&rdquo;</em><br><br>
+                If both sides sound legitimate — you have found the structural contradiction that is keeping the constraint in place. Write it on the board explicitly. This is the most important single output of the process.<br><br>
+                Then ask: <em>what assumption underlies this contradiction — and is that assumption actually true?</em> Challenge the assumption before designing the solution. Many constraints dissolve when the assumption is examined rather than accepted.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Phase 5 &mdash; 15 min<br><em>Diverge</em></span>
+            <span class="timeline-text">
+                <strong>Describe the Ideal Future — then generate solutions</strong><br><br>
+                Ask TRIZ&rsquo;s Ideal Final Result question: <em>what would the system look like if this constraint simply didn&rsquo;t exist — with no cost, no politics, no history?</em> Describe it in specific, observable terms. This is your target state.<br><br>
+                Then ask Hurson&rsquo;s generative question: <em>How might we get from here to there?</em> Generate freely — no evaluation. Include solutions that seem impossible. Include solutions from other industries that have resolved the same contradiction (TRIZ calls this analogical thinking — how did Toyota resolve quality vs speed? How did Netflix resolve selection vs availability?).<br><br>
+                Apply SIT&rsquo;s Trimming question: <em>what could we remove from the current system that would make the constraint disappear or weaken?</em> The instinct is always to add resources. Trimming asks the opposite.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Phase 6 &mdash; 15 min<br><em>Converge</em></span>
+            <span class="timeline-text">
+                <strong>Evaluate and make the testable plan</strong><br><br>
+                Filter candidate solutions through three questions:<br><br>
+                1. <em>Does this address the constraint directly — or a symptom?</em><br>
+                2. <em>Does this require authority we have — or authority we&rsquo;d need to acquire?</em><br>
+                3. <em>Would Bootstrap CUSUM detect a change point if this worked?</em><br><br>
+                The third question is the most important. If you cannot describe a specific metric that would show a statistically significant structural shift within a defined timeframe — the solution is not yet concrete enough to implement. Refine it until Bootstrap CUSUM could confirm or refute it.<br><br>
+                Output: one testable plan with a pre-committed prediction — metric, direction, timing, confidence threshold, and balancing measures. This is the input to Step 7 (PDSA) of the improvement method.
+            </span>
+        </div>
+
+    </div>
+
+    <div class="callout orange">
+        <strong>&#9888;&#65039; The 90-minute total assumes data is available</strong>
+        <p>If the team does not have data on where work accumulates, where queues form, or what the current rates are for key metrics, Phase 1 will take longer. The most common reason this process stalls is that symptoms are described in vague terms (&ldquo;communication is poor,&rdquo; &ldquo;the system is broken&rdquo;) rather than as specific, measurable Undesirable Effects. Spend the time in Phase 1 making every symptom concrete and measurable — the rest of the process depends on it.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-triz">TRIZ and SIT — the useful bits</h2>
+
+    <p>TRIZ (Theory of Inventive Problem Solving) was developed by Genrich Altshuller from analysis of 400,000 patents. SIT (Systematic Inventive Thinking) distilled TRIZ into five practical patterns. Both are powerful but have steep learning curves. These are the elements most directly applicable to constraint identification and improvement design.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Tool</th>
+                <th>Source</th>
+                <th>The one question it contributes</th>
+                <th>NHS example</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Contradiction analysis</strong></td>
+                    <td>TRIZ</td>
+                    <td><em>What two legitimate requirements are in conflict — and what assumption makes them appear incompatible?</em></td>
+                    <td>NHS needs faster discharge AND councils need to control budgets. Assumption: these budgets must remain separate. Challenge: shared ICS budgets dissolve the contradiction.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ideal Final Result (IFR)</strong></td>
+                    <td>TRIZ</td>
+                    <td><em>What would the system look like if the constraint simply didn&rsquo;t exist, with no resources and no cost?</em></td>
+                    <td>Patients leave hospital the day they are medically fit, directly to appropriate community care, with no delay. Work backwards from this to find what is preventing it.</td>
+                </tr>
+                <tr>
+                    <td><strong>Trimming</strong></td>
+                    <td>SIT</td>
+                    <td><em>What component of the current system could be removed, with its function redistributed to something already present?</em></td>
+                    <td>Remove the separate discharge coordinator role; redistribute the function to the ward nurse who already knows the patient. Fewer handoffs, faster discharge, no additional resource.</td>
+                </tr>
+                <tr>
+                    <td><strong>Task Unification</strong></td>
+                    <td>SIT</td>
+                    <td><em>What additional job could be assigned to an existing component without adding new resources?</em></td>
+                    <td>The ICS lead who already manages NHS-council relationships also holds the shared discharge budget — one person, two previously separate functions, shared accountability.</td>
+                </tr>
+                <tr>
+                    <td><strong>Attribute Dependency</strong></td>
+                    <td>SIT</td>
+                    <td><em>What two variables that are currently independent could be linked so that one automatically responds to the other?</em></td>
+                    <td>NHS discharge funding that automatically increases when delayed transfer rates rise — removing the current separation between the organisation that bears the cost and the one that controls the solution.</td>
+                </tr>
+                <tr>
+                    <td><strong>Resolve in a different dimension</strong></td>
+                    <td>TRIZ</td>
+                    <td><em>Can standardisation and customisation apply at different levels of the system simultaneously?</em></td>
+                    <td>Standardise the discharge pathway (the platform); customise the care package (the configuration). The contradiction between standardisation and local flexibility dissolves when applied to different levels.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-tools">Other tools for finding the constraint</h2>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Tool</th>
+                <th>Best for</th>
+                <th>Key question</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Current Reality Tree (CRT)</strong></td>
+                    <td>Complex systems with many interrelated symptoms. Builds a full causal map from symptoms to root cause using if&rarr;then logic.</td>
+                    <td><em>What single root cause, if true, would explain all these symptoms simultaneously?</em></td>
+                </tr>
+                <tr>
+                    <td><strong>Value Stream Mapping</strong></td>
+                    <td>Flow-based processes. Maps every step, identifies where inventory (patients, work) accumulates. The largest queue is upstream of the constraint.</td>
+                    <td><em>Where does work wait longest — inside or outside our boundary?</em></td>
+                </tr>
+                <tr>
+                    <td><strong>Iceberg Model</strong></td>
+                    <td>Distinguishing events (visible symptoms) from patterns, structures, and mental models. Forces intervention above the event level.</td>
+                    <td><em>What structural condition is producing this pattern — and what mental model is preventing us from changing it?</em></td>
+                </tr>
+                <tr>
+                    <td><strong>Pre-mortem</strong></td>
+                    <td>Quick constraint identification before implementation. Imagine the project has failed — why?</td>
+                    <td><em>If this intervention produces no Bootstrap CUSUM change point, what will have been the reason?</em></td>
+                </tr>
+                <tr>
+                    <td><strong>Cynefin framework</strong></td>
+                    <td>Deciding which approach to use. Complex problems require probe-sense-respond rather than analyse-design-implement.</td>
+                    <td><em>Is this a complicated problem (right answer exists, needs expertise) or a complex one (right answer emerges from experimentation)?</em></td>
+                </tr>
+                <tr>
+                    <td><strong>Fault Tree Analysis</strong></td>
+                    <td>Safety-critical systems. Top-down deductive logic from undesirable outcome to combinations of causes.</td>
+                    <td><em>What combinations of conditions must be simultaneously true for this undesirable outcome to occur?</em></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">How Bootstrap CUSUM confirms you found the right constraint</h2>
+
+    <p>The ultimate test of constraint identification is empirical, not analytical. If you have correctly identified and addressed the binding constraint, Bootstrap CUSUM applied to your primary outcome metric will detect a structural improvement change point within the expected timeframe. If it does not — if the data shows a flat line — the analysis was incomplete. You addressed a non-constraint, a symptom, or a constraint that was outside your system boundary at the wrong level.</p>
+
+    <div class="dark-box">
+        <h3>&#128221; The pre-committed prediction as the final output</h3>
+        <p>The output of Phase 6 is a pre-committed prediction written before implementation:</p>
+        <ul style="margin-top:10px;line-height:2.2;">
+            <li><strong>Which metric</strong> will move — the leading indicator, not just the outcome</li>
+            <li><strong>Which direction</strong> — up or down</li>
+            <li><strong>Within what timeframe</strong> — how many periods after the intervention</li>
+            <li><strong>At what confidence threshold</strong> — 90%, 95%, or 99%</li>
+            <li><strong>What balancing measures</strong> you will monitor simultaneously</li>
+        </ul>
+        <p style="margin-top:12px;">If Bootstrap CUSUM detects the predicted change point — you found the real constraint. If it does not — return to Phase 2. The flat line is not a failure. It is the most precise diagnostic available: the constraint was not where you thought it was.</p>
+    </div>
+
+    <div class="cta-box">
+        <h2>Test whether you found the right constraint</h2>
+        <p>Upload your outcome metric data to the StepChange Analyzer. Bootstrap CUSUM will tell you whether a structural change point appeared — and date it precisely so you can verify it coincides with your intervention.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="theory-of-constraints.html">Theory of Constraints</a></h3>
+        <p>Goldratt&rsquo;s five focusing steps — the foundation of constraint identification and elevation.</p>
+        <a href="theory-of-constraints.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="divergent-convergent-thinking.html">Divergent and Convergent Thinking — the Two-Diamond Approach</a></h3>
+        <p>The thinking mode behind this six-phase process — when to generate freely and when to converge on a decision.</p>
+        <a href="divergent-convergent-thinking.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a></h3>
+        <p>Once the constraint is identified, Joiner&rsquo;s levels determine what level of response is required — and whether you have the authority to deliver it.</p>
+        <a href="joiner-levels-of-fix.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">7-Step Method</div>
+        <h3><a href="improvement-method.html">The 7-Step Improvement Method</a></h3>
+        <p>This process sits between Step 3 (root cause) and Step 4 (constraint identification) of the 7-step method.</p>
+        <a href="improvement-method.html" class="btn">Read the method &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Goldratt, E.M.:</strong> <em>The Goal.</em> North River Press, 1984. Theory of Constraints and the five focusing steps. <em>It&rsquo;s Not Luck.</em> North River Press, 1994. The thinking processes including the Current Reality Tree, Evaporating Cloud, and Future Reality Tree.</p>
+        <p style="margin-top:8px;"><strong>Altshuller, G.:</strong> <em>The Innovation Algorithm: TRIZ, systematic innovation and technical creativity.</em> Technical Innovation Center, 1999. TRIZ contradiction analysis, the Ideal Final Result, and the 40 inventive principles.</p>
+        <p style="margin-top:8px;"><strong>Goldenberg, J. and Mazursky, D.:</strong> <em>Creativity in Product Innovation.</em> Cambridge University Press, 2002. SIT — Systematic Inventive Thinking — five patterns: Subtraction/Trimming, Task Unification, Multiplication, Division, Attribute Dependency.</p>
+        <p style="margin-top:8px;"><strong>Hurson, T.:</strong> <em>Think Better.</em> McGraw-Hill, 2008. The Productive Thinking Model — diverge/converge structure, the four Cs (cull, cluster, combine, clarify), and the &ldquo;How might we?&rdquo; generative question.</p>
+        <p style="margin-top:8px;"><strong>Senge, P.:</strong> <em>The Fifth Discipline.</em> Doubleday, 1990. The Iceberg Model and systems archetypes.</p>
+        <p style="margin-top:8px;"><strong>Snowden, D. and Boone, M.:</strong> &ldquo;A Leader&rsquo;s Framework for Decision Making.&rdquo; <em>Harvard Business Review,</em> November 2007. The Cynefin framework.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>

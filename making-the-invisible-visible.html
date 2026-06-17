@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/making-the-invisible-visible.html">
+    <title>Making the Invisible Visible — Why Every Improvement Framework Solves the Same Problem — StepChangeAnalysis.com</title>
+    <meta name="description" content="The symptom is visible. The cause is hidden. The constraint is structural. The contradiction is assumed away. Every great improvement framework — from Shewhart to Goldratt to Don Norman — is a method for making the invisible visible. Bootstrap CUSUM makes structural change visible in data.">
+    <meta name="keywords" content="improvement frameworks, making invisible visible, Don Norman design of everyday things, FMEA detectability, Goldratt evaporating cloud, Bootstrap CUSUM, Shewhart, Deming, systems thinking, root cause, constraint">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Making the Invisible Visible</div>
+    <div class="article-flag">&#128202; Foundation Concept &middot; Why Improvement Frameworks Exist</div>
+
+    <h1>Making the Invisible Visible</h1>
+    <p class="article-subtitle">The symptom is visible. The cause is hidden. The constraint is structural. The contradiction is assumed away. And the natural human response &mdash; act on what&rsquo;s visible, react to what&rsquo;s loudest, fix what you can reach &mdash; almost always addresses the wrong thing. Every great improvement framework is a different method for bridging that gap between what&rsquo;s visible and what&rsquo;s true.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Foundation concept &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <!-- KEY INSIGHT BOX -->
+    <div style="background:#001a3a;border-radius:10px;padding:24px 28px;margin:20px 0 32px;font-family:system-ui,sans-serif;">
+        <p style="margin:0 0 12px;font-size:1.05em;font-weight:700;color:white;line-height:1.6;">Making something visible is itself an intervention. Not a precondition for the intervention &mdash; the intervention itself.</p>
+        <p style="margin:0;font-size:0.92em;color:#94b8d4;line-height:1.8;">Most human systems fail not because people lack the will to fix them, but because the real problem is invisible. Every great improvement framework is a method for making the invisible visible &mdash; and Bootstrap CUSUM (StepChange Analyzer) is the instrument that makes structural change visible in data.</p>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-problem">The fundamental problem</a></li>
+                <li><a href="#section-norman">Don Norman — visibility as the design principle</a></li>
+                <li><a href="#section-fmea">FMEA — detectability as a risk dimension</a></li>
+                <li><a href="#section-frameworks">Every framework is a visibility tool</a></li>
+                <li><a href="#section-five-steps">The five steps every framework agrees on</a></li>
+                <li><a href="#section-cusum">Bootstrap CUSUM — making structural change visible</a></li>
+                <li><a href="#section-site">How this site is organised around visibility</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-problem">The fundamental problem</h2>
+
+    <p>Imagine a hospital with rising corridor care rates, falling staff morale, missed A&amp;E targets, and increasing ambulance handover times. A management team looks at this picture and sees four problems. They form four workstreams, assign four improvement leads, and implement four programmes simultaneously.</p>
+
+    <p>What they cannot see — because it is structural and therefore invisible to operational observation — is that all four symptoms share a single cause: approximately 13,700 acute beds per day are occupied by patients who are medically fit to leave but cannot, because social care capacity is insufficient. That constraint sits outside the system boundary of any NHS trust. It is invisible from inside the organisation. And the four workstreams, each addressing a visible symptom, will produce activity without producing structural improvement.</p>
+
+    <p>This is not a story about the NHS. It is a story about the relationship between visibility and causality that every improvement framework has independently discovered:</p>
+
+    <div style="background:#f0f4f8;border-left:4px solid var(--brand-blue);border-radius:0 8px 8px 0;padding:20px 24px;margin:24px 0;font-family:system-ui,sans-serif;">
+        <p style="margin:0 0 10px;font-size:1.0em;font-weight:700;color:#002d5b;line-height:1.6;">The visibility gap</p>
+        <p style="margin:0;font-size:0.95em;line-height:1.8;color:var(--text);">What is visible is almost never the cause of what is experienced. The symptom surfaces where the pain is felt. The cause sits upstream, often invisibly, often outside the boundary of the organisation that experiences the pain. The natural human response &mdash; act on what you can see, react to what is loudest, fix what you can reach &mdash; systematically addresses the symptom rather than the cause. This is not stupidity or laziness. It is a structural property of how human attention and organisational authority both work: we attend to what is visible, and we act where we have authority.</p>
+    </div>
+
+
+    <blockquote style="border-left:4px solid var(--brand-blue);margin:24px 0;padding:16px 22px;background:#f0f4f8;border-radius:0 8px 8px 0;font-family:system-ui,sans-serif;">
+        <p style="margin:0 0 8px;font-size:1.05em;font-style:italic;color:var(--brand-blue);line-height:1.7;">&ldquo;If we keep working the way we are doing it, the outcome will be the same.&rdquo;</p>
+        <p style="margin:0;font-size:0.85em;color:var(--muted);">Syd Stewart &mdash; StepChangeAnalysis.com</p>
+    </blockquote>
+
+    <p>Every major improvement framework &mdash; from Shewhart&rsquo;s control charts to Goldratt&rsquo;s Evaporating Cloud to Don Norman&rsquo;s affordances to FMEA detectability scoring &mdash; is a response to this same fundamental problem. They differ in domain, language, and method. They agree on the diagnosis: the problem is a visibility failure, and the solution is a visibility intervention.</p>
+
+    <hr>
+
+    <h2 id="section-norman">Don Norman — visibility as the design principle</h2>
+
+    <p>In <em>The Design of Everyday Things</em> (1988), Don Norman asked why intelligent, capable people consistently make errors with everyday objects — doors, switches, taps, computers. His answer was not that people are careless. It was that the objects failed to make the correct action visible.</p>
+
+    <p>Norman identified two visibility failures that cause most use errors:</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Norman&rsquo;s concept</th>
+                <th>What it means</th>
+                <th>The improvement equivalent</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Affordance</strong></td>
+                    <td>The correct action is not visible in the design of the object. A door that should be pushed has a handle that invites pulling. The user makes the &ldquo;wrong&rdquo; choice — but the design made the right choice invisible.</td>
+                    <td>An improvement intervention that requires the correct action to be invisible (a new protocol buried in a policy document, a new pathway with no visible cue at the point of decision) will fail regardless of how well-designed it is. Visibility of the correct action is a precondition for behaviour change.</td>
+                </tr>
+                <tr>
+                    <td><strong>Feedback</strong></td>
+                    <td>The system state is not visible after an action. The user presses a button and does not know whether anything happened. They press it again. Or they don&rsquo;t press it enough times. The absence of visible feedback produces error.</td>
+                    <td>A system without visible feedback on its current state — a metric without a chart, a process without a run chart, an improvement without a change point detection method — cannot be managed. Bootstrap CUSUM is a feedback mechanism: it makes the system&rsquo;s response to an intervention visible in the data.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>Norman&rsquo;s most important insight for improvement work: <strong>when something goes wrong, the first question is never &ldquo;who made the error?&rdquo; It is &ldquo;what was invisible that should have been visible?&rdquo;</strong> This reframe — from blame to design — is the foundation of patient safety culture, human factors engineering, and every serious improvement methodology.</p>
+
+    <div class="callout blue">
+        <strong>The Norman door in NHS improvement</strong>
+        <p>A &ldquo;Norman door&rdquo; is a door so badly designed that you always push when you should pull, or pull when you should push. NHS improvement is full of Norman doors: systems that make the wrong action easier than the right one, processes where the safe path is less visible than the unsafe shortcut, metrics that make gaming easier than genuine improvement. Every time an organisation responds to this by training staff to use the door correctly rather than fixing the door, it is applying a Level 1 fix to a Level 3 design problem.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-fmea">FMEA — detectability as a risk dimension</h2>
+
+    <p>Failure Mode and Effects Analysis (FMEA) was developed in aerospace and defence in the 1940s and became central to automotive and medical device safety. It scores every potential failure mode on three dimensions: Severity, Occurrence, and Detection. The Risk Priority Number (RPN) is their product: Severity &times; Occurrence &times; Detection.</p>
+
+    <p>Detection is the visibility score. A detection score of 1 means the failure is immediately obvious — it cannot occur without being seen. A detection score of 10 means the failure is completely invisible — it will occur and not be detected until it causes harm.</p>
+
+    <p>The profound insight in FMEA&rsquo;s structure is that <strong>improving detectability reduces risk independently of whether you have fixed the cause.</strong> Making a failure mode visible — through an alarm, a visual indicator, a monitoring system, a mandatory check — reduces the RPN even if the underlying failure mode still exists. Visibility is a risk control in its own right.</p>
+
+    <p>This maps directly onto the improvement framework: making a problem visible is an intervention, not just a precondition for one. A run chart that shows variation doesn&rsquo;t fix the process — but it makes the variation visible, which changes behaviour, which changes the system. Bootstrap CUSUM doesn&rsquo;t fix the constraint — but it makes the structural change point visible, which changes what gets attributed to what, which changes what gets standardised and what gets abandoned.</p>
+
+    <div class="callout blue">
+        <strong>The detection paradox</strong>
+        <p>In FMEA, the highest-risk failure modes are often not the most severe ones. They are the ones with low detectability — the silent failures that accumulate undetected until they produce a catastrophic outcome. The same pattern appears in organisational improvement: the most dangerous problems are not the loudest ones. They are the ones nobody can see. Corridor care is loud and visible. The discharge constraint that causes it is silent and invisible. FMEA would give corridor care a low detection score &mdash; and correctly identify the discharge constraint as the higher-risk finding.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-frameworks">Every framework is a visibility tool</h2>
+
+    <p>Across every improvement discipline, the same pattern recurs: a framework that makes something invisible, visible. The methods differ. The domains differ. The vocabulary differs. The insight is the same.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Framework</th>
+                <th>What it makes visible</th>
+                <th>What was invisible before</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Shewhart control chart</strong></td>
+                    <td>The boundary between common cause variation and special cause variation</td>
+                    <td>Whether a data point is a signal worth acting on or noise that should be ignored. Without the chart, every data point looks like a signal.</td>
+                </tr>
+                <tr>
+                    <td><strong>Bootstrap CUSUM</strong></td>
+                    <td>The date and direction of a structural step change in a time series</td>
+                    <td>Whether an intervention produced genuine structural improvement or whether the metric moved for other reasons (seasonal variation, regression to the mean, definition change).</td>
+                </tr>
+                <tr>
+                    <td><strong>Goldratt&rsquo;s constraint map</strong></td>
+                    <td>Where work accumulates — the binding constraint in the system</td>
+                    <td>That improving a non-constraint produces no improvement in throughput. Every manager sees their own bottleneck; the constraint map shows the system&rsquo;s bottleneck.</td>
+                </tr>
+                <tr>
+                    <td><strong>Goldratt&rsquo;s Evaporating Cloud</strong></td>
+                    <td>The structural contradiction keeping the constraint in place — and the assumption underneath it</td>
+                    <td>That the constraint is not a resource problem or a process problem but a logical conflict between two legitimate requirements. The Cloud makes the conflict explicit — and often dissolves it.</td>
+                </tr>
+                <tr>
+                    <td><strong>Joiner&rsquo;s levels of fix</strong></td>
+                    <td>The level at which the constraint sits (output, process, or system) and whether the organisation has authority to address it</td>
+                    <td>That Level 1 and Level 2 interventions applied to a Level 3 constraint will produce no lasting change — invisible until the Bootstrap CUSUM flat line makes it explicit.</td>
+                </tr>
+                <tr>
+                    <td><strong>Causal loop diagram</strong></td>
+                    <td>The feedback loops — reinforcing and balancing — that produce system behaviour over time</td>
+                    <td>That a vicious cycle is self-sustaining regardless of individual effort, and that the leverage point is in the loop structure, not in working harder within it.</td>
+                </tr>
+                <tr>
+                    <td><strong>TRIZ contradiction matrix</strong></td>
+                    <td>The technical or physical contradiction that makes the problem appear unsolvable</td>
+                    <td>That the problem persists not because of insufficient resources but because of a structural conflict — and that the conflict can be resolved by changing the dimension in which standardisation and customisation apply.</td>
+                </tr>
+                <tr>
+                    <td><strong>FMEA detectability score</strong></td>
+                    <td>How visible each failure mode is before it causes harm</td>
+                    <td>That silent failures are higher risk than loud ones — and that improving visibility is a risk control in its own right, independent of fixing the cause.</td>
+                </tr>
+                <tr>
+                    <td><strong>Senge&rsquo;s iceberg model</strong></td>
+                    <td>The structure and mental models beneath the visible events and patterns</td>
+                    <td>That events are the tip of the iceberg — below the surface lie patterns, structures, and mental models that will keep producing the same events until the structure changes.</td>
+                </tr>
+                <tr>
+                    <td><strong>Don Norman&rsquo;s affordances</strong></td>
+                    <td>Whether the correct action is visible at the point of decision</td>
+                    <td>That use errors are almost always design errors — the correct action was invisible, so the user made the only choice the design made obvious.</td>
+                </tr>
+                <tr>
+                    <td><strong>Hurson&rsquo;s evaluation matrix</strong></td>
+                    <td>The trade-offs between candidate solutions against agreed success criteria</td>
+                    <td>That the preferred solution is not necessarily the best one — the preference is usually based on incomplete, implicit comparison. The matrix makes the comparison explicit and visible.</td>
+                </tr>
+                <tr>
+                    <td><strong>Pre-committed prediction</strong></td>
+                    <td>What you expected to happen before the data arrived</td>
+                    <td>That attribution is almost always post-hoc rationalisation. The pre-committed prediction makes the original hypothesis visible — so the data can test it rather than confirm it.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-five-steps">The five steps every framework agrees on</h2>
+
+    <p>Strip away the domain-specific language from every framework and five steps remain. They are always the same five steps. They are always in the same order. Every framework is a different set of tools for executing one or more of them.</p>
+
+    <div class="timeline-box">
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 1</span>
+            <span class="timeline-text">
+                <strong>Make it visible &mdash; resist the first interpretation and look harder</strong><br><br>
+                Deming: distinguish common cause from special cause — don&rsquo;t react to noise. Shewhart: measure before acting. Norman: find what the design made invisible. FMEA: score detectability. Bootstrap CUSUM: let the data speak before attributing.<br><br>
+                The instruction is always the same: <em>what you think you are seeing is not what is causing the problem. Look at the structure, not the event.</em>
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 2</span>
+            <span class="timeline-text">
+                <strong>See the structure &mdash; find what is producing what you see</strong><br><br>
+                Goldratt: map the constraint. Senge: find the feedback loop. Checkland: draw the rich picture. Altshuller: name the contradiction. Joiner: identify the level. Hurson: find the real problem.<br><br>
+                The instruction is always the same: <em>the structure is producing the behaviour. Change the structure — not the people, not the effort level, not the process within unchanged boundaries.</em>
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 3</span>
+            <span class="timeline-text">
+                <strong>Challenge the assumption &mdash; what invisible belief is keeping the constraint in place?</strong><br><br>
+                Goldratt&rsquo;s Evaporating Cloud: what assumption underlies the contradiction? TRIZ: resolve in a different dimension. Christensen: what job is actually being done? Norman: who decided the door should open that way?<br><br>
+                The instruction is always the same: <em>the constraint usually persists because of an assumption nobody has questioned. Making the assumption visible often dissolves the constraint.</em>
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 4</span>
+            <span class="timeline-text">
+                <strong>Test honestly &mdash; small scale, pre-committed, measurable</strong><br><br>
+                Deming&rsquo;s PDSA: plan, do, study, act — small cycles. Goldratt: exploit before elevating. Joiner: experiment before scaling. Bootstrap CUSUM: pre-committed prediction at the specified confidence threshold. FMEA: test detectability before deployment.<br><br>
+                The instruction is always the same: <em>don&rsquo;t bet the organisation on an untested idea. Make the prediction visible before the data arrives — so the data can test it, not confirm it.</em>
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Step 5</span>
+            <span class="timeline-text">
+                <strong>Learn and move &mdash; the constraint has shifted, visibility must shift with it</strong><br><br>
+                Goldratt&rsquo;s Step 5: don&rsquo;t let inertia become the next constraint. Deming: the cycle never ends. Senge: double-loop learning. Bootstrap CUSUM: monitor continuously for the next change point.<br><br>
+                The instruction is always the same: <em>you have made one invisible thing visible and addressed it. The system has changed. Something else is now invisible. Start again.</em>
+            </span>
+        </div>
+
+    </div>
+
+    <div class="dark-box">
+        <h3>Why the loop never ends</h3>
+        <p>Every framework is iterative because visibility is not a permanent condition. Making something visible changes the system — which creates new invisible things. The discharge constraint becomes visible through a causal loop diagram; it is addressed through shared budgets; the constraint moves to GP access; GP access becomes the new invisible problem. The five steps do not produce a final solution. They produce a method for continuous navigation through a system that is always partly invisible.</p>
+        <p style="margin-top:10px;">Bootstrap CUSUM is the instrument that detects when the system has changed — when a new invisible thing has become visible in the data. The flat line tells you the constraint is unchanged. The change point tells you something structural has shifted. Both are information. Both are visibility.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">Bootstrap CUSUM — making structural change visible</h2>
+
+    <p>Bootstrap CUSUM (the StepChange Analyzer) sits at Steps 1 and 4 of the generic model. At Step 1, it makes visible what common cause variation and measurement noise conceal: whether a genuine structural shift has occurred in a time series, and when. At Step 4, it is the Study step of PDSA — the honest test of whether the pre-committed prediction was confirmed by the data.</p>
+
+    <p>Its relationship to the visibility theme is precise. Every other visibility tool on this page makes a structural truth visible to human observation — the control chart makes variation visible to the eye, the Evaporating Cloud makes the contradiction visible to the mind, FMEA makes failure risk visible to the analyst. Bootstrap CUSUM makes structural change visible in data — and does so with a specified confidence level, a precise date, and a statistical threshold that cannot be moved after the fact.</p>
+
+    <div class="callout blue">
+        <strong>The pre-committed prediction as a visibility tool</strong>
+        <p>Most improvement evaluation is retrospective: an intervention is implemented, the metric improves, and the improvement is attributed to the intervention. The attribution is almost always invisible — nobody wrote down what they expected to happen before the data arrived, so any movement in the data can be credited to any intervention. The pre-committed prediction makes the original hypothesis visible before the data arrives. Bootstrap CUSUM then tests it. The prediction was either confirmed or it was not. That result is visible, explicit, and cannot be reinterpreted after the fact.</p>
+        <p style="margin-top:8px;">This is the same principle as FMEA detectability applied to improvement evaluation: make the failure mode (wrong attribution, regression to the mean, seasonal variation) visible before it has the chance to masquerade as success.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-site">How this site is organised around visibility</h2>
+
+    <p>Every page on this site is a visibility tool. The taxonomy is:</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>What we make visible</th>
+                <th>The tool</th>
+                <th>The invisible thing it addresses</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Structural change in data</strong></td>
+                    <td><a href="index.html">Bootstrap CUSUM — StepChange Analyzer</a></td>
+                    <td>Whether an improvement is genuine or seasonal, random, or definitional</td>
+                </tr>
+                <tr>
+                    <td><strong>Type of variation</strong></td>
+                    <td><a href="common-cause-special-cause-step-change.html">Common cause vs special cause</a></td>
+                    <td>Whether to act on a data point or ignore it</td>
+                </tr>
+                <tr>
+                    <td><strong>The binding constraint</strong></td>
+                    <td><a href="theory-of-constraints.html">Theory of Constraints</a></td>
+                    <td>Which bottleneck is actually limiting throughput</td>
+                </tr>
+                <tr>
+                    <td><strong>The structural contradiction</strong></td>
+                    <td><a href="finding-the-real-constraint.html">Finding the real constraint</a></td>
+                    <td>Why the constraint has persisted despite repeated fixes</td>
+                </tr>
+                <tr>
+                    <td><strong>The level of the fix required</strong></td>
+                    <td><a href="joiner-levels-of-fix.html">Joiner&rsquo;s levels of fix</a></td>
+                    <td>Whether the intervention has the authority to reach the constraint</td>
+                </tr>
+                <tr>
+                    <td><strong>Feedback loop structure</strong></td>
+                    <td><a href="causal-loop-diagrams.html">Causal loop diagrams</a></td>
+                    <td>Why the system keeps producing the same outcomes despite interventions</td>
+                </tr>
+                <tr>
+                    <td><strong>Regression to the mean</strong></td>
+                    <td><a href="regression-to-the-mean.html">Regression to the mean</a></td>
+                    <td>Whether improvement after a bad period is structural or statistical inevitability</td>
+                </tr>
+                <tr>
+                    <td><strong>Trade-offs between solutions</strong></td>
+                    <td><a href="divergent-convergent-thinking.html">The evaluation matrix</a></td>
+                    <td>Which solution is actually best against agreed criteria — not just most politically convenient</td>
+                </tr>
+                <tr>
+                    <td><strong>The original hypothesis</strong></td>
+                    <td><a href="interpret-results.html">Pre-committed prediction</a></td>
+                    <td>What was expected before the data arrived — so attribution is honest</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="background:#001a3a;border-radius:10px;padding:24px 28px;margin:32px 0;font-family:system-ui,sans-serif;">
+        <p style="margin:0 0 10px;font-size:1.0em;font-weight:700;color:white;line-height:1.6;">Honest evidence of change</p>
+        <p style="margin:0;font-size:0.92em;color:#94b8d4;line-height:1.8;">That&rsquo;s what &ldquo;honest evidence of change&rdquo; means. Not that the people measuring are honest while others are dishonest. But that the method makes the right things visible &mdash; the structural change, the date it occurred, the confidence level, the balancing measures &mdash; so that the data is allowed to say no. A flat Bootstrap CUSUM line is not a failure. It is the most important visibility of all: the constraint is still there, still invisible to the intervention being applied, still waiting to be found.</p>
+    </div>
+
+    <div class="cta-box">
+        <h2>Make your data visible</h2>
+        <p>Upload your time-series data to the StepChange Analyzer. Bootstrap CUSUM will make the structural change point visible &mdash; or confirm the flat line that tells you the constraint has not yet been reached.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Foundation Concept</div>
+        <h3><a href="common-cause-special-cause-step-change.html">Common Cause vs Special Cause Variation</a></h3>
+        <p>The first visibility problem in improvement data — distinguishing signal from noise.</p>
+        <a href="common-cause-special-cause-step-change.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="finding-the-real-constraint.html">Finding the Real Constraint</a></h3>
+        <p>The six-phase process for making the structural constraint and the contradiction visible before designing the solution.</p>
+        <a href="finding-the-real-constraint.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a></h3>
+        <p>Making visible which level the constraint sits at — and whether the organisation has the authority to reach it.</p>
+        <a href="joiner-levels-of-fix.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="regression-to-the-mean.html">Regression to the Mean</a></h3>
+        <p>The invisible statistical phenomenon that masquerades as improvement — and how Bootstrap CUSUM makes it visible.</p>
+        <a href="regression-to-the-mean.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="divergent-convergent-thinking.html">Divergent and Convergent Thinking</a></h3>
+        <p>The evaluation matrix makes trade-offs between solutions visible. POWER makes objections visible. The pre-committed prediction makes the original hypothesis visible.</p>
+        <a href="divergent-convergent-thinking.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Norman, D.A.:</strong> <em>The Design of Everyday Things.</em> Basic Books, 1988 (revised 2013). Affordances, feedback, and the principle that use errors are almost always design errors — the correct action was invisible.</p>
+        <p style="margin-top:8px;"><strong>Shewhart, W.A.:</strong> <em>Economic Control of Quality of Manufactured Product.</em> Van Nostrand, 1931. The control chart as a visibility tool — making the boundary between common cause and special cause variation visible for the first time.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. The System of Profound Knowledge and PDSA — making variation, knowledge, and theory visible before acting.</p>
+        <p style="margin-top:8px;"><strong>Goldratt, E.M.:</strong> <em>The Goal.</em> North River Press, 1984. <em>It&rsquo;s Not Luck.</em> North River Press, 1994. The constraint map, the Current Reality Tree, and the Evaporating Cloud — making the binding constraint and the structural contradiction visible.</p>
+        <p style="margin-top:8px;"><strong>Altshuller, G.:</strong> <em>The Innovation Algorithm.</em> Technical Innovation Center, 1999. TRIZ contradiction analysis — making the technical contradiction visible so it can be resolved rather than compromised.</p>
+        <p style="margin-top:8px;"><strong>Senge, P.:</strong> <em>The Fifth Discipline.</em> Doubleday, 1990. The Iceberg Model and systems archetypes — making feedback loop structure visible beneath the surface of events.</p>
+        <p style="margin-top:8px;"><strong>Joiner, B.L.:</strong> <em>Fourth Generation Management.</em> McGraw-Hill, 1994. Levels of fix — making visible which level the constraint sits at and what authority is required to address it.</p>
+        <p style="margin-top:8px;"><strong>MIL-P-1629:</strong> Procedures for Performing a Failure Mode Effects and Criticality Analysis. US Department of Defense, 1949. The original FMEA — including detectability as a risk dimension independent of severity and occurrence.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993). Making structural step changes visible in time-series data at specified confidence levels.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
