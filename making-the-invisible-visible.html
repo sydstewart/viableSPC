@@ -105,6 +105,12 @@
         <p>A &ldquo;Norman door&rdquo; is a door so badly designed that you always push when you should pull, or pull when you should push. NHS improvement is full of Norman doors: systems that make the wrong action easier than the right one, processes where the safe path is less visible than the unsafe shortcut, metrics that make gaming easier than genuine improvement. Every time an organisation responds to this by training staff to use the door correctly rather than fixing the door, it is applying a Level 1 fix to a Level 3 design problem.</p>
     </div>
 
+    <div class="callout blue">
+        <strong>Deming said variation was the most important thing for managers to understand &mdash; but visibility may be more fundamental</strong>
+        <p>Deming&rsquo;s insight was that variation is everywhere and that managers must learn to distinguish common cause from special cause. But there is a prior problem: variation is often invisible. A manager who cannot see the variation &mdash; who has no control chart, no run chart, no Bootstrap CUSUM &mdash; will react to every data point as if it were a signal. Tampering is not stupidity. It is the rational response to invisible variation. The control chart does not just describe variation. It makes it visible &mdash; and visibility changes behaviour before any other intervention is applied.</p>
+    </div>
+
+
     <hr>
 
     <h2 id="section-fmea">FMEA — detectability as a risk dimension</h2>
@@ -121,6 +127,13 @@
         <strong>The detection paradox</strong>
         <p>In FMEA, the highest-risk failure modes are often not the most severe ones. They are the ones with low detectability — the silent failures that accumulate undetected until they produce a catastrophic outcome. The same pattern appears in organisational improvement: the most dangerous problems are not the loudest ones. They are the ones nobody can see. Corridor care is loud and visible. The discharge constraint that causes it is silent and invisible. FMEA would give corridor care a low detection score &mdash; and correctly identify the discharge constraint as the higher-risk finding.</p>
     </div>
+
+    <div class="callout blue">
+        <strong>Silos are a visibility problem &mdash; seeing the whole system</strong>
+        <p>A silo is not just an organisational structure. It is a visibility boundary. The cause of a problem is often on the other side of that boundary &mdash; in the supplier, the customer, the regulator, the adjacent department, the local authority. From inside the silo, the cause is structurally invisible. You experience the symptom. You cannot see what is producing it.</p>
+        <p style="margin-top:8px;">This is why systems thinking &mdash; Senge&rsquo;s fifth discipline, Checkland&rsquo;s rich picture, Beer&rsquo;s Viable System Model &mdash; begins by drawing the whole system: suppliers, customers, regulators, government departments, legislation, feedback loops across boundaries. The rich picture includes things the organisation does not control precisely because the causes of its problems often live there. Making the whole system visible &mdash; not just your slice of it &mdash; is the prerequisite to finding the real constraint.</p>
+    </div>
+
 
     <hr>
 
@@ -190,6 +203,21 @@
                     <td><strong>Hurson&rsquo;s evaluation matrix</strong></td>
                     <td>The trade-offs between candidate solutions against agreed success criteria</td>
                     <td>That the preferred solution is not necessarily the best one — the preference is usually based on incomplete, implicit comparison. The matrix makes the comparison explicit and visible.</td>
+                </tr>
+                <tr>
+                    <td><strong>The 5 Whys</strong></td>
+                    <td>The causal chain between a visible symptom and its root cause</td>
+                    <td>That the first answer to &ldquo;why?&rdquo; is almost never the root cause &mdash; it is the next layer of symptom. Each Why peels back one layer of invisibility. The root cause is the Why that has no further Why beneath it.</td>
+                </tr>
+                <tr>
+                    <td><strong>Causal Loop Diagram (CLD)</strong></td>
+                    <td>The feedback loops &mdash; reinforcing and balancing &mdash; that produce system behaviour over time</td>
+                    <td>That a vicious cycle is self-sustaining regardless of individual effort. The R1 reinforcing loop in NHS corridor care is invisible without the diagram &mdash; making it visible is the intervention.</td>
+                </tr>
+                <tr>
+                    <td><strong>Root Cause Analysis (RCA)</strong></td>
+                    <td>The upstream causes behind a visible failure or adverse event</td>
+                    <td>That the proximate cause &mdash; the last thing that happened before the failure &mdash; is almost never the root cause. RCA makes the causal chain visible so the intervention addresses the origin, not the trigger.</td>
                 </tr>
                 <tr>
                     <td><strong>Pre-committed prediction</strong></td>
@@ -361,6 +389,13 @@
         <p>Most improvement evaluation is retrospective: an intervention is implemented, the metric improves, and the improvement is attributed to the intervention. The attribution is almost always invisible — nobody wrote down what they expected to happen before the data arrived, so any movement in the data can be credited to any intervention. The pre-committed prediction makes the original hypothesis visible before the data arrives. Bootstrap CUSUM then tests it. The prediction was either confirmed or it was not. That result is visible, explicit, and cannot be reinterpreted after the fact.</p>
         <p style="margin-top:8px;">This is the same principle as FMEA detectability applied to improvement evaluation: make the failure mode (wrong attribution, regression to the mean, seasonal variation) visible before it has the chance to masquerade as success.</p>
     </div>
+
+    <div class="callout blue">
+        <strong>How the five steps relate to the 7-step improvement method</strong>
+        <p>The five steps are the <em>why</em> &mdash; the generic model that every improvement framework independently arrived at. The <a href="improvement-method.html">7-step method</a> is the <em>how</em> &mdash; the operational sequence for applying the five steps in practice with a team.</p>
+        <p style="margin-top:8px;">Step 1 of the 7-step method (list symptoms) is the five-step model&rsquo;s Step 1 (make it visible). Steps 2&ndash;4 of the 7-step method (measure, root cause, test constraint) are the five-step model&rsquo;s Steps 2 and 3 (see the structure, challenge the assumption). Step 7 of the 7-step method (PDSA with Bootstrap CUSUM) is the five-step model&rsquo;s Step 4 (test honestly). The same logic, at different levels of abstraction.</p>
+    </div>
+
 
     <hr>
 
