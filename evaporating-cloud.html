@@ -40,6 +40,7 @@
                 <li><a href="#section-structure">The five-box structure</a></li>
                 <li><a href="#section-how">How to draw one</a></li>
                 <li><a href="#section-examples">Real examples</a></li>
+                <li><a href="#section-cat-whatnext">What to do next &mdash; challenging the CAT assumption</a></li>
                 <li><a href="#section-triz">The TRIZ connection</a></li>
                 <li><a href="#section-dissolve">How contradictions dissolve</a></li>
                 <li><a href="#section-cusum">Bootstrap CUSUM &mdash; the test</a></li>
@@ -212,6 +213,37 @@
             <p style="margin:0;font-size:0.85em;color:#0F6E56;"><strong>The injection:</strong> Gloucestershire&rsquo;s SHMI fell 14 consecutive months while throughput rose. O&rsquo;Neill at Alcoa: both improved simultaneously. The assumption was never empirically true. Not a compromise &mdash; the conflict evaporated in the data.</p>
         </div>
 
+
+    <div class="callout blue" id="section-cat-whatnext">
+        <strong>What the manager should do next &mdash; challenging the CAT assumption in practice</strong>
+
+        <p style="margin-top:8px;font-weight:600;">Step 1 &mdash; Prepare the data before the conversation</p>
+        <p style="margin-top:4px;">Don&rsquo;t go to the customer with a complaint. Go with evidence. Quantify the constraint precisely:</p>
+        <ul style="margin:8px 0;line-height:2.0;padding-left:20px;">
+            <li>Average time in CAT queue per release (weeks)</li>
+            <li>Number of releases delayed by CAT in the last 12 months</li>
+            <li>Cost to the customer in delayed capability</li>
+            <li>Your own cost in holding releases, re-testing, version proliferation</li>
+        </ul>
+        <p>Data makes the conversation about shared evidence rather than competing interests. It depersonalises the problem &mdash; not <em>&ldquo;you&rsquo;re slowing us down&rdquo;</em> but <em>&ldquo;here is what the process is costing both of us.&rdquo;</em></p>
+
+        <p style="margin-top:12px;font-weight:600;">Step 2 &mdash; Three questions in the conversation</p>
+        <p style="margin-top:4px;"><strong>Q1: &ldquo;Is this picture accurate from your side?&rdquo;</strong> &mdash; Give them the chance to correct the data. They may have context you have never seen. This is Going to the Gemba applied to the customer relationship.</p>
+        <p style="margin-top:6px;"><strong>Q2: &ldquo;What is making CAT take this long from your side?&rdquo;</strong> &mdash; You don&rsquo;t know their constraint. You cannot design the injection until you understand it.</p>
+        <p style="margin-top:6px;"><strong>Q3: &ldquo;What would need to be true for this to be faster?&rdquo;</strong> &mdash; The injection question. Opens the solution space without prescribing a solution. Invites co-design. Use a Parking Lot to capture ideas that emerge but aren&rsquo;t the primary constraint &mdash; keeping the conversation focused on the one assumption being challenged.</p>
+
+        <p style="margin-top:12px;font-weight:600;">Four scenarios &mdash; what is likely to come out</p>
+
+        <p style="margin-top:8px;"><strong>Scenario A &mdash; Their constraint is resource.</strong> CAT takes six weeks because they have one person doing it part-time. Injection: dedicated CAT resource or shared testing environment. Solvable within the relationship.</p>
+
+        <p style="margin-top:8px;"><strong>Scenario B &mdash; Their constraint is trust.</strong> CAT takes six weeks because they don&rsquo;t trust your releases to be stable. Every release needs extensive testing because previous releases had defects. The injection points back at your quality process, not their CAT process. The Evaporating Cloud shifts &mdash; the real conflict is between release speed and release quality. Bootstrap CUSUM on defect rates post-release tells you whether that assumption is true.</p>
+
+        <p style="margin-top:8px;"><strong>Scenario C &mdash; Their constraint is regulatory.</strong> CAT takes six weeks because a regulator requires a specific sign-off before any software change goes live. This is the Boundary trap &mdash; the constraint sits outside both organisations&rsquo; authority. Requires a Level 3 Deep fix: engaging with the regulatory framework itself, not the customer&rsquo;s internal process.</p>
+
+        <p style="margin-top:8px;"><strong>Scenario D &mdash; Their constraint is assumption.</strong> CAT takes six weeks because <em>&ldquo;that&rsquo;s how long it takes&rdquo;</em> &mdash; nobody has ever questioned it. When you show the data, they discover the actual testing takes two days. The six weeks is largely waiting time. Injection: a new trigger mechanism that starts CAT immediately when a release is ready rather than when the customer&rsquo;s calendar allows. No new resource. No regulatory engagement. A process redesign that both parties benefit from. <strong>The most common outcome &mdash; and the most satisfying.</strong></p>
+
+        <p style="margin-top:12px;font-weight:600;">The Bootstrap CUSUM test</p>
+        <p style="margin-top:4px;">After the conversation and the agreed injection, Bootstrap CUSUM on CAT cycle time confirms whether the injection produced a structural change point or activity without improvement. The pre-committed prediction: <em>&ldquo;CAT cycle time will fall from X weeks to Y weeks within Z months of implementing the new trigger mechanism.&rdquo;</em> The data is allowed to say no.</p>
     </div>
 
     <hr>
