@@ -188,14 +188,16 @@
 
         <div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:20px;">
             <div style="font-weight:700;font-size:0.95em;color:var(--brand-blue);margin-bottom:12px;border-bottom:2px solid #185FA5;padding-bottom:6px;">Customer acceptance testing</div>
-            <p style="margin:0 0 4px;font-size:0.88em;line-height:1.7;"><strong>A &mdash; Objective:</strong> Deliver software on time with high quality</p>
+            <p style="margin:0 0 4px;font-size:0.88em;line-height:1.7;"><strong>A &mdash; Objective:</strong> Deliver high quality software on time</p>
             <p style="margin:0 0 4px;font-size:0.88em;line-height:1.7;"><strong>B &mdash; Requirement 1:</strong> Business needs faster delivery</p>
             <p style="margin:0 0 4px;font-size:0.88em;line-height:1.7;"><strong>C &mdash; Requirement 2:</strong> Customer relationship needs to be maintained</p>
             <p style="margin:0 0 4px;font-size:0.88em;line-height:1.7;"><strong>D:</strong> Redesign the customer acceptance testing process</p>
             <p style="margin:0 0 8px;font-size:0.88em;line-height:1.7;"><strong>D&prime;:</strong> Don&rsquo;t challenge the customer&rsquo;s process</p>
-            <p style="margin:0 0 4px;font-size:0.85em;color:#c0392b;"><strong>Conflict:</strong> Change CAT vs protect the relationship</p>
-            <p style="margin:0 0 4px;font-size:0.85em;"><strong>The assumption:</strong> Challenging the customer&rsquo;s process will damage the relationship</p>
-            <p style="margin:0;font-size:0.85em;color:#0F6E56;"><strong>The injection:</strong> Show the customer the data. Most customers, shown that CAT is costing them delivery time, will engage rather than resist. The assumption was never tested &mdash; not a compromise, an evaporation.</p>
+            <p style="margin:0 0 8px;font-size:0.85em;color:#c0392b;"><strong>Conflict:</strong> Redesign CAT vs protect the relationship</p>
+            <p style="margin:0 0 4px;font-size:0.85em;font-weight:600;">Two assumptions keeping the conflict in place:</p>
+            <p style="margin:0 0 4px;font-size:0.85em;"><strong>Assumption 1 (on the B&rarr;D arrow):</strong> <em>&ldquo;Redesigning the CAT process will take significant time and effort AND is technically achievable.&rdquo;</em> This is the assumption the tech team acts on immediately &mdash; it is visible, satisfying to address, and produces a technically correct solution. The engineering trap: the team redesigns the process, the customer doesn&rsquo;t adopt it, nothing changes. The technical solution addressed the wrong assumption.</p>
+            <p style="margin:0 0 8px;font-size:0.85em;"><strong>Assumption 2 (on the C&rarr;D&prime; arrow):</strong> <em>&ldquo;Challenging the customer&rsquo;s acceptance testing process will damage the relationship.&rdquo;</em> This is the assumption that has never been tested. It is invisible, uncomfortable to examine, and gets deferred indefinitely. It is also the assumption that, if false, dissolves the conflict entirely &mdash; without any redesign required.</p>
+            <p style="margin:0;font-size:0.85em;color:#0F6E56;"><strong>The injection:</strong> Test Assumption 2 before building Assumption 1. Show the customer the Kanban board &mdash; the delivery timeline, the weeks lost at CAT, the cost in their terms. Most customers, shown that CAT is costing them delivery time, will engage rather than resist. The conflict evaporates not through a technical redesign but through a conversation that was never had because an assumption was never tested. Not a compromise. An evaporation.</p>
         </div>
 
         <div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:20px;">
