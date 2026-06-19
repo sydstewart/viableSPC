@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/measurement-gaming.html">
+    <title>Gaming the Measure — Deming's Point 11 and the Balancing Measures Defence — StepChangeAnalysis.com</title>
+    <meta name="description" content="Any single-point measurement that becomes known as a target will be gamed. Deming's Point 11 explains why — and the balancing measures defence shows what to do instead. The practical guide to designing measurement systems that are hard to game and honest about structural change.">
+    <meta name="keywords" content="Deming Point 11 targets, gaming the metric NHS, balancing measures improvement, measurement design NHS, Goodhart's law healthcare, NHS targets gaming, corridor care measurement, Bootstrap CUSUM balancing measures">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Gaming the Measure</div>
+    <div class="article-flag">&#128202; Concept &middot; Measurement Design &middot; Deming</div>
+
+    <h1>Gaming the Measure</h1>
+    <p class="article-subtitle">Any single-point measurement that becomes known as a target will be gamed. Not through dishonesty &mdash; through the entirely rational human response to being judged by a number. Deming called this out in Point 11 of his 14 Points: eliminate numerical targets for management. The target changes what people do without changing the system. The measurement becomes the target. The target becomes the game. The game destroys the signal. This page explains why &mdash; and what to do instead.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Deming, W.E. <em>Out of the Crisis</em>, Point 11 &nbsp;&middot;&nbsp; <a href="types-of-measures.html" style="color:#0056b3;">Related: Types of Measures</a></div>
+
+    <div style="background:#fff8e1;border:2px solid #f59e0b;border-radius:10px;padding:18px 22px;margin:20px 0 28px;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#92400e;margin-bottom:10px;">&#9654; Key rule &mdash; gaming the measure</div>
+        <p style="margin:0 0 8px;font-size:0.97em;font-weight:700;color:#1a1a1a;line-height:1.55;">The defence against gaming is not to hide the measurement. The defence is a system of measures &mdash; primary outcome, process measure, and balancing measures &mdash; where improving one by gaming produces visible deterioration in another. Gaming the system of measures requires genuinely improving the system.</p>
+        <p style="margin:0;font-size:0.88em;color:#78350f;line-height:1.65;">Bootstrap CUSUM on all measures simultaneously. A genuine structural improvement produces a change point in the primary outcome AND improvement in the process measure AND no deterioration in the balancing measures. Gaming produces a change point in the primary outcome but deterioration elsewhere &mdash; the signal that the metric was managed, not the system.</p>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-deming">Deming&rsquo;s Point 11 &mdash; why targets fail</a></li>
+                <li><a href="#section-goodhart">Goodhart&rsquo;s Law &mdash; the same insight from economics</a></li>
+                <li><a href="#section-how">How gaming happens &mdash; the mechanisms</a></li>
+                <li><a href="#section-nhs">NHS examples &mdash; four-hour target, corridor care</a></li>
+                <li><a href="#section-defence">The balancing measures defence</a></li>
+                <li><a href="#section-design">Designing a measurement system that is hard to game</a></li>
+                <li><a href="#section-cusum">Bootstrap CUSUM on the full measurement system</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-deming">Deming&rsquo;s Point 11 &mdash; why targets fail</h2>
+
+    <p>Point 11 of Deming&rsquo;s 14 Points: <em>&ldquo;Eliminate numerical quotas for the workforce and numerical goals for management. Substitute leadership.&rdquo;</em></p>
+
+    <p>Deming was not saying that measurement is wrong. He was a statistician who spent his career arguing for more and better measurement. What he was saying is that a numerical target applied to a person or a team changes behaviour without changing the system &mdash; and the behaviour change almost always involves finding ways to hit the number that are easier than actually improving the system.</p>
+
+    <p>The mechanism is straightforward. A target creates pressure. Pressure creates ingenuity. Ingenuity finds the path of least resistance between the current state and the number. The path of least resistance is almost never the path through the structural constraint. It is the path around the measurement &mdash; redefine what counts, retime the measurement, reclassify the category, apply local effort at the measurement moment rather than systemic effort at the constraint.</p>
+
+    <p>The result: the number hits the target. The system does not change. The next period, the pressure returns. The ingenuity finds a slightly more creative path. The divergence between the number and the reality grows. The measurement becomes progressively less useful as a signal of system state and progressively more useful as a signal of how hard the team is working to avoid the consequences of missing the target.</p>
+
+    <hr>
+
+    <h2 id="section-goodhart">Goodhart&rsquo;s Law &mdash; the same insight from economics</h2>
+
+    <p>Charles Goodhart, the economist, stated the same principle in 1975: <em>&ldquo;When a measure becomes a target, it ceases to be a good measure.&rdquo;</em> This became known as Goodhart&rsquo;s Law &mdash; and it applies to every domain where performance is measured and judged by numbers.</p>
+
+    <p>Deming arrived at the same insight from a different direction: not from economic theory but from observing what happened in factories and organisations when numerical targets were imposed. The ingenuity of people under pressure is not the problem. The design of the measurement system is. A well-designed measurement system makes gaming produce visible deterioration in another measure. A poorly designed one makes gaming invisible.</p>
+
+    <hr>
+
+    <h2 id="section-how">How gaming happens &mdash; the mechanisms</h2>
+
+    <p>Gaming is not usually dishonest. It is usually the rational response of people doing their best under pressure. Understanding the mechanisms helps design measurement systems that are resistant to them.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Gaming mechanism</th>
+                <th>How it works</th>
+                <th>What it hides</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Retiming</strong></td>
+                    <td>The measurement is taken at a specific time. Effort is concentrated immediately before that time. The number looks good at the measurement moment; the rest of the period is unchanged.</td>
+                    <td>The actual system state for 23 hours and 50 minutes of every day.</td>
+                </tr>
+                <tr>
+                    <td><strong>Reclassification</strong></td>
+                    <td>The definition of what counts is gradually narrowed. Patients are reclassified from &ldquo;corridor&rdquo; to &ldquo;assessment area.&rdquo; Waits are reclassified from &ldquo;delayed&rdquo; to &ldquo;planned.&rdquo; The category changes; the experience doesn&rsquo;t.</td>
+                    <td>The real volume of the problem being measured.</td>
+                </tr>
+                <tr>
+                    <td><strong>Selection</strong></td>
+                    <td>The cases that would miss the target are managed differently &mdash; diverted, delayed, or handled outside the measured pathway &mdash; so the measured cases look better than the full picture.</td>
+                    <td>The patients or cases who are experiencing the worst outcomes.</td>
+                </tr>
+                <tr>
+                    <td><strong>Recording adjustment</strong></td>
+                    <td>On bad days, the recording is delayed, estimated, or not completed. On good days, it is meticulous. The data series gradually drifts toward the good days.</td>
+                    <td>The variance in system performance &mdash; the bad days are systematically underrepresented.</td>
+                </tr>
+                <tr>
+                    <td><strong>Threshold management</strong></td>
+                    <td>Performance is managed to just above the target rather than to the best achievable level. Once the target is hit, effort relaxes. The system settles at the minimum acceptable rather than the maximum possible.</td>
+                    <td>The gap between what the system could achieve and what the target requires.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cascade pressure</strong></td>
+                    <td>The target pressure is passed down the hierarchy. Each level manages to hit its number by passing the pressure to the level below. Front-line staff absorb the pressure as unsustainable workload. The metric improves; the staff experience deteriorates.</td>
+                    <td>The human cost of hitting the number &mdash; visible only in staff experience scores and sickness rates.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-nhs">NHS examples &mdash; four-hour target and corridor care</h2>
+
+    <p>The NHS four-hour A&amp;E target is the most extensively documented example of Goodhart&rsquo;s Law in healthcare. Introduced in 2004, it produced exactly the gaming mechanisms described above:</p>
+
+    <ul style="line-height:2.2;">
+        <li><strong>Retiming:</strong> patients admitted or discharged at 3 hours 55 minutes to avoid the 4-hour breach, regardless of clinical need</li>
+        <li><strong>Reclassification:</strong> patients moved to assessment units, corridors, or &ldquo;decision to admit&rdquo; status that paused the clock</li>
+        <li><strong>Selection:</strong> lower-acuity patients streamed through faster to protect the target percentage; higher-acuity patients waited longer</li>
+        <li><strong>Threshold management:</strong> trusts managed to 95% rather than striving for 100%; once at 95%, pressure relaxed</li>
+    </ul>
+
+    <p>The result: the four-hour target measured how hard trusts were working to hit the four-hour target, not how quickly patients were being seen and treated. By 2019, the NHS itself acknowledged that the target was producing perverse behaviours and the metric was being reformed.</p>
+
+    <div class="callout blue">
+        <strong>The corridor care measurement risk</strong>
+        <p>The same gaming risk applies to any single-point corridor care measurement. If the metric is patients in the corridor at 1800 hours, staff will find ways to have fewer patients visible at 1800 &mdash; moving patients to side rooms at 1750, reclassifying corridor spaces as assessment areas, not recording patients who arrive after 1745. The Bootstrap CUSUM change point appears. The improvement does not.</p>
+        <p style="margin-top:8px;">The measurement is not wrong. The single-point snapshot is wrong. Total corridor patient-hours per 24 hours is much harder to game &mdash; it requires reducing the actual time patients spend in corridors throughout the day, not just at one moment.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-defence">The balancing measures defence</h2>
+
+    <p>The defence against gaming is not to hide the measurement. Hidden measurements create a different problem &mdash; staff who don&rsquo;t know what is being measured cannot improve it. The defence is to measure several things simultaneously, designed so that gaming one produces visible deterioration in another.</p>
+
+    <p>This is the balancing measures principle from improvement science: for every primary outcome measure, identify the balancing measures that would deteriorate if the primary measure were gamed rather than genuinely improved.</p>
+
+    <div class="dark-box">
+        <h3>The measurement system for corridor care elimination</h3>
+        <p>A measurement system designed so that gaming any single measure produces deterioration in at least one other:</p>
+        <div style="margin-top:12px;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.87em;">
+            <thead><tr style="border-bottom:2px solid #4a9fd4;">
+                <th style="text-align:left;padding:8px;color:#94b8d4;">Measure</th>
+                <th style="text-align:left;padding:8px;color:#94b8d4;">Type</th>
+                <th style="text-align:left;padding:8px;color:#94b8d4;">What gaming looks like</th>
+                <th style="text-align:left;padding:8px;color:#94b8d4;">Balancing signal</th>
+            </tr></thead>
+            <tbody>
+                <tr style="border-bottom:1px solid #2a4a6a;">
+                    <td style="padding:8px;color:white;"><strong>Total corridor patient-hours per 24 hours</strong></td>
+                    <td style="padding:8px;color:#94b8d4;">Primary outcome</td>
+                    <td style="padding:8px;color:#94b8d4;">Moving patients repeatedly; unsustainable for staff</td>
+                    <td style="padding:8px;color:#94b8d4;">Staff experience score deteriorates</td>
+                </tr>
+                <tr style="border-bottom:1px solid #2a4a6a;">
+                    <td style="padding:8px;color:white;"><strong>Discharge before noon rate (%)</strong></td>
+                    <td style="padding:8px;color:#94b8d4;">Process measure</td>
+                    <td style="padding:8px;color:#94b8d4;">Rushed discharges; patients sent home not fully ready</td>
+                    <td style="padding:8px;color:#94b8d4;">30-day readmission rate rises</td>
+                </tr>
+                <tr style="border-bottom:1px solid #2a4a6a;">
+                    <td style="padding:8px;color:white;"><strong>30-day emergency readmission rate</strong></td>
+                    <td style="padding:8px;color:#94b8d4;">Balancing measure</td>
+                    <td style="padding:8px;color:#94b8d4;">Cannot be easily gamed &mdash; readmissions independently recorded</td>
+                    <td style="padding:8px;color:#94b8d4;">Self-balancing</td>
+                </tr>
+                <tr style="border-bottom:1px solid #2a4a6a;">
+                    <td style="padding:8px;color:white;"><strong>Patient safety incident rate</strong></td>
+                    <td style="padding:8px;color:#94b8d4;">Balancing measure</td>
+                    <td style="padding:8px;color:#94b8d4;">Cannot be easily gamed &mdash; independently reported</td>
+                    <td style="padding:8px;color:#94b8d4;">Self-balancing</td>
+                </tr>
+                <tr>
+                    <td style="padding:8px;color:white;"><strong>Staff experience score (quarterly)</strong></td>
+                    <td style="padding:8px;color:#94b8d4;">Balancing measure</td>
+                    <td style="padding:8px;color:#94b8d4;">Anonymous survey &mdash; hard to game; reveals sustainability</td>
+                    <td style="padding:8px;color:#94b8d4;">Self-balancing</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <p style="margin-top:12px;">Gaming the primary outcome (corridor patient-hours) requires moving patients continuously throughout the day &mdash; which is unsustainable and shows up in staff experience scores. Gaming the process measure (discharge before noon) requires rushing discharges &mdash; which shows up in 30-day readmissions. Gaming the balancing measures is very difficult because they are independently recorded.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-design">Designing a measurement system that is hard to game</h2>
+
+    <p>Six principles for measurement system design that resist gaming:</p>
+
+    <div class="timeline-box">
+
+        <div class="timeline-item">
+            <span class="timeline-date">1. Measure the whole period, not a moment</span>
+            <span class="timeline-text">
+                Total patient-hours rather than a snapshot count. Average throughput across the day rather than performance at a single reporting time. Retiming gaming requires effort throughout the period, not just at the measurement moment.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">2. Measure outcomes, not outputs</span>
+            <span class="timeline-text">
+                30-day readmission rate rather than discharge count. Patient-reported experience rather than satisfaction survey score at the point of discharge. Outcomes are what the system is for. Outputs are what the system produces. Gaming an output measure is much easier than gaming an outcome measure because outcomes require real change in what happens to the patient after they leave.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">3. Use independent data sources for balancing measures</span>
+            <span class="timeline-text">
+                Readmission data from other trusts. Patient safety incidents reported through the national reporting system. Staff survey data collected centrally. If the balancing measure data is collected by the same team that manages the primary outcome, gaming both simultaneously becomes possible. Independence makes the balancing measures self-protecting.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">4. Pre-commit the measures before the intervention</span>
+            <span class="timeline-text">
+                The measurement system must be defined before the intervention begins &mdash; which metrics, which frequency, which time period, which balancing measures. A measurement system designed after results are known will unconsciously favour metrics that confirm the desired narrative. Pre-commitment prevents this.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">5. Stratify rather than aggregate</span>
+            <span class="timeline-text">
+                Weekday primary series, weekend series, bank holiday series. Separate control charts for each patient group, pathway, or ward rather than a trust-wide aggregate. Aggregation hides gaming by averaging good performance on easy cases with poor performance on hard ones. Stratification makes selection gaming visible.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">6. Publish the full series including bad periods</span>
+            <span class="timeline-text">
+                A measurement system that only reports during improvement programmes, or only reports when performance is good, is not a measurement system. It is a communications exercise. The full series &mdash; including the months before the intervention, the months after, and the months when performance deteriorated &mdash; is what Bootstrap CUSUM needs to detect genuine change points rather than cherry-picked improvements.
+            </span>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">Bootstrap CUSUM on the full measurement system</h2>
+
+    <p>Bootstrap CUSUM applied to a single metric tells you whether that metric has structurally changed. Applied to the full measurement system &mdash; primary outcome, process measure, and balancing measures &mdash; it tells you whether the system has genuinely improved or whether the metric was managed.</p>
+
+    <p>The interpretation:</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Primary outcome</th>
+                <th>Process measure</th>
+                <th>Balancing measures</th>
+                <th>Interpretation</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td>&#9660; Change point</td>
+                    <td>&#9660; Improving</td>
+                    <td>&#8594; Stable</td>
+                    <td style="color:#0F6E56;"><strong>Genuine structural improvement.</strong> Scale it.</td>
+                </tr>
+                <tr>
+                    <td>&#9660; Change point</td>
+                    <td>&#9660; Improving</td>
+                    <td>&#9650; Deteriorating</td>
+                    <td style="color:#BA7517;"><strong>Improvement with harm shift.</strong> The system improved one outcome by worsening another. Investigate which balancing measure is deteriorating and why before scaling.</td>
+                </tr>
+                <tr>
+                    <td>&#9660; Change point</td>
+                    <td>&#8594; Unchanged</td>
+                    <td>&#8594; Stable</td>
+                    <td style="color:#BA7517;"><strong>Possible gaming.</strong> The outcome improved without the process changing. How? Investigate retiming, reclassification, or selection before attributing to the intervention.</td>
+                </tr>
+                <tr>
+                    <td>&#8594; Flat line</td>
+                    <td>&#8594; Unchanged</td>
+                    <td>&#8594; Stable</td>
+                    <td style="color:#534AB7;"><strong>Constraint not reached.</strong> Three possibilities: wrong constraint, insufficient conditions, too soon. Investigate before redesigning.</td>
+                </tr>
+                <tr>
+                    <td>&#9650; Deterioration</td>
+                    <td>&#9660; Improving</td>
+                    <td>&#8594; Stable</td>
+                    <td style="color:#c0392b;"><strong>Process improved but outcome worsened.</strong> The process change addressed a non-constraint. Something else is now binding. Find it.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="cta-box">
+        <h2>Run Bootstrap CUSUM on your full measurement system</h2>
+        <p>Upload each metric in your measurement system separately to the StepChange Analyzer. Compare the change points across primary outcome, process measure, and balancing measures. The pattern tells you what actually happened.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="types-of-measures.html">Types of Measures</a></h3>
+        <p>Outcome measures, process measures, balancing measures, and structure measures — what each captures and when to use each type.</p>
+        <a href="types-of-measures.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="hawthorne-effect.html">The Hawthorne Effect</a></h3>
+        <p>Behaviour changes when people know they are being measured — the pre-observation baseline and the four-week baseline design that controls for it.</p>
+        <a href="hawthorne-effect.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="deming-14-points.html">Deming&rsquo;s 14 Points</a></h3>
+        <p>Point 11 in full context — and the other thirteen points that together describe the management system that makes honest measurement possible.</p>
+        <a href="deming-14-points.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="tampering-and-impatience.html">Tampering &amp; Impatience</a></h3>
+        <p>Reacting to common cause variation as if it were a signal — the measurement failure that targets systematically produce.</p>
+        <a href="tampering-and-impatience.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. Point 11: eliminate numerical quotas and numerical goals for management. Substitute leadership. The full argument against targets as management instruments.</p>
+        <p style="margin-top:8px;"><strong>Goodhart, C.A.E.:</strong> &ldquo;Problems of Monetary Management: The U.K. Experience.&rdquo; 1975. Goodhart&rsquo;s Law: when a measure becomes a target, it ceases to be a good measure.</p>
+        <p style="margin-top:8px;"><strong>Bevan, G. and Hood, C.:</strong> &ldquo;What&rsquo;s Measured is What Matters: Targets and Gaming in the English Public Health Care System.&rdquo; <em>Public Administration,</em> 2006. The definitive analysis of gaming in the NHS four-hour target and other healthcare performance metrics.</p>
+        <p style="margin-top:8px;"><strong>Shewhart, W.A.:</strong> <em>Economic Control of Quality of Manufactured Product.</em> Van Nostrand, 1931. The original argument for understanding variation before acting on measurement &mdash; the foundation on which Bootstrap CUSUM is built.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>

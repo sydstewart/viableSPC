@@ -93,36 +93,36 @@
 
     <p>Every major NHS improvement mechanism creates a Hawthorne Effect:</p>
 
-    <div class="timeline-box">
-
-        <div class="timeline-item">
-            <span class="timeline-date">GIRFT visits</span>
-            <span class="timeline-text">
-                <strong>Getting It Right First Time teams visit a trust, compare its performance against peer trusts, and identify improvement opportunities.</strong> During and immediately after a GIRFT visit, trust staff know they are being compared nationally. Metrics improve. The GIRFT team reports improvement. The question &mdash; rarely asked &mdash; is whether the metrics hold 12 months after the team leaves. GIRFT&rsquo;s own comparative dataset is the most rigorous in the NHS, but it measures performance during and shortly after engagement, not sustained improvement against the counterfactual.
-            </span>
-        </div>
-
-        <div class="timeline-item">
-            <span class="timeline-date">CQC inspections</span>
-            <span class="timeline-text">
-                <strong>Trusts rated &ldquo;inadequate&rdquo; or &ldquo;requires improvement&rdquo; enter special measures with intensive scrutiny.</strong> Metrics almost always improve during special measures &mdash; because the trust is under intense observation with high-frequency reporting. The re-inspection typically shows improvement. Whether that improvement reflects structural change in the system or sustained Hawthorne response to continued scrutiny is not systematically tested. Trusts that exit special measures and reduce their reporting frequency sometimes see metrics drift back toward previous levels.
-            </span>
-        </div>
-
-        <div class="timeline-item">
-            <span class="timeline-date">National programmes</span>
-            <span class="timeline-text">
-                <strong>NHS England announces a national improvement programme &mdash; corridor care, SDEC, Virtual Wards &mdash; with centrally monitored KPIs.</strong> Trusts know their metrics are being tracked nationally. Reporting improves. Metrics improve. The programme is declared a success. Whether the improvement is structural &mdash; produced by the redesigned system &mdash; or Hawthorne &mdash; produced by the act of national monitoring &mdash; is almost never tested because the monitoring continues indefinitely as long as the programme is live. The pre-committed prediction was never made before the programme launched.
-            </span>
-        </div>
-
-        <div class="timeline-item">
-            <span class="timeline-date">Improvement collaboratives</span>
-            <span class="timeline-text">
-                <strong>Groups of trusts working together on a shared improvement theme, with regular data sharing and peer comparison.</strong> The collaborative itself creates a Hawthorne Effect &mdash; trusts sharing data with peers attend more carefully to the metrics being shared. The question is whether improvement persists after the collaborative ends and the shared measurement structure is removed.
-            </span>
-        </div>
-
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Mechanism</th>
+                <th>What happens</th>
+                <th>The Hawthorne question never asked</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>GIRFT visits</strong></td>
+                    <td>Teams compare trust performance against peers. Staff know they are being observed nationally. Metrics improve. GIRFT reports improvement.</td>
+                    <td>Do the metrics hold 12 months after the GIRFT team leaves? GIRFT&rsquo;s dataset measures performance during and shortly after engagement &mdash; not sustained improvement against the counterfactual.</td>
+                </tr>
+                <tr>
+                    <td><strong>CQC inspections</strong></td>
+                    <td>Trusts in special measures face intensive scrutiny and high-frequency reporting. Metrics almost always improve. The re-inspection shows improvement.</td>
+                    <td>Does the improvement reflect structural change or sustained Hawthorne response to continued scrutiny? Trusts that exit special measures and reduce reporting frequency sometimes see metrics drift back.</td>
+                </tr>
+                <tr>
+                    <td><strong>National programmes</strong></td>
+                    <td>NHS England announces a programme with centrally monitored KPIs. Trusts know metrics are tracked nationally. Reporting improves. Metrics improve. Programme declared a success.</td>
+                    <td>Is the improvement structural (produced by redesigned system) or Hawthorne (produced by national monitoring)? Almost never tested because monitoring continues indefinitely while the programme is live. The pre-committed prediction was never made before launch.</td>
+                </tr>
+                <tr>
+                    <td><strong>Improvement collaboratives</strong></td>
+                    <td>Groups of trusts share data and compare performance on a shared theme. Data sharing itself creates a Hawthorne Effect &mdash; trusts attend more carefully to what peers can see.</td>
+                    <td>Does improvement persist after the collaborative ends and the shared measurement structure is removed?</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <hr>
@@ -210,6 +210,128 @@
     <p>The question is whether visibility alone is sufficient for structural improvement &mdash; or whether it requires the deeper <a href="joiner-levels-of-fix.html">Level 3</a> intervention of changing the system that produces the performance. Hawthorne improvement is Level 1 and Level 2: it changes outputs and processes through heightened attention. Structural improvement changes the system design so that good performance is produced automatically, without requiring sustained external observation.</p>
 
     <p>The Hawthorne Effect tells you that visibility matters. Bootstrap CUSUM tells you whether visibility alone was sufficient &mdash; or whether the structural change that would sustain improvement without observation still needs to be made.</p>
+
+
+    <div class="callout blue" style="margin-top:0;">
+        <strong>The honest synthesis &mdash; what Deming actually said about prediction</strong>
+        <p>You might ask: how can anyone predict the outcome of an improvement intervention before it happens? And is any statistically proven gain not worth having, regardless of whether it was pre-committed?</p>
+        <p style="margin-top:8px;">Both are fair challenges. Deming&rsquo;s answer to the first: in <em>The New Economics</em> he stated that the PDSA cycle begins with a <em>prediction</em> &mdash; not just a plan. <em>&ldquo;The Study step is the comparison of the results of the execution with the prediction.&rdquo;</em> Without a prediction, the Study phase has nothing to compare against. It can only ask &ldquo;did something change?&rdquo; &mdash; not &ldquo;did the right thing change in the right direction for the right reason?&rdquo;</p>
+        <p style="margin-top:8px;">The answer to the second: yes &mdash; any Bootstrap CUSUM change point is worth having. A structural improvement without a pre-committed prediction is still a structural improvement. The pre-committed prediction adds <em>attribution confidence</em>, not the existence of the improvement. The evidence spectrum:</p>
+        <ul style="line-height:2.0;margin-top:8px;">
+            <li><strong>Before/after comparison</strong> &mdash; something may have changed</li>
+            <li><strong>SPC/run charts</strong> &mdash; something structurally changed at this date</li>
+            <li><strong>Bootstrap CUSUM</strong> &mdash; a structural step change occurred, precisely dated</li>
+            <li><strong>Bootstrap CUSUM + pre-committed prediction</strong> &mdash; the change occurred as predicted, suggesting the intervention caused it and can be replicated</li>
+        </ul>
+        <p style="margin-top:8px;">The pre-committed prediction is not a guarantee of accuracy. It is a statement of theory made at the only moment the theory is genuinely independent of the result &mdash; before the data arrives. A Bootstrap CUSUM change point that matches a pre-committed prediction tells you the theory was right and the intervention can be scaled with confidence. A change point that contradicts the prediction is equally valuable: it tells you the theory was wrong, which means scaling would not replicate the result.</p>
+        <p style="margin-top:8px;"><strong>The discipline of writing the prediction forces the improvement team to articulate what they actually believe will happen and why.</strong> Most improvement programmes cannot do this because their theory of change is implicit rather than explicit. The act of writing the prediction makes the theory visible &mdash; and visible theories can be questioned, challenged, and refined. Invisible theories cannot.</p>
+    </div>
+
+
+    <div class="callout blue">
+        <strong>A practical example &mdash; the complete pre-committed prediction sequence</strong>
+
+        <p>The pre-committed prediction does not require certainty about magnitude. It requires honesty about direction and a baseline that makes the question answerable. Here is the complete four-phase sequence using a real corridor care intervention.</p>
+
+        <p style="margin-top:12px;font-weight:600;color:#0C447C;">Phase 0 &mdash; Measure the baseline variation first (four weeks)</p>
+        <p style="margin-top:4px;">Before any intervention, measure the number of patients in the corridor at 1800 hours every day for four weeks. Four weeks gives 28&ndash;30 data points &mdash; the conventional minimum for a stable estimate of a process mean and its natural variation. It also captures a full weekly cycle: four of each day of the week, so the baseline mean is not distorted by having three Mondays and only two Fridays.</p>
+        <p style="margin-top:8px;">This is the Shewhart step. Without it, you cannot distinguish a genuine downward shift from normal day-to-day variation. If the 1800 corridor count varies between 2 and 18 patients through normal common cause variation, a reduction from an average of 12 to an average of 10 is noise, not signal. You need to know the baseline range before you can know what &ldquo;going down&rdquo; actually means.</p>
+        <p style="margin-top:8px;">The four-week baseline also gives you something even more valuable: a pre-observation measure of the system as it actually is, before anyone is being watched. This is the cleanest possible control for the Hawthorne Effect &mdash; measure before observation changes behaviour, then measure after.</p>
+
+        <p style="margin-top:12px;font-weight:600;color:#c0392b;">&#9888; The gaming problem &mdash; Deming&rsquo;s Point 11</p>
+        <p style="margin-top:4px;">Any single-point measurement that becomes known can be gamed. If the metric is patients in the corridor at 1800 hours, the system will find ways to have fewer patients visible at 1800 &mdash; moving patients to side rooms at 1750 and back at 1810, narrowing the definition of &ldquo;corridor,&rdquo; not recording on bad days. The Bootstrap CUSUM change point appears. The improvement does not.</p>
+        <p style="margin-top:8px;">This is Deming&rsquo;s Point 11: eliminate numerical targets for management. A target changes what people do without changing the system. The measurement becomes the target. The target becomes the game. The game destroys the signal.</p>
+        <p style="margin-top:8px;"><strong>The defence is not to hide the measurement time. The defence is a system of measures:</strong></p>
+        <div style="background:white;border:1px solid #B4B2A9;border-radius:8px;padding:16px;margin-top:8px;">
+            <table style="width:100%;border-collapse:collapse;font-size:0.87em;">
+                <thead><tr style="border-bottom:2px solid #185FA5;">
+                    <th style="text-align:left;padding:6px 8px;color:#0C447C;">Measure</th>
+                    <th style="text-align:left;padding:6px 8px;color:#0C447C;">What it captures</th>
+                    <th style="text-align:left;padding:6px 8px;color:#0C447C;">Gaming resistance</th>
+                </tr></thead>
+                <tbody>
+                    <tr style="border-bottom:1px solid #e5e7eb;">
+                        <td style="padding:6px 8px;"><strong>Total corridor patient-hours per 24 hours</strong> (primary outcome)</td>
+                        <td style="padding:6px 8px;">Actual patient experience &mdash; a patient in the corridor 18 hours is ten times the harm of one there two hours</td>
+                        <td style="padding:6px 8px;">High &mdash; requires moving patients continuously throughout the day, not just at one moment</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #e5e7eb;">
+                        <td style="padding:6px 8px;"><strong>Discharge before noon rate</strong> (process measure)</td>
+                        <td style="padding:6px 8px;">Output of morning coordination &mdash; directly what the senior manager on the floor is influencing</td>
+                        <td style="padding:6px 8px;">High &mdash; requires actual discharges, not patient movement</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #e5e7eb;">
+                        <td style="padding:6px 8px;"><strong>30-day emergency readmission rate</strong> (balancing measure)</td>
+                        <td style="padding:6px 8px;">Whether faster discharge is safe &mdash; detects premature discharge</td>
+                        <td style="padding:6px 8px;">Very high &mdash; readmissions are independently recorded</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #e5e7eb;">
+                        <td style="padding:6px 8px;"><strong>Patient safety incident rate</strong> (balancing measure)</td>
+                        <td style="padding:6px 8px;">Whether flow improvement is producing harm elsewhere</td>
+                        <td style="padding:6px 8px;">Very high &mdash; independently reported</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:6px 8px;"><strong>Staff experience score</strong> (balancing measure, quarterly)</td>
+                        <td style="padding:6px 8px;">Whether the intervention is sustainable &mdash; staff doing impossible things to hit numbers burn out</td>
+                        <td style="padding:6px 8px;">High &mdash; anonymous survey</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top:10px;">Bootstrap CUSUM on all five. A genuine structural improvement produces a change point in the primary outcome AND improvement in the process measure AND no deterioration in the balancing measures. Gaming produces a change point in the primary outcome but deterioration in one or more balancing measures &mdash; the signal that the metric was managed, not the system.</p>
+        <p style="margin-top:8px;">See <a href="measurement-gaming.html">Gaming the Measure &mdash; Deming&rsquo;s Point 11 and the Balancing Measures Defence</a> for the full treatment of this problem.</p>
+
+        <p style="margin-top:12px;font-weight:600;color:#c0392b;">&#9888; Practical caution &mdash; the baseline is not one stable process</p>
+        <p style="margin-top:4px;">The 1800 corridor patient count is not a single stable process with one mean and one variation range. It contains several systematically different processes embedded within it:</p>
+        <ul style="line-height:2.2;margin-top:8px;">
+            <li><strong>Weekdays (Mon&ndash;Fri)</strong> &mdash; the primary process: elective admissions, ward rounds, discharge rounds, full social care and community services operating</li>
+            <li><strong>Weekends</strong> &mdash; genuinely different: reduced elective activity, different staffing levels, reduced discharge capacity, different demand pattern</li>
+            <li><strong>Bank holidays</strong> &mdash; similar to weekends but with additional disruption: GP services reduced, social care emergency-only, community capacity further restricted</li>
+            <li><strong>Summer (school holidays)</strong> &mdash; staff leave reduces coordination capacity; elective admissions fall; different demand pattern from winter</li>
+            <li><strong>Winter</strong> &mdash; respiratory illness surge, higher acuity, social care more stretched, bank holidays clustered</li>
+        </ul>
+        <p style="margin-top:8px;">Running Bootstrap CUSUM on a mixed daily series that combines all of these without accounting for the systematic patterns produces control limits that are too wide. The variation between a Monday in January and a Saturday in August is common cause variation of the <em>calendar</em>, not of the <em>system</em>. The real system variation is hidden inside the calendar variation &mdash; and genuine change points become harder to detect.</p>
+        <p style="margin-top:8px;"><strong>The practical recommendation for the four-week baseline:</strong></p>
+        <ul style="line-height:2.2;margin-top:4px;">
+            <li>Use <strong>Monday to Friday</strong> as the primary series &mdash; comparing like with like</li>
+            <li><strong>Note bank holidays</strong> and exclude them from the primary series or treat them as a separate series</li>
+            <li><strong>Note weekends</strong> separately &mdash; useful as a balancing measure but not the primary signal</li>
+            <li><strong>Specify the season</strong> in the pre-committed prediction &mdash; a summer baseline will look different from a winter one; the prediction should state which conditions it applies to</li>
+        </ul>
+        <p style="margin-top:8px;">The pre-committed prediction should therefore say: <em>&ldquo;We believe a sustained downward shift in weekday (Monday&ndash;Friday, excluding bank holidays) 1800 corridor patient count &mdash; below the common cause range established in the four-week weekday baseline &mdash; will appear within three months of the intervention starting.&rdquo;</em> That specificity makes the prediction cleaner, the Bootstrap CUSUM more sensitive, and the learning more precise.</p>
+
+        <p style="margin-top:12px;font-weight:600;color:#0C447C;">Phase 1 &mdash; State the pre-committed prediction</p>
+        <p style="margin-top:4px;background:#f0f7ff;border-left:3px solid #185FA5;padding:12px 16px;border-radius:4px;font-style:italic;">&ldquo;We believe that putting a senior manager on the floor 24/7 with cross-departmental authority will produce a sustained downward shift in the 1800 corridor patient count &mdash; below the common cause range established in the four-week baseline &mdash; within three months of the intervention starting.&rdquo;</p>
+        <p style="margin-top:8px;">Notice what this prediction does and does not claim. It does not claim a specific magnitude &mdash; 15% or 40%. It cannot, because the effect of a system-level intervention depends on what the manager sees, whether staff feel safe enough to show it, and whether the constraint is actually internal coordination. It does claim a direction (downward), a comparison point (below the baseline range, not just below the baseline mean), and a timeframe (three months). Those three elements are enough to make the prediction specific enough that the data can say no.</p>
+
+        <p style="margin-top:12px;font-weight:600;color:#0C447C;">Phase 2 &mdash; Implement the intervention</p>
+        <p style="margin-top:4px;">Senior manager takes post. Continue measuring at 1800 every day. Do not change the measurement protocol &mdash; same time, same definition, same recorder if possible.</p>
+
+        <p style="margin-top:12px;font-weight:600;color:#0C447C;">Phase 3 &mdash; Run Bootstrap CUSUM on the full series</p>
+        <p style="margin-top:4px;">Applied to the complete series (four-week baseline plus intervention period). A downward change point appearing within three months, sustained below the baseline common cause range, confirms the theory. The change point date tells you when the system shifted &mdash; which reveals whether it was immediate (the constraint was visible and the authority was sufficient from day one) or gradual (the departments needed time to reorganise).</p>
+
+        <p style="margin-top:12px;font-weight:600;color:#0C447C;">Phase 4 &mdash; The Act step: change point or flat line?</p>
+
+        <p style="margin-top:4px;"><strong>If Bootstrap CUSUM shows a change point:</strong> What specifically changed? Is the change sustained week by week? Can it be maintained without this specific person, or does it depend on their continued presence? The change point is the beginning of the sustainability question, not the end of the improvement story.</p>
+
+        <p style="margin-top:8px;"><strong>If Bootstrap CUSUM shows a flat line at three months:</strong> This is not failure. It is the Study phase of PDSA working exactly as Deming intended &mdash; the result compared against the prediction, the theory found incomplete. Three possibilities, and only honest investigation distinguishes them:</p>
+        <ol style="line-height:2.2;margin-top:8px;">
+            <li><strong>The constraint is not where you thought.</strong> The manager coordinated every department perfectly and the 1800 count stayed flat &mdash; because the beds are full of patients who are medically fit to leave but have nowhere to go. The constraint is external discharge capacity, not internal coordination. The theory was wrong. Move to a different level of intervention.</li>
+            <li><strong>The conditions were insufficient.</strong> The authority wasn&rsquo;t enough to change consultant priorities. Or the psychological safety wasn&rsquo;t there &mdash; staff showed the manager a performance rather than the real constraint. Diagnose which condition was missing and redesign the intervention.</li>
+            <li><strong>Three months wasn&rsquo;t long enough.</strong> The change is coming but hasn&rsquo;t appeared yet. Make a revised prediction with an extended timeframe &mdash; but acknowledge the extension honestly rather than quietly moving the goalposts.</li>
+        </ol>
+        <p style="margin-top:10px;"><strong>The critical rule: do not push harder without investigating which possibility explains the flat line.</strong> Reacting to a flat line by doing more of the same thing faster is Deming&rsquo;s tampering applied to improvement programmes. The flat line is information. Treat it as information.</p>
+
+        <p style="margin-top:14px;font-weight:600;">What the pre-committed prediction does for the trust:</p>
+        <ol style="line-height:2.2;margin-top:8px;">
+            <li><strong>Makes the theory of change visible</strong> before it&rsquo;s too late to learn from it</li>
+            <li><strong>Protects from motivated reasoning</strong> &mdash; the result cannot be reinterpreted to fit the theory after the fact</li>
+            <li><strong>Gives permission to stop</strong> &mdash; defines what &ldquo;not working&rdquo; looks like before the intervention begins</li>
+            <li><strong>Makes learning transferable</strong> &mdash; other trusts can adopt with confidence because the mechanism is articulated and tested</li>
+            <li><strong>Controls for the Hawthorne Effect</strong> &mdash; the four-week pre-observation baseline is the cleanest possible separator between structural change and observation-induced behaviour change</li>
+        </ol>
+        <p style="margin-top:10px;">The pre-committed prediction is the cheapest insurance the NHS has against wasting improvement investment on interventions that produce activity, Hawthorne response, or regression to the mean rather than structural change. It costs nothing to make. It saves everything if the intervention doesn&rsquo;t work &mdash; because it turns a failure into learning rather than embarrassment.</p>
+    </div>
 
     <hr>
 
