@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/hawthorne-effect.html">
+    <title>The Hawthorne Effect — Why Observed Improvement Is Not the Same as Structural Improvement — StepChangeAnalysis.com</title>
+    <meta name="description" content="The Hawthorne Effect: behaviour changes when people know they are being measured, regardless of what is being measured. The most important confounder in NHS improvement evaluation — and why pre-committed Bootstrap CUSUM predictions are the only rigorous response to it.">
+    <meta name="keywords" content="Hawthorne effect NHS, Hawthorne effect improvement, observer effect healthcare, NHS improvement evaluation, SPC charts NHS, pre-committed prediction improvement, Bootstrap CUSUM Hawthorne, improvement claims NHS, statistical process control healthcare">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Hawthorne Effect</div>
+    <div class="article-flag">&#128202; Concept &middot; Measurement &middot; Improvement Evaluation</div>
+
+    <h1>The Hawthorne Effect</h1>
+    <p class="article-subtitle">Behaviour changes when people know they are being measured &mdash; regardless of what is being measured. The Hawthorne Effect is the most important confounder in NHS improvement evaluation. Every GIRFT visit, every national programme, every CQC inspection creates one. The question is never whether metrics improve during observation. The question is whether they hold after. Most NHS improvement evaluation never answers this question because it stops when the programme ends.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Western Electric Hawthorne Studies 1924&ndash;1932 &nbsp;&middot;&nbsp; <a href="regression-to-the-mean.html" style="color:#0056b3;">Related: Regression to the mean</a></div>
+
+    <div style="background:#fff8e1;border:2px solid #f59e0b;border-radius:10px;padding:18px 22px;margin:20px 0 28px;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#92400e;margin-bottom:10px;">&#9654; Key rule &mdash; the Hawthorne Effect</div>
+        <p style="margin:0 0 8px;font-size:0.97em;font-weight:700;color:#1a1a1a;line-height:1.55;">A metric improving during an improvement programme is not evidence that the programme worked. It may be evidence that people knew they were being measured. The only way to distinguish Hawthorne improvement from structural improvement is a pre-committed prediction tested by Bootstrap CUSUM on data collected after external observation has ended.</p>
+        <p style="margin:0;font-size:0.88em;color:#78350f;line-height:1.65;">The NHS has significant statistical capability &mdash; SPC charts and run charts are widely used. But it does not yet routinely require pre-committed predictions before improvement interventions are implemented. Without that discipline, the Hawthorne Effect cannot be separated from genuine structural change.</p>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what">What the Hawthorne Effect actually is</a></li>
+                <li><a href="#section-folk">The folk version vs the precise version</a></li>
+                <li><a href="#section-nhs">Why it matters for NHS improvement</a></li>
+                <li><a href="#section-three">The three confounders &mdash; Hawthorne, regression, tampering</a></li>
+                <li><a href="#section-definition">What is a pre-committed prediction?</a></li>
+                <li><a href="#section-response">The Bootstrap CUSUM response</a></li>
+                <li><a href="#section-irony">The irony &mdash; visibility as intervention</a></li>
+                <li><a href="#section-missing">The missing discipline in NHS evaluation</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what">What the Hawthorne Effect actually is</h2>
+
+    <p>Between 1924 and 1932, researchers at Western Electric&rsquo;s Hawthorne plant near Chicago conducted a series of studies into what affected worker productivity. They changed lighting levels, rest periods, working hours, and physical conditions &mdash; and found that almost every change, whether improvement or deterioration in conditions, was followed by improved productivity.</p>
+
+    <p>The conclusion that eventually emerged was that the improvement was not caused by the changes themselves. It was caused by the workers knowing they were being studied. Being observed changed their behaviour &mdash; not because they were being manipulated or performing dishonestly, but because attention itself is motivating, and being measured changes what people attend to.</p>
+
+    <p>The original studies were more complex and contested than the folk version suggests &mdash; subsequent analysis showed the effects were smaller and more varied than initially reported. But the core insight survived: <strong>the act of measurement changes what is measured.</strong></p>
+
+    <hr>
+
+    <h2 id="section-folk">The folk version vs the precise version</h2>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Version</th>
+                <th>What it says</th>
+                <th>Why it matters</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Folk version</strong></td>
+                    <td>&ldquo;People work harder when they are being watched.&rdquo;</td>
+                    <td>Implies the effect is about effort and motivation. Suggests removing observation would return performance to baseline. Misses the structural dimension.</td>
+                </tr>
+                <tr>
+                    <td><strong>Precise version</strong></td>
+                    <td>&ldquo;Behaviour changes when people know they are being measured, regardless of what is being measured or whether conditions improve or deteriorate.&rdquo;</td>
+                    <td>Implies the effect is about visibility and attention, not effort. A metric that improves because it is being tracked may not improve because the underlying system has changed. The improvement is real but not structural.</td>
+                </tr>
+                <tr>
+                    <td><strong>NHS improvement version</strong></td>
+                    <td>&ldquo;Trust metrics improve when a GIRFT team, CQC inspection, or national programme is present. They may or may not hold when the observation ends.&rdquo;</td>
+                    <td>The central question for every NHS improvement claim: is this structural change or Hawthorne? SPC charts during the observation period cannot answer this. Only sustained data after the observation ends can.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-nhs">Why it matters for NHS improvement</h2>
+
+    <p>Every major NHS improvement mechanism creates a Hawthorne Effect:</p>
+
+    <div class="timeline-box">
+
+        <div class="timeline-item">
+            <span class="timeline-date">GIRFT visits</span>
+            <span class="timeline-text">
+                <strong>Getting It Right First Time teams visit a trust, compare its performance against peer trusts, and identify improvement opportunities.</strong> During and immediately after a GIRFT visit, trust staff know they are being compared nationally. Metrics improve. The GIRFT team reports improvement. The question &mdash; rarely asked &mdash; is whether the metrics hold 12 months after the team leaves. GIRFT&rsquo;s own comparative dataset is the most rigorous in the NHS, but it measures performance during and shortly after engagement, not sustained improvement against the counterfactual.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">CQC inspections</span>
+            <span class="timeline-text">
+                <strong>Trusts rated &ldquo;inadequate&rdquo; or &ldquo;requires improvement&rdquo; enter special measures with intensive scrutiny.</strong> Metrics almost always improve during special measures &mdash; because the trust is under intense observation with high-frequency reporting. The re-inspection typically shows improvement. Whether that improvement reflects structural change in the system or sustained Hawthorne response to continued scrutiny is not systematically tested. Trusts that exit special measures and reduce their reporting frequency sometimes see metrics drift back toward previous levels.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">National programmes</span>
+            <span class="timeline-text">
+                <strong>NHS England announces a national improvement programme &mdash; corridor care, SDEC, Virtual Wards &mdash; with centrally monitored KPIs.</strong> Trusts know their metrics are being tracked nationally. Reporting improves. Metrics improve. The programme is declared a success. Whether the improvement is structural &mdash; produced by the redesigned system &mdash; or Hawthorne &mdash; produced by the act of national monitoring &mdash; is almost never tested because the monitoring continues indefinitely as long as the programme is live. The pre-committed prediction was never made before the programme launched.
+            </span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="timeline-date">Improvement collaboratives</span>
+            <span class="timeline-text">
+                <strong>Groups of trusts working together on a shared improvement theme, with regular data sharing and peer comparison.</strong> The collaborative itself creates a Hawthorne Effect &mdash; trusts sharing data with peers attend more carefully to the metrics being shared. The question is whether improvement persists after the collaborative ends and the shared measurement structure is removed.
+            </span>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <h2 id="section-three">The three confounders &mdash; Hawthorne, regression, tampering</h2>
+
+    <p>The Hawthorne Effect is one of three systematic confounders that make improvement claims in healthcare unreliable without rigorous pre-committed evaluation. All three produce metric improvement that is real but not structural.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:16px;margin:20px 0 28px;">
+
+        <div style="background:#FAEEDA;border:2px solid #BA7517;border-radius:10px;padding:20px;">
+            <div style="font-weight:700;font-size:1em;color:#633806;margin-bottom:8px;">Hawthorne Effect</div>
+            <p style="margin:0 0 8px;font-size:0.88em;line-height:1.7;">Behaviour changes because people know they are being measured. Metrics improve during observation, may revert when observation ends.</p>
+            <p style="margin:0;font-size:0.85em;color:#854F0B;"><strong>Bootstrap CUSUM test:</strong> Does the change point hold 12&ndash;24 months after external observation ends?</p>
+        </div>
+
+        <div style="background:#E1F5EE;border:2px solid #0F6E56;border-radius:10px;padding:20px;">
+            <div style="font-weight:700;font-size:1em;color:#085041;margin-bottom:8px;"><a href="regression-to-the-mean.html" style="color:#085041;">Regression to the Mean</a></div>
+            <p style="margin:0 0 8px;font-size:0.88em;line-height:1.7;">After an extreme bad period, the next period will look better regardless of any intervention. Improvement is statistical inevitability, not structural change.</p>
+            <p style="margin:0;font-size:0.85em;color:#0F6E56;"><strong>Bootstrap CUSUM test:</strong> Did the change point occur before or after the extreme period? Was the improvement sustained beyond what regression alone would predict?</p>
+        </div>
+
+        <div style="background:#EEEDFE;border:2px solid #534AB7;border-radius:10px;padding:20px;">
+            <div style="font-weight:700;font-size:1em;color:#3C3489;margin-bottom:8px;"><a href="tampering-and-impatience.html" style="color:#3C3489;">Tampering</a></div>
+            <p style="margin:0 0 8px;font-size:0.88em;line-height:1.7;">Reacting to common cause variation as if it were special cause. Each intervention adds variation rather than reducing it. Metrics oscillate without structurally improving.</p>
+            <p style="margin:0;font-size:0.85em;color:#534AB7;"><strong>Bootstrap CUSUM test:</strong> Is there a sustained change point or a series of interventions producing oscillation around an unchanged mean?</p>
+        </div>
+
+    </div>
+
+    <p>All three confounders share the same structural feature: <strong>the metric moves without the system changing.</strong> Bootstrap CUSUM applied to the right outcome metric, with a pre-committed prediction made before the intervention, is the instrument that distinguishes all three from genuine structural improvement.</p>
+
+    <div class="dark-box" id="section-definition">
+        <h3>What is a pre-committed prediction &mdash; and why before the intervention?</h3>
+        <p>A pre-committed prediction is a specific, written, publicly stated prediction about what will happen to a named metric, in a named direction, by a named amount, within a named timeframe &mdash; made <em>before</em> the improvement intervention begins and <em>before</em> any outcome data is collected.</p>
+        <p style="margin-top:10px;">The six components of a valid pre-committed prediction:</p>
+        <ol style="line-height:2.2;margin-top:8px;">
+            <li><strong>Which metric</strong> will change (e.g. 12-hour A&amp;E waits, ambulance handover hours, discharge-ready patient count)</li>
+            <li><strong>Which direction</strong> (downward, upward)</li>
+            <li><strong>By how much</strong> (e.g. 30% reduction from the 12-month baseline mean)</li>
+            <li><strong>Within what timeframe</strong> (e.g. a Bootstrap CUSUM change point will appear within 6 months of the intervention)</li>
+            <li><strong>At what confidence level</strong> (e.g. Bootstrap CUSUM p&lt;0.05)</li>
+            <li><strong>What balancing measures</strong> will be monitored to detect unintended consequences (e.g. 30-day readmission rates, patient safety incidents)</li>
+        </ol>
+        <p style="margin-top:10px;"><strong>Why before the intervention?</strong> Because the moment outcome data is visible, the prediction is no longer independent of the result. A prediction made after even one month of data is shaped &mdash; consciously or unconsciously &mdash; by what the data shows. Only a prediction made before any outcome data exists is genuinely independent of the result and therefore genuinely falsifiable.</p>
+        <p style="margin-top:10px;">This is the scientific method applied to improvement: hypothesis before experiment, not after. Without it, every intervention can be made to appear successful in retrospect &mdash; the Hawthorne Effect, regression to the mean, and seasonal variation all produce movements in the data that can be attributed to any recent intervention if the attribution is made after the data arrives.</p>
+        <p style="margin-top:10px;"><strong>The pre-committed prediction is what makes Bootstrap CUSUM honest.</strong> The algorithm detects change points in data regardless of when or why they occurred. The pre-committed prediction is what determines whether a detected change point is evidence of a successful intervention or coincidence.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-response">The Bootstrap CUSUM response</h2>
+
+    <p>The only rigorous response to the Hawthorne Effect in improvement evaluation is a pre-committed prediction tested by Bootstrap CUSUM on sustained data after external observation has ended.</p>
+
+    <p>The sequence:</p>
+
+    <div class="timeline-box">
+        <div class="timeline-item">
+            <span class="timeline-date">Before</span>
+            <span class="timeline-text"><strong>State the prediction publicly before the intervention begins.</strong> Which metric will change? In which direction? By how much? Within what timeframe? At what confidence threshold? What balancing measures will be monitored? The prediction must be made before the data arrives &mdash; not after.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">During</span>
+            <span class="timeline-text"><strong>Run SPC charts and Bootstrap CUSUM during the intervention period.</strong> A change point during the observation period is promising but not conclusive. It may be Hawthorne. Continue monitoring.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">After</span>
+            <span class="timeline-text"><strong>Continue Bootstrap CUSUM for 12&ndash;24 months after external observation ends.</strong> If the change point holds without external monitoring &mdash; the system has structurally changed. If the metric drifts back toward baseline &mdash; the improvement was Hawthorne. Report the result honestly either way.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">Report</span>
+            <span class="timeline-text"><strong>Report the Bootstrap CUSUM result, not the narrative.</strong> A flat line is reported as a flat line. A reversed change point is reported as reversed. The data is allowed to say no. This is what honest evidence of structural improvement looks like.</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-irony">The irony &mdash; visibility as intervention</h2>
+
+    <p>There is a productive irony in the Hawthorne Effect that improvement practitioners should take seriously: being measured changes behaviour because being measured changes what is visible. Staff who know their discharge times are being tracked attend more carefully to discharge. The metric improves not because the system changed but because visibility changed what people attended to.</p>
+
+    <p>This is a genuine visibility intervention &mdash; and it is not worthless. <a href="visual-management.html">Visual management</a>, run charts on the wall, Red/Green Day tracking all work partly through this mechanism. Making performance visible changes performance. That is a real effect, even if it is not structural change.</p>
+
+    <p>The question is whether visibility alone is sufficient for structural improvement &mdash; or whether it requires the deeper <a href="joiner-levels-of-fix.html">Level 3</a> intervention of changing the system that produces the performance. Hawthorne improvement is Level 1 and Level 2: it changes outputs and processes through heightened attention. Structural improvement changes the system design so that good performance is produced automatically, without requiring sustained external observation.</p>
+
+    <p>The Hawthorne Effect tells you that visibility matters. Bootstrap CUSUM tells you whether visibility alone was sufficient &mdash; or whether the structural change that would sustain improvement without observation still needs to be made.</p>
+
+    <hr>
+
+    <h2 id="section-missing">The missing discipline in NHS evaluation</h2>
+
+    <p>The NHS has significant statistical capability. SPC charts and run charts are used widely across trusts. GIRFT, NHS England&rsquo;s Analytical Services, and the Health Foundation all produce rigorous comparative analysis. This is not a criticism of NHS statisticians.</p>
+
+    <p>The gap is not statistical capability. It is the <strong>timing of the prediction relative to the intervention.</strong> NHS improvement evaluation almost universally analyses data after the intervention has been implemented and results have been observed. The pre-committed prediction &mdash; made before the data arrives, specifying what would count as success and what would count as failure &mdash; is the missing step.</p>
+
+    <p>Without the pre-committed prediction:</p>
+
+    <ul style="line-height:2.2;">
+        <li>Any improvement can be attributed to the intervention</li>
+        <li>Any flat line can be explained by confounding factors</li>
+        <li>The Hawthorne Effect cannot be separated from structural change</li>
+        <li>Regression to the mean cannot be separated from genuine improvement</li>
+        <li>The bundle effect makes it impossible to isolate which intervention worked</li>
+        <li>Improvement programmes accumulate false evidence of what works</li>
+    </ul>
+
+    <p>This is the <a href="corridor-care-bright-spots.html">attribution trap operating at national scale</a>. The NHS improvement evaluation framework does not yet routinely require pre-committed predictions. Until it does, the Hawthorne Effect will remain indistinguishable from structural change &mdash; and improvement claims will remain systematically disputed.</p>
+
+    <div class="cta-box">
+        <h2>Make your prediction before the data arrives</h2>
+        <p>Upload your baseline data to the StepChange Analyzer before your intervention begins. Bootstrap CUSUM will establish the change point if and when it occurs &mdash; and will tell you honestly whether it holds after observation ends.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="regression-to-the-mean.html">Regression to the Mean</a></h3>
+        <p>The second major confounder — after an extreme bad period, improvement is statistically inevitable regardless of any intervention. Bootstrap CUSUM distinguishes regression from structural change.</p>
+        <a href="regression-to-the-mean.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="tampering-and-impatience.html">Tampering &amp; Impatience</a></h3>
+        <p>The third major confounder — reacting to common cause variation as if it were special cause adds variation rather than reducing it. The three confounders together explain most false improvement claims.</p>
+        <a href="tampering-and-impatience.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="making-the-invisible-visible.html">Making the Invisible Visible</a></h3>
+        <p>The Hawthorne Effect shows that visibility itself changes behaviour — but visibility without structural change produces temporary improvement. The foundation concept explains the distinction.</p>
+        <a href="making-the-invisible-visible.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Real data</div>
+        <h3><a href="corridor-care-bright-spots.html">Corridor Care Bright Spots</a></h3>
+        <p>Five candidate Bright Spots — none yet tested to pre-committed Bootstrap CUSUM standard. The honest assessment of what the evidence does and does not prove.</p>
+        <a href="corridor-care-bright-spots.html" class="btn">Read the analysis &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Roethlisberger, F.J. and Dickson, W.J.:</strong> <em>Management and the Worker.</em> Harvard University Press, 1939. The original account of the Western Electric Hawthorne studies 1924&ndash;1932.</p>
+        <p style="margin-top:8px;"><strong>Levitt, S.D. and List, J.A.:</strong> &ldquo;Was There Really a Hawthorne Effect at the Hawthorne Plant? An Analysis of the Original Illumination Experiments.&rdquo; <em>American Economic Journal: Applied Economics,</em> 2011. Re-analysis showing the original effects were smaller and more variable than the folk version suggests.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. Common cause vs special cause variation &mdash; the framework for distinguishing structural change from noise, seasonal variation, and the Hawthorne Effect.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993). The instrument for testing whether a structural change point has occurred and whether it is sustained.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>

@@ -74,24 +74,11 @@
         <a href="three-charts-three-stories.html">Three charts, three stories &rarr;</a>
     </div>
 
-
-    <div style="background:#f8fafc;border-left:4px solid var(--brand-blue);border-radius:0 8px 8px 0;padding:20px 24px;margin:0 0 28px;font-family:system-ui,sans-serif;">
-        <div style="font-size:0.72em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--brand-blue);margin-bottom:12px;">&#128161; Why honest interpretation matters</div>
-        <p style="margin:0 0 12px;font-size:0.95em;line-height:1.7;color:var(--text);">These are common ways good people accidentally fool themselves &mdash; and why well-intentioned improvement claims go wrong:</p>
-        <ul style="margin:0;padding-left:1.4em;font-size:0.92em;line-height:2.1;color:var(--text);">
-            <li><strong>Measuring too soon</strong> &mdash; before the change has had time to produce a structural shift</li>
-            <li><strong>Picking the metric that moved</strong> rather than the one pre-specified before the intervention</li>
-            <li><strong>Attributing seasonal improvement to a programme</strong> &mdash; summer data credited to a winter initiative</li>
-            <li><strong><a href="regression-to-the-mean.html" style="color:inherit;">Regression to the mean</a></strong> &mdash; an extreme result (good or bad) is likely to be followed by a more typical one, regardless of any intervention; improvement after a bad period may be statistical inevitability, not evidence of structural change</li>
-            <li><strong>Definition changes</strong> that shift the number without changing the underlying reality</li>
-        </ul>
-        <p style="margin:12px 0 0;font-size:0.92em;line-height:1.7;color:var(--text);">Bootstrap CUSUM closes all five gaps. It requires the system to have shifted structurally and sustainably &mdash; not just moved in one period, not just seasonally, not just because the baseline changed. That&rsquo;s what we mean by &ldquo;honest evidence of change.&rdquo;</p>
-    </div>
-
     <details class="toc-details">
         <summary>&#9776;&nbsp; Contents</summary>
         <div class="toc-inner">
             <ol>
+                <li><a href="#section-honest">Why honest interpretation matters</a></li>
                 <li><a href="#section-detected">Change detected &mdash; what it means</a></li>
                 <li><a href="#section-no-change">No change detected &mdash; what it means</a></li>
                 <li><a href="#section-pitfalls">Common interpretation pitfalls</a></li>
@@ -102,6 +89,21 @@
             </ol>
         </div>
     </details>
+
+    <div class="callout blue" id="section-honest">
+        <strong>&#128161; Why honest interpretation matters</strong>
+        <p>These are common ways good people accidentally fool themselves &mdash; and why well-intentioned improvement claims go wrong:</p>
+        <ul style="line-height:2.2;margin-top:10px;">
+            <li><strong>Measuring too soon</strong> &mdash; before the change has had time to produce a structural shift</li>
+            <li><strong>Picking the metric that moved</strong> rather than the one pre-specified before the intervention</li>
+            <li><strong>Attributing seasonal improvement to a programme</strong> &mdash; summer data credited to a winter initiative</li>
+            <li><strong><a href="regression-to-the-mean.html">Regression to the mean</a></strong> &mdash; an extreme result is likely to be followed by a more typical one regardless of any intervention; improvement after a bad period may be statistical inevitability, not structural change</li>
+            <li><strong><a href="hawthorne-effect.html">The Hawthorne Effect</a></strong> &mdash; behaviour changes when people know they are being measured; metrics improve during observation and may revert when observation ends; the most important confounder in NHS improvement evaluation</li>
+            <li><strong>Definition changes</strong> that shift the number without changing the underlying reality</li>
+            <li><strong>Claiming structural change without testing sustainability</strong> &mdash; a Bootstrap CUSUM change point confirms the system shifted at a point in time; it does not confirm the shift is permanent; only sustained data 12&ndash;24 months after the intervention &mdash; particularly after any external observation or programme support ends &mdash; confirms structural sustainability</li>
+        </ul>
+        <p style="margin-top:12px;">Bootstrap CUSUM closes all these gaps &mdash; but only when combined with a <strong>pre-committed prediction</strong> made before the intervention begins. A pre-committed prediction specifies which metric will change, in which direction, by how much, and within what timeframe &mdash; before any outcome data is collected. Without it, the Bootstrap CUSUM result can always be reinterpreted after the fact. With it, the data is allowed to say no. <a href="hawthorne-effect.html#section-definition">What is a pre-committed prediction?</a></p>
+    </div>
 
     <h2 id="section-detected">Change detected &mdash; what it means</h2>
 
@@ -116,7 +118,7 @@
         <p>Bootstrap CUSUM applied to London air quality data found that the structural improvement in NO2 levels appeared approximately 18 months <em>before</em> the ULEZ was introduced. The intervention received credit for a change that had already occurred. This is the attribution problem in practice: without Bootstrap CUSUM, before-and-after comparisons will always find improvement in the period after an intervention, even when the improvement predates it. See the <a href="ulez-london-air-quality.html">ULEZ analysis</a> for the full data.</p>
     </div>
 
-    <p><strong>Is the change sustained?</strong> A single change point followed by a return to the previous level is not a structural improvement &mdash; it is a temporary excursion. Run the full series including post-intervention data to confirm the new level is holding.</p>
+    <p><strong>Is the change sustained?</strong> A single change point followed by a return to the previous level is not a structural improvement &mdash; it is a temporary excursion. Run the full series including post-intervention data to confirm the new level is holding. Structural change and sustained structural change are not the same thing &mdash; the <a href="hawthorne-effect.html">Hawthorne Effect</a> can produce genuine change points that reverse when external observation ends. Continue monitoring for 12&ndash;24 months after any programme or external support is withdrawn before claiming sustained structural improvement.</p>
 
     <p><strong>What caused the change?</strong> Change detected is the beginning of the investigation, not the end. The Bootstrap CUSUM tells you that something changed and when. It does not tell you what changed or why. The next step is causal investigation: what was different in the system at or before that change point date? See <a href="what-to-do-next.html#path-detected">What to do next: change detected</a> for the full decision pathway.</p>
 
@@ -298,11 +300,6 @@
             <div class="nav-tag">Path C</div>
             <h3>No Change Detected: What to Do Next</h3>
             <p>No change point. Five possible meanings — each with a different next step. Includes the failed intervention diagnosis.</p>
-        </a>
-        <a href="regression-to-the-mean.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Regression to the Mean</h3>
-            <p>Why improvement after a bad period may be statistical inevitability, not evidence of change &mdash; and how Bootstrap CUSUM distinguishes the two.</p>
         </a>
     </div>
 

@@ -66,6 +66,7 @@
                 <li><a href="#section-coats">Matthew Coats &mdash; what Watford actually did</a></li>
                 <li><a href="#section-alcoa">&ldquo;If you get that right, all else will follow&rdquo; &mdash; the Alcoa parallel</a></li>
                 <li><a href="#section-gloucestershire">Gloucestershire &mdash; a second Bright Spot with data</a></li>
+                <li><a href="#section-candidate-bright-spots">Candidate Bright Spots &mdash; Blackburn, Blackpool, Ipswich, Bolton</a></li>
                 <li><a href="#section-scale">One trust and the national constraint</a></li>
             </ol>
         </div>
@@ -434,6 +435,173 @@
         <p style="margin-top:10px;">Gloucestershire&rsquo;s &ldquo;no separation between quality, safety and flow&rdquo; is the Joiner Triangle in practice. Most hospitals treat these as separate workstreams with separate ownership, separate meetings, and separate accountabilities. That separation is the silo. When the Exec Tri held all three simultaneously &mdash; quality, safety, and flow as a single system &mdash; the contradiction dissolved.</p>
         <p style="margin-top:10px;">The assumed contradiction was: <em>&ldquo;We need more flow AND we need quality and safety &mdash; and these are in conflict.&rdquo;</em> Speed compromises safety; thoroughness slows flow. Most hospitals accept this tension. Gloucestershire&rsquo;s SHMI data answers the contradiction empirically: <strong>mortality fell for 14 consecutive months while throughput increased.</strong> More flow, better safety. The contradiction was not a natural law &mdash; it was an assumption about how the system had to be organised. Challenge the assumption, change the structure, and the contradiction evaporates.</p>
         <p style="margin-top:10px;">This is Goldratt&rsquo;s Evaporating Cloud applied to NHS management. The cloud dissolves not through compromise. Paul O&rsquo;Neill at Alcoa demonstrated this principle most starkly: when he became CEO in 1987 he refused to accept any trade between safety and productivity &mdash; his argument was that if you have to choose between them, your processes are broken. Fix the processes and you get both. Gloucestershire&rsquo;s data makes the same point in an NHS context: SHMI fell for 14 consecutive months while throughput rose. Not some improvement in safety at the cost of some flow. Both, simultaneously, because the assumption that they were in conflict was removed rather than managed.</p>
+    </div>
+
+
+    <hr>
+
+    <h2 id="section-candidate-bright-spots">Candidate Bright Spots &mdash; three further trusts</h2>
+
+    <p>Three further trusts have produced results consistent with structural improvement in 2025/26. They are presented here as <em>candidate</em> Bright Spots. But the honest answer to whether the improvements are statistically proven is: <strong>no &mdash; not to the standard this site applies.</strong></p>
+
+    <p>None of the five Bright Spots on this page &mdash; including Watford and Gloucestershire &mdash; have been tested to Bootstrap CUSUM standard with a pre-committed prediction made before the intervention. The evidence ranges from operational observation (Watford) to visual time series consistent with a change point (Gloucestershire) to comparative deviation from national trend (Blackburn/Blackpool) to policy-mandated adoption (Ipswich) to SPC-evidenced improvement (Bolton). All are meaningful. None are pre-committed.</p>
+
+    <p>This is not a criticism of these trusts. It is a diagnosis of the field. The NHS has significant statistical capability &mdash; SPC charts and run charts are used widely across trusts, and GIRFT, NHS England&rsquo;s Analytical Services, and the Health Foundation all produce rigorous analysis. But <strong>the NHS does not yet routinely require pre-committed predictions before improvement interventions are implemented.</strong> Without that discipline, statistical analysis confirms or questions claims after the fact rather than testing them before. This is why the NHS cannot reliably distinguish genuine structural change from the <a href="hawthorne-effect.html">Hawthorne Effect</a> (staff changing behaviour because they are being observed), seasonal variation, <a href="regression-to-the-mean.html">regression to the mean</a>, or the bundle effect (multiple simultaneous interventions making it impossible to isolate which one worked). Bootstrap CUSUM with a pre-committed prediction made before the intervention is the missing discipline.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Bright Spot</th>
+                <th>Evidence type</th>
+                <th>Statistical status</th>
+                <th>Pre-committed prediction?</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Watford General</strong></td>
+                    <td>Operational &mdash; corridor care eliminated, sustained through a winter</td>
+                    <td>No statistical test in public domain</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td><strong>Gloucestershire</strong></td>
+                    <td>Visual time series from CEO presentation &mdash; sustained downward step change in DRD and handover times against rising ED attendances</td>
+                    <td>Consistent with a Bootstrap CUSUM change point. Not formally tested. Strongest evidence of the five.</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td><strong>Blackburn / Blackpool</strong></td>
+                    <td>GIRFT comparative dataset &mdash; Blackpool plotted against 100+ trusts, deviated significantly from national trend</td>
+                    <td>Strong comparative signal. SPC with standard NHS rules. Not Bootstrap CUSUM. No pre-committed prediction before GIRFT arrived.</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td><strong>Ipswich</strong></td>
+                    <td>Run charts on discharge before noon. NHS England mandated methodology nationally.</td>
+                    <td>Policy confidence, not statistical proof. Bundle effect: multiple interventions simultaneously make isolation impossible.</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td><strong>Bolton</strong></td>
+                    <td>Formal Lean Six Sigma with sustained SPC tracking. Exact flow times measured.</td>
+                    <td>Nearest to statistical confirmation. Sustained special cause variation demonstrated. Still not Bootstrap CUSUM with pre-committed prediction.</td>
+                    <td>No</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="dark-box">
+        <h3>The missing discipline &mdash; what pre-committed Bootstrap CUSUM would require</h3>
+        <p>Before any of these interventions were implemented, the trust would state publicly:</p>
+        <ol style="line-height:2.2;margin-top:10px;">
+            <li>Which metric will change (e.g. 12-hour A&amp;E waits, DRD daily count, ambulance handover hours)</li>
+            <li>In which direction (downward)</li>
+            <li>By how much (e.g. 30% reduction from baseline)</li>
+            <li>Within what timeframe (e.g. within 6 months of intervention)</li>
+            <li>At what confidence threshold (e.g. Bootstrap CUSUM p&lt;0.05)</li>
+            <li>What balancing measures will be monitored (e.g. 30-day readmission rates, patient safety incidents)</li>
+        </ol>
+        <p style="margin-top:10px;">Bootstrap CUSUM then tests the prediction. The data is allowed to say no. A flat line is reported as a flat line, not explained away. This is what honest evidence of improvement looks like &mdash; and it is what none of the five Bright Spots have yet provided.</p>
+        <p style="margin-top:10px;">That is not because the improvements are not real. It is because the NHS does not yet routinely require it before claims are made. This is the <a href="hawthorne-effect.html">attribution trap and the Hawthorne Effect</a> operating simultaneously at national scale: improvement is claimed, observed, and mandated before the data has been allowed to say no.</p>
+    </div>
+
+    <div class="callout blue">
+        <strong>The sustainability question &mdash; structural change vs structural sustain</strong>
+        <p>Bootstrap CUSUM detects a structural change point &mdash; the moment the system shifted. But a change point is not the same as a sustained structural improvement. The honest test is whether the change point holds 12&ndash;24 months after any external support (GIRFT teams, national programmes, winter funding) has been withdrawn. The Hawthorne Effect &mdash; staff changing behaviour because they are being observed &mdash; produces genuine short-term change points that reverse when the observation ends. Only sustained Bootstrap CUSUM data distinguishes the two.</p>
+        <p style="margin-top:8px;">The Level 2 interventions below (Criteria-Led Discharge, Red/Green Days, Lean Diagnostics) are the most likely to be structurally sustained &mdash; they change internal process ownership in ways that don&rsquo;t reverse when external teams leave. The Level 3 Deep interventions (Transfer of Care Hubs, Discharge to Assess) are structurally different but sustainability depends on conditions outside the trust&rsquo;s control: joint budgets, cross-boundary agreements, community capacity. These can be undone by financial pressure or policy change.</p>
+    </div>
+
+    <h3 id="section-blackburn-blackpool">Royal Blackburn and Blackpool Teaching Hospitals &mdash; the 2026 North West turnaround</h3>
+
+    <p>In early 2026, NHS England deployed GIRFT (Getting It Right First Time) teams to the North West. By April 2026, Royal Blackburn Hospital had entirely cleared its main corridor of patients and reduced 12-hour A&E waits by 18%. Blackpool Teaching Hospitals cut 12-hour waits by 42% and significantly reduced both length of stay and discharge delays.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Intervention</th>
+                <th>Joiner level</th>
+                <th>What changed</th>
+                <th>Sustainability assessment</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Transfer of Care Hubs</strong> &mdash; co-locating hospital discharge teams and local authority social workers in the same room</td>
+                    <td>Level 3 Deep</td>
+                    <td>Dissolved the organisational boundary between NHS and social care at the point of discharge. Made the cross-boundary constraint visible to both parties simultaneously.</td>
+                    <td>Fragile. Requires both organisations to maintain the co-location agreement and joint accountability. Vulnerable to local authority cost pressures. Now mandated nationally &mdash; which is why it required national policy rather than staying as a local agreement.</td>
+                </tr>
+                <tr>
+                    <td><strong>Discharge to Assess (D2A)</strong> &mdash; sending patients home first, assessing care needs in their own home rather than an acute bed</td>
+                    <td>Level 3 Deep</td>
+                    <td>Dissolved the assumption that assessment must happen in hospital. The Evaporating Cloud: <em>we need the patient out of the acute bed AND we need proper assessment. Assumption: assessment must happen in hospital. Injection: assess at home.</em></td>
+                    <td>Sustainable as national policy while community capacity exists. If social care workforce shortages mean community capacity isn&rsquo;t there, D2A becomes a mechanism for unsafe discharge rather than a flow intervention. Sustainability depends on conditions outside any single trust&rsquo;s control.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>The Bootstrap CUSUM question for Blackburn and Blackpool</strong>
+        <p>GIRFT compared Blackpool&rsquo;s data against 100+ other acute trusts facing the same winter pressures. Because Blackpool deviated so drastically from the national trend line, the GIRFT team is confident the interventions were the active variables. This is strong comparative evidence of a structural change point. The pre-committed prediction test: <em>&ldquo;12-hour waits at Blackpool will remain below X for 24 months after the GIRFT team withdraws.&rdquo;</em> Bootstrap CUSUM on that sustained data would confirm whether the change point is permanent or Hawthorne.</p>
+    </div>
+
+    <h3 id="section-ipswich">Ipswich Hospital &mdash; the Patient Flow Bundle</h3>
+
+    <p>Ipswich recognised that A&E corridors fill because patients upstairs stay in beds longer than clinically necessary. They implemented a strict six-point flow bundle &mdash; Red/Green Day tracking, Criteria-Led Discharge, and 10:30am board rounds &mdash; achieving significant reduction in length of stay and bed availability.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Intervention</th>
+                <th>Joiner level</th>
+                <th>What changed</th>
+                <th>Sustainability assessment</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Red/Green Day Tracking</strong> &mdash; every patient&rsquo;s day flagged as green (progress toward discharge) or red (nothing happened)</td>
+                    <td>Level 2</td>
+                    <td>Made administrative delays visible in real time. Red days trigger immediate management intervention rather than appearing in a weekly report.</td>
+                    <td>High. Makes invisible delays visible at the point of work. Once embedded, does not require external support to maintain. NHS England packaged the methodology and mandated it nationally as the SAFER patient flow bundle.</td>
+                </tr>
+                <tr>
+                    <td><strong>Criteria-Led Discharge</strong> &mdash; nurses empowered to discharge patients when pre-agreed clinical criteria are met, without waiting for a doctor&rsquo;s signature</td>
+                    <td>Level 2&ndash;3</td>
+                    <td>Changed accountability structure for discharge. Removed the doctor-as-bottleneck assumption. The Evaporating Cloud: <em>we need safe discharge AND timely discharge. Assumption: only a doctor can confirm safety. Injection: pre-agreed criteria allow nurses to confirm.</em></td>
+                    <td>High. Capability change &mdash; nurses empowered to discharge don&rsquo;t lose that capability when a team leaves. Requires ongoing clinical governance to maintain criteria quality.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3 id="section-bolton">Bolton NHS Foundation Trust &mdash; Lean Diagnostic Redesign</h3>
+
+    <p>Bolton identified that patients were blocking beds waiting for scans and test results. They applied Lean principles to diagnostic pathways &mdash; mapping the full patient journey, finding waste (patients moving between wards, duplicated X-rays, rigid booking slots), and moving to flexible demand-driven queues. Radiographers were trained to perform procedures previously requiring backlogged radiologists. Result: diagnostic flow time cut from weeks to days, eliminating the &ldquo;wait for a scan&rdquo; bed-blocking.</p>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Intervention</th>
+                <th>Joiner level</th>
+                <th>What changed</th>
+                <th>Sustainability assessment</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Lean Diagnostic Redesign</strong> &mdash; rigid booked slots replaced by flexible demand-driven queues; radiographers trained to perform procedures previously reserved for radiologists</td>
+                    <td>Level 2&ndash;3</td>
+                    <td>Removed the assumption that diagnostic scheduling must be supply-driven rather than demand-driven. Made waste visible through value stream mapping. Challenged the assumption that only radiologists can perform certain procedures.</td>
+                    <td>High for the process redesign. The scheduling change is embedded in how diagnostics operates. The radiographer capability change is structural &mdash; once trained, that capability doesn&rsquo;t reverse. Bolton used formal Lean Six Sigma methodology with sustained SPC tracking, making this the most statistically robust of the three candidate Bright Spots.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout blue">
+        <strong>The common thread across all candidate Bright Spots</strong>
+        <p>None of these trusts solved corridor care by asking A&E nurses to work harder. They solved it by treating the hospital as one interconnected system &mdash; empowering nurses to discharge, accelerating diagnostics, and using real-time data to clear the wards. This is the Joiner Triangle in practice: Quality defined from the patient&rsquo;s perspective, Scientific Approach applied to flow data, All One Team dissolving the departmental silos that kept the constraint invisible.</p>
+        <p style="margin-top:8px;">The interventions that are most likely to produce sustained Bootstrap CUSUM change points are those that changed internal process ownership &mdash; criteria-led discharge, trained radiographers, Red/Green day visibility. The interventions that crossed organisational boundaries (Transfer of Care Hubs, D2A) are structurally significant but sustainability depends on conditions outside any single trust&rsquo;s control.</p>
     </div>
 
     <hr>
