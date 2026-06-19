@@ -43,7 +43,7 @@
                 <li><a href="#section-definition">What is a pre-committed prediction?</a></li>
                 <li><a href="#section-response">The Bootstrap CUSUM response</a></li>
                 <li><a href="#section-irony">The irony &mdash; visibility as intervention</a></li>
-                <li><a href="#section-missing">The missing discipline in NHS evaluation</a></li>
+                <li><a href="#section-missing">The pre-committed prediction checklist</a></li>
             </ol>
         </div>
     </details>
@@ -335,24 +335,37 @@
 
     <hr>
 
-    <h2 id="section-missing">The missing discipline in NHS evaluation</h2>
+    <h2 id="section-missing">The pre-committed prediction checklist</h2>
 
-    <p>The NHS has significant statistical capability. SPC charts and run charts are used widely across trusts. GIRFT, NHS England&rsquo;s Analytical Services, and the Health Foundation all produce rigorous comparative analysis. This is not a criticism of NHS statisticians.</p>
+    <p>The pre-committed prediction is the missing step in most improvement evaluation &mdash; in healthcare, manufacturing, software, policy, and public services. It is not a criticism of any organisation&rsquo;s statistical capability. SPC charts, run charts, and comparative analysis are all valuable. The gap is not what is measured after the fact. It is what is specified before the intervention begins.</p>
 
-    <p>The gap is not statistical capability. It is the <strong>timing of the prediction relative to the intervention.</strong> NHS improvement evaluation almost universally analyses data after the intervention has been implemented and results have been observed. The pre-committed prediction &mdash; made before the data arrives, specifying what would count as success and what would count as failure &mdash; is the missing step.</p>
+    <p>The gap is the <strong>timing of the prediction relative to the intervention.</strong> Most improvement evaluation analyses data after the intervention has been implemented and results observed. The pre-committed prediction &mdash; made before the data arrives, specifying what would count as success and what would count as failure &mdash; is what makes the analysis honest rather than confirmatory.</p>
 
-    <p>Without the pre-committed prediction:</p>
+    <p>Without it:</p>
 
     <ul style="line-height:2.2;">
         <li>Any improvement can be attributed to the intervention</li>
         <li>Any flat line can be explained by confounding factors</li>
         <li>The Hawthorne Effect cannot be separated from structural change</li>
-        <li>Regression to the mean cannot be separated from genuine improvement</li>
+        <li><a href="regression-to-the-mean.html">Regression to the mean</a> cannot be separated from genuine improvement</li>
         <li>The bundle effect makes it impossible to isolate which intervention worked</li>
-        <li>Improvement programmes accumulate false evidence of what works</li>
+        <li>Improvement programmes accumulate false evidence of what works &mdash; and that false evidence gets scaled</li>
     </ul>
 
-    <p>This is the <a href="corridor-care-bright-spots.html">attribution trap operating at national scale</a>. The NHS improvement evaluation framework does not yet routinely require pre-committed predictions. Until it does, the Hawthorne Effect will remain indistinguishable from structural change &mdash; and improvement claims will remain systematically disputed.</p>
+    <p>This applies equally to a trust putting a senior manager on the floor, a software company tackling its Customer Acceptance Testing bottleneck, a council improving planning application turnaround times, or a manufacturer redesigning a diagnostic pathway. The framework is universal. The checklist is the same.</p>
+
+    <div class="dark-box" id="section-checklist">
+        <h3>&#9745; The pre-committed prediction checklist</h3>
+        <p>Before any improvement intervention, five things should be in place. Write them down. Make them visible. They are the standard against which the data will be compared.</p>
+        <ol style="line-height:2.4;margin-top:12px;">
+            <li><strong>The metric</strong> &mdash; which one, measured how, at what frequency, by whom. Not a vague outcome area but a specific, countable number. <em>Example: total corridor patient-hours per 24-hour period, counted from ward records, daily.</em></li>
+            <li><strong>The baseline</strong> &mdash; four weeks minimum before the intervention begins, stratified by day type (weekdays, weekends, bank holidays separately). This is the Shewhart step: establishing common cause variation before any change is made.</li>
+            <li><strong>The direction</strong> &mdash; will the metric go up or down? This is always knowable even when the magnitude is not. <em>Example: will go down.</em></li>
+            <li><strong>The timeframe</strong> &mdash; within how many months should Bootstrap CUSUM detect a change point if the theory is right? Be honest. If you cannot state a timeframe, the theory is not specific enough to test.</li>
+            <li><strong>The balancing measures</strong> &mdash; what would deteriorate if the primary metric were gamed rather than genuinely improved? Name them before the intervention. Monitor them throughout. A genuine structural improvement produces no deterioration in balancing measures. Gaming does.</li>
+        </ol>
+        <p style="margin-top:12px;">That is the complete pre-committed prediction. It does not require certainty about magnitude. It requires honesty about direction, timeframe, and what failure looks like. <strong>The data is then allowed to say no.</strong></p>
+    </div>
 
     <div class="cta-box">
         <h2>Make your prediction before the data arrives</h2>
