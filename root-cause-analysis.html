@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://stepchangeanalysis.com/root-cause-analysis.html">
-    <title>Root Cause Analysis — Tools, Techniques and When to Use Them — StepChangeAnalysis.com</title>
-    <meta name="description" content="Root cause analysis explained — the fishbone (Ishikawa) diagram, fault tree analysis, the 5 Whys, and when to use each. Why finding the root cause is necessary but not sufficient — and how Bootstrap CUSUM verifies whether the fix worked.">
-    <meta name="keywords" content="root cause analysis explained, RCA healthcare, fishbone diagram explained, Ishikawa diagram, root cause analysis tools improvement, fault tree analysis, cause and effect diagram">
+    <title>Root Cause Analysis (RCA) — Methods, Diagrams and NHS Examples — StepChangeAnalysis.com</title>
+    <meta name="description" content="Root cause analysis methods explained with NHS examples — fishbone diagram, 5 Whys, fault tree analysis, psychological why frameworks. Why NHS RCA repeatedly fails to prevent recurrence, and how Bootstrap CUSUM closes the loop. The honest guide for improvement practitioners.">
+    <meta name="keywords" content="root cause analysis explained, root cause analysis methods, root cause analysis diagram, root cause analysis NHS, RCA healthcare, fishbone diagram Ishikawa, root cause analysis systems improvement, root cause analysis psychological why frameworks, fault tree analysis, cause and effect diagram, root cause analysis tools">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
     <script>
@@ -39,6 +39,7 @@
                 <li><a href="#section-fishbone">The fishbone (Ishikawa) diagram</a></li>
                 <li><a href="#section-when">When to use which tool</a></li>
                 <li><a href="#section-necessary">Finding the root cause is necessary but not sufficient</a></li>
+                <li><a href="#section-psychological">Psychological &ldquo;Why&rdquo; frameworks</a></li>
                 <li><a href="#section-nhs">RCA in the NHS &mdash; why it frequently fails to prevent recurrence</a></li>
                 <li><a href="#section-cusum">Closing the loop with Bootstrap CUSUM</a></li>
             </ol>
@@ -98,6 +99,59 @@
     <hr>
 
     <h2 id="section-fishbone">The fishbone (Ishikawa) diagram</h2>
+
+    <div style="margin:20px 0 28px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;">
+        <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:12px;text-align:center;">Fishbone (Ishikawa) diagram &mdash; the standard root cause analysis diagram</div>
+        <svg width="100%" viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>Fishbone root cause analysis diagram showing categories of causes leading to a problem</title>
+        <!-- Spine -->
+        <line x1="80" y1="150" x2="580" y2="150" stroke="#185FA5" stroke-width="2.5"/>
+        <!-- Problem box -->
+        <rect x="582" y="120" width="88" height="60" rx="8" fill="#001a3a" stroke="#185FA5" stroke-width="1.5"/>
+        <text x="626" y="145" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="white">Problem</text>
+        <text x="626" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#94b8d4">effect</text>
+        <!-- Fish head arrow -->
+        <polygon points="578,150 568,144 568,156" fill="#185FA5"/>
+        <!-- Top bones -->
+        <line x1="160" y1="150" x2="200" y2="90" stroke="#185FA5" stroke-width="1.5"/>
+        <rect x="130" y="72" width="90" height="34" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+        <text x="175" y="87" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#0C447C">People</text>
+        <text x="175" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#185FA5">skills, training, behaviour</text>
+
+        <line x1="290" y1="150" x2="330" y2="90" stroke="#0F6E56" stroke-width="1.5"/>
+        <rect x="260" y="72" width="90" height="34" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+        <text x="305" y="87" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#085041">Process</text>
+        <text x="305" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#0F6E56">methods, procedures, steps</text>
+
+        <line x1="420" y1="150" x2="460" y2="90" stroke="#BA7517" stroke-width="1.5"/>
+        <rect x="390" y="72" width="90" height="34" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
+        <text x="435" y="87" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#633806">Equipment</text>
+        <text x="435" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#854F0B">tools, technology, systems</text>
+
+        <!-- Bottom bones -->
+        <line x1="160" y1="150" x2="200" y2="210" stroke="#534AB7" stroke-width="1.5"/>
+        <rect x="130" y="194" width="90" height="34" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+        <text x="175" y="209" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#3C3489">Environment</text>
+        <text x="175" y="222" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#534AB7">place, conditions, culture</text>
+
+        <line x1="290" y1="150" x2="330" y2="210" stroke="#5F5E5A" stroke-width="1.5"/>
+        <rect x="260" y="194" width="90" height="34" rx="6" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+        <text x="305" y="209" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#2C2C2A">Materials</text>
+        <text x="305" y="222" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">supplies, information, data</text>
+
+        <line x1="420" y1="150" x2="460" y2="210" stroke="#c0392b" stroke-width="1.5"/>
+        <rect x="390" y="194" width="90" height="34" rx="6" fill="#FDECEA" stroke="#c0392b" stroke-width="1"/>
+        <text x="435" y="209" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#a02020">Management</text>
+        <text x="435" y="222" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b">decisions, policy, oversight</text>
+
+        <!-- Tail -->
+        <polygon points="80,150 92,142 92,158" fill="#185FA5"/>
+        <text x="50" y="154" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#5F5E5A">causes</text>
+        </svg>
+        <p style="font-family:system-ui,sans-serif;font-size:0.78em;color:var(--muted);text-align:center;margin:8px 0 0;">Each bone represents a category of potential causes. Sub-branches identify specific causes within each category. The fishbone generates hypotheses &mdash; the 5 Whys then tests each one.</p>
+    </div>
+
+
 
     <p>The fishbone diagram &mdash; also called the Ishikawa diagram or cause-and-effect diagram &mdash; was developed by Kaoru Ishikawa at Kawasaki Heavy Industries in the 1960s and is now used across healthcare, manufacturing, and service industries worldwide. It provides a structured way to brainstorm and organise potential causes across multiple categories simultaneously.</p>
 
@@ -252,6 +306,16 @@
 
     <hr>
 
+    <h2 id="section-psychological">Psychological &ldquo;Why&rdquo; frameworks &mdash; why people ask why differently</h2>
+
+    <p>The 5 Whys is a logical technique. But the question &ldquo;why?&rdquo; also has a psychological dimension that determines whether an RCA reveals the true root cause or a socially acceptable one.</p>
+
+    <p>In organisations where fear is present &mdash; where pointing out problems or naming system failures carries personal risk &mdash; the 5 Whys produces a sanitised causal chain that stops at the level where blame becomes uncomfortable. The questioning process appears rigorous. The conclusions are systematically incomplete. The real root cause &mdash; the management system, the accountability structure, the incentive that produced the behaviour &mdash; is never named because naming it carries too high a personal cost.</p>
+
+    <p>Psychological safety is not a pre-condition for asking why. It is a pre-condition for the answers being honest. Amy Edmondson&rsquo;s research on psychological safety in healthcare teams showed precisely this: teams with low psychological safety reported fewer errors, not because they made fewer errors, but because they were less willing to report them. RCA conducted in conditions of low psychological safety produces fewer root causes found, not because there are fewer root causes, but because the investigation stops before reaching the ones that are uncomfortable to name.</p>
+
+    <p>This is why <a href="going-to-the-gemba.html">Going to the Gemba</a> is a pre-condition for honest RCA in complex organisations: the senior person who goes to where the problem manifests, in a culture of psychological safety, hears what the front line actually knows &mdash; not what the front line thinks it is safe to say. Deming&rsquo;s Point 8 (drive out fear) is not a management philosophy. It is a prerequisite for root cause analysis to reach the root.</p>
+
     <h2 id="section-nhs">RCA in the NHS &mdash; why it frequently fails to prevent recurrence</h2>
 
     <p>The NHS conducts thousands of Root Cause Analyses every year through the Serious Incident framework, the Patient Safety Incident Response Framework (PSIRF), and clinical audit processes. The volume of RCA activity is not in question. The effectiveness is.</p>
@@ -311,6 +375,27 @@
             <h3>Variation &amp; SPC</h3>
             <p>RCA analyses individual events. SPC analyses patterns. A stable event rate with no change point means the system is producing events routinely — individual RCA misses this entirely.</p>
         </a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="going-to-the-gemba.html">Going to the Gemba</a></h3>
+        <p>The visibility pre-condition for honest RCA &mdash; going to where the problem manifests with the authority to act on what you find.</p>
+        <a href="going-to-the-gemba.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="evaporating-cloud.html">Evaporating Cloud</a></h3>
+        <p>When RCA identifies a contradiction rather than a single root cause &mdash; the Evaporating Cloud dissolves it by naming and questioning the assumption underneath.</p>
+        <a href="evaporating-cloud.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="making-the-invisible-visible.html">Making the Invisible Visible</a></h3>
+        <p>RCA is one of fifteen visibility instruments. The foundation concept explains where it fits in the broader framework.</p>
+        <a href="making-the-invisible-visible.html" class="btn">Read the concept &rarr;</a>
     </div>
 
     <div class="callout blue" style="margin-top:32px;">
