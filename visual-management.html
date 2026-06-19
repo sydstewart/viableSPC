@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://stepchangeanalysis.com/visual-management.html">
+    <title>Visual Management — Making Work Visible vs Making the Constraint Visible — StepChangeAnalysis.com</title>
+    <meta name="description" content="Visual management makes work visible. That is not the same as making the constraint visible. When the two are confused, the Kanban board becomes a sophisticated way of recording the problem rather than solving it. The honest guide to what visual management can and cannot do.">
+    <meta name="keywords" content="visual management, kanban board, andon cord, visual factory, making constraint visible, Toyota production system, lean improvement, NHS visual management, bottleneck identification">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Visual Management</div>
+    <div class="article-flag">&#128202; Concept &middot; Visibility Tool &middot; Toyota</div>
+
+    <h1>Visual Management</h1>
+    <p class="article-subtitle">Visual management makes work visible. That is not the same as making the constraint visible. When the two are confused &mdash; when the Kanban board shows where work is piling up but nobody asks why it is piling up there &mdash; visual management becomes a sophisticated way of recording the problem rather than solving it. This is the honest guide to what visual management can and cannot do &mdash; and the one question that determines which one you have.</p>
+    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Toyota Production System &nbsp;&middot;&nbsp; <a href="making-the-invisible-visible.html" style="color:#0056b3;">Making the invisible visible</a></div>
+
+    <div style="background:#fff8e1;border:2px solid #f59e0b;border-radius:10px;padding:18px 22px;margin:20px 0 28px;font-family:system-ui,sans-serif;">
+        <div style="font-size:0.68em;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#92400e;margin-bottom:10px;">&#9654; Key rule &mdash; visual management</div>
+        <p style="margin:0 0 8px;font-size:0.97em;font-weight:700;color:#1a1a1a;line-height:1.55;">A Kanban board makes work visible. It does not make the constraint visible. When the two are confused, the board becomes a sophisticated way of recording the problem rather than solving it. The pile of work on the board shows you where work is accumulating &mdash; not why it is accumulating there, and not what structural feature of the system is producing the accumulation.</p>
+        <p style="margin:0;font-size:0.88em;color:#78350f;line-height:1.65;">The one question that determines whether visual management is working: <em>has seeing the work pile up changed what the system does, or only changed what the team talks about?</em> Bootstrap CUSUM on the outcome metric answers that question honestly.</p>
+    </div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what">What visual management is</a></li>
+                <li><a href="#section-distinction">The critical distinction</a></li>
+                <li><a href="#section-kanban">The Kanban board &mdash; the honest assessment</a></li>
+                <li><a href="#section-tools">Visual management tools and what each makes visible</a></li>
+                <li><a href="#section-assumptions">When visual management fails &mdash; the assumption trap</a></li>
+                <li><a href="#section-works">When visual management works</a></li>
+                <li><a href="#section-cusum">Bootstrap CUSUM &mdash; the test</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what">What visual management is</h2>
+
+    <p>Visual management is the practice of making the state of a system visible to the people working within it &mdash; through charts, boards, indicators, signals, and displays at the point of work. The underlying principle is simple and correct: you can only manage what you can see. If the system state is invisible, decisions will be made on assumptions, reports, and memory rather than on current reality.</p>
+
+    <p>Toyota developed visual management as part of the Toyota Production System. The Andon cord &mdash; which any worker could pull to stop the production line when a defect was detected &mdash; is the most famous example. It made quality problems visible immediately, at the point of occurrence, to everyone with authority to act on them. The information did not travel upward to a report or a meeting. It was present in the environment, visible to everyone, demanding an immediate response.</p>
+
+    <p>The principle is sound. The application in most organisations is not.</p>
+
+    <hr>
+
+    <h2 id="section-distinction">The critical distinction</h2>
+
+    <p>Visual management in Toyota&rsquo;s original conception made the <strong>constraint</strong> visible &mdash; the specific point in the system where quality failed, where flow was interrupted, where throughput was limited. The Andon cord did not just show that work was happening. It showed that something had gone wrong at a specific point and needed immediate attention.</p>
+
+    <p>In most adoptions of visual management, the constraint-identification function was lost and the work-tracking function remained. The Kanban board shows where work is. It does not show why it is there, what structural feature is causing it to accumulate, or what would need to change for the accumulation to stop.</p>
+
+    <div class="dark-box">
+        <h3>The two questions visual management must answer</h3>
+        <p>For visual management to produce structural change rather than sophisticated problem recording, it must answer two questions &mdash; not just one:</p>
+        <ol style="margin-top:10px;line-height:2.2;">
+            <li><strong>Where is work accumulating?</strong> (Most Kanban boards answer this)</li>
+            <li><strong>What structural feature of the system is causing the accumulation?</strong> (Almost no Kanban boards answer this)</li>
+        </ol>
+        <p style="margin-top:10px;">The first question makes work visible. The second question makes the constraint visible. Both are necessary. The first without the second produces a board that records the problem. The second requires a different instrument &mdash; the <a href="finding-the-real-constraint.html" style="color:#94b8d4;">six-phase constraint-finding process</a>, the <a href="evaporating-cloud.html" style="color:#94b8d4;">Evaporating Cloud</a>, or direct observation through <a href="going-to-the-gemba.html" style="color:#94b8d4;">Going to the Gemba</a>.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-kanban">The Kanban board &mdash; the honest assessment</h2>
+
+    <p>Kanban boards became ubiquitous in software development, NHS improvement, and project management in the 2010s. In most organisations they have produced a familiar pattern: the board is populated, the work is tracked, the meetings happen around the board &mdash; and the underlying process constraint persists unchanged.</p>
+
+    <p>The reason is structural, not motivational. The Kanban board correctly identifies where work is piling up. If Customer Acceptance Testing has twenty tickets in the &ldquo;waiting&rdquo; column and three in the &ldquo;done&rdquo; column, the board has correctly identified that Customer Acceptance Testing is the bottleneck. That is Goldratt&rsquo;s Theory of Constraints working exactly as intended: the pile of work makes the constraint visible.</p>
+
+    <p>But the pile of work shows you where the constraint <em>manifests</em>. It does not show you <em>why</em> the constraint is there. And in most cases, the reason the constraint persists is not a process problem that more resource or better process design would fix. It is a structural assumption that has never been questioned.</p>
+
+    <div class="callout blue">
+        <strong>The Customer Acceptance Testing example</strong>
+        <p>The Kanban board shows CAT as the bottleneck. The team can see this. The managers can see this. But the constraint persists because two assumptions are keeping it in place:</p>
+        <p style="margin-top:8px;"><strong>Assumption 1:</strong> <em>&ldquo;The customer controls the acceptance testing process and won&rsquo;t change it.&rdquo;</em> This assumption has never been tested. Nobody has shown the customer the Kanban board and asked: <em>&ldquo;This is where delivery time is being lost &mdash; can we work together to redesign this stage?&rdquo;</em></p>
+        <p style="margin-top:8px;"><strong>Assumption 2:</strong> <em>&ldquo;Raising this with the customer will damage the relationship.&rdquo;</em> The fear of the customer&rsquo;s response keeps the constraint invisible at the level where it could be addressed &mdash; the same way fear of management keeps front-line constraints invisible in healthcare.</p>
+        <p style="margin-top:8px;">The Kanban board has made the symptom visible. The Evaporating Cloud would make the assumption visible. Until the assumption is named and tested, the board records the problem indefinitely.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-tools">Visual management tools and what each makes visible</h2>
+
+    <div class="numbers-box">
+        <table>
+            <thead><tr>
+                <th>Tool</th>
+                <th>What it makes visible</th>
+                <th>What it does NOT make visible</th>
+                <th>The additional instrument needed</th>
+            </tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Kanban board</strong></td>
+                    <td>Where work is accumulating &mdash; the location of the bottleneck</td>
+                    <td>Why work is accumulating there &mdash; the structural cause of the bottleneck</td>
+                    <td>Evaporating Cloud, Gemba walk, five whys of the assumption</td>
+                </tr>
+                <tr>
+                    <td><strong>Andon cord</strong></td>
+                    <td>That a defect has occurred, at the specific point and moment of occurrence</td>
+                    <td>The root cause of the defect &mdash; why the system produced it</td>
+                    <td>Root cause analysis, 5 Whys, CLD</td>
+                </tr>
+                <tr>
+                    <td><strong>Run chart on the wall</strong></td>
+                    <td>The pattern of the metric over time &mdash; whether it is improving, stable, or deteriorating</td>
+                    <td>Whether the pattern is common cause or special cause variation &mdash; and whether any improvement is structural</td>
+                    <td>Shewhart control chart, Bootstrap CUSUM</td>
+                </tr>
+                <tr>
+                    <td><strong>Bed state board (NHS)</strong></td>
+                    <td>Current occupancy, available beds, patients ready for discharge</td>
+                    <td>Why discharge-ready patients are still in beds &mdash; the structural constraint on discharge</td>
+                    <td>Gemba walk, stakeholder mapping, Evaporating Cloud (NHS/social care boundary)</td>
+                </tr>
+                <tr>
+                    <td><strong>Dashboard / KPI display</strong></td>
+                    <td>The current state of the metrics being tracked</td>
+                    <td>Whether the metrics are the right ones, whether movement is structural change or noise, whether improvement is real or seasonal</td>
+                    <td>Types of measures framework, Bootstrap CUSUM, pre-committed prediction</td>
+                </tr>
+                <tr>
+                    <td><strong>Control centre (Gloucestershire)</strong></td>
+                    <td>Real-time system state across all departments simultaneously &mdash; visible to everyone with authority at the same moment</td>
+                    <td>The structural causes of what the centre shows &mdash; these require Gemba observation and constraint analysis</td>
+                    <td>Gemba walk with authority, Evaporating Cloud for persistent constraints</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2 id="section-assumptions">When visual management fails &mdash; the assumption trap</h2>
+
+    <p>Visual management fails predictably when the constraint it reveals is being kept in place by an assumption that the organisation is unwilling to question. The board shows the problem. The assumption prevents the solution. And because the assumption is invisible &mdash; it has never been made explicit &mdash; the team continues to look at the board and discuss the symptom without ever reaching the cause.</p>
+
+    <p>Four assumptions that commonly block visual management from producing structural change:</p>
+
+    <div class="timeline-box">
+        <div class="timeline-item">
+            <span class="timeline-date">The customer assumption</span>
+            <span class="timeline-text"><strong>&ldquo;The customer won&rsquo;t accept a change to this process.&rdquo;</strong> The board shows the bottleneck is at the customer interface. The team can see it. Nobody has asked the customer. The assumption persists untested. Show the customer the data &mdash; most customers, shown that the current process is costing them delivery time, will engage rather than resist. The data makes the conversation safe by making it about the process rather than the relationship.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">The authority assumption</span>
+            <span class="timeline-text"><strong>&ldquo;We can&rsquo;t change that &mdash; it belongs to a different department/organisation/budget.&rdquo;</strong> The board shows the constraint is across a boundary. The team accepts the boundary as fixed. The Evaporating Cloud asks: is the boundary actually fixed, or is it assumed to be fixed? Who has the authority to change the boundary? What would need to be true for the boundary to become permeable?</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">The resource assumption</span>
+            <span class="timeline-text"><strong>&ldquo;We just need more resource at this bottleneck.&rdquo;</strong> The board shows the pile. The team requests more resource. The resource is added. The pile moves to the next stage. Goldratt called this &ldquo;elevating the non-constraint&rdquo; &mdash; adding resource where the pile is visible rather than where throughput is actually limited. The constraint is upstream of the pile, not at it.</span>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-date">The fear assumption</span>
+            <span class="timeline-text"><strong>&ldquo;Raising this will cause problems.&rdquo;</strong> The board shows the problem clearly. Everyone can see it. Nobody raises it formally because the management response to problems has historically been blame rather than improvement. Deming&rsquo;s Point 8 &mdash; drive out fear &mdash; is the pre-condition for visual management to reveal rather than conceal. Until fear is removed, the board shows the sanitised version of the system rather than the real one.</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-works">When visual management works</h2>
+
+    <p>Visual management produces structural change when three conditions are simultaneously met &mdash; the same three conditions as Going to the Gemba:</p>
+
+    <ol style="line-height:2.2;">
+        <li><strong>The right thing is made visible</strong> &mdash; not just where work is but where throughput is actually limited</li>
+        <li><strong>The person seeing it has authority to act</strong> &mdash; immediately, without escalation</li>
+        <li><strong>Psychological safety means what is shown is real</strong> &mdash; not a performance for the board meeting</li>
+    </ol>
+
+    <p>Toyota&rsquo;s Andon cord met all three: it made the defect visible at the point of occurrence (right thing), any worker could stop the line (authority), and stopping the line was rewarded rather than punished (psychological safety). That is why it produced structural change rather than sophisticated problem recording.</p>
+
+    <p>Most Kanban boards meet the first condition partially and neither of the other two. That is why they produce boards full of accumulated work and discussions about the boards rather than structural change in the constraint.</p>
+
+    <hr>
+
+    <h2 id="section-cusum">Bootstrap CUSUM &mdash; the test</h2>
+
+    <p>The honest test of whether visual management is working is not whether the board is populated, the meetings are happening, or the team feels productive. It is whether the outcome metric has structurally improved.</p>
+
+    <p>Bootstrap CUSUM applied to the relevant outcome metric &mdash; not the activity metric (tickets moved) but the outcome metric (delivery time, patient waiting time, defect rate) &mdash; will show either a structural change point or a flat line. The flat line is the most important output: it tells you that visual management has been producing activity without structural change, and that the constraint has not been reached.</p>
+
+    <div class="cta-box">
+        <h2>Test whether your visual management is producing structural change</h2>
+        <p>Upload your outcome metric data to the StepChange Analyzer. Bootstrap CUSUM will tell you whether a structural change point has appeared &mdash; or whether the board is recording the problem rather than solving it.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="going-to-the-gemba.html">Going to the Gemba</a></h3>
+        <p>The visibility intervention that complements visual management — going to where the constraint manifests with the authority to act on it immediately.</p>
+        <a href="going-to-the-gemba.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="evaporating-cloud.html">The Evaporating Cloud</a></h3>
+        <p>The tool for dissolving the assumptions that keep visual management from producing structural change — making the invisible contradiction visible so it can be questioned.</p>
+        <a href="evaporating-cloud.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">Related Concept</div>
+        <h3><a href="finding-the-real-constraint.html">Finding the Real Constraint</a></h3>
+        <p>The six-phase process for moving from the visible pile of work (what the Kanban board shows) to the structural constraint (what the Evaporating Cloud reveals).</p>
+        <a href="finding-the-real-constraint.html" class="btn">Read the concept &rarr;</a>
+    </div>
+
+    <footer class="article-footer">
+        <p><strong>Ohno, T.:</strong> <em>Toyota Production System.</em> Productivity Press, 1988. The Andon cord and visual control as instruments for making the constraint visible at the point of work.</p>
+        <p style="margin-top:8px;"><strong>Anderson, D.J.:</strong> <em>Kanban: Successful Evolutionary Change for Your Technology Business.</em> Blue Hole Press, 2010. The Kanban method as adopted in software development &mdash; useful for making work visible, incomplete for making the constraint visible.</p>
+        <p style="margin-top:8px;"><strong>Goldratt, E.M.:</strong> <em>The Goal.</em> North River Press, 1984. The constraint is upstream of the largest pile of work, not at it. Adding resource where the pile is visible addresses the symptom, not the constraint.</p>
+        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
