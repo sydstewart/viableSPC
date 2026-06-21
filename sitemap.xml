@@ -79,6 +79,9 @@
 
   <!-- Examples — Healthcare -->
   <url><loc>https://stepchangeanalysis.com/bright-spot-gloucestershire.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/bright-spot-corridor-care-blackburn-blackpool.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/bright-spot-corridor-care-ipswich.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/bright-spot-corridor-care-bolton.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://stepchangeanalysis.com/bright-spot-watford.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://stepchangeanalysis.com/corridor-care-bright-spots.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://stepchangeanalysis.com/corridor-care-2029.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
