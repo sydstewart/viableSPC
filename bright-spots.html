@@ -3,22 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://stepchangeanalysis.com/bright-spots.html">
+    <title>Bright Spot Analysis in Healthcare QI: Find What Works and Scale It — StepChangeAnalysis.com</title>
+    <meta name="description" content="Bright spot analysis for healthcare quality improvement: how to find positive deviance, distinguish real outliers from luck using Bootstrap CUSUM, and scale what works. NHS corridor care examples included.">
+    <meta name="keywords" content="bright spots improvement, positive deviance healthcare, bright spots Chip Heath, finding what works, positive outliers improvement, Bootstrap CUSUM bright spots, special cause positive variation">
 
-<title>Bright Spot Analysis (Positive Deviance) for Healthcare Quality Improvement — StepChangeAnalysis.com</title>
-<meta name="description" content="Bright spot analysis explained for healthcare quality improvement: how to separate true positive outliers (special cause) from luck, investigate what changed, and replicate safely using data over time. NHS-proven examples included.">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
 
-<meta name="keywords" content="bright spot analysis, bright spots improvement, positive deviance healthcare, bright spots Chip Heath, finding what works, positive outliers improvement, special cause variation, common cause variation, bootstrap cusum bright spots">
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-NZLMMS3ZGG");
-</script>
-
-<link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 
@@ -26,401 +23,295 @@
 
 <main class="page-wrap">
 
-<div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Bright Spot Analysis</div>
-<div class="page-flag">&#127775; Improvement Concepts &middot; Healthcare QI</div>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Concepts</a> &rsaquo; Bright Spots</div>
+    <div class="page-flag">&#127775; Improvement Concepts</div>
+    <h1>Bright Spots and Positive Deviance</h1>
+    <p class="page-intro">In any failing system, some units are succeeding. Not by chance &mdash; by doing something structurally different. A Bright Spot is not a unit at the high end of normal variation. It is a genuine statistical outlier: special cause variation on the positive side, produced by a different process or a different structure that is operating within the same nominal environment. Finding it, understanding it, and replicating it is one of the highest-leverage actions available in any improvement programme.</p>
 
-<h1>Bright Spot Analysis</h1>
-
-<p class="page-intro">
-    <strong>Positive deviance</strong> for healthcare quality improvement: find what works, prove it isn’t luck, and replicate it safely.
-    A bright spot is not a unit at the high end of normal variation. It is a genuine positive outlier — <strong>special cause variation on the positive side</strong> — produced by a structural difference that can potentially be understood and replicated.
-    Examples on this site use NHS/public data where possible because it’s auditable, but the method applies anywhere.
-</p>
-
-<div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
-
-<!-- Standard routing box -->
-<div class="cta-box" style="margin-top:18px;">
-    <p><strong>Got time-series data?</strong> Run the analyzer, then interpret the result before you act.</p>
-    <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
-    <p style="margin-top:10px;">
-        Next: <a href="interpret-results.html">Interpret results</a> &rarr; <a href="what-to-do-next.html">What to do next</a>
-    </p>
-</div>
-
-<details class="toc-details">
-    <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
-    <div class="toc-inner">
-        <ol>
-            <li><a href="#section-healthcare-qi">Bright spot analysis in healthcare quality improvement</a></li>
-            <li><a href="#section-definition">What a Bright Spot is</a></li>
-            <li><a href="#section-special-cause">Bright Spots as special cause variation</a></li>
-            <li><a href="#section-lucky-vs-structural">Lucky vs structural &mdash; the critical distinction</a></li>
-            <li><a href="#section-origin">Origin of the concept</a></li>
-            <li><a href="#section-cusum">How Bootstrap CUSUM identifies Bright Spots</a></li>
-            <li><a href="#section-investigation">The Bright Spots investigation framework</a></li>
-            <li><a href="#section-replication">From investigation to replication</a></li>
-            <li><a href="#section-examples">Bright Spots in the site articles</a></li>
-        </ol>
-    </div>
-</details>
-
-<h2 id="section-healthcare-qi">Bright spot analysis in healthcare quality improvement</h2>
-
-<p>
-    Bright spot analysis is the disciplined alternative to “copy the top performer”.
-    In QI, league tables and snapshots often produce the wrong lesson because they confuse <em>common-cause noise</em> with a real structural difference.
-    Bright spot analysis asks three practical questions:
-</p>
-
-<div class="callout blue">
-    <strong>The three bright spot questions (QI version)</strong>
-    <ol style="margin-top:10px;line-height:2.0;">
-        <li><strong>Is it real?</strong> Is the performance statistically distinguishable from the rest of the system (not just a good month)?</li>
-        <li><strong>What changed, and when?</strong> Can we define a focused “change window” for investigation?</li>
-        <li><strong>Will it replicate?</strong> Can we pre-specify what success would look like in data over time, and verify it?</li>
-    </ol>
-</div>
-
-<p>
-    This page gives the concept and the replication logic. The related NHS pages on this site show how it looks in practice.
-</p>
-
-<hr>
-
-<h2 id="section-definition">What a Bright Spot is</h2>
-
-<div class="definition-box">
-    <div class="def-label">&#127775; Definition</div>
-    <div class="def-term">Bright Spot</div>
-    <div class="def-text">
-        A unit, team, site, pathway, or individual whose performance is statistically distinguishable from the rest of the system —
-        not because of random good luck, but because something about how it is structured or how it operates is genuinely different.
-        A Bright Spot is <strong>special cause variation on the positive side</strong>: a result that the system, operating normally, would not produce.
-        It is worth investigating because the structural difference that produced it can potentially be identified, understood, and replicated.
-    </div>
-    <div class="def-source">
-        Concept originated with Zeitlin (1990). Operationalised by Sternin &amp; Sternin (1990s).
-        Healthcare and organisational application: Pascale, Sternin &amp; Sternin, <em>The Power of Positive Deviance</em> (Harvard Business Press, 2010).
-        Popularised as “Bright Spots”: Heath &amp; Heath, <em>Switch</em> (Random House, 2010).
-    </div>
-</div>
-
-<p>
-    The Bright Spots question is a deliberate inversion of the standard improvement question.
-    Standard improvement analysis asks: <em>why is performance poor, and what interventions will raise it?</em>
-    This leads to root cause analysis of failures, which is valuable but often produces system-level diagnoses without actionable local findings.
-</p>
-
-<p>
-    The Bright Spots question asks instead: <em>which units are already producing the outcome we want, what are they doing differently, and how do we replicate it?</em>
-    This question is directly actionable. The answer is already in the system, working at scale, validated by real-world results.
-    It does not need to be invented, piloted, or theorised. It needs to be found and replicated.
-</p>
-
-<hr>
-
-<h2 id="section-special-cause">Bright Spots as special cause variation</h2>
-
-<p>
-    The statistical foundation of the Bright Spots concept is precise. In the language of
-    <a href="variation-and-spc.html">Statistical Process Control</a>, a Bright Spot is a unit whose performance represents
-    <strong>positive special cause variation</strong> — a result that falls outside the upper natural process limits of the system,
-    or that shows a Bootstrap CUSUM upward change point, indicating a permanent structural shift to a better level.
-</p>
-
-<p>This framing matters because it distinguishes two things that look superficially similar but are fundamentally different:</p>
-
-<div class="comparison-grid">
-    <div class="cg-card lucky">
-        <div class="cg-label">&#9888; High common cause performance</div>
-        <h3>The lucky unit</h3>
-        <ul>
-            <li>Performance is good this period</li>
-            <li>Result is within the natural process limits of the system</li>
-            <li>No Bootstrap CUSUM change point in its series</li>
-            <li>Will likely regress toward the system mean next period</li>
-            <li>Good fortune, not a different structure</li>
+    <div class="callout blue" style="margin-top:16px;">
+        <strong>What you&rsquo;ll be able to do after this page</strong>
+        <ul style="margin:10px 0 0 18px;line-height:1.9;">
+            <li>Identify genuine bright spots in your service &mdash; and tell them from lucky outliers or regression to the mean.</li>
+            <li>Use Bootstrap CUSUM to confirm whether an outlier is a real signal worth investigating.</li>
+            <li>Investigate the mechanism: why is this team or trust performing better, and is it replicable?</li>
+            <li>Apply the spread and scale discipline: replicate the conditions, not just the actions.</li>
         </ul>
-        <div class="cg-verdict">&#10060; Investigating and replicating this unit replicates luck. Not a Bright Spot.</div>
     </div>
-    <div class="cg-card structural">
-        <div class="cg-label">&#9989; Positive special cause performance</div>
-        <h3>The genuine Bright Spot</h3>
-        <ul>
-            <li>Performance is consistently above the system upper control limit</li>
-            <li>Bootstrap CUSUM shows an upward change point at a specific date</li>
-            <li>The change persists across multiple periods</li>
-            <li>Something specific changed at a specific time</li>
-            <li>A different structure or process is operating</li>
-        </ul>
-        <div class="cg-verdict">&#9989; Investigating this unit finds a replicable structural difference. A genuine Bright Spot.</div>
+
+    <div class="cta-box" style="margin-top:18px;">
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+        <p style="margin-top:10px;color:white;">
+            Next: <a href="interpret-results.html" style="color:white;">Interpret results</a> &rarr; <a href="what-to-do-next.html" style="color:white;">What to do next</a>
+        </p>
     </div>
-</div>
 
-<p>
-    The distinction is not always obvious from a single period’s data. A unit that appears to be performing exceptionally in one quarter
-    may simply be at the top of common cause variation — it will return to average without any change in how it operates.
-    A genuine Bright Spot maintains its exceptional performance over time because the structural difference that produces it is still in place.
-</p>
+    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
 
-<hr>
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-definition">What a Bright Spot is</a></li>
+                <li><a href="#section-special-cause">Bright Spots as special cause variation</a></li>
+                <li><a href="#section-lucky-vs-structural">Lucky vs structural &mdash; the critical distinction</a></li>
+                <li><a href="#section-origin">Origin of the concept</a></li>
+                <li><a href="#section-cusum">How Bootstrap CUSUM identifies Bright Spots</a></li>
+                <li><a href="#section-investigation">The Bright Spots investigation framework</a></li>
+                <li><a href="#section-replication">From investigation to replication</a></li>
+                <li><a href="#section-examples">Bright Spots in the site articles</a></li>
+            </ol>
+        </div>
+    </details>
 
-<h2 id="section-lucky-vs-structural">Lucky vs structural &mdash; the critical distinction</h2>
+    <h2 id="section-definition">What a Bright Spot is</h2>
 
-<p>
-    <a href="deming-14-points.html">Deming</a>’s 94% rule states that 94% of problems are caused by the system, not the people in it.
-    The Bright Spots corollary is equally important: most of the variation in performance between units in the same system is also caused by the system —
-    by differences in staffing models, process design, physical layout, team culture, leadership approach, or resource availability.
-    These are structural differences, not individual talent differences.
-</p>
-
-<div class="callout gold">
-    <strong>The question that changes everything</strong>
-    <p>
-        Standard improvement analysis asks: <em>what are we doing wrong?</em> This focuses attention on failure modes, which are often system-level problems
-        requiring system-level fixes with long lag times before measurable results.
-    </p>
-    <p>
-        The Bright Spots question asks: <em>who in this system is already doing it right, and what are they doing that others are not?</em>
-        This focuses attention on existing solutions that are already working at scale, validated by real patient or operational outcomes, achievable with the same resources.
-        The structural difference that produced the Bright Spot is the answer to the improvement question — it is not a theory to be tested but a practice to be understood and replicated.
-    </p>
-</div>
-
-<p>
-    The critical word is <em>structural</em>. A Bright Spot is not a unit with better staff, more funding, or easier patients.
-    It is a unit that is doing something systematically different with the same or similar inputs. The structural difference might be:
-</p>
-
-<ul style="margin: 0 0 20px 24px; line-height: 2; font-size: 1.05em;">
-    <li>A different sequence of steps in the care pathway</li>
-    <li>A different handover protocol that reduces information loss</li>
-    <li>A different team meeting structure that surfaces problems earlier</li>
-    <li>A physical layout change that reduces travel time and interruptions</li>
-    <li>A different approach to family communication that reduces anxiety and callbacks</li>
-    <li>A different discharge planning process that starts on admission rather than the day before</li>
-</ul>
-
-<p>
-    In every case, the structural difference is something that can be described, understood, and taught.
-    It is not a personality trait or a lucky circumstance. It is a replicable practice.
-</p>
-
-<hr>
-
-<h2 id="section-origin">Origin of the concept</h2>
-
-<div class="origin-timeline">
-    <div class="ot-item">
-        <div class="ot-year">1990</div>
-        <div class="ot-content"><strong>Marian Zeitlin</strong> publishes <em>Positive Deviance in Child Nutrition</em> (UN University Press). Studying malnutrition in developing countries, Zeitlin asks why some children in desperately poor communities are well-nourished while their neighbours are not. The answer is in the specific practices of those families &mdash; not more resources, but different behaviours with the same constrained resources. The term &ldquo;positive deviance&rdquo; is coined: deviation from the norm in a positive direction.</div>
+    <div class="definition-box">
+        <div class="def-label">&#127775; Definition</div>
+        <div class="def-term">Bright Spot</div>
+        <div class="def-text">A unit, team, site, pathway, or individual whose performance is statistically distinguishable from the rest of the system &mdash; not because of random good luck, but because something about how it is structured or how it operates is genuinely different. A Bright Spot is <strong>special cause variation on the positive side</strong>: a result that the system, operating normally, would not produce. It is worth investigating because the structural difference that produced it can potentially be identified, understood, and replicated.</div>
+        <div class="def-source">Concept originated with Zeitlin (1990). Operationalised by Sternin &amp; Sternin (1990s). Healthcare and organisational application: Pascale, Sternin &amp; Sternin, <em>The Power of Positive Deviance</em> (Harvard Business Press, 2010). Popularised as &ldquo;Bright Spots&rdquo;: Heath &amp; Heath, <em>Switch</em> (Random House, 2010).</div>
     </div>
-    <div class="ot-item">
-        <div class="ot-year">1990s</div>
-        <div class="ot-content"><strong>Jerry and Monique Sternin</strong>, working with Save the Children in rural Vietnam, operationalise positive deviance as a change methodology. Rather than bringing in external solutions, they identify families whose children are well-nourished despite poverty, study what those families do differently, and facilitate community learning from those practices. Their pilot rehabilitates 93% of malnourished children and is scaled to 5 million families across Vietnam.</div>
-    </div>
-    <div class="ot-item">
-        <div class="ot-year">2010</div>
-        <div class="ot-content"><strong>Pascale, Sternin &amp; Sternin</strong> publish <em>The Power of Positive Deviance</em> (Harvard Business Press), bringing the methodology to healthcare and organisational improvement. The book documents applications in MRSA reduction, school dropout prevention, and female genital mutilation elimination &mdash; all using the same core approach: find the positive deviants within the system, understand what they do differently, facilitate community adoption.</div>
-    </div>
-    <div class="ot-item">
-        <div class="ot-year">2010</div>
-        <div class="ot-content"><strong>Chip and Dan Heath</strong> publish <em>Switch: How to Change Things When Change Is Hard</em> (Random House), popularising the same concept under the name &ldquo;Bright Spots&rdquo; for a general management audience. Their framing: <em>find the exceptions to the problem — the moments when the problem does not occur — and clone them.</em></div>
-    </div>
-</div>
 
-<hr>
+    <p>The Bright Spots question is a deliberate inversion of the standard improvement question. Standard improvement analysis asks: <em>why is performance poor, and what interventions will raise it?</em> This leads to root cause analysis of failures, which is valuable but often produces system-level diagnoses without actionable local findings.</p>
 
-<h2 id="section-cusum">How Bootstrap CUSUM identifies Bright Spots</h2>
+    <p>The Bright Spots question asks instead: <em>which units are already producing the outcome we want, what are they doing differently, and how do we replicate it?</em> This question is directly actionable. The answer is already in the system, working at scale, validated by real-world results. It does not need to be invented, piloted, or theorised. It needs to be found and replicated.</p>
 
-<p>
-    Applied at the unit level across a system, <a href="three-charts-three-stories.html">Bootstrap CUSUM</a> is the most precise tool available for distinguishing genuine Bright Spots from lucky units.
-    It does three things that ranking by average performance cannot do.
-</p>
+    <hr>
 
-<div class="dark-box">
-    <h3>&#128202; Three things Bootstrap CUSUM does that ranking cannot</h3>
-    <p><strong>1. Distinguishes special cause from common cause performance.</strong> A unit ranked first in this period’s league table may simply be at the high end of common cause variation. Bootstrap CUSUM tests whether its performance is statistically distinguishable from the system distribution. A change point at 95% confidence or above is evidence that something genuinely structural is operating. A result within common cause limits — however impressive it looks in a ranking — is not a Bright Spot.</p>
-    <p style="margin-top:10px;"><strong>2. Dates the structural change precisely.</strong> When a unit’s Bootstrap CUSUM shows a change point, it is dated to within weeks. This is the information that makes investigation productive. The question is: what changed in this unit in the 6–12 months before the change point? That window defines the investigation scope. Without a precise date, the investigation must cover the entire history of the unit — an unfocused exercise that rarely produces actionable findings.</p>
-    <p style="margin-top:10px;"><strong>3. Confirms persistence.</strong> A Bootstrap CUSUM change point that appears and holds — that does not dissolve as more data accumulates — confirms that the structural difference is ongoing. The practice is still in place. The replication target is a current, active system, not a historical artefact.</p>
-    <p style="margin-top:10px;" class="quote">&ldquo;The Bootstrap CUSUM change point is the evidence that warrants the investigation. Without it, you are studying luck. With it, you are studying structure.&rdquo;</p>
-</div>
+    <h2 id="section-special-cause">Bright Spots as special cause variation</h2>
 
-<p>
-    The practical workflow is straightforward. Apply Bootstrap CUSUM to each unit’s outcome series.
-    Units with upward change points at 95% confidence or above, on a consistent positive trajectory, are candidates for Bright Spot investigation.
-    Units whose good performance appears only in recent periods without a confirmed change point are candidates for watchful waiting — monitor another few periods before concluding the performance is structural.
-</p>
+    <p>The statistical foundation of the Bright Spots concept is precise. In the language of <a href="variation-and-spc.html">Statistical Process Control</a>, a Bright Spot is a unit whose performance represents <strong>positive special cause variation</strong> &mdash; a result that falls outside the upper natural process limits of the system, or that shows a Bootstrap CUSUM upward change point, indicating a permanent structural shift to a better level.</p>
 
-<hr>
+    <p>This framing matters because it distinguishes two things that look superficially similar but are fundamentally different:</p>
 
-<h2 id="section-investigation">The Bright Spots investigation framework</h2>
-
-<p>
-    Identifying a Bright Spot statistically is the beginning, not the end. The investigation that follows must answer a specific question:
-    what is structurally different about how this unit operates? The following five-step framework makes that investigation systematic.
-</p>
-
-<div class="investigation-steps">
-    <div class="inv-step">
-        <div class="inv-num">1</div>
-        <div class="inv-body">
-            <div class="step-title">Confirm the Bright Spot statistically</div>
-            <p>Apply Bootstrap CUSUM to the unit’s outcome series. Confirm a change point at 95% confidence or above, in the direction of improvement, that has persisted across multiple periods. Note the precise date of the change point. This is the evidence that justifies the investigation. Without it, the investigation may be studying luck.</p>
+    <div class="comparison-grid">
+        <div class="cg-card lucky">
+            <div class="cg-label">&#9888; High common cause performance</div>
+            <h3>The lucky unit</h3>
+            <ul>
+                <li>Performance is good this period</li>
+                <li>Result is within the natural process limits of the system</li>
+                <li>No Bootstrap CUSUM change point in its series</li>
+                <li>Will likely regress toward the system mean next period</li>
+                <li>Good fortune, not a different structure</li>
+            </ul>
+            <div class="cg-verdict">&#10060; Investigating and replicating this unit replicates luck. Not a Bright Spot.</div>
+        </div>
+        <div class="cg-card structural">
+            <div class="cg-label">&#9989; Positive special cause performance</div>
+            <h3>The genuine Bright Spot</h3>
+            <ul>
+                <li>Performance is consistently above the system upper control limit</li>
+                <li>Bootstrap CUSUM shows an upward change point at a specific date</li>
+                <li>The change persists across multiple periods</li>
+                <li>Something specific changed at a specific time</li>
+                <li>A different structure or process is operating</li>
+            </ul>
+            <div class="cg-verdict">&#9989; Investigating this unit finds a replicable structural difference. A genuine Bright Spot.</div>
         </div>
     </div>
-    <div class="inv-step">
-        <div class="inv-num">2</div>
-        <div class="inv-body">
-            <div class="step-title">Define the investigation window</div>
-            <p>The structural change that produced the Bootstrap CUSUM change point was introduced in the period before the change point appears in the data — typically 6 to 12 months earlier, depending on how quickly the change could affect the outcome measure. Focus the investigation on that window. What changed in this unit during that period? New leadership, new staffing model, new process, new physical layout, new equipment, new partnership with another team?</p>
-        </div>
+
+    <p>The distinction is not always obvious from a single period&rsquo;s data. A unit that appears to be performing exceptionally in one quarter may simply be at the top of common cause variation &mdash; it will return to average without any change in how it operates. A genuine Bright Spot maintains its exceptional performance over time because the structural difference that produces it is still in place.</p>
+
+    <hr>
+
+    <h2 id="section-lucky-vs-structural">Lucky vs structural &mdash; the critical distinction</h2>
+
+    <p><a href="deming-14-points.html">Deming</a>&rsquo;s 94% rule states that 94% of problems are caused by the system, not the people in it. The Bright Spots corollary is equally important: most of the variation in performance between units in the same system is also caused by the system &mdash; by differences in staffing models, process design, physical layout, team culture, leadership approach, or resource availability. These are structural differences, not individual talent differences.</p>
+
+    <div class="callout gold">
+        <strong>The question that changes everything</strong>
+        <p>Standard improvement analysis asks: <em>what are we doing wrong?</em> This focuses attention on failure modes, which are often system-level problems requiring system-level fixes with long lag times before measurable results.</p>
+        <p>The Bright Spots question asks: <em>who in this system is already doing it right, and what are they doing that others are not?</em> This focuses attention on existing solutions that are already working at scale, validated by real patient or operational outcomes, achievable with the same resources. The structural difference that produced the Bright Spot is the answer to the improvement question &mdash; it is not a theory to be tested but a practice to be understood and replicated.</p>
     </div>
-    <div class="inv-step">
-        <div class="inv-num">3</div>
-        <div class="inv-body">
-            <div class="step-title">Observe, do not just ask</div>
-            <p>The critical insight from the original Sternin work is that positive deviants often cannot articulate what they do differently — because what they do has become habitual and invisible to them. Asking “why do you perform better?” typically produces answers about staff motivation and team culture, not the specific structural practices that produce the outcome. The investigation must observe the process directly: shadow the team, map the workflow, time the steps. The structural difference will be visible in what people do, not always in what they say.</p>
-        </div>
-    </div>
-    <div class="inv-step">
-        <div class="inv-num">4</div>
-        <div class="inv-body">
-            <div class="step-title">Separate structure from context</div>
-            <p>Not every difference between a Bright Spot unit and the rest of the system is replicable. Some differences are context-specific: a particular geography, a building layout that cannot be changed, a patient population with unusual characteristics. The investigation must distinguish structural differences that can be replicated (a process step, a meeting format, a communication protocol) from contextual differences that cannot. The replication hypothesis is built on the former, not the latter.</p>
-        </div>
-    </div>
-    <div class="inv-step">
-        <div class="inv-num">5</div>
-        <div class="inv-body">
-            <div class="step-title">Test replication with Bootstrap CUSUM as the verdict</div>
-            <p>Introduce the identified structural practice to a second unit. Pre-specify the Bootstrap CUSUM prediction: we expect an upward change point in outcome measure Y within Z periods at W% confidence. Run Bootstrap CUSUM periodically as data accumulates. A confirmed change point in the replication unit is the evidence that the structural practice — not the context — produced the Bright Spot outcome. This is the <a href="pdsa-cycle.html">PDSA Study phase</a> made objective. Without a pre-specified prediction and a Bootstrap CUSUM test, the replication is not confirmed — it is claimed.</p>
-        </div>
-    </div>
-</div>
 
-<hr>
+    <p>The critical word is <em>structural</em>. A Bright Spot is not a unit with better staff, more funding, or easier patients. It is a unit that is doing something systematically different with the same or similar inputs. The structural difference might be:</p>
 
-<h2 id="section-replication">From investigation to replication</h2>
-
-<p>
-    The replication challenge is where most Bright Spots programmes fail. The structural difference is identified.
-    A decision is made to roll it out. The rollout happens. Nothing changes. Three specific failure modes account for most of these outcomes.
-</p>
-
-<div class="callout orange">
-    <strong>Replication failure mode 1 &mdash; Replicating the surface, not the structure</strong>
-    <p>A Bright Spot unit has a daily huddle at 8am that the team uses to surface problems before the day begins. The replication unit introduces a daily huddle at 8am. Outcomes do not change. The investigation missed what the huddle actually does: a specific protocol for raising patient safety concerns without hierarchy, which the Bright Spot team developed over 18 months and which is not captured in the description “daily huddle.” The structural element was the psychological safety protocol, not the meeting. Replication must go deep enough to capture the mechanism, not just the form.</p>
-</div>
-
-<div class="callout orange">
-    <strong>Replication failure mode 2 &mdash; Replicating without confirming</strong>
-    <p>The structural practice is rolled out across ten units simultaneously. No pre-specified Bootstrap CUSUM prediction is made. Six months later, some units appear to be performing better and some worse. Nobody knows whether any of the apparent improvements are genuine structural changes or common cause variation. The rollout is declared a success because some units look better. No one can say whether any of them actually are. Pre-specifying a Bootstrap CUSUM change point as the test of replication success removes this ambiguity entirely.</p>
-</div>
-
-<div class="callout orange">
-    <strong>Replication failure mode 3 &mdash; Replicating too fast</strong>
-    <p>The structural practice is confirmed in one unit and immediately rolled out to fifty. The lag between introduction and detectable Bootstrap CUSUM change point is 12 months. At month 6, when no change point has appeared, the programme is declared ineffective and cancelled. The intervention was working — it had not yet had time to produce a measurable result. The expected lag must be stated before rollout begins, and the commitment to maintain the intervention through the lag window must be made explicit. Without it, <a href="tampering-and-impatience.html">impatience tampering</a> is inevitable.</p>
-</div>
-
-<hr>
-
-<h2 id="section-examples">Bright Spots in the site articles</h2>
-
-<div class="callout teal">
-    <strong>NHS corridor care bright spot series</strong>
-    <p style="margin-top:10px;">
-        This concept page is the method. The corridor care series is a worked example of bright spot thinking: identify positive outliers, define the change window, then investigate mechanism.
-    </p>
-    <ul style="margin:10px 0 0 18px;line-height:1.9;">
-        <li><a href="corridor-care-2029.html">Corridor care 2029 &mdash; prospective analysis</a></li>
-        <li><a href="corridor-care-bright-spots.html">Corridor care bright spots (hub)</a></li>
-        <li><a href="bright-spot-gloucestershire.html">Bright spot: Gloucestershire</a></li>
-        <li><a href="bright-spot-watford.html">Bright spot: Watford</a></li>
+    <ul style="margin: 0 0 20px 24px; line-height: 2; font-size: 1.05em;">
+        <li>A different sequence of steps in the care pathway</li>
+        <li>A different handover protocol that reduces information loss</li>
+        <li>A different team meeting structure that surfaces problems earlier</li>
+        <li>A physical layout change that reduces travel time and interruptions</li>
+        <li>A different approach to family communication that reduces anxiety and callbacks</li>
+        <li>A different discharge planning process that starts on admission rather than the day before</li>
     </ul>
-    <p style="margin-top:10px;">
-      <!-- (Add future pages here when they’re live: Blackburn/Blackpool, Ipswich, Bolton.) -->
-    </p>
-</div>
 
-<div class="callout teal">
-    <strong>The Sepsis Six &mdash; a national null result that conceals Bright Spots</strong>
-    <p>Bootstrap CUSUM on national sepsis mortality data finds one stage and no change point across 22 years. This is not evidence that no trust improved. It is evidence that the national average did not structurally shift. Within that flat national picture, some trusts almost certainly show upward Bootstrap CUSUM change points in their in-hospital sepsis mortality — trusts whose bundle compliance reached consistent high levels before the others, or who introduced additional structural elements alongside the bundle. Those are the Bright Spots. The national null result tells you the average intervention did not structurally move the system. The Bright Spot analysis tells you which units proved that it could. See <a href="sepsis-six-does-public-data-show-whether-it-worked.html">the Sepsis Six article</a>.</p>
-</div>
+    <p>In every case, the structural difference is something that can be described, understood, and taught. It is not a personality trait or a lucky circumstance. It is a replicable practice.</p>
 
-<div class="callout teal">
-    <strong>NHS A&amp;E &mdash; four stages of decline and an unanswered question</strong>
-    <p>Bootstrap CUSUM on national A&amp;E performance finds four structural stages of decline and no upward change point from any intervention across 15 years. The national picture is unambiguous. But within that national decline, some trusts will have maintained performance significantly above the national average — and some will show upward change points that the national series cannot detect. Identifying those trusts, dating their change points, and investigating what changed in the 6–12 months before each point is the most productive next step available in NHS A&amp;E improvement — more productive than another national policy intervention. See <a href="why-nothing-has-worked-nhs-ae-performance.html">the A&amp;E analysis</a>.</p>
-</div>
+    <hr>
 
-<div class="callout teal">
-    <strong>UK carbon emissions &mdash; the carbon price floor as a systemic Bright Spot</strong>
-    <p>The electricity sector is the Bright Spot of the UK emissions picture: a 55.4% reduction at 99.8% confidence, against a transport sector showing no structural change at 95% across 34 years. The investigation question — what did electricity do differently? — is precisely answered: the carbon price floor changed the economics of the system for every generator simultaneously. That is the structural difference. Replicating it for transport means finding a mechanism that changes the economics of fossil fuel vehicles for every driver simultaneously — which is the logic behind the 2030 petrol and diesel ban. See <a href="the-grid-fixed-itself.html">the carbon emissions analysis</a>.</p>
-</div>
+    <h2 id="section-origin">Origin of the concept</h2>
 
-<hr>
+    <div class="origin-timeline">
+        <div class="ot-item">
+            <div class="ot-year">1990</div>
+            <div class="ot-content"><strong>Marian Zeitlin</strong> publishes <em>Positive Deviance in Child Nutrition</em> (UN University Press). Studying malnutrition in developing countries, Zeitlin asks why some children in desperately poor communities are well-nourished while their neighbours are not. The answer is in the specific practices of those families &mdash; not more resources, but different behaviours with the same constrained resources. The term &ldquo;positive deviance&rdquo; is coined: deviation from the norm in a positive direction.</div>
+        </div>
+        <div class="ot-item">
+            <div class="ot-year">1990s</div>
+            <div class="ot-content"><strong>Jerry and Monique Sternin</strong>, working with Save the Children in rural Vietnam, operationalise positive deviance as a change methodology. Rather than bringing in external solutions, they identify families whose children are well-nourished despite poverty, study what those families do differently, and facilitate community learning from those practices. Their pilot rehabilitates 93% of malnourished children and is scaled to 5 million families across Vietnam.</div>
+        </div>
+        <div class="ot-item">
+            <div class="ot-year">2010</div>
+            <div class="ot-content"><strong>Pascale, Sternin &amp; Sternin</strong> publish <em>The Power of Positive Deviance</em> (Harvard Business Press), bringing the methodology to healthcare and organisational improvement. The book documents applications in MRSA reduction, school dropout prevention, and female genital mutilation elimination &mdash; all using the same core approach: find the positive deviants within the system, understand what they do differently, facilitate community adoption.</div>
+        </div>
+        <div class="ot-item">
+            <div class="ot-year">2010</div>
+            <div class="ot-content"><strong>Chip and Dan Heath</strong> publish <em>Switch: How to Change Things When Change Is Hard</em> (Random House), popularising the same concept under the name &ldquo;Bright Spots&rdquo; for a general management audience. Their framing: <em>find the exceptions to the problem — the moments when the problem does not occur — and clone them.</em></div>
+        </div>
+    </div>
 
-<h2>Related concepts</h2>
-<div class="nav-grid">
-    <a href="variation-and-spc.html" class="nav-card">
-        <div class="nav-tag">Concept</div>
-        <h3>Variation &amp; SPC</h3>
-        <p>The statistical foundation — common cause vs special cause variation, and why Bright Spots are special cause on the positive side.</p>
-    </a>
-    <a href="special-cause-variation.html" class="nav-card">
-        <div class="nav-tag">Concept</div>
-        <h3>Special Cause Variation</h3>
-        <p>A Bright Spot is special cause variation in the improvement direction. Joiner’s rule: identify and understand it before attempting to replicate it at system level.</p>
-    </a>
-    <a href="common-cause-special-cause-step-change.html" class="nav-card">
-        <div class="nav-tag">Concept</div>
-        <h3>Common Cause vs Special Cause</h3>
-        <p>How Bootstrap CUSUM distinguishes a genuine Bright Spot (structural special cause) from a unit at the high end of common cause noise — and why the distinction determines whether replication is possible.</p>
-    </a>
-    <a href="three-charts-three-stories.html" class="nav-card">
-        <div class="nav-tag">Method</div>
-        <h3>Why Bootstrap CUSUM?</h3>
-        <p>The tool that distinguishes genuine Bright Spots from lucky units — dated change points at specified confidence levels.</p>
-    </a>
-    <a href="pdsa-cycle.html" class="nav-card">
-        <div class="nav-tag">Concept</div>
-        <h3>PDSA Cycle</h3>
-        <p>Bright Spot replication is a PDSA cycle — the structural practice is the change theory, Bootstrap CUSUM is the Study step.</p>
-    </a>
-    <a href="tampering-and-impatience.html" class="nav-card">
-        <div class="nav-tag">Concept</div>
-        <h3>Tampering &amp; Impatience</h3>
-        <p>The most common reason Bright Spot replication fails — abandoning an intervention before the lag window has elapsed.</p>
-    </a>
-    <a href="joiner-levels-of-fix.html" class="nav-card">
-        <div class="nav-tag">Concept</div>
-        <h3>Joiner’s Levels of Fix</h3>
-        <p>Bright Spot investigation identifies the structural difference — which Joiner level is it operating at? That determines replicability.</p>
-    </a>
-    <a href="sepsis-six-does-public-data-show-whether-it-worked.html" class="nav-card">
-        <div class="nav-tag">Article &mdash; Patient Safety</div>
-        <h3>The Sepsis Six</h3>
-        <p>The national null result — and why the Bright Spot analysis within it is the more productive question.</p>
-    </a>
-</div>
+    <hr>
 
-<div class="callout blue" style="margin-top:32px;">
-    <strong>&#128200; Part of the StepChange improvement concepts library</strong>
-    <p>This concept sits within a broader framework for understanding why improvement programmes succeed or fail. Start with <a href="why-nothing-changes.html">Why Nothing Changes</a> for the full picture, or go to <a href="start-here.html">Start Here</a> for a guided introduction to the method.</p>
-</div>
+    <h2 id="section-cusum">How Bootstrap CUSUM identifies Bright Spots</h2>
 
-<footer class="page-footer">
-    <p><strong>Positive deviance origin:</strong> Zeitlin M, Ghassemi H, Mansour M. <em>Positive Deviance in Child Nutrition.</em> United Nations University Press, 1990.</p>
-    <p style="margin-top:8px;"><strong>Vietnam application and healthcare:</strong> Pascale RT, Sternin J, Sternin M. <em>The Power of Positive Deviance: How Unlikely Innovators Solve the World’s Toughest Problems.</em> Harvard Business Press, 2010.</p>
-    <p style="margin-top:8px;"><strong>Bright Spots framing:</strong> Heath C, Heath D. <em>Switch: How to Change Things When Change Is Hard.</em> Random House, 2010.</p>
-    <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
-    <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
-</footer>
+    <p>Applied at the unit level across a system, <a href="three-charts-three-stories.html">Bootstrap CUSUM</a> is the most precise tool available for distinguishing genuine Bright Spots from lucky units. It does three things that ranking by average performance cannot do.</p>
+
+    <div class="dark-box">
+        <h3>&#128202; Three things Bootstrap CUSUM does that ranking cannot</h3>
+        <p><strong>1. Distinguishes special cause from common cause performance.</strong> A unit ranked first in this period&rsquo;s league table may simply be at the high end of common cause variation. Bootstrap CUSUM tests whether its performance is statistically distinguishable from the system distribution. A change point at 95% confidence or above is evidence that something genuinely structural is operating. A result within common cause limits &mdash; however impressive it looks in a ranking &mdash; is not a Bright Spot.</p>
+        <p style="margin-top:10px;"><strong>2. Dates the structural change precisely.</strong> When a unit&rsquo;s Bootstrap CUSUM shows a change point, it is dated to within weeks. This is the information that makes investigation productive. The question is: what changed in this unit in the 6&ndash;12 months before the change point? That window defines the investigation scope. Without a precise date, the investigation must cover the entire history of the unit &mdash; an unfocused exercise that rarely produces actionable findings.</p>
+        <p style="margin-top:10px;"><strong>3. Confirms persistence.</strong> A Bootstrap CUSUM change point that appears and holds &mdash; that does not dissolve as more data accumulates &mdash; confirms that the structural difference is ongoing. The practice is still in place. The replication target is a current, active system, not a historical artefact.</p>
+        <p style="margin-top:10px;" class="quote">&ldquo;The Bootstrap CUSUM change point is the evidence that warrants the investigation. Without it, you are studying luck. With it, you are studying structure.&rdquo;</p>
+    </div>
+
+    <p>The practical workflow is straightforward. Apply Bootstrap CUSUM to each unit&rsquo;s outcome series. Units with upward change points at 95% confidence or above, on a consistent positive trajectory, are candidates for Bright Spot investigation. Units whose good performance appears only in recent periods without a confirmed change point are candidates for watchful waiting &mdash; monitor another few periods before concluding the performance is structural.</p>
+
+    <hr>
+
+    <h2 id="section-investigation">The Bright Spots investigation framework</h2>
+
+    <p>Identifying a Bright Spot statistically is the beginning, not the end. The investigation that follows must answer a specific question: what is structurally different about how this unit operates? The following five-step framework makes that investigation systematic.</p>
+
+    <div class="investigation-steps">
+        <div class="inv-step">
+            <div class="inv-num">1</div>
+            <div class="inv-body">
+                <div class="step-title">Confirm the Bright Spot statistically</div>
+                <p>Apply Bootstrap CUSUM to the unit&rsquo;s outcome series. Confirm a change point at 95% confidence or above, in the direction of improvement, that has persisted across multiple periods. Note the precise date of the change point. This is the evidence that justifies the investigation. Without it, the investigation may be studying luck.</p>
+            </div>
+        </div>
+        <div class="inv-step">
+            <div class="inv-num">2</div>
+            <div class="inv-body">
+                <div class="step-title">Define the investigation window</div>
+                <p>The structural change that produced the Bootstrap CUSUM change point was introduced in the period before the change point appears in the data &mdash; typically 6 to 12 months earlier, depending on how quickly the change could affect the outcome measure. Focus the investigation on that window. What changed in this unit during that period? New leadership, new staffing model, new process, new physical layout, new equipment, new partnership with another team?</p>
+            </div>
+        </div>
+        <div class="inv-step">
+            <div class="inv-num">3</div>
+            <div class="inv-body">
+                <div class="step-title">Observe, do not just ask</div>
+                <p>The critical insight from the original Sternin work is that positive deviants often cannot articulate what they do differently &mdash; because what they do has become habitual and invisible to them. Asking &ldquo;why do you perform better?&rdquo; typically produces answers about staff motivation and team culture, not the specific structural practices that produce the outcome. The investigation must observe the process directly: shadow the team, map the workflow, time the steps. The structural difference will be visible in what people do, not always in what they say.</p>
+            </div>
+        </div>
+        <div class="inv-step">
+            <div class="inv-num">4</div>
+            <div class="inv-body">
+                <div class="step-title">Separate structure from context</div>
+                <p>Not every difference between a Bright Spot unit and the rest of the system is replicable. Some differences are context-specific: a particular geography, a building layout that cannot be changed, a patient population with unusual characteristics. The investigation must distinguish structural differences that can be replicated (a process step, a meeting format, a communication protocol) from contextual differences that cannot. The replication hypothesis is built on the former, not the latter.</p>
+            </div>
+        </div>
+        <div class="inv-step">
+            <div class="inv-num">5</div>
+            <div class="inv-body">
+                <div class="step-title">Test replication with Bootstrap CUSUM as the verdict</div>
+                <p>Introduce the identified structural practice to a second unit. Pre-specify the Bootstrap CUSUM prediction: we expect an upward change point in outcome measure Y within Z periods at W% confidence. Run Bootstrap CUSUM periodically as data accumulates. A confirmed change point in the replication unit is the evidence that the structural practice &mdash; not the context &mdash; produced the Bright Spot outcome. This is the <a href="pdsa-cycle.html">PDSA Study phase</a> made objective. Without a pre-specified prediction and a Bootstrap CUSUM test, the replication is not confirmed &mdash; it is claimed.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-replication">From investigation to replication</h2>
+
+    <p>The replication challenge is where most Bright Spots programmes fail. The structural difference is identified. A decision is made to roll it out. The rollout happens. Nothing changes. Three specific failure modes account for most of these outcomes.</p>
+
+    <div class="callout orange">
+        <strong>Replication failure mode 1 &mdash; Replicating the surface, not the structure</strong>
+        <p>A Bright Spot unit has a daily huddle at 8am that the team uses to surface problems before the day begins. The replication unit introduces a daily huddle at 8am. Outcomes do not change. The investigation missed what the huddle actually does: a specific protocol for raising patient safety concerns without hierarchy, which the Bright Spot team developed over 18 months and which is not captured in the description &ldquo;daily huddle.&rdquo; The structural element was the psychological safety protocol, not the meeting. Replication must go deep enough to capture the mechanism, not just the form.</p>
+    </div>
+
+    <div class="callout orange">
+        <strong>Replication failure mode 2 &mdash; Replicating without confirming</strong>
+        <p>The structural practice is rolled out across ten units simultaneously. No pre-specified Bootstrap CUSUM prediction is made. Six months later, some units appear to be performing better and some worse. Nobody knows whether any of the apparent improvements are genuine structural changes or common cause variation. The rollout is declared a success because some units look better. No one can say whether any of them actually are. Pre-specifying a Bootstrap CUSUM change point as the test of replication success removes this ambiguity entirely.</p>
+    </div>
+
+    <div class="callout orange">
+        <strong>Replication failure mode 3 &mdash; Replicating too fast</strong>
+        <p>The structural practice is confirmed in one unit and immediately rolled out to fifty. The lag between introduction and detectable Bootstrap CUSUM change point is 12 months. At month 6, when no change point has appeared, the programme is declared ineffective and cancelled. The intervention was working &mdash; it had not yet had time to produce a measurable result. The expected lag must be stated before rollout begins, and the commitment to maintain the intervention through the lag window must be made explicit. Without it, <a href="tampering-and-impatience.html">impatience tampering</a> is inevitable.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-examples">Bright Spots in the site articles</h2>
+
+    <div class="callout teal">
+        <strong>The Sepsis Six &mdash; a national null result that conceals Bright Spots</strong>
+        <p>Bootstrap CUSUM on national sepsis mortality data finds one stage and no change point across 22 years. This is not evidence that no trust improved. It is evidence that the national average did not structurally shift. Within that flat national picture, some trusts almost certainly show upward Bootstrap CUSUM change points in their in-hospital sepsis mortality &mdash; trusts whose bundle compliance reached consistent high levels before the others, or who introduced additional structural elements alongside the bundle. Those are the Bright Spots. The national null result tells you the average intervention did not structurally move the system. The Bright Spot analysis tells you which units proved that it could. See <a href="sepsis-six-does-public-data-show-whether-it-worked.html">the Sepsis Six article</a>.</p>
+    </div>
+
+    <div class="callout teal">
+        <strong>NHS A&amp;E &mdash; four stages of decline and an unanswered question</strong>
+        <p>Bootstrap CUSUM on national A&amp;E performance finds four structural stages of decline and no upward change point from any intervention across 15 years. The national picture is unambiguous. But within that national decline, some trusts will have maintained performance significantly above the national average &mdash; and some will show upward change points that the national series cannot detect. Identifying those trusts, dating their change points, and investigating what changed in the 6&ndash;12 months before each point is the most productive next step available in NHS A&amp;E improvement &mdash; more productive than another national policy intervention. See <a href="why-nothing-has-worked-nhs-ae-performance.html">the A&amp;E analysis</a>.</p>
+    </div>
+
+    <div class="callout teal">
+        <strong>UK carbon emissions &mdash; the carbon price floor as a systemic Bright Spot</strong>
+        <p>The electricity sector is the Bright Spot of the UK emissions picture: a 55.4% reduction at 99.8% confidence, against a transport sector showing no structural change at 95% across 34 years. The investigation question &mdash; what did electricity do differently? &mdash; is precisely answered: the carbon price floor changed the economics of the system for every generator simultaneously. That is the structural difference. Replicating it for transport means finding a mechanism that changes the economics of fossil fuel vehicles for every driver simultaneously &mdash; which is the logic behind the 2030 petrol and diesel ban. See <a href="the-grid-fixed-itself.html">the carbon emissions analysis</a>.</p>
+    </div>
+
+    <hr>
+
+    <h2>Related concepts</h2>
+    <div class="nav-grid">
+        <a href="variation-and-spc.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Variation &amp; SPC</h3>
+            <p>The statistical foundation — common cause vs special cause variation, and why Bright Spots are special cause on the positive side.</p>
+        </a>
+        <a href="three-charts-three-stories.html" class="nav-card">
+            <div class="nav-tag">Method</div>
+            <h3>Why Bootstrap CUSUM?</h3>
+            <p>The tool that distinguishes genuine Bright Spots from lucky units — dated change points at specified confidence levels.</p>
+        </a>
+        <a href="pdsa-cycle.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>PDSA Cycle</h3>
+            <p>Bright Spot replication is a PDSA cycle — the structural practice is the change theory, Bootstrap CUSUM is the Study step.</p>
+        </a>
+        <a href="tampering-and-impatience.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Tampering &amp; Impatience</h3>
+            <p>The most common reason Bright Spot replication fails — abandoning an intervention before the lag window has elapsed.</p>
+        </a>
+        <a href="joiner-levels-of-fix.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Joiner&rsquo;s Levels of Fix</h3>
+            <p>Bright Spot investigation identifies the structural difference — which Joiner level is it operating at? That determines replicability.</p>
+        </a>
+        <a href="sepsis-six-does-public-data-show-whether-it-worked.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; Patient Safety</div>
+            <h3>The Sepsis Six</h3>
+            <p>The national null result — and why the Bright Spot analysis within it is the more productive question.</p>
+        </a>
+    </div>
+
+    <div class="callout blue" style="margin-top:32px;">
+        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
+        <p>This concept sits within a broader framework for understanding why improvement programmes succeed or fail. Start with <a href="why-nothing-changes.html">Why Nothing Changes</a> for the full picture, or go to <a href="start-here.html">Start Here</a> for a guided introduction to the method.</p>
+    </div>
+    <footer class="page-footer">
+        <p><strong>Positive deviance origin:</strong> Zeitlin M, Ghassemi H, Mansour M. <em>Positive Deviance in Child Nutrition.</em> United Nations University Press, 1990.</p>
+        <p style="margin-top:8px;"><strong>Vietnam application and healthcare:</strong> Pascale RT, Sternin J, Sternin M. <em>The Power of Positive Deviance: How Unlikely Innovators Solve the World&rsquo;s Toughest Problems.</em> Harvard Business Press, 2010.</p>
+        <p style="margin-top:8px;"><strong>Bright Spots framing:</strong> Heath C, Heath D. <em>Switch: How to Change Things When Change Is Hard.</em> Random House, 2010.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
 </main>
 
 <div id="site-footer"></div>
 <script src="assets/site-chrome.js"></script>
 </body>
 </html>
-```
