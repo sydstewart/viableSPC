@@ -42,7 +42,7 @@
         </p>
     </div>
 
-    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
+    <div class="page-meta" style="margin-top:8px;margin-bottom:8px;">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
 
     <details class="toc-details">
         <summary>&#9776;&nbsp; Contents</summary>
@@ -58,6 +58,7 @@
                 <li><a href="#section-system">Moving from diagram to system cause</a></li>
                 <li><a href="#section-structural-fix">From cause map to structural fix</a></li>
                 <li><a href="#section-never-events-worked">Worked example &mdash; Never Events</a></li>
+                <li><a href="#section-why-questions">The Iceberg Why questions &mdash; cheat sheet</a></li>
                 <li><a href="#section-verify">Verifying with data</a></li>
             </ol>
         </div>
@@ -228,13 +229,8 @@
         <line x1="532" y1="200" x2="549" y2="226" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 2"/>
 
         <!-- Root cause markers -->
-        <circle cx="490" cy="68" r="7" fill="none" stroke="#c0392b" stroke-width="2"/>
-        <text x="490" y="72" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b">RC</text>
-        <circle cx="490" cy="83" r="7" fill="none" stroke="#c0392b" stroke-width="2"/>
-        <text x="490" y="87" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b">RC</text>
 
         <text x="36" y="184" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">causes</text>
-        <text x="680" y="228" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94b8d4">RC = root cause</text>
         </svg>
         <p style="font-family:system-ui,sans-serif;font-size:0.78em;color:var(--muted);text-align:center;margin:8px 0 0;">The root causes (RC) are in Management &mdash; incomplete NRFit rollout and absence of a mandatory double-check policy. People and Environment contributed but are not root causes: addressing them alone would not prevent recurrence.</p>
     </div>
@@ -542,6 +538,47 @@
         <p>The most common RCA failure is stopping at the person. Retraining addresses a Level 1 symptom. The structural question is: <em>what system feature allowed a trained nurse to make this error without any physical barrier preventing it?</em></p>
         <p style="margin-top:8px;">The answer is in the equipment design: oral medication syringes (Luer connectors) were physically compatible with IV lines. The connector design made the error possible. No amount of retraining changes the physics. The Level 3 fix &mdash; ENFit non-interchangeable connectors &mdash; makes wrong-route administration physically impossible. The fix is in the design, not the person.</p>
         <p style="margin-top:8px;"><strong>The test:</strong> <em>&ldquo;If I am still relying on human willpower or vigilance to avoid the error, have I actually solved it?&rdquo;</em> If the answer is yes, you are still in the danger zone. Iterate on the design.</p>
+    </div>
+
+
+    <div class="callout blue" style="margin-top:20px;" id="section-why-questions">
+        <strong>The Iceberg Why questions &mdash; what to ask at each level</strong>
+        <p style="margin-top:6px;font-size:0.88em;color:#5F5E5A;">The &ldquo;5&rdquo; in 5 Whys is a rule of thumb, not a formula. The real question is: have you reached the Mindset level? Here are the questions to ask at each level of the Iceberg.</p>
+
+        <p style="margin-top:12px;font-weight:600;color:#0C447C;">Why 1 &mdash; Questions to uncover the Pattern</p>
+        <p style="margin-top:4px;font-size:0.87em;font-style:italic;">You are proving to leadership that this is not an isolated accident. You are looking for history, frequency, and correlation.</p>
+        <ul style="margin:6px 0 0 18px;line-height:2.0;font-size:0.87em;">
+            <li>&ldquo;Have we seen this exact failure, or a near-miss, in the last six months?&rdquo;</li>
+            <li>&ldquo;What conditions are always present when this happens? Does it only happen on the night shift? Only during a software release?&rdquo;</li>
+            <li>&ldquo;We tried to fix this last year &mdash; why did that previous fix fail to stop it this time?&rdquo;</li>
+        </ul>
+
+        <p style="margin-top:12px;font-weight:600;color:#0C447C;">Whys 2 and 3 &mdash; Questions to uncover the Structure</p>
+        <p style="margin-top:4px;font-size:0.87em;font-style:italic;">You are looking for the physical, digital, and procedural rules that made the error possible. You are actively taking the blame off the human.</p>
+        <ul style="margin:6px 0 0 18px;line-height:2.0;font-size:0.87em;">
+            <li>&ldquo;What physical or digital mechanism allowed the user to make this mistake? Why does the system allow this without a second check?&rdquo;</li>
+            <li>&ldquo;Was the correct tool or information immediately available? If not, why?&rdquo;</li>
+            <li>&ldquo;How does our current workflow make doing the wrong thing easier or faster than doing the right thing?&rdquo;</li>
+            <li>&ldquo;If there is a rule or checklist in place, why is it structurally easier to bypass it than to follow it?&rdquo;</li>
+        </ul>
+
+        <p style="margin-top:12px;font-weight:600;color:#0C447C;">Whys 4 and 5 &mdash; Questions to uncover the Mindset</p>
+        <p style="margin-top:4px;font-size:0.87em;font-style:italic;">The hardest level to reach because people are afraid to talk about it. You know you have reached it when answers shift from tools and processes to incentives, budgets, and fears.</p>
+        <ul style="margin:6px 0 0 18px;line-height:2.0;font-size:0.87em;">
+            <li>&ldquo;Why do we accept this broken process as &lsquo;just the way things are&rsquo;?&rdquo;</li>
+            <li>&ldquo;What behaviour does leadership actually reward? Do we reward the nurse who is fast, or the one who is safe?&rdquo;</li>
+            <li>&ldquo;What would realistically happen to an employee who stopped the line to fix this?&rdquo;</li>
+            <li>&ldquo;Why hasn&rsquo;t the budget or time been allocated to permanently fix this structure?&rdquo;</li>
+        </ul>
+
+        <p style="margin-top:12px;font-size:0.85em;"><strong>Applied to the Never Events example:</strong></p>
+        <ul style="margin:4px 0 0 18px;line-height:2.0;font-size:0.85em;">
+            <li><strong>Why 1 (Pattern):</strong> Nurses on this ward frequently use Luer syringes as workarounds</li>
+            <li><strong>Why 2 (Structure):</strong> Pharmacy frequently sends oral medications in incompatible syringes</li>
+            <li><strong>Why 3 (Structure):</strong> Pharmacy software doesn&rsquo;t force selection of a safety syringe by medication route</li>
+            <li><strong>Why 4 (Mindset):</strong> IT and Procurement haven&rsquo;t prioritised upgrading the pharmacy software</li>
+            <li><strong>Why 5 (Mindset):</strong> Leadership views safety upgrades as a sunk cost and prioritises revenue-generating equipment over operational safety</li>
+        </ul>
     </div>
 
     <h3 style="margin-top:24px;">Identifying and dissolving the contradiction</h3>
