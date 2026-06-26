@@ -65,6 +65,7 @@
   <url><loc>https://stepchangeanalysis.com/pdsa-cycle.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://stepchangeanalysis.com/five-whys.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://stepchangeanalysis.com/root-cause-analysis.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/root-cause-analysis-diagram.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://stepchangeanalysis.com/bright-spots.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://stepchangeanalysis.com/pick-model.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
@@ -96,6 +97,7 @@
   <url><loc>https://stepchangeanalysis.com/ulez-london-air-quality.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://stepchangeanalysis.com/the-grid-fixed-itself.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://stepchangeanalysis.com/uk-gdp-analysis.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://stepchangeanalysis.com/uk-economic-interventions.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 
   <!-- Examples — Industrial -->
   <url><loc>https://stepchangeanalysis.com/hydrogen-plant-cusum.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
