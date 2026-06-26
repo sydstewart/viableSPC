@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://stepchangeanalysis.com/stratify-experiment-disaggregate.html">
-    <title>Stratify, Experiment, Disaggregate — Joiner&rsquo;s Three Strategies for Improving a Stable System — StepChangeAnalysis.com</title>
-    <meta name="description" content="Joiner's three strategies for improving a stable system in common cause variation: Stratify (find who is doing it better), Experiment (PDSA with pre-committed Bootstrap CUSUM predictions), Disaggregate (break the aggregate into its component mechanisms). How all three connect to Deming's System of Profound Knowledge and the PDSA cycle.">
+    <title>PDSA Cycle: How to Tell If Your Improvement Is Real — Stratify, Experiment, Disaggregate — StepChangeAnalysis.com</title>
+    <meta name="description" content="When your run chart or SPC chart shows no step change, Joiner's three strategies tell you what to do next: Stratify (find who is already doing it better), Experiment (PDSA with a pre-specified prediction tested by Bootstrap CUSUM), Disaggregate (find which pathway is driving the aggregate). NHS quality improvement examples throughout.">
     <meta name="keywords" content="Joiner stratify experiment disaggregate, common cause variation improvement, Fourth Generation Management p141, PDSA Bootstrap CUSUM, Deming system of profound knowledge, stable system improvement, NHS improvement method">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
@@ -20,27 +20,40 @@
 <main class="article-wrap">
 
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Stratify, Experiment, Disaggregate</div>
-    <div class="article-flag">&#128202; Concept &middot; Improvement Method &middot; Joiner p.141</div>
+    <div class="article-flag">&#128202; Quality Improvement &middot; PDSA &middot; NHS Improvement Method &middot; Joiner p.141</div>
 
-    <h1>Stratify, Experiment, Disaggregate</h1>
-    <p class="article-subtitle">When Bootstrap CUSUM shows a system is stable but performing at the wrong level, the instinct is to intervene harder. Joiner&rsquo;s answer — drawn from page 141 of <em>Fourth Generation Management</em> — is to think harder first. Three strategies, applied in sequence, reveal what the aggregate data conceals: where the variation comes from, which interventions actually move it, and which part of the process is driving the result you are trying to change.</p>
+    <h1>PDSA Cycle: How to Tell If Your Improvement Is Real</h1>
+    <p class="article-subtitle">When a run chart or SPC chart shows a system is stable but performing at the wrong level, the instinct is to intervene harder. Joiner&rsquo;s answer &mdash; drawn from page 141 of <em>Fourth Generation Management</em> &mdash; is to think harder first. Three strategies &mdash; Stratify, Experiment, Disaggregate &mdash; reveal what the aggregate data conceals: who is already doing it better, whether any tested change actually moves the measure, and which part of the process is driving the result you need to change.</p>
     <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Source: Joiner, <em>Fourth Generation Management</em>, p.141 &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+
+    <!-- Promise block -->
+    <div class="callout blue" style="margin-top:18px;">
+        <strong>The PDSA Study step — done properly</strong>
+        <p>Most NHS improvement programmes implement at scale first and evaluate afterwards. The result: interventions that feel like they worked, data that is inconclusive, and no way to know what to do next. This page shows how to run a genuine PDSA experiment — with a pre-specified prediction, a rigorous Study step, and an honest answer from your own data.</p>
+    </div>
+
+    <!-- Slim routing box -->
+    <div class="cta-box" style="padding:14px 20px;margin:16px 0 24px;">
+        <p style="margin:0 0 8px;font-size:0.95em;">Already know what to do next? Go straight to the tool.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+        <p style="margin:10px 0 0;font-size:0.88em;">Next: <a href="interpret-results.html" style="color:white;font-weight:600;">Interpret results</a> &nbsp;&rarr;&nbsp; <a href="no-change-what-next.html" style="color:white;font-weight:600;">No change detected — what next?</a></p>
+    </div>
 
     <!-- Summary box -->
     <div style="background:#f0f4f8;border:2px solid var(--brand-mid);border-radius:10px;padding:24px 28px;margin:0 0 36px;font-family:system-ui,sans-serif;">
         <div style="font-size:0.68em;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:14px;">&#128203; The three strategies at a glance</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;">
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--brand-blue);">
-                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">1. Stratify</div>
-                <div style="font-size:0.88em;color:var(--text);line-height:1.6;">Break the aggregate into groups. Who is doing it better? By how much? Under what conditions? The answer tells you whether variation in the system is explained by differences between subgroups — and points to Bright Spots worth understanding.</div>
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">1. Stratify — find who is already doing it better</div>
+                <div style="font-size:0.88em;color:var(--text);line-height:1.6;">Break the aggregate into subgroups. Which ward, team, or trust is achieving better results within the same system? That is a Bright Spot — and the starting point for a transferable, testable improvement hypothesis. Used in NHS quality improvement to identify positive deviance before designing interventions.</div>
             </div>
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--orange);">
-                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">2. Experiment</div>
-                <div style="font-size:0.88em;color:var(--text);line-height:1.6;">Test a change on a small scale with a pre-specified, measurable prediction. PDSA — Plan, Do, Study, Act. Bootstrap CUSUM is the Study step: it detects whether a genuine structural change point appeared, at the confidence level you committed to in advance.</div>
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">2. Experiment — test whether the change is real</div>
+                <div style="font-size:0.88em;color:var(--text);line-height:1.6;">Run a genuine PDSA cycle: write the prediction before implementation, then test it with Bootstrap CUSUM in the Study step. A pre-specified prediction is what separates honest improvement evidence from "the numbers look better this month." The method used by NHS QI teams to confirm structural change.</div>
             </div>
             <div style="background:white;border-radius:8px;padding:16px;border-left:4px solid var(--green);">
-                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">3. Disaggregate</div>
-                <div style="font-size:0.88em;color:var(--text);line-height:1.6;">Divide the process into its component mechanisms. The aggregate metric combines multiple distinct pathways. Identifying which pathway is dominant — and treating it specifically — is more powerful than managing the total number.</div>
+                <div style="font-weight:700;color:var(--brand-blue);font-size:0.95em;margin-bottom:6px;">3. Disaggregate — find what is driving the measure</div>
+                <div style="font-size:0.88em;color:var(--text);line-height:1.6;">Divide the process into its component mechanisms. The aggregate metric combines multiple distinct pathways. Disaggregation identifies which pathway is responsible for most of the problem — so the PDSA experiment targets the right constraint, not the most visible one.</div>
             </div>
         </div>
     </div>
@@ -49,34 +62,39 @@
         <summary>&#9776;&nbsp; Contents</summary>
         <div class="toc-inner">
             <ol>
-                <li><a href="#section-context">The problem these strategies solve</a></li>
-                <li><a href="#section-stratify">Strategy 1 — Stratify</a></li>
-                <li><a href="#section-experiment">Strategy 2 — Experiment</a></li>
-                <li><a href="#section-disaggregate">Strategy 3 — Disaggregate</a></li>
-                <li><a href="#section-sequence">The sequence — how the three strategies work together</a></li>
+                <li><a href="#section-context">When the run chart shows no improvement — the problem these strategies solve</a></li>
+                <li><a href="#section-stratify">Strategy 1 — Stratify: find who is already doing it better</a></li>
+                <li><a href="#section-experiment">Strategy 2 — Experiment: how to run a PDSA cycle that gives an honest answer</a>
+                    <ul style="margin-top:4px;">
+                        <li><a href="#section-checking">Checking your prediction with the StepChange Analyser</a></li>
+                        <li><a href="#section-worked-example">A worked example — DOAC review programme</a></li>
+                    </ul>
+                </li>
+                <li><a href="#section-disaggregate">Strategy 3 — Disaggregate: find which pathway is driving your measurement</a></li>
+                <li><a href="#section-sequence">The sequence — how the three strategies work together in a QI programme</a></li>
                 <li><a href="#section-deming">The Deming connection — System of Profound Knowledge</a></li>
-                <li><a href="#section-pdsa">The PDSA connection — where Bootstrap CUSUM fits</a></li>
-                <li><a href="#section-examples">Applied examples</a></li>
+                <li><a href="#section-pdsa">The PDSA cycle — where Bootstrap CUSUM fits in the Study step</a></li>
+                <li><a href="#section-examples">NHS applied examples</a></li>
             </ol>
         </div>
     </details>
 
-    <h2 id="section-context">The problem these strategies solve</h2>
+    <h2 id="section-context">When the run chart shows no improvement — the problem these strategies solve</h2>
 
-    <p>A system is stable. Bootstrap CUSUM finds no change point. The process is producing consistent results — but at a level that is not good enough. Previous interventions have not moved it. The temptation is to try a bigger version of the same intervention, or to try several interventions simultaneously, or to commission a review.</p>
+    <p>A system is stable. The run chart or SPC chart shows common cause variation — the process is in control, but at a level that is not good enough. Previous PDSA cycles have not moved it. Previous improvement programmes have not moved it. The temptation is to try a bigger version of the same intervention, implement at scale, or commission another review.</p>
 
-    <p>Joiner&rsquo;s diagnosis is precise: the problem is not insufficient effort. It is insufficient <em>understanding</em>. The aggregate metric obscures three things that are essential for improvement — who is doing it differently, whether any tested change actually works, and which specific mechanism within the process is responsible for most of the problem.</p>
+    <p>Joiner&rsquo;s diagnosis is precise: the problem is not insufficient effort. It is insufficient <em>understanding</em>. The aggregate metric obscures three things that are essential for quality improvement — who is doing it differently, whether any tested change actually works, and which specific mechanism within the process is responsible for most of the problem.</p>
 
-    <p>Until all three questions are answered, any intervention is a guess. It may be a well-intentioned, evidence-informed guess — but it is still a guess. Stratify, Experiment, and Disaggregate replace guessing with knowing.</p>
+    <p>Until all three questions are answered, any intervention is a guess. It may be a well-intentioned, evidence-informed guess — but it is still a guess. Stratify, Experiment, and Disaggregate replace guessing with knowing. They are the method that makes the PDSA Study step mean something.</p>
 
     <div class="callout blue">
-        <strong>Why aggregate data blocks improvement</strong>
-        <p>An aggregate metric — total wrong-route events, average A&amp;E waiting time, national adverse drug reaction rate — is a summary. Summaries are useful for tracking direction. They are useless for identifying causes. An aggregate that is stable in common cause variation is telling you the average of a set of processes that may be very different from each other. Some of those processes may be excellent. Some may be failing. The average obscures both. Stratification is the act of looking inside the average.</p>
+        <strong>Why aggregate NHS data blocks quality improvement</strong>
+        <p>An aggregate metric — national A&amp;E four-hour performance, trust-level HSMR, ward-level medication error rate — is a summary. Summaries are useful for tracking direction. They are useless for identifying causes. An aggregate that is stable in common cause variation is telling you the average of a set of processes that may be very different from each other. Some wards or trusts may be performing well. Others may be failing. The average obscures both. Stratification is the act of looking inside the average — and it is the first move in any honest quality improvement investigation.</p>
     </div>
 
     <hr>
 
-    <h2 id="section-stratify">Strategy 1 — Stratify</h2>
+    <h2 id="section-stratify">Strategy 1 — Stratify: find who is already doing it better (positive deviance in QI)</h2>
 
     <p>Stratification means breaking the aggregate data into meaningful subgroups and asking whether the variation between those subgroups explains the overall result. The subgroups might be sites, teams, patient groups, time periods, geographies, product types, or any other dimension that might plausibly drive different performance.</p>
 
@@ -126,11 +144,11 @@
 
     <hr>
 
-    <h2 id="section-experiment">Strategy 2 — Experiment</h2>
+    <h2 id="section-experiment">Strategy 2 — Experiment: how to run a PDSA cycle that gives you an honest answer</h2>
 
-    <p>Experimentation is the act of testing a change on a small scale, with a pre-specified prediction, before implementing it at scale. It is the direct application of Deming&rsquo;s PDSA cycle — and it is the strategy most consistently absent from public sector improvement programmes, which tend to implement at scale first and evaluate (or not) afterwards.</p>
+    <p>Experimentation is the act of testing a change on a small scale, with a pre-specified prediction, before implementing it at scale. It is the direct application of Deming&rsquo;s PDSA cycle — and it is the strategy most consistently absent from NHS improvement programmes, which tend to implement at scale first and evaluate (or not) afterwards.</p>
 
-    <p>The pre-specification is not a bureaucratic formality. It is the mechanism that makes the experiment honest. Without a pre-specified prediction, any subsequent data movement — including random common cause fluctuation — can be interpreted as evidence the intervention worked. This is the most common form of false attribution in improvement work, and it is almost invisible because it feels like rigour.</p>
+    <p>The pre-specification is not a bureaucratic formality. It is the mechanism that makes the PDSA Study step honest. Without a pre-specified prediction, any subsequent data movement — including random common cause fluctuation in a run chart — can be interpreted as evidence the intervention worked. This is the most common form of false attribution in quality improvement work, and it is almost invisible because it feels like rigour. It is how improvement programmes produce confident-sounding reports while the underlying measure stays flat.</p>
 
     <div class="dark-box">
         <h3>&#128221; What a pre-specified experiment looks like</h3>
@@ -151,6 +169,58 @@
     <div class="callout blue">
         <strong>Bootstrap CUSUM is the Study step of PDSA</strong>
         <p>The PDSA cycle is only as strong as its Study step. Without a rigorous method for detecting whether a change produced a genuine structural shift — rather than a temporary fluctuation or a seasonal effect — the Study step defaults to judgement: &ldquo;it feels like it worked&rdquo; or &ldquo;the numbers are better this month.&rdquo; Bootstrap CUSUM replaces that judgement with a pre-committed statistical test. It answers, at a specified confidence level, whether the data shows a structural change point — and it dates that change point so you can verify it coincides with the intervention. That is the Study step done properly.</p>
+    </div>
+
+    <div class="dark-box" id="section-checking">
+        <p>The pre-specified prediction is written before implementation. The StepChange Analyser is how you test it afterwards. Here is the exact sequence:</p>
+
+        <div class="timeline-box" style="margin-top:18px;">
+            <div class="timeline-item">
+                <span class="timeline-date">Step 1</span>
+                <span class="timeline-text">
+                    <strong>Collect the data in the required format.</strong> One row per time period. Two columns: date (YYYY-MM or YYYY for annual data) and the metric value. Include data from before the intervention — you need the pre-intervention baseline so Bootstrap CUSUM can detect where the level shifts. A minimum of 12 pre-intervention periods is recommended; more gives greater detection power.
+                </span>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">Step 2</span>
+                <span class="timeline-text">
+                    <strong>Upload to the StepChange Analyser and set the parameters to match your pre-specification.</strong> Set the confidence threshold to exactly the level you committed to in your written prediction — 90%, 95%, or 99%. Do not raise or lower the threshold after seeing the data. Changing the threshold post-hoc is the statistical equivalent of moving the goalposts. Set Turn Length to approximately 10% of your total data length (minimum 5).
+                </span>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">Step 3</span>
+                <span class="timeline-text">
+                    <strong>Click Recalculate Chart. Read the CUSUM line, not the raw data line.</strong> The green CUSUM line shows cumulative deviation from the mean. A genuine structural change point appears as a sharp inflection — a clear change in the slope of the CUSUM line — at the point the algorithm identifies as statistically significant. The vertical marker shows the change point date.
+                </span>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">Step 4</span>
+                <span class="timeline-text">
+                    <strong>Compare the change point date to your intervention date.</strong> The question is not "did the numbers improve?" It is "did a structural change point appear at the predicted time, in the predicted direction, at the predicted confidence level?" If the change point precedes your intervention, something else caused the shift. If it follows by more than your predicted lag, the intervention may have worked but later than expected — note that and investigate why. If no change point appears, the intervention did not produce a detectable structural change at this confidence level.
+                </span>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">Step 5</span>
+                <span class="timeline-text">
+                    <strong>Check the balancing measures using the same method.</strong> Upload the data for each balancing measure and run the same analysis. If a change point appears in a balancing measure in an adverse direction, that is a harm signal — even if the primary metric confirmed the prediction. A confirmed primary change point with an adverse balancing change point means the intervention worked on the target but created a cost elsewhere. Do not scale until that cost is understood.
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="callout blue" id="section-worked-example">
+        <strong>&#128203; A worked example — what the written prediction looks like</strong>
+        <p>Before implementing a pharmacy-led DOAC review programme across three wards:</p>
+        <ul style="margin-top:10px;line-height:2.2;">
+            <li><strong>What will change:</strong> Pharmacist review of all new DOAC prescriptions within 24 hours of initiation, Wards 7, 8, and 9, commencing 1 September.</li>
+            <li><strong>Primary metric:</strong> Monthly rate of DOAC-related adverse drug reactions per 1,000 patient-days on those three wards.</li>
+            <li><strong>Leading indicator:</strong> Proportion of DOAC prescriptions with documented renal function check at initiation — expected to shift first, within 4–6 weeks.</li>
+            <li><strong>Direction:</strong> Down (reduction in adverse reaction rate).</li>
+            <li><strong>Timing:</strong> A Bootstrap CUSUM change point detectable within 6 months of the intervention start date.</li>
+            <li><strong>Confidence threshold:</strong> 90% — chosen because the dataset is small (monthly data, three wards) and a lower threshold is needed for adequate detection power at this sample size.</li>
+            <li><strong>Balancing measures:</strong> Rate of anticoagulation omissions (risk that review creates delay or omission); time from admission to first DOAC dose (risk of therapeutic gap).</li>
+        </ul>
+        <p style="margin-top:14px;"><strong>How to check it:</strong> On 1 March (six months later), upload the September–February data appended to the pre-intervention baseline to the StepChange Analyser. Set confidence to 90%, X-axis to Month, Y-axis to ADR Rate. Click Recalculate. If a change point appears between September and November and the CUSUM line slopes downward from that point — and the balancing measure uploads show no adverse change point — the prediction is confirmed. Act: standardise and prepare to scale to other wards. Plan the next PDSA.</p>
     </div>
 
     <div class="numbers-box">
@@ -187,7 +257,7 @@
 
     <hr>
 
-    <h2 id="section-disaggregate">Strategy 3 — Disaggregate</h2>
+    <h2 id="section-disaggregate">Strategy 3 — Disaggregate: find which pathway is driving your measurement</h2>
 
     <p>Disaggregation means dividing the process into its component mechanisms and managing those mechanisms separately. An aggregate metric — total events, overall rate, national average — is a sum of several distinct pathways, each with its own root cause and its own solution. Managing the total without understanding the components is managing the wrong thing.</p>
 
@@ -232,7 +302,7 @@
 
     <hr>
 
-    <h2 id="section-sequence">The sequence — how the three strategies work together</h2>
+    <h2 id="section-sequence">The sequence — how the three strategies work together in a quality improvement programme</h2>
 
     <p>The three strategies are not independent options — they are a sequence. Each one sets up the next, and skipping one reduces the precision of those that follow.</p>
 
@@ -313,9 +383,9 @@
 
     <hr>
 
-    <h2 id="section-pdsa">The PDSA connection — where Bootstrap CUSUM fits</h2>
+    <h2 id="section-pdsa">The PDSA cycle — where Bootstrap CUSUM fits in the Study step</h2>
 
-    <p>The PDSA cycle and Joiner&rsquo;s three strategies are not parallel frameworks — PDSA is the operational container inside which Stratify, Experiment, and Disaggregate are run. Each strategy generates a PDSA cycle, and the cycles run in sequence.</p>
+    <p>The PDSA cycle and Joiner&rsquo;s three strategies are not parallel frameworks — PDSA is the operational container inside which Stratify, Experiment, and Disaggregate are run. Each strategy generates a PDSA cycle, and the cycles run in sequence. The worked example above shows a single PDSA 2 cycle (Experiment). The three cycles below show how the full sequence connects end to end — from Bright Spot discovery through to confirmed structural change in the aggregate metric.</p>
 
     <div class="timeline-box">
         <h3>&#128257; Three PDSA cycles — one for each strategy</h3>
@@ -356,7 +426,7 @@
 
     <hr>
 
-    <h2 id="section-examples">Applied examples</h2>
+    <h2 id="section-examples">NHS applied examples — the three strategies in practice</h2>
 
     <div class="timeline-box">
         <h3>&#128203; How the three strategies have been applied on this site</h3>
@@ -401,9 +471,9 @@
     </div>
 
     <div class="cta-box">
-        <h2>Run the Experiment step</h2>
-        <p>Upload your subgroup or pathway data to the StepChange Analyzer. Run Bootstrap CUSUM at your pre-specified confidence threshold. The Study step of PDSA — done properly.</p>
-        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+        <h2>Run the Study step</h2>
+        <p>Write the prediction first. Then upload your pre- and post-intervention data to the StepChange Analyser. Set the confidence threshold you committed to in advance. Click Recalculate. The CUSUM line tells you whether a structural change point appeared — and exactly when.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyser</a>
     </div>
 
     <div class="related-box">
