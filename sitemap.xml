@@ -55,6 +55,7 @@
 
   <!-- Concepts — Measurement -->
   <url><loc>https://stepchangeanalysis.com/types-of-measures.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://stepchangeanalysis.com/leading-indicators.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://stepchangeanalysis.com/variation-and-spc.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://stepchangeanalysis.com/behaviour-over-time.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://stepchangeanalysis.com/causal-loop-diagrams.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
