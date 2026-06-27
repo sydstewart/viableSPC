@@ -1,503 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="How to design leading indicators for long-lead-time systems — a six-step causal chain method with a worked example from Scottish football development. When the outcome takes 15 years, what do you measure in year two?">
-<meta name="keywords" content="leading indicators, intermediate metrics, theory of change, Joiner levels, measurement, improvement model, causal chain, long lead time, systems thinking, NHS improvement">
-<link rel="canonical" href="https://stepchangeanalysis.com/leading-indicators.html">
-<title>Leading Indicators — Measuring Progress When the Outcome Is 15 Years Away — StepChangeAnalysis.com</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 16px; line-height: 1.7; color: #1a1a1a; background: #fff; }
-  a { color: #1a5fa8; text-decoration: none; }
-  a:hover { text-decoration: underline; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leading Indicators — Measuring Progress When the Outcome Is 15 Years Away — StepChangeAnalysis.com</title>
+    <meta name="description" content="How to design leading indicators for long-lead-time systems — a six-step causal chain method with NHS and football development worked examples. When the outcome takes 15 years, what do you measure in year two?">
+    <meta name="keywords" content="leading indicators, intermediate metrics, theory of change, Joiner levels, measurement, improvement model, causal chain, long lead time, systems thinking, NHS improvement">
 
-  .site-nav { border-bottom: 1px solid #e5e5e5; padding: 12px 24px; font-size: 14px; display: flex; gap: 20px; flex-wrap: wrap; }
-  .site-nav a { color: #444; }
-  .breadcrumb { font-size: 13px; color: #666; padding: 12px 0 0; }
-  .breadcrumb a { color: #666; }
-  .container { max-width: 740px; margin: 0 auto; padding: 0 24px 80px; }
-  .tag { display: inline-block; font-size: 12px; color: #555; background: #f2f2f2; border-radius: 3px; padding: 2px 8px; margin-bottom: 8px; }
-  h1 { font-size: 28px; font-weight: 700; line-height: 1.25; margin: 16px 0 8px; color: #111; }
-  .byline { font-size: 13px; color: #666; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid #e5e5e5; }
-  .byline a { color: #1a5fa8; }
-  h2 { font-size: 20px; font-weight: 700; margin: 40px 0 12px; color: #111; }
-  h3 { font-size: 16px; font-weight: 700; margin: 28px 0 8px; color: #111; }
-  p { margin-bottom: 16px; }
-  ul, ol { margin: 0 0 16px 24px; }
-  li { margin-bottom: 6px; }
-  strong { font-weight: 600; }
-  em { font-style: italic; }
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
 
-  /* Acronym block */
-  .acronym-block { background: #f7f7f5; border: 1px solid #e0e0de; border-radius: 4px; padding: 14px 18px; margin: 0 0 24px; font-size: 13px; }
-  .acronym-block strong { display: block; margin-bottom: 8px; font-size: 13px; }
-  .acronym-block p { margin: 0; line-height: 2.0; }
+    <link rel="canonical" href="https://stepchangeanalysis.com/leading-indicators.html">
+    <link rel="stylesheet" href="assets/styles.css">
 
-  /* callout blue */
-  .callout { background: #eaf2fb; border-left: 4px solid #1a5fa8; padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0; }
-  .callout strong { display: block; margin-bottom: 8px; font-size: 15px; }
-  .callout p { margin-bottom: 8px; font-size: 14px; }
-  .callout p:last-child { margin-bottom: 0; }
-
-  /* collapsible contents — matches site pattern */
-  .contents-box { background: #f7f7f5; border: 1px solid #e0e0de; border-radius: 4px; margin: 24px 0 32px; font-size: 14px; overflow: hidden; }
-  .contents-toggle { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; cursor: pointer; user-select: none; font-weight: 700; font-size: 14px; }
-  .contents-toggle:hover { background: #efefed; }
-  .contents-arrow { font-size: 11px; color: #888; transition: transform 0.2s; }
-  .contents-arrow.open { transform: rotate(180deg); }
-  .contents-body { display: none; padding: 4px 16px 14px; border-top: 1px solid #e0e0de; }
-  .contents-body.open { display: block; }
-  .contents-body ol { margin: 8px 0 0 18px; }
-  .contents-body li { margin-bottom: 5px; }
-
-  /* cta-box */
-  .cta-box { background: #1a5fa8; border-radius: 6px; padding: 18px 22px; margin: 32px 0; }
-  .cta-box p { color: #e8f2fb; font-size: 14px; margin-bottom: 12px; }
-  .cta-box p:last-child { margin-bottom: 0; }
-  .cta-btn { display: inline-block; background: #fff; color: #1a5fa8 !important; font-weight: 700; font-size: 14px; padding: 8px 18px; border-radius: 4px; text-decoration: none; margin-bottom: 10px; }
-  .cta-btn:hover { background: #eaf2fb; text-decoration: none; }
-  .cta-next { display: block; font-size: 13px; margin-top: 8px; }
-  .cta-next a { color: #fff; text-decoration: underline; }
-
-  /* Step blocks */
-  .step-block { border: 1px solid #e0e0de; border-radius: 6px; margin: 20px 0; overflow: hidden; }
-  .step-header { background: #f7f7f5; padding: 11px 16px; display: flex; align-items: baseline; gap: 12px; border-bottom: 1px solid #e0e0de; }
-  .step-num { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0; }
-  .step-title { font-size: 15px; font-weight: 700; color: #111; }
-  .step-body { padding: 14px 16px; font-size: 14px; }
-  .step-body p { margin-bottom: 10px; }
-  .step-body p:last-child { margin-bottom: 0; }
-  .step-body ul { margin-bottom: 10px; }
-  .worked-eg { background: #eef5ee; border-left: 3px solid #2a8a4a; padding: 10px 14px; margin-top: 10px; border-radius: 0 4px 4px 0; font-size: 13px; line-height: 1.65; }
-  .worked-eg .eg-label { display: block; color: #2a6a3a; margin-bottom: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
-
-  /* Causal chain — vertical */
-  .chain-wrap { background: #f7f7f5; border: 1px solid #e0e0de; border-radius: 6px; padding: 20px 24px; margin: 24px 0; }
-  .chain-title { font-size: 12px; color: #666; font-weight: 600; margin-bottom: 16px; }
-  .chain-row { display: grid; grid-template-columns: 1fr 110px; gap: 10px; align-items: center; margin-bottom: 2px; }
-  .chain-box { border: 1px solid #ccc; border-radius: 4px; padding: 7px 12px; font-size: 13px; background: #fff; }
-  .chain-box.intervention { border-color: #2a8a4a; color: #1a5a2a; font-weight: 600; }
-  .chain-box.outcome { border-color: #1a5fa8; color: #1a5fa8; font-weight: 600; }
-  .chain-time { font-size: 11px; color: #888; text-align: right; line-height: 1.4; }
-  .chain-time em { color: #2a8a4a; font-style: normal; display: block; }
-  .chain-arrow { padding: 1px 0 1px 4px; color: #bbb; font-size: 14px; line-height: 1; }
-
-  /* Warning box */
-  .warning-box { background: #fff8ec; border-left: 3px solid #e08a00; padding: 14px 18px; margin: 24px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
-  .warning-box .box-title { font-weight: 700; color: #a06000; margin-bottom: 8px; }
-  .warning-box p { margin-bottom: 8px; }
-  .warning-box p:last-child { margin-bottom: 0; }
-
-  /* Metric table */
-  .metric-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 20px 0; }
-  .metric-table th { background: #f2f2f0; padding: 8px 10px; text-align: left; font-weight: 600; border: 1px solid #ddd; }
-  .metric-table td { padding: 8px 10px; border: 1px solid #ddd; vertical-align: top; line-height: 1.5; }
-  .metric-table tr:nth-child(even) td { background: #fafaf8; }
-
-  /* Related pages boxes — matches site pattern from PDF */
-  .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 32px 0; }
-  .related-card { border: 1px solid #e0e0de; border-radius: 6px; padding: 14px 16px; font-size: 13px; line-height: 1.5; }
-  .related-card .rc-tag { font-size: 11px; color: #888; margin-bottom: 5px; display: block; }
-  .related-card a { font-weight: 600; color: #1a5fa8; display: block; margin-bottom: 4px; font-size: 14px; }
-  .related-card p { margin: 0; color: #555; font-size: 12px; line-height: 1.5; }
-
-  blockquote { border-left: 3px solid #ccc; padding: 8px 16px; margin: 20px 0; color: #444; font-style: italic; font-size: 15px; }
-
-  .footer-nav { border-top: 1px solid #e5e5e5; padding: 24px 0 0; margin-top: 48px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 14px; }
-
-  @media (max-width: 580px) {
-    h1 { font-size: 22px; }
-    .related-grid { grid-template-columns: 1fr; }
-    .metric-table { font-size: 12px; }
-    .metric-table th, .metric-table td { padding: 6px 7px; }
-    .chain-row { grid-template-columns: 1fr; }
-    .chain-time { text-align: left; padding-left: 4px; }
-  }
-</style>
+    <style>
+        /* Page-specific styles only — causal chain diagram and sequential table */
+        .chain-wrap { background:#f7f7f5; border:1px solid #e0e0de; border-radius:6px; padding:20px 24px; margin:24px 0; }
+        .chain-title { font-size:12px; color:#666; font-weight:600; margin-bottom:16px; text-transform:uppercase; letter-spacing:0.04em; }
+        .chain-row { display:grid; grid-template-columns:1fr 130px; gap:10px; align-items:center; margin-bottom:2px; }
+        .chain-node { border:1px solid #ccc; border-radius:4px; padding:7px 12px; font-size:13px; background:#fff; }
+        .chain-node.intervention { border-color:#198754; color:#0d4a2a; font-weight:600; }
+        .chain-node.outcome { border-color:#185FA5; color:#185FA5; font-weight:600; }
+        .chain-time { font-size:12px; color:#444; text-align:right; line-height:1.5; font-weight:500; }
+        .chain-time em { color:#198754; font-style:normal; display:block; font-weight:700; }
+        .chain-arrow { padding:1px 0 1px 4px; color:#666; font-size:16px; line-height:1; }
+        .worked-eg { background:#eef5ee; border-left:3px solid #198754; padding:10px 14px; margin:12px 0 4px; border-radius:0 4px 4px 0; font-size:14px; line-height:1.65; }
+        .worked-eg .eg-label { display:block; color:#0d5228; margin-bottom:4px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; }
+        .step-block { border:1px solid #e0e0de; border-radius:6px; margin:20px 0; overflow:hidden; }
+        .step-header { background:#f7f7f5; padding:11px 16px; display:flex; align-items:baseline; gap:12px; border-bottom:1px solid #e0e0de; }
+        .step-num { font-size:11px; font-weight:700; color:#888; text-transform:uppercase; letter-spacing:0.05em; flex-shrink:0; }
+        .step-title { font-size:15px; font-weight:700; color:#111; }
+        .step-body { padding:14px 16px; font-size:14px; line-height:1.7; }
+        .step-body p { margin-bottom:10px; }
+        .step-body p:last-child { margin-bottom:0; }
+        .seq-table { width:100%; border-collapse:collapse; font-size:13px; margin:0; }
+        .seq-table th { background:#f2f2f0; padding:8px 10px; text-align:left; font-weight:600; border:1px solid #ddd; font-size:12px; }
+        .seq-table td { padding:8px 10px; border:1px solid #ddd; vertical-align:top; line-height:1.5; }
+        .seq-table tr:nth-child(even) td { background:#fafaf8; }
+        @media (max-width:600px) { .chain-row { grid-template-columns:1fr; } .chain-time { text-align:left; } }
+    </style>
 </head>
 <body>
 
-<nav class="site-nav">
-  <a href="https://stepchangeanalysis.com/">💡 Start here</a>
-  <a href="https://stepchangeanalysis.com/#validator">🔍 Data Validator</a>
-  <a href="https://stepchangeanalysis.com/#articles">📰 Articles</a>
-  <a href="https://stepchangeanalysis.com/glossary.html">📚 Glossary</a>
-  <a href="https://stepchangeanalysis.com/#feedback">💬 Feedback</a>
-</nav>
+<div id="site-header"></div>
 
-<div class="container">
+<main class="page-wrap">
 
-<p class="breadcrumb"><a href="https://stepchangeanalysis.com/">Home</a> › <a href="https://stepchangeanalysis.com/#articles">Articles</a> › Leading Indicators</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Leading Indicators</div>
+    <div class="page-flag">&#128200; Improvement Concepts &middot; Measurement</div>
+    <h1>Leading Indicators &mdash; Measuring Progress When the Outcome Is 15 Years Away</h1>
+    <p class="page-intro">When a system fix takes 10&ndash;15 years to show results in the final outcome, decision-makers need earlier evidence that the intervention is working. This page introduces a six-step method for designing leading indicators &mdash; intermediate metrics that are causally connected to the long-term outcome and visible within two to three years. The method is grounded in Deming&rsquo;s &ldquo;Production viewed as a system,&rdquo; Weiss&rsquo;s Theory of Change, and Joiner&rsquo;s levels of fix. The central question: if the outcome is 15 years away, what honest evidence of progress can you measure in year two?</p>
 
-<span class="tag">⚙️ Improvement Methods · Measurement</span>
-
-<h1>Leading Indicators — Measuring Progress When the Outcome Is 15 Years Away</h1>
-
-<p class="byline">
-  By Syd Stewart, Chartered Chemical Engineer · StepChangeAnalysis.com · 2026<br>
-  Related: <a href="https://stepchangeanalysis.com/corridor-care-2029.html">Corridor Care 2029</a> · <a href="https://stepchangeanalysis.com/why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E</a> · <a href="https://stepchangeanalysis.com/types-of-measures.html">Types of Measures</a> · <a href="https://stepchangeanalysis.com/model-for-improvement.html">Model for Improvement</a> · <a href="https://stepchangeanalysis.com/glossary.html#section-methods">Glossary — Improvement Methods</a>
-</p>
-
-<div class="acronym-block">
-  <strong>📚 Acronyms used in this article</strong>
-  <p>
-    <strong>SFA</strong> — Scottish Football Association (governing body of football in Scotland, based at Hampden Park, Glasgow)<br>
-    <strong>SPFL</strong> — Scottish Professional Football League (the top four divisions of Scottish club football, from the Premiership to League Two)<br>
-    <strong>CAS</strong> — Club Academy Scotland (the SFA's framework for governing and part-funding youth player development, covering ages 11–19 across all SPFL clubs)<br>
-    <strong>UEFA</strong> — Union of European Football Associations (the governing body for football in Europe, which runs the Champions League, Europa League, and European Championship)<br>
-    <strong>CUSUM</strong> — Cumulative Sum (the statistical method used in the StepChange Analyzer to detect structural change points in time-series data)
-  </p>
-</div>
-
-<div class="callout">
-  <strong>📋 Summary</strong>
-  <p>When a system fix takes 10–15 years to show results in the final outcome, decision-makers need earlier evidence that the intervention is working. This page introduces a six-step method for designing <strong>leading indicators</strong> — intermediate metrics that are causally connected to the long-term outcome and visible within two to three years.</p>
-  <p>The method is worked through using Scottish football development as the example domain. The same six steps apply to any complex system with long lead times — NHS workforce planning, education reform, infrastructure investment, public health programmes.</p>
-  <p><strong>The central question:</strong> if the outcome is 15 years away, what honest evidence of progress can you measure in year two?</p>
-</div>
-
-<div class="contents-box">
-  <div class="contents-toggle" onclick="toggleContents(this)" aria-expanded="false">
-    <span>☰ Contents</span>
-    <span class="contents-arrow">▼</span>
-  </div>
-  <div class="contents-body">
-    <ol>
-      <li><a href="#section-problem">The problem with long lead times</a></li>
-      <li><a href="#section-method">The six-step method</a></li>
-      <li><a href="#section-chain">The causal chain — Scottish football</a></li>
-      <li><a href="#section-vanity">Vanity metrics vs leading indicators</a></li>
-      <li><a href="#section-metrics">The resulting metric set</a></li>
-      <li><a href="#section-cusum">How StepChange Analysis connects</a></li>
-      <li><a href="#section-generalise">Generalising the method</a></li>
-      <li><a href="#section-howto">Links to the Improvement Model and Types of Measures</a></li>
-      <li><a href="#section-proof">Proof points — what the evidence actually shows</a></li>
-      <li><a href="#section-references">References</a></li>
-    </ol>
-  </div>
-</div>
-
-<h2 id="section-problem">1. The problem with long lead times</h2>
-
-<p>Most serious improvement problems have long causal chains. The intervention happens now. The outcome appears years — sometimes decades — later. In between, multiple steps must occur in sequence, each one necessary for the next.</p>
-
-<p>This creates a governance problem. Decision-makers are asked to invest today in something that will not be verifiable until they have left office. Without intermediate evidence, the argument for sustained investment collapses into faith — and faith does not survive budget cycles, political pressure, or a poor run of short-term results.</p>
-
-<p>The standard response is to pick metrics that are easy to measure but not causally connected to the outcome: activity counts, participation numbers, money spent. These are <strong>vanity metrics</strong>. They go up readily without driving the outcome. They give the appearance of progress while the underlying system remains unchanged.</p>
-
-<blockquote>The NHS has measured millions of A&amp;E attendances, GP appointments, and waiting list entries for 25 years. Not one policy intervention in that period is detectable as a structural improvement in StepChange Analysis. The metrics moved. The system did not. — <a href="https://stepchangeanalysis.com/why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked</a></blockquote>
-
-<p>Deming made the same point structurally in 1950. His "Production viewed as a system" diagram — first presented to Japanese engineers in August 1950 and reproduced in <em>Out of the Crisis</em> (1986, p.4) — shows quality flowing from inputs (suppliers A, B, C...) through the production process to the consumer. His conclusion: <em>"Improvement of quality envelops the entire production line, from incoming materials to the consumer."</em> You cannot improve the output by measuring only the output. The inputs to the system are where improvement is made — and therefore where improvement must be measured. Leading indicators are, in Deming's terms, the measures of those inputs and the process that transforms them. The lag measure — the final outcome — tells you what already happened. The leading indicator tells you what is happening now, upstream, where you can still act.</p>
-
-<p>The alternative is to design <strong>leading indicators</strong>: metrics that sit earlier in the causal chain, are measurable within a short window, and genuinely precede and cause the long-term outcome. These are not proxies for success — they are necessary conditions for it.</p>
-
-<h2 id="section-method">2. The six-step method</h2>
-
-<p>The method works backwards from the desired outcome. It is a simplified application of Theory of Change — formally proposed by Carol Weiss in 1995 and widely used in international development, public health, and social policy precisely because those fields face the same problem: long lead times, multiple causal steps, and decision-makers who need to see progress before the ultimate outcome arrives. Weiss argued that complex programmes are difficult to evaluate because stakeholders give too little attention to the early and mid-term changes — the "mini-steps" — that must happen before a long-term goal can be reached. Making those mini-steps explicit is the method on this page.</p>
-
-<div class="step-block">
-  <div class="step-header"><span class="step-num">Step 1</span><span class="step-title">Name the ultimate outcome precisely</span></div>
-  <div class="step-body">
-    <p>State the long-term goal in measurable terms. Vague outcomes produce vague metrics. "Improve performance" is not an outcome. "Scotland qualifies for and reaches the knockout stage of a World Cup" is.</p>
-    <p>The precision matters because it determines what the causal chain leads to. An imprecise outcome allows the chain to be drawn in multiple directions — making it impossible to identify which intermediate steps are genuinely necessary.</p>
-    <div class="worked-eg"><span class="eg-label">Worked example — Scottish football</span>Ultimate outcome: Scotland consistently qualifies for major international tournaments and reaches the knockout stages. Time horizon: 10–15 years.</div>
-  </div>
-</div>
-
-<div class="step-block">
-  <div class="step-header"><span class="step-num">Step 2</span><span class="step-title">Map the causal chain backwards</span></div>
-  <div class="step-body">
-    <p>Starting from the outcome, ask at each step: <em>what must be true immediately before this can happen?</em> Work backwards until you reach the current intervention point. Draw the chain explicitly — do not skip steps.</p>
-    <p>Every arrow in the chain represents an assumption. Making the chain explicit forces those assumptions into the open, where they can be tested rather than taken on faith.</p>
-    <div class="worked-eg"><span class="eg-label">Worked example — Scottish football</span>Tournament success ← sufficient quality senior players ← players developed to professional standard ← players in elite academy environments ← academies meeting quality standards ← consistent philosophy and coaching quality ← funded and enforced infrastructure</div>
-  </div>
-</div>
-
-<div class="step-block">
-  <div class="step-header"><span class="step-num">Step 3</span><span class="step-title">Identify the necessary conditions at each link</span></div>
-  <div class="step-body">
-    <p>For each arrow in the chain, ask: <em>what must be true for this step to reliably produce the next one?</em> These conditions are your candidate metrics. Each must be falsifiable — it must be possible for the condition not to be met.</p>
-    <p>Be suspicious of conditions that are always true regardless of what you do. A condition that cannot fail is not a condition — it is decoration.</p>
-    <div class="worked-eg"><span class="eg-label">Worked example — Scottish football</span>For "elite academy environments → players developed to professional standard" to hold, the necessary conditions include: academies must meet a minimum quality standard; coaching staff must be qualified to a defined level; a consistent development philosophy must be applied across all CAS academies; players must have sufficient competitive exposure at the right age.</div>
-  </div>
-</div>
-
-<div class="step-block">
-  <div class="step-header"><span class="step-num">Step 4</span><span class="step-title">Filter by measurability and lead time</span></div>
-  <div class="step-body">
-    <p>From your list of necessary conditions, retain only those that: (a) can be measured within two to three years, and (b) use data that already exists or can be collected without a new bureaucracy. Prefer metrics where collection is already happening — you are assembling, not inventing.</p>
-    <div class="worked-eg"><span class="eg-label">Worked example — Scottish football</span>Already collected: the SFA holds CAS licence grades for all clubs annually. UEFA holds age-group tournament qualification records. The SPFL holds professional debut data. The SFA holds senior squad composition records. None require new collection — only assembly and publication in a single annual report.</div>
-  </div>
-</div>
-
-<div class="step-block">
-  <div class="step-header"><span class="step-num">Step 5</span><span class="step-title">Test each candidate: vanity metric or leading indicator?</span></div>
-  <div class="step-body">
-    <p>Apply this test to every candidate: <em>could this metric improve substantially without the long-term outcome improving at all?</em> If yes, it is a vanity metric. Discard it.</p>
-    <div class="worked-eg">
-      <span class="eg-label">Worked example — Scottish football</span>
-      <strong style="display:block; margin-top:4px; margin-bottom:2px; font-size:12px;">Vanity metric:</strong> "Number of children participating in football programmes." Can rise indefinitely through after-school clubs and community initiatives with no connection to elite player development. Fails the test.<br><br>
-      <strong style="display:block; margin-bottom:2px; font-size:12px;">Leading indicator:</strong> "Number of Scottish-developed players making professional debuts per year." Cannot rise without the development pipeline actually producing professional players. Causally connected. Passes the test.
+    <div class="callout blue" style="margin-top:16px;">
+        <strong>What you&rsquo;ll be able to do after this page</strong>
+        <ul style="margin:10px 0 0 18px;line-height:1.9;">
+            <li>Design leading indicators that are causally connected to the long-term outcome &mdash; not vanity metrics.</li>
+            <li>Understand why the right metric shifts as a programme matures along its causal chain.</li>
+            <li>Recognise a missing change point as a diagnostic finding, not just a disappointment.</li>
+            <li>Apply the six-step causal chain method to any long-lead-time system &mdash; NHS, education, sport, policy.</li>
+        </ul>
     </div>
-  </div>
-</div>
 
-<div class="step-block">
-  <div class="step-header"><span class="step-num">Step 6</span><span class="step-title">Assign a single owner and publish the baseline</span></div>
-  <div class="step-body">
-    <p>Every metric must have one named body or role responsible for collecting and publishing it on a fixed schedule. Shared ownership means no ownership.</p>
-    <p>Publish the baseline before the intervention begins. Without a baseline, there is no honest before-and-after. The baseline is what StepChange Analysis will eventually test for a structural change point — it must exist in the data before a signal can be found in it.</p>
-    <div class="worked-eg"><span class="eg-label">Worked example — Scottish football</span>Owner: a Technical Director with board-level authority and a public annual reporting obligation. Each metric published in an Annual Academy Output Report — accessible to journalists, fans, and politicians. Accountability without a new bureaucracy, because the data already exists within the SFA, SPFL, and UEFA.</div>
-  </div>
-</div>
+    <div class="cta-box" style="margin-top:18px;">
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+        <p style="margin-top:10px;color:white;">
+            Next: <a href="types-of-measures.html" style="color:white;">Types of Measures</a> &rarr; <a href="model-for-improvement.html" style="color:white;">Model for Improvement</a>
+        </p>
+    </div>
 
-<h2 id="section-chain">3. The causal chain — Scottish football</h2>
+    <div class="page-meta">By Syd Stewart, Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
 
-<p>The chain below reads from intervention (top) to final outcome (bottom). The right column shows the approximate time before each step becomes visible in data, and identifies the four points where leading indicators can be measured.</p>
+    <div class="callout blue" style="margin:0 0 24px;">
+        <strong>&#128218; Acronyms used in this article</strong>
+        <p style="margin:8px 0 0;line-height:2.0;font-size:13px;">
+            <strong>SFA</strong> &mdash; Scottish Football Association (governing body of football in Scotland, based at Hampden Park, Glasgow)<br>
+            <strong>SPFL</strong> &mdash; Scottish Professional Football League (the top four divisions of Scottish club football, from the Premiership to League Two)<br>
+            <strong>CAS</strong> &mdash; Club Academy Scotland (the SFA&rsquo;s framework for governing and part-funding youth player development, covering ages 11&ndash;19)<br>
+            <strong>UEFA</strong> &mdash; Union of European Football Associations (governing body for football in Europe; runs the Champions League and European Championship)<br>
+            <strong>CUSUM</strong> &mdash; Cumulative Sum (the statistical method used in the StepChange Analyzer to detect structural change points in time-series data)
+        </p>
+    </div>
 
-<div class="chain-wrap">
-  <div class="chain-title">CAUSAL CHAIN — Scottish football development (top = intervention now · bottom = outcome 10–15 years)</div>
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-problem">The problem with long lead times</a></li>
+                <li><a href="#section-method">The six-step method</a></li>
+                <li><a href="#section-chain">The causal chain &mdash; Scottish football</a></li>
+                <li><a href="#section-vanity">Vanity metrics vs leading indicators</a></li>
+                <li><a href="#section-metrics">The resulting metric set</a></li>
+                <li><a href="#section-shifting">The primary metric shifts as time passes</a></li>
+                <li><a href="#section-cusum">How StepChange Analysis connects</a></li>
+                <li><a href="#section-generalise">Generalising the method</a></li>
+                <li><a href="#section-proof">Proof points &mdash; what the evidence actually shows</a></li>
+                <li><a href="#section-howto">Links to the Improvement Model and Types of Measures</a></li>
+                <li><a href="#section-references">References</a></li>
+            </ol>
+        </div>
+    </details>
 
-  <div class="chain-row">
-    <div class="chain-box intervention">Funded and enforced infrastructure<br><small style="font-weight:400;color:#555;">(CAS, Performance Schools, Technical Director appointed)</small></div>
-    <div class="chain-time">Now — year 1</div>
-  </div>
-  <div class="chain-arrow">↓</div>
+    <h2 id="section-problem">1. The problem with long lead times</h2>
 
-  <div class="chain-row">
-    <div class="chain-box">Consistent coaching philosophy across all CAS elite academies</div>
-    <div class="chain-time">Year 1–2</div>
-  </div>
-  <div class="chain-arrow">↓</div>
+    <p>Most serious improvement problems have long causal chains. The intervention happens now. The outcome appears years &mdash; sometimes decades &mdash; later. In between, multiple steps must occur in sequence, each one necessary for the next.</p>
 
-  <div class="chain-row">
-    <div class="chain-box">Academies meeting quality standards — CAS gold licence or above</div>
-    <div class="chain-time">Year 1–2<em>← measure here</em></div>
-  </div>
-  <div class="chain-arrow">↓</div>
+    <p>This creates a governance problem. Decision-makers are asked to invest today in something that will not be verifiable until they have left office. Without intermediate evidence, the argument for sustained investment collapses into faith &mdash; and faith does not survive budget cycles, political pressure, or a poor run of short-term results. The standard response is to reach for the outcome measure &mdash; the number that everyone understands, that governance bodies demand, and that cannot move for a decade. That response is a belief as much as a choice: <em>my job is to report the outcome.</em> Joiner called this Level 3 Deep &mdash; a mindset that no technical fix can dislodge. The shift required is to a different belief: <em>my job is to understand the system that produces the outcome, and to measure it at each stage.</em> That is what this page is about.</p>
 
-  <div class="chain-row">
-    <div class="chain-box">Players in elite academy environments with sufficient competitive exposure</div>
-    <div class="chain-time">Year 2–3</div>
-  </div>
-  <div class="chain-arrow">↓</div>
+    <p>The standard response to the governance problem is to pick metrics that are easy to measure but not causally connected to the outcome: activity counts, participation numbers, money spent. These are <strong>vanity metrics</strong>. They go up readily without driving the outcome. They give the appearance of progress while the underlying system remains unchanged.</p>
 
-  <div class="chain-row">
-    <div class="chain-box">Scottish-developed players making professional debuts</div>
-    <div class="chain-time">Year 2–4<em>← measure here</em></div>
-  </div>
-  <div class="chain-arrow">↓</div>
+    <blockquote>The NHS has measured millions of A&amp;E attendances, GP appointments, and waiting list entries for 25 years. Not one policy intervention in that period is detectable as a structural improvement in StepChange Analysis. The metrics moved. The system did not. &mdash; <a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked</a></blockquote>
 
-  <div class="chain-row">
-    <div class="chain-box">Scotland age-group teams qualifying for UEFA youth tournaments</div>
-    <div class="chain-time">Year 3–5<em>← measure here</em></div>
-  </div>
-  <div class="chain-arrow">↓</div>
+    <p>Deming made the same point structurally in 1950. His &ldquo;Production viewed as a system&rdquo; diagram &mdash; first presented to Japanese engineers in August 1950 and reproduced in <em>Out of the Crisis</em> (1986, p.4) &mdash; shows quality flowing from inputs (suppliers A, B, C&hellip;) through the production process to the consumer. His conclusion: <em>&ldquo;Improvement of quality envelops the entire production line, from incoming materials to the consumer.&rdquo;</em> You cannot improve the output by measuring only the output. The inputs to the system are where improvement is made &mdash; and therefore where improvement must be measured. Leading indicators are, in Deming&rsquo;s terms, the measures of those inputs and the process that transforms them.</p>
 
-  <div class="chain-row">
-    <div class="chain-box">Senior squad sourced predominantly from CAS elite academies</div>
-    <div class="chain-time">Year 5–8<em>← measure here</em></div>
-  </div>
-  <div class="chain-arrow">↓</div>
+    <p>The alternative is to design <strong>leading indicators</strong>: metrics that sit earlier in the causal chain, are measurable within a short window, and genuinely precede and cause the long-term outcome. These are not proxies for success &mdash; they are necessary conditions for it.</p>
 
-  <div class="chain-row">
-    <div class="chain-box outcome">Tournament qualification and knockout stage results</div>
-    <div class="chain-time">Year 10–15</div>
-  </div>
-</div>
+    <hr>
 
-<p>Each "measure here" point is a leading indicator. Four of the eight steps in the chain are measurable within five years — years before the final outcome can be honestly tested.</p>
+    <h2 id="section-method">2. The six-step method</h2>
 
-<h2 id="section-vanity">4. Vanity metrics vs leading indicators</h2>
+    <p>The method works backwards from the desired outcome. It is a simplified application of Theory of Change &mdash; formally proposed by Carol Weiss in 1995 and widely used in international development, public health, and social policy precisely because those fields face the same problem: long lead times, multiple causal steps, and decision-makers who need to see progress before the ultimate outcome arrives. Weiss argued that complex programmes are difficult to evaluate because stakeholders give too little attention to the early and mid-term changes &mdash; the &ldquo;mini-steps&rdquo; &mdash; that must happen before a long-term goal can be reached. Making those mini-steps explicit is the method on this page.</p>
 
-<p>The distinction matters because vanity metrics are politically attractive — they move quickly, can be reported at press conferences, and rarely get worse. Leading indicators are harder to game because they are causally connected to something that cannot be faked.</p>
+    <div class="step-block">
+        <div class="step-header"><span class="step-num">Step 1</span><span class="step-title">Name the ultimate outcome precisely</span></div>
+        <div class="step-body">
+            <p>State the long-term goal in measurable terms. Vague outcomes produce vague metrics. &ldquo;Improve performance&rdquo; is not an outcome. &ldquo;Scotland qualifies for and reaches the knockout stage of a World Cup&rdquo; is. The precision determines what the causal chain leads to &mdash; an imprecise outcome allows the chain to be drawn in multiple directions, making it impossible to identify which intermediate steps are genuinely necessary.</p>
+            <div class="worked-eg"><span class="eg-label">Worked example &mdash; Scottish football</span>Ultimate outcome: Scotland consistently qualifies for major international tournaments and reaches the knockout stages. Time horizon: 10&ndash;15 years.</div>
+        </div>
+    </div>
 
-<div class="warning-box">
-  <div class="box-title">⚠️ The vanity metric trap — an NHS example with a leading indicator alternative</div>
-  <p>GP appointment numbers rose consistently from 2018 to 2024 and were cited repeatedly as evidence of improvement. StepChange Analysis on the same period found that GP doctor contact rates — the metric causally connected to patient access — showed <strong>no structural change at all</strong> across those years. The system grew. The outcome the system exists to produce did not move.</p>
-  <p><strong>Vanity metric:</strong> Total GP appointments recorded. Moves easily — add appointment slots, telephone contacts, online bookings. Does not require the patient to actually receive GP care.</p>
-  <p><strong>Leading indicator:</strong> Rate of patients who see or speak to a GP within 48 hours of requesting an appointment. This cannot improve without the GP contact system structurally changing. Causally connected. Non-gameable.</p>
-  <p><strong>Time to outcome:</strong> If the leading indicator shows a structural improvement in year one, the downstream outcome — reduced avoidable emergency attendances driven by unmet primary care need — would be expected to appear in StepChange Analysis within 18–30 months. The lag is predictable and, crucially, pre-committable before the data arrives.</p>
-  <p><a href="https://stepchangeanalysis.com/gp-appointments-analysis.html">Read the full GP appointments analysis →</a></p>
-</div>
+    <div class="step-block">
+        <div class="step-header"><span class="step-num">Step 2</span><span class="step-title">Map the causal chain backwards</span></div>
+        <div class="step-body">
+            <p>Starting from the outcome, ask at each step: <em>what must be true immediately before this can happen?</em> Work backwards until you reach the current intervention point. Draw the chain explicitly &mdash; do not skip steps. Every arrow represents an assumption; making the chain explicit forces those assumptions into the open, where they can be tested rather than taken on faith.</p>
+            <div class="worked-eg"><span class="eg-label">Worked example &mdash; Scottish football</span>Tournament success &larr; sufficient quality senior players &larr; players developed to professional standard &larr; players in elite academy environments &larr; academies meeting quality standards &larr; consistent philosophy and coaching quality &larr; funded and enforced infrastructure</div>
+        </div>
+    </div>
 
-<p>The same trap appears in every domain with long lead times. In education: school inspection ratings improve while pupil outcomes stagnate. In safety: near-miss reporting rates rise while incident rates remain flat. In football development: youth participation numbers climb while the number of players reaching professional level does not change. The metric moves. The system does not.</p>
+    <div class="step-block">
+        <div class="step-header"><span class="step-num">Step 3</span><span class="step-title">Identify the necessary conditions at each link</span></div>
+        <div class="step-body">
+            <p>For each arrow in the chain, ask: <em>what must be true for this step to reliably produce the next one?</em> These conditions are your candidate metrics. Each must be falsifiable &mdash; it must be possible for the condition not to be met. Be suspicious of conditions that are always true regardless of what you do. A condition that cannot fail is not a condition &mdash; it is decoration.</p>
+            <div class="worked-eg"><span class="eg-label">Worked example &mdash; Scottish football</span>For &ldquo;elite academy environments &rarr; players developed to professional standard&rdquo; to hold: academies must meet a minimum quality standard; coaching staff must be qualified to a defined level; a consistent development philosophy must be applied across all CAS academies; players must have sufficient competitive exposure at the right age.</div>
+        </div>
+    </div>
 
-<h2 id="section-metrics">5. The resulting metric set — Scottish football development</h2>
+    <div class="step-block">
+        <div class="step-header"><span class="step-num">Step 4</span><span class="step-title">Filter by measurability and lead time</span></div>
+        <div class="step-body">
+            <p>From your list of necessary conditions, retain only those that: (a) can be measured within two to three years, and (b) use data that already exists or can be collected without a new bureaucracy. Prefer metrics where collection is already happening &mdash; you are assembling, not inventing.</p>
+            <div class="worked-eg"><span class="eg-label">Worked example &mdash; Scottish football</span>Already collected: the SFA holds CAS licence grades for all clubs annually. UEFA holds age-group tournament qualification records. The SPFL holds professional debut data. The SFA holds senior squad composition records. None require new collection &mdash; only assembly and publication in a single annual report.</div>
+        </div>
+    </div>
 
-<p>Applying the six steps produces four leading indicators, each at a different point in the causal chain and each visible within two to five years of the intervention beginning — well before the senior team's tournament results can be honestly tested.</p>
+    <div class="step-block">
+        <div class="step-header"><span class="step-num">Step 5</span><span class="step-title">Test each candidate: vanity metric or leading indicator?</span></div>
+        <div class="step-body">
+            <p>Apply this test to every candidate: <em>could this metric improve substantially without the long-term outcome improving at all?</em> If yes, it is a vanity metric. Discard it.</p>
+            <div class="worked-eg">
+                <span class="eg-label">Worked example &mdash; Scottish football</span>
+                <strong style="display:block;margin-top:4px;margin-bottom:2px;">Vanity metric:</strong> &ldquo;Number of children participating in football programmes.&rdquo; Can rise indefinitely through after-school clubs and community initiatives with no connection to elite player development. Fails the test.<br><br>
+                <strong style="display:block;margin-bottom:2px;">Leading indicator:</strong> &ldquo;Number of Scottish-developed players making professional debuts per year.&rdquo; Cannot rise without the development pipeline actually producing professional players. Causally connected. Passes the test.
+            </div>
+        </div>
+    </div>
 
-<table class="metric-table">
-  <thead>
-    <tr>
-      <th>Metric</th>
-      <th>Position in chain</th>
-      <th>Data held by</th>
-      <th>Visible within</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Number of CAS clubs reaching gold licence or above</td>
-      <td>Environment quality</td>
-      <td>SFA (annual audit)</td>
-      <td>1 season</td>
-    </tr>
-    <tr>
-      <td>Number of Scottish-developed players making professional debuts per year</td>
-      <td>Pipeline output</td>
-      <td>SPFL registration data</td>
-      <td>1–2 seasons</td>
-    </tr>
-    <tr>
-      <td>Number of Scotland age-group teams qualifying for UEFA youth tournaments</td>
-      <td>International competitiveness</td>
-      <td>UEFA / SFA records</td>
-      <td>2–3 years</td>
-    </tr>
-    <tr>
-      <td>Percentage of Scotland senior squad from a CAS elite academy</td>
-      <td>System-to-squad conversion</td>
-      <td>SFA squad records</td>
-      <td>5–8 years</td>
-    </tr>
-  </tbody>
-</table>
+    <div class="step-block">
+        <div class="step-header"><span class="step-num">Step 6</span><span class="step-title">Assign a single owner and publish the baseline</span></div>
+        <div class="step-body">
+            <p>Every metric must have one named body or role responsible for collecting and publishing it on a fixed schedule. Shared ownership means no ownership. Publish the baseline before the intervention begins &mdash; without a baseline, there is no honest before-and-after. The baseline is what StepChange Analysis will eventually test for a structural change point.</p>
+            <div class="worked-eg"><span class="eg-label">Worked example &mdash; Scottish football</span>Owner: a Technical Director with board-level authority and a public annual reporting obligation. Each metric published in an Annual Academy Output Report &mdash; accessible to journalists, fans, and politicians. The data already exists within the SFA, SPFL, and UEFA; the accountability is what is missing.</div>
+        </div>
+    </div>
 
-<p>Each metric passes the vanity test — none can improve without the underlying system changing. Each uses data that already exists. Each has a natural single owner. And each is far enough upstream in the causal chain to be visible well before the senior team's results change.</p>
+    <hr>
 
-<h2 id="section-cusum">6. How StepChange Analysis connects</h2>
+    <h2 id="section-chain">3. The causal chain &mdash; Scottish football</h2>
 
-<div class="callout">
-  <strong>📊 These metrics are designed to be StepChange Analysed</strong>
-  <p>Once a leading indicator has been collected for long enough — typically 15–20 observations — the StepChange Analyzer can test whether a genuine structural change has occurred, or whether observed movement is within normal variation.</p>
-  <p>This is the honest test: not "did the number go up?" but "has the process that generates the number structurally changed?" A change point in a leading indicator, at 95% confidence or above, is the earliest honest evidence that the intervention is working at a systemic level — years before the final outcome can be tested.</p>
-  <p>A flat CUSUM on a leading indicator, with no change point despite the intervention having had time to act, is equally important: it tells you the intervention is not reaching the causal mechanism assumed. That is Joiner's diagnosis — the fix is at the wrong level of the system.</p>
-</div>
+    <p>The chain below reads from intervention (top) to final outcome (bottom). The right column shows the approximate time before each step becomes visible in data, and identifies the four points where leading indicators can be measured.</p>
 
-<div class="cta-box">
-  <a class="cta-btn" href="https://stepchangeanalysis.com/">▶ Open the StepChange Analyzer</a>
-  <p>Upload your leading indicator time series. The Analyzer will show you whether a structural change point has occurred — or whether what you are seeing is noise.</p>
-  <div class="cta-next">Next: <a href="https://stepchangeanalysis.com/types-of-measures.html" style="color:white;">Types of Measures →</a> &nbsp;|&nbsp; <a href="https://stepchangeanalysis.com/model-for-improvement.html" style="color:white;">Model for Improvement →</a></div>
-</div>
+    <div class="chain-wrap">
+        <div class="chain-title">Causal chain &mdash; Scottish football development (top = intervention now &nbsp;&middot;&nbsp; bottom = outcome 10&ndash;15 years)</div>
 
-<h2 id="section-generalise">7. Generalising the method</h2>
+        <div class="chain-row"><div class="chain-node intervention">Funded and enforced infrastructure &mdash; CAS, Performance Schools, Technical Director appointed</div><div class="chain-time">Now &mdash; year 1</div></div>
+        <div class="chain-arrow">&darr;</div>
+        <div class="chain-row"><div class="chain-node">Consistent coaching philosophy across all CAS elite academies</div><div class="chain-time">Year 1&ndash;2</div></div>
+        <div class="chain-arrow">&darr;</div>
+        <div class="chain-row"><div class="chain-node">Academies meeting quality standards &mdash; CAS gold licence or above</div><div class="chain-time">Year 1&ndash;2<em>&larr; measure here</em></div></div>
+        <div class="chain-arrow">&darr;</div>
+        <div class="chain-row"><div class="chain-node">Players in elite academy environments with sufficient competitive exposure</div><div class="chain-time">Year 2&ndash;3</div></div>
+        <div class="chain-arrow">&darr;</div>
+        <div class="chain-row"><div class="chain-node">Scottish-developed players making professional debuts</div><div class="chain-time">Year 2&ndash;4<em>&larr; measure here</em></div></div>
+        <div class="chain-arrow">&darr;</div>
+        <div class="chain-row"><div class="chain-node">Scotland age-group teams qualifying for UEFA youth tournaments</div><div class="chain-time">Year 3&ndash;5<em>&larr; measure here</em></div></div>
+        <div class="chain-arrow">&darr;</div>
+        <div class="chain-row"><div class="chain-node">Senior squad sourced predominantly from CAS elite academies</div><div class="chain-time">Year 5&ndash;8<em>&larr; measure here</em></div></div>
+        <div class="chain-arrow">&darr;</div>
+        <div class="chain-row"><div class="chain-node outcome">Tournament qualification and knockout stage results</div><div class="chain-time">Year 10&ndash;15</div></div>
+    </div>
 
-<p>The six steps are domain-independent. The same logic applies directly to NHS and public policy settings:</p>
+    <p>Each &ldquo;measure here&rdquo; point is a leading indicator. Four of the eight steps in the chain are measurable within five years &mdash; well before the final outcome can be honestly tested.</p>
 
-<ul>
-  <li><strong>NHS workforce planning.</strong> Ultimate outcome: adequate staffing ratios in five years. Leading indicators: medical school places filled, foundation training completion rates, specialty training fill rates — all visible within 12–24 months and causally connected to the workforce outcome.</li>
-  <li><strong>Education reform.</strong> Ultimate outcome: improved literacy at age 16. Leading indicators: proportion of primary teachers trained in structured literacy programmes, phonics screening pass rates at age 6 — measurable years before the secondary outcome appears.</li>
-  <li><strong>Public health.</strong> Ultimate outcome: reduction in type 2 diabetes incidence in ten years. Leading indicators: pre-diabetes identification rate, referral-to-programme uptake, programme completion — each a necessary condition for the outcome, visible within two years.</li>
-  <li><strong>A&amp;E corridor care.</strong> Ultimate outcome: elimination of corridor care by 2029. Leading indicator: delayed transfer of care bed-days per 1,000 admissions — the actual constraint, not corridor hours logged or SDEC capacity built. <a href="https://stepchangeanalysis.com/corridor-care-2029.html">See the full pre-committed prediction →</a></li>
-</ul>
+    <hr>
 
-<p>In every case: map the causal chain backwards, identify necessary conditions, filter for measurability and lead time, test for vanity, assign ownership, publish the baseline. The domain changes. The logic does not.</p>
+    <h2 id="section-vanity">4. Vanity metrics vs leading indicators</h2>
 
-<h2 id="section-proof">Proof points — what the evidence actually shows</h2>
+    <p>The distinction matters because vanity metrics are politically attractive &mdash; they move quickly, can be reported at press conferences, and rarely get worse. Leading indicators are harder to game because they are causally connected to something that cannot be faked.</p>
 
-<p>The football development examples used in this page are not hypothetical. Each has a verified source.</p>
+    <div class="callout orange">
+        <strong>&#9888; The vanity metric trap &mdash; an NHS example with a leading indicator alternative</strong>
+        <p>GP appointment numbers rose consistently from 2018 to 2024 and were cited repeatedly as evidence of improvement. StepChange Analysis on the same period found that GP doctor contact rates &mdash; the metric causally connected to patient access &mdash; showed <strong>no structural change at all</strong> across those years. The system grew. The outcome the system exists to produce did not move.</p>
+        <p><strong>Vanity metric:</strong> Total GP appointments recorded. Moves easily &mdash; add appointment slots, telephone contacts, online bookings. Does not require the patient to actually receive GP care.</p>
+        <p><strong>Leading indicator:</strong> Rate of patients who see or speak to a GP within 48 hours of requesting an appointment. Cannot improve without the GP contact system structurally changing. Causally connected. Non-gameable.</p>
+        <p><strong>Time to outcome:</strong> If the leading indicator shows a structural improvement in year one, the downstream outcome &mdash; reduced avoidable emergency attendances driven by unmet primary care need &mdash; would be expected to appear in StepChange Analysis within 18&ndash;30 months. The lag is predictable and pre-committable before the data arrives.</p>
+        <p><a href="gp-appointments-analysis.html">Read the full GP appointments analysis &rarr;</a></p>
+    </div>
 
-<p><strong>France — INF Clairefontaine (1988).</strong> The national football centre opened in January 1988, 50km southwest of Paris. Ten years later, France hosted and won the 1998 World Cup, with Clairefontaine serving as the base camp for the winning squad. Alumni of the programme include Thierry Henry and Kylian Mbappé. The centre is one part of a broader network of 16 elite academies supervised by the French Football Federation across France. The claim that Clairefontaine alone produced the 1998 victory overstates it — it was the flagship of a system, not the system itself. Source: Wikipedia — INF Clairefontaine; FIFA Training Centre interview with FFF Technical Director Hubert Fournier.</p>
+    <p>The same trap appears in every domain with long lead times. In education: school inspection ratings improve while pupil outcomes stagnate. In safety: near-miss reporting rates rise while incident rates remain flat. In football development: youth participation numbers climb while the number of players reaching professional level does not change. The metric moves. The system does not.</p>
 
-<p><strong>Iceland — KSÍ facility programme (mid-1990s planning, built from 2000).</strong> The Football Association of Iceland (KSÍ) began discussions on overcoming its population and climate challenges in the mid-1990s. The first domed "football house" opened at Keflavík in 2000; eventually 15 such facilities were commissioned across the country, all publicly owned and available to communities as well as clubs. At the same time, KSÍ invested heavily in coach education, making UEFA B and A licence courses available at minimal cost. By January 2016, Iceland had approximately one UEFA-qualified coach per 500 inhabitants, compared to one per 10,000 in England. Iceland qualified for UEFA Euro 2016 — their first major tournament — and reached the quarter-finals. The correction to the page's earlier wording: the facilities were planned in the mid-1990s but built from 2000 onwards, not in the 1990s as originally stated. Source: Wikipedia — Football in Iceland; Goal.com — "The Secret Behind the Iceland Miracle."</p>
+    <hr>
 
-<p><strong>Belgium — Project 2000.</strong> Following a humiliating group-stage exit as co-hosts of UEFA Euro 2000, the Royal Belgian Football Association (RBFA) redesigned its youth development structure from scratch — a programme known as Project 2000. Between 2004 and 2007, Belgium's FIFA ranking fell from 16th to 71st. Between 2004 and 2012 they failed to qualify for any major tournament. The investment in domestic youth development — focused on individual technical development rather than rigid systems — produced the generation of De Bruyne, Hazard, Lukaku, and Courtois. Belgium topped the FIFA World Rankings for the first time in 2015 and held the top spot for more than three years between September 2018 and March 2022. The earlier wording in this page referred to "formal relationships with top European academies" — that specific claim is not verified by sources; what is documented is a domestic curriculum reform. Source: Sky Sports — Bob Browaeys interview, 2018; UEFA — Developing football in Belgium; CNN — "The Belgian Blueprint," 2021.</p>
+    <h2 id="section-metrics">5. The resulting metric set &mdash; Scottish football development</h2>
 
-<p><strong>Wales — Dragon Park, Newport (opened 20 April 2013).</strong> Dragon Park is the Wales National Football Development Centre in Newport, opened in April 2013 by then-UEFA President Michel Platini. The £5m complex was a joint venture between UEFA, the Football Association of Wales, Sport Wales, and Newport City Council. It was intended to develop the Wales under-21, women's, and younger age-group squads. Wales qualified for UEFA Euro 2016 — their first major tournament since 1958 — and reached the semi-finals. A correction to the page's earlier wording: the facility referred to as "Hensol" is the FAW's senior headquarters at the Vale Resort, where the FAW relocated in 2020. Dragon Park in Newport (2013) is the correct development centre referenced in the context of youth infrastructure investment. Source: Wikipedia — Dragon Park; UEFA — Developing football in Wales.</p>
+    <p>Applying the six steps produces four leading indicators, each at a different point in the causal chain and each visible within two to five years of the intervention beginning &mdash; well before the senior team&rsquo;s tournament results can be honestly tested.</p>
 
-<h2 id="section-howto">8. Links to the Improvement Model and Types of Measures</h2>
+    <div style="overflow-x:auto;margin:24px 0;">
+        <table class="seq-table">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Position in chain</th>
+                    <th>Data held by</th>
+                    <th>Visible within</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Number of CAS clubs reaching gold licence or above</td><td>Environment quality</td><td>SFA (annual audit)</td><td>1 season</td></tr>
+                <tr><td>Number of Scottish-developed players making professional debuts per year</td><td>Pipeline output</td><td>SPFL registration data</td><td>1&ndash;2 seasons</td></tr>
+                <tr><td>Number of Scotland age-group teams qualifying for UEFA youth tournaments</td><td>International competitiveness</td><td>UEFA / SFA records</td><td>2&ndash;3 years</td></tr>
+                <tr><td>Percentage of Scotland senior squad from a CAS elite academy</td><td>System-to-squad conversion</td><td>SFA squad records</td><td>5&ndash;8 years</td></tr>
+            </tbody>
+        </table>
+    </div>
 
-<p><strong><a href="https://stepchangeanalysis.com/glossary.html">Joiner's levels of fixes</a></strong> tell you which level of the system your intervention is targeting. A Level 1 or Level 2 fix applied to a Level 3 problem will not produce a detectable change point in any metric — leading indicator or final outcome. Confirm which level your intervention operates at before designing metrics. If the answer is Level 1 or 2, no set of leading indicators will save an intervention that does not address the root cause.</p>
+    <p>Each metric passes the vanity test &mdash; none can improve without the underlying system changing. Each uses data that already exists. Each has a natural single owner. And each is far enough upstream in the causal chain to be visible well before the senior team&rsquo;s results change.</p>
 
-<p><strong><a href="https://stepchangeanalysis.com/types-of-measures.html">Types of measures</a></strong> — outcome, process, and balancing measures — map directly onto the causal chain. Outcome measures sit at the bottom. Process measures sit in the middle. Leading indicators are process measures chosen specifically because they are measurable early and causally connected to the outcome. Balancing measures — the things that must not get worse — should be designed alongside leading indicators and monitored in parallel.</p>
+    <hr>
 
-<p>The practical sequence:</p>
-<ol>
-  <li>Apply Joiner's levels to confirm the intervention is operating at the right level of the system.</li>
-  <li>Map the causal chain using the six-step method on this page.</li>
-  <li>Identify leading indicators — process measures that are early, causal, and non-vanity.</li>
-  <li>Establish baselines and begin collecting data.</li>
-  <li>Apply the StepChange Analyzer once sufficient observations exist — typically after 18–24 months.</li>
-  <li>Use the result as the honest test: not "did the number move?" but "has the system structurally changed?"</li>
-</ol>
+    <h2 id="section-shifting">6. The primary metric shifts as time passes</h2>
 
-<h2>Related pages</h2>
+    <p>This is the insight Weiss&rsquo;s &ldquo;mini-steps&rdquo; argument points to that is most often missed in practice. The four metrics above are not four measures to track simultaneously for 15 years. They are four measures that each become the <em>primary test</em> at a specific window of the causal chain &mdash; and then yield primacy to the next one as the programme matures.</p>
 
-<div class="related-grid">
-  <div class="related-card">
-    <span class="rc-tag">🏥️ NHS Healthcare Policy</span>
-    <a href="https://stepchangeanalysis.com/corridor-care-2029.html">Corridor Care 2029 — What Bootstrap CUSUM Will and Won't Find</a>
-    <p>Joiner's levels applied prospectively to four NHS initiatives. A pre-committed prediction about which will and won't produce a structural change point.</p>
-  </div>
-  <div class="related-card">
-    <span class="rc-tag">🏥️ NHS Healthcare Policy</span>
-    <a href="https://stepchangeanalysis.com/why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E</a>
-    <p>25 years of Level 1 and 2 interventions applied to a Level 3 problem. Zero structural improvement change points across 184 months.</p>
-  </div>
-  <div class="related-card">
-    <span class="rc-tag">🏥️ NHS Healthcare Policy</span>
-    <a href="https://stepchangeanalysis.com/gp-appointments-analysis.html">More GP Appointments, Fewer Patients Feeling Seen</a>
-    <p>The vanity metric trap in practice: activity rose while the causally connected outcome did not move.</p>
-  </div>
-  <div class="related-card">
-    <span class="rc-tag">⚙️ Improvement Methods</span>
-    <a href="https://stepchangeanalysis.com/types-of-measures.html">Types of Measures</a>
-    <p>Outcome, process, and balancing measures — and where leading indicators sit in the measurement framework.</p>
-  </div>
-  <div class="related-card">
-    <span class="rc-tag">⚙️ Improvement Methods</span>
-    <a href="https://stepchangeanalysis.com/model-for-improvement.html">Model for Improvement</a>
-    <p>The PDSA cycle and how leading indicators fit into the Study phase of improvement testing.</p>
-  </div>
-  <div class="related-card">
-    <span class="rc-tag">📚 Reference</span>
-    <a href="https://stepchangeanalysis.com/glossary.html#section-methods">Glossary — Improvement Methods</a>
-    <p>Definitions of Joiner's levels, Theory of Change, PDSA, and related concepts used across the site.</p>
-  </div>
-</div>
+    <p>At year one, you cannot measure whether Scotland reaches a World Cup knockout round. But you <em>can</em> measure whether CAS licence grades are rising. That is the year-one test. By year three, the meaningful question has shifted to whether the improving environments are producing professional players. By year five, the primary question shifts again to whether those players are internationally competitive. By year eight, the relevant test is whether the senior squad is drawing from the system that was built.</p>
 
-<h2 id="section-references">References</h2>
+    <p>Using the year-one metric as the primary test at year eight tells you almost nothing new. Using the year-eight metric at year one produces no signal &mdash; it simply cannot move yet. Each metric is the right measure for a specific window. The evaluation strategy must move along the chain as the programme matures.</p>
 
-<div class="acronym-block" style="line-height:1.9;">
-  <strong>Primary sources</strong>
-  <p>
-    Joiner, B.L. (1994). <em>Fourth Generation Management: The New Business Consciousness.</em> McGraw-Hill.<br>
-    Deming, W.E. (1986). <em>Out of the Crisis.</em> MIT Press. [orig. 1982] — "Production viewed as a system" diagram, p.4; "improvement of quality envelops the entire production line, from incoming materials to the consumer."<br>
-    Weiss, C.H. (1995). Nothing as Practical as Good Theory: Exploring Theory-Based Evaluation for Comprehensive Community Initiatives for Children and Families. In J. Connell, A. Kubisch, L. Schorr &amp; C. Weiss (Eds.), <em>New Approaches to Evaluating Community Initiatives: Concepts, Methods and Contexts.</em> Aspen Institute. [The paper that formally proposed Theory of Change and coined the term "mini-steps."]<br>
-    Bootstrap CUSUM: Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993).<br>
-    Wikipedia — INF Clairefontaine. Retrieved June 2026. <a href="https://en.wikipedia.org/wiki/INF_Clairefontaine">en.wikipedia.org/wiki/INF_Clairefontaine</a><br>
-    FIFA Training Centre — Interview with Hubert Fournier, FFF Technical Director. <a href="https://www.fifatrainingcentre.com/en/environment/interviews/watch/discovering-clairefontaine-the-french-national-football-centre.php">fifatrainingcentre.com</a><br>
-    Wikipedia — Football in Iceland. Retrieved June 2026. <a href="https://en.wikipedia.org/wiki/Football_in_Iceland">en.wikipedia.org/wiki/Football_in_Iceland</a><br>
-    Goal.com — "The Secret Behind the Iceland Miracle." <a href="https://www.goal.com/en/news/the-secret-behind-the-iceland-miracle/1quzrzppu5pmy1gc6jx6nxl0fw">goal.com</a><br>
-    Sky Sports — "Belgium are much more than a golden generation" (Bob Browaeys interview, 2018). <a href="https://www.skysports.com/football/news/12098/11387201/belgium-are-much-more-than-a-golden-generation-and-it-is-not-luck">skysports.com</a><br>
-    UEFA — Developing football in Belgium. <a href="https://www.uefa.com/insideuefa/national-associations/bel/">uefa.com</a><br>
-    Wikipedia — Dragon Park, Newport. Retrieved June 2026. <a href="https://en.wikipedia.org/wiki/Dragon_Park">en.wikipedia.org/wiki/Dragon_Park</a><br>
-    UEFA — Developing football in Wales. <a href="https://www.uefa.com/insideuefa/national-associations/wal/">uefa.com</a><br>
-    Scottish FA — Club Academy Scotland. <a href="https://www.scottishfa.co.uk/performance/club-academy-scotland/">scottishfa.co.uk</a><br>
-    Wikipedia — Scottish Football Association. Retrieved June 2026. <a href="https://en.wikipedia.org/wiki/Scottish_Football_Association">en.wikipedia.org/wiki/Scottish_Football_Association</a>
-  </p>
-</div>
+    <div class="callout orange">
+        <strong>&#9888; The fixed-metric trap</strong>
+        <p>The most common failure in long-lead-time improvement is picking one metric at the start and reporting against it for the entire programme &mdash; regardless of where the programme has reached in the causal chain. Early on, the chosen metric (often an outcome measure) cannot move yet, so the programme appears to be failing when it may be working as intended. Later, the programme continues reporting an early-chain metric long after the question has shifted to whether the outcome has moved. The metric becomes a governance comfort blanket rather than an honest test.</p>
+    </div>
 
-<div class="footer-nav">
-  <span>← <a href="https://stepchangeanalysis.com/corridor-care-2029.html">Corridor Care 2029</a></span>
-  <span><a href="https://stepchangeanalysis.com/types-of-measures.html">Types of Measures</a> →</span>
-</div>
+    <p>This sequential logic also applies to Bootstrap CUSUM. You do not run the same CUSUM series for 15 years and wait. You run CUSUM on the metric that is currently the primary test &mdash; and when a change point appears there, that is both confirmation that the previous link worked <em>and</em> the signal to shift attention to the next metric. The sequence of change points across the chain, appearing in the right order and with the right lead times between them, is the strongest possible evidence that the causal theory is correct.</p>
 
-</div>
+    <p>If a change point appears in one metric but the next metric fails to follow within its expected window, you have located the broken link precisely &mdash; and you know exactly where to investigate rather than re-examining the entire programme.</p>
 
-<script>
-function toggleContents(el) {
-  var body = el.nextElementSibling;
-  var arrow = el.querySelector('.contents-arrow');
-  var isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  arrow.classList.toggle('open', !isOpen);
-  el.setAttribute('aria-expanded', String(!isOpen));
-}
-</script>
+    <div style="overflow-x:auto;margin:24px 0;">
+        <table class="seq-table">
+            <thead>
+                <tr>
+                    <th>Window</th>
+                    <th>Primary metric</th>
+                    <th>Change point confirms</th>
+                    <th>No change point means</th>
+                    <th>Next step</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Year 1&ndash;2</td><td>CAS clubs reaching gold licence or above</td><td>Infrastructure investment is reaching academies</td><td>Investment not converting: coaching standards or governance failing at club level</td><td>Shift to debut counts</td></tr>
+                <tr><td>Year 2&ndash;4</td><td>Scottish-developed players making professional debuts</td><td>Improved environments are producing players &mdash; pipeline working</td><td>Environment quality improved but coaching or competitive exposure still failing</td><td>Shift to age-group results</td></tr>
+                <tr><td>Year 3&ndash;5</td><td>Scotland age-group teams qualifying for UEFA youth tournaments</td><td>Players are internationally competitive at youth level</td><td>Pipeline producing players but not at international standard</td><td>Shift to senior squad composition</td></tr>
+                <tr><td>Year 5&ndash;8</td><td>Percentage of senior squad from a CAS elite academy</td><td>System is converting academy players to senior international level</td><td>Players progressing to professional level but not reaching senior squad: transition pathway failing</td><td>Shift to tournament results</td></tr>
+                <tr><td>Year 10&ndash;15</td><td>Tournament qualification and knockout stage results</td><td>The full causal chain has worked</td><td>One or more links failed despite earlier change points &mdash; return to chain and identify where sequence broke</td><td>Restart: what is now invisible that wasn&rsquo;t before?</td></tr>
+            </tbody>
+        </table>
+    </div>
 
+    <p>The &ldquo;no change point means&rdquo; column is as important as the confirmation column. A missing change point at any stage is a diagnostic finding, not just a disappointment. It locates the broken link with precision. Without the explicit causal chain, a failure at any stage looks like programme failure. With the chain, it looks like what it actually is: a specific mechanism that is not working, surrounded by mechanisms that are.</p>
+
+    <div class="callout blue">
+        <strong>This is a Joiner Level 3 Deep shift</strong>
+        <p>The six-step method and sequential table above are technical tools. But the thing that prevents them from being used is not technical &mdash; it is a belief. The belief is: <em>my job is to report the outcome measure.</em> That belief is held at every level of NHS governance, in every improvement programme, in every sport governing body that measures tournament results without measuring the academy system that produces the players.</p>
+        <p>Joiner&rsquo;s Level 3 Deep &mdash; fix the mindset &mdash; is the shift from that belief to a different one: <em>my job is to understand and measure the system that produces the outcome.</em> This is not a small adjustment to reporting practice. It is a different theory of what management is for. Deming called it the difference between managing by results and managing by method. The outcome measure tells you what the system produced. The causal chain tells you how &mdash; and therefore where to act to produce a different result next time.</p>
+        <p>Without this belief change, every technical improvement to measurement design hits the same governance wall. Decision-makers continue to demand the outcome number regardless of whether it can yet move. Programmes are declared failures before the causal chain has had time to produce a signal. Interventions are abandoned and replaced &mdash; Deming&rsquo;s tampering &mdash; resetting the lag clock and making it impossible for any signal to appear. The technical method is necessary. The Level 3 Deep belief change is what makes it possible to use it.</p>
+        <p>See: <a href="corridor-care-2029.html">Corridor Care 2029</a> &mdash; where three of four NHS initiatives are Level 1 or Level 2 fixes applied to a Level 3 problem, and the pre-committed prediction is that Bootstrap CUSUM will find no structural change point because the mindset driving the measurement has not changed.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-cusum">7. How StepChange Analysis connects</h2>
+
+    <div class="callout blue">
+        <strong>&#128202; These metrics are designed to be StepChange Analysed</strong>
+        <p>Once a leading indicator has been collected for long enough &mdash; typically 15&ndash;20 observations &mdash; the StepChange Analyzer can test whether a genuine structural change has occurred, or whether observed movement is within normal variation.</p>
+        <p>This is the honest test: not &ldquo;did the number go up?&rdquo; but &ldquo;has the process that generates the number structurally changed?&rdquo; A change point in a leading indicator, at 95% confidence or above, is the earliest honest evidence that the intervention is working at a systemic level &mdash; years before the final outcome can be tested.</p>
+        <p>A flat CUSUM on a leading indicator, with no change point despite the intervention having had time to act, is equally important: it tells you the intervention is not reaching the causal mechanism assumed. That is Joiner&rsquo;s diagnosis &mdash; the fix is at the wrong level of the system.</p>
+    </div>
+
+    <div class="cta-box">
+        <h3 style="margin:0 0 8px;color:white;">Test your leading indicators with your own data</h3>
+        <p>Upload your leading indicator time series. The Analyzer will show you whether a structural change point has occurred &mdash; or whether what you are seeing is noise.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+    </div>
+
+    <p>This is the link between Joiner&rsquo;s levels of fixes and StepChange Analysis: Joiner tells you <em>where in the system to intervene.</em> The causal chain method tells you <em>what to measure to know if the intervention is working.</em> StepChange Analysis tells you <em>whether what you are seeing in the data is a genuine structural change or noise.</em> Used together, they form a complete improvement analysis framework applicable to any domain with long lead times.</p>
+
+    <hr>
+
+    <h2 id="section-generalise">8. Generalising the method</h2>
+
+    <p>The six steps are domain-independent. The same logic applies directly to NHS and public policy settings:</p>
+
+    <ul style="line-height:2.0;">
+        <li><strong>NHS workforce planning.</strong> Ultimate outcome: adequate staffing ratios in five years. Leading indicators: medical school places filled, foundation training completion rates, specialty training fill rates &mdash; all visible within 12&ndash;24 months and causally connected to the workforce outcome.</li>
+        <li><strong>Education reform.</strong> Ultimate outcome: improved literacy at age 16. Leading indicators: proportion of primary teachers trained in structured literacy programmes, phonics screening pass rates at age 6 &mdash; measurable years before the secondary outcome appears.</li>
+        <li><strong>Public health.</strong> Ultimate outcome: reduction in type 2 diabetes incidence in ten years. Leading indicators: pre-diabetes identification rate, referral-to-programme uptake, programme completion &mdash; each a necessary condition for the outcome, visible within two years.</li>
+        <li><strong>A&amp;E corridor care.</strong> Ultimate outcome: elimination of corridor care by 2029. Leading indicator: delayed transfer of care bed-days per 1,000 admissions &mdash; the actual constraint, not corridor hours logged or SDEC capacity built. <a href="corridor-care-2029.html">See the full pre-committed prediction &rarr;</a></li>
+    </ul>
+
+    <p>In every case: map the causal chain backwards, identify necessary conditions, filter for measurability and lead time, test for vanity, assign ownership, publish the baseline. The domain changes. The logic does not.</p>
+
+    <hr>
+
+    <h2 id="section-proof">9. Proof points &mdash; what the evidence actually shows</h2>
+
+    <p>The football development examples used in this page are not hypothetical. Each has a verified source.</p>
+
+    <p><strong>France &mdash; INF Clairefontaine (1988).</strong> The national football centre opened in January 1988, 50km southwest of Paris. Ten years later, France hosted and won the 1998 World Cup, with Clairefontaine serving as the base camp for the winning squad. The centre is one part of a broader network of 16 elite academies supervised by the French Football Federation. The claim that Clairefontaine alone produced the 1998 victory overstates it &mdash; it was the flagship of a system, not the system itself. Source: Wikipedia &mdash; INF Clairefontaine; FIFA Training Centre interview with FFF Technical Director Hubert Fournier.</p>
+
+    <p><strong>Iceland &mdash; KS&Iacute; facility programme (mid-1990s planning, built from 2000).</strong> The KS&Iacute; began discussions on overcoming its population and climate challenges in the mid-1990s. The first &ldquo;football house&rdquo; opened at Keflavík in 2000; eventually 15 such facilities were commissioned, all publicly owned. By January 2016, Iceland had approximately one UEFA-qualified coach per 500 inhabitants, compared to one per 10,000 in England. Iceland qualified for UEFA Euro 2016 &mdash; their first major tournament &mdash; and reached the quarter-finals. Source: Wikipedia &mdash; Football in Iceland; Goal.com &mdash; &ldquo;The Secret Behind the Iceland Miracle.&rdquo;</p>
+
+    <p><strong>Belgium &mdash; Project 2000.</strong> Following group-stage elimination at UEFA Euro 2000 as co-hosts, the RBFA redesigned its youth development structure. Between 2004 and 2012, Belgium failed to qualify for any major tournament. The investment in domestic youth development produced De Bruyne, Hazard, Lukaku, and Courtois. Belgium topped the FIFA World Rankings for the first time in 2015 and held the top spot for more than three years between September 2018 and March 2022. Source: Sky Sports &mdash; Bob Browaeys interview, 2018; UEFA &mdash; Developing football in Belgium.</p>
+
+    <p><strong>Wales &mdash; Dragon Park, Newport (opened 20 April 2013).</strong> Dragon Park is the Wales National Football Development Centre, opened by then-UEFA President Michel Platini. The &pound;5m complex was a joint venture between UEFA, the FAW, Sport Wales, and Newport City Council. Wales qualified for UEFA Euro 2016 &mdash; their first major tournament since 1958 &mdash; and reached the semi-finals. Source: Wikipedia &mdash; Dragon Park; UEFA &mdash; Developing football in Wales.</p>
+
+    <hr>
+
+    <h2 id="section-howto">10. Links to the Improvement Model and Types of Measures</h2>
+
+    <p><strong><a href="joiner-levels-of-fix.html">Joiner&rsquo;s levels of fixes</a></strong> tell you which level of the system your intervention is targeting. A Level 1 or Level 2 fix applied to a Level 3 problem will not produce a detectable change point in any metric &mdash; leading indicator or final outcome. Confirm which level your intervention operates at before designing metrics.</p>
+
+    <p><strong><a href="types-of-measures.html">Types of measures</a></strong> &mdash; outcome, process, and balancing measures &mdash; map directly onto the causal chain. Outcome measures sit at the bottom. Process measures sit in the middle. Leading indicators are process measures chosen specifically because they are measurable early and causally connected to the outcome. Balancing measures &mdash; the things that must not get worse &mdash; should be designed alongside leading indicators and monitored in parallel.</p>
+
+    <p>The practical sequence:</p>
+    <ol style="line-height:2.0;">
+        <li>Apply Joiner&rsquo;s levels to confirm the intervention is operating at the right level of the system.</li>
+        <li>Map the causal chain using the six-step method on this page.</li>
+        <li>Identify leading indicators &mdash; process measures that are early, causal, and non-vanity.</li>
+        <li>Establish baselines and begin collecting data.</li>
+        <li>Apply the StepChange Analyzer once sufficient observations exist &mdash; typically after 18&ndash;24 months.</li>
+        <li>Use the result as the honest test: not &ldquo;did the number move?&rdquo; but &ldquo;has the system structurally changed?&rdquo;</li>
+    </ol>
+
+    <hr>
+
+    <h2>Related concepts and articles</h2>
+
+    <div class="nav-grid">
+        <a href="corridor-care-2029.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; NHS Healthcare Policy</div>
+            <h3>Corridor Care 2029</h3>
+            <p>Joiner&rsquo;s levels applied prospectively to four NHS initiatives. A pre-committed prediction about which will and won&rsquo;t produce a structural change point.</p>
+        </a>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; NHS Healthcare Policy</div>
+            <h3>Why Nothing Has Worked: NHS A&amp;E</h3>
+            <p>25 years of Level 1 and 2 interventions applied to a Level 3 problem. Zero structural improvement change points across 184 months of data.</p>
+        </a>
+        <a href="gp-appointments-analysis.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; NHS Healthcare Policy</div>
+            <h3>More GP Appointments, Fewer Patients Feeling Seen</h3>
+            <p>The vanity metric trap in practice: activity rose while the causally connected outcome &mdash; GP doctor contact rate &mdash; did not move.</p>
+        </a>
+        <a href="types-of-measures.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Types of Measures</h3>
+            <p>Outcome, process, and balancing measures &mdash; and where leading indicators sit in the measurement framework.</p>
+        </a>
+        <a href="model-for-improvement.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Model for Improvement</h3>
+            <p>The PDSA cycle and how leading indicators fit into the Study phase of improvement testing.</p>
+        </a>
+        <a href="glossary.html#section-methods" class="nav-card">
+            <div class="nav-tag">Reference</div>
+            <h3>Glossary &mdash; Improvement Methods</h3>
+            <p>Definitions of Joiner&rsquo;s levels, Theory of Change, PDSA, and related concepts used across the site.</p>
+        </a>
+    </div>
+
+    <hr>
+
+    <h2 id="section-references">References</h2>
+
+    <footer class="page-footer">
+        <p><strong>Joiner, B.L.</strong> (1994). <em>Fourth Generation Management: The New Business Consciousness.</em> McGraw-Hill.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.</strong> (1986). <em>Out of the Crisis.</em> MIT Press. [orig. 1982] &mdash; &ldquo;Production viewed as a system&rdquo; diagram, p.4; &ldquo;improvement of quality envelops the entire production line, from incoming materials to the consumer.&rdquo;</p>
+        <p style="margin-top:8px;"><strong>Weiss, C.H.</strong> (1995). Nothing as Practical as Good Theory: Exploring Theory-Based Evaluation for Comprehensive Community Initiatives for Children and Families. In J. Connell, A. Kubisch, L. Schorr &amp; C. Weiss (Eds.), <em>New Approaches to Evaluating Community Initiatives: Concepts, Methods and Contexts.</em> Aspen Institute. [The paper that formally proposed Theory of Change and coined the term &ldquo;mini-steps.&rdquo;]</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><strong>France &mdash; INF Clairefontaine:</strong> Wikipedia &mdash; INF Clairefontaine; FIFA Training Centre interview with Hubert Fournier &mdash; fifatrainingcentre.com</p>
+        <p style="margin-top:8px;"><strong>Iceland:</strong> Wikipedia &mdash; Football in Iceland; Goal.com &mdash; &ldquo;The Secret Behind the Iceland Miracle&rdquo;</p>
+        <p style="margin-top:8px;"><strong>Belgium:</strong> Sky Sports &mdash; Bob Browaeys interview, 2018; UEFA &mdash; Developing football in Belgium; CNN &mdash; &ldquo;The Belgian Blueprint,&rdquo; 2021</p>
+        <p style="margin-top:8px;"><strong>Wales:</strong> Wikipedia &mdash; Dragon Park, Newport; UEFA &mdash; Developing football in Wales</p>
+        <p style="margin-top:8px;"><strong>Scotland:</strong> Scottish FA &mdash; Club Academy Scotland (scottishfa.co.uk); Wikipedia &mdash; Scottish Football Association</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
 </body>
 </html>
