@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSIRF and Systemic Learning: The Analytical Gap — and How to Fill It — StepChangeAnalysis.com</title>
+    <meta name="description" content="PSIRF requires NHS organisations to learn systemically from their patient safety incident profile. It does not specify how. This page provides the six-step analytical framework — from pattern detection to structural fix to verified improvement.">
+    <meta name="keywords" content="PSIRF analytical framework, PSIRF systemic learning, patient safety incident profile analysis, PSIRF Bootstrap CUSUM, PSIRF improvement, PSIRF patient safety incident response plan, PSIRP data analysis, NHS patient safety improvement">
+    <link rel="canonical" href="https://stepchangeanalysis.com/psirf-analytical-framework.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+
+    <style>
+        /* Page-specific only */
+        .gap-table { width:100%; border-collapse:collapse; font-size:13px; margin:20px 0; }
+        .gap-table th { background:#f2f2f0; padding:9px 12px; text-align:left; font-weight:600; border:1px solid #ddd; }
+        .gap-table td { padding:9px 12px; border:1px solid #ddd; vertical-align:top; line-height:1.6; }
+        .gap-table tr:nth-child(even) td { background:#fafaf8; }
+        .gap-table td:first-child { font-weight:600; white-space:nowrap; }
+        .loop-step { display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid #e5e5e5; }
+        .loop-step:last-child { border-bottom:none; }
+        .loop-num { background:#185FA5; color:white; font-weight:700; font-size:13px; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+        .loop-body { flex:1; }
+        .loop-body strong { display:block; font-size:15px; margin-bottom:4px; color:#111; }
+        .loop-body p { font-size:14px; color:#444; margin:0; line-height:1.6; }
+        .loop-tool { font-size:12px; color:#185FA5; font-weight:600; margin-top:5px; display:block; }
+        .psirf-q { background:#f7f7f5; border-left:3px solid #e08a00; padding:10px 14px; margin:8px 0; border-radius:0 4px 4px 0; font-size:13px; font-style:italic; color:#333; }
+        .psirf-a { background:#eaf2fb; border-left:3px solid #185FA5; padding:10px 14px; margin:8px 0 16px; border-radius:0 4px 4px 0; font-size:13px; color:#333; }
+        .psirf-a strong { color:#185FA5; display:block; margin-bottom:3px; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; }
+    </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="page-wrap">
+
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="examples.html">Examples</a> &rsaquo; PSIRF Analytical Framework</div>
+    <div class="page-flag">&#127973; NHS Healthcare Policy &middot; Patient Safety</div>
+    <h1>PSIRF and Systemic Learning: The Analytical Gap &mdash; and How to Fill It</h1>
+    <p class="page-intro">The Patient Safety Incident Response Framework (PSIRF) asks every NHS trust to move from investigating individual incidents to learning systemically from patterns across their incident profile. It is the right ambition. But PSIRF does not specify the analytical tools that make systemic learning honest rather than asserted. This page fills that gap &mdash; step by step.</p>
+
+    <div class="callout blue" style="margin-top:16px;">
+        <strong>What this page answers</strong>
+        <ul style="margin:10px 0 0 18px;line-height:2.0;">
+            <li>How do I know if my incident profile is genuinely improving or just varying normally?</li>
+            <li>How do I move from a pattern I can see to the structural cause producing it?</li>
+            <li>How do I know whether my intervention changed the system or just completed an action?</li>
+            <li>What is the difference between a proportionate response and no response?</li>
+            <li>How do I identify the structural issue &mdash; not the proximate cause &mdash; that PSIRF asks me to address?</li>
+        </ul>
+    </div>
+
+    <div class="cta-box" style="margin-top:18px;">
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+        <p style="margin-top:10px;color:white;">Upload your incident series. The Analyzer will tell you whether your profile has structurally changed &mdash; or whether what you are seeing is normal variation.</p>
+    </div>
+
+    <div class="page-meta">By Syd Stewart, Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; June 2026</div>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
+        <div class="toc-inner">
+            <ol>
+                <li><a href="#section-what-psirf-requires">What PSIRF actually requires</a></li>
+                <li><a href="#section-gap">The analytical gap PSIRF leaves open</a></li>
+                <li><a href="#section-evidence">The evidence that the previous approach failed</a></li>
+                <li><a href="#section-framework">The six-step analytical framework</a></li>
+                <li><a href="#section-questions">PSIRF questions &mdash; with analytical answers</a></li>
+                <li><a href="#section-profile">Analysing your patient safety incident profile</a></li>
+                <li><a href="#section-never-events">Worked example &mdash; Never Events</a></li>
+                <li><a href="#section-cusum">How Bootstrap CUSUM provides the honest test</a></li>
+                <li><a href="#section-references">References</a></li>
+            </ol>
+        </div>
+    </details>
+
+    <h2 id="section-what-psirf-requires">1. What PSIRF actually requires</h2>
+
+    <p>The Patient Safety Incident Response Framework was published by NHS England in August 2022 and became mandatory for all NHS secondary care providers from April 2024, replacing the Serious Incident Framework (2015). It is now being piloted in primary care for 2025/26.</p>
+
+    <p>PSIRF makes four substantive demands of NHS organisations that are directly relevant to how they analyse data:</p>
+
+    <div class="callout blue">
+        <strong>The four PSIRF aims &mdash; what each requires analytically</strong>
+        <table class="gap-table" style="margin:12px 0 0;">
+            <thead><tr><th>PSIRF aim</th><th>What this requires analytically</th></tr></thead>
+            <tbody>
+                <tr><td>Compassionate engagement with those affected</td><td>Understanding what actually happened &mdash; which requires reaching the structural cause, not stopping at proximate cause or human error</td></tr>
+                <tr><td>System-based approaches to learning</td><td>Analysing patterns across multiple incidents, not just individual event investigation &mdash; which requires time-series analysis of the incident profile</td></tr>
+                <tr><td>Considered and proportionate responses</td><td>Knowing whether a pattern is signal or noise before committing resources &mdash; which requires distinguishing common cause variation from structural change</td></tr>
+                <tr><td>Supportive oversight focused on improvement</td><td>Demonstrating that the incident profile has actually changed &mdash; not just that actions were completed</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>PSIRF also requires each provider to publish a Patient Safety Incident Response Plan (PSIRP) that describes their patient safety incident profile and how they intend to respond to and learn from incidents over the next 12&ndash;18 months. The profile must be reviewed continuously for emerging trends and hotspots.</p>
+
+    <p>Describing a profile. Identifying trends. Demonstrating that improvement work is having the desired effect. These are data analysis tasks. PSIRF mandates them. It does not specify how to do them honestly.</p>
+
+    <hr>
+
+    <h2 id="section-gap">2. The analytical gap PSIRF leaves open</h2>
+
+    <p>HSSIB &mdash; the national body responsible for PSIRF implementation &mdash; published a report in October 2025 based on interviews with NHS investigation leads and patient safety specialists across England. Its findings confirm the gap precisely.</p>
+
+    <div class="callout orange">
+        <strong>&#9888; What HSSIB found in October 2025</strong>
+        <p>&ldquo;Currently there is a gap between staff&rsquo;s awareness that there are tools and guides in the PSIRF toolkit and having the necessary support and expertise to be able to use them in practice.&rdquo;</p>
+        <p style="margin-top:8px;">&ldquo;Using system-based tools is a skilled activity. Expertise builds over time with practice, support and guidance from those with existing expertise and experience.&rdquo;</p>
+        <p style="margin-top:8px;">&ldquo;Greater oversight of PSIRF implementation in organisations is needed to help ensure consistency in how PSIRF is understood and applied in NHS trusts.&rdquo;</p>
+        <p style="margin-top:8px; font-size:13px; color:#555;">Source: HSSIB, <em>Investigating under PSIRF: sharing HSSIB learning for future development.</em> October 2025. <a href="https://www.hssib.org.uk/patient-safety-investigations/investigating-under-the-patient-safety-incident-response-framework-psirf-sharing-hssib-learning-for-future-development/investigation-report/">hssib.org.uk</a></p>
+    </div>
+
+    <p>The specific analytical gap has three parts. PSIRF tells organisations to analyse their incident profile &mdash; but does not specify how to distinguish a genuine change in that profile from normal variation. PSIRF tells organisations to identify systemic issues &mdash; but does not specify how to move from a pattern visible in the data to the structural feature of the system that is producing it. PSIRF tells organisations to demonstrate that improvement work is having the desired effect &mdash; but does not specify the test that would constitute honest demonstration rather than asserted improvement.</p>
+
+    <p>These are not small operational details. They are the core analytical questions that make PSIRF either transformative or another iteration of the same activity-without-verified-outcome cycle that the Serious Incident Framework produced.</p>
+
+    <hr>
+
+    <h2 id="section-evidence">3. The evidence that the previous approach failed</h2>
+
+    <p>The case for a different analytical approach is not theoretical. The NHS has conducted thousands of patient safety investigations every year under the Serious Incident Framework. Bootstrap CUSUM applied to NHS Never Events data &mdash; the most serious category of preventable patient safety incidents &mdash; produces a finding that makes the analytical failure concrete.</p>
+
+    <div class="dark-box">
+        <h3 style="margin:0 0 10px; color:white;">&#128202; Wrong-route medication Never Events &mdash; what Bootstrap CUSUM finds</h3>
+        <p style="color:#ccc; font-size:14px;">Wrong-route medication administration is a Never Event: a preventable patient safety incident that should never occur if available safeguards are in place. Every occurrence triggers a formal investigation under the Serious Incident Framework.</p>
+        <p style="color:#ccc; font-size:14px; margin-top:10px;">Bootstrap CUSUM on the annual event rate series finds: <strong style="color:white;">17.5 events per year. No structural change point detected across 15 years.</strong> Thousands of individual investigations. Thousands of corrective action plans completed and signed off. The system continued producing wrong-route events at exactly the same rate throughout.</p>
+        <p style="color:#ccc; font-size:14px; margin-top:10px;">The investigations were not wrong. The root causes they identified were real. The actions that were implemented were genuine. What was missing was a Joiner Level 3 fix &mdash; a structural change to what was physically possible in the system &mdash; and a pre-committed Bootstrap CUSUM test to verify that the rate had actually changed.</p>
+        <p style="color:#aaa; font-size:13px; margin-top:10px;"><a href="never-events-wrong-route.html" style="color:#93c5fd;">Read the full Never Events Bootstrap CUSUM analysis &rarr;</a></p>
+    </div>
+
+    <p>This is what PSIRF is designed to change. Its explicit shift from individual event investigation to systemic pattern learning is the right diagnosis of what failed. What it needs to make that shift operational is an analytical method that can detect genuine structural change in an incident profile &mdash; and distinguish it from normal variation.</p>
+
+    <hr>
+
+    <h2 id="section-framework">4. The six-step analytical framework</h2>
+
+    <p>The framework below provides the analytical sequence that makes PSIRF&rsquo;s systemic learning ambition operational. Each step answers a specific question that PSIRF raises but does not resolve. The steps are sequential &mdash; each one uses the output of the previous step as its input.</p>
+
+    <p>The framework is grounded in three bodies of work: Deming&rsquo;s &ldquo;Production viewed as a system&rdquo; (the principle that you must measure inputs and process, not just outputs); Carol Weiss&rsquo;s Theory of Change (the principle that you must make intermediate steps explicit before you can evaluate whether they are working); and Joiner&rsquo;s levels of fix (the diagnostic tool for identifying whether an intervention is operating at the right level of the system).</p>
+
+    <div style="border:1px solid #e0e0de; border-radius:8px; padding:20px 24px; margin:24px 0;">
+        <div style="font-size:12px; color:#666; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:16px;">The six-step analytical framework &mdash; making the invisible visible</div>
+
+        <div class="loop-step">
+            <div class="loop-num">1</div>
+            <div class="loop-body">
+                <strong>What can&rsquo;t you currently see that is producing what you can see?</strong>
+                <p>Map your incident profile as a time series. Apply Bootstrap CUSUM to detect whether the rate has structurally changed or is stable. A stable rate with no change point tells you the system is producing incidents routinely &mdash; individual investigation of each event is missing the pattern entirely.</p>
+                <span class="loop-tool">Tool: Bootstrap CUSUM on your incident series &nbsp;&middot;&nbsp; <a href="index.html">Open the StepChange Analyzer</a></span>
+            </div>
+        </div>
+
+        <div class="loop-step">
+            <div class="loop-num">2</div>
+            <div class="loop-body">
+                <strong>What structural feature of the system is producing this pattern?</strong>
+                <p>Once the pattern is confirmed as genuine (not noise), map the causal chain from intervention point to outcome. Identify the structural condition &mdash; the physical design, the procurement decision, the accountability gap &mdash; that is producing the pattern. This is distinct from the proximate cause of any individual event.</p>
+                <span class="loop-tool">Tools: Root cause analysis &nbsp;&middot;&nbsp; Causal loop diagrams &nbsp;&middot;&nbsp; <a href="root-cause-analysis.html">RCA guide</a> &nbsp;&middot;&nbsp; <a href="finding-the-real-constraint.html">Finding the real constraint</a></span>
+            </div>
+        </div>
+
+        <div class="loop-step">
+            <div class="loop-num">3</div>
+            <div class="loop-body">
+                <strong>What belief is keeping that structural feature in place?</strong>
+                <p>Every persistent structural problem has a belief keeping it there &mdash; a Joiner Level 3 Deep assumption held by the people with authority to change the structure. Naming that assumption is the pre-condition for designing an intervention that will actually dissolve it, rather than one that works around it temporarily.</p>
+                <span class="loop-tool">Tools: Joiner&rsquo;s levels of fix &nbsp;&middot;&nbsp; 5 Whys to mindset level &nbsp;&middot;&nbsp; <a href="joiner-levels-of-fix.html">Joiner guide</a></span>
+            </div>
+        </div>
+
+        <div class="loop-step">
+            <div class="loop-num">4</div>
+            <div class="loop-body">
+                <strong>What structural change would dissolve that assumption?</strong>
+                <p>Design the intervention at the right Joiner level. A Level 1 fix (retraining, alert, reminder) applied to a Level 3 structural problem will not change the incident rate &mdash; as the Never Events data confirms across 15 years. The intervention must change what is structurally possible, not just what is procedurally required.</p>
+                <span class="loop-tool">Tools: Joiner levels of fix &nbsp;&middot;&nbsp; Evaporating Cloud &nbsp;&middot;&nbsp; <a href="evaporating-cloud.html">Evaporating Cloud guide</a> &nbsp;&middot;&nbsp; <a href="making-the-invisible-visible.html">Moonshot Process</a></span>
+            </div>
+        </div>
+
+        <div class="loop-step">
+            <div class="loop-num">5</div>
+            <div class="loop-body">
+                <strong>Has the intervention produced a structural change point in the data?</strong>
+                <p>Before implementing the intervention, state in writing: we expect a Bootstrap CUSUM change point in [the incident rate series] within [N] time periods at [Y]% confidence. After implementation, run Bootstrap CUSUM periodically. A downward change point at the predicted confidence level confirms the intervention worked. No change point within the expected window means the structural cause was not reached &mdash; return to Step 2.</p>
+                <span class="loop-tool">Tool: Bootstrap CUSUM &nbsp;&middot;&nbsp; <a href="index.html">Open the StepChange Analyzer</a> &nbsp;&middot;&nbsp; <a href="corridor-care-2029.html">See a live pre-committed prediction</a></span>
+            </div>
+        </div>
+
+        <div class="loop-step">
+            <div class="loop-num">6</div>
+            <div class="loop-body">
+                <strong>What is now invisible that wasn&rsquo;t before? The loop restarts.</strong>
+                <p>A confirmed structural change point raises new questions. The system has changed &mdash; what does it now produce that it didn&rsquo;t before? What adjacent pattern has emerged? What does the Bootstrap CUSUM on the broader incident profile now show? The improvement cycle does not end at verification &mdash; it restarts with a harder question.</p>
+                <span class="loop-tool">Tools: Bootstrap CUSUM on updated series &nbsp;&middot;&nbsp; <a href="bright-spots.html">Bright Spots analysis</a> &nbsp;&middot;&nbsp; <a href="stratify-experiment-disaggregate.html">Stratify and disaggregate</a></span>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2 id="section-questions">5. PSIRF questions &mdash; with analytical answers</h2>
+
+    <p>The questions below are the ones patient safety managers implementing PSIRF are actually asking. Each one has a specific analytical answer.</p>
+
+    <div class="psirf-q">&ldquo;How do I know if my incident profile is actually improving or just varying normally?&rdquo;</div>
+    <div class="psirf-a"><strong>Answer &mdash; Bootstrap CUSUM</strong>Bootstrap CUSUM detects structural change points in a time series at a specified confidence level. Applied to your incident rate series (events per month, per quarter, per year), it answers the question precisely: has the rate of this type of event structurally changed, or is the variation you can see within the normal range the system has always produced? A downward change point at 95% confidence or above is the honest signal that the profile has improved. No change point is the honest signal that it has not &mdash; regardless of how many actions were completed.</div>
+
+    <div class="psirf-q">&ldquo;How do I move from seeing a pattern in my incident data to understanding what is causing it?&rdquo;</div>
+    <div class="psirf-a"><strong>Answer &mdash; Causal chain mapping (Visibility Loop Step 2)</strong>Once Bootstrap CUSUM confirms the pattern is genuine, map the causal chain backwards from the outcome to the structural condition producing it. The structural condition is not the proximate cause of any individual event &mdash; it is the system feature that makes the class of events possible. For wrong-route medication: the proximate cause is individual administration error. The structural cause is the physical interoperability of enteral and parenteral connectors &mdash; a procurement and design problem, not a training problem.</div>
+
+    <div class="psirf-q">&ldquo;How do I know whether an improvement intervention actually changed anything?&rdquo;</div>
+    <div class="psirf-a"><strong>Answer &mdash; Pre-committed Bootstrap CUSUM prediction</strong>Before the intervention, state what you expect to see in the data and when. After the intervention, run Bootstrap CUSUM on the incident rate series. The pre-committed prediction makes the test honest: you specified what would count as success before seeing the results. A change point in the predicted direction within the predicted timeframe is confirmation. Absence of a change point is the signal to return to the causal chain analysis &mdash; the intervention did not reach the structural level.</div>
+
+    <div class="psirf-q">&ldquo;What is a proportionate response? How do I know when to investigate and when not to?&rdquo;</div>
+    <div class="psirf-a"><strong>Answer &mdash; Bootstrap CUSUM on the incident series</strong>PSIRF&rsquo;s &ldquo;proportionate response&rdquo; principle has no analytical test in the PSIRF guidance itself. Bootstrap CUSUM provides one. If the incident series shows a stable process with no change point, individual events are common cause variation &mdash; the system is producing them routinely, and investigating each one individually will not change the rate. The proportionate response is a system-level intervention, not an individual event investigation. If Bootstrap CUSUM detects a new upward change point, something specific has changed and individual investigation of events around the change point is warranted.</div>
+
+    <div class="psirf-q">&ldquo;My PSIRP requires me to demonstrate that our improvement work is having the desired effect. How do I demonstrate that honestly?&rdquo;</div>
+    <div class="psirf-a"><strong>Answer &mdash; Bootstrap CUSUM change point in the outcome series</strong>Completing actions is a process measure. A downward Bootstrap CUSUM change point in the incident rate series is an outcome measure. PSIRF requires demonstration of outcome change, not action completion. The StepChange Analyzer provides the test. Upload your incident rate series, run Bootstrap CUSUM, and report the finding. A change point is honest confirmation. A flat series with no change point is the honest finding that the system has not yet changed &mdash; which is itself a signal for what to do next.</div>
+
+    <hr>
+
+    <h2 id="section-profile">6. Analysing your patient safety incident profile</h2>
+
+    <p>The PSIRP requires each trust to describe its patient safety incident profile and show how it is monitoring for emerging trends. The following steps apply the six-step framework specifically to profile analysis.</p>
+
+    <div class="callout blue">
+        <strong>Building an analytically honest incident profile</strong>
+        <p><strong>Step 1 &mdash; Choose the right series.</strong> Separate your incident data by type. A combined count of all incident types is almost never the right series &mdash; different types have different structural causes and will show different patterns. Wrong-route medication, pressure ulcers, falls, and delayed diagnoses are all produced by different structural features and need separate Bootstrap CUSUM analysis.</p>
+        <p style="margin-top:8px;"><strong>Step 2 &mdash; Build the time series.</strong> Express each incident type as a rate per relevant denominator &mdash; events per 1,000 bed-days, events per 10,000 patient contacts, events per quarter &mdash; not raw counts. Raw counts move with activity levels. Rates show whether the underlying system is changing.</p>
+        <p style="margin-top:8px;"><strong>Step 3 &mdash; Apply Bootstrap CUSUM.</strong> Upload each series to the StepChange Analyzer. The output shows whether the rate is in a stable process (common cause variation &mdash; the system is producing events routinely) or has experienced a structural change point (the system has fundamentally changed &mdash; either improved or deteriorated).</p>
+        <p style="margin-top:8px;"><strong>Step 4 &mdash; Interpret correctly.</strong> A stable series with no change point means individual investigation of each event has not produced system change. The structural cause has not been reached. This is a signal to apply Steps 2&ndash;4 of the framework: find the structural feature, name the belief keeping it in place, design a Level 3 intervention.</p>
+        <p style="margin-top:8px;"><strong>Step 5 &mdash; Report honestly.</strong> Report the Bootstrap CUSUM finding, not just the action completion rate. If the series shows no change point despite improvement actions, report that finding and state what it implies: the structural cause has not been addressed. That is the honest picture PSIRF asks for.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="section-never-events">7. Worked example &mdash; Never Events</h2>
+
+    <p>The Never Events analysis on this site provides the most direct worked example of the framework applied to an NHS patient safety incident series. Wrong-route medication administration is chosen because it has the clearest structural cause and the longest available data series.</p>
+
+    <table class="gap-table">
+        <thead><tr><th>Framework step</th><th>Applied to wrong-route Never Events</th></tr></thead>
+        <tbody>
+            <tr><td>Step 1 &mdash; See the pattern</td><td>Bootstrap CUSUM on annual wrong-route event rates finds a stable process: 17.5 events per year, no structural change point across 15 years. The individual investigations have not changed the system rate.</td></tr>
+            <tr><td>Step 2 &mdash; Find the structural feature</td><td>The structural cause is physical connector interoperability: enteral and parenteral administration sets can be connected to each other. The wrong connection is physically possible with standard equipment. Training and protocol cannot prevent an error that the physical system makes possible.</td></tr>
+            <tr><td>Step 3 &mdash; Name the belief keeping it in place</td><td>The belief: &ldquo;this is a procurement and equipment standardisation problem that is outside the boundary of clinical governance investigation.&rdquo; The investigation authority stops at the ward. The structural cause sits in procurement and supply chain &mdash; outside that boundary. The belief keeps the boundary in place.</td></tr>
+            <tr><td>Step 4 &mdash; Design the Level 3 fix</td><td>ENFit &mdash; a new connector standard that makes wrong-route connection physically impossible. This is a Level 3 fix: it changes what the system can produce, not just what the protocol requires. NHS England mandated ENFit rollout. Rollout is incomplete as of 2026.</td></tr>
+            <tr><td>Step 5 &mdash; Verify with Bootstrap CUSUM</td><td>The pre-committed prediction: a downward Bootstrap CUSUM change point in the wrong-route event rate series should appear within 24&ndash;36 months of complete ENFit rollout at 95% confidence. If it does not, rollout is incomplete or a second structural cause exists.</td></tr>
+            <tr><td>Step 6 &mdash; What is now invisible?</td><td>Once wrong-route events eliminate, what does the broader enteral/parenteral medication safety profile look like? What adjacent harm pattern emerges? The loop restarts.</td></tr>
+        </tbody>
+    </table>
+
+    <p><a href="never-events-wrong-route.html">Read the full Never Events Bootstrap CUSUM analysis &rarr;</a></p>
+
+    <hr>
+
+    <h2 id="section-cusum">8. How Bootstrap CUSUM provides the honest test</h2>
+
+    <div class="callout blue">
+        <strong>&#128202; Why Bootstrap CUSUM and not a run chart or SPC?</strong>
+        <p>Run charts and Statistical Process Control (SPC) charts are widely used in NHS improvement and are valuable for monitoring variation in real time. Bootstrap CUSUM provides something different: a statistically rigorous test for whether a structural change point has occurred in a historical series, with a specified confidence level.</p>
+        <p style="margin-top:8px;">The distinction matters for PSIRF. A run chart tells you visually whether something looks different. Bootstrap CUSUM tells you, at 95% or 99% confidence, whether the process that generated the data has structurally changed &mdash; or whether what you are seeing is within the normal range of variation the system has always produced. For a governance framework that requires demonstrated improvement, the rigorous test is what is needed.</p>
+        <p style="margin-top:8px;">The StepChange Analyzer is free, browser-based, and requires no software installation. No data is uploaded to any server. Upload a CSV of your incident rate series and the Analyzer returns the Bootstrap CUSUM result, including the change point date and confidence level if one is detected.</p>
+    </div>
+
+    <div class="cta-box">
+        <h3 style="margin:0 0 8px;color:white;">Test your incident profile now</h3>
+        <p>Upload your patient safety incident rate series as a CSV. The Analyzer will tell you whether your profile has structurally changed &mdash; or whether the variation you are seeing is within the normal range.</p>
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+        <div class="cta-next">Need help preparing your data? <a href="fix-csv-date-format.html" style="color:white;">Fix CSV date format &rarr;</a></div>
+    </div>
+
+    <h2>Related pages</h2>
+
+    <div class="nav-grid">
+        <a href="never-events-wrong-route.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; Patient Safety</div>
+            <h3>Never Events &mdash; Wrong Route</h3>
+            <p>15 years of wrong-route medication events. No structural change point in Bootstrap CUSUM. The clearest worked example of the framework on this site.</p>
+        </a>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; NHS Healthcare Policy</div>
+            <h3>Why Nothing Has Worked: NHS A&amp;E</h3>
+            <p>25 years of A&amp;E policy interventions. Zero structural change points across 184 months. The same analytical failure at system scale.</p>
+        </a>
+        <a href="root-cause-analysis.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Root Cause Analysis</h3>
+            <p>Finding the root cause is necessary but not sufficient. The fix must operate at the right Joiner level &mdash; and Bootstrap CUSUM must verify it worked.</p>
+        </a>
+        <a href="joiner-levels-of-fix.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Joiner&rsquo;s Levels of Fix</h3>
+            <p>The diagnostic tool for identifying whether a PSIRF improvement intervention is operating at the right level of the system.</p>
+        </a>
+        <a href="leading-indicators.html" class="nav-card">
+            <div class="nav-tag">Concept</div>
+            <h3>Leading Indicators</h3>
+            <p>When the outcome measure takes years to move, what do you measure in the meantime? The six-step causal chain method for designing upstream metrics.</p>
+        </a>
+        <a href="corridor-care-2029.html" class="nav-card">
+            <div class="nav-tag">Article &mdash; NHS Healthcare Policy</div>
+            <h3>Corridor Care 2029</h3>
+            <p>A live pre-committed Bootstrap CUSUM prediction for four NHS corridor care initiatives &mdash; the model for honest prospective improvement verification.</p>
+        </a>
+    </div>
+
+    <div class="related-box">
+        <div class="related-tag">External source</div>
+        <h3><a href="https://www.hssib.org.uk/patient-safety-investigations/investigating-under-the-patient-safety-incident-response-framework-psirf-sharing-hssib-learning-for-future-development/investigation-report/">HSSIB: Investigating under PSIRF &mdash; sharing learning for future development (October 2025)</a></h3>
+        <p>The national body&rsquo;s own assessment of where PSIRF implementation is falling short &mdash; including the gap between knowing tools exist and having the expertise to use them. The report this page responds to.</p>
+        <a href="https://www.hssib.org.uk/patient-safety-investigations/investigating-under-the-patient-safety-incident-response-framework-psirf-sharing-hssib-learning-for-future-development/investigation-report/" class="btn">Read the HSSIB report &rarr;</a>
+    </div>
+
+    <hr>
+
+    <h2 id="section-references">References</h2>
+
+    <footer class="page-footer">
+        <p><strong>PSIRF:</strong> NHS England. <em>Patient Safety Incident Response Framework.</em> August 2022. <a href="https://www.england.nhs.uk/patient-safety/patient-safety-insight/incident-response-framework/">england.nhs.uk</a></p>
+        <p style="margin-top:8px;"><strong>HSSIB PSIRF report:</strong> HSSIB. <em>Investigating under PSIRF: sharing HSSIB learning for future development.</em> October 2025. <a href="https://www.hssib.org.uk/patient-safety-investigations/investigating-under-the-patient-safety-incident-response-framework-psirf-sharing-hssib-learning-for-future-development/investigation-report/">hssib.org.uk</a></p>
+        <p style="margin-top:8px;"><strong>Serious Incident Framework (replaced):</strong> NHS England. <em>Serious Incident Framework.</em> 2015.</p>
+        <p style="margin-top:8px;"><strong>Joiner, B.L.</strong> (1994). <em>Fourth Generation Management: The New Business Consciousness.</em> McGraw-Hill.</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.</strong> (1986). <em>Out of the Crisis.</em> MIT Press &mdash; &ldquo;Production viewed as a system,&rdquo; p.4.</p>
+        <p style="margin-top:8px;"><strong>Weiss, C.H.</strong> (1995). Nothing as Practical as Good Theory. In Connell et al. (Eds.), <em>New Approaches to Evaluating Community Initiatives.</em> Aspen Institute.</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><strong>Chelsea and Westminster NHS Foundation Trust PSIRP:</strong> Cited for the 52,000 incidents / 286 investigations (0.5%) statistic. <a href="https://www.chelwest.nhs.uk/about-us/organisation/links/cwft-psirf-plan_sep25_final-2.pdf">chelwest.nhs.uk</a></p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    </footer>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>

@@ -3,541 +3,559 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Making the Invisible Visible — Why Improvement Fails and What to Do Instead — StepChangeAnalysis.com</title>
+    <meta name="description" content="Every major improvement framework — Lean, Six Sigma, TOC, Deming — is a different instrument for making a different invisible thing visible. This page presents the six-step framework above the methods, with the thirteen visibility traps and the tools that dissolve them.">
     <link rel="canonical" href="https://stepchangeanalysis.com/making-the-invisible-visible.html">
-    <title>Making the Invisible Visible — Why Every Improvement Framework Solves the Same Problem — StepChangeAnalysis.com</title>
-    <meta name="description" content="The symptom is visible. The cause is hidden. The constraint is structural. The contradiction is assumed away. Every great improvement framework — from Shewhart to Goldratt to Don Norman — is a method for making the invisible visible. Bootstrap CUSUM makes structural change visible in data.">
-    <meta name="keywords" content="improvement frameworks, making invisible visible, Don Norman design of everyday things, FMEA detectability, Goldratt evaporating cloud, Bootstrap CUSUM, Shewhart, Deming, systems thinking, root cause, constraint">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
 
     <link rel="stylesheet" href="assets/styles.css">
+
+    <style>
+        /* Page-specific only */
+        .loop-wrap { border:1px solid #e0e0de; border-radius:8px; overflow:hidden; margin:24px 0; }
+        .loop-step { display:flex; gap:0; border-bottom:1px solid #e0e0de; }
+        .loop-step:last-child { border-bottom:none; }
+        .loop-num { background:#185FA5; color:white; font-weight:700; font-size:15px; width:48px; min-width:48px; display:flex; align-items:center; justify-content:center; padding:16px 0; }
+        .loop-content { padding:14px 18px; flex:1; }
+        .loop-content strong { display:block; font-size:15px; color:#111; margin-bottom:4px; }
+        .loop-content p { font-size:13px; color:#444; margin:0; line-height:1.6; }
+        .loop-content .loop-tool { font-size:12px; color:#185FA5; margin-top:6px; display:block; font-weight:600; }
+        .loop-step.step-alt .loop-num { background:#0d4a2a; }
+        .trap-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0; }
+        .trap-card { border:1px solid #e0e0de; border-radius:8px; padding:16px 18px; font-size:13px; display:flex; flex-direction:column; gap:6px; }
+        .trap-card .trap-num { font-size:10px; font-weight:700; color:#fff; background:#8B2020; text-transform:uppercase; letter-spacing:0.07em; padding:3px 9px; border-radius:3px; display:inline-block; align-self:flex-start; }
+        .trap-card .trap-title { font-size:14px; font-weight:700; color:#111; line-height:1.3; margin:0; }
+        .trap-card p { margin:0; color:#555; font-size:13px; line-height:1.65; }
+        /* Fix inline bold in callouts — override any block display */
+        .callout strong.inline, .callout span.bold { display:inline; font-weight:700; }
+        .iceberg-box { background:#f0f4fb; border:1px solid #c5d5ee; border-radius:8px; padding:20px 24px; margin:24px 0; }
+        .iceberg-level { display:flex; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:1px solid #d5e3f5; }
+        .iceberg-level:last-child { border-bottom:none; }
+        .il-badge { font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; white-space:nowrap; flex-shrink:0; margin-top:2px; }
+        .il-visible { background:#c5d5ee; color:#0c2d5a; }
+        .il-pattern { background:#d4ecd8; color:#0d4a2a; }
+        .il-structure { background:#faeeda; color:#633806; }
+        .il-mindset { background:#f5c4b3; color:#712B13; }
+        .il-body strong { display:block; font-size:14px; color:#111; margin-bottom:3px; }
+        .il-body p { font-size:13px; color:#444; margin:0; line-height:1.6; }
+        .framework-table { width:100%; border-collapse:collapse; font-size:13px; margin:20px 0; }
+        .framework-table th { background:#f2f2f0; padding:8px 12px; text-align:left; border:1px solid #ddd; font-weight:600; }
+        .framework-table td { padding:8px 12px; border:1px solid #ddd; vertical-align:top; line-height:1.6; }
+        .framework-table tr:nth-child(even) td { background:#fafaf8; }
+        @media (max-width:580px) { .trap-grid { grid-template-columns:1fr; } .loop-num { width:36px; min-width:36px; font-size:13px; } }
+    </style>
 </head>
 <body>
 
 <div id="site-header"></div>
 
-<main class="article-wrap">
+<main class="page-wrap">
 
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="concepts.html">Concepts</a> &rsaquo; Making the Invisible Visible</div>
-    <div class="article-flag">&#128202; Foundation Concept &middot; Why Improvement Frameworks Exist</div>
-
+    <div class="page-flag">&#128270; The Framework Above the Methods</div>
     <h1>Making the Invisible Visible</h1>
-    <p class="article-subtitle">The symptom is visible. The cause is hidden. The constraint is structural. The contradiction is assumed away. And the natural human response &mdash; act on what&rsquo;s visible, react to what&rsquo;s loudest, fix what you can reach &mdash; almost always addresses the wrong thing. Every great improvement framework is a different method for bridging that gap between what&rsquo;s visible and what&rsquo;s true.</p>
-    <div class="article-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Foundation concept &nbsp;&middot;&nbsp; <a href="index.html" style="color:#0056b3;font-weight:600;">Open the StepChange Analyzer</a></div>
+    <p class="page-intro">Every major improvement framework developed in the last hundred years &mdash; Lean, Six Sigma, Theory of Constraints, Deming, Systems Thinking, Failure Demand, Bright Spots &mdash; is a response to the same fundamental problem. The symptom is visible. The cause is hidden. This page presents the framework above the methods: six steps for making the invisible visible, thirteen traps where the cause hides, and the instruments that dissolve each one.</p>
 
-    <!-- KEY INSIGHT BOX -->
-    <div style="background:#001a3a;border-radius:10px;padding:24px 28px;margin:20px 0 32px;font-family:system-ui,sans-serif;">
-        <p style="margin:0 0 12px;font-size:1.05em;font-weight:700;color:white;line-height:1.6;">Making something visible is itself an intervention. Not a precondition for the intervention &mdash; the intervention itself.</p>
-        <p style="margin:0;font-size:0.92em;color:#94b8d4;line-height:1.8;">Most human systems fail not because people lack the will to fix them, but because the real problem is invisible. Every great improvement framework is a method for making the invisible visible &mdash; and Bootstrap CUSUM (StepChange Analyzer) is the instrument that makes structural change visible in data.</p>
+    <div class="callout blue" style="margin-top:16px;">
+        <strong>The central question</strong>
+        <p>A manager looking at a system that is not improving &mdash; under pressure to show results, with finite time and resource &mdash; cannot implement all the available frameworks simultaneously. She has to choose. And the frameworks do not tell her how.</p>
+        <p style="margin-top:8px;">The question that sits above all of them is: <em>what are they all trying to do?</em> The answer, when you strip away the domain-specific language and the decade in which each was developed, is the same for all of them. Every framework is a different instrument for making a different invisible thing visible. The manager does not need to choose between them. She needs to identify which invisible thing is in front of her, and reach for the instrument that makes that specific thing visible.</p>
     </div>
 
+    <div class="cta-box" style="margin-top:18px;">
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+        <p style="margin-top:10px;color:white;">The Analyzer is the instrument for Step 5 &mdash; testing honestly whether an intervention has produced a structural change point in the data.</p>
+    </div>
+
+    <div class="page-meta">By Syd Stewart, Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; June 2026</div>
+
     <details class="toc-details">
-        <summary>&#9776;&nbsp; Contents</summary>
+        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
         <div class="toc-inner">
             <ol>
-                <li><a href="#section-problem">The fundamental problem</a></li>
-                <li><a href="#section-norman">Don Norman — visibility as the design principle</a></li>
-                <li><a href="#section-fmea">FMEA — detectability as a risk dimension</a></li>
-                <li><a href="#section-frameworks">Every framework is a visibility tool</a></li>
-                <li><a href="#section-five-steps">The five steps every framework agrees on</a></li>
-                <li><a href="#section-cusum">Bootstrap CUSUM — making structural change visible</a></li>
-                <li><a href="#section-site">How this site is organised around visibility</a></li>
+                <li><a href="#section-iceberg">The Senge Iceberg &mdash; why the symptom is never the cause</a></li>
+                <li><a href="#section-loop">The six-step Visibility Loop</a></li>
+                <li><a href="#section-traps">The thirteen visibility traps</a></li>
+                <li><a href="#section-frameworks">How the major frameworks map to each step</a></li>
+                <li><a href="#section-principles">The two principles that dissolve most traps</a></li>
+                <li><a href="#section-where-tools-fit">Where the key tools sit &mdash; TOC, Bright Spots, Moonshot</a></li>
+                <li><a href="#section-nhs">Applied to NHS corridor care</a></li>
+                <li><a href="#section-instruments">The instruments on this site</a></li>
             </ol>
         </div>
     </details>
 
-    <h2 id="section-problem">The fundamental problem</h2>
+    <h2 id="section-iceberg">1. The Senge Iceberg &mdash; why the symptom is never the cause</h2>
 
-    <p>Imagine a hospital with rising corridor care rates, falling staff morale, missed A&amp;E targets, and increasing ambulance handover times. A management team looks at this picture and sees four problems. They form four workstreams, assign four improvement leads, and implement four programmes simultaneously.</p>
+    <p>Peter Senge introduced the Iceberg Model in <em>The Fifth Discipline</em> (1990) as a way of understanding why systemic problems resist surface-level solutions. Every event that reaches management is the visible tip. The patterns that produce repeated events are visible if you look carefully. The structures &mdash; the rules, the incentives, the physical arrangements &mdash; are below the waterline. The mindsets that justify those structures are the deepest root.</p>
 
-    <p>What they cannot see — because it is structural and therefore invisible to operational observation — is that all four symptoms share a single cause: approximately 13,700 acute beds per day are occupied by patients who are medically fit to leave but cannot, because social care capacity is insufficient. That constraint sits outside the system boundary of any NHS trust. It is invisible from inside the organisation. And the four workstreams, each addressing a visible symptom, will produce activity without producing structural improvement.</p>
+    <p>Senge&rsquo;s insight was that most organisations manage at the Event level. They react to what is visible. Occasionally they manage at the Pattern level &mdash; they notice the trend and try to reverse it. Rarely do they work at the Structure level, where the patterns are produced. Almost never at the Mindset level, where the structures are justified and maintained.</p>
 
-    <p>This is not a story about the NHS. It is a story about the relationship between visibility and causality that every improvement framework has independently discovered:</p>
+    <div class="iceberg-box">
+        <div style="font-size:12px; font-weight:700; color:#185FA5; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:14px;">The Iceberg &mdash; four levels of visibility</div>
 
-    <div style="background:#f0f4f8;border-left:4px solid var(--brand-blue);border-radius:0 8px 8px 0;padding:20px 24px;margin:24px 0;font-family:system-ui,sans-serif;">
-        <p style="margin:0 0 10px;font-size:1.0em;font-weight:700;color:#002d5b;line-height:1.6;">The visibility gap</p>
-        <p style="margin:0;font-size:0.95em;line-height:1.8;color:var(--text);">What is visible is almost never the cause of what is experienced. The symptom surfaces where the pain is felt. The cause sits upstream, often invisibly, often outside the boundary of the organisation that experiences the pain. The natural human response &mdash; act on what you can see, react to what is loudest, fix what you can reach &mdash; systematically addresses the symptom rather than the cause. This is not stupidity or laziness. It is a structural property of how human attention and organisational authority both work: we attend to what is visible, and we act where we have authority.</p>
+        <div class="iceberg-level">
+            <div class="il-badge il-visible">Above waterline</div>
+            <div class="il-body">
+                <strong>Events</strong>
+                <p>The visible tip. A Never Event. A corridor patient. A missed diagnosis. A customer complaint. A product release that fails. Management reacts here &mdash; investigating the individual event, taking immediate action, reporting to governance. Necessary but not sufficient. The event will recur because the structure that produced it is unchanged.</p>
+            </div>
+        </div>
+
+        <div class="iceberg-level">
+            <div class="il-badge il-pattern">Below waterline</div>
+            <div class="il-body">
+                <strong>Patterns</strong>
+                <p>The recurring trend. Wrong-route Never Events at 17.5 per year for 15 years. A&amp;E four-hour performance declining through four structural stages over 25 years. The same support ticket recurring every quarter. Bootstrap CUSUM makes patterns visible &mdash; distinguishing genuine structural change from normal variation, dating when a pattern started, confirming whether it has ended.</p>
+            </div>
+        </div>
+
+        <div class="iceberg-level">
+            <div class="il-badge il-structure">Below waterline</div>
+            <div class="il-body">
+                <strong>Structures</strong>
+                <p>The system design that produces the pattern. Luer connectors physically compatible across routes. Social care budgets separate from NHS budgets. Procurement without clinical safety input. The customisation commitment that prevents standardisation. These are the <a href="joiner-levels-of-fix.html">Joiner Level 3</a> fixes &mdash; the ones that change what the system can produce rather than how people behave within it.</p>
+            </div>
+        </div>
+
+        <div class="iceberg-level">
+            <div class="il-badge il-mindset">Deepest level</div>
+            <div class="il-body">
+                <strong>Mindsets</strong>
+                <p>The beliefs that justify keeping the structures in place. <em>&ldquo;Safety is a behavioural problem.&rdquo;</em> <em>&ldquo;The delays are inevitable because customers are complex.&rdquo;</em> <em>&ldquo;That delayed discharge is not our problem &mdash; it is the local authority&rsquo;s.&rdquo;</em> These are <a href="joiner-levels-of-fix.html">Joiner Level 3 Deep</a>. No technical fix can dissolve a mindset. Only naming the assumption and testing it against evidence can.</p>
+            </div>
+        </div>
     </div>
 
+    <p>Every improvement programme that addresses only the Event will see the Event recur. The Structure regenerates it. The Mindset justifies the Structure. This is not bad luck or poor execution. It is the predictable consequence of working above the waterline.</p>
 
-    <blockquote style="border-left:4px solid var(--brand-blue);margin:24px 0;padding:16px 22px;background:#f0f4f8;border-radius:0 8px 8px 0;font-family:system-ui,sans-serif;">
-        <p style="margin:0 0 8px;font-size:1.05em;font-style:italic;color:var(--brand-blue);line-height:1.7;">&ldquo;If we keep working the way we are doing it, the outcome will be the same.&rdquo;</p>
-        <p style="margin:0;font-size:0.85em;color:var(--muted);">Syd Stewart &mdash; StepChangeAnalysis.com</p>
-    </blockquote>
+    <div style="margin:20px 0; text-align:center;">
+        <img src="images/img-moonshot-wrong-route.png" alt="Wrong-route medication Never Event traced from the Event (patient harmed) through the Pattern (17.5 Never Events/year) to the Structure (physical Luer compatibility) to the Mindset (safety is behavioural) — showing the reactive loop and the Joiner levels of fix from Level 1 Containment through Level 2 Process to Level 3 Systemic Design including ENFit connector" style="max-width:480px; width:100%; height:auto; border-radius:6px; border:1px solid #e0e0de;">
+        <p style="font-size:12px; color:#666; margin-top:8px;">The wrong-route Never Event traced through the Senge Iceberg. The reactive loop (dashed arrow) returns to the Structure level but never reaches the Mindset. Without challenging the belief that &ldquo;safety is behavioural,&rdquo; the event rate stays flat at 17.5 per year regardless of how many investigations are conducted.</p>
+    </div>
 
-    <p>Every major improvement framework &mdash; from Shewhart&rsquo;s control charts to Goldratt&rsquo;s <a href="evaporating-cloud.html">Evaporating Cloud</a> to Don Norman&rsquo;s affordances to FMEA detectability scoring &mdash; is a response to this same fundamental problem. They differ in domain, language, and method. They agree on the diagnosis: the problem is a visibility failure, and the solution is a visibility intervention.</p>
+    <blockquote>Bootstrap CUSUM applied to 184 months of NHS A&amp;E data finds four stages of structural decline and zero structural improvement change points. 25 years of policy interventions &mdash; all above the waterline. The pattern is unchanged because the structure producing it has not been addressed. &mdash; <a href="why-nothing-has-worked-nhs-ae-performance.html">Why Nothing Has Worked: NHS A&amp;E</a></blockquote>
 
     <hr>
 
-    <h2 id="section-norman">Don Norman — visibility as the design principle</h2>
+    <h2 id="section-loop">2. The six-step Visibility Loop</h2>
 
-    <p>In <em>The Design of Everyday Things</em> (1988), Don Norman asked why intelligent, capable people consistently make errors with everyday objects — doors, switches, taps, computers. His answer was not that people are careless. It was that the objects failed to make the correct action visible.</p>
+    <p>The six steps below show what working through the framework looks like as a continuous cycle. Step 6 is not the end &mdash; it is the beginning of the next pass. Each time you dissolve a visibility failure, the constraint moves and a new invisible thing appears. The loop never closes. Each pass makes the next invisible thing visible.</p>
 
-    <p>Norman identified two visibility failures that cause most use errors:</p>
-
-    <div class="numbers-box">
-        <table>
-            <thead><tr>
-                <th>Norman&rsquo;s concept</th>
-                <th>What it means</th>
-                <th>The improvement equivalent</th>
-            </tr></thead>
-            <tbody>
-                <tr>
-                    <td><strong>Affordance</strong></td>
-                    <td>The correct action is not visible in the design of the object. A door that should be pushed has a handle that invites pulling. The user makes the &ldquo;wrong&rdquo; choice — but the design made the right choice invisible.</td>
-                    <td>An improvement intervention that requires the correct action to be invisible (a new protocol buried in a policy document, a new pathway with no visible cue at the point of decision) will fail regardless of how well-designed it is. Visibility of the correct action is a precondition for behaviour change.</td>
-                </tr>
-                <tr>
-                    <td><strong>Feedback</strong></td>
-                    <td>The system state is not visible after an action. The user presses a button and does not know whether anything happened. They press it again. Or they don&rsquo;t press it enough times. The absence of visible feedback produces error.</td>
-                    <td>A system without visible feedback on its current state — a metric without a chart, a process without a run chart, an improvement without a change point detection method — cannot be managed. Bootstrap CUSUM is a feedback mechanism: it makes the system&rsquo;s response to an intervention visible in the data.</td>
-                </tr>
-            </tbody>
-        </table>
+    <div style="margin:20px 0; text-align:center;">
+        <img src="images/img-visibility-loop.png" alt="The six-step Visibility Loop: Step 1 Make it visible, Step 2 See the structure, Step 3 Challenge the assumption, Step 4 Design the intervention, Step 5 Test honestly, Step 6 Learn and move — with a loop-back arrow from Step 6 to Step 1" style="max-width:420px; width:100%; height:auto; border-radius:6px; border:1px solid #e0e0de;">
+        <p style="font-size:12px; color:#666; margin-top:8px;">The six steps in sequence. The dashed arrow from Step 6 back to Step 1 is the most important line in the diagram: the loop never ends. Each pass makes the next invisible thing visible and restarts the cycle with a harder question.</p>
     </div>
 
-    <p>Norman&rsquo;s most important insight for improvement work: <strong>when something goes wrong, the first question is never &ldquo;who made the error?&rdquo; It is &ldquo;what was invisible that should have been visible?&rdquo;</strong> This reframe — from blame to design — is the foundation of patient safety culture, human factors engineering, and every serious improvement methodology.</p>
+    <div class="loop-wrap">
+        <div class="loop-step">
+            <div class="loop-num">1</div>
+            <div class="loop-content">
+                <strong>What can&rsquo;t you currently see that is producing what you can see?</strong>
+                <p>Map the event as a time series. Apply Bootstrap CUSUM. If the series is stable with no change point, individual events are common cause variation &mdash; the system is producing them routinely and individual event investigation will not change the rate. The pattern is the signal, not the event. This step makes the pattern visible.</p>
+                <span class="loop-tool">Instruments: <a href="index.html">Bootstrap CUSUM</a> &nbsp;&middot;&nbsp; <a href="root-cause-analysis.html">Root Cause Analysis</a> &nbsp;&middot;&nbsp; <a href="five-whys.html">5 Whys</a> &nbsp;&middot;&nbsp; <a href="going-to-the-gemba.html">Going to the Gemba</a> &nbsp;&middot;&nbsp; <a href="bright-spots.html">Bright Spots</a></span>
+            </div>
+        </div>
 
-    <div class="callout blue">
-        <strong>The Norman door in NHS improvement</strong>
-        <p>A &ldquo;Norman door&rdquo; is a door so badly designed that you always push when you should pull, or pull when you should push. NHS improvement is full of Norman doors: systems that make the wrong action easier than the right one, processes where the safe path is less visible than the unsafe shortcut, metrics that make gaming easier than genuine improvement. Every time an organisation responds to this by training staff to use the door correctly rather than fixing the door, it is applying a Level 1 fix to a Level 3 design problem.</p>
+        <div class="loop-step step-alt">
+            <div class="loop-num">2</div>
+            <div class="loop-content">
+                <strong>What structural feature of the system is producing this outcome?</strong>
+                <p>Once the pattern is confirmed as genuine, map the causal chain backwards from the outcome to the structural condition producing it. The structural condition is not the proximate cause of any individual event &mdash; it is the system feature that makes the class of events possible. For wrong-route medication: the structural cause is physical connector interoperability, not individual administration error.</p>
+                <p>Distinguishing signal from noise is the prerequisite for this step. Common cause variation &mdash; the normal output of a stable system &mdash; does not indicate a structural problem. It indicates a system performing as designed. Reacting to common cause variation as if it were a structural defect is Deming&rsquo;s tampering: it adds cost, increases variation, and produces no improvement. Special cause variation &mdash; a data point or pattern outside the bounds of normal system behaviour &mdash; does indicate something worth investigating structurally. Bootstrap CUSUM distinguishes the two with statistical rigour. Only when a genuine structural signal is confirmed does Step 2 investigation make sense. Without that confirmation, the investigation addresses noise and leaves the structural cause untouched. See: <a href="variation-and-spc.html">Variation &amp; SPC</a> &nbsp;&middot;&nbsp; <a href="common-cause-variation.html">Common cause variation</a> &nbsp;&middot;&nbsp; <a href="special-cause-variation.html">Special cause variation</a></p>
+                <span class="loop-tool">Instruments: <a href="root-cause-analysis.html">Root Cause Analysis</a> &nbsp;&middot;&nbsp; <a href="variation-and-spc.html">Variation &amp; SPC</a> &nbsp;&middot;&nbsp; <a href="causal-loop-diagrams.html">Causal Loop Diagrams</a> &nbsp;&middot;&nbsp; <a href="finding-the-real-constraint.html">Finding the Real Constraint</a> &nbsp;&middot;&nbsp; <a href="failure-demand.html">Failure Demand</a> &nbsp;&middot;&nbsp; <a href="leading-indicators.html">Leading Indicators</a></span>
+            </div>
+        </div>
+
+        <div class="loop-step">
+            <div class="loop-num">3</div>
+            <div class="loop-content">
+                <strong>What belief is keeping that structural feature in place?</strong>
+                <p>Every persistent structural problem has a belief keeping it there &mdash; a Joiner Level 3 Deep assumption held by the people with authority to change the structure. Naming that assumption is the pre-condition for designing an intervention that will dissolve it, rather than one that works around it temporarily. <em>&ldquo;Safety is a behavioural problem&rdquo;</em> is the belief that kept Luer connectors in place for 15 years after the structural fix was known.</p>
+                <span class="loop-tool">Instruments: <a href="joiner-levels-of-fix.html">Joiner Levels of Fix</a> &nbsp;&middot;&nbsp; <a href="five-whys.html">5 Whys to mindset level</a> &nbsp;&middot;&nbsp; <a href="why-nothing-changes.html">Why Nothing Changes</a> &nbsp;&middot;&nbsp; <a href="evaporating-cloud.html">Evaporating Cloud</a></span>
+            </div>
+        </div>
+
+        <div class="loop-step step-alt">
+            <div class="loop-num">4</div>
+            <div class="loop-content">
+                <strong>What structural change would dissolve that assumption?</strong>
+                <p>Design the intervention at the right Joiner level. A Level 1 fix applied to a Level 3 problem will produce no Bootstrap CUSUM change point. The intervention must change what is structurally possible, not just what is procedurally required. This is where TRIZ separation principles, the Evaporating Cloud, and the Moonshot Protocol live. The dissolution is not a compromise between the two sides of the conflict &mdash; it is a questioning of the assumption that made the conflict seem unavoidable.</p>
+                <span class="loop-tool">Instruments: <a href="joiner-levels-of-fix.html">Joiner Levels of Fix</a> &nbsp;&middot;&nbsp; <a href="evaporating-cloud.html">Evaporating Cloud</a> &nbsp;&middot;&nbsp; <a href="theory-of-constraints.html">Theory of Constraints</a> &nbsp;&middot;&nbsp; <a href="divergent-convergent-thinking.html">Divergent &amp; Convergent Thinking</a></span>
+            </div>
+        </div>
+
+        <div class="loop-step">
+            <div class="loop-num">5</div>
+            <div class="loop-content">
+                <strong>Has the intervention produced a structural change point in the data?</strong>
+                <p>Before implementing the fix, state in writing what you expect to see in the data and when. After implementation, run Bootstrap CUSUM on the outcome series periodically. A change point at the predicted confidence level is the honest confirmation. No change point within the expected window means the structural cause was not reached &mdash; return to Step 2. A mandate is not a change point. Action completion is not a change point. Only the data can confirm structural improvement.</p>
+                <p>PDSA (Plan&ndash;Do&ndash;Study&ndash;Act) is the improvement cycle that sits within Step 5. The Plan phase is the pre-committed prediction: state what you expect before you start. The Do phase is the implementation. The Study phase is where Bootstrap CUSUM is applied &mdash; not &ldquo;did the number move?&rdquo; but &ldquo;has the system structurally changed?&rdquo; The Act phase is Step 6: what does the change point (or its absence) tell you about what to do next? PDSA without Bootstrap CUSUM in the Study phase produces conclusions that reflect hope rather than evidence. See: <a href="pdsa-cycle.html">PDSA cycle &rarr;</a> &nbsp;&middot;&nbsp; <a href="model-for-improvement.html">Model for Improvement &rarr;</a></p>
+                <p>For interventions whose outcomes take years to appear, Theory of Change (Carol Weiss, 1995) provides the method for designing intermediate measures &mdash; the &ldquo;mini-steps&rdquo; that must be visible before the final outcome can move. Each mini-step in the causal chain is itself a Bootstrap CUSUM series. A sequence of change points through the causal chain &mdash; appearing in the right order, with the right lead times between them &mdash; is the strongest possible evidence that the full theory of change is working. See: <a href="leading-indicators.html">Leading Indicators &mdash; the six-step causal chain method &rarr;</a></p>
+                <span class="loop-tool">Instruments: <a href="index.html">Bootstrap CUSUM &mdash; StepChange Analyzer</a> &nbsp;&middot;&nbsp; <a href="types-of-measures.html">Types of Measures</a> &nbsp;&middot;&nbsp; <a href="leading-indicators.html">Leading Indicators &amp; Theory of Change</a> &nbsp;&middot;&nbsp; <a href="corridor-care-2029.html">Corridor Care 2029 &mdash; live pre-committed prediction</a></span>
+            </div>
+        </div>
+
+        <div class="loop-step step-alt">
+            <div class="loop-num">6</div>
+            <div class="loop-content">
+                <strong>What is now invisible that wasn&rsquo;t before? The loop restarts.</strong>
+                <p>A confirmed structural change point raises a new question. The system has changed &mdash; what does it now produce that it didn&rsquo;t before? What adjacent pattern has emerged? What constraint has moved? The improvement cycle does not end at verification. It restarts at Step 1 with a harder question. This is why the framework is not a methodology &mdash; it is a loop that never closes.</p>
+                <span class="loop-tool">Instruments: <a href="bright-spots.html">Bright Spots</a> &nbsp;&middot;&nbsp; <a href="stratify-experiment-disaggregate.html">Stratify, Experiment, Disaggregate</a> &nbsp;&middot;&nbsp; <a href="index.html">Bootstrap CUSUM on updated series</a></span>
+            </div>
+        </div>
     </div>
-
-    <div class="callout blue">
-        <strong>Deming said variation was the most important thing for managers to understand &mdash; but visibility may be more fundamental</strong>
-        <p>Deming&rsquo;s insight was that variation is everywhere and that managers must learn to distinguish common cause from special cause. But there is a prior problem: variation is often invisible. A manager who cannot see the variation &mdash; who has no control chart, no run chart, no Bootstrap CUSUM &mdash; will react to every data point as if it were a signal. Tampering is not stupidity. It is the rational response to invisible variation. The control chart does not just describe variation. It makes it visible &mdash; and visibility changes behaviour before any other intervention is applied.</p>
-    </div>
-
 
     <hr>
 
-    <h2 id="section-fmea">FMEA — detectability as a risk dimension</h2>
+    <h2 id="section-traps">3. The thirteen visibility traps</h2>
 
-    <p>Failure Mode and Effects Analysis (FMEA) was developed in aerospace and defence in the 1940s and became central to automotive and medical device safety. It scores every potential failure mode on three dimensions: Severity, Occurrence, and Detection. The Risk Priority Number (RPN) is their product: Severity &times; Occurrence &times; Detection.</p>
+    <p>In any complex organisation &mdash; NHS trust, manufacturer, software company, local authority &mdash; the same thirteen symptoms recur. Each is a visibility failure. Each has a different invisible cause. Together they form a diagnostic: a map of the places where the cause hides.</p>
 
-    <p>Detection is the visibility score. A detection score of 1 means the failure is immediately obvious — it cannot occur without being seen. A detection score of 10 means the failure is completely invisible — it will occur and not be detected until it causes harm.</p>
+    <p>Each trap corresponds to a specific point in the Visibility Loop where the cause becomes invisible. Traps 1&ndash;4 are primarily Step 1 failures: the pattern is not seen at all. Traps 5&ndash;9 are Step 2 failures: the structural feature is misidentified or not reached. Traps 10&ndash;12 are Step 3 failures: the belief keeping the structure in place is never named. Trap 13 is the deepest &mdash; a Step 3 Deep failure where the belief is held by the people with the authority to change the structure, and has never been made explicit even to themselves.</p>
 
-    <p>The profound insight in FMEA&rsquo;s structure is that <strong>improving detectability reduces risk independently of whether you have fixed the cause.</strong> Making a failure mode visible — through an alarm, a visual indicator, a monitoring system, a mandatory check — reduces the RPN even if the underlying failure mode still exists. Visibility is a risk control in its own right.</p>
+    <p>Every trap also contains a contradiction &mdash; two legitimate requirements that appear to conflict. The organisation needs to scale AND deliver custom solutions. The trust needs to investigate incidents AND learn systemically. The boss needs to delegate AND maintain quality. These contradictions are not problems to be managed. They are assumptions to be dissolved &mdash; using the Evaporating Cloud to name the hidden assumption, and TRIZ separation principles to design the structural fix. The trap persists because the contradiction has never been made explicit.</p>
 
-    <p>This maps directly onto the improvement framework: making a problem visible is an intervention, not just a precondition for one. A run chart that shows variation doesn&rsquo;t fix the process — but it makes the variation visible, which changes behaviour, which changes the system. Bootstrap CUSUM doesn&rsquo;t fix the constraint — but it makes the structural change point visible, which changes what gets attributed to what, which changes what gets standardised and what gets abandoned.</p>
+    <p>Most problem areas do not trigger one trap. They trigger four to six simultaneously, and the traps reinforce each other. This is why single-method improvement programmes fail: Lean addresses Traps 3 and 7. Six Sigma addresses Traps 3 and 11. Theory of Constraints addresses Traps 4 and 5. Each addresses its cluster correctly &mdash; and leaves the others untouched.</p>
 
-    <div class="callout blue">
-        <strong>The detection paradox</strong>
-        <p>In FMEA, the highest-risk failure modes are often not the most severe ones. They are the ones with low detectability — the silent failures that accumulate undetected until they produce a catastrophic outcome. The same pattern appears in organisational improvement: the most dangerous problems are not the loudest ones. They are the ones nobody can see. Corridor care is loud and visible. The discharge constraint that causes it is silent and invisible. FMEA would give corridor care a low detection score &mdash; and correctly identify the discharge constraint as the higher-risk finding.</p>
+    <div class="trap-grid">
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 1</div>
+            <span class="trap-title">The innovation trap</span>
+            <p>The most vocal customers dominate the roadmap. Silent customers who are leaving register only months later as a revenue problem rather than a product problem.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 2</div>
+            <span class="trap-title">The customisation contradiction</span>
+            <p>Every customer request is individually reasonable. The cumulative cost &mdash; a codebase that cannot scale, a support burden that grows faster than revenue &mdash; is never visible as a system.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 3</div>
+            <span class="trap-title">The quality spiral</span>
+            <p>The same issues recur. Each fix addresses the visible symptom without reaching the structural cause. Deming called this tampering: reacting to common cause variation as if it were special cause.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 4</div>
+            <span class="trap-title">The single point of failure</span>
+            <p>The boss holds all key relationships, product knowledge, and strategy simultaneously. The assumption that only the boss can do these things has never been made explicit &mdash; and therefore never questioned.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 5</div>
+            <span class="trap-title">The implementation queue</span>
+            <p>An implementation process designed for a customer who is fully prepared, deployed into a reality where customers are never fully prepared. The gap between assumed conditions and actual conditions is invisible until someone maps it.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 6</div>
+            <span class="trap-title">The version proliferation trap</span>
+            <p>Customers are reluctant to upgrade. The constraint is not customer inertia &mdash; it is that the upgrade has never been made easy or safe enough. The design failure in the upgrade pathway is invisible because the customer&rsquo;s reluctance is visible.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 7</div>
+            <span class="trap-title">The activity trap</span>
+            <p>The team is constantly improving. Releases are frequent. The changelog is long. Bootstrap CUSUM on the metrics that matter shows no structural change point. The activity is real. The improvement is not.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 8</div>
+            <span class="trap-title">The meeting loop</span>
+            <p>Weekly progress meetings. Monthly reviews. Quarterly planning. The decisions made in those meetings address visible symptoms while the invisible cause compounds quietly beneath. A Level 1 and Level 2 system applied to a Level 3 problem.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 9</div>
+            <span class="trap-title">The information gap</span>
+            <p>Remote working has reduced informal information flow. The conversation that previously happened at the coffee machine &mdash; making the constraint visible before it became a crisis &mdash; no longer happens. The information exists. The visibility mechanism does not.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 10</div>
+            <span class="trap-title">The compliance burden</span>
+            <p>Regulatory requirements accumulate. Each is individually legitimate. Cumulatively they consume the capacity that should be going to structural improvement. Opportunity cost is always invisible. It never appears on a dashboard.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 11</div>
+            <span class="trap-title">The attribution trap</span>
+            <p>An intervention is applied. The metric improves. The improvement is attributed to the intervention. Nobody asks whether it would survive a Bootstrap CUSUM test, whether it is seasonal variation, or regression to the mean. Without a pre-committed prediction, every intervention appears to work.</p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 12</div>
+            <span class="trap-title">The boundary trap</span>
+            <p>The constraint sits outside the organisational boundary &mdash; in a supplier, a regulator, a partner, a different budget. The organisation can see everything inside its boundary. It cannot act on what lies outside &mdash; even when it suspects the constraint lies there. <a href="never-events-wrong-route.html">The Never Events case illustrates this with precision.</a></p>
+        </div>
+
+        <div class="trap-card">
+            <div class="trap-num">Trap 13</div>
+            <span class="trap-title">The success trap</span>
+            <p>The practices that produced past success became embedded as the way things are done. Then the environment changed. What made the organisation great is now producing the wrong outcomes &mdash; and is invisible as a constraint precisely because it was once the source of advantage.</p>
+        </div>
+
     </div>
 
-    <div class="callout blue">
-        <strong>Silos are a visibility problem &mdash; seeing the whole system</strong>
-        <p>A silo is not just an organisational structure. It is a visibility boundary. The cause of a problem is often on the other side of that boundary &mdash; in the supplier, the customer, the regulator, the adjacent department, the local authority. From inside the silo, the cause is structurally invisible. You experience the symptom. You cannot see what is producing it.</p>
-        <p style="margin-top:8px;">This is why systems thinking &mdash; Senge&rsquo;s fifth discipline, Checkland&rsquo;s rich picture, Beer&rsquo;s Viable System Model &mdash; begins by drawing the whole system: suppliers, customers, regulators, government departments, legislation, feedback loops across boundaries. The rich picture includes things the organisation does not control precisely because the causes of its problems often live there. Making the whole system visible &mdash; not just your slice of it &mdash; is the prerequisite to finding the real constraint.</p>
+    <div class="callout blue" style="margin-top:8px;">
+        <strong>Each trap has the same deep structure</strong>
+        <p>Look carefully at any of the thirteen traps and you will find: a <span class="bold">legitimate goal</span>, a <span class="bold">structural feature</span> that was once the right way to achieve it, a <span class="bold">mindset</span> that justifies keeping the structural feature in place even as conditions change, and a <span class="bold">conflict</span> between what the structure now produces and what the goal requires. The mindset is the hidden assumption keeping the conflict alive. The structural fix is not a compromise &mdash; it is a dissolution of the assumption that made the conflict seem unavoidable. This is the <a href="evaporating-cloud.html">Evaporating Cloud</a> applied to organisational visibility.</p>
     </div>
-
 
     <hr>
 
-    <h2 id="section-frameworks">Every framework is a visibility tool</h2>
+    <h2 id="section-frameworks">4. How the major frameworks map to each step</h2>
 
-    <p>Across every improvement discipline, the same pattern recurs: a framework that makes something invisible, visible. The methods differ. The domains differ. The vocabulary differs. The insight is the same.</p>
+    <p>The frameworks that have proliferated over the last century are not competing answers to the same question. They are different instruments for making different invisible things visible. A manager who understands this does not need to choose between them. She needs to identify which invisible thing is in front of her.</p>
 
-    <div class="numbers-box">
-        <table>
-            <thead><tr>
-                <th>Framework</th>
+    <table class="framework-table">
+        <thead>
+            <tr>
+                <th>Visibility Loop step</th>
                 <th>What it makes visible</th>
-                <th>What was invisible before</th>
-            </tr></thead>
-            <tbody>
-                <tr>
-                    <td><strong>Shewhart control chart</strong></td>
-                    <td>The boundary between common cause variation and special cause variation</td>
-                    <td>Whether a data point is a signal worth acting on or noise that should be ignored. Without the chart, every data point looks like a signal.</td>
-                </tr>
-                <tr>
-                    <td><strong>Bootstrap CUSUM</strong></td>
-                    <td>The date and direction of a structural step change in a time series</td>
-                    <td>Whether an intervention produced genuine structural improvement or whether the metric moved for other reasons (seasonal variation, regression to the mean, definition change).</td>
-                </tr>
-                <tr>
-                    <td><strong>Goldratt&rsquo;s constraint map</strong></td>
-                    <td>Where work accumulates — the binding constraint in the system</td>
-                    <td>That improving a non-constraint produces no improvement in throughput. Every manager sees their own bottleneck; the constraint map shows the system&rsquo;s bottleneck.</td>
-                </tr>
-                <tr>
-                    <td><strong>Goldratt&rsquo;s Evaporating Cloud</strong></td>
-                    <td>The structural contradiction keeping the constraint in place — and the assumption underneath it</td>
-                    <td>That the constraint is not a resource problem or a process problem but a logical conflict between two legitimate requirements. The Cloud makes the conflict explicit — and often dissolves it.</td>
-                </tr>
-                <tr>
-                    <td><strong>Joiner&rsquo;s levels of fix</strong></td>
-                    <td>The level at which the constraint sits (output, process, or system) and whether the organisation has authority to address it</td>
-                    <td>That Level 1 and Level 2 interventions applied to a Level 3 constraint will produce no lasting change — invisible until the Bootstrap CUSUM flat line makes it explicit.</td>
-                </tr>
-                <tr>
-                    <td><strong>Causal loop diagram</strong></td>
-                    <td>The feedback loops — reinforcing and balancing — that produce system behaviour over time</td>
-                    <td>That a vicious cycle is self-sustaining regardless of individual effort, and that the leverage point is in the loop structure, not in working harder within it.</td>
-                </tr>
-                <tr>
-                    <td><strong>TRIZ contradiction matrix</strong></td>
-                    <td>The technical or physical contradiction that makes the problem appear unsolvable</td>
-                    <td>That the problem persists not because of insufficient resources but because of a structural conflict — and that the conflict can be resolved by changing the dimension in which standardisation and customisation apply.</td>
-                </tr>
-                <tr>
-                    <td><strong>FMEA detectability score</strong></td>
-                    <td>How visible each failure mode is before it causes harm</td>
-                    <td>That silent failures are higher risk than loud ones — and that improving visibility is a risk control in its own right, independent of fixing the cause.</td>
-                </tr>
-                <tr>
-                    <td><strong>Senge&rsquo;s iceberg model</strong></td>
-                    <td>The structure and mental models beneath the visible events and patterns</td>
-                    <td>That events are the tip of the iceberg — below the surface lie patterns, structures, and mental models that will keep producing the same events until the structure changes.</td>
-                </tr>
-                <tr>
-                    <td><strong>Don Norman&rsquo;s affordances</strong></td>
-                    <td>Whether the correct action is visible at the point of decision</td>
-                    <td>That use errors are almost always design errors — the correct action was invisible, so the user made the only choice the design made obvious.</td>
-                </tr>
-                <tr>
-                    <td><strong>Hurson&rsquo;s evaluation matrix</strong></td>
-                    <td>The trade-offs between candidate solutions against agreed success criteria</td>
-                    <td>That the preferred solution is not necessarily the best one — the preference is usually based on incomplete, implicit comparison. The matrix makes the comparison explicit and visible.</td>
-                </tr>
-                <tr>
-                    <td><strong>The 5 Whys</strong></td>
-                    <td>The causal chain between a visible symptom and its root cause</td>
-                    <td>That the first answer to &ldquo;why?&rdquo; is almost never the root cause &mdash; it is the next layer of symptom. Each Why peels back one layer of invisibility. The root cause is the Why that has no further Why beneath it.</td>
-                </tr>
-                <tr>
-                    <td><strong>Causal Loop Diagram (CLD)</strong></td>
-                    <td>The feedback loops &mdash; reinforcing and balancing &mdash; that produce system behaviour over time</td>
-                    <td>That a vicious cycle is self-sustaining regardless of individual effort. The R1 reinforcing loop in NHS corridor care is invisible without the diagram &mdash; making it visible is the intervention.</td>
-                </tr>
-                <tr>
-                    <td><strong>Root Cause Analysis (RCA)</strong></td>
-                    <td>The upstream causes behind a visible failure or adverse event</td>
-                    <td>That the proximate cause &mdash; the last thing that happened before the failure &mdash; is almost never the root cause. RCA makes the causal chain visible so the intervention addresses the origin, not the trigger.</td>
-                </tr>
-                <tr>
-                    <td><strong>Pre-committed prediction</strong></td>
-                    <td>What you expected to happen before the data arrived</td>
-                    <td>That attribution is almost always post-hoc rationalisation. The pre-committed prediction makes the original hypothesis visible — so the data can test it rather than confirm it.</td>
-                </tr>
-            </tbody>
-        </table>
+                <th>Frameworks that address it</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Step 1</strong> &mdash; See the pattern</td>
+                <td>Whether events are common cause or special cause; whether a structural change has occurred; when it occurred</td>
+                <td>Deming / SPC / Bootstrap CUSUM &nbsp;&middot;&nbsp; Bright Spots &nbsp;&middot;&nbsp; Root Cause Analysis &nbsp;&middot;&nbsp; Failure Demand</td>
+            </tr>
+            <tr>
+                <td><strong>Step 2</strong> &mdash; Find the structural feature</td>
+                <td>The system design producing the pattern; the binding constraint; the structural gap between assumed and actual conditions</td>
+                <td>Theory of Constraints &nbsp;&middot;&nbsp; Systems Thinking &nbsp;&middot;&nbsp; Causal Loop Diagrams &nbsp;&middot;&nbsp; 5 Whys &nbsp;&middot;&nbsp; Lean (value stream mapping)</td>
+            </tr>
+            <tr>
+                <td><strong>Step 3</strong> &mdash; Name the belief</td>
+                <td>The mindset keeping the structure in place; the assumption that has never been questioned; the contradiction assumed to be unavoidable</td>
+                <td>Joiner Level 3 Deep &nbsp;&middot;&nbsp; Evaporating Cloud &nbsp;&middot;&nbsp; Psychological safety frameworks &nbsp;&middot;&nbsp; Going to the Gemba</td>
+            </tr>
+            <tr>
+                <td><strong>Step 4</strong> &mdash; Design the dissolution</td>
+                <td>The structural change that makes the conflict disappear; Question 3 of the Model for Improvement: what changes can we make that will result in an improvement?</td>
+                <td>TRIZ separation principles &nbsp;&middot;&nbsp; Evaporating Cloud &nbsp;&middot;&nbsp; Joiner Level 3 fix &nbsp;&middot;&nbsp; Poka-Yoke &nbsp;&middot;&nbsp; Moonshot Protocol &nbsp;&middot;&nbsp; <a href="model-for-improvement.html">Model for Improvement Q3</a></td>
+            </tr>
+            <tr>
+                <td><strong>Step 5</strong> &mdash; Test honestly</td>
+                <td>Question 2 of the Model for Improvement: how will we know that a change is an improvement? PDSA Plan = pre-committed prediction. PDSA Study = Bootstrap CUSUM. A structural change point is the honest answer.</td>
+                <td>Bootstrap CUSUM &nbsp;&middot;&nbsp; Pre-committed prediction &nbsp;&middot;&nbsp; <a href="model-for-improvement.html">Model for Improvement Q2</a> &nbsp;&middot;&nbsp; <a href="pdsa-cycle.html">PDSA</a> &nbsp;&middot;&nbsp; Types of measures &nbsp;&middot;&nbsp; Theory of Change &nbsp;&middot;&nbsp; Leading Indicators</td>
+            </tr>
+            <tr>
+                <td><strong>Step 6</strong> &mdash; See what&rsquo;s next</td>
+                <td>The new invisible constraint that appeared when the previous one was dissolved; the adjacent pattern; the next question</td>
+                <td>Bright Spots &nbsp;&middot;&nbsp; Stratify and disaggregate &nbsp;&middot;&nbsp; Bootstrap CUSUM on updated series</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2 id="section-principles">5. The two principles that dissolve most traps</h2>
+
+    <p>Once the contradiction keeping a trap alive has been named &mdash; the Step 3 work of the Visibility Loop &mdash; the Step 4 question is: what structural change would dissolve the assumption that makes the conflict seem unavoidable?</p>
+
+    <p>TRIZ (the Theory of Inventive Problem Solving, developed by Genrich Altshuller from analysis of 400,000 patents) identified 40 inventive principles for resolving technical and organisational contradictions. Across the thirteen visibility traps, two principles do most of the work. They are not compromises &mdash; they do not ask you to trade one requirement for another. They dissolve the assumption that made the conflict appear unavoidable in the first place.</p>
+
+    <p>Understanding these two principles is more useful than trying to apply all 40. Most organisational contradictions reduce to one of them. Together they explain why the structural fixes that actually prevent recurrence so often involve either separating the conflicting requirements into different layers (Segmentation) or arranging the conditions in advance so the harmful event cannot occur (Prior Action).</p>
+
+    <div class="callout blue">
+        <strong>Principle 10 &mdash; Prior Action</strong>
+        <p>Resolves the traps where harm occurs because a dangerous condition was allowed to exist in the first place. The fix is to arrange the system in advance so the harmful condition cannot arise. This is the Bootstrap CUSUM principle applied to organisational design: the pre-committed prediction is Prior Action. The baseline is established <em>before</em> the programme launches, not reconstructed afterwards. Applies to: Traps 3, 7, 11, and 13.</p>
+    </div>
+
+    <div class="callout blue" style="margin-top:12px;">
+        <strong>Principle 1 &mdash; Segmentation</strong>
+        <p>Resolves the traps where the contradiction exists because two conflicting requirements are applied at the same level of the system simultaneously. The fix is to separate them into different levels or layers. Standardise the platform, customise the configuration. Segment core from variant. Separate accountability from budget. The dissolution of the variety contradiction in one sentence: <em>accept variety at the point of contact &mdash; absorb it before it reaches the delivery system.</em> Applies to: Traps 2, 4, 6, and 12.</p>
+    </div>
+
+    <div style="margin:24px 0; text-align:center;">
+        <img src="images/img-moonshot-principles.png" alt="Two Key Principles to Prevent Recurrence: Principle 1 Fix Systems Not People — the blameless culture — human error is a symptom never a root cause, you cannot train away human fallibility, design environments where the wrong choice is hard and the right choice is easy. Principle 2 Defence in Depth — limit the blast radius — all humans machines and processes will eventually fail, do not aim for perfection aim for safe failure, catch errors in the preparation phase so the system fails safely quietly and recoverably." style="max-width:560px; width:100%; height:auto; border-radius:6px; border:1px solid #e0e0de;">
+        <p style="font-size:12px; color:#666; margin-top:8px;">The two principles that the Moonshot Protocol holds throughout. Principle 1 dissolves the behavioural mindset that keeps structural fixes off the table. Principle 2 ensures that when Principle 1 is not yet fully implemented, the system fails safely rather than catastrophically.</p>
     </div>
 
     <hr>
 
-    <h2 id="section-five-steps">The five steps every framework agrees on</h2>
+    <h2 id="section-where-tools-fit">6. Where the key tools sit in the six steps</h2>
 
-    <p>Strip away the domain-specific language from every framework and five steps remain. They are always the same five steps. They are always in the same order. Every framework is a different set of tools for executing one or more of them.</p>
+    <p>Three tools cause the most confusion about where they belong in the Visibility Loop. Each addresses a specific step — and understanding which step clarifies both when to reach for the tool and what to do before and after it.</p>
 
-    <div style="margin:20px 0 28px;background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:10px;padding:20px;overflow-x:auto;">
-        <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:12px;">The five steps &mdash; the loop that never ends</div>
-        <svg width="100%" viewBox="0 0 680 660" role="img" xmlns="http://www.w3.org/2000/svg">
-        <title>The five-step generic improvement model</title>
-        <desc>Five-step loop: Make it visible, See the structure, Challenge the assumption, Test honestly, Learn and move. Single feedback arrow right side. Single-column legend below.</desc>
-        <defs>
-          <marker id="arrow5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-        </defs>
+    <h3 style="margin:24px 0 10px;">Evaporating Cloud and Theory of Constraints &mdash; Step 4</h3>
 
-        <a href="making-the-invisible-visible.html">
-        <g style="cursor:pointer;">
-          <rect x="180" y="30" width="300" height="62" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
-          <text x="330" y="52" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#0C447C">1. Make it visible</text>
-          <text x="330" y="72" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="12" fill="#185FA5">resist the first interpretation &mdash; look harder</text>
-        </g></a>
-        <line x1="330" y1="92" x2="330" y2="130" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrow5)"/>
+    <p>Both belong at Step 4 — designing the structural change that dissolves the assumption keeping the problem in place. But they approach Step 4 from different directions.</p>
 
-        <a href="theory-of-constraints.html">
-        <g style="cursor:pointer;">
-          <rect x="180" y="130" width="300" height="62" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
-          <text x="330" y="152" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#085041">2. See the structure</text>
-          <text x="330" y="172" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="12" fill="#0F6E56">find the constraint, not the symptom</text>
-        </g></a>
-        <line x1="330" y1="192" x2="330" y2="230" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrow5)"/>
+    <p><strong>Theory of Constraints</strong> identifies the binding constraint — the single point in the system that limits throughput. Once identified (Step 2), it asks: what is preventing the constraint from being elevated? The answer is almost always an assumption that has never been questioned (Step 3). The Evaporating Cloud then names that assumption explicitly and designs its dissolution (Step 4). The Cloud is not standalone — it is the Step 4 instrument that follows from Steps 2 and 3.</p>
 
-        <a href="finding-the-real-constraint.html">
-        <g style="cursor:pointer;">
-          <rect x="180" y="230" width="300" height="62" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
-          <text x="330" y="252" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#633806">3. Challenge the assumption</text>
-          <text x="330" y="272" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="12" fill="#854F0B">what belief keeps the constraint alive?</text>
-        </g></a>
-        <line x1="330" y1="292" x2="330" y2="330" stroke="#BA7517" stroke-width="1.5" marker-end="url(#arrow5)"/>
+    <p><strong>The Evaporating Cloud</strong> works wherever there is a conflict that appears unavoidable &mdash; two requirements that seem mutually exclusive. The five-box structure: (1) the shared goal both sides are trying to achieve; (2) what Side A needs to achieve that goal; (3) what Side B needs to achieve that goal; (4) the conflict between A&rsquo;s requirement and B&rsquo;s requirement; (5) the hidden assumption that makes the conflict appear unavoidable. Dissolving assumption (5) makes the conflict in (4) disappear &mdash; without either side compromising. Applied to wrong-route Never Events: the conflict is &ldquo;staff need standard connectors for efficiency&rdquo; vs &ldquo;connectors must be route-specific for safety.&rdquo; The hidden assumption: that one connector system must serve both purposes. ENFit dissolves the assumption by separating connector types by route &mdash; a TRIZ Segmentation (Principle 1) solution.</p>
 
-        <a href="interpret-results.html">
-        <g style="cursor:pointer;">
-          <rect x="180" y="330" width="300" height="62" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
-          <text x="330" y="352" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#3C3489">4. Test honestly</text>
-          <text x="330" y="372" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="12" fill="#534AB7">pre-committed prediction &mdash; Bootstrap CUSUM</text>
-        </g></a>
-        <line x1="330" y1="392" x2="330" y2="430" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow5)"/>
+    <p><strong>TRIZ separation principles</strong> are the structural inventions that implement the dissolution. Principle 1 (Segmentation) separates conflicting requirements into different domains &mdash; different layers of the system, different points in time, different scales. Principle 10 (Prior Action) arranges the conditions in advance so the harmful event cannot occur. Together they explain the ENFit solution (Segmentation in space), the pre-committed Bootstrap CUSUM prediction (Prior Action in time), and the Universal Core / Configuration Layer architecture that dissolves the customisation contradiction (Segmentation into layers). A TRIZ concept page is on the development list &mdash; for now, the Evaporating Cloud page provides the full worked example.</p>
 
-        <a href="no-change-what-next.html">
-        <g style="cursor:pointer;">
-          <rect x="180" y="430" width="300" height="62" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
-          <text x="330" y="452" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#2C2C2A">5. Learn and move</text>
-          <text x="330" y="472" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="12" fill="#5F5E5A">constraint has moved &mdash; repeat from step 1</text>
-        </g></a>
-
-        <path d="M480 461 Q556 461 556 61 Q556 30 482 30"
-              fill="none" stroke="#888780" stroke-width="1.4"
-              stroke-dasharray="7 4" marker-end="url(#arrow5)"/>
-        <text x="562" y="244" text-anchor="start" font-family="system-ui,sans-serif" font-size="12" fill="#5F5E5A">It&apos;s a</text>
-        <text x="562" y="259" text-anchor="start" font-family="system-ui,sans-serif" font-size="12" fill="#5F5E5A">loop,</text>
-        <text x="562" y="274" text-anchor="start" font-family="system-ui,sans-serif" font-size="12" fill="#5F5E5A">not a</text>
-        <text x="562" y="289" text-anchor="start" font-family="system-ui,sans-serif" font-size="12" fill="#5F5E5A">line</text>
-
-        <rect x="40" y="514" width="600" height="128" rx="8"
-              fill="none" stroke="#B4B2A9" stroke-width="0.5"/>
-        <text x="56" y="534" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#444441">Frameworks at each step:</text>
-
-        <rect x="56" y="546" width="34" height="14" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
-        <text x="73" y="557" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#185FA5">1</text>
-        <text x="98" y="557" font-family="system-ui,sans-serif" font-size="11" fill="#444441">Shewhart &middot; Deming &middot; Norman &middot; Poka-Yoke (Shingo) &middot; FMEA detection</text>
-
-        <rect x="56" y="566" width="34" height="14" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
-        <text x="73" y="577" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#0F6E56">2</text>
-        <text x="98" y="577" font-family="system-ui,sans-serif" font-size="11" fill="#444441">Goldratt &middot; Senge &middot; Joiner &middot; Checkland &middot; Value Stream Mapping</text>
-
-        <rect x="56" y="586" width="34" height="14" rx="3" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/>
-        <text x="73" y="597" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#854F0B">3</text>
-        <text x="98" y="597" font-family="system-ui,sans-serif" font-size="11" fill="#444441">TRIZ &middot; <a href="evaporating-cloud.html">Goldratt Evaporating Cloud</a> &middot; Christensen &middot; Norman</text>
-
-        <rect x="56" y="606" width="34" height="14" rx="3" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
-        <text x="73" y="617" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#534AB7">4</text>
-        <text x="98" y="617" font-family="system-ui,sans-serif" font-size="11" fill="#444441">Deming PDSA &middot; Bootstrap CUSUM &middot; pre-committed prediction</text>
-
-        <rect x="56" y="626" width="34" height="14" rx="3" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
-        <text x="73" y="637" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#5F5E5A">5</text>
-        <text x="98" y="637" font-family="system-ui,sans-serif" font-size="11" fill="#444441">Goldratt Step 5 &middot; Deming cycle &middot; Senge double-loop learning</text>
-
-        </svg>
-        <p style="font-family:system-ui,sans-serif;font-size:0.82em;color:var(--muted);margin:10px 0 0;text-align:center;">Each step links to the relevant concept page &mdash; click to explore further.</p>
+    <div class="callout blue">
+        <strong>TOC, Evaporating Cloud, and TRIZ at Step 4 &mdash; three instruments, one step</strong>
+        <p>TOC finds the constraint and names the policy blocking its elevation. The Evaporating Cloud names the five-box structure of the conflict and surfaces the hidden assumption. TRIZ Principles 1 and 10 provide the structural invention that implements the dissolution and makes it physically or organisationally real. Together: TOC identifies <em>what</em> to dissolve, the Cloud names <em>why it has persisted</em>, TRIZ invents the mechanism that dissolves it concretely.</p>
+        <p style="margin-top:8px; font-size:13px;"><a href="theory-of-constraints.html">Theory of Constraints &rarr;</a> &nbsp;&middot;&nbsp; <a href="evaporating-cloud.html">Evaporating Cloud &rarr;</a> &nbsp;&middot;&nbsp; <a href="root-cause-analysis-diagram.html">Moonshot Protocol &mdash; full worked example &rarr;</a></p>
     </div>
 
+    <h3 style="margin:28px 0 10px;">Bright Spots &mdash; Steps 1 and 6</h3>
 
-    <div class="timeline-box">
+    <p>Bright Spots belong at two points in the loop — and the purpose is different at each.</p>
 
-        <div class="timeline-item">
-            <span class="timeline-date">Step 1</span>
-            <span class="timeline-text">
-                <strong>Make it visible &mdash; resist the first interpretation and look harder</strong><br><br>
-                Deming: distinguish common cause from special cause — don&rsquo;t react to noise. Shewhart: measure before acting. Norman: find what the design made invisible. FMEA: score detectability. Bootstrap CUSUM: let the data speak before attributing.<br><br>
-                The instruction is always the same: <em>what you think you are seeing is not what is causing the problem. Look at the structure, not the event.</em>
-            </span>
-        </div>
+    <p><strong>At Step 1</strong>, Bright Spots answer: <em>what can&rsquo;t I see that is producing what I can see?</em> If the overall pattern is poor performance, Bright Spots make visible the exceptions — the wards, teams, or trusts already doing what the system as a whole cannot. The invisible thing Step 1 makes visible is not just the problem but the proof that the problem is solvable. Watford General made corridor care visible as a solvable structural problem by demonstrating that patient-level discharge coordination produced dramatically different outcomes from the standard model. The Bright Spot is evidence that the structural cause is not inevitable.</p>
 
-        <div class="timeline-item">
-            <span class="timeline-date">Step 2</span>
-            <span class="timeline-text">
-                <strong>See the structure &mdash; find what is producing what you see</strong><br><br>
-                Goldratt: map the constraint. Senge: find the feedback loop. Checkland: draw the rich picture. Altshuller: name the contradiction. Joiner: identify the level. Hurson: find the real problem.<br><br>
-                The instruction is always the same: <em>the structure is producing the behaviour. Change the structure — not the people, not the effort level, not the process within unchanged boundaries.</em>
-            </span>
-        </div>
+    <p><strong>At Step 6</strong>, after a structural change point has been confirmed, Bright Spots ask: <em>what is now visible that wasn&rsquo;t before?</em> After Watford demonstrated the model, the new invisible thing was: which other trusts are replicating it, and what are they learning that Watford didn&rsquo;t? Step 6 restarts the loop at a harder question — and Bright Spots at this stage find where the next structural learning is already happening before the rest of the system has noticed.</p>
 
-        <div class="timeline-item">
-            <span class="timeline-date">Step 3</span>
-            <span class="timeline-text">
-                <strong>Challenge the assumption &mdash; what invisible belief is keeping the constraint in place?</strong><br><br>
-                Goldratt&rsquo;s Evaporating Cloud: what assumption underlies the contradiction? TRIZ: resolve in a different dimension. Christensen: what job is actually being done? Norman: who decided the door should open that way?<br><br>
-                The instruction is always the same: <em>the constraint usually persists because of an assumption nobody has questioned. Making the assumption visible often dissolves the constraint.</em>
-            </span>
-        </div>
-
-        <div class="timeline-item">
-            <span class="timeline-date">Step 4</span>
-            <span class="timeline-text">
-                <strong>Test honestly &mdash; small scale, pre-committed, measurable</strong><br><br>
-                Deming&rsquo;s PDSA: plan, do, study, act — small cycles. Goldratt: exploit before elevating. Joiner: experiment before scaling. Bootstrap CUSUM: pre-committed prediction at the specified confidence threshold. FMEA: test detectability before deployment.<br><br>
-                The instruction is always the same: <em>don&rsquo;t bet the organisation on an untested idea. Make the prediction visible before the data arrives — so the data can test it, not confirm it.</em>
-            </span>
-        </div>
-
-        <div class="timeline-item">
-            <span class="timeline-date">Step 5</span>
-            <span class="timeline-text">
-                <strong>Learn and move &mdash; the constraint has shifted, visibility must shift with it</strong><br><br>
-                Goldratt&rsquo;s Step 5: don&rsquo;t let inertia become the next constraint. Deming: the cycle never ends. Senge: double-loop learning. Bootstrap CUSUM: monitor continuously for the next change point.<br><br>
-                The instruction is always the same: <em>you have made one invisible thing visible and addressed it. The system has changed. Something else is now invisible. Start again.</em>
-            </span>
-        </div>
-
+    <div class="callout blue">
+        <strong>Bright Spots at Step 1 and Step 6 &mdash; the bookends of the loop</strong>
+        <p>Step 1: who is already succeeding at what you are trying to do, and what structural conditions make that possible? Step 6: after a change point, who is already doing what the changed system makes possible — and what can they see that the rest of the system cannot yet?</p>
+        <p style="margin-top:8px; font-size:13px;"><a href="bright-spots.html">Bright Spots &rarr;</a> &nbsp;&middot;&nbsp; <a href="corridor-care-bright-spots.html">Corridor care Bright Spots &rarr;</a></p>
     </div>
+
+    <h3 style="margin:28px 0 10px;">The Moonshot Protocol &mdash; all six steps operationalised</h3>
+
+    <p>The Moonshot Protocol is not a tool for one step. It is the full Visibility Loop expressed as a structured ten-step process across three phases — what working through all six steps looks like in practice when the problem is complex, the constraint is structural, and the contradiction has never been explicitly named.</p>
+
+    <div style="margin:20px 0; text-align:center;">
+        <img src="images/img-moonshot-overview.png" alt="The Moonshot Protocol — three phases: Phase 1 The Diagnostic (steps 1-5: Define Unacceptable Event, Map Patterns 5 Whys, Audit Structure, Triage Joiner Levels, Expose Mindset), Phase 2 The Resolution Contradiction Engine (steps 6-9: Identify Contradictions, Dissolve TRIZ Separation, Verify for Evolution, Sunset the Backdoor), Phase 3 The Pivot (step 10: Reclaim and Redeploy) leading to The Moonshot" style="max-width:420px; width:100%; height:auto; border-radius:6px; border:1px solid #e0e0de;">
+        <p style="font-size:12px; color:#666; margin-top:8px;">The ten steps across three phases. Phase 1 (Diagnostic) completes Visibility Loop Steps 1&ndash;3. Phase 2 (Resolution) is entirely Step 4. Phase 3 (Pivot) completes Steps 5 and 6.</p>
+    </div>
+
+    <div style="border:1px solid #e0e0de; border-radius:6px; overflow:hidden; margin:16px 0 24px;">
+        <div style="background:#f7f7f5; padding:10px 16px; border-bottom:1px solid #e0e0de; font-size:12px; font-weight:700; color:#666; text-transform:uppercase; letter-spacing:0.04em;">The Moonshot Protocol mapped to the Visibility Loop</div>
+        <div style="padding:14px 16px; border-bottom:1px solid #e0e0de;">
+            <div style="font-size:12px; font-weight:700; color:#185FA5; margin-bottom:5px;">Phase 1 &mdash; Diagnostic &nbsp;&rarr;&nbsp; Visibility Loop Steps 1, 2, 3</div>
+            <div style="font-size:13px; color:#444; line-height:1.65;">Define the event &rarr; Map the pattern (Bootstrap CUSUM) &rarr; Audit the structure (fishbone, 5 Whys) &rarr; Triage by Joiner level &rarr; Expose the hidden belief. Ends with the assumption named explicitly.</div>
+        </div>
+        <div style="padding:14px 16px; border-bottom:1px solid #e0e0de; background:#fafaf8;">
+            <div style="font-size:12px; font-weight:700; color:#0d4a2a; margin-bottom:5px;">Phase 2 &mdash; Resolution &nbsp;&rarr;&nbsp; Visibility Loop Step 4</div>
+            <div style="font-size:13px; color:#444; line-height:1.65;">Identify the contradiction &rarr; Dissolve via TRIZ separation &rarr; Verify for evolution &rarr; Sunset the backdoor. Entirely Step 4 — designing the structural change that dissolves the assumption. Evaporating Cloud and TRIZ Principles 1 and 10 are the instruments here.</div>
+        </div>
+        <div style="padding:14px 16px;">
+            <div style="font-size:12px; font-weight:700; color:#712B13; margin-bottom:5px;">Phase 3 &mdash; Pivot &nbsp;&rarr;&nbsp; Visibility Loop Steps 5 and 6</div>
+            <div style="font-size:13px; color:#444; line-height:1.65;">Reclaim and redeploy capacity previously consumed by the recurring problem. Bootstrap CUSUM confirms the change point (Step 5). The freed capacity redirects to the next constraint — what is now invisible that wasn&rsquo;t before? (Step 6).</div>
+        </div>
+    </div>
+
+    <p>The Moonshot Protocol is used when all other attempts have failed — when the event keeps recurring, when the Joiner Level 1 and 2 fixes have been applied and Bootstrap CUSUM shows no change point, and when it is time to work explicitly at the Level 3 structural contradiction. It is not the first tool to reach for. It is the tool for when the loop has been running without completing past Step 2.</p>
+    <p style="font-size:13px; margin-bottom:0;"><a href="root-cause-analysis-diagram.html">See the Moonshot Protocol in full &mdash; RCA Diagrams &amp; Templates &rarr;</a></p>
+
+    <hr>
+
+    <h2 id="section-nhs">7. Applied to NHS corridor care &mdash; all thirteen traps active simultaneously</h2>
+
+    <p>The Never Events case has eight active traps simultaneously. The corridor care crisis has all thirteen. This is why 25 years of single-method improvement programmes have produced no Bootstrap CUSUM change point in A&amp;E performance.</p>
 
     <div class="dark-box">
-        <h3>Why the loop never ends</h3>
-        <p>Every framework is iterative because visibility is not a permanent condition. Making something visible changes the system — which creates new invisible things. The discharge constraint becomes visible through a causal loop diagram; it is addressed through shared budgets; the constraint moves to GP access; GP access becomes the new invisible problem. The five steps do not produce a final solution. They produce a method for continuous navigation through a system that is always partly invisible.</p>
-        <p style="margin-top:10px;">Bootstrap CUSUM is the instrument that detects when the system has changed — when a new invisible thing has become visible in the data. The flat line tells you the constraint is unchanged. The change point tells you something structural has shifted. Both are information. Both are visibility.</p>
+        <h3 style="margin:0 0 10px; color:white;">&#128202; Bootstrap CUSUM on NHS A&amp;E performance &mdash; 184 months</h3>
+        <p style="color:#ccc; font-size:14px;">25 years of NHS A&amp;E policy interventions. Four stages of structural decline. Zero structural improvement change points. The metrics moved. The system did not. Every intervention addressed a visible symptom while the structural cause &mdash; delayed transfer of care consuming 13,700 beds per day &mdash; remained untouched because it sits outside the A&amp;E boundary in social care budgets the NHS does not control.</p>
+        <p style="color:#aaa; font-size:13px; margin-top:10px;"><a href="why-nothing-has-worked-nhs-ae-performance.html" style="color:#93c5fd;">Read the full analysis &rarr;</a> &nbsp;&middot;&nbsp; <a href="corridor-care-2029.html" style="color:#93c5fd;">Corridor Care 2029 &mdash; pre-committed prediction &rarr;</a></p>
     </div>
+
+    <p>The Watford General bright spot &mdash; Matthew Coats&rsquo;s singular focus on urgent and emergency care &mdash; dissolved Traps 4, 8, 9, and 12 simultaneously by creating a control centre that co-located decision-making authority across the boundary. UEC performance improved. And then, counterintuitively, elective, cancer, and financial performance all followed &mdash; because UEC was the binding constraint on system flow. <a href="bright-spots.html">Read the Bright Spots analysis &rarr;</a></p>
 
     <hr>
 
-    <h2 id="section-cusum">Bootstrap CUSUM — making structural change visible</h2>
+    <h2 id="section-instruments">8. The instruments on this site &mdash; what each one makes visible</h2>
 
-    <p>Bootstrap CUSUM (the StepChange Analyzer) sits at Steps 1 and 4 of the generic model. At Step 1, it makes visible what common cause variation and measurement noise conceal: whether a genuine structural shift has occurred in a time series, and when. At Step 4, it is the Study step of PDSA — the honest test of whether the pre-committed prediction was confirmed by the data.</p>
-
-    <p>Its relationship to the visibility theme is precise. Every other visibility tool on this page makes a structural truth visible to human observation — the control chart makes variation visible to the eye, the Evaporating Cloud makes the contradiction visible to the mind, FMEA makes failure risk visible to the analyst. Bootstrap CUSUM makes structural change visible in data — and does so with a specified confidence level, a precise date, and a statistical threshold that cannot be moved after the fact.</p>
-
-    <div class="callout blue">
-        <strong>The pre-committed prediction as a visibility tool</strong>
-        <p>Most improvement evaluation is retrospective: an intervention is implemented, the metric improves, and the improvement is attributed to the intervention. The attribution is almost always invisible — nobody wrote down what they expected to happen before the data arrived, so any movement in the data can be credited to any intervention. The pre-committed prediction makes the original hypothesis visible before the data arrives. Bootstrap CUSUM then tests it. The prediction was either confirmed or it was not. That result is visible, explicit, and cannot be reinterpreted after the fact.</p>
-        <p style="margin-top:8px;">This is the same principle as FMEA detectability applied to improvement evaluation: make the failure mode (wrong attribution, regression to the mean, seasonal variation) visible before it has the chance to masquerade as success.</p>
+    <div class="nav-grid">
+        <a href="model-for-improvement.html" class="nav-card">
+            <div class="nav-tag">Steps 4 &amp; 5 &mdash; Design &amp; test</div>
+            <h3>Model for Improvement</h3>
+            <p>The operational mechanism for Steps 4 and 5. Question 3 is Step 4 (design the change). Question 2 is Step 5 (test honestly with Bootstrap CUSUM). PDSA is the cycle that connects them. Does not tell you what structural change to design &mdash; that requires Steps 1&ndash;3 first.</p>
+        </a>
+        <a href="pdsa-cycle.html" class="nav-card">
+            <div class="nav-tag">Steps 4 &amp; 5 &mdash; Design &amp; test</div>
+            <h3>PDSA Cycle</h3>
+            <p>Plan = pre-committed Bootstrap CUSUM prediction. Do = structural intervention. Study = Bootstrap CUSUM applied to the outcome series. Act = Step 6 &mdash; what does the result tell you about what to do next?</p>
+        </a>
+        <a href="root-cause-analysis.html" class="nav-card">
+            <div class="nav-tag">Step 1 &mdash; See the pattern</div>
+            <h3>Root Cause Analysis</h3>
+            <p>The instrument for making the invisible structural cause visible. Includes a complete 5 Whys worked example through all five levels to the Mindset root cause &mdash; with Joiner level analysis and Bootstrap CUSUM verification.</p>
+        </a>
+        <a href="five-whys.html" class="nav-card">
+            <div class="nav-tag">Step 1 &amp; 2 &mdash; See the pattern &amp; structure</div>
+            <h3>The 5 Whys</h3>
+            <p>The simplest instrument for tracing the causal chain from event to root cause. Asking why five times reaches the structural level &mdash; if the questioning stops early, it produces a proximate cause, not a root cause.</p>
+        </a>
+        <a href="joiner-levels-of-fix.html" class="nav-card">
+            <div class="nav-tag">Step 3 &amp; 4 &mdash; Name the belief &amp; design the fix</div>
+            <h3>Joiner&rsquo;s Levels of Fix</h3>
+            <p>The diagnostic for identifying whether a proposed fix will prevent recurrence. Level 1 and Level 2 fixes applied to Level 3 problems produce no Bootstrap CUSUM change point. Level 3 Deep names the mindset.</p>
+        </a>
+        <a href="evaporating-cloud.html" class="nav-card">
+            <div class="nav-tag">Step 4 &mdash; Design the dissolution</div>
+            <h3>Evaporating Cloud</h3>
+            <p>The instrument for dissolving the contradiction keeping a structural problem in place. Names the assumption, questions it, and designs the intervention that makes the conflict disappear.</p>
+        </a>
+        <a href="leading-indicators.html" class="nav-card">
+            <div class="nav-tag">Step 2 &amp; 5 &mdash; Structure &amp; honest test</div>
+            <h3>Leading Indicators</h3>
+            <p>When the outcome takes 15 years to move, what do you measure in year two? The six-step causal chain method for designing upstream metrics that are causally connected to the long-term outcome.</p>
+        </a>
+        <a href="types-of-measures.html" class="nav-card">
+            <div class="nav-tag">Step 5 &mdash; Test honestly</div>
+            <h3>Types of Measures</h3>
+            <p>Outcome, process, and balancing measures. Action completion is a process measure. Structural change in the event rate is an outcome measure. NHS improvement typically reports the former and calls it the latter.</p>
+        </a>
+        <a href="bright-spots.html" class="nav-card">
+            <div class="nav-tag">Step 1 &amp; 6 &mdash; See &amp; restart</div>
+            <h3>Bright Spots</h3>
+            <p>Who is already succeeding at what you are trying to do &mdash; and why? Bright Spots analysis makes the invisible structural conditions of exceptional performance visible and transferable.</p>
+        </a>
+        <a href="psirf-analytical-framework.html" class="nav-card">
+            <div class="nav-tag">NHS application &mdash; all six steps</div>
+            <h3>PSIRF Analytical Framework</h3>
+            <p>PSIRF mandates systemic learning from patient safety incident profiles. The six-step Visibility Loop provides the analytical tools that make that mandate operational rather than aspirational.</p>
+        </a>
+        <a href="failure-demand.html" class="nav-card">
+            <div class="nav-tag">Step 1 &mdash; See the pattern</div>
+            <h3>Failure Demand</h3>
+            <p>John Seddon&rsquo;s instrument for making visible the demand generated by the system&rsquo;s own failures. In most organisations, 30&ndash;60% of demand is failure demand &mdash; invisible until you measure it separately.</p>
+        </a>
+        <a href="theory-of-constraints.html" class="nav-card">
+            <div class="nav-tag">Step 2 &mdash; Find the structure</div>
+            <h3>Theory of Constraints</h3>
+            <p>Goldratt&rsquo;s instrument for identifying the binding constraint in a system. The pile of work is visible &mdash; the station that determines the throughput of the entire system is not.</p>
+        </a>
+        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="nav-card">
+            <div class="nav-tag">Evidence &mdash; all six steps failed</div>
+            <h3>Why Nothing Has Worked: NHS A&amp;E</h3>
+            <p>184 months of data. Zero structural improvement change points. The most complete demonstration on this site of what happens when the Visibility Loop is never completed past Step 1.</p>
+        </a>
+        <a href="never-events-wrong-route.html" class="nav-card">
+            <div class="nav-tag">Evidence &mdash; Trap 12 boundary trap</div>
+            <h3>Never Events &mdash; Wrong Route</h3>
+            <p>17.5 events per year. 15 years. No structural change point. The clearest demonstration of the boundary trap: the structural fix was known, the authority to implement it sat outside every investigation room.</p>
+        </a>
     </div>
 
-    <div class="callout blue">
-        <strong>How the five steps relate to the 7-step improvement method</strong>
-        <p>The five steps are the <em>why</em> &mdash; the generic model that every improvement framework independently arrived at. The <a href="improvement-method.html">7-step method</a> is the <em>how</em> &mdash; the operational sequence for applying the five steps in practice with a team.</p>
-        <p style="margin-top:8px;">Step 1 of the 7-step method (list symptoms) is the five-step model&rsquo;s Step 1 (make it visible). Steps 2&ndash;4 of the 7-step method (measure, root cause, test constraint) are the five-step model&rsquo;s Steps 2 and 3 (see the structure, challenge the assumption). Step 7 of the 7-step method (PDSA with Bootstrap CUSUM) is the five-step model&rsquo;s Step 4 (test honestly). The same logic, at different levels of abstraction.</p>
-    </div>
-
-
-    <hr>
-
-    <h2 id="section-site">How this site is organised around visibility</h2>
-
-    <p>Every page on this site is a visibility tool. The taxonomy is:</p>
-
-    <div class="numbers-box">
-        <table>
-            <thead><tr>
-                <th>What we make visible</th>
-                <th>The tool</th>
-                <th>The invisible thing it addresses</th>
-            </tr></thead>
-            <tbody>
-                <tr>
-                    <td><strong>Structural change in data</strong></td>
-                    <td><a href="index.html">Bootstrap CUSUM — StepChange Analyzer</a></td>
-                    <td>Whether an improvement is genuine or seasonal, random, or definitional</td>
-                </tr>
-                <tr>
-                    <td><strong>Type of variation</strong></td>
-                    <td><a href="common-cause-special-cause-step-change.html">Common cause vs special cause</a></td>
-                    <td>Whether to act on a data point or ignore it</td>
-                </tr>
-                <tr>
-                    <td><strong>The binding constraint</strong></td>
-                    <td><a href="theory-of-constraints.html">Theory of Constraints</a></td>
-                    <td>Which bottleneck is actually limiting throughput</td>
-                </tr>
-                <tr>
-                    <td><strong>The structural contradiction</strong></td>
-                    <td><a href="finding-the-real-constraint.html">Finding the real constraint</a></td>
-                    <td>Why the constraint has persisted despite repeated fixes</td>
-                </tr>
-                <tr>
-                    <td><strong>The level of the fix required</strong></td>
-                    <td><a href="joiner-levels-of-fix.html">Joiner&rsquo;s levels of fix</a></td>
-                    <td>Whether the intervention has the authority to reach the constraint</td>
-                </tr>
-                <tr>
-                    <td><strong>Feedback loop structure</strong></td>
-                    <td><a href="causal-loop-diagrams.html">Causal loop diagrams</a></td>
-                    <td>Why the system keeps producing the same outcomes despite interventions</td>
-                </tr>
-                <tr>
-                    <td><strong>Regression to the mean</strong></td>
-                    <td><a href="regression-to-the-mean.html">Regression to the mean</a></td>
-                    <td>Whether improvement after a bad period is structural or statistical inevitability</td>
-                </tr>
-                <tr>
-                    <td><strong>Trade-offs between solutions</strong></td>
-                    <td><a href="divergent-convergent-thinking.html">The evaluation matrix</a></td>
-                    <td>Which solution is actually best against agreed criteria — not just most politically convenient</td>
-                </tr>
-                <tr>
-                    <td><strong>The original hypothesis</strong></td>
-                    <td><a href="interpret-results.html">Pre-committed prediction</a></td>
-                    <td>What was expected before the data arrived — so attribution is honest</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div style="background:#001a3a;border-radius:10px;padding:24px 28px;margin:32px 0;font-family:system-ui,sans-serif;">
-        <p style="margin:0 0 10px;font-size:1.0em;font-weight:700;color:white;line-height:1.6;">Honest evidence of change</p>
-        <p style="margin:0;font-size:0.92em;color:#94b8d4;line-height:1.8;">That&rsquo;s what &ldquo;honest evidence of change&rdquo; means. Not that the people measuring are honest while others are dishonest. But that the method makes the right things visible &mdash; the structural change, the date it occurred, the confidence level, the balancing measures &mdash; so that the data is allowed to say no. A flat Bootstrap CUSUM line is not a failure. It is the most important visibility of all: the constraint is still there, still invisible to the intervention being applied, still waiting to be found.</p>
-    </div>
-
-    <div class="cta-box">
-        <h2>Make your data visible</h2>
-        <p>Upload your time-series data to the StepChange Analyzer. Bootstrap CUSUM will make the structural change point visible &mdash; or confirm the flat line that tells you the constraint has not yet been reached.</p>
+    <div class="cta-box" style="margin-top:32px;">
+        <h3 style="margin:0 0 8px;color:white;">Test your own data</h3>
+        <p>The StepChange Analyzer applies Bootstrap CUSUM to your time series &mdash; free, browser-based, no data uploaded. Upload a CSV of your incident rate, quality metric, or improvement outcome. The Analyzer will tell you whether a structural change has occurred &mdash; or whether what you are seeing is noise.</p>
         <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+        <div class="cta-next">Start here if new: <a href="start-here.html" style="color:white;">Start Here &rarr;</a> &nbsp;|&nbsp; <a href="why-nothing-changes.html" style="color:white;">Why Nothing Changes &rarr;</a></div>
     </div>
 
-    <div class="related-box">
-        <div class="related-tag">Foundation Concept</div>
-        <h3><a href="common-cause-special-cause-step-change.html">Common Cause vs Special Cause Variation</a></h3>
-        <p>The first visibility problem in improvement data — distinguishing signal from noise.</p>
-        <a href="common-cause-special-cause-step-change.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <div class="related-box">
-        <div class="related-tag">Related Concept</div>
-        <h3><a href="finding-the-real-constraint.html">Finding the Real Constraint</a></h3>
-        <p>The six-phase process for making the structural constraint and the contradiction visible before designing the solution.</p>
-        <a href="finding-the-real-constraint.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <div class="related-box">
-        <div class="related-tag">Related Concept</div>
-        <h3><a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a></h3>
-        <p>Making visible which level the constraint sits at — and whether the organisation has the authority to reach it.</p>
-        <a href="joiner-levels-of-fix.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <div class="related-box">
-        <div class="related-tag">Related Concept</div>
-        <h3><a href="regression-to-the-mean.html">Regression to the Mean</a></h3>
-        <p>The invisible statistical phenomenon that masquerades as improvement — and how Bootstrap CUSUM makes it visible.</p>
-        <a href="regression-to-the-mean.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <div class="related-box">
-        <div class="related-tag">Related Concept</div>
-        <h3><a href="divergent-convergent-thinking.html">Divergent and Convergent Thinking</a></h3>
-        <p>The evaluation matrix makes trade-offs between solutions visible. POWER makes objections visible. The pre-committed prediction makes the original hypothesis visible.</p>
-        <a href="divergent-convergent-thinking.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <div class="related-box">
-        <div class="related-tag">Related Concept</div>
-        <h3><a href="going-to-the-gemba.html">Going to the Gemba</a></h3>
-        <p>The most direct response to asymmetric visibility &mdash; going to where the constraint manifests with the authority to act on it immediately.</p>
-        <a href="going-to-the-gemba.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <div class="related-box">
-        <div class="related-tag">Related Concept</div>
-        <h3><a href="visual-management.html">Visual Management</a></h3>
-        <p>Making work visible vs making the constraint visible &mdash; the distinction that determines whether visual management produces structural change or records the problem.</p>
-        <a href="visual-management.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <div class="related-box">
-        <div class="related-tag">Related Concept</div>
-        <h3><a href="evaporating-cloud.html">Evaporating Cloud</a></h3>
-        <p>Makes the structural contradiction keeping a constraint in place visible &mdash; then dissolves it by naming and questioning the assumption underneath.</p>
-        <a href="evaporating-cloud.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <footer class="article-footer">
-        <p><strong>Norman, D.A.:</strong> <em>The Design of Everyday Things.</em> Basic Books, 1988 (revised 2013). Affordances, feedback, and the principle that use errors are almost always design errors — the correct action was invisible.</p>
-        <p style="margin-top:8px;"><strong>Shewhart, W.A.:</strong> <em>Economic Control of Quality of Manufactured Product.</em> Van Nostrand, 1931. The control chart as a visibility tool — making the boundary between common cause and special cause variation visible for the first time.</p>
-        <p style="margin-top:8px;"><strong>Deming, W.E.:</strong> <em>Out of the Crisis.</em> MIT Press, 1982. The System of Profound Knowledge and PDSA — making variation, knowledge, and theory visible before acting.</p>
-        <p style="margin-top:8px;"><strong>Goldratt, E.M.:</strong> <em>The Goal.</em> North River Press, 1984. <em>It&rsquo;s Not Luck.</em> North River Press, 1994. The constraint map, the Current Reality Tree, and the Evaporating Cloud — making the binding constraint and the structural contradiction visible.</p>
-        <p style="margin-top:8px;"><strong>Altshuller, G.:</strong> <em>The Innovation Algorithm.</em> Technical Innovation Center, 1999. TRIZ contradiction analysis — making the technical contradiction visible so it can be resolved rather than compromised.</p>
-        <p style="margin-top:8px;"><strong>Senge, P.:</strong> <em>The Fifth Discipline.</em> Doubleday, 1990. The Iceberg Model and systems archetypes — making feedback loop structure visible beneath the surface of events.</p>
-        <p style="margin-top:8px;"><strong>Joiner, B.L.:</strong> <em>Fourth Generation Management.</em> McGraw-Hill, 1994. Levels of fix — making visible which level the constraint sits at and what authority is required to address it.</p>
-        <p style="margin-top:8px;"><strong>MIL-P-1629:</strong> Procedures for Performing a Failure Mode Effects and Criticality Analysis. US Department of Defense, 1949. The original FMEA — including detectability as a risk dimension independent of severity and occurrence.</p>
-        <p style="margin-top:8px;"><strong>Bootstrap CUSUM method:</strong> Taylor (2000), Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993). Making structural step changes visible in time-series data at specified confidence levels.</p>
-        <p style="margin-top:16px;color:#aaa;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
+    <footer class="page-footer">
+        <p><strong>Senge, P.</strong> (1990). <em>The Fifth Discipline: The Art and Practice of the Learning Organisation.</em> Doubleday. [The Iceberg Model.]</p>
+        <p style="margin-top:8px;"><strong>Joiner, B.L.</strong> (1994). <em>Fourth Generation Management: The New Business Consciousness.</em> McGraw-Hill. [Levels of Fix; Level 3 Deep.]</p>
+        <p style="margin-top:8px;"><strong>Deming, W.E.</strong> (1986). <em>Out of the Crisis.</em> MIT Press. [Variation; common cause vs special cause; tampering.]</p>
+        <p style="margin-top:8px;"><strong>Goldratt, E.M.</strong> (1984). <em>The Goal.</em> North River Press. [Theory of Constraints; the binding constraint.]</p>
+        <p style="margin-top:8px;"><strong>Seddon, J.</strong> (2008). <em>Systems Thinking in the Public Sector.</em> Triarchy Press. [Failure demand.]</p>
+        <p style="margin-top:8px;"><strong>Altshuller, G.</strong> (1996). <em>And Suddenly the Inventor Appeared: TRIZ, the Creative Problem Solving Process.</em> Technical Innovation Center. [Principles 1 and 10.]</p>
+        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
+        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
     </footer>
 
 </main>
