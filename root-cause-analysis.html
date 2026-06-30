@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://stepchangeanalysis.com/root-cause-analysis.html">
-    <title>Root Cause Analysis (RCA) in NHS Healthcare: PSIRF, 5 Whys, Fishbone &mdash; StepChangeAnalysis.com</title>
-    <meta name="description" content="Root cause analysis for NHS healthcare and PSIRF: complete 5 Whys worked example with Joiner level test and Bootstrap CUSUM verification. Fishbone diagrams, cause mapping, and how to close the loop with honest outcome data.">
+    <title>Root Cause Analysis (RCA) in Healthcare QI: Cause Mapping Without Blame — StepChangeAnalysis.com</title>
+    <meta name="description" content="Root cause analysis for healthcare quality improvement: cause mapping, fishbone and 5 Whys — plus how to handle human factors and psychological 'why' questions without blaming people. NHS examples included.">
     <meta name="keywords" content="root cause analysis explained, root cause analysis methods, root cause analysis diagram, root cause analysis NHS, RCA healthcare, fishbone diagram Ishikawa, root cause analysis systems improvement, root cause analysis psychological why frameworks, fault tree analysis, cause and effect diagram, root cause analysis tools">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
@@ -28,11 +28,6 @@
     <div class="page-flag">&#128200; Improvement Concepts</div>
     <h1>Root Cause Analysis</h1>
     <p class="page-intro">Root cause analysis (RCA) is the family of structured techniques used to identify why a problem occurred &mdash; not just what happened, but why the system produced that outcome. Finding the root cause is necessary but not sufficient. The fix must operate at the right level of the system, and Bootstrap CUSUM must verify that it worked.</p>
-
-    <div class="callout blue" style="margin:12px 0 16px;">
-        <strong>&#128270; Visibility Loop &mdash; Step 1: What can&rsquo;t you currently see that is producing what you can see?</strong>
-        <p>Root cause analysis is the instrument for Step 1 of the Visibility Loop &mdash; making the invisible visible. It answers: what structural feature of the system produced this outcome? Steps 2&ndash;6 &mdash; identifying the belief keeping the structure in place, designing the intervention, verifying it worked, and asking what is now invisible &mdash; are covered in <a href="making-the-invisible-visible.html">Making the Invisible Visible</a>.</p>
-    </div>
 
 
     <div style="background:#f0f4ff;border-left:4px solid #185FA5;padding:14px 18px;margin:18px 0 12px;border-radius:0 6px 6px 0;">
@@ -71,7 +66,6 @@
                 <li><a href="#section-necessary">Finding the root cause is necessary but not sufficient</a></li>
                 <li><a href="#section-psychological">Psychological &ldquo;Why&rdquo; frameworks</a></li>
                 <li><a href="#section-nhs">RCA in the NHS &mdash; why it frequently fails to prevent recurrence</a></li>
-                <li><a href="#section-psirf">RCA under PSIRF &mdash; a complete worked example</a></li>
                 <li><a href="#section-cusum">Closing the loop with Bootstrap CUSUM</a></li>
             </ol>
         </div>
@@ -285,71 +279,51 @@
 
     <h2 id="section-when">When to use which tool</h2>
 
-    <p>Each RCA tool operates at a different level of the Senge Iceberg. Choosing the wrong tool for the level produces the wrong answer &mdash; not because the tool is applied incorrectly, but because it is designed to make a different invisible thing visible. A 5 Whys stops at the proximate cause unless it is deliberately extended to reach the structural level. A fishbone generates structural hypotheses but requires follow-up investigation to confirm them. Bootstrap CUSUM confirms whether a structural change has actually occurred.</p>
+    <p>Not every recurring problem warrants a full investigation. The rule of three is the practical trigger for deciding whether to log and watch, run a light check, or commit to the full structural process described below — including, where the cause turns out to be a deep structural contradiction, the <a href="moonshot-protocol.html">Moonshot Protocol</a>.</p>
+
+    <div class="callout blue">
+        <strong>The rule of three</strong>
+        <ul style="margin:8px 0 0 18px;line-height:2.0;">
+            <li><strong>First occurrence:</strong> Observe and log. Apply a <a href="joiner-levels-of-fix.html">Joiner Level 1</a> containment fix if needed. Do not launch a full investigation — this may be special cause variation, a one-off.</li>
+            <li><strong>Second occurrence:</strong> Preliminary audit — run <a href="five-whys.html">5 Whys</a> steps 1–2 only. Check whether the two events share the same structural trigger.</li>
+            <li><strong>Third occurrence:</strong> Common cause confirmed. The system is producing the event. Launch a full structural investigation — the fishbone or 5 Whys techniques below, and if a genuine contradiction is blocking the fix, the <a href="moonshot-protocol.html">Moonshot Protocol</a>.</li>
+        </ul>
+        <p style="margin-top:8px;"><strong>Why three?</strong> A special cause happens once. When it happens three times, it is no longer an accident — it is a feature of the system design. You now have enough data to show that this is a structural failure, not bad luck.</p>
+    </div>
 
     <div style="overflow-x:auto; margin:24px 0;">
         <table class="compare-table">
             <thead>
-                <tr>
-                    <th>Situation</th>
-                    <th>Recommended tool</th>
-                    <th>Iceberg level it addresses</th>
-                    <th>Why</th>
-                </tr>
+                <tr><th>Situation</th><th>Recommended tool</th><th>Why</th></tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Single adverse event with a clear sequence of events</td>
                     <td><a href="five-whys.html">5 Whys</a></td>
-                    <td><strong>Pattern &rarr; Structure</strong><br><span style="font-size:12px;color:#666;">Traces the causal chain below the event to the structural condition. Must be pushed past Why 2&ndash;3 or it stops at Pattern level.</span></td>
                     <td>Fast, simple, follows the causal chain directly</td>
                 </tr>
                 <tr>
                     <td>Complex event with multiple contributing causes across different departments or systems</td>
                     <td>Fishbone diagram</td>
-                    <td><strong>Structure</strong><br><span style="font-size:12px;color:#666;">Each fishbone category (People, Process, Equipment, Environment, Materials, Management) maps to a structural domain of the system. Generates structural hypotheses, not confirmed causes.</span></td>
-                    <td>Captures multiple categories simultaneously; good for team sessions</td>
+                    <td>Captures multiple categories simultaneously, good for team sessions</td>
                 </tr>
                 <tr>
                     <td>Recurring pattern of similar events across multiple sites or time periods</td>
                     <td>Bootstrap CUSUM + RCA</td>
-                    <td><strong>Pattern confirmed &rarr; Structure investigated</strong><br><span style="font-size:12px;color:#666;">CUSUM confirms whether the pattern is real and when it started. RCA then investigates the structural cause. Without CUSUM, the investigation reacts to noise as if it were signal.</span></td>
                     <td>CUSUM identifies the pattern and dates it; RCA explains the cause</td>
                 </tr>
                 <tr>
                     <td>Safety-critical system where all failure pathways must be mapped</td>
                     <td>Fault tree analysis</td>
-                    <td><strong>Structure &rarr; Mindset</strong><br><span style="font-size:12px;color:#666;">Maps all structural failure pathways including combinations. In healthcare, reveals assumptions (mindsets) about which combinations are considered impossible.</span></td>
                     <td>Systematic, quantifiable, maps all pathways including combinations</td>
                 </tr>
                 <tr>
                     <td>Learning from near-misses in primary care or community settings</td>
                     <td>Significant Event Analysis</td>
-                    <td><strong>Event &rarr; Pattern</strong><br><span style="font-size:12px;color:#666;">Reflective review of individual events. Makes patterns visible through accumulated reflection, not statistical analysis.</span></td>
                     <td>Reflective format, culturally accessible, covers positive events too</td>
-                </tr>
-                <tr>
-                    <td>Understanding why the investigation keeps producing the same action plans</td>
-                    <td><a href="joiner-levels-of-fix.html">Joiner Levels of Fix</a></td>
-                    <td><strong>Mindset</strong><br><span style="font-size:12px;color:#666;">The deepest level. Identifies the belief keeping the structure in place &mdash; the assumption that makes Level 1 and Level 2 fixes feel sufficient when the constraint is at Level 3.</span></td>
-                    <td>Names the assumption that the investigation never reached</td>
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <div class="callout blue">
-        <strong>The fishbone categories map directly to the Iceberg structure</strong>
-        <p>Each of the six fishbone categories (6M) is a structural domain of the system. Together they represent everything below the waterline that the event investigation should reach:</p>
-        <ul style="margin:8px 0 0 18px; line-height:2.0;">
-            <li><strong>People</strong> &mdash; skills, training, staffing. Usually the proximate cause level. Stopping here produces retraining responses that do not prevent recurrence.</li>
-            <li><strong>Process</strong> &mdash; methods, protocols, care pathways. The Level 2 Joiner layer. Process fixes persist better than people fixes but still fail when the structural condition makes the wrong process easy.</li>
-            <li><strong>Equipment / Machine</strong> &mdash; devices, connectors, IT systems. Often the structural (Level 3) cause. The Luer connector is an Equipment cause &mdash; missed by investigations that stop at Process or People.</li>
-            <li><strong>Materials</strong> &mdash; medications, supplies, information. Supply chain and procurement decisions that sit outside the ward boundary. The classic Boundary Trap location.</li>
-            <li><strong>Measurement</strong> &mdash; monitoring, audit, reporting. The absence of patient-specific monitoring is a Measurement cause. Not &ldquo;measurement was wrong&rdquo; but &ldquo;measurement did not exist at the right level.&rdquo;</li>
-            <li><strong>Environment / Management</strong> &mdash; culture, decisions, resource allocation. The Mindset level. <em>&ldquo;Safety is a behavioural problem&rdquo;</em> is an Environment/Management cause that keeps Equipment and Materials fixes off the table.</li>
-        </ul>
-        <p style="margin-top:10px; font-size:13px;">The full investigation uses the fishbone to generate hypotheses across all six structural domains &mdash; then applies the 5 Whys to the most plausible branches, the Joiner test to identify which level the fix must operate at, and Bootstrap CUSUM to verify that the fix produced a structural change point.</p>
     </div>
 
     <hr>
@@ -393,129 +367,7 @@
 
     <hr>
 
-    <h2 id="section-psirf">RCA under PSIRF &mdash; a complete worked example</h2>
-
-    <p>The Patient Safety Incident Response Framework (PSIRF, mandatory from April 2024) explicitly moves the NHS away from individual event RCA as the default response and toward system-level pattern analysis. It is the right direction. But PSIRF does not specify how to apply RCA when it is the appropriate response, or how to verify that the intervention actually changed anything. The following worked example shows the complete cycle &mdash; from event to root cause to Joiner level to Bootstrap CUSUM verification.</p>
-
-    <p>The example is wrong-route medication administration &mdash; a Never Event. It is chosen because it has the longest public data series, the clearest structural cause, and the most instructive boundary trap. The same analytical steps apply to any recurring NHS patient safety incident.</p>
-
-    <div class="callout blue">
-        <strong>The evidence that makes this example instructive</strong>
-        <p>Bootstrap CUSUM applied to NHS wrong-route Never Event data: <strong>17.5 events per year. No structural change point detected across 15 years</strong> &mdash; despite thousands of individual RCA investigations, corrective action plans signed off, and retraining programmes completed.</p>
-        <p style="margin-top:8px;">The investigations were not wrong. The root causes identified were real. The actions implemented were genuine. The system kept producing the same events at the same rate because the structural cause &mdash; the physical interoperability of enteral and parenteral connectors &mdash; was never addressed at the level that would change what the system could produce. <a href="never-events-wrong-route.html">See the full Bootstrap CUSUM analysis &rarr;</a></p>
-    </div>
-
-    <h3 style="margin:24px 0 12px;">The 5 Whys applied in full &mdash; wrong-route medication Never Event</h3>
-
-    <div style="border:1px solid #e0e0de; border-radius:6px; overflow:hidden; margin:0 0 24px;">
-        <div style="background:#f7f7f5; padding:10px 16px; border-bottom:1px solid #e0e0de; font-size:12px; font-weight:700; color:#666; text-transform:uppercase; letter-spacing:0.04em;">5 Whys analysis &mdash; wrong-route medication administration (Never Event)</div>
-
-        <div style="padding:14px 16px; border-bottom:1px solid #e0e0de;">
-            <div style="font-size:12px; font-weight:700; color:#185FA5; margin-bottom:4px;">EVENT</div>
-            <div style="font-size:14px;">A nurse administers an enteral feed via an intravenous line. The patient is harmed. A serious incident investigation is opened.</div>
-        </div>
-
-        <div style="padding:14px 16px; border-bottom:1px solid #e0e0de; background:#fafaf8;">
-            <div style="font-size:12px; font-weight:700; color:#185FA5; margin-bottom:4px;">WHY 1 &mdash; Proximate cause</div>
-            <div style="font-size:14px; margin-bottom:6px;">Why was the enteral feed connected to the IV line?</div>
-            <div style="font-size:14px; color:#444; border-left:3px solid #185FA5; padding-left:10px;">The enteral syringe connected physically to the IV line. The nurse did not notice the wrong connection before administering. The standard response: retrain the nurse. Add a checklist. Issue an alert.</div>
-            <div style="font-size:12px; color:#c87000; margin-top:8px; padding:6px 10px; background:#fff8ec; border-radius:3px;"><strong>Joiner Level 1 fix:</strong> Retrain the individual. Does not prevent the next nurse, on the next shift, from making the same connection with the same equipment.</div>
-        </div>
-
-        <div style="padding:14px 16px; border-bottom:1px solid #e0e0de;">
-            <div style="font-size:12px; font-weight:700; color:#185FA5; margin-bottom:4px;">WHY 2 &mdash; System cause</div>
-            <div style="font-size:14px; margin-bottom:6px;">Why did the enteral syringe connect to the IV line at all?</div>
-            <div style="font-size:14px; color:#444; border-left:3px solid #185FA5; padding-left:10px;">Luer connectors are universal. Enteral and parenteral syringes are physically compatible with each other by design. The wrong connection is not a failure of vigilance that training can prevent &mdash; it is a physical possibility that the equipment makes available.</div>
-            <div style="font-size:12px; color:#c87000; margin-top:8px; padding:6px 10px; background:#fff8ec; border-radius:3px;"><strong>Joiner Level 2 fix:</strong> Add labels, colour-coding, double-check protocols at ward level. Reduces risk in high-attention settings. Does not change the physical possibility. The next tired nurse, the next interrupted handover, makes the same connection.</div>
-        </div>
-
-        <div style="padding:14px 16px; border-bottom:1px solid #e0e0de; background:#fafaf8;">
-            <div style="font-size:12px; font-weight:700; color:#185FA5; margin-bottom:4px;">WHY 3 &mdash; Structural cause (Boundary Trap)</div>
-            <div style="font-size:14px; margin-bottom:6px;">Why does the ward use equipment with physically compatible connectors?</div>
-            <div style="font-size:14px; color:#444; border-left:3px solid #185FA5; padding-left:10px;">The ward receives syringes from pharmacy and procurement. The procurement contract specifies Luer connectors because they are the standard. The ward cannot change what procurement orders. The investigation team has authority over ward practice &mdash; not over the procurement contract or pharmacy dispensing.</div>
-            <div style="font-size:12px; color:#c87000; margin-top:8px; padding:6px 10px; background:#fff8ec; border-radius:3px;"><strong>This is the Boundary Trap (Trap 12 from Chapter 1).</strong> The structural cause sits in a different function. The investigation authority stops at the ward. What looks like a Level 2 process fix is actually a Level 3 structural problem &mdash; because the people who could make the fix were not in the investigation room.</div>
-        </div>
-
-        <div style="padding:14px 16px; border-bottom:1px solid #e0e0de;">
-            <div style="font-size:12px; font-weight:700; color:#185FA5; margin-bottom:4px;">WHY 4 &mdash; Governance cause</div>
-            <div style="font-size:14px; margin-bottom:6px;">Why is procurement specifying connectors without clinical safety input?</div>
-            <div style="font-size:14px; color:#444; border-left:3px solid #185FA5; padding-left:10px;">The trust&rsquo;s procurement governance separates clinical safety from supply chain decisions. Connector compatibility is treated as a technical specification, not a patient safety risk. The people who know the clinical consequence &mdash; the nurses who nearly made the wrong connection &mdash; have no input to the procurement decision.</div>
-        </div>
-
-        <div style="padding:14px 16px; background:#fff8ec; border-left:3px solid #c87000;">
-            <div style="font-size:12px; font-weight:700; color:#c87000; margin-bottom:4px;">WHY 5 &mdash; Root cause (Joiner Level 3 Deep / Mindset)</div>
-            <div style="font-size:14px; margin-bottom:6px;">Why has the structural cause not been addressed in 15 years of investigation?</div>
-            <div style="font-size:14px; color:#444; border-left:3px solid #c87000; padding-left:10px;">The belief keeping the structure in place: <em>&ldquo;safety is a behavioural problem, solvable through training, checklists, and alerts.&rdquo;</em> That belief is held at every level of NHS governance. It makes the structural solution &mdash; physically non-interchangeable connectors &mdash; invisible as an option, because the assumption is that human vigilance, properly trained and monitored, is sufficient. The Level 3 Deep mindset, not the Luer connector, is the root cause of the 15-year flat line.</div>
-        </div>
-    </div>
-
-    <h3 style="margin:0 0 12px;">The four defence layers &mdash; and where each sits in the Joiner framework</h3>
-
-    <p>Four independent layers should each have prevented this event before the nurse touched the syringe. The Chapter 1 diagram below shows how each layer maps to a Joiner level and why the investigation only ever reached Layers 3 and 4.</p>
-
-    <div style="margin:20px 0; text-align:center;">
-        <img src="images/img-moonshot-wrong-route.png" alt="Wrong-route medication Never Event traced from the event through pattern, structure, mindset to Joiner level fixes including ENFit connector mandate" style="max-width:100%;height:auto;border-radius:6px;border:1px solid #e0e0de;">
-        <p style="font-size:12px;color:#666;margin-top:8px;text-align:center;">The wrong-route event traced through the Senge Iceberg: Event &rarr; Pattern &rarr; Structure &rarr; Mindset. Each level maps to a Joiner level of fix. The ENFit connector (Level 3) is the correct dissolution &mdash; it makes wrong-route connection physically impossible. See <a href="root-cause-analysis-diagram.html">RCA Diagrams &amp; Templates</a> for the full Moonshot Protocol analysis.</p>
-    </div>
-
-    <div style="overflow-x:auto; margin:0 0 24px;">
-        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-            <thead>
-                <tr>
-                    <th style="background:#f2f2f0; padding:8px 12px; text-align:left; border:1px solid #ddd; font-weight:600; width:8%;">Layer</th>
-                    <th style="background:#f2f2f0; padding:8px 12px; text-align:left; border:1px solid #ddd; font-weight:600; width:20%;">Defence</th>
-                    <th style="background:#f2f2f0; padding:8px 12px; text-align:left; border:1px solid #ddd; font-weight:600; width:15%;">Joiner level</th>
-                    <th style="background:#f2f2f0; padding:8px 12px; text-align:left; border:1px solid #ddd; font-weight:600;">Why investigation never reached it</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="padding:8px 12px; border:1px solid #ddd; font-weight:600;">1</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd;">Procurement: correct syringes always in stock; incompatible ones unorderable</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd; color:#185FA5; font-weight:600;">Level 3 &mdash; system</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd;">Procurement sits outside the clinical governance boundary. The investigation team has no authority over the procurement contract.</td>
-                </tr>
-                <tr style="background:#fafaf8;">
-                    <td style="padding:8px 12px; border:1px solid #ddd; font-weight:600;">2</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd;">Pharmacy: dispenses correct device matched to route; label confirms route-device match</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd; color:#185FA5; font-weight:600;">Level 3 &mdash; system</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd;">Pharmacy dispensing systems sit outside the clinical governance boundary. What appears to be a simple operational fix requires a structural change to pharmacy workflow that the investigation team cannot mandate.</td>
-                </tr>
-                <tr>
-                    <td style="padding:8px 12px; border:1px solid #ddd; font-weight:600;">3</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd;">Ward: storage layout separates routes; visual management makes wrong device visible before connection</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd; color:#BA7517; font-weight:600;">Level 2 &mdash; process</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd;">Inside the investigation boundary. Generates the checklist, alert, and retraining response. Does not prevent the event if Layers 1 and 2 have failed.</td>
-                </tr>
-                <tr style="background:#fafaf8;">
-                    <td style="padding:8px 12px; border:1px solid #ddd; font-weight:600;">4</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd;">Point of care: ENFit connector &mdash; physical impossibility of wrong-route connection</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd; color:#198754; font-weight:600;">Level 3 &mdash; system (correct fix)</td>
-                    <td style="padding:8px 12px; border:1px solid #ddd;">Required national mandate. NHS England mandated ENFit adoption. Rollout is incomplete as of 2026. A mandate is not the same as implementation. Implementation is not the same as a change point in the data.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="callout blue">
-        <strong>&#128202; The Bootstrap CUSUM pre-commitment for ENFit</strong>
-        <p>Before the ENFit mandate was issued, the honest pre-commitment should have been: we expect a Bootstrap CUSUM downward change point in the wrong-route Never Event rate within 24&ndash;36 months of <em>complete</em> ENFit rollout, at 95% confidence.</p>
-        <p style="margin-top:8px;">Running the StepChange Analyzer on the Never Event series now answers the question honestly: has rollout produced a structural change point, or is the reactive loop continuing because Layers 1, 2, and 3 remain incomplete and the mandate has not been uniformly implemented?</p>
-        <p style="margin-top:8px;">A mandate is a Level 3 intervention on paper. It only becomes a Level 3 intervention in practice when Bootstrap CUSUM shows the change point.</p>
-        <p style="margin-top:8px; font-size:13px;"><a href="never-events-wrong-route.html">See the full Bootstrap CUSUM analysis of wrong-route Never Events &rarr;</a> &nbsp;&middot;&nbsp; <a href="psirf-analytical-framework.html">See the PSIRF analytical framework for the six-step governance approach &rarr;</a></p>
-    </div>
-
-    <h3 style="margin:24px 0 12px;">What PSIRF changes &mdash; and what it leaves unanswered</h3>
-
-    <p>PSIRF is the right response to 15 years of individual RCA producing no structural change point. It moves the NHS toward system-level pattern analysis rather than event-by-event investigation. But it leaves three specific analytical questions unanswered &mdash; and those questions are what this page and the <a href="psirf-analytical-framework.html">PSIRF Analytical Framework page</a> address:</p>
-
-    <ul style="line-height:2.0; margin-bottom:16px;">
-        <li><strong>How do I know if my incident profile is genuinely improving or just varying normally?</strong> Bootstrap CUSUM on the event rate series is the honest test.</li>
-        <li><strong>How do I move from seeing a pattern to identifying the structural cause?</strong> The 5 Whys through all five levels, applying the Joiner test at each &mdash; as in the worked example above.</li>
-        <li><strong>How do I demonstrate that an intervention actually changed the system?</strong> Pre-committed Bootstrap CUSUM prediction before the intervention. Change point after it. Not action completion. Outcome change.</li>
-    </ul>
-
-    <hr>
+    <h2 id="section-cusum">Closing the loop with Bootstrap CUSUM</h2>
 
     <div class="info-box">
         <h3>&#128202; The complete RCA + Bootstrap CUSUM cycle</h3>
@@ -530,11 +382,6 @@
 
     <h2>Related concepts</h2>
     <div class="nav-grid">
-        <a href="psirf-analytical-framework.html" class="nav-card">
-            <div class="nav-tag">Article &mdash; Patient Safety</div>
-            <h3>PSIRF Analytical Framework</h3>
-            <p>PSIRF mandates systemic learning from incident patterns. This page provides the six-step analytical framework that makes that mandate operational &mdash; from Bootstrap CUSUM pattern detection to verified structural improvement.</p>
-        </a>
         <a href="five-whys.html" class="nav-card">
             <div class="nav-tag">Concept</div>
             <h3>The 5 Whys</h3>
