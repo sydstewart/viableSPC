@@ -381,6 +381,32 @@
 
     <p><strong>3. PSIRF and the shift away from RCA as the default.</strong> The Patient Safety Incident Response Framework (2022) does not merely supplement RCA — NHS England's own policy team has stated plainly that &ldquo;methods that assume simplistic, linear identification of a single cause (i.e., Root Cause Analysis) are no longer recommended&rdquo; as the default response. PSIRF instead promotes a range of system-based methods (SEIPS, FRAM, HFACS) that examine how people, process, technology, and environment interact &mdash; because a single-cause model frequently stops at a plausible answer before reaching the real one. This is the official NHS diagnosis of the exact failure mode described above. The analytical tool that makes system-level pattern analysis rigorous &mdash; Bootstrap CUSUM applied to the event series &mdash; is not yet routinely used within it. See the <a href="psirf-analytical-framework.html">PSIRF Analytical Framework</a> for how RCA, pattern recognition, and structural verification fit together inside that wider response framework.</p>
 
+    <div style="overflow-x:auto; margin:16px 0;">
+        <table class="compare-table">
+            <thead>
+                <tr><th>Framework</th><th>Where it comes from</th><th>What it forces you to check</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>SEIPS</strong><br>Systems Engineering Initiative for Patient Safety</td>
+                    <td>Healthcare human factors research (Carayon et al.); the framework PSIRF specifically encourages</td>
+                    <td>How five components &mdash; person, tools/technology, organisation, environment, and task &mdash; interacted at the moment of the incident. Errors are treated as arising from the work system, not the individual acting alone.</td>
+                </tr>
+                <tr>
+                    <td><strong>FRAM</strong><br>Functional Resonance Analysis Method</td>
+                    <td>Safety science (Erik Hollnagel); used across aviation, energy, and healthcare</td>
+                    <td>How everyday, normal adjustments people make to keep work running &mdash; not a single broken step &mdash; can unexpectedly combine across different parts of the system to produce an unwanted outcome.</td>
+                </tr>
+                <tr>
+                    <td><strong>HFACS</strong><br>Human Factors Analysis and Classification System</td>
+                    <td>Aviation accident investigation; adapted for healthcare</td>
+                    <td>Whether the cause traces upward through four levels &mdash; the unsafe act itself, preconditions for it, supervisory factors, and organisational influences &mdash; rather than stopping at the frontline action.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size:0.85em;color:var(--muted);margin-top:8px;">All three share the same underlying discipline as <a href="joiner-levels-of-fix.html">Joiner's Levels of Fix</a>: resist stopping at the first cause that is comfortable to name, and keep checking sideways, across time, or upward through the organisation before calling an investigation complete.</p>
+    </div>
+
     <div style="margin:20px 0; text-align:center;">
         <img src="images/img-moonshot-wrong-route.png" alt="Worked example: wrong-route medication Never Event traced from the event through pattern, structure, mindset to Joiner level fixes including ENFit connector mandate" style="max-width:480px; width:100%; height:auto; border-radius:6px; border:1px solid #e0e0de;">
         <p style="font-size:12px; color:#666; margin-top:8px;">The wrong-route Never Event traced through the Senge Iceberg. The reactive loop (dashed arrow) returns to the Structure level but never reaches the Mindset. Without challenging the belief that &ldquo;safety is behavioural,&rdquo; the event rate stays flat at 17.5 per year regardless of how many investigations are conducted. See the <a href="moonshot-protocol.html#section-worked-example">Moonshot Protocol</a> for another type of RCA template &mdash; the full ten-step method for reaching and dissolving the Mindset level.</p>
