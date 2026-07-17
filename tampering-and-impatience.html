@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tampering, Impatience and the Western Electric Rules — StepChangeAnalysis.com</title>
-    <meta name="description" content="Tampering explained — acting on common cause variation as if it were special cause. The Western Electric Rules (WECO): when exactly it is right to intervene. Warfarin INR as Joiner's worked example. How the StepChangeAnalysis tool flags signals while leaving the decision with the clinician.">
+    <title>That Bad Reading Might Just Be Noise — StepChangeAnalysis.com</title>
+    <meta name="description" content="Your gut says fix it. But most 'bad' readings are just normal noise — and reacting anyway makes things worse. Four simple questions tell you when to actually step in.">
     <meta name="keywords" content="tampering Deming explained, acting on common cause variation, why improvement programmes fail, warfarin INR tampering, Joiner fourth generation management, how to know when to intervene, Bootstrap CUSUM tampering, Western Electric Rules explained, WECO rules control chart, Western Electric Rules SPC, Zone A Zone B Zone C control chart">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
@@ -24,29 +24,95 @@
 <main class="page-wrap">
 
     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Concepts</a> &rsaquo; Tampering &amp; Impatience</div>
-    <div class="page-flag">&#9888;&#65039; Improvement Concepts &mdash; Failure Mode</div>
-    <h1>Tampering, Impatience, and the Western Electric Rules</h1>
-    <p class="page-intro">Tampering is adjusting a system that is behaving normally, in response to variation that is simply part of how the system works &mdash; treating common cause variation as though it were a signal requiring action. It is one of the most destructive management behaviours in any improvement programme, in any setting. It makes things worse. And it is almost universal. The Western Electric Rules (WECO) provide the precise statistical answer to the question tampering arises from: <em>when exactly is it right to act?</em></p>
+    <div class="page-flag">&#128269; Case File &mdash; Improvement Concepts</div>
+    <h1>The Trap of Tampering</h1>
+    <p class="page-intro">You see a spike in your data. Your gut says, &ldquo;Fix it.&rdquo; But what if that &ldquo;fix&rdquo; is the very thing that makes your data noise worse?</p>
     <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
 
-    <details class="toc-details">
-        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
-        <div class="toc-inner">
-            <ol>
-                <li><a href="#section-definition">What tampering is</a></li>
-                <li><a href="#section-two-types">Common cause and special cause variation</a></li>
-                <li><a href="#section-funnel">Deming&rsquo;s funnel experiment</a></li>
-                <li><a href="#section-warfarin">Joiner&rsquo;s worked example &mdash; warfarin and INR</a></li>
-                <li><a href="#section-impatience">Impatience &mdash; the second form of tampering</a></li>
-                <li><a href="#section-political">The political cycle as a tampering machine</a></li>
-                <li><a href="#section-cusum">How Bootstrap CUSUM prevents tampering</a></li>
-                <li><a href="#section-examples">Tampering in practice &mdash; worked examples</a></li>
-                <li><a href="#section-weco">The Western Electric Rules (WECO) &mdash; when it is right to act</a></li>
-                <li><a href="#section-test">The tampering test &mdash; four questions</a></li>
-            </ol>
-        </div>
-    </details>
+    <section class="info-box" id="section-verdict">
+        <h3>The Detective&rsquo;s Verdict</h3>
+        <p>Most teams fall into the <strong>Tampering Trap</strong>, treating every blip as an emergency. But look at the evidence below:</p>
 
+        <figure>
+            <img src="images/variation_chart.png" alt="A control chart showing daily variation with a single high spike circled." class="tampering-graphic" style="max-width:100%;height:auto;margin:20px 0;border:1px solid var(--border);border-radius:8px;">
+            <figcaption><strong>Figure 1: The Daily Rhythm.</strong> The spots between the red lines show the system&rsquo;s &ldquo;heartbeat&rdquo;&mdash;it&rsquo;s naturally noisy, and the data is behaving exactly as expected.</figcaption>
+        </figure>
+
+        <p><strong>The Analysis:</strong> That circled spot at <strong>35</strong> looks like a crisis. You might know why it happened&mdash;perhaps a delivery driver was ill&mdash;but that doesn&rsquo;t mean you should change your system. By plotting the spots, you see that the system returned to its normal range the very next day. You saved your team from a month of unnecessary &ldquo;fixes&rdquo; that would have only added chaos to a healthy process.</p>
+
+        <div class="callout blue" style="margin-top:20px; border-left-width:8px;">
+            <strong>The Three-Strike Rule</strong>
+            <p>Don&rsquo;t launch a systemic investigation for a single spike. If it happens once, annotate your chart and keep watching. Only when an event occurs at least <strong>three times</strong> do you have evidence of a recurring weakness. That is when you should investigate and consider action.</p>
+        </div>
+
+        <div class="callout blue" style="margin-top:20px; border-left-width:8px;">
+            <strong>The Three-Strike Rule (Clinical Example)</strong>
+            <p>Don&rsquo;t launch a systemic investigation for a single spike. If you are monitoring a blood test for a high-risk medication and see a high reading, <strong>do not immediately lower the dose.</strong> Instead, test the patient again in three days. If it is still high, you have evidence of a recurring issue. Only then should you consider adjusting the medication after talking with the patient.</p>
+        </div>
+    </section>
+
+    <div class="evidence-grid">
+        <div class="evidence-card">
+            <h4>When to do nothing</h4>
+            <p>If your data is bouncing within its natural limits, <strong>doing nothing is not laziness&mdash;it&rsquo;s strategy.</strong> You are protecting the system from unnecessary, chaotic intervention.</p>
+        </div>
+        <div class="evidence-card">
+            <h4>When to act</h4>
+            <p>Only act when the pattern itself breaks. If the rhythm remains the same, your &ldquo;intervention&rdquo; will likely cause more harm than good.</p>
+        </div>
+    </div>
+
+    <section id="section-tell" style="margin-top: 40px;">
+        <h3>How to tell the difference: Just Plot the Spots</h3>
+        <ul>
+            <li><strong>Is it a blip?</strong> If it&rsquo;s just one day, leave it alone. That&rsquo;s just daily noise.</li>
+            <li><strong>Is it a pattern?</strong> <strong>Plot the spots</strong> to see the full picture. If you see a consistent, repeating shift in the rhythm that lasts for weeks, that&rsquo;s your signal to investigate.</li>
+        </ul>
+    </section>
+
+    <div class="callout blue" style="margin-top:20px; border-left-width:8px;">
+        <strong>Managing Interventions (Without Tampering)</strong>
+        <p>Not sure if what you're looking at is real? Upload your CSV to the StepChange Analyzer &mdash; it will tell you immediately whether a genuine change has occurred. <a href="index.html">Try the Analyzer &rarr;</a></p>
+        <p style="margin-top:10px;">Prefer to read the method first? The <strong>Western Electric Rules</strong> give you the same protocol on paper &mdash; the standard patterns that separate routine noise from a system that actually needs attention. <a href="western-electric-rules.html">Learn the Western Electric Rules &rarr;</a></p>
+    </div>
+
+    <div class="cta-box" style="padding:24px 32px;">
+        <h3 style="margin-top:0;margin-bottom:8px;">Still worried about a specific blip?</h3>
+        <p style="margin-bottom:16px;">Upload your CSV to the Analyzer. We&rsquo;ll show you if your system is just breathing, or if it&rsquo;s actually choking.</p>
+        <a href="index.html" class="cta-btn">Plot my spots now</a>
+    </div>
+
+    <details class="toc-details" style="margin-top:32px;">
+        <summary>&#128218;&nbsp; Show the full statistical case &mdash; Deming, Joiner, and the Western Electric Rules &mdash; click to expand</summary>
+        <div class="toc-inner">
+
+            <details class="toc-details">
+                <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
+                <div class="toc-inner">
+                    <ol>
+                        <li><a href="#section-test">The rigorous version &mdash; four questions</a></li>
+                        <li><a href="#section-definition">What tampering is</a></li>
+                        <li><a href="#section-two-types">Common cause and special cause variation</a></li>
+                        <li><a href="#section-funnel">Deming&rsquo;s funnel experiment</a></li>
+                        <li><a href="#section-warfarin">Joiner&rsquo;s worked example &mdash; warfarin and INR</a></li>
+                        <li><a href="#section-impatience">Impatience &mdash; the second form of tampering</a></li>
+                        <li><a href="#section-political">The political cycle as a tampering machine</a></li>
+                        <li><a href="#section-cusum">How Bootstrap CUSUM prevents tampering</a></li>
+                        <li><a href="#section-examples">Tampering in practice &mdash; worked examples</a></li>
+                        <li><a href="#section-weco">The Western Electric Rules (WECO) &mdash; when it is right to act</a></li>
+                    </ol>
+                </div>
+            </details>
+
+    <div class="dark-box" id="section-test">
+        <h3>&#128221; The rigorous version &mdash; four questions</h3>
+        <p>The Three-Strike Rule above is the plain-language version of this test. Here&rsquo;s the statistical version, for anyone who wants to check the working:</p>
+        <p><strong>1. Is this result outside the natural process limits?</strong> Apply an X-mR control chart or Bootstrap CUSUM to the historical series. Does this result fall outside the upper or lower natural process limit? If no: it is common cause variation. Rule 1. Leave it alone.</p>
+        <p style="margin-top:10px;"><strong>2. Has the process structurally changed?</strong> Has Bootstrap CUSUM detected a new stage &mdash; a permanent shift in the process mean &mdash; coinciding with or immediately before this result? If no: the process is behaving normally. Any result within the natural limits is expected.</p>
+        <p style="margin-top:10px;"><strong>3. If I am about to act &mdash; can I identify the specific cause?</strong> Special cause variation has a specific, assignable cause. If you cannot name the specific thing that changed to produce this result, there is no specific cause to act on. Acting without a specific identified cause is tampering by definition.</p>
+        <p style="margin-top:10px;"><strong>4. Is the intervention being considered within the expected lag window?</strong> If a structural intervention was implemented less than [expected lag] periods ago, the absence of a Bootstrap CUSUM change point is not evidence of failure. It is the expected state. The correct action is to continue the intervention and monitor &mdash; not to replace it.</p>
+        <p style="margin-top:14px;" class="quote">&ldquo;If you can&rsquo;t describe what you are doing as a process, you don&rsquo;t know what you&rsquo;re doing.&rdquo; &mdash; W. Edwards Deming</p>
+    </div>
     <h2 id="section-definition">What tampering is</h2>
 
     <div class="definition-box">
@@ -489,18 +555,8 @@
 
     <p class="note">&#128218; <strong>Source:</strong> Western Electric Company. <em>Statistical Quality Control Handbook.</em> 1956. The four rules described above are the core detection tests. Additional rules exist (such as 15 consecutive points in Zone C, or 8 points with none in Zone C) but the four described are the most widely used and most relevant to the tampering concept. See also: Montgomery, D.C. <em>Introduction to Statistical Quality Control.</em> Wiley, 2009.</p>
 
-    <h2 id="section-test">The tampering test &mdash; four questions</h2>
-
-    <p>Before acting on any result that looks bad, four questions distinguish appropriate action from tampering:</p>
-
-    <div class="dark-box">
-        <h3>&#128221; The four questions</h3>
-        <p><strong>1. Is this result outside the natural process limits?</strong> Apply an X-mR control chart or Bootstrap CUSUM to the historical series. Does this result fall outside the upper or lower natural process limit? If no: it is common cause variation. Rule 1. Leave it alone.</p>
-        <p style="margin-top:10px;"><strong>2. Has the process structurally changed?</strong> Has Bootstrap CUSUM detected a new stage &mdash; a permanent shift in the process mean &mdash; coinciding with or immediately before this result? If no: the process is behaving normally. Any result within the natural limits is expected.</p>
-        <p style="margin-top:10px;"><strong>3. If I am about to act &mdash; can I identify the specific cause?</strong> Special cause variation has a specific, assignable cause. If you cannot name the specific thing that changed to produce this result, there is no specific cause to act on. Acting without a specific identified cause is tampering by definition.</p>
-        <p style="margin-top:10px;"><strong>4. Is the intervention being considered within the expected lag window?</strong> If a structural intervention was implemented less than [expected lag] periods ago, the absence of a Bootstrap CUSUM change point is not evidence of failure. It is the expected state. The correct action is to continue the intervention and monitor &mdash; not to replace it.</p>
-        <p style="margin-top:14px;" class="quote">&ldquo;If you can&rsquo;t describe what you are doing as a process, you don&rsquo;t know what you&rsquo;re doing.&rdquo; &mdash; W. Edwards Deming</p>
-    </div>
+        </div>
+    </details>
 
     <hr>
 
