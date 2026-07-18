@@ -46,12 +46,11 @@
         </ul>
     </div>
 
-    <div class="cta-box" style="margin-top:18px;">
-        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
-        <p style="margin-top:10px;color:white;">
-            Next: <a href="interpret-results.html" style="color:white;">Interpret results</a> &rarr; <a href="what-to-do-next.html" style="color:white;">What to do next</a>
-        </p>
-    </div>
+    <p style="margin-top:18px;font-size:0.95em;">
+        <a href="#section-what" style="font-weight:600;">&#8595; Jump to what root cause analysis is</a>
+        &nbsp;&middot;&nbsp;
+        <a href="#section-nhs" style="font-weight:600;">or why it frequently fails in the NHS</a>
+    </p>
 
     <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
 
@@ -370,6 +369,13 @@
         <p style="margin-top:10px;"><strong>Step 3 — Implement a Level 3 fix.</strong> The fix must address the root cause at the system level. Physical redesign where possible (making the wrong action impossible), structural change where physical redesign is not feasible, economic or accountability mechanism change where structural redesign is not feasible.</p>
         <p style="margin-top:10px;"><strong>Step 4 — Pre-specify the Bootstrap CUSUM test.</strong> Before implementing the fix, state in writing: we expect a Bootstrap CUSUM change point in [outcome measure — the event rate series] within [Z] time periods at [Y]% confidence. This is the commitment that makes the verification step meaningful.</p>
         <p style="margin-top:10px;"><strong>Step 5 — Verify with Bootstrap CUSUM.</strong> Run Bootstrap CUSUM on the event rate series periodically after the fix. When a downward change point appears at the predicted confidence level, the fix is confirmed. When it does not appear within the expected lag window, the root cause analysis was incomplete — return to Step 2.</p>
+    </div>
+
+    <div class="cta-box" style="margin-top:24px;">
+        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
+        <p style="margin-top:10px;color:white;">
+            Next: <a href="interpret-results.html" style="color:white;">Interpret results</a> &rarr; <a href="what-to-do-next.html" style="color:white;">What to do next</a>
+        </p>
     </div>
 
     <hr>
