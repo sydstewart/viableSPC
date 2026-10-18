@@ -536,6 +536,10 @@ function buildStageTable(data) {
         const start = data.stage_dates[i].split(' ')[0];
         const end   = data.stage_dates[i + 1].split(' ')[0];
         const confText  = data.confleveltext[i] || "";
+        // Use the stage SD already supplied by the worker, not the global SD.
+        const sdMatch = confText.match(/\bSD:\s*([^<]+)/);
+        const sdValue = sdMatch ? Number(sdMatch[1]) : NaN;
+        const stageSD = Number.isFinite(sdValue) ? sdValue.toFixed(2) : "—";
         const confMatch = confText.match(/Conf: ([\d.]+)%/);
         const confVal   = confMatch ? confMatch[1] + "%" : (i === 0 ? "Baseline" : "---");
         let change = "Baseline";
@@ -547,7 +551,7 @@ function buildStageTable(data) {
             <td>${count++}</td>
             <td>${start}</td><td>${end}</td>
             <td style="text-align:right;">${mean.toFixed(2)}</td>
-            <td style="text-align:right;">${data.global_sd}</td>
+            <td style="text-align:right;">${stageSD}</td>
             <td style="text-align:right;">${confVal}</td>
             <td style="text-align:right;"><b>${change}</b></td>
         </tr>`;
@@ -828,6 +832,10 @@ function buildStageTableHTML() {
         const start = data.stage_dates[i].split(' ')[0];
         const end   = data.stage_dates[i + 1].split(' ')[0];
         const confText  = data.confleveltext[i] || "";
+        // Use the stage SD already supplied by the worker, not the global SD.
+        const sdMatch = confText.match(/\bSD:\s*([^<]+)/);
+        const sdValue = sdMatch ? Number(sdMatch[1]) : NaN;
+        const stageSD = Number.isFinite(sdValue) ? sdValue.toFixed(2) : "—";
         const confMatch = confText.match(/Conf: ([\d.]+)%/);
         const confVal   = confMatch ? confMatch[1] + "%" : (i === 0 ? "Baseline" : "---");
         let change = "Baseline";
@@ -837,7 +845,7 @@ function buildStageTableHTML() {
         }
         html += `<tr>
             <td>${count++}</td><td>${start}</td><td>${end}</td>
-            <td>${mean.toFixed(2)}</td><td>${data.global_sd}</td>
+            <td>${mean.toFixed(2)}</td><td>${stageSD}</td>
             <td>${confVal}</td><td><b>${change}</b></td>
         </tr>`;
     }
