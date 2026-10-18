@@ -277,11 +277,8 @@ function manhatten(values, turnLength, bootNum, confLimit) {
     while (i < fog.length) {
         const x = fog[i];  // x = row index in cusumControl to process now
 
-        // Mirror Python exactly:
-        // idx_start = firstindex + (1 if x > 1 else 0)
-        // x > 1 means: skip boundary point for all segments except
-        // the very first (x=0) and second (x=1) entries processed
-        const idxStart = cusumControl[x].firstIndex + (x > 1 ? 1 : 0);
+        // Stages have disjoint, inclusive bounds; no boundary-point skip is needed.
+        const idxStart = cusumControl[x].firstIndex;
         const idxEnd   = cusumControl[x].lastIndex;
 
         // Segment too short — skip (mirrors Python's len(dx) == 0 check
@@ -314,9 +311,8 @@ function manhatten(values, turnLength, bootNum, confLimit) {
         // Bootstrap confidence test
         const conf = bootstrapConfidence(dx, pMean, sdiff, bootNum);
 
-        // Mirror Python condition: conf >= conflimit AND turnpt != z
-        // z = idxStart (the start of this segment)
-        if (conf >= confLimit && turnPt !== idxStart) {
+        // Keep both children nonempty and retain the existing start-point guard.
+        if (conf >= confLimit && turnPt > idxStart && turnPt < idxEnd) {
 
             // Add two new rows to cusumControl (the split segments)
             cusumControl.push({
@@ -326,7 +322,7 @@ function manhatten(values, turnLength, bootNum, confLimit) {
                 expanded: ''
             });
             cusumControl.push({
-                firstIndex: turnPt,
+                firstIndex: turnPt + 1,
                 lastIndex: cusumControl[x].lastIndex,
                 conflevel: conf,
                 expanded: ''
