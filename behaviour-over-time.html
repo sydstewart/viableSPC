@@ -1,269 +1,69 @@
+<!doctype html>
 <!DOCTYPE html>
+
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://stepchangeanalysis.com/behaviour-over-time.html">
-    <title>Behaviour Over Time Charts — Patterns Before Data — StepChangeAnalysis.com</title>
-    <meta name="description" content="Behaviour Over Time (BOT) charts explained — the systems thinking tool for sketching patterns before looking at data. The six archetypal patterns, what loop structure produces each, and how BOT connects to Bootstrap CUSUM and the 7-step improvement method.">
-    <meta name="keywords" content="behaviour over time chart, BOT chart systems thinking, system archetypes, patterns of system behaviour, Senge fifth discipline, reinforcing loop pattern, stagnation pattern improvement, systems thinking patterns">
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-    <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Behaviour Over Time — StepChangeAnalysis.com</title>
+<meta content="Make a simple Behaviour Over Time sketch, compare team impressions and check them against recorded data before deciding what to investigate." name="description"/>
+<link href="https://stepchangeanalysis.com/behaviour-over-time.html" rel="canonical"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag("js", new Date());
         gtag("config", "G-NZLMMS3ZGG");
     </script>
-
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
+</style></head>
 <body>
 <div id="site-header"></div>
-
-<main class="page-wrap">
-     <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="making-the-invisible-visible.html">Understand the System?</a> &rsaquo; Behaviour Over Time<</div>
-     <div class="page-flag">&#128200; Improvement Concepts &mdash; Systems Thinking</div>
-    <h1>Behaviour Over Time Charts</h1>
-    <p class="page-intro">Before you look at the data, sketch what you think you will see. A Behaviour Over Time chart is a simple freehand plot of how a key variable changes over time. It takes two minutes to draw and does something no statistical tool can: it makes your mental model explicit, commits you to a prediction, and prevents you from unconsciously fitting your interpretation to the data after the fact. It is the starting point of the improvement method &mdash; Step 1, before the numbers.</p>
-    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
-
-    <details class="toc-details">
-        <summary>&#9776;&nbsp; Contents</summary>
-        <div class="toc-inner">
-            <ol>
-                <li><a href="#section-what">What a BOT chart is</a></li>
-                <li><a href="#section-why">Why draw it before looking at the data</a></li>
-                <li><a href="#section-patterns">The six archetypal patterns</a></li>
-                <li><a href="#section-loops">Patterns and loops — the connection</a></li>
-                <li><a href="#section-seven-steps">Where BOT fits in the 7-step method</a></li>
-                <li><a href="#section-cusum">BOT and Bootstrap CUSUM — prediction and test</a></li>
-                <li><a href="#section-examples">BOT charts from the site articles</a></li>
-            </ol>
-        </div>
-    </details>
-
-    <h2 id="section-what">What a BOT chart is</h2>
-
-    <p>A Behaviour Over Time (BOT) chart is a concept from system dynamics, developed in the tradition of Jay Forrester at MIT and popularised by Peter Senge in <em>The Fifth Discipline</em> (1990). It is simply a sketch &mdash; typically freehand, on paper or a whiteboard &mdash; of how one or more key variables change over time. The horizontal axis is time. The vertical axis is the variable of interest: revenue, patient wait times, error rate, support cases, market share. No numbers are required. The shape is the point.</p>
-
-    <p>The BOT chart is the first step in understanding a system problem. Before collecting data, before running analysis, before building a model, you draw what you think is happening. The shape you sketch encodes your assumptions about the system: is this variable growing, declining, cycling, stuck? Has it changed recently or is it long-established? Is the pattern getting worse or stabilising?</p>
-
-    <div class="step-integration">
-        <div class="si-label">&#9654; Connection to the 7-Step Improvement Method</div>
-        <p><strong>BOT belongs between Step 1 and Step 2</strong> of the <a href="improvement-method.html">7-step improvement method</a>. Step 1 is to list your symptoms. Before you measure (Step 2), sketch the BOT for each key symptom: <em>what pattern do I think I am seeing in this variable over time?</em> This sketch becomes the prediction that Bootstrap CUSUM will test. It forces you to commit to a hypothesis before the data can influence your interpretation.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-why">Why draw it before looking at the data</h2>
-
-    <p>The most common analytical error in improvement work is not statistical &mdash; it is cognitive. When you look at a time series and then decide what it means, your interpretation is inevitably shaped by what you see. A flat line looks like stability. A recent uptick looks like improvement. A gradual decline looks manageable. The pattern you perceive depends heavily on where you start the series, what scale you use, and what you were hoping to find.</p>
-
-    <p>Drawing the BOT before you look at the data does three things:</p>
-
-    <ul>
-        <li><strong>It surfaces your mental model.</strong> The shape you sketch is a direct representation of what you believe is happening. Comparing it to the actual Bootstrap CUSUM result tells you whether your mental model is accurate — and if it is not, precisely where it is wrong.</li>
-        <li><strong>It prevents reverse-engineering.</strong> Once you have committed to a prediction in writing, you cannot unconsciously adjust your interpretation to fit the result. The prediction is the Plan step of <a href="pdsa-cycle.html">PDSA</a>. The Bootstrap CUSUM result is the Study step. The gap between them is the learning.</li>
-        <li><strong>It aligns teams before analysis.</strong> When a team draws BOT charts independently and then compares them, the disagreements are immediately visible. Two people looking at the same organisation see different patterns &mdash; and those differences reveal assumptions that would otherwise never be surfaced. The BOT exercise is a team diagnostic tool as much as an analytical one.</li>
-    </ul>
-
-    <hr>
-
-    <h2 id="section-patterns">The six archetypal patterns</h2>
-
-    <p>System dynamics identifies six recurring patterns that appear across very different organisations and sectors. Each has a characteristic shape and a specific loop structure that produces it. Recognising the pattern is the first step toward understanding the loop &mdash; and breaking it.</p>
-
-    <div class="archetype-grid">
-
-        <div class="arch-card">
-            <div class="ac-label">Pattern 1</div>
-            <h3>Exponential Growth</h3>
-            <span class="ac-loop" style="background:#dcfce7;color:#14532d;">R loop dominant</span>
-            <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-                <line x1="10" y1="55" x2="190" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <line x1="10" y1="5" x2="10" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <path d="M 10,52 Q 80,50 130,35 T 190,5" fill="none" stroke="#198754" stroke-width="2.5"/>
-            </svg>
-            <p>A reinforcing (positive feedback) loop drives continuous amplification. Each gain produces more gain.</p>
-            <p class="ac-examples">Examples: viral adoption, compound interest, a Bright Spot scaling up, runaway costs</p>
-        </div>
-
-        <div class="arch-card">
-            <div class="ac-label">Pattern 2</div>
-            <h3>Exponential Decay / Collapse</h3>
-            <span class="ac-loop" style="background:#dcfce7;color:#14532d;">R loop dominant (negative)</span>
-            <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-                <line x1="10" y1="55" x2="190" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <line x1="10" y1="5" x2="10" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <path d="M 10,8 Q 70,10 120,25 T 190,52" fill="none" stroke="#c0392b" stroke-width="2.5"/>
-            </svg>
-            <p>A reinforcing loop driving in the wrong direction. Each loss produces more loss. The customisation trap eventually produces this.</p>
-            <p class="ac-examples">Examples: market erosion, declining product, customer churn spiral, legacy base shrinkage</p>
-        </div>
-
-        <div class="arch-card">
-            <div class="ac-label">Pattern 3</div>
-            <h3>Goal-Seeking / Balancing</h3>
-            <span class="ac-loop" style="background:#fff7ed;color:#c2410c;">B loop dominant</span>
-            <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-                <line x1="10" y1="55" x2="190" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <line x1="10" y1="5" x2="10" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <line x1="10" y1="20" x2="190" y2="20" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
-                <path d="M 10,50 Q 60,20 110,21 T 190,20" fill="none" stroke="#0056b3" stroke-width="2.5"/>
-            </svg>
-            <p>A balancing (negative feedback) loop seeks a goal. The system approaches a target and stabilises near it.</p>
-            <p class="ac-examples">Examples: thermostat, inventory replenishment, a successful improvement that holds</p>
-        </div>
-
-        <div class="arch-card">
-            <div class="ac-label">Pattern 4</div>
-            <h3>Oscillation</h3>
-            <span class="ac-loop" style="background:#fff7ed;color:#c2410c;">B loop with delay</span>
-            <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-                <line x1="10" y1="55" x2="190" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <line x1="10" y1="5" x2="10" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <path d="M 10,30 Q 35,5 60,30 T 110,30 T 160,30 T 190,30" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
-            </svg>
-            <p>A balancing loop with a delay overshoots its goal, corrects, overshoots again. Policy swings, boom-bust cycles, tampering produce this.</p>
-            <p class="ac-examples">Examples: NHS waiting list management, economic policy cycles, reactive staffing</p>
-        </div>
-
-        <div class="arch-card">
-            <div class="ac-label">Pattern 5</div>
-            <h3>S-Curve (Sigmoid)</h3>
-            <span class="ac-loop" style="background:#dcfce7;color:#14532d;">R then B</span>
-            <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-                <line x1="10" y1="55" x2="190" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <line x1="10" y1="5" x2="10" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <path d="M 10,52 Q 60,50 90,30 T 140,10 T 190,8" fill="none" stroke="#0e7490" stroke-width="2.5"/>
-            </svg>
-            <p>A reinforcing loop drives growth until a limiting factor activates a balancing loop. Growth slows and plateaus.</p>
-            <p class="ac-examples">Examples: technology adoption, market penetration, capacity-limited service growth</p>
-        </div>
-
-        <div class="arch-card">
-            <div class="ac-label">Pattern 6</div>
-            <h3>Stagnation</h3>
-            <span class="ac-loop" style="background:#f0f4f8;color:#002d5b;">Constrained / locked</span>
-            <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-                <line x1="10" y1="55" x2="190" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <line x1="10" y1="5" x2="10" y2="55" stroke="#e2e8f0" stroke-width="1"/>
-                <path d="M 10,35 Q 60,33 110,34 T 190,33" fill="none" stroke="#002d5b" stroke-width="2.5"/>
-            </svg>
-            <p>The system is constrained at an undesirable level. Effort is being expended but the constraint has not been addressed. The most common pattern in persistent organisational problems.</p>
-            <p class="ac-examples">Examples: NHS A&amp;E flat line, new contract value flat, error rate flat despite improvement efforts</p>
-        </div>
-
-    </div>
-
-    <div class="callout orange">
-        <strong>The stagnation pattern is the most important to recognise</strong>
-        <p>A flat Bootstrap CUSUM line on an outcome measure you are trying to improve is the stagnation pattern. It looks like stability but it is the signature of an unaddressed constraint. The <a href="five-whys.html">5 Whys</a> analyses why individual events happen. The BOT chart of the stagnation pattern asks the more important question: why has the system been producing this level of outcome consistently for years, despite all the effort invested? That question leads to the <a href="theory-of-constraints.html">constraint</a>, not to the proximate cause of any individual event.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-loops">Patterns and loops &mdash; the connection</h2>
-
-    <p>Every pattern is produced by a loop structure. This is the central insight of system dynamics: the behaviour of a system over time is determined by its feedback structure, not by the intentions or efforts of the people operating within it. Understanding the pattern is the first step toward identifying the loop. Identifying the loop is the first step toward changing it.</p>
-
-    <p>The relationship is precise:</p>
-
-    <ul style="line-height:2.2;">
-        <li><strong>Reinforcing loop (R) dominant</strong> &rarr; Exponential growth or exponential decay</li>
-        <li><strong>Balancing loop (B) dominant</strong> &rarr; Goal-seeking, approach to a stable level</li>
-        <li><strong>B loop with delay</strong> &rarr; Oscillation &mdash; the system overshoots and corrects repeatedly</li>
-        <li><strong>R then B</strong> &rarr; S-curve &mdash; fast growth until a limit activates</li>
-        <li><strong>Multiple competing loops</strong> &rarr; Complex patterns combining the above</li>
-        <li><strong>Locked system / unaddressed constraint</strong> &rarr; Stagnation</li>
-    </ul>
-
-    <p>Once you can name the pattern, you can hypothesise the loop. Once you can draw the loop, you can identify what needs to change to alter the pattern. This is the path from BOT chart to <a href="causal-loop-diagrams.html">Causal Loop Diagram</a> &mdash; the BOT shows what is happening over time, the CLD explains why.</p>
-
-    <hr>
-
-    <h2 id="section-seven-steps">Where BOT fits in the 7-step improvement method</h2>
-
-    <div class="info-box">
-        <h3>&#128200; BOT in the improvement method</h3>
-        <p><strong>Step 1 (List symptoms)</strong> &mdash; For each major symptom, ask: what pattern does this follow over time? Draw the BOT freehand. Name the archetype: is this stagnation, decay, oscillation? The name tells you what type of loop to look for.</p>
-        <p style="margin-top:10px;"><strong>Between Step 1 and Step 2</strong> &mdash; The BOT sketch is your pre-data prediction. Commit it to paper before opening a spreadsheet. Write the archetype name alongside it. <em>We believe new contract value shows the stagnation pattern — flat for 3 years at an undesirable level.</em></p>
-        <p style="margin-top:10px;"><strong>Step 2 (Measure)</strong> &mdash; Run Bootstrap CUSUM on the actual data. Compare the result to your BOT sketch. Does the change point structure confirm the stagnation pattern? Or does it show something unexpected — a recent decay, an oscillation hidden in the trend? The gap between your BOT and the Bootstrap CUSUM result is the most valuable learning in the process.</p>
-        <p style="margin-top:10px;"><strong>Step 3 (Root cause)</strong> &mdash; The archetype named in Step 1 guides the root cause question. Stagnation asks: <em>what constraint is holding the system at this level?</em> Decay asks: <em>what reinforcing loop is amplifying the decline?</em> Oscillation asks: <em>what delay is causing the balancing loop to overshoot?</em> Each archetype has a corresponding RCA question.</p>
-        <p style="margin-top:10px;"><strong>Step 7 (PDSA &mdash; Study phase)</strong> &mdash; After implementing the fix, draw the expected BOT for the post-intervention period. <em>We expect the stagnation pattern to break — an upward change point in new contract value within 18 months.</em> Bootstrap CUSUM delivers the verdict on whether the pattern changed.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-cusum">BOT and Bootstrap CUSUM &mdash; prediction and test</h2>
-
-    <p>The BOT chart and Bootstrap CUSUM are the prediction-and-test pair at the heart of the improvement method. The BOT is what you expect to see. Bootstrap CUSUM is what the data actually shows. Together they form a complete hypothesis-testing cycle that is more rigorous than either tool alone.</p>
-
-    <p><strong>The BOT prevents post-hoc rationalisation.</strong> Without a pre-committed sketch, any Bootstrap CUSUM result can be interpreted as confirming what you already believed. A change point appears: &ldquo;yes, that is what we expected.&rdquo; No change point appears: &ldquo;yes, the system is stable as we expected.&rdquo; The BOT sketch, committed before the analysis, removes this escape route. Either the pattern you predicted appeared or it did not. The answer is binary and honest.</p>
-
-    <p><strong>Bootstrap CUSUM makes the BOT prediction precise.</strong> A BOT sketch says &ldquo;I expect an upward shift.&rdquo; Bootstrap CUSUM says &ldquo;an upward change point appeared on 14 March 2024 at 97.3% confidence.&rdquo; The precision transforms an intuition into a statistical statement &mdash; one that can be reported, compared to predictions, and used to make the case for scaling or stopping.</p>
-
-    <hr>
-
-    <h2 id="section-examples">BOT charts from the site articles</h2>
-
-    <p>Every article on this site has an implicit BOT chart. Here is how each maps to the archetypes:</p>
-
-    <ul style="line-height:2.2;">
-        <li><strong><a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E</a></strong> &mdash; <strong>Stagnation then decay.</strong> Flat near target for several years, then a structural shift downward. Four Bootstrap CUSUM stages. No upward change point. The decay pattern is driven by a reinforcing loop: performance pressure &rarr; short-term fixes &rarr; pressure relief &rarr; structural fix never made &rarr; performance deteriorates further.</li>
-        <li><strong><a href="dementia-diagnosis-rate.html">Dementia diagnosis</a></strong> &mdash; <strong>S-curve then decay.</strong> Growth to target (reinforcing loop: awareness &rarr; referrals &rarr; diagnoses &rarr; more awareness), then plateau (balancing: target reached &rarr; pressure reduces), then collapse (COVID special cause) and partial recovery. The BOT is not simple — it requires three loop phases to explain.</li>
-        <li><strong><a href="the-grid-fixed-itself.html">UK electricity emissions</a></strong> &mdash; <strong>Delayed decay then rapid fall.</strong> Stagnation until 2013 (constraint: economics of coal generation unchanged), then a sharp structural decline (reinforcing loop: carbon price &rarr; coal uneconomic &rarr; gas/renewables &rarr; lower emissions &rarr; investment in renewables &rarr; further cost reduction). One Bootstrap CUSUM change point at 99.8% confidence.</li>
-        <li><strong><a href="hydrogen-plant-cusum.html">Hydrogen plant</a></strong> &mdash; <strong>Hidden oscillation.</strong> The efficiency gap looks like noise in the raw data. Bootstrap CUSUM on residuals reveals the underlying pattern. The BOT sketch would have shown: we expect the efficiency gap to be consistent and persistent, not random — the pattern of a structural constraint, not random variation.</li>
-    </ul>
-
-    <div class="callout blue" style="margin-top:32px;">
-        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
-        <p>BOT charts belong at the start of the improvement process — before measurement, before analysis. See <a href="causal-loop-diagrams.html">Causal Loop Diagrams</a> for the next step: understanding why the pattern persists. See <a href="improvement-method.html">the 7-step improvement method</a> for how BOT, CLD, and Bootstrap CUSUM work together in a complete cycle.</p>
-    </div>
-
-    <h2>Related concepts</h2>
-    <div class="nav-grid">
-        <a href="causal-loop-diagrams.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Causal Loop Diagrams</h3>
-            <p>The next step after the BOT sketch — understanding why the pattern persists by mapping the feedback loops that produce it.</p>
-        </a>
-        <a href="improvement-method.html" class="nav-card">
-            <div class="nav-tag">Method</div>
-            <h3>The 7-Step Improvement Method</h3>
-            <p>BOT sits between Step 1 and Step 2 — the prediction that Bootstrap CUSUM will test in Steps 2 and 7.</p>
-        </a>
-        <a href="variation-and-spc.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Variation &amp; SPC</h3>
-            <p>SPC charts show patterns over time with statistical rigour. The BOT sketch is the pre-data hypothesis that SPC and Bootstrap CUSUM test.</p>
-        </a>
-        <a href="theory-of-constraints.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Theory of Constraints</h3>
-            <p>The stagnation pattern is the signature of an unaddressed constraint. TOC is the method for identifying and addressing it.</p>
-        </a>
-        <a href="five-whys.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>The 5 Whys</h3>
-            <p>The 5 Whys analyses individual events. BOT charts reveal patterns. Both are needed — they answer different questions.</p>
-        </a>
-        <a href="why-nothing-changes.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Why Nothing Changes</h3>
-            <p>The stagnation archetype in the context of improvement — why effort alone does not break the flat line.</p>
-        </a>
-    </div>
-
-    <footer class="page-footer">
-        <p><strong>System dynamics and archetypes:</strong> Senge P. <em>The Fifth Discipline.</em> Doubleday, 1990. &nbsp;&middot;&nbsp; Forrester J. <em>Industrial Dynamics.</em> MIT Press, 1961.</p>
-        <p style="margin-top:8px;"><strong>System archetypes:</strong> Senge P et al. <em>The Fifth Discipline Fieldbook.</em> Doubleday, 1994.</p>
-        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor W.A. Change-Point Analysis (2000).</p>
-        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
-    </footer>
-</main>
-
+<main class="improvement-page" id="main-content"><h1>Behaviour Over Time</h1>
+<p><strong>Move from “what happened today?” to “what has been happening over time?”</strong></p>
+<p>A Behaviour Over Time (BOT) sketch is a simple picture of how something changes over time. It helps a team see beyond an isolated event, compare what people think is happening and choose what to investigate next.</p>
+<section><h2>Make a simple sketch</h2>
+<ol>
+<li><strong>Choose one thing that matters.</strong> For example, the number of late deliveries each week. Be clear what “late” means.</li>
+<li><strong>Choose a useful period.</strong> Look far enough back to put today’s event in context—for example, the past six months.</li>
+<li><strong>Put time along the bottom.</strong> Put the amount or frequency up the side. Sketch the shape you think you would see. Exact numbers are not needed for an initial impression.</li>
+<li><strong>Compare sketches.</strong> Ask people who do the work and those affected to sketch separately, then discuss differences. What has each person seen or missed?</li>
+</ol>
+<p>Label recollections as <strong>impressions to check</strong>, not measured evidence. If recorded data is available, use it—there is no need to avoid it or pretend you have not seen it.</p>
+</section>
+<section><h2>What might the shape tell us?</h2>
+<ul>
+<li><strong>Rising or falling:</strong> is the problem becoming more or less frequent? Whether the direction is better or worse depends on what you measure.</li>
+<li><strong>Repeating peaks and dips:</strong> what else repeats at those times? Check rather than assume a connection.</li>
+<li><strong>Little overall change:</strong> is the problem persisting? A steady level is not necessarily an acceptable one.</li>
+</ul>
+<p>For example, the team sketches late deliveries peaking near each month-end. Follow the work around those dates: do orders arrive in a rush, are dates promised without checking capacity, and where does work queue? <strong>The aim is to uncover how targets, promises, beliefs, decisions and working arrangements might <em>combine</em> to produce the recurring delays.</strong> Check that explanation with the people doing the work and against records before choosing a fix.</p>
+</section>
+<section><h2>Check the picture</h2>
+<p>Compare the sketch with recorded data over the same period. A run chart can show the observations in time order. Use a suitable statistical method if you need to assess whether a change is distinguishable from routine variation.</p>
+<p>A sketch does not prove a trend, identify a bottleneck or establish a cause. Different arrangements can produce similar shapes.</p>
+</section>
+<section><h2>What’s your next useful question?</h2>
+<p><strong>Where do our impressions differ—and what evidence would help us check them?</strong></p>
+<p>Choose one question and agree who will help answer it.</p>
+<a class="more" href="making-the-invisible-visible.html">Return to making the invisible visible →</a><br/>
+<a class="more" href="why-improvements-fail.html">Return to the three-question guide →</a>
+</section></main>
 <div id="site-footer"></div>
 <script src="assets/site-chrome.js"></script>
 </body>
