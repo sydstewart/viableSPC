@@ -30,6 +30,11 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 @media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
 
 .improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
+
+.improvement-page .loop-example{margin:24px 0;padding:24px 16px;background:#f5f8fb;border:1px solid #cbd5df;border-radius:8px}
+.improvement-page .loop-example svg{display:block;width:100%;max-width:400px;height:auto;margin:0 auto}
+.improvement-page .loop-example figcaption{max-width:560px;margin:16px auto 0;font-size:16px;line-height:1.55}
+.improvement-page .loop-example figcaption strong{color:#002d5b}
 </style></head>
 <body>
 <div id="site-header"></div>
@@ -57,6 +62,22 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <li><strong>Reinforcing loops amplify a change.</strong> More rework can leave less time to prevent errors, contributing to more errors and still more rework. Improvement can compound too.</li>
 <li><strong>Balancing loops counteract a change or close a gap.</strong> A growing backlog may prompt extra capacity; completed work increases and the backlog falls—if suitable capacity is actually available.</li>
 </ul>
+<figure class="loop-example">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 390" role="img" aria-labelledby="pressure-loop-title pressure-loop-desc">
+<title id="pressure-loop-title">Work pressure: a reinforcing feedback loop</title>
+<desc id="pressure-loop-desc">More work pressure can lead to more shortcuts, which can lead to more errors and rework, increasing work pressure again. All three arrows have a plus sign, meaning a change in the same direction, other things being equal.</desc>
+<defs><marker id="loop-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#185fa5"/></marker></defs>
+<g fill="#fff" stroke="#8ca7c1" stroke-width="1.5"><rect x="88" y="18" width="250" height="66" rx="8"/><rect x="88" y="148" width="250" height="66" rx="8"/><rect x="88" y="278" width="250" height="66" rx="8"/></g>
+<g fill="none" stroke="#185fa5" stroke-width="2.5" marker-end="url(#loop-arrow)"><path d="M213 84 V137"/><path d="M213 214 V267"/><path d="M88 311 H30 V51 H77"/></g>
+<g fill="#002d5b" font-family="system-ui, sans-serif" font-size="21" text-anchor="middle"><text x="213" y="59">Work pressure</text><text x="213" y="189">Shortcuts</text><text x="213" y="305">Errors and</text><text x="213" y="331">rework</text></g>
+<g fill="#185fa5" font-family="system-ui, sans-serif" font-size="24" font-weight="600"><text x="228" y="121">+</text><text x="228" y="251">+</text><text x="54" y="41">+</text></g>
+<circle cx="30" cy="181" r="22" fill="#eef4fa" stroke="#185fa5" stroke-width="1.5"/><text x="30" y="189" text-anchor="middle" fill="#002d5b" font-family="system-ui, sans-serif" font-size="23" font-weight="700">R</text>
+<text x="180" y="378" text-anchor="middle" fill="#002d5b" font-family="system-ui, sans-serif" font-size="19" font-weight="600">R — reinforcing loop</text>
+</svg>
+<figcaption><strong>One possible cycle.</strong> More work pressure can encourage shortcuts; shortcuts can create errors and rework; rework adds to the pressure. Each + means “a change in the same direction”, other things being equal—not “good”.</figcaption>
+</figure>
+<p>Each shortcut may save time now but create more work later. Ask where you could interrupt the cycle—for example, by preventing recurring errors or reducing avoidable demand. Check whether these relationships actually hold in your setting.</p>
+<p><strong>A causal loop is not the same as a learning loop.</strong> This diagram proposes how a problem might sustain itself. The learning loop above is how you test a change, review what happens and adapt.</p>
 <p>Reinforcing and balancing do not mean “good” and “bad”. Delays, capacity limits and other influences can alter what happens. These examples are possible mechanisms to investigate, not established explanations of your system.</p>
 </section>
 <details class="conditions" id="sketch-a-causal-loop"><summary>Optional: sketch a causal loop diagram</summary><div class="conditions-body">
@@ -69,6 +90,12 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 </ul>
 <p>A chart may identify a performance change, but cannot establish that the proposed loop caused it or that an intervention broke the loop.</p>
 </div></details>
+<section id="optional-reading"><h2>Optional reading</h2>
+<ul>
+<li><strong>Free practical guide:</strong> Colleen Lannon’s <a href="https://thesystemsthinker.com/causal-loop-construction-the-basics/"><cite>Causal Loop Construction: The Basics</cite></a>, from <strong>The Systems Thinker</strong>. It walks through naming variables, connecting them, identifying reinforcing and balancing loops, and talking through the story. It uses <strong>s/o</strong> for same/opposite direction, equivalent to the <strong>+/−</strong> notation used on this page.</li>
+<li><strong>Book:</strong> Donella Meadows, <a href="https://www.chelseagreen.com/product/thinking-in-systems"><cite>Thinking in Systems: A Primer</cite></a>, edited by Diana Wright. Recommended for a wider understanding of systems, feedback and delays—not as a prerequisite or simply a diagramming manual.</li>
+</ul>
+</section>
 <section><h2>What’s your next useful question?</h2>
 <p><strong>Who needs to learn what happened—and what could they do differently with that knowledge?</strong></p>
 <a class="more" href="why-improvements-fail.html#right-problem">Return to Right problem? →</a><br/>
