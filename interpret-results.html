@@ -1,9 +1,7 @@
 <!doctype html>
-<!DOCTYPE html>
 
-<!DOCTYPE html>
 
-<!DOCTYPE html>
+
 
 <html lang="en">
 <head>
@@ -38,8 +36,8 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <div id="site-header"></div>
 <main class="improvement-page" id="main-content"><h1>Interpreting your StepChange chart</h1>
 <p><strong>What might have changed—and what should we check next?</strong></p>
-<p>The analyser looks for possible changes in the average level of a measure. It does not tell us what caused them, whether an intervention worked or whether the new level will last.</p><p>Need a definition or help with another chart or setting?<br>
-  <a href="interpreting-stepchange-analyzer-output.html">
+<p>The analyser looks for possible changes in the average level of a measure. It does not tell us what caused them, whether an intervention worked or whether the new level will last.</p><p>Need a definition or help with another chart or setting?<br/>
+<a href="interpreting-stepchange-analyzer-output.html">
     Analyser reference: terms, charts and settings →
   </a>
 </p>
@@ -56,26 +54,35 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <p><strong>Change %</strong> compares a stage average with the previous stage. It is a relative change, not a percentage-point difference.</p>
 <p><strong>Conf %</strong> reports the method’s score from comparing the cumulative pattern with shuffled versions of the observations. A higher score is stronger evidence against that shuffled-order comparison—not the probability that your intervention worked. It is not a guarantee against false alarms.</p>
 </section>
-<section><h2>What does the result mean?</h2>
+<section id="what-the-result-means"><h2>What does the result mean?</h2>
 <ul>
 <li><strong>More than one stage:</strong> the analysis identified possible average-level changes at the selected settings. Check direction, size and timing. Investigate what changed around those dates, including data definitions and outside influences. Continue monitoring; a detected step does not prove permanence or cause.</li>
 <li><strong>One stage:</strong> no split was detected with these data and settings. This does not prove stability, no benefit or no problem. The effect might be small, gradual, too recent or hard to detect—or the intervention may not have helped.</li>
 </ul>
 </section>
-<section><h2>Before deciding what to do</h2>
+<section id="before-deciding"><h2>Before deciding what to do</h2>
 <p>Check missing records, date order, definitions and denominators. Seasonal cycles, trends and links between successive observations can make the shuffled-order comparison misleading; the method must suit the data.</p>
 <p>Record the period and settings used. Do not keep changing them until a preferred result appears. Errors or inadequate data need attention before interpreting the output.</p>
 <p>Compare timing with the intervention and its expected delay, check implementation and possible harm elsewhere. Do not declare success—or automatically wait or launch another initiative—from the chart alone. Urgent safety concerns still require action.</p>
 </section>
-<section><h2>What’s your next useful question?</h2>
+<section id="next-steps"><h2>Choose the next step</h2>
+<ul>
+<li><strong>Possible change:</strong> check its size, direction, timing and practical importance. Investigate competing explanations and whether the result continues; do not attribute it to the intervention from timing alone.</li>
+<li id="no-change"><strong>No split detected:</strong> check data quality, the measure, implementation, expected delay and whether the method could detect the effect you expected. An unacceptable result still needs attention; consider whether the explanation or intervention needs revision.</li>
+<li id="data-problem"><strong>Data or method problem:</strong> correct errors or choose an appropriate analysis before drawing conclusions.</li>
+</ul>
+<details class="conditions" id="wait-and-review"><summary>When is waiting and monitoring reasonable?</summary><div class="conditions-body">
+<p>Waiting can be a deliberate choice when there is no urgent concern, the intervention needs more time, or current performance is acceptable. It is not the automatic response to a single-stage result.</p>
+<p>Record what you expect, what you will monitor, the review date and what would trigger earlier action. Choose the interval to fit the expected effect and risk—not a universal number of months. Continue checking implementation, workload and possible harm.</p>
+</div></details>
+<p>For the variation principles, see <a href="variation-and-spc.html">Understanding variation</a>. To reconsider the explanation or intervention, return to <a href="why-improvements-fail.html">Right problem? Right intervention? Right measures?</a></p>
+</section><section><h2>What’s your next useful question?</h2>
 <p><strong>What explanation could account for this result—and what evidence would help us check it?</strong></p>
-
-
 <a class="more" href="index.html">Return to the analyser →</a><br/>
 <a class="more" href="types-of-measures.html">Check your choice of measures →</a><br/>
 <a class="more" href="scanner.html">Check your CSV with the Data Validator →</a>
 </section></main>
 <div id="site-footer"></div>
 <script src="assets/site-chrome.js"></script>
-</body>
+<script>(function(){function reveal(){var id;try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}var el=document.getElementById(id);if(!el)return;var d=el.closest('details');if(d)d.open=true;requestAnimationFrame(function(){el.scrollIntoView();});}window.addEventListener('hashchange',reveal);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',reveal);else reveal();})();</script></body>
 </html>

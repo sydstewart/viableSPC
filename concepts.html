@@ -1,354 +1,216 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://stepchangeanalysis.com/concepts.html">
-    <title>Concepts — StepChangeAnalysis.com</title>
-    <meta name="description" content="Improvement concepts that support structural change detection: variation, common vs special cause, tampering, Joiner levels, constraints, and sufficiency. Mental models for improvers who use Bootstrap CUSUM.">
-    <meta name="keywords" content="improvement concepts, common cause variation, special cause variation, Joiner levels of fix, necessary but not sufficient, tampering, theory of constraints, PDSA, Bootstrap CUSUM">
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
-
-    <link rel="stylesheet" href="assets/styles.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://stepchangeanalysis.com/concepts.html" rel="canonical"/>
+<title>Concepts — StepChangeAnalysis.com</title>
+<meta content="Improvement concepts that support structural change detection: variation, common vs special cause, tampering, Joiner levels, constraints, and sufficiency. Mental models for improvers who use Bootstrap CUSUM." name="description"/>
+<meta content="improvement concepts, common cause variation, special cause variation, Joiner levels of fix, necessary but not sufficient, tampering, theory of constraints, PDSA, Bootstrap CUSUM" name="keywords"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-NZLMMS3ZGG");</script>
+<link href="assets/styles.css" rel="stylesheet"/>
 </head>
 <body>
-
 <div id="site-header"></div>
-
 <main class="article-wrap">
+<div class="breadcrumb"><a href="index.html">Home</a> › Concepts</div>
+<div class="article-flag">📈 Improvement Concepts</div>
+<h1>Concepts</h1>
+<p class="article-subtitle">The mental models behind StepChange: detect structural change, avoid tampering, and decide what to do next when outcomes don’t move.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin:16px 0 32px;font-family:system-ui,sans-serif;">
+<a class="cta-btn" href="index.html">▶ Open the StepChange Analyzer</a>
+<a href="interpret-results.html" style="display:inline-block;padding:10px 20px;background:white;border:2px solid var(--brand-blue);border-radius:6px;color:var(--brand-blue);font-weight:600;font-size:0.92em;text-decoration:none;">Interpret results</a>
 
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Concepts</div>
-    <div class="article-flag">&#128200; Improvement Concepts</div>
+</div>
+<!-- Foundation concept -->
+<div style="background:#001a3a;border-radius:10px;padding:20px 24px;margin:0 0 28px;font-family:system-ui,sans-serif;">
+<div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:#4a9fd4;margin-bottom:10px;">Foundation concept</div>
+<a href="making-the-invisible-visible.html" style="text-decoration:none;">
+<h3 style="margin:0 0 8px;font-size:1.05em;color:white;">Making the invisible visible</h3>
+</a>
+<p style="margin:0;font-size:0.88em;color:#94b8d4;line-height:1.7;">The symptom is visible. The cause is hidden. The constraint is structural. The contradiction is assumed away. Every great improvement framework is a different method for bridging that gap between what’s visible and what’s true.</p>
+<a href="making-the-invisible-visible.html" style="display:inline-block;margin-top:12px;font-size:0.85em;color:#4a9fd4;font-weight:600;">Read the foundation concept →</a>
+</div>
+<!-- START HERE -->
+<div class="callout blue">
+<strong>Start here — five concepts that underpin everything else</strong>
+<ol style="line-height:2.2;margin-top:12px;">
+<li><a href="why-nothing-changes.html">Why nothing changes</a> — the failure pattern behind repeated effort without structural improvement</li>
+<li><a href="types-of-measures.html">Types of measures</a> — outcome vs process vs balancing; lead vs lag</li>
+<li><a href="variation-and-spc.html">Understanding variation</a> — patterns, signals and proportionate responses</li>
+<li><a href="joiner-levels-of-fix.html">Joiner levels of fix</a> — Level 1/2/3: the quickest predictor of whether an intervention will produce lasting change</li>
+<li><a href="necessary-but-not-sufficient.html">Necessary but not sufficient</a> — why correct interventions still fail the sufficiency test</li>
+</ol>
+<p style="margin-top:14px;">Use <a href="interpret-results.html"><strong>Interpreting your StepChange chart</strong></a> to check the result and choose a proportionate next step.</p>
+</div>
+<!-- USE-CASE ROUTING -->
+<div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:22px 26px;margin:28px 0;font-family:system-ui,sans-serif;"><h2 style="margin-top:0">Three useful starting points</h2>
+<ul style="padding-left:24px">
+<li><a href="ashbys-law.html"><strong>Variation, demand and capacity</strong></a> — Can the system cope with the work? Include slack and flexibility when designing the change.</li>
+<li><a href="variation-and-spc.html">Understanding variation</a> — What is the pattern telling us? Common and special causes, tampering and misleading comparisons.</li>
+<li><a href="interpret-results.html"><strong>Interpreting your StepChange chart</strong></a> — What might have changed, and what should we check next?</li>
+</ul></div>
+<hr/>
+<!-- SECTION 1: WHY THINGS FAIL -->
+<h2>Why things fail</h2>
+<div class="numbers-box" style="padding:0;border:none;background:none;">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:8px;">
+<a href="why-nothing-changes.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;transition:box-shadow 0.15s;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Why nothing changes</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Failure patterns behind repeated effort without structural improvement.</p>
+</a>
+<a href="joiner-triangle.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">The Joiner Triangle</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Quality, Scientific Approach, All One Team — one interdependent system. Taken separately they are not as effective.</p>
+</a>
+<a href="joiner-levels-of-fix.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Joiner levels of fix</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Level 1/2/3: the quickest predictor of lasting change.</p>
+</a>
+<a href="deming-14-points.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Deming’s 14 Points</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Operational prescriptions that follow from systems thinking and variation.</p>
+</a>
+<a href="compliance-trap.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">The compliance trap</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why measurement pressure often worsens the outcomes it measures.</p>
+</a>
+<a href="innovators-dilemma.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">The Innovator’s Dilemma</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why systems resist disruptive improvement from within.</p>
+</a>
+<a href="common-traps.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Common traps</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">The don’t-do-this list, in one place.</p>
+</a>
+</div>
+</div>
+<hr/>
+<!-- SECTION 2: MEASUREMENT & ANALYSIS -->
+<h2>Measurement &amp; analysis</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:8px;">
+<a href="types-of-measures.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Types of measures</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Outcome vs process vs balancing; lead vs lag indicators.</p>
+</a>
+<a href="variation-and-spc.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Understanding variation</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Common and special causes, suitable charts, tampering and misleading comparisons.</p>
+</a>
 
-    <h1>Concepts</h1>
-    <p class="article-subtitle">The mental models behind StepChange: detect structural change, avoid tampering, and decide what to do next when outcomes don&rsquo;t move.</p>
 
-    <div style="display:flex;flex-wrap:wrap;gap:12px;margin:16px 0 32px;font-family:system-ui,sans-serif;">
-        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
-        <a href="interpret-results.html" style="display:inline-block;padding:10px 20px;background:white;border:2px solid var(--brand-blue);border-radius:6px;color:var(--brand-blue);font-weight:600;font-size:0.92em;text-decoration:none;">Interpret results</a>
-        <a href="what-to-do-next.html" style="display:inline-block;padding:10px 20px;background:white;border:2px solid var(--brand-blue);border-radius:6px;color:var(--brand-blue);font-weight:600;font-size:0.92em;text-decoration:none;">What to do next</a>
-    </div>
 
-    <!-- Foundation concept -->
-    <div style="background:#001a3a;border-radius:10px;padding:20px 24px;margin:0 0 28px;font-family:system-ui,sans-serif;">
-        <div style="font-size:0.7em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:#4a9fd4;margin-bottom:10px;">Foundation concept</div>
-        <a href="making-the-invisible-visible.html" style="text-decoration:none;">
-            <h3 style="margin:0 0 8px;font-size:1.05em;color:white;">Making the invisible visible</h3>
-        </a>
-        <p style="margin:0;font-size:0.88em;color:#94b8d4;line-height:1.7;">The symptom is visible. The cause is hidden. The constraint is structural. The contradiction is assumed away. Every great improvement framework is a different method for bridging that gap between what&rsquo;s visible and what&rsquo;s true.</p>
-        <a href="making-the-invisible-visible.html" style="display:inline-block;margin-top:12px;font-size:0.85em;color:#4a9fd4;font-weight:600;">Read the foundation concept &rarr;</a>
-    </div>
+<a href="measurement-gaming.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Gaming the Measure</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Deming’s Point 11 — why targets get gamed and the balancing measures defence. Goodhart’s Law in NHS practice.</p>
+</a>
+<a href="hawthorne-effect.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Hawthorne Effect</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Behaviour changes when people know they are being measured. Why observed improvement is not the same as structural improvement.</p>
+</a>
 
-    <!-- START HERE -->
-    <div class="callout blue">
-        <strong>Start here &mdash; five concepts that underpin everything else</strong>
-        <ol style="line-height:2.2;margin-top:12px;">
-            <li><a href="why-nothing-changes.html">Why nothing changes</a> &mdash; the failure pattern behind repeated effort without structural improvement</li>
-            <li><a href="types-of-measures.html">Types of measures</a> &mdash; outcome vs process vs balancing; lead vs lag</li>
-            <li><a href="variation-and-spc.html">Variation &amp; SPC</a> &mdash; noise vs signal and why tampering happens</li>
-            <li><a href="joiner-levels-of-fix.html">Joiner levels of fix</a> &mdash; Level 1/2/3: the quickest predictor of whether an intervention will produce lasting change</li>
-            <li><a href="necessary-but-not-sufficient.html">Necessary but not sufficient</a> &mdash; why correct interventions still fail the sufficiency test</li>
-        </ol>
-        <p style="margin-top:14px;">After those five, go to <a href="what-to-do-next.html"><strong>What to do next</strong></a> to apply them to your Bootstrap CUSUM result.</p>
-    </div>
 
-    <!-- USE-CASE ROUTING -->
-    <div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:22px 26px;margin:28px 0;font-family:system-ui,sans-serif;">
-        <div style="font-size:0.72em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:16px;">&#9654; Find the right concept for your situation</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:14px;">
-
-            <div style="background:white;border-radius:8px;padding:14px 16px;border-left:3px solid var(--brand-blue);">
-                <div style="font-weight:700;font-size:0.9em;margin-bottom:8px;color:var(--brand-blue);">Bootstrap CUSUM shows a change point</div>
-                <div style="font-size:0.85em;line-height:2.0;">
-                    <a href="common-cause-special-cause-step-change.html">Common cause vs special cause</a><br>
-                    <a href="special-cause-variation.html">Special cause variation</a><br>
-                    <a href="change-detected-what-next.html">Change detected: what to do next</a><br>
-                    <a href="joiner-triangle.html">The Joiner Triangle</a><br>
-                    <a href="joiner-levels-of-fix.html">Joiner levels of fix</a><br>
-                    <a href="making-the-invisible-visible.html">Making the invisible visible</a><br>
-                    <a href="finding-the-real-constraint.html">Finding the real constraint</a><br>
-                    <a href="divergent-convergent-thinking.html">Divergent and convergent thinking</a><br>
-                    <a href="stratify-experiment-disaggregate.html">Stratify, experiment, disaggregate</a>
-                </div>
-            </div>
-
-            <div style="background:white;border-radius:8px;padding:14px 16px;border-left:3px solid var(--green);">
-                <div style="font-weight:700;font-size:0.9em;margin-bottom:8px;color:#166534;">Bootstrap CUSUM shows no change</div>
-                <div style="font-size:0.85em;line-height:2.0;">
-                    <a href="common-cause-special-cause-step-change.html">Common cause vs special cause</a><br>
-                    <a href="common-cause-variation.html">Common cause variation</a><br>
-                    <a href="no-change-what-next.html">No change detected: what to do next</a><br>
-                    <a href="decide-to-wait.html">Decide to wait (don&rsquo;t tamper)</a><br>
-                    <a href="tampering-and-impatience.html">Tampering &amp; impatience</a>
-                </div>
-            </div>
-
-            <div style="background:white;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);">
-                <div style="font-weight:700;font-size:0.9em;margin-bottom:8px;color:#92400e;">Stuck choosing or designing measures</div>
-                <div style="font-size:0.85em;line-height:2.0;">
-                    <a href="types-of-measures.html">Types of measures</a><br>
-                    <a href="behaviour-over-time.html">Behaviour over time</a><br>
-                    <a href="causal-loop-diagrams.html">Causal loop diagrams</a><br>
-                    <a href="model-for-improvement.html">Model for Improvement</a>
-                </div>
-            </div>
-
-            <div style="background:white;border-radius:8px;padding:14px 16px;border-left:3px solid #7c3aed;">
-                <div style="font-weight:700;font-size:0.9em;margin-bottom:8px;color:#5b21b6;">Intervention not producing results</div>
-                <div style="font-size:0.85em;line-height:2.0;">
-                    <a href="necessary-but-not-sufficient.html">Necessary but not sufficient</a><br>
-                    <a href="theory-of-constraints.html">Theory of Constraints</a><br>
-                    <a href="joiner-triangle.html">The Joiner Triangle</a><br>
-                    <a href="joiner-levels-of-fix.html">Joiner levels of fix</a><br>
-                    <a href="finding-the-real-constraint.html">Finding the real constraint</a><br>
-                    <a href="why-nothing-changes.html">Why nothing changes</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <hr>
-
-    <!-- SECTION 1: WHY THINGS FAIL -->
-    <h2>Why things fail</h2>
-    <div class="numbers-box" style="padding:0;border:none;background:none;">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:8px;">
-
-            <a href="why-nothing-changes.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;transition:box-shadow 0.15s;">
-                <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Why nothing changes</h3>
-                <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Failure patterns behind repeated effort without structural improvement.</p>
-            </a>
-
-            <a href="joiner-triangle.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-                <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">The Joiner Triangle</h3>
-                <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Quality, Scientific Approach, All One Team &mdash; one interdependent system. Taken separately they are not as effective.</p>
-            </a>
-
-            <a href="joiner-levels-of-fix.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-                <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Joiner levels of fix</h3>
-                <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Level 1/2/3: the quickest predictor of lasting change.</p>
-            </a>
-
-            <a href="deming-14-points.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-                <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Deming&rsquo;s 14 Points</h3>
-                <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Operational prescriptions that follow from systems thinking and variation.</p>
-            </a>
-
-            <a href="compliance-trap.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-                <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">The compliance trap</h3>
-                <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why measurement pressure often worsens the outcomes it measures.</p>
-            </a>
-
-            <a href="innovators-dilemma.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-                <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">The Innovator&rsquo;s Dilemma</h3>
-                <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why systems resist disruptive improvement from within.</p>
-            </a>
-
-            <a href="common-traps.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-                <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Common traps</h3>
-                <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">The don&rsquo;t-do-this list, in one place.</p>
-            </a>
-
-        </div>
-    </div>
-
-    <hr>
-
-    <!-- SECTION 2: MEASUREMENT & ANALYSIS -->
-    <h2>Measurement &amp; analysis</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:8px;">
-
-        <a href="types-of-measures.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Types of measures</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Outcome vs process vs balancing; lead vs lag indicators.</p>
-        </a>
-
-        <a href="variation-and-spc.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Variation &amp; SPC</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Noise vs signal and why tampering happens when you confuse them.</p>
-        </a>
-
-        <a href="common-cause-special-cause-step-change.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Common cause vs special cause</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Which type of variation do you have? The decision guide and what to do next for each.</p>
-        </a>
-
-        <a href="common-cause-variation.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Common cause variation</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Stable systems performing at the wrong level: when to wait and when to redesign.</p>
-        </a>
-
-        <a href="special-cause-variation.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Special cause variation</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Signals that something specific changed: eliminate before improving the stable system.</p>
-        </a>
-
-        <a href="measurement-gaming.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Gaming the Measure</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Deming&rsquo;s Point 11 &mdash; why targets get gamed and the balancing measures defence. Goodhart&rsquo;s Law in NHS practice.</p>
-        </a>
-
-        <a href="hawthorne-effect.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Hawthorne Effect</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Behaviour changes when people know they are being measured. Why observed improvement is not the same as structural improvement.</p>
-        </a>
-
-        <a href="regression-to-the-mean.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Regression to the mean</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why improvement after a bad period may be statistical inevitability — and how Bootstrap CUSUM tells the difference.</p>
-        </a>
-
-        <a href="tampering-and-impatience.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Tampering &amp; impatience</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why reacting to noise makes performance worse, not better.</p>
-        </a>
-
-        <a href="behaviour-over-time.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Behaviour over time</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Patterns before data; archetypes and feedback loops.</p>
-        </a>
-
-        <a href="causal-loop-diagrams.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Causal loop diagrams</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Feedback structure behind persistent performance patterns.</p>
-        </a>
-
-    </div>
-
-    <hr>
-
-    <!-- SECTION 3: IMPROVEMENT METHOD -->
-    <h2>Improvement method</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:8px;">
-
-        <a href="model-for-improvement.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Model for Improvement</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Aim, measures, changes; PDSA as structured learning.</p>
-        </a>
-
-        <a href="pdsa-cycle.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">PDSA cycle</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Prediction &rarr; test &rarr; study &rarr; adapt. Bootstrap CUSUM is the Study step.</p>
-        </a>
-
-        <a href="making-the-invisible-visible.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Making the invisible visible</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why every improvement framework solves the same problem — and where Bootstrap CUSUM fits.</p>
-        </a>
-
-        <a href="finding-the-real-constraint.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Finding the real constraint</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Six-phase process from symptoms to testable plan. TRIZ, SIT, four traps, contradiction analysis.</p>
-        </a>
-
-        <a href="divergent-convergent-thinking.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Divergent and convergent thinking</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">The two-diamond approach, evaluation matrix, PICK, POWER — 3 hours to a testable plan.</p>
-        </a>
-
-        <a href="stratify-experiment-disaggregate.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Stratify, experiment, disaggregate</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Joiner&rsquo;s three strategies for improving a stable system. What to do instead of tampering.</p>
-        </a>
-
-        <a href="going-to-the-gemba.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Going to the Gemba</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">The visibility intervention &mdash; going to where the constraint lives with the authority to act on it immediately.</p>
-        </a>
-
-        <a href="visual-management.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Visual Management</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Making work visible vs making the constraint visible &mdash; the honest distinction that determines whether visual management produces change or records the problem.</p>
-        </a>
-
-        <a href="evaporating-cloud.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Evaporating Cloud</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Makes the structural contradiction keeping a constraint in place visible &mdash; then dissolves it by naming and questioning the assumption underneath.</p>
-        </a>
-
-        <a href="bright-spots.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Bright Spots</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Positive deviance: find who is doing it better and understand why.</p>
-        </a>
-
-        <a href="root-cause-analysis.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Root cause analysis</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Fishbone diagrams and multi-factor cause mapping.</p>
-        </a>
-
-        <a href="five-whys.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">The 5 Whys</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Linear causality tool for straightforward, single-chain problems.</p>
-        </a>
-
-        <a href="pick-model.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">The PICK model</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Impact vs effort prioritisation before choosing what to work on.</p>
-        </a>
-
-    </div>
-
-    <hr>
-
-    <!-- SECTION 4: SYSTEMS & CONSTRAINTS -->
-    <h2>Systems &amp; constraints</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:8px;">
-
-        <a href="theory-of-constraints.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Theory of Constraints</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Find and elevate the binding constraint. Improving non-constraints does not shift outcomes.</p>
-        </a>
-
-        <a href="necessary-but-not-sufficient.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Necessary but not sufficient</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why correct interventions still fail the sufficiency test &mdash; and how Bootstrap CUSUM confirms it.</p>
-        </a>
-
-        <a href="systems-thinking.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Systems thinking &amp; silos</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why component optimisation harms the whole system.</p>
-        </a>
-
-        <a href="failure-demand.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Failure demand</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Demand created by system failure and rework — the hidden load.</p>
-        </a>
-
-        <a href="necessary-but-not-sufficient.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Focus &amp; prioritisation</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">How to choose where to act when everything feels urgent.</p>
-        </a>
-
-        <a href="ashbys-law.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
-            <h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Ashby&rsquo;s Law</h3>
-            <p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Requisite variety: why simple responses fail complex systems.</p>
-        </a>
-
-    </div>
-
-    <hr>
-
-    <!-- SPINE FOOTER CTA -->
-    <div class="callout blue" style="margin-top:32px;">
-        <strong>Next step</strong>
-        <p style="margin-top:10px;line-height:1.8;">
-            Run your time-series data through the <a href="index.html"><strong>StepChange Analyzer (Bootstrap CUSUM)</strong></a>, then use
-            <a href="interpret-results.html"><strong>Interpret results</strong></a> and <a href="what-to-do-next.html"><strong>What to do next</strong></a>
-            to act on the finding without tampering.
-        </p>
-        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;">
-            <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
-            <a href="interpret-results.html" style="display:inline-block;padding:9px 18px;background:white;border:2px solid var(--brand-blue);border-radius:6px;color:var(--brand-blue);font-weight:600;font-size:0.88em;text-decoration:none;">Interpret results</a>
-            <a href="what-to-do-next.html" style="display:inline-block;padding:9px 18px;background:white;border:2px solid var(--brand-blue);border-radius:6px;color:var(--brand-blue);font-weight:600;font-size:0.88em;text-decoration:none;">What to do next</a>
-            <a href="improvement-method.html" style="display:inline-block;padding:9px 18px;background:white;border:2px solid var(--brand-blue);border-radius:6px;color:var(--brand-blue);font-weight:600;font-size:0.88em;text-decoration:none;">7-step method</a>
-        </div>
-    </div>
-
+<a href="behaviour-over-time.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Behaviour over time</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Patterns before data; archetypes and feedback loops.</p>
+</a>
+<a href="causal-loop-diagrams.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Causal loop diagrams</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Feedback structure behind persistent performance patterns.</p>
+</a>
+</div>
+<hr/>
+<!-- SECTION 3: IMPROVEMENT METHOD -->
+<h2>Improvement method</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:8px;">
+<a href="model-for-improvement.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Model for Improvement</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Aim, measures, changes; PDSA as structured learning.</p>
+</a>
+<a href="pdsa-cycle.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">PDSA cycle</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Prediction → test → study → adapt. Bootstrap CUSUM is the Study step.</p>
+</a>
+<a href="making-the-invisible-visible.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Making the invisible visible</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why every improvement framework solves the same problem — and where Bootstrap CUSUM fits.</p>
+</a>
+<a href="finding-the-real-constraint.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Constraints and bottlenecks</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Follow the work, check four traps and test what is limiting the whole-system result.</p>
+</a>
+<a href="divergent-convergent-thinking.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Divergent and convergent thinking</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">The two-diamond approach, evaluation matrix, PICK, POWER — 3 hours to a testable plan.</p>
+</a>
+<a href="stratify-experiment-disaggregate.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Stratify, experiment, disaggregate</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Joiner’s three strategies for improving a stable system. What to do instead of tampering.</p>
+</a>
+<a href="going-to-the-gemba.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Going to the Gemba</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">The visibility intervention — going to where the constraint lives with the authority to act on it immediately.</p>
+</a>
+<a href="visual-management.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Visual Management</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Making work visible vs making the constraint visible — the honest distinction that determines whether visual management produces change or records the problem.</p>
+</a>
+<a href="evaporating-cloud.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Evaporating Cloud</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Makes the structural contradiction keeping a constraint in place visible — then dissolves it by naming and questioning the assumption underneath.</p>
+</a>
+<a href="bright-spots.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Bright Spots</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Positive deviance: find who is doing it better and understand why.</p>
+</a>
+<a href="root-cause-analysis.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Root cause analysis</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Fishbone diagrams and multi-factor cause mapping.</p>
+</a>
+<a href="five-whys.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">The 5 Whys</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Linear causality tool for straightforward, single-chain problems.</p>
+</a>
+<a href="pick-model.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">The PICK model</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Impact vs effort prioritisation before choosing what to work on.</p>
+</a>
+</div>
+<hr/>
+<!-- SECTION 4: SYSTEMS & CONSTRAINTS -->
+<h2>Systems &amp; constraints</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-bottom:8px;">
+<a href="theory-of-constraints.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Theory of Constraints</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Five focusing steps for improving the whole system—not just local utilisation.</p>
+</a>
+<a href="necessary-but-not-sufficient.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Necessary but not sufficient</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why correct interventions still fail the sufficiency test — and how Bootstrap CUSUM confirms it.</p>
+</a>
+<a href="systems-thinking.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Systems thinking &amp; silos</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Why component optimisation harms the whole system.</p>
+</a>
+<a href="failure-demand.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Failure demand</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Demand created by system failure and rework — the hidden load.</p>
+</a>
+<a href="necessary-but-not-sufficient.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Focus &amp; prioritisation</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">How to choose where to act when everything feels urgent.</p>
+</a>
+<a href="ashbys-law.html" style="text-decoration:none;color:inherit;display:block;background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;">
+<h3 style="margin:0 0 6px;font-size:1em;color:var(--brand-blue);">Variation, demand and capacity</h3>
+<p style="margin:0;font-size:0.87em;color:var(--muted);line-height:1.6;">Queues, utilisation, slack and flexibility—with Ashby’s Law as optional background.</p>
+</a>
+</div>
+<hr/>
+<!-- SPINE FOOTER CTA -->
+<div class="callout blue" style="margin-top:32px;"><strong>Next step</strong><p>Run the analyser, then check the result and choose a proportionate response. The chart does not identify the cause or determine the action by itself.</p><a class="more" href="interpret-results.html">Interpret your StepChange chart →</a></div>
 </main>
-
 <div id="site-footer"></div>
 <script src="assets/site-chrome.js"></script>
 </body>

@@ -1,226 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://stepchangeanalysis.com/ashbys-law.html">
-    <title>Ashby's Law: Why Only Variety Can Absorb Variety — StepChangeAnalysis.com</title>
-    <meta name="description" content="Ashby's Law of Requisite Variety, explained simply — why compliance systems can't out-think the variety they're meant to control, and two practical fixes.">
-    <meta name="keywords" content="Ashby law requisite variety, only variety can absorb variety, cybernetics improvement, requisite variety management, Ashby cybernetics, variety management systems, compliance variety problem">
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-    <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Variation, Demand and Capacity — StepChangeAnalysis.com</title>
+<meta content="Understand how variable work, capacity and utilisation create queues. Protect useful slack and flexibility; use Ashby’s Law as optional background." name="description"/>
+<link href="https://stepchangeanalysis.com/ashbys-law.html" rel="canonical"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag("js", new Date());
         gtag("config", "G-NZLMMS3ZGG");
     </script>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
 
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
+.improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
+</style></head>
 <body>
 <div id="site-header"></div>
-
-<main class="page-wrap">
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="making-the-invisible-visible.html">Understand the System?</a> &rsaquo; Ashby&rsquo;s Law</div>
-    <div class="page-flag">&#128200; Improvement Concepts &mdash; Systems &amp; Constraints</div>
-    <h1>Ashby&rsquo;s Law of Requisite Variety</h1>
-    <p class="page-intro">Only variety can absorb variety. A control system can only manage the variety in its environment if it has at least as much internal variety available to respond. This single principle explains why compliance systems fail, why expert humans become bottlenecks, why standard products get pulled toward complexity, and why centralised management cannot cope with the diversity of what it is trying to manage. The solution in every case is the same: either reduce the variety that enters the system, or build internal mechanisms with enough variety to absorb it.</p>
-    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
-
-    <details class="toc-details">
-        <summary>&#9776;&nbsp; Contents</summary>
-        <div class="toc-inner">
-            <ol>
-                <li><a href="#section-law">The Law stated precisely</a></li>
-                <li><a href="#section-variety">What variety means in practice</a></li>
-                <li><a href="#section-two-responses">The two responses</a></li>
-                <li><a href="#section-compliance">Why compliance systems fail — Ashby applied</a></li>
-                <li><a href="#section-bottleneck">Why expert humans become bottlenecks</a></li>
-                <li><a href="#section-standardisation">Standardisation as a variety reduction strategy</a></li>
-                <li><a href="#section-cusum">Bootstrap CUSUM as a high-variety monitor</a></li>
-                <li><a href="#section-seven-steps">Where Ashby fits in the 7-step method</a></li>
-            </ol>
-        </div>
-    </details>
-
-    <h2 id="section-law">The Law stated precisely</h2>
-
-    <div class="law-box">
-        <div class="law-text">&ldquo;Only variety can destroy variety.&rdquo;<br>— W. Ross Ashby, <em>An Introduction to Cybernetics</em>, 1956</div>
-        <div class="law-source">Often rendered as: <em>Only variety can absorb variety.</em> The Law of Requisite Variety.</div>
-    </div>
-
-    <p>William Ross Ashby was a British psychiatrist and cybernetician who formalised the mathematical theory of control systems. His Law of Requisite Variety, published in 1956, states that for a controller to regulate a system, the controller must have at least as many distinct states available as the system it is trying to regulate has disturbances that could affect it.</p>
-
-    <p>In plain language: <strong>a control system can only handle the variety it has been designed to handle.</strong> Any variety that exceeds the controller&rsquo;s capacity passes through unmanaged, causing the failures, errors, and surprises that the control system was supposed to prevent.</p>
-
-    <div class="callout green">
-        <strong>The plain-language version</strong>
-        <p>Filter out external complexity before it enters the system &mdash; or build internal capability to handle it safely when it does. Those are the only two options. Everything else is the same complexity being absorbed by the same expert human, one case at a time, forever.</p>
-    </div>
-
-    <div class="callout purple">
-        <strong>A simple illustration</strong>
-        <p>A thermostat has two states: heat on, heat off. It can manage exactly one type of disturbance: temperature variation. It cannot manage humidity, air quality, occupancy, or sunlight. Those disturbances pass through unmanaged because the thermostat&rsquo;s variety (2 states) does not match the environment&rsquo;s variety (many dimensions). To manage more variety, the control system needs more states &mdash; a more sophisticated controller with more internal variety.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-variety">What variety means in practice</h2>
-
-    <p>In an organisational context, variety is the number of different situations, states, or conditions that a system must be able to respond to. High variety means many different situations requiring different responses. Low variety means few situations with predictable, standardised responses.</p>
-
-    <p>Every organisation faces variety from its environment: different customer requests, different failure modes, different regulatory requirements, different market conditions, different clinical presentations. That variety is real. It cannot be wished away. The question is always: <em>where is this variety absorbed, and at what cost?</em></p>
-
-    <div class="variety-grid">
-        <div class="vg-card low">
-            <div class="vgc-label">&#10060; Low internal variety</div>
-            <h3>Variety absorbed by expert humans</h3>
-            <ul>
-                <li>Every non-standard situation routes to the same expert</li>
-                <li>The expert is the variety absorber for the whole system</li>
-                <li>The expert becomes the bottleneck</li>
-                <li>The system cannot scale without adding more of the same expert</li>
-                <li>When the expert is unavailable, the system fails</li>
-            </ul>
-        </div>
-        <div class="vg-card high">
-            <div class="vgc-label">&#9989; High internal variety</div>
-            <h3>Variety absorbed by system design</h3>
-            <ul>
-                <li>Common situations handled by scripts, menus, and automated checks</li>
-                <li>Experts handle only genuinely novel situations</li>
-                <li>The system scales without proportional expert headcount</li>
-                <li>When individuals are unavailable, the system continues</li>
-                <li>Experts are freed for the work only they can do</li>
-            </ul>
-        </div>
-    </div>
-
-    <hr>
-
-    <h2 id="section-two-responses">The two responses</h2>
-
-    <p>There are exactly two ways to address a variety mismatch: reduce the variety that enters the system, or increase the internal variety available to absorb it. In practice both are needed.</p>
-
-    <p><strong>Response 1 — Exclude variety at the boundary.</strong> Reduce the variety the system must handle by limiting what enters. A <a href="standardisation-vs-customisation.html">portfolio policy</a> that defines which product configurations are offered excludes the variety of bespoke requests before they enter the delivery system. A structured requirements template that captures customer needs in a standard format reduces the variety of interpretations a developer must resolve. A validated report catalogue that defines which reports can be built reduces the variety of SQL configurations a developer must write from scratch. These are boundary decisions — they reduce the problem before it reaches the system.</p>
-
-    <p><strong>Response 2 — Build internal mechanisms with sufficient variety.</strong> For the variety that does enter, build the internal mechanisms that can absorb it without routing it through expert humans. Automated checks, validation gates, continuous monitoring systems, and structured menus are all variety absorbers. Each one handles a class of variety that previously required an expert decision. The <a href="failure-demand.html">Goalie role</a> is a variety absorber for inbound operational demand. The automated patient list reconciliation check is a variety absorber for the variety of possible patient list errors. Bootstrap CUSUM is a variety absorber for the variety of possible outcome deteriorations — it detects structural change regardless of its specific form.</p>
-
-    <hr>
-
-    <h2 id="section-compliance">Why compliance systems fail — Ashby applied</h2>
-
-    <p>A compliance audit has a fixed, limited internal variety: it checks for a defined set of expected states (compliant / non-compliant) against a defined list of criteria. The audit can only detect the specific failure modes it was designed to look for. Any failure mode not on the list passes through undetected.</p>
-
-    <p>The real world has near-infinite variety: novel combinations of circumstances, edge cases, new failure modes that did not exist when the audit criteria were written, systemic problems that emerge from interactions between individually compliant components. The compliance system&rsquo;s internal variety (a finite checklist) does not match the environment&rsquo;s variety (indefinitely large). The result is exactly what Ashby predicts: the variety that exceeds the controller&rsquo;s capacity passes through unmanaged.</p>
-
-    <p>This is why serious failures so consistently occur in organisations that have recently passed their compliance audits. The audit was not wrong — it checked what it was designed to check, and the organisation complied. The failure emerged from variety the audit was not designed to see. See <a href="compliance-trap.html">The Compliance Trap</a> for the full analysis and the prevention alternative.</p>
-
-    <hr>
-
-    <h2 id="section-bottleneck">Why expert humans become bottlenecks</h2>
-
-    <p>When a system lacks the internal variety to handle the situations it faces, the unmanaged variety flows to wherever the most variety is available — which is almost always the most expert human in the organisation. The expert can handle a wide range of situations precisely because they have high internal variety: deep knowledge, broad experience, pattern recognition across many domains.</p>
-
-    <p>This produces the <a href="innovators-dilemma.html">Expert Trap</a>: the expert becomes the variety absorber for everything the system cannot handle. Support queries, implementation problems, compliance reviews, sales decisions, product questions — all route to the same expert because that is the only place with enough variety to handle them. The expert is fully utilised. New work cannot proceed. The system cannot scale.</p>
-
-    <p>The correct response is not to find a more productive expert or ask the existing expert to work harder. It is to build internal system variety that matches the variety of the situations the expert is currently handling — so that the expert handles only the genuinely novel situations that truly require their unique capability.</p>
-
-    <div class="callout orange">
-        <strong>The Goalie / Builder / Investigator / Toolmaker structure as a variety response</strong>
-        <p>The role structure described in <a href="focus-and-prioritisation.html">Focus &amp; Prioritisation</a> is an Ashby response. The Goalie role absorbs the variety of inbound operational demand, so that variety does not flow to the Builder (the constrained expert). The Investigator builds the internal variety of the Goalie role over time by converting recurring escalations into scripts, templates, and documented processes. The Toolmaker builds system variety — automated checks, validation tools, report builders — that absorbs variety without requiring any human to handle it. Each role adds internal variety to a specific part of the system.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-standardisation">Standardisation as a variety reduction strategy</h2>
-
-    <p>The <a href="standardisation-vs-customisation.html">standardisation vs customisation</a> decision is, at its root, an Ashby decision. Every customisation request adds variety to the installed base that the system must absorb in perpetuity — in support, in upgrades, in regression testing, in documentation. Accepting customisation without a defined process for absorbing its ongoing variety adds to the system&rsquo;s variety burden indefinitely.</p>
-
-    <p>A standardised product — the Blueprint — reduces the variety entering the system at the boundary (Response 1) by defining a fixed configuration space. The variety within that space (different parameter settings, different patient populations, different clinic sizes) is absorbed by the system design (Response 2) — through validated SQL fragments, automated checks, and structured parameter menus rather than bespoke development decisions.</p>
-
-    <p>Von Hippel&rsquo;s lead user insight, reframed through Ashby: the lead users who are getting exceptional results with simple configurations have found ways to reduce the variety they introduce into the system. Their simpler, more reliable approach is the Blueprint hypothesis — not because simplicity is inherently better, but because it matches the system&rsquo;s internal variety with the variety it actually needs to handle.</p>
-
-    <hr>
-
-    <h2 id="section-cusum">Bootstrap CUSUM as a high-variety monitor</h2>
-
-    <p>A Shewhart X-mR control chart has limited internal variety: it applies a fixed set of rules (points beyond control limits, runs rules) to detect a specific class of signal (large sudden shifts). It cannot detect small persistent shifts, slow drifts, or structural change that accumulates over many observations. Its internal variety does not match the variety of ways a process can genuinely change.</p>
-
-    <p>Bootstrap CUSUM has higher internal variety: it accumulates evidence across all observations, detects changes of any size that persist long enough to accumulate statistically significant evidence, and tests candidate change points across the full series rather than applying fixed rules to individual points. Its internal variety better matches the variety of real process change.</p>
-
-    <p>Applied to outcome monitoring: a compliance audit checks a snapshot. Its internal variety is limited to what the auditor looks for on the inspection day. Bootstrap CUSUM on an outcome measure monitors continuously and detects structural change of any form — whether or not it was anticipated, whether or not it matches any predefined failure mode. It is a higher-variety controller applied to the same regulatory problem. See <a href="three-charts-three-stories.html">Three Charts, Three Stories</a> for the direct comparison.</p>
-
-    <hr>
-
-    <h2 id="section-seven-steps">Where Ashby fits in the 7-step method</h2>
-
-    <div class="step-integration">
-        <div class="si-label">&#9654; Connection to the 7-Step Improvement Method</div>
-        <p><strong>Step 1 (List symptoms):</strong> When the symptom list includes the same expert being the bottleneck for multiple different types of work, Ashby is the diagnosis. The variety of situations the system faces exceeds the internal variety available to handle them, and all the excess flows to the expert.</p>
-        <p style="margin-top:10px;"><strong>Step 3 (Root cause):</strong> The root cause in most expert-bottleneck situations is a variety mismatch — the system lacks internal variety to match the variety of its environment. Identifying which types of variety are consuming the constraint is the root cause analysis.</p>
-        <p style="margin-top:10px;"><strong>Step 4 (Dominant constraint):</strong> The constraint is the variety mismatch. The <a href="theory-of-constraints.html">Theory of Constraints</a> Step 3 (Subordinate) means routing as much variety as possible away from the constraint — through Goalies, scripts, automated checks — so the constraint handles only the variety it uniquely can.</p>
-        <p style="margin-top:10px;"><strong>Step 5 (Complete solution):</strong> The complete solution addresses variety at both boundaries: Response 1 (portfolio policy, standardisation) reduces what enters. Response 2 (automated checks, monitoring systems, validated tools) absorbs what gets through without routing it to the constraint.</p>
-        <p style="margin-top:10px;"><strong>Step 7 (PDSA):</strong> Bootstrap CUSUM on outcome measures is the high-variety monitoring system that confirms whether the variety management interventions are working. A downward change point in support volume confirms that a new variety absorber (a script, an automated check) is handling a class of variety that previously reached the expert.</p>
-        <div class="step-tools">
-            <a href="improvement-method.html" class="tool-link">The 7-Step Method</a>
-            <a href="compliance-trap.html" class="tool-link">The Compliance Trap</a>
-            <a href="standardisation-vs-customisation.html" class="tool-link">Standardisation vs Customisation</a>
-            <a href="failure-demand.html" class="tool-link">Failure Demand</a>
-            <a href="focus-and-prioritisation.html" class="tool-link">Focus &amp; Prioritisation</a>
-            <a href="three-charts-three-stories.html" class="tool-link">Bootstrap CUSUM</a>
-        </div>
-    </div>
-
-    <div class="callout blue" style="margin-top:32px;">
-        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
-        <p>Ashby&rsquo;s Law sits in the Systems &amp; Constraints group alongside <a href="theory-of-constraints.html">Theory of Constraints</a>, <a href="failure-demand.html">Failure Demand</a>, and <a href="focus-and-prioritisation.html">Focus &amp; Prioritisation</a>. Together they explain why systems get stuck and what the structural responses are. See <a href="compliance-trap.html">The Compliance Trap</a> for the most direct application.</p>
-    </div>
-
-    <h2>Related concepts</h2>
-    <div class="nav-grid">
-        <a href="compliance-trap.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>The Compliance Trap</h3>
-            <p>The most direct application of Ashby's Law — why compliance systems cannot prevent what they are designed to prevent, and the prevention alternative.</p>
-        </a>
-        <a href="standardisation-vs-customisation.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Standardisation vs Customisation</h3>
-            <p>Standardisation is Response 1 to variety — reducing what enters the system at the boundary before it reaches the constraint.</p>
-        </a>
-        <a href="failure-demand.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Failure Demand</h3>
-            <p>Failure demand is unmanaged variety — situations the system failed to handle correctly first time, generating a second contact that absorbs more constraint capacity.</p>
-        </a>
-        <a href="focus-and-prioritisation.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Focus &amp; Prioritisation</h3>
-            <p>The Goalie/Builder/Investigator/Toolmaker structure is a practical Ashby response — each role adds internal variety to a specific part of the system.</p>
-        </a>
-        <a href="theory-of-constraints.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Theory of Constraints</h3>
-            <p>The constraint is almost always the place where variety exceeds internal absorption capacity. TOC provides the method for addressing it systematically.</p>
-        </a>
-        <a href="why-nothing-changes.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Why Nothing Changes</h3>
-            <p>Improvement initiatives that add a new compliance requirement are not adding internal variety — they are adding more variety burden. Ashby explains why they fail to hold.</p>
-        </a>
-    </div>
-
-    <footer class="page-footer">
-        <p><strong>Primary source:</strong> Ashby W.R. <em>An Introduction to Cybernetics.</em> Chapman &amp; Hall, 1956. Available free at <a href="http://pespmc1.vub.ac.be/books/IntroCyb.pdf" target="_blank">pespmc1.vub.ac.be</a></p>
-        <p style="margin-top:8px;"><strong>Also:</strong> Beer S. <em>Brain of the Firm.</em> Allen Lane, 1972. &nbsp;&middot;&nbsp; Seddon J. <em>Freedom from Command and Control.</em> Vanguard Press, 2003.</p>
-        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
-    </footer>
-</main>
-
+<main class="improvement-page" id="main-content"><h1>Variation, demand and capacity</h1>
+<p><strong>Can the system cope with the work—and does the intervention leave room to respond?</strong></p>
+<p>Average demand and average capacity can look balanced while people still wait. Work arrives unevenly, jobs take different amounts of time, and the skills or resources needed are not always available together.</p>
+<section id="demand-and-capacity"><h2>Look beyond the averages</h2>
+<p>Imagine a service with enough time to handle an average day’s orders. Requests cluster in the morning, some need specialist help, and urgent work interrupts planned work. A quiet afternoon cannot undo every delay created earlier.</p>
+<ul>
+<li><strong>Amount:</strong> how much work arrives, including rework and unmet demand?</li>
+<li><strong>Timing:</strong> when does it arrive, how long does it take and when is capacity available?</li>
+<li><strong>Variety:</strong> what different needs, skills and responses are involved?</li>
+</ul>
+<p>Follow the work with the people doing it. Check these patterns over time and at the steps where queues form—not just in organisation-wide totals. <a href="finding-the-real-constraint.html">Find what is limiting the result</a>.</p>
+</section>
+<section id="slack-and-utilisation"><h2>Keep capacity to respond</h2>
+<p><strong>Utilisation</strong> is the proportion of available capacity being used. <strong>Slack</strong> is capacity not already committed, which can help absorb variation and recover from disruption.</p>
+<p>When arrivals and job times vary, waiting can rise sharply as utilisation approaches full capacity. Keeping everyone busy is not the same as helping work finish promptly.</p>
+<p><strong>Around 80% utilisation can be a useful planning prompt—not a universal limit.</strong> There is no fixed cliff at 80%, and 20% slack is not a rule for every resource. The margin needed depends on variability, pooling of resources and the consequences of delay.</p>
+<p>Protect useful flexibility where and when it is needed, with the right skills. Do not fill every gap simply to improve a utilisation score—or assume spare capacity in one team can relieve a constraint elsewhere.</p>
+</section>
+<section id="design-and-test"><h2>Design and test the arrangement</h2>
+<ul>
+<li><strong>Reduce avoidable variation.</strong> Remove rework, missing information and artificial batches; standardise routine work without ignoring genuine differences in need.</li>
+<li><strong>Match capacity to demand.</strong> Consider flexible schedules, shared capacity or cross-training where safe and practical. Protect a clear route for urgent work and exceptions.</li>
+<li><strong>Keep a deliberate margin.</strong> Agree how response capacity will be protected and used. If demand persistently exceeds capacity, slack alone is not a solution: address capacity, scope or demand with those affected.</li>
+<li><strong>Check the whole result.</strong> Monitor completed work, waiting, quality, safety, workload and cost. Did the change improve flow or simply transfer the queue or burden?</li>
+</ul>
+</section>
+<details class="conditions" id="ashbys-law"><summary>How Ashby’s Law helps explain this</summary><div class="conditions-body">
+<p>Ashby’s Law of Requisite Variety concerns the range of responses needed to manage the range of disturbances that matter to a system’s goal.</p>
+<p>For a service, a useful question is: <strong>can our arrangements respond to the different needs we actually encounter?</strong> Reduce avoidable complexity and build appropriate ways to handle what remains—for example, a clear routine route plus skilled judgement for exceptions.</p>
+<p>Variety is not the same as numerical variability or workload. Extra hours alone may not help if the required skills, information or authority are missing. Nor does the law mean every difference should be standardised away.</p>
+</div></details>
+<details class="conditions" id="references"><summary>Sources and further reading</summary><div class="conditions-body">
+<p>W. Ross Ashby, <em>An Introduction to Cybernetics</em> (1956), Chapter 11: requisite variety.</p>
+<p>Linda Green, <a href="https://business.columbia.edu/sites/default/files-efs/pubfiles/5474/queueing%20theory%20and%20modeling.pdf"><em>Queueing Theory and Modeling</em></a>: the relationship between utilisation and delay depends on variability and system size.</p>
+</div></details>
+<section><h2>What’s your next useful question?</h2>
+<p><strong>Where does the work need more flexibility—not simply more activity?</strong></p>
+<a class="more" href="why-improvements-fail.html#right-problem">Return to Right problem? →</a><br/>
+<a class="more" href="why-improvements-fail.html#right-intervention">Return to Right intervention? →</a>
+</section></main>
 <div id="site-footer"></div>
 <script src="assets/site-chrome.js"></script>
-</body>
+<script>(function(){function reveal(){var id;try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}var el=document.getElementById(id);if(!el)return;var d=el.closest('details');if(d)d.open=true;requestAnimationFrame(function(){el.scrollIntoView();});}window.addEventListener('hashchange',reveal);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',reveal);else reveal();})();</script></body>
 </html>
