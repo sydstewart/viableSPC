@@ -1,208 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://stepchangeanalysis.com/causal-loop-diagrams.html">
-    <title>Causal Loop Diagrams — Why Patterns Persist — StepChangeAnalysis.com</title>
-    <meta name="description" content="Causal loop diagrams explained — reinforcing and balancing loops, how to read a CLD, and three worked examples from the site: the NHS A&E spiral, the customisation trap, and the dementia diagnosis loop. How CLDs connect to Bootstrap CUSUM.">
-    <meta name="keywords" content="causal loop diagram explained, reinforcing loop balancing loop, systems thinking feedback loops, CLD improvement, why patterns persist systems thinking, causal loop diagram healthcare, positive feedback loop negative feedback loop">
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-    <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Feedback Loops and Causal Loop Diagrams — StepChangeAnalysis.com</title>
+<meta content="Make feedback useful: follow consequences, reach people who can act and check the response. Understand reinforcing and balancing loops, with a short causal-loop diagram guide." name="description"/>
+<link href="https://stepchangeanalysis.com/causal-loop-diagrams.html" rel="canonical"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag("js", new Date());
         gtag("config", "G-NZLMMS3ZGG");
     </script>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
 
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
+.improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
+</style></head>
 <body>
 <div id="site-header"></div>
-
-<main class="page-wrap">
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="making-the-invisible-visible.html">Understand the System?</a> &rsaquo; Causal Loop Diagrams<</div>
-    <div class="page-flag">&#128200; Improvement Concepts &mdash; Systems Thinking</div>
-    <h1>Causal Loop Diagrams</h1>
-    <p class="page-intro">A Causal Loop Diagram maps the feedback structure of a system &mdash; the loops of cause and effect that cause a pattern to persist over time. Where the <a href="five-whys.html">5 Whys</a> asks why a single event happened, and <a href="behaviour-over-time.html">Behaviour Over Time charts</a> describe what pattern the system traces, the CLD answers the deeper question: <em>why does the system keep producing this pattern despite all the effort to change it?</em> The answer is almost always in a loop that has not been broken.</p>
-    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
-
-    <details class="toc-details">
-        <summary>&#9776;&nbsp; Contents</summary>
-        <div class="toc-inner">
-            <ol>
-                <li><a href="#section-reading">How to read a CLD</a></li>
-                <li><a href="#section-loops">Reinforcing and balancing loops</a></li>
-                <li><a href="#section-ae">Worked example 1 — The NHS A&amp;E spiral</a></li>
-                <li><a href="#section-customisation">Worked example 2 — The customisation trap</a></li>
-                <li><a href="#section-dementia">Worked example 3 — The dementia diagnosis loop</a></li>
-                <li><a href="#section-seven-steps">Where CLDs fit in the 7-step method</a></li>
-                <li><a href="#section-cusum">CLDs and Bootstrap CUSUM</a></li>
-            </ol>
-        </div>
-    </details>
-
-    <h2 id="section-reading">How to read a CLD</h2>
-
-    <p>A Causal Loop Diagram has three elements:</p>
-
-    <ul>
-        <li><strong>Variables</strong> — the key quantities in the system, written as nouns or noun phrases. Examples: <em>A&amp;E waiting time, number of support cases, developer capacity, diagnosis rate.</em></li>
-        <li><strong>Links</strong> — arrows connecting variables, each labelled with a polarity. A <strong>positive (+) link</strong> means: when the cause increases, the effect increases (same direction). A <strong>negative (&ndash;) link</strong> means: when the cause increases, the effect decreases (opposite direction).</li>
-        <li><strong>Loop labels</strong> — each closed loop is labelled R (reinforcing) or B (balancing), with a number if there are multiple loops of the same type.</li>
-    </ul>
-
-    <p>Reading a CLD means tracing around a loop and asking: does this loop amplify (R) or stabilise (B)? A loop with an even number of negative links is reinforcing. A loop with an odd number of negative links is balancing.</p>
-
-    <div class="callout blue">
-        <strong>The key question a CLD answers</strong>
-        <p>Not &ldquo;what caused this event?&rdquo; (that is the 5 Whys question) but &ldquo;what feedback structure is causing this <em>pattern</em> to persist?&rdquo; The pattern will continue for as long as the loop structure remains intact. Breaking the loop &mdash; introducing a negative link where there was none, removing a link that was sustaining the loop &mdash; is what changes the pattern. That is a <a href="joiner-levels-of-fix.html">Level 3 intervention</a>.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-loops">Reinforcing and balancing loops</h2>
-
-    <div class="loop-grid">
-        <div class="loop-card reinforcing">
-            <div class="lc-label">&#9650; Reinforcing Loop (R)</div>
-            <h3>Amplifies in either direction</h3>
-            <p>Also called positive feedback. A change in any variable propagates around the loop and returns to amplify the original change. Can drive virtuous circles (growth, improvement compounding) or vicious circles (deterioration accelerating).</p>
-            <p>Produces: exponential growth, exponential decay, or a vicious/virtuous cycle. Breaks when a negative link is introduced into the loop.</p>
-        </div>
-        <div class="loop-card balancing">
-            <div class="lc-label">&#9660; Balancing Loop (B)</div>
-            <h3>Seeks a goal or equilibrium</h3>
-            <p>Also called negative feedback. The loop resists change and pulls the system toward a goal or equilibrium. Not always desirable &mdash; a balancing loop that maintains the system at an undesirable level is the mechanism behind stagnation and resistance to improvement.</p>
-            <p>Produces: goal-seeking behaviour, oscillation (if delay is present). Breaks when the goal is changed or the gap-sensing mechanism is altered.</p>
-        </div>
-    </div>
-
-    <div class="step-integration">
-        <div class="si-label">&#9654; Connection to the 7-Step Improvement Method</div>
-        <p><strong>CLDs belong in Step 3</strong> of the <a href="improvement-method.html">7-step improvement method</a> — root cause analysis. When the <a href="five-whys.html">5 Whys</a> finds a root cause but the problem keeps recurring, the CLD reveals why: a loop is regenerating the root cause faster than the fix addresses it. The CLD turns the root cause question from &ldquo;what caused this event?&rdquo; into &ldquo;what loop structure keeps producing this class of event?&rdquo;</p>
-        <p><strong>They also connect to Step 4</strong> (dominant constraint): the constraint is almost always the variable that, if changed, would break the key loop. Identifying the loop points directly at what the constraint is and why previous interventions at other loop variables did not hold.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-ae">Worked example 1 &mdash; The NHS A&amp;E spiral</h2>
-
-    <p>Bootstrap CUSUM on NHS A&amp;E performance finds four structural stages of decline and not one upward change point across 15 years. The CLD explains why no intervention has produced a sustained improvement: each intervention activates a balancing loop that prevents the system from reaching a genuinely better state, while a reinforcing loop drives progressive deterioration.</p>
-
-    <div class="cld-wrap">
-        <img src="images/ae-cld-diagram.png" alt="NHS A&amp;E causal loop diagram showing B1 balancing loop (nodes 1-2-3-4-1) and R1 reinforcing loop (nodes 1-2-3-4-5-6-1). The red arrow from node 4 short-term improvement to node 5 pressure for structural fix is the key mechanism — every short-term improvement reduces pressure for the structural fix, preventing the system from ever reaching a genuinely better state." style="width:100%;height:auto;border-radius:6px;">
-        <figcaption><strong>B1 Balancing loop (1&ndash;2&ndash;3&ndash;4&ndash;1, odd number of negative links):</strong> A&amp;E waiting time rises &rarr; political pressure builds &rarr; new initiative launched &rarr; short-term improvement occurs &rarr; waiting time falls temporarily &rarr; pressure reduces &rarr; structural fix never made &rarr; waiting time rises again. The loop maintains the system near an undesirable equilibrium. <strong>R1 Reinforcing loop (1&ndash;2&ndash;3&ndash;4&ndash;5&ndash;6&ndash;1, even count of opposite links):</strong> The structural fix path that <em>should</em> operate &mdash; but is blocked by the red arrow. Every short-term improvement reduces the pressure for a structural fix (node 4 &rarr; node 5), so structural change capacity (node 6) is never built. This is why Bootstrap CUSUM finds no upward change point across 15 years and 20+ interventions.</figcaption>
-    </div>
-
-    <p>The key structural feature is that short-term improvement <em>reduces</em> the pressure for structural change. Every time an initiative produces visible short-term results, the political urgency to make the hard structural investment (bed capacity, workforce, primary care access) is reduced. The system settles back to a slightly worse level than before. Over 15 years and 20+ initiatives, this produces the Bootstrap CUSUM signature: four stages of progressive decline, no upward change point.</p>
-
-    <p>The only intervention that breaks this loop is one that produces structural improvement <em>without</em> reducing the pressure for further structural change &mdash; or one that makes the pressure for structural fix independent of short-term performance fluctuations. See <a href="why-nothing-has-worked-nhs-ae-performance.html">the A&amp;E analysis</a> for the Bootstrap CUSUM data.</p>
-
-    <hr>
-
-    <h2 id="section-customisation">Worked example 2 &mdash; The customisation trap</h2>
-
-    <p>The <a href="standardisation-vs-customisation.html">customisation trap</a> is a reinforcing loop that progressively increases the constraint on developer time while appearing to generate revenue at each step. The CLD shows why saying yes to each individual customisation request is rational locally but destructive systemically.</p>
-
-    <div class="cld-wrap">
-        <img src="images/customisation-trap-cld.png" alt="Customisation trap causal loop diagram — R1 reinforcing loop showing six nodes: 1. Customisation requests, 2. Bespoke configs in installed base, 3. Support burden per developer, 4. Developer time for new products, 5. New marketable products with little customisation, 6. Sales pressure to customise to win. Two negative links at nodes 3-4 and 5-6 give an even count of opposite links confirming R1 reinforcing loop." style="width:100%;height:auto;border-radius:6px;">
-        <figcaption><strong>R1 Reinforcing loop (1&ndash;2&ndash;3&ndash;4&ndash;5&ndash;6&ndash;1, even count of opposite links):</strong> Customisation requests increase &rarr; bespoke configs in the installed base grow &rarr; support burden per developer rises &rarr; <em>(negative link)</em> developer time for new products falls &rarr; new marketable products with little customisation fall &rarr; <em>(negative link)</em> sales pressure to customise to win deals rises &rarr; customisation requests increase again. Two negative links, even count = reinforcing. Each cycle around the loop tightens the constraint: more support burden, less development capacity, weaker standard product, more pressure to customise. The loop does not break by itself &mdash; it requires a structural intervention such as a <a href="standardisation-vs-customisation.html">portfolio policy</a> that interrupts the link between sales pressure and customisation requests.</figcaption>
-    </div>
-
-    <p>The Bootstrap CUSUM signature of this loop unchecked is the decay pattern in new contract value and the stagnation pattern in support cases (they stay high rather than falling). Breaking the loop requires introducing a negative link: a <a href="standardisation-vs-customisation.html">portfolio policy</a> that interrupts the connection between sales pressure and customisation requests — replacing it with a connection to a standardised Blueprint offer instead.</p>
-
-    <hr>
-
-    <h2 id="section-dementia">Worked example 3 &mdash; The dementia diagnosis loop</h2>
-
-    <p>The <a href="dementia-diagnosis-rate.html">dementia diagnosis rate</a> shows an S-curve pattern: growth from 2012 to 2016 (reinforcing loop R1 dominant), plateau near the 66% target (balancing loop B1 activates), then collapse in 2020 (COVID special cause) and partial recovery. The CLD explains all three phases.</p>
-
-    <div class="cld-wrap">
-        <img src="images/dementia-causal-loop-2.png" alt="Dementia diagnosis rate causal loop diagram showing R1 reinforcing loop (right side): higher diagnosis rate increases clinical and public awareness, more awareness drives more referrals, more referrals increase the diagnosis rate. B1 balancing loop (left side): higher diagnosis rate reduces political and funding pressure via red arrow, reduced pressure means memory clinic capacity is not sustained, reduced capacity limits referrals and causes the rate to plateau." style="width:100%;height:auto;border-radius:6px;">
-        <figcaption><strong>R1 Reinforcing loop (right, blue arrows):</strong> Higher diagnosis rate &rarr; more clinical &amp; public awareness &rarr; more referrals &rarr; higher diagnosis rate. The self-amplifying loop that drove the rate from 44% to 67% between 2012 and 2016, activated by the Prime Minister&rsquo;s Challenge on Dementia funding and national awareness campaigns. <strong>B1 Balancing loop (left, blue and red arrows):</strong> Higher diagnosis rate &rarr; <em>(red arrow, negative link)</em> political &amp; funding pressure reduces &rarr; memory clinic capacity not sustained &rarr; capacity limits referrals &rarr; diagnosis rate plateaus. The stabilising loop that held the rate near 66% once the political target was reached &mdash; and then prevented recovery after the COVID collapse. Bootstrap CUSUM dates both transitions precisely: upward change point 2013 (R1 activating), plateau change point 2016 (B1 dominating).</figcaption>
-    </div>
-
-    <p>The CLD explains the Bootstrap CUSUM change points precisely. R1 produced the upward change point in 2013 when the PM&rsquo;s Challenge activated the awareness loop. B1 produced the plateau change point in 2016 when political focus reduced. The COVID collapse is a special cause event superimposed on an already-stagnating system. The partial recovery is R1 weakly reactivating, limited by the B1 capacity constraint that was never addressed.</p>
-
-    <hr>
-
-    <h2 id="section-seven-steps">Where CLDs fit in the 7-step method</h2>
-
-    <div class="info-box">
-        <h3>&#128200; CLDs in the improvement method</h3>
-        <p><strong>Step 3 (Root cause)</strong> &mdash; After the 5 Whys identifies the root cause of individual events, draw the CLD to understand why that root cause keeps regenerating. The CLD turns the root cause question from <em>what caused this event?</em> into <em>what loop structure keeps producing this class of event?</em> The loop that keeps regenerating the root cause is the target for the Level 3 fix.</p>
-        <p style="margin-top:10px;"><strong>Step 4 (Dominant constraint)</strong> &mdash; In a CLD with multiple loops, the dominant constraint is the variable whose change would most disrupt the key loop. In the A&amp;E CLD, the constraint is structural capacity &mdash; because it is the only variable that, if addressed, would break the B1 loop by making short-term improvement produce lasting change rather than pressure relief. In the customisation trap, the constraint is the absence of a portfolio policy &mdash; the link that, if added, interrupts the reinforcing loop.</p>
-        <p style="margin-top:10px;"><strong>Step 5 (Complete solution)</strong> &mdash; The <a href="necessary-but-not-sufficient.html">necessary but not sufficient</a> test applied to a CLD: a solution that addresses one variable in a loop but not the loop structure itself is necessary but not sufficient. The complete solution changes the loop &mdash; adds a link, removes a link, or changes the polarity of a link &mdash; so that the pattern changes structurally.</p>
-        <p style="margin-top:10px;"><strong>Step 7 (PDSA &mdash; Study)</strong> &mdash; The CLD predicts what Bootstrap CUSUM should show if the loop is successfully broken. In the customisation trap: if the portfolio policy breaks the R1 loop, we expect a downward change point in support cases and an upward change point in developer output. Pre-specify both. Bootstrap CUSUM delivers the verdict.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-cusum">CLDs and Bootstrap CUSUM</h2>
-
-    <p>The CLD and Bootstrap CUSUM answer complementary questions. The CLD explains the <em>mechanism</em> &mdash; why the pattern persists. Bootstrap CUSUM confirms whether the <em>pattern</em> has structurally changed &mdash; and dates the change precisely.</p>
-
-    <p>Used together, they form a complete analytical framework:</p>
-
-    <ul style="line-height:2.2;">
-        <li><strong><a href="behaviour-over-time.html">BOT chart</a></strong> &rarr; identifies the pattern (stagnation, decay, oscillation)</li>
-        <li><strong>CLD</strong> &rarr; identifies the loop structure producing that pattern</li>
-        <li><strong>Bootstrap CUSUM</strong> &rarr; confirms whether the intervention broke the loop, and dates the break</li>
-    </ul>
-
-    <div class="callout teal">
-        <strong>The CLD predicts where Bootstrap CUSUM change points should NOT appear</strong>
-        <p>This is the less obvious but equally important use of CLDs. A CLD of the A&amp;E system predicts that Bootstrap CUSUM will find no upward change point from any short-term initiative &mdash; because the B1 loop absorbs every short-term improvement before it can produce structural change. This is not a failure of the analytical method. It is a prediction confirmed by 15 years of data. The CLD explains the data. The data validates the CLD. Together they make the case for the structural fix that will actually break the loop.</p>
-    </div>
-
-    <div class="callout blue" style="margin-top:32px;">
-        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
-        <p>Causal Loop Diagrams sit at Step 3 of the <a href="improvement-method.html">7-step improvement method</a>. See <a href="behaviour-over-time.html">Behaviour Over Time</a> for the prior step &mdash; identifying the pattern. See <a href="why-nothing-changes.html">Why Nothing Changes</a> for the broader diagnostic framework that CLDs support.</p>
-    </div>
-
-    <h2>Related concepts</h2>
-    <div class="nav-grid">
-        <a href="behaviour-over-time.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Behaviour Over Time</h3>
-            <p>The prior step — sketching the pattern before mapping the loop structure that produces it.</p>
-        </a>
-        <a href="five-whys.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>The 5 Whys</h3>
-            <p>Analyses individual events. CLDs explain why the system keeps producing those events — the two tools are complementary.</p>
-        </a>
-        <a href="theory-of-constraints.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Theory of Constraints</h3>
-            <p>The dominant constraint in a CLD is the variable whose change would most disrupt the key loop. TOC provides the method for acting on it.</p>
-        </a>
-        <a href="why-nothing-changes.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Why Nothing Changes</h3>
-            <p>The balancing loop that resists improvement — why every intervention produces short-term relief and long-term return to the same level.</p>
-        </a>
-        <a href="improvement-method.html" class="nav-card">
-            <div class="nav-tag">Method</div>
-            <h3>The 7-Step Improvement Method</h3>
-            <p>CLDs belong in Steps 3 and 4 — understanding the loop that keeps producing the problem, and identifying the constraint that would break it.</p>
-        </a>
-        <a href="three-charts-three-stories.html" class="nav-card">
-            <div class="nav-tag">Method</div>
-            <h3>Why Bootstrap CUSUM?</h3>
-            <p>Bootstrap CUSUM confirms whether the CLD-predicted loop was successfully broken — and dates the break precisely.</p>
-        </a>
-    </div>
-
-    <footer class="page-footer">
-        <p><strong>System dynamics and causal loops:</strong> Senge P. <em>The Fifth Discipline.</em> Doubleday, 1990. &nbsp;&middot;&nbsp; Sterman J. <em>Business Dynamics.</em> McGraw-Hill, 2000.</p>
-        <p style="margin-top:8px;"><strong>Causal loop notation:</strong> Richardson G, Pugh A. <em>Introduction to System Dynamics Modelling.</em> Productivity Press, 1981.</p>
-        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
-    </footer>
-</main>
-
+<main class="improvement-page" id="main-content"><h1>Feedback loops: learn from what happens</h1>
+<p><strong>Do people learn what happened after their decisions—and can they act on it?</strong></p>
+<p>Systems thinking examines the relationships between parts of a system. Feedback is one important relationship: the consequences of an action return to influence what happens next.</p>
+<p>For practical improvement, useful feedback means information about what happened reaches the people who can use it to improve their next decision or action. It is slow or incomplete when it arrives too late, leaves out important consequences, reaches the wrong people—or produces a report without an opportunity to respond.</p>
+<section id="one-example"><h2>One example: a promise without the result</h2>
+<p>Imagine sales promising a delivery date but never learning whether it was met or what disruption it caused. Operations fixes each problem locally. Sales continues making similar promises—not necessarily through indifference, but because the consequences never reach the decision.</p>
+<p>Connect actual delivery results and operational difficulties back to the people making promises. Agree how they will use that information with operations to change future commitments, then check the effect on reliability and workload.</p>
+</section>
+<section id="close-the-learning-loop"><h2>Close the learning loop</h2>
+<ol>
+<li><strong>Choose the decision that needs feedback.</strong> What do people need to learn—not simply report?</li>
+<li><strong>Follow the consequences.</strong> Include the customer’s experience and effects on other teams, not just whether an action was completed.</li>
+<li><strong>Get useful information to the right people in time.</strong> Combine measures with specific examples and people’s experience. Make problems safe to report and avoid blame that discourages honest information.</li>
+<li><strong>Agree who can respond.</strong> What can they change? What needs escalation or joint action? Give them the time and authority to use the feedback.</li>
+<li><strong>Check what happened next.</strong> Communicate the response and review whether it helped. Sending information is not the same as closing the loop.</li>
+</ol>
+<p><strong>Timely does not always mean immediate.</strong> Some effects take time to appear. Check early signs and possible harm, but avoid repeated adjustments before the effects of the previous change can be understood. Urgent safety concerns still require action.</p>
+</section>
+<section id="reinforcing-and-balancing"><h2>Feedback can amplify or counteract change</h2>
+<p>In a causal feedback loop, a change influences other things that eventually affect the original change:</p>
+<ul>
+<li><strong>Reinforcing loops amplify a change.</strong> More rework can leave less time to prevent errors, contributing to more errors and still more rework. Improvement can compound too.</li>
+<li><strong>Balancing loops counteract a change or close a gap.</strong> A growing backlog may prompt extra capacity; completed work increases and the backlog falls—if suitable capacity is actually available.</li>
+</ul>
+<p>Reinforcing and balancing do not mean “good” and “bad”. Delays, capacity limits and other influences can alter what happens. These examples are possible mechanisms to investigate, not established explanations of your system.</p>
+</section>
+<details class="conditions" id="sketch-a-causal-loop"><summary>Optional: sketch a causal loop diagram</summary><div class="conditions-body">
+<p>A causal loop diagram is a sketch of proposed relationships—not proof of them.</p>
+<ul>
+<li><strong>Name quantities that can change:</strong> for example, rework, time available for prevention and errors.</li>
+<li><strong>Connect them with arrows:</strong> explain how a change in one might affect another. A + means the effect moves in the same direction; a − means the opposite direction, other things being equal. Neither sign means good or bad.</li>
+<li><strong>Trace the return path:</strong> does it amplify the original change (R, reinforcing) or counteract it (B, balancing)? Mark important delays. A chain without a return path is not a feedback loop.</li>
+<li><strong>Check the explanation:</strong> involve people across the connections, look for evidence for each link and consider alternatives. Use the sketch to make a prediction and guide a test.</li>
+</ul>
+<p>A chart may identify a performance change, but cannot establish that the proposed loop caused it or that an intervention broke the loop.</p>
+</div></details>
+<section><h2>What’s your next useful question?</h2>
+<p><strong>Who needs to learn what happened—and what could they do differently with that knowledge?</strong></p>
+<a class="more" href="why-improvements-fail.html#right-problem">Return to Right problem? →</a><br/>
+<a class="more" href="systems-thinking.html">Look at relationships across the system →</a><br/>
+<a class="more" href="make-change-workable.html#close-the-loop">Close the feedback loop when making a change →</a>
+</section></main>
 <div id="site-footer"></div>
 <script src="assets/site-chrome.js"></script>
 </body>
