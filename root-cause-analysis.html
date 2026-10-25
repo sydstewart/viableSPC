@@ -1,250 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://stepchangeanalysis.com/root-cause-analysis.html">
-    <title>Root Cause Analysis Diagrams — Free Templates, Plus How to Verify the Fix Actually Worked — StepChangeAnalysis.com</title>
-    <meta name="description" content="Free fishbone (Ishikawa), 5 Whys, and fault tree diagram templates — with worked examples. Most RCA guides stop at the diagram. This one shows how to verify with data whether your fix actually changed the outcome.">
-    <meta name="keywords" content="root cause analysis diagram, fishbone diagram template, root cause analysis template, fishbone diagram example, Ishikawa diagram, cause and effect diagram, root cause analysis explained, root cause analysis methods, root cause analysis tools, fault tree analysis, root cause analysis verification, root cause analysis NHS, RCA healthcare">
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-    <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://stepchangeanalysis.com/root-cause-analysis.html" rel="canonical"/>
+<title>Root Cause Analysis: Diagrams, Templates and Practical Investigation — StepChangeAnalysis.com</title>
+<meta content="Investigate what contributed to a problem: five practical steps, fishbone diagrams, a free blank template, worked examples and evidence checks before testing a change." name="description"/>
+<meta content="root cause analysis diagram, fishbone diagram template, root cause analysis template, fishbone diagram example, Ishikawa diagram, cause and effect diagram, root cause analysis explained, root cause analysis methods, root cause analysis tools, fault tree analysis, root cause analysis verification, root cause analysis NHS, RCA healthcare" name="keywords"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag("js", new Date());
         gtag("config", "G-NZLMMS3ZGG");
     </script>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
 
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
+.improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
 
-<div id="site-header"></div>
+.improvement-page h3{font-size:20px;line-height:1.35;color:#002d5b;margin:24px 0 12px}
+.improvement-page nav{margin:24px 0;padding:16px 20px;background:#eef4fa;border:1px solid #cbd5df;border-radius:8px}
+.improvement-page nav ul{margin:8px 0}.improvement-page figure{margin:20px 0}
+.improvement-page .diagram-scroll{overflow-x:auto;border:1px solid #cbd5df;border-radius:8px;background:white;padding:16px}
+.improvement-page .diagram-scroll svg{display:block;width:1260px;max-width:none;height:auto}
+.improvement-page figcaption{font-size:16px;line-height:1.55;margin-top:12px}
+.improvement-page .hint{font-size:15px;color:#4e5965}.improvement-page .table-scroll{overflow-x:auto;margin:20px 0}
+.improvement-page table{border-collapse:collapse;width:100%;font-size:16px;line-height:1.5;min-width:600px}
+.improvement-page th,.improvement-page td{padding:12px;border:1px solid #cbd5df;vertical-align:top;text-align:left}
+.improvement-page th{background:#eef4fa;color:#002d5b}.improvement-page .step-list>li{margin-bottom:20px}
+.improvement-page .check{padding:20px;background:#eef4fa;border-left:4px solid #185fa5;margin:24px 0}
+@media print{#site-header,#site-footer,nav{display:none}.improvement-page .diagram-scroll{overflow:visible}.improvement-page .diagram-scroll svg{width:100%}main.improvement-page{max-width:none;padding:0}.improvement-page details>*{display:block}}
 
-<main class="page-wrap">
-
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Diagnose the Cause?</div>
-    <div class="page-flag">&#128269; Diagnose the Cause?</div>
-    <h1>Root Cause Analysis Diagrams, Templates &mdash; and How to Verify the Fix Actually Worked</h1>
-    <p class="page-intro">Root cause analysis (RCA) is the family of structured techniques used to identify why a problem occurred &mdash; not just what happened, but why the system produced that outcome. This page gives you three ready-to-use diagram types (fishbone, 5 Whys, fault tree) and a free blank template. Most guides to RCA stop there &mdash; diagram drawn, causes listed, job done. This one goes further: finding the root cause is necessary but not sufficient. The fix has to operate at the right level of the system, and it has to be verified with data, not assumed. Two fully worked examples, drawn from real NHS incident data, show what that looks like end to end.</p>
-
-    <div style="background:#f0f4ff;border-left:4px solid #185FA5;padding:14px 18px;margin:18px 0 12px;border-radius:0 6px 6px 0;">
-        <strong style="color:#0C447C;">Root cause analysis (RCA)</strong> &mdash; a structured method for identifying <em>why</em> a problem occurred, not just what happened. RCA uses fishbone diagrams, 5 Whys, and cause mapping to reach system causes rather than stopping at human error &mdash; but the diagram is only half the job. This page includes a free blank fishbone template, worked examples, and the statistical step (Bootstrap CUSUM) most RCA guides leave out: confirming the fix actually changed the outcome.
-        <br><br>
-        <span style="font-size:0.87em;color:#5F5E5A;">Related: <a href="five-whys.html">5 Whys guide</a> &nbsp;&middot;&nbsp; <a href="never-events-wrong-route.html">Never Events worked example</a> &nbsp;&middot;&nbsp; <a href="joiner-levels-of-fix.html">Joiner levels of fix</a> &nbsp;&middot;&nbsp; <a href="moonshot-protocol.html">Moonshot Protocol</a></span>
-    </div>
-
-    <div class="callout blue" style="margin-top:16px;">
-        <strong>Four questions to ask before you call it fixed</strong>
-        <p style="margin-top:6px;">A fishbone diagram or 5 Whys chain gives you a <em>candidate</em> cause. Before you close the investigation, four separate checks need to pass &mdash; and RCA guides typically stop after the first one:</p>
-        <ol style="margin:10px 0 0 18px;line-height:2.0;">
-            <li><strong>Right cause?</strong> Is this actually the root cause &mdash; or a comfortable stopping point? See <a href="making-the-invisible-visible.html">Making the Invisible Visible</a> for the Iceberg model that checks whether you&rsquo;ve reached Mindset, or stopped at Structure.</li>
-            <li><strong>Right intervention?</strong> Is the fix pitched at the level the cause actually sits at? See <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a> &mdash; a Level 3 cause needs a Level 3 fix, not a Level 1 patch.</li>
-            <li><strong>Right measure?</strong> Are you tracking the measure that will actually tell you? See <a href="types-of-measures.html">Types of Measures</a> for process vs outcome measures, <a href="leading-indicators.html">Leading Indicators</a> for choosing what to watch when the outcome is years away, <a href="measurement-gaming.html">Gaming the Measure</a> for why a single-point target gets gamed, and <a href="bright-spots.html">Bright Spots</a> for what a genuine positive outlier looks like.</li>
-            <li><strong>Right analysis &mdash; did it work?</strong> See <a href="interpreting-stepchange-analyzer-output.html">Interpreting StepChange Analyzer Output</a> to run the outcome measure through Bootstrap CUSUM rather than assuming the fix landed, <a href="tampering-and-impatience.html">Tampering &amp; Impatience</a> for why reacting to normal noise makes things worse, and <a href="false-alarms-in-performance-charts.html">False Alarms in Performance Charts</a> for telling a genuine signal from common cause variation.</li>
-        </ol>
-    </div>
-
-    <div class="callout blue" style="margin-top:16px;">
-        <strong>What you&rsquo;ll be able to do after this page</strong>
-        <ul style="margin:10px 0 0 18px;line-height:1.9;">
-            <li>Draw a fishbone (Ishikawa) diagram for any healthcare QI problem, using the free blank template.</li>
-            <li>Choose between fishbone, 5 Whys, fault tree, and other tools &mdash; and know when each works best.</li>
-            <li>Build a cause map that reaches system causes (not just &ldquo;human error&rdquo;).</li>
-            <li>Handle psychological &ldquo;why&rdquo; questions honestly (fear, hierarchy, incentives) without blame.</li>
-            <li>Close the loop: verify with data whether the fix actually changed the outcome.</li>
-        </ul>
-    </div>
-
-    <p style="margin-top:18px;font-size:0.95em;">
-        <a href="#section-blank" style="font-weight:600;">&#8595; Jump straight to the blank fishbone template</a>
-        &nbsp;&middot;&nbsp;
-        <a href="#section-example1" style="font-weight:600;">or the completed NHS example</a>
-        &nbsp;&middot;&nbsp;
-        <a href="#section-nhs" style="font-weight:600;">or why RCA frequently fails in the NHS</a>
-    </p>
-
-    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; July 2026</div>
-
-    <details class="toc-details">
-        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
-        <div class="toc-inner">
-            <ol>
-                <li><a href="#section-what">What root cause analysis is</a></li>
-                <li><a href="#section-tools">The RCA tool family</a></li>
-                <li><a href="#section-fishbone">The fishbone (Ishikawa) diagram</a></li>
-                <li><a href="#section-blank">Blank fishbone template</a></li>
-                <li><a href="#section-example1">NHS example 1 &mdash; wrong-route medication error</a></li>
-                <li><a href="#section-example2">NHS example 2 &mdash; delayed discharge</a></li>
-                <li><a href="#section-five-whys">The 5 Whys diagram</a></li>
-                <li><a href="#section-fault-tree">Fault tree diagram</a></li>
-                <li><a href="#section-when">Which tool or diagram to use when</a></li>
-                <li><a href="#section-necessary">Finding the root cause is necessary but not sufficient</a></li>
-                <li><a href="#section-psychological">Psychological &ldquo;Why&rdquo; frameworks</a></li>
-                <li><a href="#section-nhs">RCA in the NHS &mdash; why it frequently fails to prevent recurrence</a></li>
-                <li><a href="#section-system">Moving from diagram to system cause</a></li>
-                <li><a href="#section-structural-fix">From cause map to structural fix</a></li>
-                <li><a href="#section-verify">Closing the loop with data</a></li>
-            </ol>
-        </div>
-    </details>
-
-    <h2 id="section-what">What root cause analysis is</h2>
-
-    <p>Root cause analysis is a structured investigation methodology applied after an adverse event, near-miss, or persistent problem. Its purpose is to identify the fundamental cause &mdash; the root cause &mdash; that, if addressed, would prevent recurrence. Not the proximate cause (what immediately triggered the event), not the contributing factors (what made it worse), but the underlying condition that made the event possible.</p>
-
-    <p>The distinction matters because most organisations respond to problems at the proximate cause level. A patient falls: the immediate response is to put up the bed rails. A medication error occurs: the immediate response is to retrain the nurse. These responses address the proximate cause &mdash; they may prevent this specific event in this specific way, but they leave the underlying condition unchanged. The next event of the same type will occur through a slightly different proximate cause, and the cycle repeats.</p>
-
-    <div class="callout blue">
-        <strong>Root cause vs proximate cause vs contributing factor</strong>
-        <p><strong>Proximate cause:</strong> The immediate trigger of the event. What happened just before the adverse outcome. A necessary but not sufficient explanation &mdash; it tells you the mechanism but not the cause.</p>
-        <p><strong>Contributing factor:</strong> A condition that increased the likelihood or severity of the event but did not directly cause it. Fatigue, understaffing, poor lighting, time pressure. Important context but not the root cause.</p>
-        <p><strong>Root cause:</strong> The fundamental system condition without which the event either could not have occurred or would have been far less likely. Addressing the root cause prevents recurrence of the entire class of events, not just this specific instance.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-tools">The RCA tool family</h2>
-
-    <p>Several complementary tools exist for root cause analysis. Each is suited to different types of problems and different organisational contexts.</p>
-
-    <div class="tools-grid">
-        <div class="tool-card five-whys">
-            <div class="tc-label">&#9679; Linear chains</div>
-            <h3>The 5 Whys</h3>
-            <p>Ask why five times to trace a linear causal chain from symptom to root cause. Simple, fast, requires no special equipment. Developed by Toyota.</p>
-            <div class="tc-use">Best for: single-cause problems with a clear causal chain. Process failures where one thing led to another.</div>
-            <div class="tc-limit">Limitation: produces a single causal chain. Misses multiple interacting causes. Different teams reach different answers.</div>
-        </div>
-        <div class="tool-card fishbone">
-            <div class="tc-label">&#9679; Multiple causes</div>
-            <h3>Fishbone (Ishikawa) Diagram</h3>
-            <p>Maps multiple categories of potential causes onto a diagram shaped like a fishbone, with the problem at the head. Developed by Kaoru Ishikawa at Kawasaki in the 1960s.</p>
-            <div class="tc-use">Best for: complex problems with multiple contributing causes across different categories. Team-based analysis sessions.</div>
-            <div class="tc-limit">Limitation: generates hypotheses, not confirmed causes. Requires follow-up investigation to verify which branches are active.</div>
-        </div>
-        <div class="tool-card fault-tree">
-            <div class="tc-label">&#9679; System failures</div>
-            <h3>Fault Tree Analysis (FTA)</h3>
-            <p>Top-down logical diagram that maps all possible combinations of failures that could produce an undesired top event. Uses Boolean logic gates (AND, OR). Standard in aerospace and nuclear industries.</p>
-            <div class="tc-use">Best for: safety-critical systems where all failure pathways must be identified and quantified. High-consequence, low-frequency events.</div>
-            <div class="tc-limit">Limitation: complex and time-intensive. Requires detailed system knowledge. Overkill for most healthcare improvement work.</div>
-        </div>
-        <div class="tool-card swarm">
-            <div class="tc-label">&#9679; Near-misses</div>
-            <h3>Significant Event Analysis (SEA)</h3>
-            <p>A reflective, team-based review of significant events &mdash; including near-misses and good outcomes &mdash; to learn from what happened. Standard in UK primary care.</p>
-            <div class="tc-use">Best for: primary care and community settings. Learning from both adverse events and positive outcomes. Building a culture of reflection.</div>
-            <div class="tc-limit">Limitation: variable quality depending on team facilitation skills. Can become a tick-box exercise without strong facilitation.</div>
-        </div>
-        <div class="tool-card">
-            <div class="tc-label">&#9679; Structural contradictions</div>
-            <h3>The <a href="moonshot-protocol.html#section-worked-example">Moonshot Protocol</a></h3>
-            <p>A three-phase, ten-step process for the cases where the four tools above correctly identify a cause, but the fix has never stuck because two requirements appear to conflict. Dissolves the contradiction with TRIZ separation rather than compromising.</p>
-            <div class="tc-use">Best for: recurring events where 5 Whys or a fishbone has already found a structural cause, but the obvious fix is blocked by a genuine trade-off &mdash; safety versus flexibility, speed versus thoroughness.</div>
-            <div class="tc-limit">Not a starting tool. Use after a lighter technique has found the cause and the rule of three below confirms a full investigation is warranted.</div>
-        </div>
-    </div>
-
-    <hr>
-
-    <h2 id="section-fishbone">The fishbone (Ishikawa) diagram</h2>
-
-    <p>The fishbone diagram &mdash; also called the Ishikawa diagram or cause-and-effect diagram &mdash; was developed by Kaoru Ishikawa at Kawasaki Heavy Industries in the 1960s and is now used across healthcare, manufacturing, and service industries worldwide. The diagram looks like a fish skeleton: the problem (effect) is the head; the bones are categories of causes; the sub-bones are specific causes within each category.</p>
-
-    <div class="fishbone-wrap">
-        <svg viewBox="0 0 720 320" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
-            <!-- Spine -->
-            <line x1="80" y1="160" x2="620" y2="160" stroke="#002d5b" stroke-width="3"/>
-            <!-- Problem box -->
-            <rect x="620" y="130" width="90" height="60" rx="6" fill="#002d5b"/>
-            <text x="665" y="153" text-anchor="middle" fill="white" font-size="10" font-weight="700">PROBLEM</text>
-            <text x="665" y="167" text-anchor="middle" fill="white" font-size="10" font-weight="700">STATEMENT</text>
-            <text x="665" y="181" text-anchor="middle" fill="#93c5fd" font-size="9">Effect</text>
-            <!-- Arrow head -->
-            <polygon points="618,155 608,148 608,162" fill="#002d5b"/>
-
-            <!-- Top branches -->
-            <line x1="180" y1="160" x2="240" y2="80" stroke="#0e7490" stroke-width="2.5"/>
-            <rect x="148" y="55" width="90" height="32" rx="5" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
-            <text x="193" y="68" text-anchor="middle" fill="#0e7490" font-size="11" font-weight="700">People</text>
-            <text x="193" y="82" text-anchor="middle" fill="#0e7490" font-size="9">Skills, training, staffing</text>
-            <line x1="200" y1="135" x2="240" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="220" y1="148" x2="240" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
-
-            <line x1="340" y1="160" x2="380" y2="80" stroke="#198754" stroke-width="2.5"/>
-            <rect x="308" y="55" width="90" height="32" rx="5" fill="#f0fdf4" stroke="#198754" stroke-width="2"/>
-            <text x="353" y="68" text-anchor="middle" fill="#198754" font-size="11" font-weight="700">Process</text>
-            <text x="353" y="82" text-anchor="middle" fill="#198754" font-size="9">Steps, procedures</text>
-            <line x1="355" y1="135" x2="380" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="365" y1="148" x2="380" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
-
-            <line x1="500" y1="160" x2="530" y2="80" stroke="#7c3aed" stroke-width="2.5"/>
-            <rect x="468" y="55" width="90" height="32" rx="5" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
-            <text x="513" y="68" text-anchor="middle" fill="#7c3aed" font-size="11" font-weight="700">Equipment</text>
-            <text x="513" y="82" text-anchor="middle" fill="#7c3aed" font-size="9">Tools, technology</text>
-            <line x1="510" y1="135" x2="530" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="518" y1="148" x2="530" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
-
-            <!-- Bottom branches -->
-            <line x1="180" y1="160" x2="240" y2="240" stroke="#e67e22" stroke-width="2.5"/>
-            <rect x="148" y="235" width="90" height="32" rx="5" fill="#fff8f0" stroke="#e67e22" stroke-width="2"/>
-            <text x="193" y="248" text-anchor="middle" fill="#e67e22" font-size="11" font-weight="700">Environment</text>
-            <text x="193" y="262" text-anchor="middle" fill="#e67e22" font-size="9">Workplace, culture</text>
-            <line x1="200" y1="185" x2="240" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="220" y1="172" x2="240" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
-
-            <line x1="340" y1="160" x2="380" y2="240" stroke="#c0392b" stroke-width="2.5"/>
-            <rect x="308" y="235" width="90" height="32" rx="5" fill="#fff5f5" stroke="#c0392b" stroke-width="2"/>
-            <text x="353" y="248" text-anchor="middle" fill="#c0392b" font-size="11" font-weight="700">Management</text>
-            <text x="353" y="262" text-anchor="middle" fill="#c0392b" font-size="9">Decisions, resources</text>
-            <line x1="355" y1="185" x2="380" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="365" y1="172" x2="380" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
-
-            <line x1="500" y1="160" x2="530" y2="240" stroke="#0056b3" stroke-width="2.5"/>
-            <rect x="468" y="235" width="90" height="32" rx="5" fill="#e9f2ff" stroke="#0056b3" stroke-width="2"/>
-            <text x="513" y="248" text-anchor="middle" fill="#0056b3" font-size="11" font-weight="700">Materials</text>
-            <text x="513" y="262" text-anchor="middle" fill="#0056b3" font-size="9">Supplies, information</text>
-            <line x1="510" y1="185" x2="530" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="518" y1="172" x2="530" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
-
-            <text x="70" y="155" text-anchor="middle" fill="#64748b" font-size="10">Start</text>
-            <text x="70" y="168" text-anchor="middle" fill="#64748b" font-size="10">here</text>
-
-            <text x="360" y="16" text-anchor="middle" fill="#002d5b" font-size="12" font-weight="700">Fishbone (Ishikawa) Diagram &mdash; 6M Categories</text>
-            <text x="360" y="30" text-anchor="middle" fill="#64748b" font-size="10">Each branch is a category of potential causes. Sub-bones are specific causes within that category.</text>
-
-            <text x="80" y="305" fill="#64748b" font-size="9">&#9650; Top branches: above the spine &nbsp;&nbsp; &#9660; Bottom branches: below the spine &nbsp;&nbsp; Each sub-bone is a specific hypothesis to investigate</text>
-        </svg>
-    </div>
-
-    <h3>The 6M categories</h3>
-    <p>The most widely used fishbone structure in manufacturing and healthcare uses six categories &mdash; the 6Ms. In healthcare the categories are sometimes adapted to the 4Ps (People, Process, Place, Policy) or to specific clinical frameworks.</p>
-
-    <div style="overflow-x:auto; margin:16px 0;">
-        <table class="compare-table">
-            <thead>
-                <tr><th>Category</th><th>Manufacturing original</th><th>Healthcare equivalent</th><th>Examples of causes</th></tr>
-            </thead>
-            <tbody>
-                <tr><td><strong>Man / People</strong></td><td>Operator skills, training</td><td>Staff knowledge, fatigue, communication</td><td>Insufficient training, unclear roles, handover failures</td></tr>
-                <tr><td><strong>Machine / Equipment</strong></td><td>Tools, machinery</td><td>Medical devices, IT systems, connectors</td><td>Equipment not available, alert fatigue, incompatible connectors</td></tr>
-                <tr><td><strong>Method / Process</strong></td><td>Procedures, work instructions</td><td>Clinical protocols, care pathways</td><td>No standard procedure, procedure not followed, outdated guideline</td></tr>
-                <tr><td><strong>Material</strong></td><td>Raw materials, components</td><td>Medications, supplies, patient information</td><td>Look-alike/sound-alike drugs, missing information, supply chain failures</td></tr>
-                <tr><td><strong>Measurement</strong></td><td>Inspection methods</td><td>Monitoring, audit, reporting</td><td>No monitoring system, measurement error, metric not tracked</td></tr>
-                <tr><td><strong>Mother Nature / Environment</strong></td><td>Temperature, humidity</td><td>Ward culture, staffing levels, time pressure</td><td>Understaffing, interruptions, normalisation of deviance</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <hr>
-
-    <h2 id="section-blank">Blank fishbone template</h2>
-
-    <div style="margin:20px 0 28px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;">
-        <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:12px;text-align:center;">Fishbone (Ishikawa) diagram &mdash; blank template</div>
-        <svg width="100%" viewBox="0 0 720 340" role="img" xmlns="http://www.w3.org/2000/svg">
+.improvement-page .diagram-scroll{box-sizing:border-box;width:calc(100vw - 48px);max-width:1292px;position:relative;left:50%;transform:translateX(-50%)}
+.improvement-page .diagram-scroll svg{width:100%;min-width:1200px}
+@media(max-width:600px){.improvement-page .diagram-scroll{width:100%;left:0;transform:none}.improvement-page .table-scroll table,.improvement-page .table-scroll tbody,.improvement-page .table-scroll tr,.improvement-page .table-scroll td{display:block;min-width:0;width:auto}.improvement-page .table-scroll thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.improvement-page .table-scroll tr{border:1px solid #cbd5df;border-radius:8px;margin-bottom:16px;padding:8px;background:white}.improvement-page .table-scroll td{border:0;padding:8px}.improvement-page .table-scroll td::before{content:attr(data-label);display:block;color:#002d5b;font-weight:700;margin-bottom:4px}}
+</style><style>
+.improvement-page .resource .conditions-body{padding:0 16px 16px}
+.improvement-page .resource{margin:12px 0}.improvement-page .resource summary{font-size:17px}
+.improvement-page .diagram-overview{background:white;padding:12px;border:1px solid #cbd5df;border-radius:8px}
+.improvement-page .diagram-overview svg{display:block;width:100%;height:auto}
+.improvement-page .diagram-actions{font-size:16px;margin:12px 0}
+.improvement-page .text-button{font:inherit;border:0;background:none;color:#185fa5;padding:8px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;min-height:44px}
+.improvement-page button:focus-visible,.diagram-viewer button:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.diagram-viewer{margin:auto;box-sizing:border-box;width:calc(100vw - 32px);max-width:1400px;max-height:calc(100dvh - 32px);padding:20px;border:1px solid #8ca7c1;border-radius:8px;background:#fff;color:#2c2c2b;font:16px/1.5 system-ui,sans-serif}
+.diagram-viewer::backdrop{background:rgba(0,25,50,.65)}
+.diagram-viewer .viewer-top{display:flex;gap:16px;justify-content:space-between;align-items:center;margin-bottom:12px}
+.diagram-viewer h2{font:700 20px/1.3 system-ui,sans-serif;margin:0;color:#002d5b}
+.diagram-viewer button{font:inherit;min-height:44px;padding:8px 16px;border:1px solid #8ca7c1;border-radius:6px;cursor:pointer;background:#eef4fa;color:#002d5b}
+.diagram-viewer .viewer-canvas{overflow:auto;max-height:calc(100dvh - 220px);border:1px solid #cbd5df;border-radius:6px;background:#fff}
+.diagram-viewer .viewer-canvas svg{display:block;min-width:1200px;width:1200px;height:auto}
+.diagram-viewer .viewer-help{font-size:15px;margin:0 0 12px}.diagram-viewer .viewer-download{display:inline-block;margin-top:12px;color:#185fa5;min-height:44px}
+@media(max-width:600px){.diagram-viewer{padding:16px}.diagram-viewer .viewer-top{align-items:flex-start}.diagram-viewer h2{font-size:18px}.improvement-page .resource summary{font-size:16px}}
+</style></head>
+<body><div id="site-header"></div><main class="improvement-page" id="main-content"><h1>Root cause analysis: investigate causes with evidence</h1>
+<p><strong>What contributed to this problem—and what evidence supports that explanation?</strong></p>
+<p>Root cause analysis (RCA) helps investigate the conditions behind an event or recurring problem. There may be several interacting contributors, not one definitive “root cause”. A diagram organises possible explanations; it does not prove them.</p>
+<nav aria-label="Page shortcuts"><a href="#diagrams-and-templates"><strong>Jump to diagrams and templates →</strong></a> · <a href="#section-blank">Blank fishbone template →</a></nav>
+<section id="investigation-guide"><h2>Five practical investigation steps</h2>
+<ol class="step-list"><li id="section-what"><strong>Define the problem.</strong> Establish what happened, where and when, and how it differed from what was expected. Build a timeline without assuming a cause.</li>
+<li id="section-psychological"><strong>Gather evidence with the people involved.</strong> Review records, observe work and listen across team boundaries. Make it safe to explain what made sense at the time.</li>
+<li><strong>Choose a useful tool.</strong> Use a fishbone to organise possible contributors, <a href="five-whys.html">5 Whys</a> to explore a causal path, or specialist analysis where the risk and question justify it.</li>
+<li id="section-system"><strong>Check explanations.</strong> Separate observations, assumptions and unanswered questions. Look for supporting and conflicting evidence. Branch when several contributors are plausible; pause when information is missing.<p style="margin-top:12px"><strong>Have we stopped at the obvious explanation?</strong> “Someone made a mistake” or “the procedure wasn’t followed” may describe what happened without explaining the conditions behind it. Would another person face the same difficulty? <a href="joiner-levels-of-fix.html">Explore Joiner’s levels of fix →</a> Follow the evidence—not a prescribed level or a search for someone to blame.</p></li>
+<li><strong>Choose and test a change.</strong> Address a supported explanation. Agree responsibilities, expected effects, measures and a review date. Check implementation and possible harm, then adapt.</li></ol>
+<p id="section-when"><strong>Respond according to risk—not a count of occurrences.</strong> Serious concerns may warrant action and investigation after one event. Three occurrences do not confirm common-cause variation.</p></section>
+<section id="diagrams-and-templates"><h2>Diagrams and templates</h2>
+<p>Open only what you need. Full-size views and SVG downloads are built into this page. The examples are <strong>illustrative hypotheses, not verified incident findings or clinical recommendations</strong>.</p>
+<details class="conditions resource" id="section-blank"><summary>Blank fishbone template</summary><div class="conditions-body"><p>Put a specific problem in the head box. Add possible contributors to the branches; adapt the categories to the work. Mark what is supported, assumed or unknown and assign evidence checks.</p><figure><p class="diagram-actions"><button class="text-button" type="button" data-open-diagram="diagram-1">Open full-size diagram</button> · <a data-download-diagram="diagram-1" download="blank-fishbone-template.svg" href="#section-blank">Download SVG</a></p><div class="diagram-overview"><svg id="diagram-1" tabindex="0" width="100%" viewBox="0 0 720 340" role="img" xmlns="http://www.w3.org/2000/svg">
         <title>Blank fishbone root cause analysis diagram template with six categories</title>
         <defs>
             <marker id="arrowf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
@@ -290,40 +124,81 @@
         <line x1="340" y1="170" x2="390" y2="260" stroke="#5F5E5A" stroke-width="1.8"/>
         <rect x="285" y="256" width="110" height="40" rx="6" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.2"/>
         <text x="340" y="272" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#2C2C2A">Materials</text>
-        <text x="340" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">drugs &middot; supplies &middot; information</text>
+        <text x="340" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">supplies · information</text>
         <line x1="355" y1="202" x2="385" y2="232" stroke="#5F5E5A" stroke-width="1" stroke-dasharray="3 2"/>
         <line x1="365" y1="190" x2="387" y2="216" stroke="#5F5E5A" stroke-width="1" stroke-dasharray="3 2"/>
 
         <line x1="510" y1="170" x2="560" y2="260" stroke="#c0392b" stroke-width="1.8"/>
         <rect x="455" y="256" width="110" height="40" rx="6" fill="#FDECEA" stroke="#c0392b" stroke-width="1.2"/>
         <text x="510" y="272" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#a02020">Management</text>
-        <text x="510" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b">decisions &middot; policy &middot; oversight</text>
+        <text x="510" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b">policy · oversight</text>
         <line x1="525" y1="202" x2="555" y2="232" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 2"/>
         <line x1="535" y1="190" x2="557" y2="216" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 2"/>
 
         <text x="40" y="174" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#5F5E5A">causes</text>
-        </svg>
-        <p style="font-family:system-ui,sans-serif;font-size:0.78em;color:var(--muted);text-align:center;margin:8px 0 0;">Each bone = a category of causes. Sub-branches (dashed) = specific causes within that category. The problem (effect) goes in the head box on the right.</p>
-    </div>
+        </svg></div><figcaption>Six adaptable categories. Download to print or edit in a compatible vector editor; this is not an online fill-in form.</figcaption></figure></div></details><details class="conditions resource" id="section-fishbone"><summary>How a fishbone diagram works</summary><div class="conditions-body"><p>Branches group possible contributors across people, processes, equipment, environment, management and materials. They are prompts—not a ranking of importance. A factor may belong in more than one category.</p><figure><p class="diagram-actions"><button class="text-button" type="button" data-open-diagram="diagram-0">Open full-size diagram</button> · <a data-download-diagram="diagram-0" download="fishbone-categories.svg" href="#section-blank">Download SVG</a></p><div class="diagram-overview"><svg id="diagram-0" tabindex="0" viewBox="0 0 720 320" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+            <!-- Spine -->
+            <line x1="80" y1="160" x2="620" y2="160" stroke="#002d5b" stroke-width="3"/>
+            <!-- Problem box -->
+            <rect x="620" y="130" width="90" height="60" rx="6" fill="#002d5b"/>
+            <text x="665" y="153" text-anchor="middle" fill="white" font-size="10" font-weight="700">PROBLEM</text>
+            <text x="665" y="167" text-anchor="middle" fill="white" font-size="10" font-weight="700">STATEMENT</text>
+            <text x="665" y="181" text-anchor="middle" fill="#93c5fd" font-size="9">Effect</text>
+            <!-- Arrow head -->
+            <polygon points="618,155 608,148 608,162" fill="#002d5b"/>
 
-    <div class="callout blue">
-        <strong>How to use this template</strong>
-        <ol style="margin:10px 0 0 18px;line-height:2.0;">
-            <li><strong>Write the problem clearly in the head box</strong> &mdash; be specific. &ldquo;Delayed discharge&rdquo; is better than &ldquo;flow problems.&rdquo; &ldquo;Wrong-route medication administered to patient X on ward Y&rdquo; is better than &ldquo;medication error.&rdquo;</li>
-            <li><strong>Brainstorm causes in each category</strong> &mdash; write on the sub-branches. Include everything that might be contributing, not just the obvious ones.</li>
-            <li><strong>Ask &ldquo;why?&rdquo; at least twice for each cause</strong> &mdash; the first answer is usually a symptom. The second or third answer starts to reach the system.</li>
-            <li><strong>Circle the root causes</strong> &mdash; the causes that, if addressed, would prevent recurrence. These are usually in Management, Environment, or Process &mdash; not in People.</li>
-            <li><strong>Verify with data</strong> &mdash; the diagram generates hypotheses. Bootstrap CUSUM on the outcome metric after the fix confirms whether a hypothesis was correct.</li>
-        </ol>
-    </div>
+            <!-- Top branches -->
+            <line x1="180" y1="160" x2="240" y2="80" stroke="#0e7490" stroke-width="2.5"/>
+            <rect x="148" y="55" width="90" height="32" rx="5" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
+            <text x="193" y="68" text-anchor="middle" fill="#0e7490" font-size="11" font-weight="700">People</text>
+            <text x="193" y="82" text-anchor="middle" fill="#0e7490" font-size="9">Skills, staffing</text>
+            <line x1="200" y1="135" x2="240" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="220" y1="148" x2="240" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
 
-    <hr>
+            <line x1="340" y1="160" x2="380" y2="80" stroke="#198754" stroke-width="2.5"/>
+            <rect x="308" y="55" width="90" height="32" rx="5" fill="#f0fdf4" stroke="#198754" stroke-width="2"/>
+            <text x="353" y="68" text-anchor="middle" fill="#198754" font-size="11" font-weight="700">Process</text>
+            <text x="353" y="82" text-anchor="middle" fill="#198754" font-size="9">Steps, procedures</text>
+            <line x1="355" y1="135" x2="380" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="365" y1="148" x2="380" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
 
-    <h2 id="section-example1">NHS example 1 &mdash; wrong-route medication error (never event)</h2>
+            <line x1="500" y1="160" x2="530" y2="80" stroke="#7c3aed" stroke-width="2.5"/>
+            <rect x="468" y="55" width="90" height="32" rx="5" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+            <text x="513" y="68" text-anchor="middle" fill="#7c3aed" font-size="11" font-weight="700">Equipment</text>
+            <text x="513" y="82" text-anchor="middle" fill="#7c3aed" font-size="9">Tools, technology</text>
+            <line x1="510" y1="135" x2="530" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="518" y1="148" x2="530" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
 
-    <div style="margin:20px 0 28px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;">
-        <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#c0392b;margin-bottom:12px;text-align:center;">Fishbone example &mdash; wrong-route medication administration (Never Event)</div>
-        <svg width="100%" viewBox="0 0 720 360" role="img" xmlns="http://www.w3.org/2000/svg">
+            <!-- Bottom branches -->
+            <line x1="180" y1="160" x2="240" y2="240" stroke="#e67e22" stroke-width="2.5"/>
+            <rect x="148" y="235" width="90" height="32" rx="5" fill="#fff8f0" stroke="#e67e22" stroke-width="2"/>
+            <text x="193" y="248" text-anchor="middle" fill="#e67e22" font-size="11" font-weight="700">Environment</text>
+            <text x="193" y="262" text-anchor="middle" fill="#e67e22" font-size="9">Workplace, culture</text>
+            <line x1="200" y1="185" x2="240" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="220" y1="172" x2="240" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <line x1="340" y1="160" x2="380" y2="240" stroke="#c0392b" stroke-width="2.5"/>
+            <rect x="308" y="235" width="90" height="32" rx="5" fill="#fff5f5" stroke="#c0392b" stroke-width="2"/>
+            <text x="353" y="248" text-anchor="middle" fill="#c0392b" font-size="11" font-weight="700">Management</text>
+            <text x="353" y="262" text-anchor="middle" fill="#c0392b" font-size="9">Rules, resources</text>
+            <line x1="355" y1="185" x2="380" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="365" y1="172" x2="380" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <line x1="500" y1="160" x2="530" y2="240" stroke="#0056b3" stroke-width="2.5"/>
+            <rect x="468" y="235" width="90" height="32" rx="5" fill="#e9f2ff" stroke="#0056b3" stroke-width="2"/>
+            <text x="513" y="248" text-anchor="middle" fill="#0056b3" font-size="11" font-weight="700">Materials</text>
+            <text x="513" y="262" text-anchor="middle" fill="#0056b3" font-size="9">Supplies, data</text>
+            <line x1="510" y1="185" x2="530" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="518" y1="172" x2="530" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
+
+            <text x="70" y="155" text-anchor="middle" fill="#64748b" font-size="10">Start</text>
+            <text x="70" y="168" text-anchor="middle" fill="#64748b" font-size="10">here</text>
+
+            <text x="360" y="16" text-anchor="middle" fill="#002d5b" font-size="12" font-weight="700">Fishbone (Ishikawa) Diagram &mdash; Example Categories</text>
+            <text x="360" y="30" text-anchor="middle" fill="#64748b" font-size="10">Each branch is a category of potential causes. Sub-bones are specific causes within that category.</text>
+
+            <text x="80" y="305" fill="#64748b" font-size="9">&#9650; Top branches: above the spine &nbsp;&nbsp; &#9660; Bottom branches: below the spine &nbsp;&nbsp; Each sub-bone is a specific hypothesis to investigate</text>
+        </svg></div><figcaption>Each sub-branch is a possible contributor to investigate, not an established cause.</figcaption></figure></div></details><details class="conditions resource" id="section-example1"><summary>Worked example: wrong-route medication event</summary><div class="conditions-body"><figure><p class="diagram-actions"><button class="text-button" type="button" data-open-diagram="diagram-2">Open full-size diagram</button> · <a data-download-diagram="diagram-2" download="fishbone-medication-example.svg" href="#section-blank">Download SVG</a></p><div class="diagram-overview"><svg id="diagram-2" tabindex="0" width="100%" viewBox="0 0 720 360" role="img" xmlns="http://www.w3.org/2000/svg">
         <title>Completed fishbone diagram for wrong-route medication never event</title>
         <line x1="60" y1="180" x2="610" y2="180" stroke="#c0392b" stroke-width="2.5"/>
         <polygon points="608,174 622,180 608,186" fill="#c0392b"/>
@@ -373,24 +248,7 @@
         <line x1="532" y1="200" x2="549" y2="226" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 2"/>
 
         <text x="36" y="184" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">causes</text>
-        </svg>
-        <p style="font-family:system-ui,sans-serif;font-size:0.78em;color:var(--muted);text-align:center;margin:8px 0 0;">The root causes (RC) are in Management &mdash; incomplete NRFit rollout and absence of a mandatory double-check policy. People and Environment contributed but are not root causes: addressing them alone would not prevent recurrence.</p>
-    </div>
-
-    <div class="callout blue">
-        <strong>Why &ldquo;locum unfamiliar with ward&rdquo; is not a root cause</strong>
-        <p>The most common mistake in RCA is stopping at the person. &ldquo;Locum unfamiliar with ward&rdquo; describes a contributing factor but not the root cause. The root cause question is: <em>what system feature allowed a locum unfamiliar with the ward to administer medication via the wrong route without any check catching it?</em></p>
-        <p style="margin-top:8px;">The answer is in Management: NRFit connectors &mdash; which make wrong-route administration physically impossible &mdash; had not been fully rolled out, and no mandatory independent double-check policy existed. Address the system, and it doesn&rsquo;t matter whether the nurse is familiar with the ward or not.</p>
-        <p style="margin-top:8px;">See <a href="never-events-wrong-route.html">Never Events: Wrong-Route Medication</a> for the full Bootstrap CUSUM analysis of whether NHS Never Event programmes have produced structural change.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-example2">NHS example 2 &mdash; delayed discharge</h2>
-
-    <div style="margin:20px 0 28px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;">
-        <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0F6E56;margin-bottom:12px;text-align:center;">Fishbone example &mdash; patient discharge delayed beyond clinical readiness</div>
-        <svg width="100%" viewBox="0 0 720 360" role="img" xmlns="http://www.w3.org/2000/svg">
+        </svg></div><figcaption>Possible contributors span familiarity, checking, equipment, workload and oversight. No branch establishes a root cause.</figcaption></figure><p><strong>Investigate:</strong> reconstruct the sequence using records and accounts. Check the actual equipment, safeguards, information and working conditions. Do not infer a policy failure from the event alone.</p><p><strong>Test:</strong> use appropriate clinical and safety expertise to develop a safeguard for a supported vulnerability. Check reliable use, remaining risks and unintended effects.</p></div></details><details class="conditions resource" id="section-example2"><summary>Worked example: delayed discharge</summary><div class="conditions-body"><figure><p class="diagram-actions"><button class="text-button" type="button" data-open-diagram="diagram-3">Open full-size diagram</button> · <a data-download-diagram="diagram-3" download="fishbone-discharge-example.svg" href="#section-blank">Download SVG</a></p><div class="diagram-overview"><svg id="diagram-3" tabindex="0" width="100%" viewBox="0 0 720 360" role="img" xmlns="http://www.w3.org/2000/svg">
         <title>Completed fishbone diagram for delayed hospital discharge</title>
         <line x1="60" y1="180" x2="610" y2="180" stroke="#0F6E56" stroke-width="2.5"/>
         <polygon points="608,174 622,180 608,186" fill="#0F6E56"/>
@@ -403,7 +261,7 @@
         <rect x="90" y="52" width="145" height="48" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
         <text x="162" y="71" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#0C447C">People</text>
         <text x="162" y="86" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#185FA5">Family not involved in planning</text>
-        <text x="162" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#185FA5">No named discharge coordinator</text>
+        <text x="162" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#185FA5">No named coordinator</text>
         <line x1="168" y1="148" x2="192" y2="120" stroke="#185FA5" stroke-width="1" stroke-dasharray="3 2"/>
 
         <line x1="340" y1="180" x2="380" y2="95" stroke="#534AB7" stroke-width="1.8"/>
@@ -435,19 +293,7 @@
         <line x1="522" y1="212" x2="548" y2="240" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 2"/>
 
         <text x="36" y="184" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">causes</text>
-        </svg>
-        <p style="font-family:system-ui,sans-serif;font-size:0.78em;color:var(--muted);text-align:center;margin:8px 0 0;">Two constraint types visible: internal (Process, Management) and external (System boundary &mdash; social care). Addressing only internal causes will improve flow but not eliminate the external constraint. See <a href="bright-spot-gloucestershire.html">Gloucestershire Bright Spot</a> for how both were addressed simultaneously.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-five-whys">The 5 Whys diagram</h2>
-
-    <p>The 5 Whys is a linear cause chain: you ask &ldquo;why?&rdquo; repeatedly until you reach the root cause. It is simpler than the fishbone and works well for straightforward single-cause problems. It works less well for complex multi-cause problems where several independent chains lead to the same outcome &mdash; a fishbone handles these better.</p>
-
-    <div style="margin:20px 0 28px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:20px;overflow-x:auto;">
-        <div style="font-family:system-ui,sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--brand-mid);margin-bottom:12px;text-align:center;">5 Whys diagram &mdash; wrong-route medication example</div>
-        <svg width="100%" viewBox="0 0 680 180" role="img" xmlns="http://www.w3.org/2000/svg">
+        </svg></div><figcaption>Possible contributors span the hospital and receiving services. The absence of a named organisational model does not establish the cause.</figcaption></figure><p><strong>Investigate:</strong> build a timeline of readiness, decisions, medication, transport and support arrangements. Compare cases and involve receiving services; do not assume all delay is internal—or external.</p><p><strong>Test:</strong> address a supported source of waiting. Check safety, readmissions, workload and effects on receiving services alongside discharge time.</p></div></details><details class="conditions resource" id="section-five-whys"><summary>A 5 Whys diagram: one possible path</summary><div class="conditions-body"><figure><p class="diagram-actions"><button class="text-button" type="button" data-open-diagram="diagram-4">Open full-size diagram</button> · <a data-download-diagram="diagram-4" download="five-whys-medication-example.svg" href="#section-blank">Download SVG</a></p><div class="diagram-overview"><svg id="diagram-4" tabindex="0" width="100%" viewBox="0 0 680 180" role="img" xmlns="http://www.w3.org/2000/svg">
         <title>5 Whys diagram showing chain from problem to root cause</title>
         <defs>
             <marker id="arrow5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
@@ -488,286 +334,43 @@
         <text x="515" y="84" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#185FA5">Why?</text>
 
         <rect x="527" y="55" width="148" height="70" rx="6" fill="#001a3a" stroke="#185FA5" stroke-width="1.5"/>
-        <text x="601" y="78" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="white">Root cause</text>
+        <text x="601" y="78" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="white">To check</text>
         <text x="601" y="92" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94b8d4">No executive</text>
         <text x="601" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94b8d4">accountable for</text>
         <text x="601" y="116" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94b8d4">NRFit completion</text>
-        </svg>
-        <p style="font-family:system-ui,sans-serif;font-size:0.78em;color:var(--muted);text-align:center;margin:8px 0 0;">The 5 Whys traces one causal chain. The root cause is a management system failure (no executive accountable), not a human error.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-fault-tree">Fault tree diagram</h2>
-
-    <p>The fault tree diagram works top-down: starting from the failure event, it maps the combinations of conditions that could produce it using AND/OR logic gates. It is most useful for safety-critical systems where you need to identify all possible pathways to a failure, not just the most likely one. In healthcare, it is used in FMEA (Failure Mode and Effects Analysis) and safety case development.</p>
-
-    <p>For most QI improvement work, the fishbone or 5 Whys is more practical. Use fault tree analysis when you need to be exhaustive about failure pathways rather than when you need to identify the single most important cause.</p>
-
-    <hr>
-
-    <h2 id="section-when">Which tool or diagram to use when</h2>
-
-    <p>Not every recurring problem warrants a full investigation. The rule of three is the practical trigger for deciding whether to log and watch, run a light check, or commit to the full structural process below &mdash; including, where the cause turns out to be a deep structural contradiction, the <a href="moonshot-protocol.html#section-when">Moonshot Protocol</a>.</p>
-
-    <div class="callout blue">
-        <strong>The rule of three</strong>
-        <ul style="margin:8px 0 0 18px;line-height:2.0;">
-            <li><strong>First occurrence:</strong> Observe and log. Apply a <a href="joiner-levels-of-fix.html">Joiner Level 1</a> containment fix if needed. Do not launch a full investigation &mdash; this may be special cause variation, a one-off.</li>
-            <li><strong>Second occurrence:</strong> Preliminary audit &mdash; run <a href="five-whys.html">5 Whys</a> steps 1&ndash;2 only. Check whether the two events share the same structural trigger.</li>
-            <li><strong>Third occurrence:</strong> Common cause confirmed. The system is producing the event. Launch a full structural investigation &mdash; the fishbone or 5 Whys techniques above, and if a genuine contradiction is blocking the fix, the <a href="moonshot-protocol.html#section-when">Moonshot Protocol</a>.</li>
-        </ul>
-        <p style="margin-top:8px;"><strong>Why three?</strong> A special cause happens once. When it happens three times, it is no longer an accident &mdash; it is a feature of the system design. You now have enough data to show that this is a structural failure, not bad luck.</p>
-    </div>
-
-    <div class="numbers-box">
-        <table>
-            <thead><tr>
-                <th>Situation</th>
-                <th>Recommended tool</th>
-                <th>Why</th>
-            </tr></thead>
-            <tbody>
-                <tr>
-                    <td>Single adverse event with a clear sequence of events</td>
-                    <td><strong>5 Whys</strong></td>
-                    <td>Fast, simple, follows the causal chain directly</td>
-                </tr>
-                <tr>
-                    <td>Complex event with multiple contributing causes across different departments or systems</td>
-                    <td><strong>Fishbone diagram</strong></td>
-                    <td>Organises brainstorming across categories; prevents fixating on one cause; good for team sessions</td>
-                </tr>
-                <tr>
-                    <td>Recurring pattern of similar events across multiple sites or time periods</td>
-                    <td><strong>Bootstrap CUSUM + RCA</strong></td>
-                    <td>CUSUM identifies the pattern and dates it; RCA explains the cause</td>
-                </tr>
-                <tr>
-                    <td>Safety-critical system where all failure pathways must be mapped</td>
-                    <td><strong>Fault tree analysis</strong></td>
-                    <td>Systematic, quantifiable, maps all pathways including combinations; used in FMEA</td>
-                </tr>
-                <tr>
-                    <td>Learning from near-misses in primary care or community settings</td>
-                    <td><strong>Significant Event Analysis</strong></td>
-                    <td>Reflective format, culturally accessible, covers positive events too</td>
-                </tr>
-                <tr>
-                    <td>Want to show causal loops and feedback (systemic problems)</td>
-                    <td><strong>Causal Loop Diagram</strong></td>
-                    <td>Shows reinforcing loops; better for recurring system problems. See <a href="causal-loop-diagrams.html">Causal Loop Diagrams</a></td>
-                </tr>
-                <tr>
-                    <td>Contradictions keeping the problem in place</td>
-                    <td><strong>Evaporating Cloud</strong></td>
-                    <td>Reveals the assumption sustaining the conflict. See <a href="evaporating-cloud.html">Evaporating Cloud</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <hr>
-
-    <h2 id="section-necessary">Finding the root cause is necessary but not sufficient</h2>
-
-    <p>Root cause analysis is widely assumed to lead naturally to prevention. Find the cause, fix the cause, prevent recurrence. In practice the chain frequently breaks at the third link. Two specific failures account for most of this.</p>
-
-    <p><strong>The fix operates at the wrong level.</strong> The RCA correctly identifies the root cause at the system level. The fix is implemented at the process or output level because the system-level fix is too expensive, too slow, or outside the authority of the team conducting the analysis. The root cause remains unchanged. The event recurs through a different proximate cause. Another RCA is conducted. The pattern repeats. <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a> is the diagnostic tool for this failure: if the fix is at Level 1 or Level 2 but the root cause is at Level 3, the fix will not prevent recurrence.</p>
-
-    <p><strong>The fix is never verified.</strong> The fix is implemented and assumed to work. No pre-specified outcome measure was defined before the fix. No Bootstrap CUSUM prediction was made. When the next review occurs, the team reports that the action was completed &mdash; not that the outcome changed. Completing an action and changing an outcome are not the same thing. Without a pre-specified test, the improvement is asserted rather than confirmed.</p>
-
-    <div class="callout red">
-        <strong>The NHS RCA cycle that produces no change</strong>
-        <p>A Never Event occurs. An RCA is conducted. A corrective action plan is produced. The actions are completed and signed off. The event occurs again the following year. Another RCA is conducted. The same root causes are identified. A similar action plan is produced. This cycle, documented in multiple NHS investigations, is the direct consequence of RCA without Joiner-level awareness and without Bootstrap CUSUM verification. The root cause is found, a Level 1 or Level 2 fix is applied, the system remains unchanged, and the event recurs. <a href="never-events-wrong-route.html">Bootstrap CUSUM on NHS Never Events data</a> shows the result: 17.5 events per year, unchanged for 15 years, across thousands of individual RCA investigations.</p>
-    </div>
-
-    <div class="callout blue" style="margin-top:16px;">
-        <strong>A live example: is the constraint really where it looks like it is?</strong>
-        <p>A widely repeated diagnosis of NHS emergency care holds that the constraint sits in social care discharge capacity &mdash; beds occupied by patients medically ready to leave but with nowhere to go. That data point is real and well-documented. But it is also a plausible, externally-located cause of exactly the kind this page has been warning about: comfortable to state, outside the hospital's own authority to fix, and easy to stop investigating at. <a href="corridor-care-bright-spots.html">Bright Spot analysis of trusts that have reduced corridor care</a> suggests a meaningful share of delay sits inside the hospital&rsquo;s own processes &mdash; diagnostic turnaround, medication rounds, weekend staffing, internal discharge planning &mdash; before a patient ever becomes a social-care problem. Neither explanation is settled; both may be true simultaneously. The point is procedural, not factual: a plausible cause is not the same as a verified one, and the same discipline this page applies to a fishbone diagram applies to a policy diagnosis. See <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E: Why Nothing Has Worked</a> for the fuller Theory of Constraints analysis this example is drawn from.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-psychological">Psychological &ldquo;Why&rdquo; frameworks &mdash; why people ask why differently</h2>
-
-    <p>The 5 Whys is a logical technique. But the question &ldquo;why?&rdquo; also has a psychological dimension that determines whether an RCA reveals the true root cause or a socially acceptable one.</p>
-
-    <p>In organisations where fear is present &mdash; where pointing out problems or naming system failures carries personal risk &mdash; the 5 Whys produces a sanitised causal chain that stops at the level where blame becomes uncomfortable. The questioning process appears rigorous. The conclusions are systematically incomplete. The real root cause &mdash; the management system, the accountability structure, the incentive that produced the behaviour &mdash; is never named because naming it carries too high a personal cost.</p>
-
-    <p>Psychological safety is not a pre-condition for asking why. It is a pre-condition for the answers being honest. Amy Edmondson&rsquo;s research on psychological safety in healthcare teams showed precisely this: teams with low psychological safety reported fewer errors, not because they made fewer errors, but because they were less willing to report them. RCA conducted in conditions of low psychological safety produces fewer root causes found, not because there are fewer root causes, but because the investigation stops before reaching the ones that are uncomfortable to name.</p>
-
-    <p>This is why <a href="going-to-the-gemba.html">Going to the Gemba</a> is a pre-condition for honest RCA in complex organisations: the senior person who goes to where the problem manifests, in a culture of psychological safety, hears what the front line actually knows &mdash; not what the front line thinks it is safe to say. Deming&rsquo;s Point 8 (drive out fear) is not a management philosophy. It is a prerequisite for root cause analysis to reach the root.</p>
-
-    <h2 id="section-nhs">RCA in the NHS &mdash; why it frequently fails to prevent recurrence</h2>
-
-    <p>The NHS conducts thousands of Root Cause Analyses every year through the Serious Incident framework, the Patient Safety Incident Response Framework (PSIRF), and clinical audit processes. The volume of RCA activity is not in question. The effectiveness is.</p>
-
-    <p>Three structural features of NHS RCA produce the recurring-event pattern:</p>
-
-    <p><strong>1. Individual event focus without pattern analysis.</strong> Each RCA analyses one specific event. The systemic pattern &mdash; that the same type of event recurs at the same rate year after year &mdash; is visible only when multiple events are analysed as a series. Bootstrap CUSUM on the series answers the question that individual RCA cannot: has the rate of this type of event structurally changed? If it has not, the individual RCAs have not produced system change.</p>
-
-    <p><strong>2. Action completion measured, not outcome change.</strong> NHS governance frameworks typically require trusts to report that RCA actions have been completed. They do not require trusts to demonstrate that completing those actions changed the outcome. The accountability framework measures activity, not effect. This is precisely the <a href="types-of-measures.html">process measure vs outcome measure</a> confusion: completing an action plan is a process measure. Reducing the event rate is an outcome measure. The NHS reports the former and calls it improvement.</p>
-
-    <p><strong>3. PSIRF and the shift away from RCA as the default.</strong> The Patient Safety Incident Response Framework (2022) does not merely supplement RCA — NHS England's own policy team has stated plainly that &ldquo;methods that assume simplistic, linear identification of a single cause (i.e., Root Cause Analysis) are no longer recommended&rdquo; as the default response. PSIRF instead promotes a range of system-based methods (SEIPS, FRAM, HFACS) that examine how people, process, technology, and environment interact &mdash; because a single-cause model frequently stops at a plausible answer before reaching the real one. This is the official NHS diagnosis of the exact failure mode described above. The analytical tool that makes system-level pattern analysis rigorous &mdash; Bootstrap CUSUM applied to the event series &mdash; is not yet routinely used within it. See the <a href="psirf-analytical-framework.html">PSIRF Analytical Framework</a> for how RCA, pattern recognition, and structural verification fit together inside that wider response framework.</p>
-
-    <div style="overflow-x:auto; margin:16px 0;">
-        <table class="compare-table">
-            <thead>
-                <tr><th>Framework</th><th>Where it comes from</th><th>What it forces you to check</th></tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>SEIPS</strong><br>Systems Engineering Initiative for Patient Safety</td>
-                    <td>Healthcare human factors research (Carayon et al.); the framework PSIRF specifically encourages</td>
-                    <td>How five components &mdash; person, tools/technology, organisation, environment, and task &mdash; interacted at the moment of the incident. Errors are treated as arising from the work system, not the individual acting alone.</td>
-                </tr>
-                <tr>
-                    <td><strong>FRAM</strong><br>Functional Resonance Analysis Method</td>
-                    <td>Safety science (Erik Hollnagel); used across aviation, energy, and healthcare</td>
-                    <td>How everyday, normal adjustments people make to keep work running &mdash; not a single broken step &mdash; can unexpectedly combine across different parts of the system to produce an unwanted outcome.</td>
-                </tr>
-                <tr>
-                    <td><strong>HFACS</strong><br>Human Factors Analysis and Classification System</td>
-                    <td>Aviation accident investigation; adapted for healthcare</td>
-                    <td>Whether the cause traces upward through four levels &mdash; the unsafe act itself, preconditions for it, supervisory factors, and organisational influences &mdash; rather than stopping at the frontline action.</td>
-                </tr>
-            </tbody>
-        </table>
-        <p style="font-size:0.85em;color:var(--muted);margin-top:8px;">All three share the same underlying discipline as <a href="joiner-levels-of-fix.html">Joiner's Levels of Fix</a>: resist stopping at the first cause that is comfortable to name, and keep checking sideways, across time, or upward through the organisation before calling an investigation complete.</p>
-    </div>
-
-    <div style="margin:20px 0; text-align:center;">
-        <img src="images/img-moonshot-wrong-route.png" alt="Worked example: wrong-route medication Never Event traced from the event through pattern, structure, mindset to Joiner level fixes including ENFit connector mandate" style="max-width:480px; width:100%; height:auto; border-radius:6px; border:1px solid #e0e0de;">
-        <p style="font-size:12px; color:#666; margin-top:8px;">The wrong-route Never Event traced through the Senge Iceberg. The reactive loop (dashed arrow) returns to the Structure level but never reaches the Mindset. Without challenging the belief that &ldquo;safety is behavioural,&rdquo; the event rate stays flat at 17.5 per year regardless of how many investigations are conducted. See the <a href="moonshot-protocol.html#section-worked-example">Moonshot Protocol</a> for another type of RCA template &mdash; the full ten-step method for reaching and dissolving the Mindset level.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-system">Moving from diagram to system cause</h2>
-
-    <p>The most important rule in any RCA diagram: <strong>keep asking why until you reach a system cause, not a person cause.</strong> Most diagrams stop too early &mdash; at the action of an individual rather than at the system feature that allowed or produced that action.</p>
-
-    <p>A system cause is one that:</p>
-    <ul style="line-height:2.2;">
-        <li>Would produce the same outcome with a <em>different</em> person in the same situation</li>
-        <li>Can be changed by a management or design decision rather than by training or supervision</li>
-        <li>Is in the Management, Process, or Equipment categories &mdash; not in People</li>
-    </ul>
-
-    <p>People causes (tiredness, distraction, unfamiliarity) describe human vulnerability to a system design failure. They are real contributing factors. They are not root causes &mdash; because addressing them without changing the system means the next person in the same situation faces the same risk.</p>
-
-    <hr>
-
-    <h2 id="section-structural-fix">From cause map to structural fix &mdash; the Moonshot Protocol</h2>
-
-    <p>Drawing the fishbone diagram is Step 2 of improvement &mdash; seeing the structure. But most QI programmes stop there: the diagram is produced, the causes are listed, an action plan is written, the same event recurs. The reason is that RCA rarely reaches the structural assumption that is keeping the problem in place.</p>
-
-    <p>The <a href="moonshot-protocol.html">Moonshot Protocol</a> takes the fishbone forward into structural change &mdash; a three-phase, ten-step process for naming the contradiction behind a recurring problem and dissolving it with <a href="triz-separation-principles.html">TRIZ separation</a>, rather than compromising on it. It includes a full worked example using the wrong-route medication Never Event case, the rule of three for deciding when a full structural investigation is warranted, and the Bootstrap CUSUM pre-committed prediction for verifying the fix actually worked.</p>
-
-    <p><a href="moonshot-protocol.html">Read the full Moonshot Protocol &rarr;</a></p>
-
-    <hr>
-
-    <h2 id="section-verify">Closing the loop with data</h2>
-
-    <p>A fishbone diagram, 5 Whys chain, or fault tree generates hypotheses about what caused the problem. None of them prove which cause was the binding one. Only data can do that &mdash; which is why this is Step 4 of the five-step improvement framework: <em>test honestly.</em> The diagram is Step 2 (see the structure) and Step 3 (challenge the assumption); Bootstrap CUSUM closes the loop.</p>
-
-    <div class="info-box">
-        <h3>&#128202; The complete RCA + Bootstrap CUSUM cycle</h3>
-        <p><strong>Step 1 — Identify the pattern with Bootstrap CUSUM.</strong> Apply Bootstrap CUSUM to the event rate series (incidents per month, adverse events per quarter, never events per year). If the process is stable with no change point, individual events are common cause variation — the system is producing them routinely. This tells you the problem is systemic, not episodic. If an upward change point appears, something specific changed and made things worse. Date the change point — that narrows the investigation window.</p>
-        <p style="margin-top:10px;"><strong>Step 2 — Identify the root cause with RCA.</strong> Use the <a href="five-whys.html">5 Whys</a> or fishbone diagram above to trace the causal chain. Apply the Joiner test at the end: is the proposed fix at Level 1 (output), Level 2 (process), or Level 3 (system)? If it is at Level 1 or 2, ask whether a Level 3 cause exists that the analysis has not yet reached.</p>
-        <p style="margin-top:10px;"><strong>Step 3 — Implement a Level 3 fix.</strong> The fix must address the root cause at the system level. Physical redesign where possible (making the wrong action impossible), structural change where physical redesign is not feasible, economic or accountability mechanism change where structural redesign is not feasible.</p>
-        <p style="margin-top:10px;"><strong>Step 4 — Pre-specify the Bootstrap CUSUM test.</strong> Before implementing the fix, state in writing: we expect a Bootstrap CUSUM change point in [outcome measure — the event rate series] within [Z] time periods at [Y]% confidence. This is the commitment that makes the verification step meaningful.</p>
-        <p style="margin-top:10px;"><strong>Step 5 — Verify with Bootstrap CUSUM.</strong> Run Bootstrap CUSUM on the event rate series periodically after the fix. When a downward change point appears at the predicted confidence level, the fix is confirmed. When it does not appear within the expected lag window, the root cause analysis was incomplete — return to Step 2.</p>
-    </div>
-
-    <div class="cta-box" style="margin-top:24px;">
-        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
-        <p style="margin-top:10px;color:white;">
-            Next: <a href="interpret-results.html" style="color:white;">Interpret results</a> &rarr; <a href="what-to-do-next.html" style="color:white;">What to do next</a>
-        </p>
-    </div>
-
-    <hr>
-
-    <h2>Related concepts</h2>
-    <div class="nav-grid">
-        <a href="five-whys.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>The 5 Whys</h3>
-            <p>The simplest RCA tool &mdash; asking why five times to reach the root cause. Includes the Never Events worked example.</p>
-        </a>
-        <a href="joiner-levels-of-fix.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Joiner&rsquo;s Levels of Fix</h3>
-            <p>The test that determines whether the RCA fix will prevent recurrence &mdash; or just delay the next event.</p>
-        </a>
-        <a href="pdsa-cycle.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>PDSA Cycle</h3>
-            <p>RCA is the Plan phase theory of change. Bootstrap CUSUM is the Study phase verification. PDSA is the framework that connects them.</p>
-        </a>
-        <a href="types-of-measures.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Types of Measures</h3>
-            <p>Action completion is a process measure. Event rate reduction is an outcome measure. NHS RCA typically reports the former.</p>
-        </a>
-        <a href="never-events-wrong-route.html" class="nav-card">
-            <div class="nav-tag">Article &mdash; Patient Safety</div>
-            <h3>Never Events &mdash; Wrong Route</h3>
-            <p>Thousands of RCAs. No structural change in the event rate. Bootstrap CUSUM shows what happens when RCA never reaches Level 3.</p>
-        </a>
-        <a href="psirf-analytical-framework.html" class="nav-card">
-            <div class="nav-tag">Article &mdash; Patient Safety</div>
-            <h3>PSIRF Analytical Framework</h3>
-            <p>RCA is one technique inside PSIRF&rsquo;s wider response framework. See how it fits alongside pattern recognition and structural verification.</p>
-        </a>
-        <a href="variation-and-spc.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Variation &amp; SPC</h3>
-            <p>RCA analyses individual events. SPC analyses patterns. A stable event rate with no change point means the system is producing events routinely &mdash; individual RCA misses this entirely.</p>
-        </a>
-    </div>
-
-    <div class="related-box">
-        <div class="related-tag">Related Concept</div>
-        <h3><a href="going-to-the-gemba.html">Going to the Gemba</a></h3>
-        <p>The visibility pre-condition for honest RCA &mdash; going to where the problem manifests with the authority to act on what you find.</p>
-        <a href="going-to-the-gemba.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <div class="related-box">
-        <div class="related-tag">Related Concept</div>
-        <h3><a href="evaporating-cloud.html">Evaporating Cloud</a></h3>
-        <p>When RCA identifies a contradiction rather than a single root cause &mdash; the Evaporating Cloud dissolves it by naming and questioning the assumption underneath.</p>
-        <a href="evaporating-cloud.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <div class="related-box">
-        <div class="related-tag">Related Concept</div>
-        <h3><a href="making-the-invisible-visible.html">Making the Invisible Visible</a></h3>
-        <p>RCA is one of fifteen visibility instruments. The foundation concept explains where it fits in the broader framework.</p>
-        <a href="making-the-invisible-visible.html" class="btn">Read the concept &rarr;</a>
-    </div>
-
-    <div class="callout blue" style="margin-top:32px;">
-        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
-        <p>This concept sits within a broader framework for understanding why improvement programmes succeed or fail. Start with <a href="why-nothing-changes.html">Why Nothing Changes</a> for the full picture, or go to <a href="start-here.html">Start Here</a> for a guided introduction to the method.</p>
-    </div>
-    <footer class="page-footer">
-        <p><strong>Fishbone diagram:</strong> Ishikawa, K. <em>Introduction to Quality Control.</em> 3A Corporation, 1990. Original development at Kawasaki Heavy Industries, 1960s.</p>
-        <p style="margin-top:8px;"><strong>5 Whys:</strong> Ohno, T. <em>Toyota Production System.</em> Productivity Press, 1978.</p>
-        <p style="margin-top:8px;"><strong>NHS PSIRF:</strong> NHS England. <em>Patient Safety Incident Response Framework.</em> 2022. <a href="https://www.england.nhs.uk/patient-safety/incident-response-framework/">england.nhs.uk</a></p>
-        <p style="margin-top:8px;"><strong>NHS just culture guide:</strong> NHS Improvement. <em>A just culture guide.</em> 2018. The psychological safety pre-conditions for honest root cause analysis in healthcare.</p>
-        <p style="margin-top:8px;"><strong>Joiner levels of fix:</strong> Joiner, B.L. <em>Fourth Generation Management.</em> McGraw-Hill, 1994.</p>
-        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
-        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; July 2026</p>
-    </footer>
-
-</main>
-
-<div id="site-footer"></div>
-<script src="assets/site-chrome.js"></script>
-</body>
-</html>
+        </svg></div><figcaption>Check every arrow and branch for other contributors. Executive accountability is a hypothesis, not a conclusion.</figcaption></figure><p>Five is a prompt, not a guaranteed route to one root cause. Use the <a href="five-whys.html#section-example">5 Whys guide</a> for a non-clinical example with evidence checks.</p></div></details></section>
+<section id="section-tools"><h2>When another approach helps</h2>
+<p>A timeline or process map can establish the sequence. <a href="causal-loop-diagrams.html">Feedback loops</a> help explore how consequences sustain a pattern. For specialist safety investigations, follow the applicable framework and use trained support, such as the relevant <a href="psirf-analytical-framework.html">PSIRF approach</a>.</p>
+<details class="conditions resource" id="section-fault-tree"><summary>Optional: fault tree logic</summary><div class="conditions-body"><p>Fault trees examine combinations of conditions behind a defined failure. An <strong>OR</strong> gate means any modelled condition can produce the event; an <strong>AND</strong> gate requires the specified conditions together. Check other pathways and dependencies. Do not assume the model is exhaustive or multiply probabilities without justifying the assumptions.</p></div></details>
+</section>
+<section id="section-verify"><h2>Test the response—not just the explanation</h2>
+<span id="section-necessary"></span><span id="section-structural-fix"></span>
+<p>Agree what should change, by roughly how much and when. Check whether the intervention is being used and measure both the intended result and possible harm elsewhere.</p>
+<p>A suitable chart or Bootstrap CUSUM analysis may identify a performance change. <strong>It does not, by itself, confirm the cause or prove the intervention worked.</strong> Consider implementation, data quality, timing and alternative explanations. No detected change is not automatically proof of no benefit.</p>
+<a class="more" href="why-improvements-fail.html#right-intervention">Right intervention? →</a><br><a class="more" href="why-improvements-fail.html#right-measures">Right measures? →</a></section>
+<section id="section-nhs"><h2>Complementary tools—not mandatory stages</h2>
+<p><a href="systems-thinking.html">Systems thinking</a> examines parts and relationships; RCA investigates contributors with evidence; <a href="five-whys.html">5 Whys</a> explores a particular causal path; <a href="causal-loop-diagrams.html">feedback loops</a> examine how consequences return to influence what happens next.</p>
+<a class="more" href="why-improvements-fail.html#right-problem">Return to Right problem? →</a></section></main><dialog class="diagram-viewer" id="diagram-viewer" aria-labelledby="viewer-title"><div class="viewer-top"><h2 id="viewer-title">Full-size diagram</h2><button type="button" id="close-viewer">Close</button></div><p class="viewer-help">Scroll sideways or down to explore the diagram at a readable size.</p><div class="viewer-canvas" tabindex="0" role="region" aria-label="Scrollable full-size diagram"></div><a class="viewer-download" download>Download this diagram as SVG</a></dialog><div id="site-footer"></div><script src="assets/site-chrome.js"></script><script>
+(function(){
+ const viewer=document.getElementById('diagram-viewer');
+ const files=new Map();
+ document.querySelectorAll('svg[id^="diagram-"]').forEach(svg=>{
+   const clone=svg.cloneNode(true);clone.removeAttribute('id');clone.removeAttribute('tabindex');clone.setAttribute('xmlns','http://www.w3.org/2000/svg');clone.setAttribute('width','1260');
+   const vb=svg.viewBox.baseVal;clone.setAttribute('height',String(Math.round(1260*vb.height/vb.width)));
+   const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)],{type:'image/svg+xml;charset=utf-8'}));
+   const a=document.querySelector('[data-download-diagram="'+svg.id+'"]');a.href=url;files.set(svg.id,{url,name:a.download});
+ });
+ document.querySelectorAll('[data-open-diagram]').forEach(button=>button.addEventListener('click',()=>{
+   const id=button.dataset.openDiagram;const original=document.getElementById(id);const copy=original.cloneNode(true);copy.removeAttribute('id');
+   const renamed=new Map();copy.querySelectorAll('[id]').forEach(el=>{renamed.set(el.id,'viewer-'+el.id);el.id='viewer-'+el.id;});
+   copy.querySelectorAll('*').forEach(el=>{for(const a of [...el.attributes]){let value=a.value;renamed.forEach((n,o)=>{value=value.replaceAll('url(#'+o+')','url(#'+n+')');});if(value!==a.value)el.setAttribute(a.name,value);}});
+   viewer.querySelector('.viewer-canvas').replaceChildren(copy);
+   const resource=original.closest('details');document.getElementById('viewer-title').textContent=resource.querySelector('summary').textContent;
+   const file=files.get(id);const a=viewer.querySelector('.viewer-download');a.href=file.url;a.download=file.name;
+   viewer.showModal();viewer.querySelector('.viewer-canvas').scrollTo(0,0);
+ }));
+ document.getElementById('close-viewer').addEventListener('click',()=>viewer.close());
+ function revealHash(){if(!location.hash)return;const target=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(!target)return;let node=target;while(node){if(node.tagName==='DETAILS')node.open=true;node=node.parentElement;}requestAnimationFrame(()=>target.scrollIntoView());}
+ addEventListener('hashchange',revealHash);revealHash();
+})();
+</script></body></html>

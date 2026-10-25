@@ -1,267 +1,98 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://stepchangeanalysis.com/five-whys.html">
-    <title>The 5 Whys — Root Cause Analysis Technique — StepChangeAnalysis.com</title>
-    <meta name="description" content="The 5 Whys explained — Sakichi Toyoda's technique for finding the root cause of a problem by asking why five times. Why most 5 Whys analyses stop too early, and how Joiner's Levels of Fix determines whether the answer is good enough.">
-    <meta name="keywords" content="5 whys explained, five whys root cause analysis, 5 whys technique NHS, Toyota 5 whys, why why analysis, 5 whys examples, root cause analysis tools">
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-    <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://stepchangeanalysis.com/five-whys.html" rel="canonical"/>
+<title>The 5 Whys: How to Use It, Example and Limits — StepChangeAnalysis.com</title>
+<meta content="A practical 5 Whys guide: define the problem, check evidence for each answer, branch for multiple contributors and test a response. Five is a prompt, not proof." name="description"/>
+<meta content="5 whys explained, five whys root cause analysis, 5 whys technique NHS, Toyota 5 whys, why why analysis, 5 whys examples, root cause analysis tools" name="keywords"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag("js", new Date());
         gtag("config", "G-NZLMMS3ZGG");
     </script>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
 
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
+.improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
+
+.improvement-page h3{font-size:20px;line-height:1.35;color:#002d5b;margin:24px 0 12px}
+.improvement-page nav{margin:24px 0;padding:16px 20px;background:#eef4fa;border:1px solid #cbd5df;border-radius:8px}
+.improvement-page nav ul{margin:8px 0}.improvement-page figure{margin:20px 0}
+.improvement-page .diagram-scroll{overflow-x:auto;border:1px solid #cbd5df;border-radius:8px;background:white;padding:16px}
+.improvement-page .diagram-scroll svg{display:block;width:1260px;max-width:none;height:auto}
+.improvement-page figcaption{font-size:16px;line-height:1.55;margin-top:12px}
+.improvement-page .hint{font-size:15px;color:#4e5965}.improvement-page .table-scroll{overflow-x:auto;margin:20px 0}
+.improvement-page table{border-collapse:collapse;width:100%;font-size:16px;line-height:1.5;min-width:600px}
+.improvement-page th,.improvement-page td{padding:12px;border:1px solid #cbd5df;vertical-align:top;text-align:left}
+.improvement-page th{background:#eef4fa;color:#002d5b}.improvement-page .step-list>li{margin-bottom:20px}
+.improvement-page .check{padding:20px;background:#eef4fa;border-left:4px solid #185fa5;margin:24px 0}
+@media print{#site-header,#site-footer,nav{display:none}.improvement-page .diagram-scroll{overflow:visible}.improvement-page .diagram-scroll svg{width:100%}main.improvement-page{max-width:none;padding:0}.improvement-page details>*{display:block}}
+
+.improvement-page .diagram-scroll{box-sizing:border-box;width:calc(100vw - 48px);max-width:1292px;position:relative;left:50%;transform:translateX(-50%)}
+.improvement-page .diagram-scroll svg{width:100%;min-width:1200px}
+@media(max-width:600px){.improvement-page .diagram-scroll{width:100%;left:0;transform:none}.improvement-page .table-scroll table,.improvement-page .table-scroll tbody,.improvement-page .table-scroll tr,.improvement-page .table-scroll td{display:block;min-width:0;width:auto}.improvement-page .table-scroll thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.improvement-page .table-scroll tr{border:1px solid #cbd5df;border-radius:8px;margin-bottom:16px;padding:8px;background:white}.improvement-page .table-scroll td{border:0;padding:8px}.improvement-page .table-scroll td::before{content:attr(data-label);display:block;color:#002d5b;font-weight:700;margin-bottom:4px}}
+</style></head>
+</html>
 <body>
-
 <div id="site-header"></div>
-
-<main class="page-wrap">
-
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="root-cause-analysis.html">Diagnose the Cause?</a> &rsaquo; The 5 Whys</div>
-    <div class="page-flag">&#128269; Diagnose the Cause?</div>
-    <h1>The 5 Whys</h1>
-    <p class="page-intro">The 5 Whys is the simplest and most widely used root cause analysis technique. Ask why five times and you will reach the root cause of almost any problem. But most analyses stop at Why 2 or Why 3 &mdash; at the process level &mdash; when the real answer lies in the system. Knowing when to stop is as important as knowing how to start.</p>
-    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
-
-    <details class="toc-details">
-        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
-        <div class="toc-inner">
-            <ol>
-                <li><a href="#section-origin">Origin and method</a></li>
-                <li><a href="#section-how">How to run a 5 Whys</a></li>
-                <li><a href="#section-example">Worked example &mdash; NHS Never Events</a></li>
-                <li><a href="#section-joiner">The Joiner test &mdash; which level did you reach?</a></li>
-                <li><a href="#section-stopping">Why most 5 Whys stop too early</a></li>
-                <li><a href="#section-limitations">Limitations of the 5 Whys</a></li>
-                <li><a href="#section-cusum">The 5 Whys and Bootstrap CUSUM</a></li>
-            </ol>
-        </div>
-    </details>
-
-    <h2 id="section-origin">Origin and method</h2>
-
-    <p>The 5 Whys was developed by Sakichi Toyoda, the founder of Toyota Industries, in the early twentieth century and became a central element of the Toyota Production System in the 1950s. It was adopted by Toyota as a standard problem-solving technique and popularised in the West through Taiichi Ohno&rsquo;s <em>Toyota Production System</em> (1978) and later through the lean manufacturing movement.</p>
-
-    <p>The method is deliberately simple: when a problem occurs, ask <em>why</em> it happened. Take the answer and ask <em>why</em> again. Repeat five times. The principle is that surface symptoms have proximate causes, proximate causes have underlying causes, and underlying causes have root causes &mdash; and that five iterations is typically sufficient to reach a cause that is actionable and preventive rather than merely corrective.</p>
-
-    <div class="callout blue">
-        <strong>Taiichi Ohno&rsquo;s original example</strong>
-        <p><strong>Problem:</strong> The robot stopped.</p>
-        <p><strong>Why 1:</strong> The circuit overloaded, causing a fuse to blow. &nbsp;<strong>Why 2:</strong> There was insufficient lubrication on the bearings. &nbsp;<strong>Why 3:</strong> The oil pump on the robot was not circulating sufficient oil. &nbsp;<strong>Why 4:</strong> The pump intake was clogged with metal shavings. &nbsp;<strong>Why 5:</strong> There was no strainer fitted to the pump.</p>
-        <p><strong>Fix:</strong> Attach a strainer to the pump. Replacing the fuse (Why 1) would have allowed the robot to restart but the problem would have recurred. Only the Why 5 answer prevents recurrence.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-how">How to run a 5 Whys</h2>
-
-    <p>The technique requires a clearly defined problem statement, a multidisciplinary team with direct knowledge of the process, and the discipline to keep asking why rather than accepting the first plausible answer. Five practical rules:</p>
-
-    <ol style="margin: 16px 0 20px 24px; line-height: 2.1; font-size: 1.05em;">
-        <li><strong>Start with a specific event, not a general problem.</strong> &ldquo;The patient received the wrong medication&rdquo; is specific. &ldquo;Medication errors are too high&rdquo; is not. A vague problem statement produces vague answers.</li>
-        <li><strong>Each answer must be based on evidence, not assumption.</strong> &ldquo;Because staff are careless&rdquo; is an assumption. &ldquo;Because the check step was skipped&rdquo; requires evidence that the check step was actually skipped in this specific case.</li>
-        <li><strong>Each why must follow logically from the previous answer.</strong> Read the chain backwards: &ldquo;Because of Why 5, Why 4 occurred. Because of Why 4, Why 3 occurred...&rdquo; If the chain does not read logically, an answer is missing or wrong.</li>
-        <li><strong>Keep asking until you reach something actionable that prevents recurrence.</strong> If the answer to Why 5 is still something you cannot change, keep going to Why 6 or Why 7. The number five is a guide, not a rule.</li>
-        <li><strong>Apply the Joiner test at the end.</strong> Is the fix at the output level, the process level, or the system level? If it is at the output or process level, ask whether a system-level cause exists that the analysis has not yet reached.</li>
-    </ol>
-
-    <hr>
-
-    <h2 id="section-example">Worked example &mdash; NHS Never Events</h2>
-
-    <p>Wrong-route medication administration has been classified as a Never Event &mdash; wholly preventable &mdash; since 2010. <a href="never-events-wrong-route.html">Bootstrap CUSUM on 15 years of NHS data</a> finds a flat process at 17.5 events per year with no structural change. The 5 Whys analysis of a single wrong-route event illustrates exactly why the flat line persists.</p>
-
-    <div class="why-chain">
-        <div class="why-step">
-            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">1</span></div>
-            <div class="why-body">
-                <div class="wb-q">Problem</div>
-                <div class="wb-a">A patient received an oral medication administered via the intrathecal route, causing serious harm.</div>
-            </div>
-        </div>
-        <div class="why-arrow">&#8595;</div>
-        <div class="why-step l1">
-            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">1</span></div>
-            <div class="why-body">
-                <div class="wb-q">Why did the patient receive medication via the wrong route?</div>
-                <div class="wb-a">The nurse administered the medication using the wrong connector.</div>
-                <span class="wb-level">Joiner Level 1 — output fix: retrain the nurse</span>
-            </div>
-        </div>
-        <div class="why-arrow">&#8595;</div>
-        <div class="why-step l1">
-            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">2</span></div>
-            <div class="why-body">
-                <div class="wb-q">Why did the nurse use the wrong connector?</div>
-                <div class="wb-a">The oral and intrathecal connectors are physically compatible &mdash; they fit together even though they should not be connected.</div>
-                <span class="wb-level">Joiner Level 1/2 — process fix: label connectors more clearly</span>
-            </div>
-        </div>
-        <div class="why-arrow">&#8595;</div>
-        <div class="why-step l2">
-            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">3</span></div>
-            <div class="why-body">
-                <div class="wb-q">Why are incompatible connectors physically compatible?</div>
-                <div class="wb-a">The procurement system has not standardised on ENFit connectors, which are physically incompatible and make wrong-route administration mechanically impossible.</div>
-                <span class="wb-level">Joiner Level 2 — process fix: change procurement policy</span>
-            </div>
-        </div>
-        <div class="why-arrow">&#8595;</div>
-        <div class="why-step l2">
-            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">4</span></div>
-            <div class="why-body">
-                <div class="wb-q">Why has the NHS not standardised on ENFit connectors?</div>
-                <div class="wb-a">The procurement decision requires a capital programme, a change management programme, and central NHS England commitment. These have not been authorised despite the recommendation existing since 2010.</div>
-                <span class="wb-level">Joiner Level 2/3 — system fix: authorise the capital programme</span>
-            </div>
-        </div>
-        <div class="why-arrow">&#8595;</div>
-        <div class="why-step l3">
-            <div class="why-num"><span class="wn-label">WHY</span><span class="wn-num">5</span></div>
-            <div class="why-body">
-                <div class="wb-q">Why has a capital programme not been authorised in 14 years?</div>
-                <div class="wb-a">The system does not have a mechanism that connects the cost of Never Events (borne by individual trusts and patients) to the capital decision (made centrally). The decision-maker and the cost-bearer are different parts of the system with no feedback loop between them.</div>
-                <span class="wb-level">Joiner Level 3 — system fix: redesign the accountability structure</span>
-            </div>
-        </div>
-    </div>
-
-    <p>The NHS response to each wrong-route event has overwhelmingly operated at Why 1 and Why 2: retraining, revised checklists, new alert notices, updated frameworks. The Why 5 answer &mdash; the missing feedback loop between cost-bearer and decision-maker &mdash; has never been addressed. Bootstrap CUSUM shows the result: 17.5 events per year, flat, for 15 years.</p>
-
-    <hr>
-
-    <h2 id="section-joiner">The Joiner test &mdash; which level did you reach?</h2>
-
-    <p>The most important question at the end of any 5 Whys analysis is: at which level is the proposed fix operating? <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a> provides the test.</p>
-
-    <div class="stop-grid">
-        <div class="stop-card too-early">
-            <div class="sc-label">&#10060; Level 1 answer</div>
-            <h3>Fix the output</h3>
-            <p>The fix addresses the specific event that occurred. Retrain the individual, replace the fuse, reprimand the team. Prevents recurrence of this exact event in this exact way &mdash; but the system that allowed the event remains unchanged. A different person, a different day, a different event of the same type will recur.</p>
-        </div>
-        <div class="stop-card too-early">
-            <div class="sc-label">&#9888; Level 2 answer</div>
-            <h3>Fix the process</h3>
-            <p>The fix changes the process that allowed the problem. New procedure, new checklist, new training programme, new labelling. Reduces recurrence of this type of event &mdash; but the system that produced the faulty process remains unchanged. The process improvement may be absorbed, forgotten, or bypassed under pressure.</p>
-        </div>
-        <div class="stop-card correct">
-            <div class="sc-label">&#9989; Level 3 answer</div>
-            <h3>Fix the system</h3>
-            <p>The fix changes the system that produced the faulty process. Physical redesign, structural accountability change, economic mechanism change. Prevents the entire class of problems, not just this instance. Does not rely on individual behaviour or memory. This is where the 5 Whys should aim to reach.</p>
-        </div>
-    </div>
-
-    <div class="callout orange">
-        <strong>The test: would this fix work even if everyone forgot about it?</strong>
-        <p>A Level 3 fix works because it changes the system, not because people remember to apply it. ENFit connectors prevent wrong-route administration whether or not staff remember the training. A carbon price floor changes generator economics whether or not operators remember the policy intent. A Level 1 or Level 2 fix requires sustained human attention to maintain. Under pressure, in understaffed shifts, at 3am, the check gets skipped. The system was not redesigned. The event recurs.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-stopping">Why most 5 Whys stop too early</h2>
-
-    <p>In practice, most 5 Whys analyses in healthcare, industry, and policy stop at Why 2 or Why 3. There are three structural reasons for this.</p>
-
-    <p><strong>The person answer is satisfying.</strong> Why 1 almost always produces a person answer: someone did something wrong, skipped a step, misread a label. This answer feels complete and actionable. It names a cause and implies a fix (retrain, remind, reprimand). The discomfort of asking Why 2 &mdash; which often implicates the system or management &mdash; is avoided.</p>
-
-    <p><strong>The system answer is threatening.</strong> Why 4 and Why 5 answers frequently implicate management decisions, resource allocation, procurement policies, or organisational structures. These are uncomfortable findings for the people conducting the analysis, especially when those people are part of the management hierarchy. A 5 Whys that stops at Why 2 protects the institution. One that reaches Why 5 challenges it.</p>
-
-    <p><strong>The fix is outside the team&rsquo;s authority.</strong> A ward team can retrain a nurse. They cannot redesign the national procurement system. When the Why 5 answer requires an action that is beyond the team&rsquo;s authority, the analysis often retreats to a Why 2 or Why 3 answer that produces a fix the team can implement &mdash; even though that fix will not prevent recurrence.</p>
-
-    <div class="callout red">
-        <strong>The most dangerous stopping point: &ldquo;human error&rdquo;</strong>
-        <p><a href="deming-14-points.html">Deming</a> estimated 94% of problems are caused by the system, not the people. A 5 Whys that terminates at &ldquo;human error&rdquo; as the root cause has almost certainly stopped too early. Human error is not a root cause &mdash; it is a symptom. The root cause is the system condition that made the error easy to commit and difficult to catch. &ldquo;The nurse made an error&rdquo; answers nothing about why the system was designed so that the error was possible, likely, or uncaught. Asking why the error was possible, likely, and uncaught is where the 5 Whys should go.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-limitations">Limitations of the 5 Whys</h2>
-
-    <p>The 5 Whys is powerful for linear causal chains &mdash; where A caused B caused C caused D. It is less effective for complex systems where multiple interacting causes produce an outcome, and where the same outcome can arise from different causal paths. For those situations, a <a href="root-cause-analysis.html">fishbone (Ishikawa) diagram</a> or a <a href="causal-loop-diagrams.html">causal loop diagram</a> is more appropriate.</p>
-
-    <p>Three specific limitations worth noting:</p>
-
-    <ul>
-        <li><strong>Different teams reach different root causes.</strong> The 5 Whys is not deterministic. Two teams analysing the same event will often produce different Why chains depending on their knowledge, experience, and willingness to pursue uncomfortable answers. This is not a flaw in the technique &mdash; it reflects the fact that complex events typically have multiple contributing causes &mdash; but it means the result should be treated as a hypothesis to be tested, not a definitive finding.</li>
-        <li><strong>It analyses individual events, not patterns.</strong> The 5 Whys answers the question &ldquo;why did this event occur?&rdquo; It does not answer &ldquo;why does this type of event occur at this rate?&rdquo; For the second question, <a href="variation-and-spc.html">SPC analysis</a> and Bootstrap CUSUM are the appropriate tools.</li>
-        <li><strong>It does not verify that the fix worked.</strong> The 5 Whys identifies a root cause and implies a fix. It does not tell you whether the fix produced a genuine structural change in the outcome. That requires a pre-specified <a href="pdsa-cycle.html">PDSA Study phase</a> with Bootstrap CUSUM as the objective test.</li>
-        <li><strong>It does not dissolve a structural contradiction.</strong> When the Why 5 answer reveals two requirements that seem to conflict &mdash; versatility versus safety, speed versus thoroughness &mdash; the 5 Whys has nowhere further to go. The <a href="moonshot-protocol.html">Moonshot Protocol</a> is the method for naming that contradiction explicitly and dissolving it with TRIZ separation, rather than compromising between the two requirements.</li>
-    </ul>
-
-    <hr>
-
-    <h2 id="section-cusum">The 5 Whys and Bootstrap CUSUM</h2>
-
-    <p>The 5 Whys and Bootstrap CUSUM address different questions and operate on different timescales. Together they form a complete improvement cycle.</p>
-
-    <div class="info-box">
-        <h3>&#128202; How the two tools work together</h3>
-        <p><strong>Bootstrap CUSUM identifies that a problem exists and dates it precisely.</strong> A structural change point in a safety event series &mdash; an upward change point in a wrong-route medication series, a downward change point in a sepsis mortality series &mdash; tells you that something structurally changed at a specific time. It does not tell you what caused the change.</p>
-        <p style="margin-top:10px;"><strong>The 5 Whys identifies what caused the change.</strong> Once Bootstrap CUSUM has dated a change point, the 5 Whys investigation can be focused: what changed in this system in the 6&ndash;12 months before the change point? The date narrows the investigation window from the entire history of the system to a specific period. The causal chain revealed by the 5 Whys in that window is the hypothesis about what produced the change point.</p>
-        <p style="margin-top:10px;"><strong>Bootstrap CUSUM then verifies whether the fix worked.</strong> Once a Level 3 fix has been implemented (identified by the 5 Whys), pre-specify a Bootstrap CUSUM change point as the test: we expect an improvement in outcome measure Y within Z periods. When the change point appears, the fix is confirmed. When it does not appear, the Why 5 answer was incomplete and the analysis must continue.</p>
-        <p style="margin-top:10px;">This is the <a href="pdsa-cycle.html">PDSA cycle</a> made rigorous: the 5 Whys is the Plan phase theory of change, the fix is the Do phase, and Bootstrap CUSUM is the Study phase objective test. Without Bootstrap CUSUM, the Study phase is replaced by narrative &mdash; and any result can be declared success.</p>
-    </div>
-
-    <hr>
-
-    <h2>Related concepts</h2>
-    <div class="nav-grid">
-        <a href="root-cause-analysis.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Root Cause Analysis</h3>
-            <p>The broader family of RCA tools — fishbone diagrams, fault tree analysis, and when each is appropriate.</p>
-        </a>
-        <a href="joiner-levels-of-fix.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Joiner&rsquo;s Levels of Fix</h3>
-            <p>The test that determines whether your 5 Whys reached a deep enough answer — output, process, or system level.</p>
-        </a>
-        <a href="moonshot-protocol.html" class="nav-card">
-            <div class="nav-tag">Method</div>
-            <h3>The Moonshot Protocol</h3>
-            <p>When the Why 5 answer reveals a structural contradiction, not just a missing fix — the ten-step method for dissolving it with TRIZ separation.</p>
-        </a>
-        <a href="pdsa-cycle.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>PDSA Cycle</h3>
-            <p>The 5 Whys belongs in the Plan phase. Bootstrap CUSUM belongs in the Study phase. Together they close the loop.</p>
-        </a>
-        <a href="never-events-wrong-route.html" class="nav-card">
-            <div class="nav-tag">Article &mdash; Patient Safety</div>
-            <h3>Never Events &mdash; Wrong Route</h3>
-            <p>15 years, 17.5 events per year, no change point. The Bootstrap CUSUM picture of a system whose 5 Whys never reached Why 5.</p>
-        </a>
-        <a href="variation-and-spc.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Variation &amp; SPC</h3>
-            <p>The 5 Whys analyses individual events. SPC analyses patterns. Both are needed for a complete picture.</p>
-        </a>
-        <a href="why-nothing-changes.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Why Nothing Changes</h3>
-            <p>Why Level 1 and Level 2 fixes dominate in practice — and why the system keeps producing the same problems.</p>
-        </a>
-    </div>
-
-    <footer class="page-footer">
-        <p><strong>Origin:</strong> Toyoda, S. Toyota Industries Corporation, early 20th century. Popularised by Ohno, T. <em>Toyota Production System.</em> Productivity Press, 1978.</p>
-        <p style="margin-top:8px;"><strong>Joiner levels of fix:</strong> Joiner, B.L. <em>Fourth Generation Management.</em> McGraw-Hill, 1994.</p>
-        <p style="margin-top:8px;"><strong>Deming 94% rule:</strong> Deming, W.E. <em>Out of the Crisis.</em> MIT Press, 1982.</p>
-        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
-        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
-    </footer>
-
-</main>
-
+<main class="improvement-page" id="main-content"><h1>The 5 Whys: a practical how-to</h1>
+<p><strong>What conditions lie behind this particular explanation?</strong></p>
+<p>The 5 Whys is a simple way to explore a possible causal path: ask why something happened, check the answer, then explore the conditions behind it. <strong>Five is a prompt—not a guaranteed route to one root cause.</strong> You may need fewer or more questions, several branches, or a different investigation approach.</p>
+<p>Use it within an evidence-led investigation, not as an interview technique for finding someone to blame. For the wider process and diagrams, see the <a href="root-cause-analysis.html">root cause analysis guide</a>.</p>
+<nav aria-label="Page shortcuts"><ul><li><a href="#section-how">How to run a 5 Whys</a></li><li><a href="#section-example">Worked example: a late customer order</a></li><li><a href="#section-limitations">Limits and when to stop</a></li><li><a href="#section-cusum">Test the response</a></li></ul></nav>
+<section id="section-how"><h2>How to run a 5 Whys</h2>
+<span id="section-origin"></span>
+<ol class="step-list"><li><strong>Start with a specific problem.</strong> State what happened, where and when, and how it differed from what was expected. Do not build an assumed cause into the statement.</li>
+<li><strong>Involve people who know the work.</strong> Establish the sequence using records, observation and accounts from those involved. Ask what made an action or outcome possible, not “Why did you fail?”</li>
+<li><strong>Ask why—and check the answer.</strong> Record the proposed explanation, supporting and conflicting evidence, and what remains unknown. A plausible answer is not a fact.</li>
+<li><strong>Explore each supported path.</strong> Ask what conditions lay behind the answer. Where more than one contributor is plausible, draw separate branches rather than forcing them into a single chain.</li>
+<li><strong>Pause when evidence runs out.</strong> Assign someone to gather the missing information. “We don’t know yet” is better than an invented answer.</li>
+<li><strong>Summarise what you can act on and test.</strong> Keep uncertainties visible and connect a proposed change to a supported explanation. Do not stop merely because you have reached five questions—or continue until you can name a senior manager.</li></ol></section>
+<section id="section-example"><h2>Worked example: a late customer order</h2>
+<p><strong>Problem statement:</strong> order A was promised for Tuesday but arrived on Thursday.</p>
+<p>This is an <strong>invented, non-clinical illustration</strong>. The records described below are evidence you would need to obtain in a real investigation, not findings from an actual business.</p>
+<div aria-label="Scrollable example with evidence checks" class="table-scroll" role="region" tabindex="0"><table><thead><tr><th>Question</th><th>Illustrative answer</th><th>Evidence needed before accepting it</th></tr></thead><tbody>
+<tr><td data-label="Question">1. Why did the order arrive late?</td><td data-label="Illustrative answer">It missed the planned carrier collection and went on the next available service.</td><td data-label="Evidence needed">Compare the agreed date, collection booking, dispatch scan and delivery record. Check for carrier delays too.</td></tr>
+<tr><td data-label="Question">2. Why did it miss collection?</td><td data-label="Illustrative answer">It was not ready when the carrier arrived.</td><td data-label="Evidence needed">Check production completion, packing and collection timestamps. Talk with dispatch staff.</td></tr>
+<tr><td data-label="Question">3. Why was it not ready?</td><td data-label="Illustrative answer">It needed rework after being made to an outdated specification.</td><td data-label="Evidence needed">Compare the product, rework record and approved customer specification. Check when the discrepancy was found.</td></tr>
+<tr><td data-label="Question">4. Why was the outdated specification used?</td><td data-label="Illustrative answer">An earlier copy was still available at the workstation and was selected.</td><td data-label="Evidence needed">Inspect the copies available at the time and reconstruct how the job information was selected.</td></tr>
+<tr><td data-label="Question">5. Why was the earlier copy still available?</td><td data-label="Illustrative answer">The update process added a new version without withdrawing or clearly superseding the old one.</td><td data-label="Evidence needed">Review version history and the update workflow with those using it. Check other jobs to see whether this is a wider vulnerability.</td></tr>
+</tbody></table></div>
+<p><strong>Branch rather than force the story:</strong> readiness could also have been affected by unavailable material or an equipment interruption. Investigate these as separate paths if evidence makes them plausible. The promised date or collection plan may also have been unrealistic; do not assume either was sound.</p>
+<p><strong>Pause if you cannot check an answer.</strong> If version history is missing, record the uncertainty and gather other evidence. Do not call the fifth answer “the root cause” just because it completes the chain.</p>
+<p><strong>Possible test:</strong> if the version-control explanation is supported, trial a controlled source of approved specifications and a reliable way to supersede old copies. Check use of the current version, rework, on-time delivery, access difficulties and extra workload. This may address one pathway without explaining every late order.</p></section>
+<section id="section-limitations"><h2>Limits and when to stop</h2>
+<span id="section-joiner"></span><span id="section-stopping"></span>
+<ul><li><strong>One chain is not the whole system.</strong> Several interacting conditions can contribute to the same outcome. Use a <a href="root-cause-analysis.html#section-fishbone">fishbone</a>, timeline or specialist method when a single chain hides the important relationships.</li>
+<li><strong>Different teams can reach different answers.</strong> Make the evidence and reasoning visible; do not select an explanation by confidence, seniority or agreement alone.</li>
+<li><strong>Have we stopped at the obvious explanation?</strong> “Someone made a mistake” or “the procedure wasn’t followed” may describe what happened without explaining the conditions behind it. Would another person face the same difficulty? <a href="joiner-levels-of-fix.html">Explore Joiner’s levels of fix →</a> Follow the evidence—not a prescribed level or a search for someone to blame.</li>
+<li><strong>Stop to investigate, not to satisfy a number.</strong> Pause when evidence runs out, branches need specialist work, or the next question becomes speculation. You can test a supported contributor while recognising that the explanation remains incomplete.</li>
+<li><strong>Respond proportionately to risk.</strong> Serious concerns may require immediate protective action and formal investigation after a single event. Do not wait for repetition or rely on a brief 5 Whys exercise where a more rigorous response is required.</li></ul></section>
+<section id="section-cusum"><h2>Test the response—not just the story</h2>
+<p>Agree what you expect the change to achieve, how you will know it was implemented, what harm to watch for and when to review it. Include the people affected and use appropriate safety and approval processes.</p>
+<p>A suitable chart or Bootstrap CUSUM analysis may help identify a performance change. <strong>A change point does not confirm the causal chain or prove that the intervention caused the result.</strong> Consider other changes, implementation, data quality and variation. No detected change does not automatically mean the idea had no benefit.</p>
+<a class="more" href="why-improvements-fail.html#right-intervention">Right intervention? →</a><br/><a class="more" href="why-improvements-fail.html#right-measures">Right measures? →</a></section>
+<section><h2>Use the tools for different questions</h2>
+<p><a href="systems-thinking.html">Systems thinking</a> examines parts and relationships. <a href="root-cause-analysis.html">RCA</a> organises an evidence-led investigation. The 5 Whys explores a particular explanatory path. <a href="causal-loop-diagrams.html">Feedback loops</a> examine how consequences return to influence what happens next.</p>
+<p><strong>These are complementary tools—not mandatory stages.</strong></p>
+<a class="more" href="root-cause-analysis.html">Return to the practical RCA guide and templates →</a></section></main>
 <div id="site-footer"></div>
 <script src="assets/site-chrome.js"></script>
 </body>
-</html>
