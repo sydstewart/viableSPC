@@ -1,222 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://stepchangeanalysis.com/standardisation-vs-customisation.html">
-    <title>Standardisation vs Customisation — Portfolio Policy and the Scalability Decision — StepChangeAnalysis.com</title>
-    <meta name="description" content="Standardisation vs customisation explained — the customisation trap, portfolio policy, and the scalability decision. Why each bespoke request feels like revenue but adds variety the system cannot absorb. How the Innovator's Solution and Bright Spots point to the standardised product.">
-    <meta name="keywords" content="standardisation vs customisation, product portfolio policy, customisation trap service business, scalable product model, when to standardise a product, variety Ashby law, innovator's solution Christensen">
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://stepchangeanalysis.com/standardisation-vs-customisation.html" rel="canonical"/>
+<title>Standardisation and Customisation — Decide Where Flexibility Belongs — StepChangeAnalysis.com</title>
+<meta content="Decide what to standardise, where customers need flexibility, and how to handle exceptions. Explore TRIZ separation and test the whole result." name="description"/>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-    <script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag("js", new Date());
         gtag("config", "G-NZLMMS3ZGG");
     </script>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
 
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
-<div id="site-header"></div>
+.improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
 
-<main class="page-wrap">
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="start-here.html">Concepts</a> &rsaquo; Standardisation vs Customisation</div>
-    <div class="page-flag">&#128200; Improvement Concepts</div>
-    <h1>Standardisation vs Customisation</h1>
-    <p class="page-intro">Every request for customisation feels like revenue. In a service business under financial pressure, saying yes to bespoke work keeps the lights on. But each customisation adds variety the system must absorb &mdash; variety that consumes the constraint, creates unpredictable delivery, generates disproportionate support demand, and makes it impossible to scale. Standardisation is not about turning customers away. It is about designing a product that delivers genuine value without requiring bespoke effort every time.</p>
-    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
-
-    <details class="toc-details">
-        <summary>&#9776;&nbsp; Contents</summary>
-        <div class="toc-inner">
-            <ol>
-                <li><a href="#section-trap">The customisation trap</a></li>
-                <li><a href="#section-variety">Variety and the constraint</a></li>
-                <li><a href="#section-innovators">The Innovator&rsquo;s Solution &mdash; Christensen</a></li>
-                <li><a href="#section-lead-users">Lead users &mdash; von Hippel</a></li>
-                <li><a href="#section-blueprint">From Bright Spot to Blueprint</a></li>
-                <li><a href="#section-policy">Writing a portfolio policy</a></li>
-                <li><a href="#section-cusum">Bootstrap CUSUM and the standardisation shift</a></li>
-            </ol>
-        </div>
-    </details>
-
-    <h2 id="section-trap">The customisation trap</h2>
-
-    <p>The customisation trap is a specific pattern that affects service businesses, software companies, professional services firms, and any organisation that delivers value through expert people rather than manufactured products. It works like this:</p>
-
-    <ol style="margin:16px 0 20px 24px;line-height:2.2;">
-        <li>A customer requests a variation from the standard offering. The request is reasonable. The commercial pressure to say yes is high.</li>
-        <li>The organisation says yes. The work is done. The customer is satisfied. Revenue is recorded.</li>
-        <li>The customisation creates a new support obligation. The bespoke configuration must be maintained, upgraded, and troubleshot separately from the standard product.</li>
-        <li>The next customer requests a different customisation. Yes again. Another variant in the installed base.</li>
-        <li>Over time, the installed base contains dozens or hundreds of variants. Each is subtly different. Each requires specialist knowledge to support. The total support burden grows faster than the customer base.</li>
-        <li>Developer time is consumed maintaining variants rather than improving the core product. New sales require the same bespoke work as old sales. The organisation cannot scale because every sale is effectively a new project.</li>
-    </ol>
-
-    <div class="callout red">
-        <strong>Saying yes is a survival reflex that becomes a structural constraint</strong>
-        <p>At the individual transaction level, each customisation is rational: it generates revenue, satisfies a customer, and keeps a relationship intact. At the system level, the cumulative effect is to add variety the system cannot absorb. Ashby&rsquo;s Law of Requisite Variety states that only variety can absorb variety &mdash; a system can only manage the variety in its environment if it has equivalent internal variety. A small expert team does not have the internal variety to manage 44 product variants. It can manage one standard product with well-defined configuration options.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-variety">Variety and the constraint</h2>
-
-    <p>From a <a href="theory-of-constraints.html">Theory of Constraints</a> perspective, customisation is a constraint multiplier. Each additional variant in the installed base:</p>
-
-    <ul>
-        <li>Increases the knowledge required to support the base (constraint on Goalie effectiveness)</li>
-        <li>Increases the scope of regression testing for upgrades (constraint on Toolmaker throughput)</li>
-        <li>Increases the time required to scope new projects accurately (constraint on sales conversion)</li>
-        <li>Creates hidden implementation complexity that only becomes visible mid-project (constraint on delivery)</li>
-    </ul>
-
-    <p>The last point is the most damaging. Customisation requests that appear simple at the scoping stage frequently reveal hidden complexity during implementation &mdash; integration requirements that were not anticipated, configuration conflicts, data migration issues. The project expands. The developer is locked into delivery. New sales wait. The constraint is consumed by complexity that was accepted for a fraction of its true cost.</p>
-
-    <hr>
-
-    <h2 id="section-innovators">The Innovator&rsquo;s Solution &mdash; Christensen</h2>
-
-    <p>Clayton Christensen, in <em>The Innovator&rsquo;s Solution</em> (2003), identifies the pattern by which successful disruptors enter markets. The insight relevant to standardisation decisions is this: the disruptive new product is not a stripped-down, cheaper version of the incumbent&rsquo;s premium offering. It is a simpler, more focused product that does fewer things &mdash; but does the most important thing reliably, affordably, and without requiring specialist expertise to implement or maintain.</p>
-
-    <p>The incumbent&rsquo;s response to the disruptor is almost always to add features, increase customisation, and move further upmarket toward the most demanding customers. This is rational for the incumbent&rsquo;s existing customer base &mdash; and it is the mechanism by which the disruptor takes the mainstream market while the incumbent retreats to an ever-smaller segment of high-complexity, high-cost bespoke work.</p>
-
-    <p>The standardisation decision &mdash; deliberately simplifying the offer, defining a fixed scope, and delivering it repeatably &mdash; is the Innovator&rsquo;s Solution applied to the organisation itself. It sacrifices the most complex and demanding work (which is also the most constraint-intensive) to capture the larger, simpler, faster-growing market segment that the current offer is too expensive and too slow to serve.</p>
-
-    <hr>
-
-    <h2 id="section-lead-users">Lead users &mdash; von Hippel</h2>
-
-    <p>Eric von Hippel&rsquo;s lead user research identifies a paradox in product development: the most valuable insights for mainstream product design come from users at the extreme end of the adoption curve &mdash; users who are ahead of market trends and have already found workarounds to problems that mainstream users have not yet encountered.</p>
-
-    <p>In a B2B software context, the lead users are the customers who are getting exceptional results from the product &mdash; the <a href="bright-spots.html">Bright Spots</a> in the customer base. They have typically adapted the product in specific ways, developed their own processes around it, and found use cases that the developer did not anticipate. They are the early evidence of where the mainstream market will be in two to three years.</p>
-
-    <p>Von Hippel&rsquo;s corrected insight for the standardisation decision: lead user behaviour is the source of the standardised product hypothesis, not the source of the next bespoke feature request. The question is not &ldquo;what does this lead user want us to build for them?&rdquo; but &ldquo;what are they doing that we could pre-configure for everyone?&rdquo; Their bespoke adaptation becomes the next standard configuration option. Their workaround becomes the next built-in feature. Their exceptional results become the standard outcome.</p>
-
-    <hr>
-
-    <h2 id="section-blueprint">From Bright Spot to Blueprint</h2>
-
-    <p>The path from customisation trap to standardised offer follows a specific discovery sequence:</p>
-
-    <div class="compare-grid">
-        <div class="cg-card custom">
-            <div class="cgc-label">&#10060; Customisation model</div>
-            <h3>Every sale is a project</h3>
-            <ul>
-                <li>Scope defined per customer</li>
-                <li>Implementation requires specialist knowledge</li>
-                <li>Delivery time: months</li>
-                <li>Support burden: high per customer</li>
-                <li>Sales cycle: long (risk-averse buyers)</li>
-                <li>Cannot delegate delivery</li>
-                <li>Cannot scale without headcount</li>
-            </ul>
-        </div>
-        <div class="cg-card standard">
-            <div class="cgc-label">&#9989; Blueprint model</div>
-            <h3>Every sale is a configuration</h3>
-            <ul>
-                <li>Scope fixed in advance</li>
-                <li>Implementation follows a defined script</li>
-                <li>Delivery time: weeks</li>
-                <li>Support burden: low and predictable</li>
-                <li>Sales cycle: short (low risk, low price)</li>
-                <li>Delivery can be delegated to implementers</li>
-                <li>Scales without proportional headcount</li>
-            </ul>
-        </div>
-    </div>
-
-    <p>The Blueprint is not invented from theory. It is discovered from the installed base by asking: which customers are achieving the best outcomes, with the least implementation complexity, at the lowest ongoing support cost? What do they have in common? What configuration choices did they make? What business process did they bring to the implementation? The answers to these questions define the Blueprint &mdash; the standardised offer that delivers the best-case outcome for the easiest-to-serve segment of the market.</p>
-
-    <p>This is <a href="bright-spots.html">Bright Spots</a> applied to the customer base rather than to internal operations. The Bootstrap CUSUM question: which customers have shown a structural upward change point in their key outcome metrics since adopting the product? Those are the Bright Spots. Their configuration and their process are the Blueprint hypothesis.</p>
-
-    <hr>
-
-    <h2 id="section-policy">Writing a portfolio policy</h2>
-
-    <p>A portfolio policy makes the standardisation decision explicit, written, and enforced at the scoping stage rather than the delivery stage. It answers three questions:</p>
-
-    <ul>
-        <li><strong>What we deliver:</strong> a specific description of the standardised offer &mdash; what is included, what configuration options exist, what is out of scope.</li>
-        <li><strong>What we do not deliver:</strong> an explicit list of the customisation types that are no longer accepted, with a brief rationale. This is the Kill list from the <a href="pick-model.html">PICK model</a> applied at the product level.</li>
-        <li><strong>How we handle requests outside scope:</strong> a clear process for declining or redirecting out-of-scope requests without losing the customer relationship. This might include a referral to a partner, a scoped custom engagement at premium pricing, or a roadmap commitment for future inclusion.</li>
-    </ul>
-
-    <div class="info-box">
-        <h3>&#128202; The portfolio policy as a constraint protection mechanism</h3>
-        <p>A written portfolio policy is the organisational implementation of TOC Step 3: subordinate everything to the constraint. Every out-of-scope request accepted is a constraint-consumption event. The policy makes the decision in advance, removes case-by-case deliberation, and protects the constraint from the cumulative effect of individually rational but systemically destructive yes decisions.</p>
-        <p style="margin-top:10px;">The policy also changes the sales dynamic. A clearly defined, fixed-scope product is easier to sell to risk-averse buyers because the risk is explicit and bounded. A bespoke project carries open-ended risk for the buyer &mdash; the final cost, the delivery timeline, and the outcome are all uncertain. The Blueprint&rsquo;s constraints are its selling points to the right market segment.</p>
-        <p style="margin-top:10px;">Bootstrap CUSUM on implementation completion time, support cases per customer, and customer satisfaction should all show downward change points after the portfolio policy is implemented &mdash; as the high-complexity, high-support-burden customisation work exits the pipeline and is replaced by repeatable Blueprint deliveries.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-cusum">Bootstrap CUSUM and the standardisation shift</h2>
-
-    <p>The standardisation shift produces a specific signature across multiple Bootstrap CUSUM series:</p>
-
-    <ul>
-        <li><strong>Implementation time per project</strong> &mdash; downward change point as Blueprint deliveries replace bespoke projects</li>
-        <li><strong>Support cases per customer</strong> &mdash; downward change point as predictable, well-documented configurations replace one-off solutions</li>
-        <li><strong>Sales cycle length</strong> &mdash; downward change point as fixed-scope offers reduce buyer risk and accelerate decisions</li>
-        <li><strong>New contract value</strong> &mdash; upward change point as faster, lower-cost deliveries increase throughput</li>
-    </ul>
-
-    <p>The four change points together, coinciding with the portfolio policy implementation, are the statistical confirmation that the standardisation decision produced the structural shift. Pre-specify all four predictions before implementing the policy. The Study step of the <a href="pdsa-cycle.html">PDSA cycle</a> is not &ldquo;does it feel like things are better?&rdquo; It is: which of the four change points have appeared, and in which order?</p>
-
-    <div class="callout blue" style="margin-top:32px;">
-        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
-        <p>Standardisation vs customisation sits at Step 5 (complete solution) and Step 6 (PICK/portfolio policy) of the <a href="improvement-method.html">7-step improvement method</a>. See <a href="focus-and-prioritisation.html">Focus &amp; Prioritisation</a> for the role design that makes standardisation operationally achievable, and <a href="theory-of-constraints.html">Theory of Constraints</a> for the throughput framework.</p>
-    </div>
-
-    <h2>Related concepts</h2>
-    <div class="nav-grid">
-        <a href="theory-of-constraints.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Theory of Constraints</h3>
-            <p>Customisation is a constraint multiplier. Each variant adds variety the system must absorb at the expense of constraint capacity.</p>
-        </a>
-        <a href="bright-spots.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Bright Spots</h3>
-            <p>The Blueprint is discovered, not invented — by finding which customers achieve the best outcomes at the lowest complexity and studying what they do differently.</p>
-        </a>
-        <a href="focus-and-prioritisation.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Focus &amp; Prioritisation</h3>
-            <p>Portfolio policy is the written commitment that makes the Kill discipline systemic rather than case-by-case.</p>
-        </a>
-        <a href="failure-demand.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Failure Demand</h3>
-            <p>Bespoke configurations generate disproportionate failure demand — support cases for one-off implementations that no script can handle.</p>
-        </a>
-        <a href="necessary-but-not-sufficient.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Necessary But Not Sufficient</h3>
-            <p>Defining the Blueprint is necessary. Portfolio policy is necessary. Goldie/Builder shielding is necessary. All three together are sufficient for scale.</p>
-        </a>
-        <a href="improvement-method.html" class="nav-card">
-            <div class="nav-tag">Method</div>
-            <h3>The 7-Step Improvement Method</h3>
-            <p>The standardisation decision belongs in Step 5 (complete solution) — as a necessary condition for the goal, verified by Bootstrap CUSUM in Step 7.</p>
-        </a>
-    </div>
-
-    <footer class="page-footer">
-        <p><strong>Innovator&rsquo;s Solution:</strong> Christensen C, Raynor M. <em>The Innovator&rsquo;s Solution.</em> Harvard Business School Press, 2003.</p>
-        <p style="margin-top:8px;"><strong>Lead users:</strong> Von Hippel E. <em>The Sources of Innovation.</em> Oxford University Press, 1988. &nbsp;&middot;&nbsp; Von Hippel E. <em>Democratizing Innovation.</em> MIT Press, 2005.</p>
-        <p style="margin-top:8px;"><strong>Requisite variety:</strong> Ashby W.R. <em>An Introduction to Cybernetics.</em> Chapman &amp; Hall, 1956.</p>
-        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
-    </footer>
-</main>
-
-<div id="site-footer"></div>
-<script src="assets/site-chrome.js"></script>
-</body>
-</html>
+.improvement-page .jump-links{padding:14px 18px;background:#eef4fa;border:1px solid #cbd5df;border-radius:8px;margin:24px 0}
+.improvement-page .jump-links a{display:inline-block;min-height:44px;padding:8px 0;box-sizing:border-box;margin-right:16px}
+.improvement-page h3{font:700 20px/1.35 system-ui,sans-serif;color:#002d5b;margin:0 0 12px}
+.improvement-page .pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
+.improvement-page .pick-cell{padding:20px;border:1px solid #cbd5df;border-radius:8px;background:#fff}
+.improvement-page .pick-cell p:last-child{margin:0}.improvement-page .pick-axis{font-size:15px;line-height:1.5;color:#41566d}
+.improvement-page .pick-note{font-size:15px;color:#41566d}
+@media(max-width:600px){.improvement-page .pick-grid{grid-template-columns:1fr}.improvement-page .pick-cell{padding:18px}}
+</style></head><body><div id="site-header"></div><main class="improvement-page" id="main-content"><h1>Standardisation and customisation: decide where flexibility belongs</h1>
+<p><strong>What should be repeatable—and where does the customer genuinely need a different response?</strong> Use this page to shape an offer that meets real needs without creating unmanaged delivery and support demands.</p>
+<p>Standardisation is not a reason to ignore differences. Customisation is not automatically a problem. The question is whether the benefit justifies the full cost, risk and continuing obligation.</p>
+<nav class="jump-links" aria-label="On this page"><a href="#section-policy">Set clear acceptance rules →</a><a href="#separate-the-needs">Explore separation →</a></nav>
+<section id="section-trap"><h2>Look beyond the sale</h2>
+<p>A one-off request may bring useful revenue—and create work long after delivery. Check scoping, specialist time, testing, maintenance, upgrades and customer support before promising it.</p>
+<p id="section-variety">A possible trap is: more variants → more support and expert dependence → less time to improve the common offer → continued dependence on bespoke work. Investigate whether this happens here; do not assume every variant has the same cost.</p>
+<p>Compare genuine customer benefit and the cost of serving different needs. Check what is <a href="finding-the-real-constraint.html">limiting reliable delivery</a> and whether the right skills and response capacity are available.</p>
+</section>
+<section id="separate-the-needs"><h2>Meet both needs through separation</h2>
+<p>“Customers need flexibility; delivery needs repeatability” need not mean choosing one and sacrificing the other. <a href="triz-separation-principles.html">TRIZ separation</a> offers four useful prompts:</p>
+<ul>
+<li><strong>Time:</strong> agree customer-specific choices before routine delivery begins.</li>
+<li><strong>Space:</strong> provide a defined specialist route without exposing every delivery task to interruptions.</li>
+<li><strong>Condition:</strong> use a routine route for familiar needs and an exception route when clear criteria apply.</li>
+<li><strong>Whole and parts:</strong> keep a common core with supported configurable options.</li>
+</ul>
+<p>These are ideas to test, not guaranteed solutions. Check whether both needs are met and whether new handovers, delays or support burdens are created.</p>
+</section>
+<section id="section-policy"><h2>Agree what you will accept</h2>
+<ol>
+<li><strong>Define the offer.</strong> State the intended customer need, included service, supported options and limits.</li>
+<li><strong>Set an exception process.</strong> Who checks benefit, cost, capacity, risk and ongoing support—and who can authorise a commitment?</li>
+<li><strong>Make the trade-off explicit.</strong> If bespoke work is accepted, agree what changes elsewhere. Check cash needs, existing contracts and safety before declining or withdrawing work.</li>
+<li><strong>Offer a useful alternative.</strong> A supported option, partner referral or separately scoped engagement may fit. Do not promise a future feature without authority and capacity.</li>
+</ol>
+<p>Manage the resulting commitments with <a href="focus-and-prioritisation.html">Focus and prioritisation</a>; compare competing improvement ideas with <a href="pick-model.html">PICK</a>.</p>
+</section>
+<details class="conditions" id="section-blueprint"><summary>Optional: learn from customers before defining a standard</summary><div class="conditions-body">
+<p id="section-lead-users">Look at customers achieving useful results with manageable delivery and support effort. Ask what helps them—and whose needs the proposed standard would exclude. A successful workaround is a hypothesis to investigate, not automatically a feature everyone needs.</p>
+<p id="section-innovators">Try a repeatable offer with an appropriate customer group before committing widely. Neither unusual users nor a few easy implementations establish a mainstream market. Check demand, willingness to pay, accessibility and the capability to deliver.</p>
+<p><a href="bright-spots.html">Learn from places doing better →</a></p>
+</div></details>
+<section id="section-cusum"><h2>Test the whole result</h2>
+<p>Agree expected benefits and a review date. Check delivery time, quality, customer outcomes, support effort and financial viability—not just the number of variants removed.</p>
+<p>A chart or Bootstrap CUSUM analysis may help identify a performance change; it does not prove the new offer caused it. No detected change is not automatically proof of no benefit. Keep legitimate exceptions and possible harm visible.</p>
+<a class="more" href="why-improvements-fail.html#right-measures">Choose useful measures →</a>
+</section>
+<section><h2>What’s your next useful question?</h2>
+<p><strong>Which part of the work needs flexibility—and could the rest become more reliable and repeatable?</strong></p>
+<a class="more" href="triz-separation-principles.html">Explore conflicting needs through separation →</a><br>
+<a class="more" href="why-improvements-fail.html#where-problems-can-arise">Return to Where might the difficulty lie? →</a>
+</section></main><div id="site-footer"></div><script src="assets/site-chrome.js"></script><script>(function(){function reveal(){var id;try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}var el=document.getElementById(id);if(!el)return;var d=el.closest('details');if(d)d.open=true;requestAnimationFrame(function(){el.scrollIntoView();});}window.addEventListener('hashchange',reveal);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',reveal);else reveal();})();</script></body></html>

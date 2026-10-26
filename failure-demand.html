@@ -1,233 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://stepchangeanalysis.com/failure-demand.html">
-    <title>Failure Demand in Healthcare: What It Is, How to Measure It and What to Do — StepChangeAnalysis.com</title>
-    <meta name="description" content="Failure demand explained: demand caused by a failure to do something right first time. How to identify it in healthcare and public services, measure it honestly, and reduce it — with NHS examples and Bootstrap CUSUM.">
-    <meta name="keywords" content="failure demand Seddon explained, failure demand value demand, failure demand NHS, John Seddon systems thinking, failure demand customer service, demand created by failure">
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://stepchangeanalysis.com/failure-demand.html" rel="canonical"/>
+<title>Failure Demand — Recognise and Reduce Avoidable Work — StepChangeAnalysis.com</title>
+<meta content="Recognise failure demand without labelling every repeat contact as waste. Investigate unmet needs, test changes and check access and customer outcomes." name="description"/>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-    <script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag("js", new Date());
         gtag("config", "G-NZLMMS3ZGG");
     </script>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
 
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
-<div id="site-header"></div>
+.improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
 
-<main class="page-wrap">
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="root-cause-analysis.html">Diagnose the Cause?</a> &rsaquo; Failure Demand</div>
-    <div class="page-flag">&#128269; Diagnose the Cause?</div>
-    <h1>Failure Demand</h1>
-    <p class="page-intro">Not all demand is equal. John Seddon&rsquo;s distinction between value demand and failure demand is one of the most practically important ideas in systems thinking for service organisations. Failure demand is demand caused by a failure to do something, or to do something right, for the customer. It is waste masquerading as work &mdash; and it is invisible in most management information systems.</p>
-
-    <div class="callout blue" style="margin-top:16px;">
-        <strong>What you&rsquo;ll be able to do after this page</strong>
-        <ul style="margin:10px 0 0 18px;line-height:1.9;">
-            <li>Distinguish failure demand from value demand &mdash; and see why most services can&rsquo;t tell the difference.</li>
-            <li>Identify failure demand in your own service using Seddon&rsquo;s approach.</li>
-            <li>Understand why reducing failure demand frees up more capacity than managing the queue.</li>
-            <li>Use Bootstrap CUSUM to confirm whether a failure demand reduction is genuine structural change.</li>
-        </ul>
-    </div>
-
-    <div class="cta-box" style="margin-top:18px;">
-        <a href="index.html" class="cta-btn">&#9654; Open the StepChange Analyzer</a>
-        <p style="margin-top:10px;color:white;">
-            Next: <a href="interpret-results.html" style="color:white;">Interpret results</a> &rarr; <a href="what-to-do-next.html" style="color:white;">What to do next</a>
-        </p>
-    </div>
-
-
-    <div style="background:#f0f4ff;border-left:4px solid #185FA5;padding:14px 18px;margin:18px 0 12px;border-radius:0 6px 6px 0;">
-        <strong style="color:#0C447C;">Failure demand</strong> — Demand caused by a failure to do something right first time — defined by John Seddon at Vanguard. A GP appointment generated by a medication side effect that was not explained at prescribing is failure demand. A second A&E attendance for the same condition inadequately treated first time is failure demand. It looks identical to value demand in aggregate counts but consumes capacity without delivering value.
-        <br><br>
-        <span style="font-size:0.87em;color:#5F5E5A;">Related: <a href="failure-demand.html">John Seddon and Systems Thinking</a> &nbsp;&middot;&nbsp; <a href="types-of-measures.html">Types of measures</a> &nbsp;&middot;&nbsp; <a href="variation-and-spc.html">Variation and SPC</a> &nbsp;&middot;&nbsp; <a href="interpret-results.html">Interpret results</a></span>
-    </div>
-
-    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
-
-    <details class="toc-details">
-        <summary>&#9776;&nbsp; Contents</summary>
-        <div class="toc-inner">
-            <ol>
-                <li><a href="#section-definition">The definition</a></li>
-                <li><a href="#section-two-types">Value demand vs failure demand</a></li>
-                <li><a href="#section-invisible">Why failure demand is invisible</a></li>
-                <li><a href="#section-nhs">Failure demand in the NHS</a></li>
-                <li><a href="#section-services">Failure demand in service organisations</a></li>
-                <li><a href="#section-fix">How to reduce failure demand</a></li>
-                <li><a href="#section-cusum">Bootstrap CUSUM and failure demand</a></li>
-            </ol>
-        </div>
-    </details>
-
-    <h2 id="section-definition">The definition</h2>
-
-    <p>John Seddon, a British management thinker and critic of command-and-control management, introduced the concept of failure demand in his work on systems thinking in service organisations, most fully developed in <em>Freedom from Command and Control</em> (2003) and <em>Systems Thinking in the Public Sector</em> (2008).</p>
-
-    <p>Seddon&rsquo;s central observation is simple: in any service organisation, a significant proportion of inbound contacts are not customers asking for something new &mdash; they are customers returning because something was not done, or not done correctly, the first time. This demand is created entirely by the organisation&rsquo;s own failure. It consumes capacity, but it creates no value.</p>
-
-    <div class="callout red">
-        <strong>&#128218; Seddon&rsquo;s definition</strong>
-        <p><em>&ldquo;Failure demand is demand caused by a failure to do something or do something right for the customer.&rdquo;</em></p>
-        <p>It is distinct from value demand &mdash; demand that represents a new, legitimate request from a customer that the organisation exists to fulfil. Failure demand is waste. Value demand is the reason the organisation exists.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-two-types">Value demand vs failure demand</h2>
-
-    <div class="demand-grid">
-        <div class="demand-card value">
-            <div class="dc-label">&#9679; Value Demand</div>
-            <h3>Legitimate new requests</h3>
-            <p>Demand that represents a genuine customer need that the organisation exists to fulfil. The customer is contacting the organisation because they want something it can provide.</p>
-            <ul>
-                <li>A patient booking a first appointment</li>
-                <li>A customer placing a new order</li>
-                <li>A user requesting a new feature</li>
-                <li>A client asking for a quote</li>
-            </ul>
-        </div>
-        <div class="demand-card failure">
-            <div class="dc-label">&#9679; Failure Demand</div>
-            <h3>Demand created by failure</h3>
-            <p>Demand arising because something was not done, or not done correctly. The customer contacts the organisation not because they want something new, but because the organisation failed them.</p>
-            <ul>
-                <li>A patient chasing a referral that hasn&rsquo;t arrived</li>
-                <li>A customer calling because their order was wrong</li>
-                <li>A user raising a support ticket for a known bug</li>
-                <li>A client asking what is happening with their project</li>
-            </ul>
-        </div>
-    </div>
-
-    <p>The critical point is that failure demand and value demand look identical in most management information systems. Both generate a contact, a ticket, a call, a visit. Both consume staff time. Both appear in workload statistics. The organisation cannot manage what it cannot distinguish &mdash; and most organisations do not distinguish them.</p>
-
-    <hr>
-
-    <h2 id="section-invisible">Why failure demand is invisible</h2>
-
-    <p>Failure demand is systematically invisible for three structural reasons.</p>
-
-    <p><strong>Volume metrics hide the distinction.</strong> A call centre that receives 1,000 calls per day records 1,000 calls. Whether 400 of them are customers chasing incomplete work from last week is not visible in the volume figure. Management sees high demand and responds by adding capacity &mdash; which handles more failure demand, which obscures the underlying failure, which generates more failure demand. The organisation becomes permanently busy handling the consequences of its own failures.</p>
-
-    <p><strong>Target-setting amplifies it.</strong> In the NHS and many public services, performance targets measure response time &mdash; how quickly a contact is handled &mdash; rather than whether the underlying need was met. A GP practice that answers calls quickly but fails to resolve the patient&rsquo;s problem will generate multiple callbacks. Each callback is counted as good performance (answered quickly) while representing a failure (problem not resolved). Seddon called this &ldquo;sub-optimisation&rdquo; &mdash; the organisation meets the target while missing the point.</p>
-
-    <p><strong>It is attributed to customers rather than systems.</strong> The natural management response to high inbound volume is to ask why customers are contacting so frequently &mdash; implying the problem lies with customer behaviour rather than service design. Seddon&rsquo;s insight is that the question should be directed at the system, not the customer: <em>what did we fail to do, or fail to do correctly, that caused this contact?</em></p>
-
-    <hr>
-
-    <h2 id="section-nhs">Failure demand in the NHS</h2>
-
-    <p>The NHS is one of the most extensively documented settings for failure demand. Seddon&rsquo;s work in NHS primary care, urgent care, and housing benefit found failure demand accounting for anywhere from 40% to 80% of total contact volume in some services.</p>
-
-    <p>In <a href="why-nothing-has-worked-nhs-ae-performance.html">NHS A&amp;E</a>, a significant proportion of attendances are patients who could not access a timely GP appointment. The A&amp;E attendance is failure demand created by primary care capacity constraints. Managing A&amp;E capacity without addressing GP access addresses the symptom rather than the cause. <a href="three-charts-three-stories.html">Bootstrap CUSUM</a> on A&amp;E attendance finds no structural improvement across 15 years &mdash; the failure demand from primary care has been consistent throughout.</p>
-
-    <p>In GP appointments: a patient books an appointment because their medication review was overdue (value demand). A second appointment is booked because the prescription was issued incorrectly (failure demand). A third is booked because the referral letter was never sent (failure demand). The practice records three appointments. Two of them were created by its own failures. The <a href="gp-appointments-analysis.html">GP appointments analysis</a> on this site finds that doctor contact rates have not changed since 2018 despite appointment volumes rising &mdash; consistent with increasing failure demand absorbing the additional capacity.</p>
-
-    <hr>
-
-    <h2 id="section-services">Failure demand in service organisations</h2>
-
-    <p>The pattern is identical in commercial service organisations. A specialist B2B software company with a large installed base receives support contacts that fall into three categories:</p>
-
-    <ul>
-        <li><strong>Value demand &mdash; legitimate support:</strong> the customer has encountered a genuine edge case, a new use case, or a software defect. This is unavoidable and represents the real support workload.</li>
-        <li><strong>Failure demand &mdash; usability failures:</strong> the customer cannot complete a task because the interface is unclear, the documentation is absent, or the error message is unintelligible. This demand disappears when the UX is fixed or the help article is written. The work to handle these contacts is real. The need for it is not.</li>
-        <li><strong>Failure demand &mdash; process failures:</strong> the customer contacts support because a promised action was not completed &mdash; a configuration change was not applied, a scheduled task did not run, an upgrade was not communicated. Each of these contacts is created by the organisation&rsquo;s own process failure.</li>
-    </ul>
-
-    <div class="callout orange">
-        <strong>The 1,602 hours example</strong>
-        <p>When a specialist software company audits its 2,526 annual support cases and finds 1,602 hours consumed, the natural first question is: how do we handle these cases more efficiently? The Seddon question is different: <em>how many of these 2,526 cases are failure demand?</em> If 60% are failure demand &mdash; contacts that would not exist if specific failures had been fixed &mdash; then 961 hours per year are being consumed handling the consequences of fixable organisational failures. The solution is not faster handling. It is elimination: fix the UX issue, write the restart script, clarify the process. Each fix is a one-time investment that permanently removes a class of failure demand.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-fix">How to reduce failure demand</h2>
-
-    <p>Reducing failure demand requires identifying it first &mdash; which means classifying inbound contacts by type rather than simply counting them. A practical method:</p>
-
-    <ol style="margin:16px 0 20px 24px;line-height:2.2;">
-        <li><strong>Classify a sample of contacts</strong> as value demand or failure demand. This requires reading or listening to the actual contact, not just reading the ticket category. A one-week sample of 50&ndash;100 contacts is usually sufficient to identify the major failure demand patterns.</li>
-        <li><strong>Find the upstream failure</strong> for each failure demand category. What should have happened that did not? What was unclear, broken, or absent? Apply the <a href="five-whys.html">5 Whys</a> to each failure demand category to find the root cause.</li>
-        <li><strong>Fix the upstream failure</strong> at the system level. Write the help article. Fix the UX. Automate the restart. Set expectations before the customer needs to chase. The fix eliminates the failure demand permanently &mdash; it does not just handle it more efficiently.</li>
-        <li><strong>Measure the reduction</strong> using Bootstrap CUSUM on the total contact volume. A structural downward change point confirms that the fix eliminated a class of failure demand rather than just handling it faster.</li>
-    </ol>
-
-    <div class="info-box">
-        <h3>&#128202; Failure demand and the Theory of Constraints</h3>
-        <p>Failure demand is a direct constraint on throughput. Every hour spent handling failure demand is an hour not spent on value demand or on creating new value. In a software company where developer time is the binding constraint, failure demand that reaches developers &mdash; support cases that cannot be handled by scripts or Goalies &mdash; directly reduces the capacity available for new product development.</p>
-        <p style="margin-top:10px;">The <a href="theory-of-constraints.html">Theory of Constraints</a> Step 2 (Exploit) specifically addresses this: before adding capacity to the constraint, ensure the constraint is not being consumed by failure demand. Every hour of failure demand eliminated from the constraint is an hour of throughput permanently recovered &mdash; at zero additional cost.</p>
-        <p style="margin-top:10px;">This is also the connection to <a href="variation-and-spc.html">variation</a>: failure demand is a form of common cause variation in total contact volume. It appears as background noise in the contact volume series &mdash; stable, persistent, and structurally part of how the system operates. A Bootstrap CUSUM downward change point after a failure demand reduction programme is the confirmation that the structural cause was addressed, not just the symptoms managed.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-cusum">Bootstrap CUSUM and failure demand</h2>
-
-    <p>Bootstrap CUSUM on total contact volume distinguishes three situations that look identical in a simple monthly count:</p>
-
-    <ul>
-        <li><strong>Stable failure demand:</strong> A flat Bootstrap CUSUM line on contact volume means the failure demand is consistent &mdash; the same classes of failure are generating the same volume every period. The organisation is handling it efficiently but not eliminating it.</li>
-        <li><strong>Increasing failure demand:</strong> An upward Bootstrap CUSUM change point on contact volume, occurring when no new customers or new products were added, indicates growing failure demand &mdash; either a new failure was introduced, or an existing failure worsened.</li>
-        <li><strong>Failure demand eliminated:</strong> A downward Bootstrap CUSUM change point after a specific fix confirms that the fix eliminated a class of failure demand. The change point date should coincide with the fix. This is the Study step of the <a href="pdsa-cycle.html">PDSA cycle</a>: the pre-specified Bootstrap CUSUM prediction was a downward change point in contact volume within Z periods of implementing the restart script or help library.</li>
-    </ul>
-
-    <div class="callout blue" style="margin-top:32px;">
-        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
-        <p>Failure demand sits in Step 1 (list symptoms) and Step 3 (root cause) of the <a href="improvement-method.html">7-step improvement method</a>. High contact volume that has not reduced despite improvement efforts is the symptom. Failure demand hidden within that volume is frequently the root cause. See <a href="why-nothing-changes.html">Why Nothing Changes</a> for the broader diagnostic framework.</p>
-    </div>
-
-    <h2>Related concepts</h2>
-    <div class="nav-grid">
-        <a href="theory-of-constraints.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Theory of Constraints</h3>
-            <p>Failure demand consumes constraint capacity. Eliminating it is the cheapest way to increase throughput — no additional headcount required.</p>
-        </a>
-        <a href="root-cause-analysis.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Root Cause Analysis</h3>
-            <p>Each failure demand category has a root cause. Find it, fix it at the system level, and the demand disappears.</p>
-        </a>
-        <a href="variation-and-spc.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Variation &amp; SPC</h3>
-            <p>Failure demand appears as common cause variation in contact volume — stable, persistent, and invisible without classification.</p>
-        </a>
-        <a href="why-nothing-has-worked-nhs-ae-performance.html" class="nav-card">
-            <div class="nav-tag">Article</div>
-            <h3>NHS A&amp;E</h3>
-            <p>A&amp;E demand includes significant failure demand from primary care access constraints — visible in the flat Bootstrap CUSUM line across 15 years.</p>
-        </a>
-        <a href="improvement-method.html" class="nav-card">
-            <div class="nav-tag">Method</div>
-            <h3>The 7-Step Improvement Method</h3>
-            <p>Failure demand classification belongs in Steps 1 and 3 — listing symptoms and finding root causes.</p>
-        </a>
-        <a href="why-nothing-changes.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Why Nothing Changes</h3>
-            <p>Adding capacity to handle failure demand faster is not improvement — it is managing waste more efficiently.</p>
-        </a>
-    </div>
-
-    <footer class="page-footer">
-        <p><strong>Primary source:</strong> Seddon J. <em>Freedom from Command and Control.</em> Vanguard Press, 2003. &nbsp;&middot;&nbsp; Seddon J. <em>Systems Thinking in the Public Sector.</em> Triarchy Press, 2008.</p>
-        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
-    </footer>
-</main>
-
-<div id="site-footer"></div>
-<script src="assets/site-chrome.js"></script>
-</body>
-</html>
+.improvement-page .jump-links{padding:14px 18px;background:#eef4fa;border:1px solid #cbd5df;border-radius:8px;margin:24px 0}
+.improvement-page .jump-links a{display:inline-block;min-height:44px;padding:8px 0;box-sizing:border-box;margin-right:16px}
+.improvement-page h3{font:700 20px/1.35 system-ui,sans-serif;color:#002d5b;margin:0 0 12px}
+.improvement-page .pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
+.improvement-page .pick-cell{padding:20px;border:1px solid #cbd5df;border-radius:8px;background:#fff}
+.improvement-page .pick-cell p:last-child{margin:0}.improvement-page .pick-axis{font-size:15px;line-height:1.5;color:#41566d}
+.improvement-page .pick-note{font-size:15px;color:#41566d}
+@media(max-width:600px){.improvement-page .pick-grid{grid-template-columns:1fr}.improvement-page .pick-cell{padding:18px}}
+</style></head><body><div id="site-header"></div><main class="improvement-page" id="main-content"><h1>Failure demand: reduce work created by earlier failures</h1>
+<p><strong>What should have happened earlier that would have made this contact unnecessary?</strong> Use this page to investigate avoidable chasing, corrections and repeat contacts—not to discourage people from asking for help.</p>
+<p id="section-definition">John Seddon defines failure demand as “demand caused by a failure to do something or do something right for the customer”. The useful distinction is why the work arose, not whether the person contacting you is difficult.</p>
+<nav class="jump-links" aria-label="On this page"><a href="#section-two-types">Recognise the difference →</a><a href="#section-fix">Investigate and reduce it →</a></nav>
+<section id="section-two-types"><h2>Not every repeat contact is failure demand</h2>
+<ul>
+<li><strong>Value demand:</strong> a request that is a normal part of meeting the customer’s need—such as a new order, necessary advice or planned follow-up.</li>
+<li><strong>Possible failure demand:</strong> chasing an overdue promise, correcting an incorrect order or asking again because earlier information was unusable. Check what happened before classifying it.</li>
+<li><strong>Uncertain:</strong> record what is unknown. A repeat visit, complex case or urgent request does not establish an earlier failure.</li>
+</ul>
+<p id="section-invisible">Total calls, tickets or visits mix these types together. Counting activity alone cannot tell you whether needs were met—or why customers returned.</p>
+<details class="conditions" id="section-nhs"><summary>Examples: healthcare and other services</summary><div class="conditions-body">
+<p><strong>Healthcare:</strong> a patient chasing a referral that was agreed but never sent may be experiencing failure demand. Planned monitoring, a new symptom or clinically necessary reassessment is not automatically failure demand. A reattendance alone cannot establish inadequate earlier care.</p>
+<p id="section-services"><strong>Other services:</strong> an incorrect invoice may generate correction calls. Software contacts may reveal an unclear interface, missing information or a defect. Investigate the cause; do not classify all support as unavoidable or all questions as waste.</p>
+<p>These are illustrative examples, not findings about a particular service. Provide necessary help and respond to safety concerns while investigating.</p>
+</div></details>
+</section>
+<section id="section-fix"><h2>Find and reduce the demand at its source</h2>
+<ol>
+<li><strong>Listen to actual requests.</strong> Record what people say they need, the earlier events and whether the need was resolved. Include relevant channels and different periods; do not rely only on existing ticket labels.</li>
+<li><strong>Classify with the people doing the work.</strong> Agree examples of value, failure-related and uncertain demand. Review disagreements and missing evidence. A convenient sample may reveal patterns, but does not establish their prevalence across the service.</li>
+<li><strong>Trace a recurring pattern.</strong> What was promised, missing, unclear or inaccessible? Follow the whole journey, including other teams. Use <a href="root-cause-analysis.html">evidence-led investigation</a>, not a search for someone to blame.</li>
+<li><strong>Test a change to the conditions producing it.</strong> Examples include reliable handovers, clearer information or fixing a recurring defect. Check whether the change actually meets the customer’s need; documentation or automation alone may not.</li>
+<li><strong>Use released capacity deliberately.</strong> Agree how it will support customers, reduce waiting or <a href="make-change-workable.html#capacity-to-improve">make room to improve</a>. Less avoidable work does not automatically become usable capacity at the right place and time.</li>
+</ol>
+<p>Protect focus with <a href="focus-and-prioritisation.html">clear response arrangements</a>, but do not just shield experts from requests while leaving the failures in place.</p>
+</section>
+<section id="section-cusum"><h2>Check improvement—not just fewer contacts</h2>
+<p>Track the relevant contact types, unresolved needs and customer outcomes alongside waiting, workload and access. If reporting a proportion, show the denominator and keep definitions consistent. Check whether contacts moved channel or people gave up trying.</p>
+<p><strong>A fall in total contacts does not prove failure demand fell.</strong> Demand mix, service access and other changes may explain it. A chart or Bootstrap CUSUM analysis can help identify a performance change, not confirm its cause or permanent elimination. No detected change is not automatically proof of no benefit.</p>
+<a class="more" href="why-improvements-fail.html#right-measures">Choose useful measures →</a>
+</section>
+<details class="conditions" id="references"><summary>Definition and optional reading</summary><div class="conditions-body">
+<p>John Seddon and Vanguard, <a href="https://beyondcommandandcontrol.com/failure-demand/">Failure Demand</a>: the original concept, defined in customer terms. Use the definition to investigate your service; do not import another organisation’s reported percentages as your own.</p>
+</div></details>
+<section><h2>What’s your next useful question?</h2>
+<p><strong>Which recurring request could we trace back to an unmet need or an earlier failure?</strong></p>
+<a class="more" href="focus-and-prioritisation.html">Manage competing commitments with Focus and prioritisation →</a><br>
+<a class="more" href="why-improvements-fail.html#where-problems-can-arise">Return to Where might the difficulty lie? →</a>
+</section></main><div id="site-footer"></div><script src="assets/site-chrome.js"></script><script>(function(){function reveal(){var id;try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}var el=document.getElementById(id);if(!el)return;var d=el.closest('details');if(d)d.open=true;requestAnimationFrame(function(){el.scrollIntoView();});}window.addEventListener('hashchange',reveal);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',reveal);else reveal();})();</script></body></html>
