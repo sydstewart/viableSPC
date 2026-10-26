@@ -30,6 +30,10 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 @media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
 
 .improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
+.improvement-page .queue-figure{margin:24px 0;background:#fff;border:1px solid #cbd5df;border-radius:8px;overflow:hidden}
+.improvement-page .queue-chart{display:block;width:100%;height:440px;border:0;color-scheme:light}
+.improvement-page figcaption{padding:0 16px 18px;font-size:15px;line-height:1.6;color:#41566d}
+@media(max-width:600px){.improvement-page .queue-chart{height:500px}}
 </style></head>
 <body>
 <div id="site-header"></div>
@@ -47,7 +51,17 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 </section>
 <section id="slack-and-utilisation"><h2>Keep capacity to respond</h2>
 <p><strong>Utilisation</strong> is the proportion of available capacity being used. <strong>Slack</strong> is capacity not already committed, which can help absorb variation and recover from disruption.</p>
-<p>When arrivals and job times vary, waiting can rise sharply as utilisation approaches full capacity. Keeping everyone busy is not the same as helping work finish promptly.</p>
+<p><strong>Busy is not the same as responsive.</strong> When arrivals and job durations vary, work can queue even when average capacity exceeds average demand. As utilisation approaches full capacity, there is less room to absorb that variation, so waiting can rise sharply. Reducing avoidable variation and keeping some capacity to respond can both help.</p>
+<figure class="queue-figure" id="why-queues-grow">
+<iframe class="queue-chart" src="assets/queue-waiting.html" title="Illustrative graph: average queue waiting rises sharply as utilisation approaches full capacity, with less waiting when variability is lower" loading="lazy"></iframe>
+<figcaption><strong>Illustrative model—not a staffing calculator.</strong> At the same utilisation, lower variability means less waiting in this model. The vertical scale is waiting time as a multiple of the average job duration; it excludes time doing the job.</figcaption>
+</figure>
+<details class="conditions" id="queue-model"><summary>How to read the graph—and its limits</summary><div class="conditions-body">
+<p>In the higher-variability example, average queue waiting rises from <strong>four times the average job duration at 80% utilisation to nine times at 90%</strong>. This is a gradual, increasingly steep rise—not a fixed cliff or an exponential curve.</p>
+<p>The graph uses <a href="https://en.wikipedia.org/wiki/Kingman%27s_formula">Kingman’s approximation</a> for a single resource serving one job at a time, in steady state, with first-come-first-served work and no abandonment or loss. Both curves keep the same average job duration. The variability factors are 1 and 0.25: the coefficients of variation of both interarrival times and job durations are respectively 1 and 0.5.</p>
+<p>The model is shown only up to 95% utilisation. As utilisation approaches 100%, its predicted average waiting grows without bound. Real services may respond through overtime, changed priorities, lost demand or other changes; pooled teams and different queue arrangements need appropriate models.</p>
+<p><strong>This is a waiting-time graph, not a throughput graph.</strong> Little’s Law connects average work in the system, throughput and time; it does not by itself give this waiting curve. Use local evidence and suitable analysis to choose capacity—not these illustrative values as targets.</p>
+</div></details>
 <p><strong>Around 80% utilisation can be a useful planning prompt—not a universal limit.</strong> There is no fixed cliff at 80%, and 20% slack is not a rule for every resource. The margin needed depends on variability, pooling of resources and the consequences of delay.</p>
 <p>Protect useful flexibility where and when it is needed, with the right skills. Do not fill every gap simply to improve a utilisation score—or assume spare capacity in one team can relieve a constraint elsewhere.</p>
 </section>
@@ -66,7 +80,8 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 </div></details>
 <details class="conditions" id="references"><summary>Sources and further reading</summary><div class="conditions-body">
 <p>W. Ross Ashby, <em>An Introduction to Cybernetics</em> (1956), Chapter 11: requisite variety.</p>
-<p>Linda Green, <a href="https://business.columbia.edu/sites/default/files-efs/pubfiles/5474/queueing%20theory%20and%20modeling.pdf"><em>Queueing Theory and Modeling</em></a>: the relationship between utilisation and delay depends on variability and system size.</p>
+<p><strong>Start here:</strong> the <a href="#why-queues-grow">graph and explanation on this page</a> introduce why variable work creates queues near full utilisation.</p>
+<p><strong>A short external reading:</strong> Christopher A. Bain and colleagues, <a href="https://www.mja.com.au/journal/2010/192/1/myths-ideal-hospital-occupancy"><em>Myths of ideal hospital occupancy</em></a> (2010), a two-page article explaining why there is no single ideal occupancy percentage. It uses hospitals as its example; it is not a general staffing formula.</p>
 </div></details>
 <section><h2>What’s your next useful question?</h2>
 <p><strong>Where does the work need more flexibility—not simply more activity?</strong></p>
