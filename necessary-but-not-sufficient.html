@@ -1,299 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://stepchangeanalysis.com/necessary-but-not-sufficient.html">
-    <title>Necessary But Not Sufficient: Why Good Interventions Fail in Healthcare QI — StepChangeAnalysis.com</title>
-    <meta name="description" content="Finding the root cause doesn't mean the fix will work. This page explains the one test — necessary vs sufficient — that shows why so many good interventions still fail, and what closes the gap.">
-    <meta name="keywords" content="necessary but not sufficient Goldratt, necessary condition sufficient condition improvement, why interventions fail Goldratt, Theory of Constraints necessary conditions, Dettmer logical thinking process, necessary not sufficient healthcare">
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://stepchangeanalysis.com/necessary-but-not-sufficient.html" rel="canonical"/>
+<title>Necessary But Not Sufficient — Check What Else Is Needed — StepChangeAnalysis.com</title>
+<meta content="Check what else must be in place for an improvement to help. Understand necessary and sufficient conditions, test assumptions and avoid declaring success from activity alone." name="description"/>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-    <script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag("js", new Date());
         gtag("config", "G-NZLMMS3ZGG");
     </script>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
 
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
+.improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
 
-<div id="site-header"></div>
-
-<main class="page-wrap">
-
-    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="root-cause-analysis.html">Diagnose the Cause?</a> &rsaquo; Necessary But Not Sufficient</div>
-    <div class="page-flag">&#128269; Diagnose the Cause?</div>
-    <h1>Necessary But Not Sufficient</h1>
-    <p class="page-intro">One of the most precise and underused distinctions in improvement thinking. A necessary condition must be present for the goal to be achieved &mdash; but its presence alone does not guarantee the goal. Most improvement programmes declare success after achieving one necessary condition while others remain unmet. Goldratt and Dettmer gave this distinction a rigorous logical framework. Every improvement failure is, ultimately, a failure of sufficiency.</p>
-
-    <div style="background:#f0f4ff;border-left:4px solid #185FA5;padding:14px 18px;margin:18px 0 12px;border-radius:0 6px 6px 0;">
-        <strong style="color:#0C447C;">Necessary but not sufficient</strong> — A condition that must be present for an outcome to occur, but whose presence alone does not guarantee the outcome. In healthcare QI: a correct diagnosis is necessary but not sufficient for improvement. The fix must also be implemented at the right Joiner level, with the right authority, and confirmed by data.
-        <br><br>
-        <span style="font-size:0.87em;color:#5F5E5A;">Related: <a href="joiner-levels-of-fix.html">Joiner levels of fix</a> &nbsp;&middot;&nbsp; <a href="theory-of-constraints.html">Theory of Constraints</a> &nbsp;&middot;&nbsp; <a href="finding-the-real-constraint.html">Finding the real constraint</a> &nbsp;&middot;&nbsp; <a href="interpret-results.html">Interpret results</a></span>
-    </div>
-
-    <div class="page-meta">StepChangeAnalysis.com &nbsp;&middot;&nbsp; Concepts series &nbsp;&middot;&nbsp; June 2026</div>
-
-    <details class="toc-details">
-        <summary>&#9776;&nbsp; Contents &mdash; click to expand</summary>
-        <div class="toc-inner">
-            <ol>
-                <li><a href="#section-definition">The logical distinction</a></li>
-                <li><a href="#section-goldratt">Goldratt&rsquo;s point &mdash; technology is necessary but not sufficient</a></li>
-                <li><a href="#section-dettmer">Dettmer&rsquo;s Logical Thinking Process</a></li>
-                <li><a href="#section-improvement">Applied to improvement programmes</a></li>
-                <li><a href="#section-never-events">Worked example &mdash; NHS Never Events</a></li>
-                <li><a href="#section-sufficiency-test">The sufficiency test</a></li>
-                <li><a href="#section-cusum">Bootstrap CUSUM as the sufficiency verifier</a></li>
-            </ol>
-        </div>
-    </details>
-
-    <h2 id="section-definition">The logical distinction</h2>
-
-    <div class="definition-box">
-        <div class="def-label">&#128218; The logical distinction &mdash; Goldratt &amp; Dettmer</div>
-        <div class="def-pair">
-            <div class="def-card nec">
-                <div class="dc-label">&#9888; Necessary condition</div>
-                <h3>Must be present. Not enough.</h3>
-                <p>A condition that must be satisfied for the goal to be achievable. Without it, the goal is impossible. But its presence alone does not guarantee the goal &mdash; other necessary conditions may be unmet.</p>
-                <p style="margin-top:8px;font-style:italic;font-size:0.88em;">Oxygen is necessary for fire. It is not sufficient &mdash; you also need fuel and heat.</p>
-            </div>
-            <div class="def-card suf">
-                <div class="dc-label">&#9989; Sufficient condition</div>
-                <h3>Guarantees the goal.</h3>
-                <p>A condition or set of conditions whose presence alone guarantees the goal will be achieved. A sufficient condition is what you need to actually get the result &mdash; not just make it possible.</p>
-                <p style="margin-top:8px;font-style:italic;font-size:0.88em;">Oxygen + fuel + heat together are sufficient for fire. All three necessary conditions met simultaneously.</p>
-            </div>
-        </div>
-    </div>
-
-    <p>The practical implication is precise: every improvement goal has a set of necessary conditions &mdash; things that must be in place for the goal to be achievable. Achieving any one of them is progress. Achieving all of them simultaneously, and maintaining them, is sufficiency. Most improvement programmes achieve one or two necessary conditions, call it done, and wonder why the outcome does not follow.</p>
-
-    <div class="callout orange">
-        <strong>The most common improvement failure stated precisely</strong>
-        <p>A necessary condition is achieved: a new protocol is written, a technology is deployed, a staff training programme is completed, a structural change is made. The programme is declared successful. The outcome does not change. The response is confusion, frustration, or blame &mdash; because the logic seemed sound. The protocol was right. The technology worked. The training was delivered.</p>
-        <p>The error is treating a necessary condition as if it were sufficient. The protocol is necessary &mdash; but other necessary conditions (consistent compliance, adequate staffing, a feedback mechanism, a system that does not make workarounds attractive) remain unmet. The goal requires all of them. One is not enough.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-goldratt">Goldratt&rsquo;s point &mdash; technology is necessary but not sufficient</h2>
-
-    <p>Eliyahu Goldratt, the originator of the Theory of Constraints, made this argument most explicitly in his 1999 novel <em>Necessary But Not Sufficient</em> (co-authored with Eli Schragenheim and Carol Ptak). The book&rsquo;s premise was a direct challenge to the enterprise software industry: implementing ERP, MRP, and advanced planning systems was necessary for a company to achieve world-class performance &mdash; but it was not sufficient. Technology without corresponding changes to management processes, measurements, and mindset would not produce the promised results.</p>
-
-    <p>The argument generalised beyond technology. Goldratt&rsquo;s core insight from the Theory of Constraints was that every system has a constraint &mdash; a binding limitation that determines throughput. Addressing anything other than the constraint is necessary for some things but never sufficient to improve overall system performance. And addressing the constraint requires not just identifying it and applying a fix, but simultaneously changing the processes, measurements, and behaviours that have been built around accommodating it.</p>
-
-    <div class="info-box">
-        <h3>&#128202; Goldratt&rsquo;s three conditions for a complete solution</h3>
-        <p>In <em>Necessary But Not Sufficient</em>, Goldratt identified three conditions that together are sufficient to produce genuine, sustained improvement &mdash; any two are necessary but not sufficient:</p>
-        <p style="margin-top:10px;"><strong>1. The technology must be available and functional.</strong> This is the condition that organisations focus on almost exclusively. It is necessary. It is not enough.</p>
-        <p style="margin-top:10px;"><strong>2. The organisation&rsquo;s processes and procedures must change</strong> to exploit the technology and the released constraint. Installing new technology while keeping old processes is like building a motorway and requiring vehicles to stop at every junction &mdash; the capacity is available but the system is not designed to use it.</p>
-        <p style="margin-top:10px;"><strong>3. The organisation&rsquo;s measurements and incentives must change</strong> to align with the new processes. Old measurements will drive old behaviour even when new processes are in place. If clinicians are measured on the old metric, they will optimise for the old metric regardless of new protocols. <a href="deming-14-points.html">Deming</a> made the same point in Point 11: eliminate numerical quotas that conflict with quality. The measurement system is a necessary condition for sustained improvement &mdash; and the one most frequently left unchanged.</p>
-        <p style="margin-top:10px;">All three must change simultaneously. Change any two and the third will pull the system back to its old behaviour.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-dettmer">Dettmer&rsquo;s Logical Thinking Process</h2>
-
-    <p>H. William Dettmer formalised Goldratt&rsquo;s thinking into the Logical Thinking Process (LTP) &mdash; a set of cause-effect thinking tools that make the necessary/sufficient distinction operationally precise. The LTP provides a structured way to answer the three questions that any improvement effort must answer:</p>
-
-    <p><em>What to change? What to change to? How to cause the change?</em></p>
-
-    <div class="ltp-grid">
-        <div class="ltp-card crt">
-            <div class="lt-label">&#9679; What to change</div>
-            <h3>Current Reality Tree (CRT)</h3>
-            <p>Maps the cause-effect relationships that produce the current undesirable effects. Identifies the root cause(s) &mdash; the small number of core problems that, if addressed, would eliminate most of the undesirable effects.</p>
-            <div class="lt-q">Question: what is causing the problem?</div>
-        </div>
-        <div class="ltp-card frt">
-            <div class="lt-label">&#9679; What to change to</div>
-            <h3>Future Reality Tree (FRT)</h3>
-            <p>Maps what would need to be true for the goal to be achieved. The sufficiency test lives here: if we implement these changes, are they sufficient to produce the desired outcome &mdash; or do other necessary conditions remain unmet?</p>
-            <div class="lt-q">Question: if we make this change, will it be enough?</div>
-        </div>
-        <div class="ltp-card prt">
-            <div class="lt-label">&#9679; How to cause the change</div>
-            <h3>Prerequisite Tree (PRT)</h3>
-            <p>Identifies the necessary conditions that must be achieved before the goal is reachable, and the obstacles that prevent each necessary condition from being met. Maps the path from here to sufficient.</p>
-            <div class="lt-q">Question: what must be in place before the goal is achievable?</div>
-        </div>
-        <div class="ltp-card tt">
-            <div class="lt-label">&#9679; The transition plan</div>
-            <h3>Transition Tree (TT)</h3>
-            <p>Sequences the actions required to move from the current state to the future state &mdash; in the right order, addressing each necessary condition in the sequence that makes the next one achievable.</p>
-            <div class="lt-q">Question: in what order should we act?</div>
-        </div>
-    </div>
-
-    <p>The most important tool in the LTP for the necessary/sufficient distinction is the <strong>Future Reality Tree</strong>. It forces the question: if we implement the proposed change, is the resulting state sufficient to produce the desired outcome? If not &mdash; if other undesirable effects persist or new ones appear &mdash; the proposed change is necessary but not sufficient, and the additional necessary conditions must be identified before the full solution can be designed.</p>
-
-    <hr>
-
-    <h2 id="section-improvement">Applied to improvement programmes</h2>
-
-    <p>The necessary/sufficient framework reframes every improvement programme question. Instead of &ldquo;will this intervention work?&rdquo; &mdash; which tends to produce a binary yes/no answer &mdash; it asks: &ldquo;what are all the necessary conditions for the goal, which are currently met, and which are not?&rdquo;</p>
-
-    <p>This reframing is valuable because it separates two very different types of failure that look identical from the outside:</p>
-
-    <p><strong>Failure type 1 &mdash; wrong intervention.</strong> The intervention does not address a necessary condition for the goal. Fixing it will not help because it is not on the path to sufficiency. Example: retraining nurses in wrong-route medication administration when the necessary condition is physical connector incompatibility.</p>
-
-    <p><strong>Failure type 2 &mdash; incomplete intervention.</strong> The intervention addresses a genuine necessary condition, but other necessary conditions remain unmet. Progress is real &mdash; the goal is now closer &mdash; but the outcome has not yet changed because sufficiency has not been reached. Example: deploying ENFit connectors in one trust while procurement has not mandated them nationally.</p>
-
-    <p>Type 1 failures are worth abandoning. Type 2 failures are worth completing. From the outside &mdash; from a Bootstrap CUSUM chart showing no change point &mdash; both look the same. The necessary/sufficient analysis is what distinguishes them.</p>
-
-    <hr>
-
-    <h2 id="section-never-events">Worked example &mdash; NHS Never Events</h2>
-
-    <p><a href="never-events-wrong-route.html">Bootstrap CUSUM on NHS wrong-route Never Events</a> finds a flat process at 17.5 events per year for 15 years. The necessary/sufficient analysis explains precisely why.</p>
-
-    <div class="nc-chain">
-        <div class="nc-item met">
-            <div class="nc-icon">&#9989;</div>
-            <div class="nc-body">
-                <div class="nb-label">Necessary condition 1</div>
-                <div class="nb-text">Clinical awareness of the wrong-route risk — staff know the problem exists and understand its consequences.</div>
-                <span class="nb-status">Met — decades of training and alerts</span>
-            </div>
-        </div>
-        <div class="nc-item met">
-            <div class="nc-icon">&#9989;</div>
-            <div class="nc-body">
-                <div class="nb-label">Necessary condition 2</div>
-                <div class="nb-text">A protocol exists specifying the correct route checking procedure for each medication type.</div>
-                <span class="nb-status">Met — multiple frameworks and guidelines since 2010</span>
-            </div>
-        </div>
-        <div class="nc-item met">
-            <div class="nc-icon">&#9989;</div>
-            <div class="nc-body">
-                <div class="nb-label">Necessary condition 3</div>
-                <div class="nb-text">ENFit connectors exist that make wrong-route administration physically impossible regardless of staff behaviour.</div>
-                <span class="nb-status">Met — technology has existed since 2010</span>
-            </div>
-        </div>
-        <div class="nc-item missing">
-            <div class="nc-icon">&#10060;</div>
-            <div class="nc-body">
-                <div class="nb-label">Necessary condition 4 — unmet</div>
-                <div class="nb-text">A procurement mandate requiring all NHS trusts to adopt ENFit connectors, with a funded transition programme and a compliance deadline.</div>
-                <span class="nb-status">Not met — not authorised in 15 years</span>
-            </div>
-        </div>
-        <div class="nc-item missing">
-            <div class="nc-icon">&#10060;</div>
-            <div class="nc-body">
-                <div class="nb-label">Necessary condition 5 — unmet</div>
-                <div class="nb-text">A feedback loop connecting the cost of Never Events (borne by individual trusts) to the capital decision (made centrally), so the decision-maker experiences the consequence of inaction.</div>
-                <span class="nb-status">Not met — accountability gap persists</span>
-            </div>
-        </div>
-    </div>
-
-    <p>Three of five necessary conditions are met. Two are not. The goal &mdash; elimination of wrong-route Never Events &mdash; requires all five simultaneously. Conditions 1, 2, and 3 are necessary but not sufficient. The Bootstrap CUSUM flat line at 17.5 events per year is the statistical record of a system that achieved three necessary conditions and stopped.</p>
-
-    <hr>
-
-    <h2 id="section-sufficiency-test">The sufficiency test</h2>
-
-    <p>Before declaring an improvement programme complete, four questions constitute the sufficiency test:</p>
-
-    <ol style="margin: 16px 0 20px 24px; line-height: 2.2; font-size: 1.05em;">
-        <li><strong>Have all necessary conditions been identified?</strong> Not just the obvious ones &mdash; the technological fix, the training programme, the new protocol. Also the measurement change, the accountability structure, the feedback loop, the procurement mandate. A Future Reality Tree makes this explicit.</li>
-        <li><strong>Have all identified necessary conditions been met?</strong> Not planned, not in progress &mdash; met. A condition that is 80% implemented is not met. A procurement mandate that has been recommended but not authorised is not met.</li>
-        <li><strong>Are all necessary conditions being maintained?</strong> A necessary condition that is met and then withdrawn &mdash; a CQUIN incentive that ends, a political focus that moves elsewhere &mdash; returns the system to insufficiency. Sufficiency requires all necessary conditions to be sustained simultaneously.</li>
-        <li><strong>Has Bootstrap CUSUM confirmed a structural change in the outcome measure?</strong> A structural change point at the predicted confidence level, in the predicted direction, within the expected lag window, is the objective confirmation that the system has moved to a new sufficient state. Without it, the sufficiency test has not been passed &mdash; regardless of how many necessary conditions appear to be met.</li>
-    </ol>
-
-    <div class="callout teal">
-        <strong>Why the sufficiency test is so rarely applied</strong>
-        <p>Applying the sufficiency test requires acknowledging that the current state is insufficient &mdash; which is uncomfortable when significant effort and resource have already been invested in achieving the necessary conditions that are met. The sunk cost of the training programme, the technology deployment, the protocol redesign creates pressure to declare success rather than acknowledge that further necessary conditions remain unmet. Goldratt identified this explicitly: the organisation celebrates achieving a necessary condition, reduces pressure for further change, and the system settles into a new equilibrium that is better than before &mdash; but short of the goal. The Bootstrap CUSUM change point is the honest arbiter: the goal was either achieved or it was not. The data does not care about the effort invested.</p>
-    </div>
-
-    <hr>
-
-    <h2 id="section-cusum">Bootstrap CUSUM as the sufficiency verifier</h2>
-
-    <p><a href="three-charts-three-stories.html">Bootstrap CUSUM</a> is the objective answer to the sufficiency question. It does not assess whether necessary conditions are in place &mdash; that is the work of the Future Reality Tree and the sufficiency test. What it does is provide a dated, statistically defensible answer to whether the combination of necessary conditions that have been implemented is producing a permanent structural change in the outcome.</p>
-
-    <p>A Bootstrap CUSUM change point at 95% confidence or above, in the direction of improvement, within the expected lag window, is evidence of sufficiency. The system has moved permanently to a new mean. The conditions in place are collectively sufficient to produce and sustain the improvement.</p>
-
-    <p>The absence of a change point, in a series with adequate data, is evidence that sufficiency has not yet been reached &mdash; regardless of how many necessary conditions appear to be met. It is the signal to return to the Future Reality Tree and ask: what necessary condition have we missed, or what condition we thought was met is actually not?</p>
-
-    <div class="info-box">
-        <h3>&#128202; The complete necessary-sufficient-CUSUM cycle</h3>
-        <p><strong>1. Map the necessary conditions</strong> using a Future Reality Tree or equivalent. Identify all conditions that must be met for the goal to be achievable. Include technology, process, measurement, accountability, and sustainability conditions.</p>
-        <p style="margin-top:10px;"><strong>2. Apply the sufficiency test.</strong> Are all necessary conditions met? If not, which are unmet? Address the unmet conditions in the order specified by the Prerequisite Tree &mdash; some are prerequisites for others.</p>
-        <p style="margin-top:10px;"><strong>3. Pre-specify the Bootstrap CUSUM prediction.</strong> Once all identified necessary conditions are met, state the prediction: we expect a Bootstrap CUSUM change point in outcome measure Y within Z periods at W% confidence.</p>
-        <p style="margin-top:10px;"><strong>4. Apply Bootstrap CUSUM to the outcome measure</strong> periodically after implementation. A change point confirms sufficiency. The absence of a change point within the expected lag window signals that a necessary condition has been missed &mdash; return to Step 1.</p>
-        <p style="margin-top:10px;"><strong>5. Maintain all necessary conditions.</strong> A change point confirmed by Bootstrap CUSUM is not a signal to relax the conditions that produced it. Sufficiency requires all necessary conditions to be sustained. The dementia diagnosis rate was above target while the PM&rsquo;s Challenge maintained political and financial pressure. When that pressure reduced, the rate began to drift. The necessary condition &mdash; sustained system-level commitment &mdash; was not maintained. See <a href="dementia-diagnosis-rate.html">the dementia analysis</a>.</p>
-    </div>
-
-    <hr>
-
-    <h2>Related concepts</h2>
-    <div class="nav-grid">
-        <a href="root-cause-analysis.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Root Cause Analysis</h3>
-            <p>Finding the root cause is a necessary condition for prevention. It is not sufficient — the fix must operate at the right level and all other necessary conditions must be met.</p>
-        </a>
-        <a href="five-whys.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>The 5 Whys</h3>
-            <p>Reaching Why 5 is necessary. A Level 3 fix is necessary. Implementing it, changing the measurements, and verifying with Bootstrap CUSUM are together sufficient.</p>
-        </a>
-        <a href="joiner-levels-of-fix.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Joiner&rsquo;s Levels of Fix</h3>
-            <p>A Level 3 fix is a necessary condition for eliminating a class of problems. Whether it is sufficient depends on whether all other necessary conditions are simultaneously met.</p>
-        </a>
-        <a href="types-of-measures.html" class="nav-card">
-            <div class="nav-tag">Concept</div>
-            <h3>Types of Measures</h3>
-            <p>Changing the measurement system is one of Goldratt&rsquo;s three necessary conditions. It is the one most frequently left unchanged — and therefore the most common reason sufficiency is not reached.</p>
-        </a>
-        <a href="never-events-wrong-route.html" class="nav-card">
-            <div class="nav-tag">Article &mdash; Patient Safety</div>
-            <h3>Never Events &mdash; Wrong Route</h3>
-            <p>Three necessary conditions met, two unmet, 15 years of flat Bootstrap CUSUM data. The clearest example on this site of necessary but not sufficient in action.</p>
-        </a>
-        <a href="dementia-diagnosis-rate.html" class="nav-card">
-            <div class="nav-tag">Article &mdash; NHS Policy</div>
-            <h3>Dementia Diagnosis Rate</h3>
-            <p>The PM&rsquo;s Challenge met enough necessary conditions to exceed the target. When political pressure was removed, a necessary condition was no longer sustained. Sufficiency was lost.</p>
-        </a>
-    </div>
-
-    <div class="callout blue" style="margin-top:32px;">
-        <strong>&#128200; Part of the StepChange improvement concepts library</strong>
-        <p>This concept sits within a broader framework for understanding why improvement programmes succeed or fail. Start with <a href="why-nothing-changes.html">Why Nothing Changes</a> for the full picture, or go to <a href="start-here.html">Start Here</a> for a guided introduction to the method.</p>
-    </div>
-
-    <div class="callout blue" style="margin-top:24px;">
-        <strong>What to do next</strong>
-        <p style="margin-top:6px;">Once you have identified that the necessary conditions are in place, use Bootstrap CUSUM to confirm whether the outcome has actually changed — or whether a sufficient condition is still missing.</p>
-        <p style="margin-top:8px;font-size:0.87em;"><a href="index.html">Open the StepChange Analyzer</a> &nbsp;&middot;&nbsp; <a href="interpret-results.html">Interpret results</a> &nbsp;&middot;&nbsp; <a href="what-to-do-next.html">What to do next</a></p>
-    </div>
-
-    <footer class="page-footer">
-        <p><strong>Goldratt primary source:</strong> Goldratt E, Schragenheim E, Ptak C. <em>Necessary But Not Sufficient.</em> North River Press, 1999.</p>
-        <p style="margin-top:8px;"><strong>Theory of Constraints:</strong> Goldratt E, Cox J. <em>The Goal.</em> North River Press, 1984. &nbsp;&middot;&nbsp; Goldratt E. <em>It&rsquo;s Not Luck.</em> North River Press, 1994.</p>
-        <p style="margin-top:8px;"><strong>Logical Thinking Process:</strong> Dettmer H.W. <em>Goldratt&rsquo;s Theory of Constraints: A Systems Approach to Continuous Improvement.</em> ASQ Quality Press, 1997. &nbsp;&middot;&nbsp; Dettmer H.W. <em>The Logical Thinking Process: A Systems Approach to Complex Problem Solving.</em> ASQ Quality Press, 2007.</p>
-        <p style="margin-top:8px;"><strong>Bootstrap CUSUM:</strong> Taylor, W.A. Change-Point Analysis (2000). Building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993).</p>
-        <p style="margin-top:8px;"><a href="index.html">stepchangeanalysis.com</a> &mdash; free, browser-based, no data uploaded &nbsp;&middot;&nbsp; &copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p>
-    </footer>
-
-</main>
-
-<div id="site-footer"></div>
-<script src="assets/site-chrome.js"></script>
-</body>
-</html>
+.improvement-page .jump-links{padding:14px 18px;background:#eef4fa;border:1px solid #cbd5df;border-radius:8px;margin:24px 0}
+.improvement-page .jump-links a{display:inline-block;min-height:44px;padding:8px 0;box-sizing:border-box;margin-right:16px}
+.improvement-page h3{font:700 20px/1.35 system-ui,sans-serif;color:#002d5b;margin:0 0 12px}
+.improvement-page .pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
+.improvement-page .pick-cell{padding:20px;border:1px solid #cbd5df;border-radius:8px;background:#fff}
+.improvement-page .pick-cell p:last-child{margin:0}.improvement-page .pick-axis{font-size:15px;line-height:1.5;color:#41566d}
+.improvement-page .pick-note{font-size:15px;color:#41566d}
+@media(max-width:600px){.improvement-page .pick-grid{grid-template-columns:1fr}.improvement-page .pick-cell{padding:18px}}
+</style></head><body><div id="site-header"></div><main class="improvement-page" id="main-content"><h1>Necessary but not sufficient: check what else is needed</h1>
+<p><strong>What else must be in place for this change to help?</strong> Use this page to check whether a proposed response is incomplete—and avoid treating one useful action as the whole solution.</p>
+<p>Writing a procedure, buying software or delivering training may help. Completing the activity does not establish that the intended result will follow.</p>
+<nav class="jump-links" aria-label="On this page"><a href="#section-definition">Understand the distinction →</a><a href="#section-sufficiency-test">Check your proposed change →</a></nav>
+<section id="section-definition"><h2>Necessary is not the same as enough</h2>
+<ul>
+<li><strong>Necessary:</strong> a condition that must hold for the stated outcome to occur. Without it, that outcome is not possible.</li>
+<li><strong>Sufficient:</strong> a condition, or combination of conditions, that ensures the stated outcome under the stated assumptions.</li>
+<li><strong>Helpful:</strong> something that may improve the chance or extent of success, but is not necessarily essential.</li>
+</ul>
+<p>Be precise about the outcome and setting. A particular tool or policy is not “necessary” simply because it is familiar; another route may achieve the same result.</p>
+<p><strong>Meeting every necessary condition you have listed does not prove sufficiency.</strong> The list may be incomplete, the explanation mistaken or important assumptions unmet.</p>
+</section>
+<section id="section-improvement"><h2>Example: prevent rework from an outdated specification</h2>
+<p>This is an illustrative example, not a finding about a real business.</p>
+<p>Putting the approved specification in a shared folder may help, but does not ensure it is used. Old copies may remain at workstations; staff may lack access; orders may not identify the required version.</p>
+<p>A proposed response could combine a clear version reference on each order, reliable access and a way to withdraw or visibly supersede old copies. Check the actual work before deciding which arrangements are needed.</p>
+<p>Test whether people can find and use the right version, whether this type of rework falls and whether the arrangement introduces delays. It may address one pathway without explaining every error or late order.</p>
+</section>
+<section id="section-sufficiency-test"><h2>Check the proposed combination</h2>
+<ol>
+<li><strong>State the result.</strong> What should improve, for whom, by how much and when?</li>
+<li><strong>Explain the connection.</strong> Why should this change help? Separate evidence, assumptions and unanswered questions. Use <a href="root-cause-analysis.html">evidence-led investigation</a> where needed.</li>
+<li><strong>Check what else is required.</strong> Consider capacity, skills, tools, information, authority, cooperation and feedback—not a mandatory checklist. Explore <a href="why-improvements-fail.html#system-conditions">system conditions</a>.</li>
+<li><strong>Challenge the explanation.</strong> What could still prevent the result, even if we make the change? Could a different route work? What might make things worse elsewhere?</li>
+<li><strong>Choose a workable test.</strong> Agree responsibilities, sequencing, measures and review. Do not start every suggested action: choose a coherent response that fits available capacity, then learn and adapt.</li>
+</ol>
+<p>If two requirements seem incompatible, <a href="triz-separation-principles.html">TRIZ separation</a> may help generate alternatives. Use <a href="pick-model.html">PICK</a> to compare ideas—not to drop a genuine dependency just because it is difficult.</p>
+</section>
+<details class="conditions" id="section-goldratt"><summary>Optional: where Goldratt and Dettmer fit</summary><div class="conditions-body">
+<p>Goldratt’s <em>Necessary But Not Sufficient</em>, with Eli Schragenheim and Carol Ptak, explores why technology alone may not deliver the promised benefit. The practical question is what working arrangements and management rules also need to change.</p>
+<p id="section-dettmer">Dettmer’s Logical Thinking Process offers more structured ways to examine proposed cause-and-effect links, prerequisites and action sequences. These tools can help make assumptions visible; they do not prove the explanation or replace testing in the actual setting.</p>
+</div></details>
+<section id="section-cusum"><h2>Check the result—not just the completed actions</h2>
+<p>Measure implementation, the intended outcome and possible harm. Allow a justified period for effects to emerge; keep checking whether the required arrangements remain in place.</p>
+<p><strong>A chart or Bootstrap CUSUM analysis can help identify a performance change, not prove sufficiency or its cause.</strong> A change point does not guarantee permanent improvement. No detected change does not, by itself, show that a condition is missing: consider effect size, timing, data quality and other explanations.</p>
+<p id="section-never-events">In safety-critical work, an aggregate incident trend cannot establish why an individual event occurred or prove that a particular package prevents every recurrence. Follow appropriate safety and investigation requirements.</p>
+<a class="more" href="why-improvements-fail.html#right-measures">Choose useful measures →</a>
+</section>
+<section><h2>What’s your next useful question?</h2>
+<p><strong>If we make this change, what could still stop the result—and how could we find out?</strong></p>
+<a class="more" href="why-improvements-fail.html#right-intervention">Return to Right intervention? →</a><br>
+<a class="more" href="focus-and-prioritisation.html">Manage competing commitments →</a>
+</section></main><div id="site-footer"></div><script src="assets/site-chrome.js"></script><script>(function(){function reveal(){var id;try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}var el=document.getElementById(id);if(!el)return;var d=el.closest('details');if(d)d.open=true;requestAnimationFrame(function(){el.scrollIntoView();});}window.addEventListener('hashchange',reveal);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',reveal);else reveal();})();</script></body></html>
