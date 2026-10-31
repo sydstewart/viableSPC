@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSIRF and Systemic Learning — From Incidents to Improvement — StepChangeAnalysis.com</title>
+    <meta name="description" content="A concise guide to connecting PSIRF incident learning with the right problem, a workable intervention and evidence about safety outcomes.">
+    <meta name="keywords" content="PSIRF analytical framework, PSIRF systemic learning, patient safety incident profile analysis, PSIRF Bootstrap CUSUM, PSIRF improvement, PSIRF patient safety incident response plan, PSIRP data analysis, NHS patient safety improvement">
+    <link rel="canonical" href="https://stepchangeanalysis.com/psirf-analytical-framework.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+
+    <link rel="stylesheet" href="assets/styles.css">
+
+    <style>
+        /* Page-specific only */
+        .gap-table { width:100%; border-collapse:collapse; font-size:13px; margin:20px 0; }
+        .gap-table th { background:#f2f2f0; padding:9px 12px; text-align:left; font-weight:600; border:1px solid #ddd; }
+        .gap-table td { padding:9px 12px; border:1px solid #ddd; vertical-align:top; line-height:1.6; }
+        .gap-table tr:nth-child(even) td { background:#fafaf8; }
+        .gap-table td:first-child { font-weight:600; white-space:nowrap; }
+        .loop-step { display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid #e5e5e5; }
+        .loop-step:last-child { border-bottom:none; }
+        .loop-num { background:#185FA5; color:white; font-weight:700; font-size:13px; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+        .loop-body { flex:1; }
+        .loop-body strong { display:block; font-size:15px; margin-bottom:4px; color:#111; }
+        .loop-body p { font-size:14px; color:#444; margin:0; line-height:1.6; }
+        .loop-tool { font-size:12px; color:#185FA5; font-weight:600; margin-top:5px; display:block; }
+        .psirf-q { background:#f7f7f5; border-left:3px solid #e08a00; padding:10px 14px; margin:8px 0; border-radius:0 4px 4px 0; font-size:13px; font-style:italic; color:#333; }
+        .psirf-a { background:#eaf2fb; border-left:3px solid #185FA5; padding:10px 14px; margin:8px 0 16px; border-radius:0 4px 4px 0; font-size:13px; color:#333; }
+        .psirf-a strong { color:#185FA5; display:block; margin-bottom:3px; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; }
+    </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="article-wrap">
+    <div class="breadcrumb"><a href="why-improvements-fail.html">Why Improvement Programmes Fail</a> &rsaquo; <a href="why-improvements-fail.html#right-problem">Right Problem?</a> &rsaquo; PSIRF and Systemic Learning</div>
+    <div class="article-flag">Patient Safety &middot; Systemic Learning</div>
+    <h1>PSIRF and Systemic Learning &mdash; From Incidents to Improvement</h1>
+    <p class="article-subtitle">Connect incident learning with an explanation worth testing, a workable change and evidence about its effects. Completing an investigation or action plan is not the same as showing that care has become safer.</p>
+    <div class="article-meta">By Syd Stewart, Chartered Chemical Engineer &nbsp;&middot;&nbsp; StepChangeAnalysis.com &nbsp;&middot;&nbsp; June 2026</div>
+
+    <p>This guide applies the three questions in <a href="why-improvements-fail.html">Why Improvement Programmes Fail</a>: <a href="why-improvements-fail.html#right-problem">Right Problem?</a>, <a href="why-improvements-fail.html#right-intervention">Right Intervention?</a> and <a href="why-improvements-fail.html#right-measures">Right Measures?</a> It supports learning and evaluation; it does not replace official PSIRF guidance, clinical judgement or local response arrangements.</p>
+
+    <details class="toc-details">
+        <summary>&#9776;&nbsp; Contents</summary>
+        <div class="toc-inner"><ol>
+            <li><a href="#section-purpose">What PSIRF is and why it matters here</a></li>
+            <li><a href="#section-problem">Understand the problem</a></li>
+            <li><a href="#section-intervention">Design a workable response</a></li>
+            <li><a href="#section-measures">Evaluate what changed</a></li>
+            <li><a href="#section-next">Choose your next step</a></li>
+        </ol></div>
+    </details>
+
+    <h2 id="section-purpose">What PSIRF is and why it matters here</h2>
+    <p><strong>PSIRF stands for the Patient Safety Incident Response Framework.</strong> It is NHS England&rsquo;s framework for how NHS organisations respond to patient safety incidents and learn from them. It replaced the Serious Incident Framework, with an emphasis on compassionate involvement of those affected, system-based learning, proportionate responses and supportive oversight focused on improvement.</p>
+    <p><strong>Why is it on this website?</strong> PSIRF is a practical application of the three questions at the heart of StepChangeAnalysis: are we understanding the right problem, choosing an intervention that could address it, and using measures that show whether it helped? Patient safety makes the distinction between completing actions and improving outcomes especially important.</p>
+    <p>This page contributes an analytical perspective to that learning. Quantitative analysis can help reveal patterns and evaluate change, but it cannot replace listening to patients, families and staff, understanding everyday care or making a proportionate safety response.</p>
+    <p>The practical challenge is to connect three things: what happened and under what conditions; what could reduce the risk; and how we will know whether the response helped. The Health Services Safety Investigations Body (HSSIB) is an independent body that investigates patient safety concerns in England to support learning and safer care. Its report on learning under PSIRF highlights the importance of expertise, practice and support in using system-based tools.</p>
+    <p><strong>Do not wait for a statistical signal to address an immediate risk.</strong> A serious event, near miss or concern may warrant action and learning even when it is rare or the aggregate incident series appears stable. Follow applicable safety, reporting and response requirements.</p>
+
+    <h2 id="section-problem">Understand the problem</h2>
+    <p>Start with a clearly described safety concern, then examine both individual experiences and patterns across incidents. Avoid assuming that every event has one root cause or that a stable rate means previous investigations achieved nothing.</p>
+    <ol>
+        <li><strong>Build a useful incident profile.</strong> Separate incident types where their mechanisms differ. Use consistent definitions and relevant exposure denominators when available. Check missing data, reporting changes, case mix and activity before interpreting a rise or fall.</li>
+        <li><strong>Follow the work.</strong> Involve those affected and the people delivering care. Observe handovers, decisions, equipment use, interruptions and dependencies. Ask what made an action understandable or difficult in those conditions.</li>
+        <li><strong>Check possible explanations.</strong> Consider design, staffing, capacity, procurement, information, rules and authority. Test assumptions against evidence, including cases where the work goes well. Do not presume that a belief or mindset sits beneath every problem.</li>
+    </ol>
+    <p>Recorded incidents are not a direct measure of all harm: reporting can increase as staff become more confident in speaking up. Triangulate reports with other relevant evidence. For methods, see <a href="root-cause-analysis.html">Root Cause Analysis</a> and <a href="bright-spots.html">Bright Spot Analysis</a>.</p>
+
+    <h2 id="section-intervention">Design a workable response</h2>
+    <p>Choose an intervention connected to a supported explanation, not a familiar action such as another reminder by default. Immediate containment may be necessary alongside longer-term work. The appropriate response may involve equipment, process, staffing, capability or coordination across organisational boundaries.</p>
+    <p>Make the proposed mechanism explicit: &ldquo;If we change X, we expect Y to change first, helping reduce Z.&rdquo; Check what else must be in place, who has authority, what resources are needed and whether risk could move elsewhere.</p>
+    <p>For example, where incompatible routes can be connected, equipment design and procurement may offer a stronger safeguard than relying only on vigilance. That explanation must be checked for the specific incident type; not all wrong-route events share one mechanism. See the <a href="never-events-wrong-route.html">wrong-route Never Events case study</a> for further discussion, and <a href="joiner-levels-of-fix.html">Joiner&rsquo;s Levels of Fix</a> for ways to examine the response.</p>
+    <p>Give the work an owner, a review date and proportionate oversight. Test safely where appropriate; do not delay necessary safeguards or mandated action to create an experiment.</p>
+
+    <h2 id="section-measures">Evaluate what changed</h2>
+    <p>Agree the prediction and evaluation plan before implementation where possible. Check:</p>
+    <ul>
+        <li><strong>Implementation and response:</strong> was the change used in everyday work, and did the expected early effect occur?</li>
+        <li><strong>Outcome:</strong> did the safety result improve, using a suitable measure and enough follow-up?</li>
+        <li><strong>Harm elsewhere:</strong> did workload, delay or another risk increase?</li>
+    </ul>
+    <p>Use analysis suited to the question and data. Run charts, SPC and Bootstrap CUSUM can help examine change over time, but rare events, small samples, seasonality and reporting changes need particular care. A chart does not identify a cause or determine the required incident response.</p>
+    <p>A detected change point is not proof of causation or permanence. No detected change does not automatically mean no benefit. Combine statistical findings with implementation evidence, experiences and other explanations, then decide whether to continue, adapt, stop or extend the work.</p>
+
+    <h2 id="section-next">Choose your next step</h2>
+    <ul>
+        <li><a href="why-improvements-fail.html#right-problem">Right Problem?</a> &mdash; what conditions might be producing this concern?</li>
+        <li><a href="why-improvements-fail.html#right-intervention">Right Intervention?</a> &mdash; what response could address those conditions?</li>
+        <li><a href="why-improvements-fail.html#right-measures">Right Measures?</a> &mdash; what evidence would show whether it helped?</li>
+    </ul>
+    <p>Return to <a href="why-improvements-fail.html">Why Improvement Programmes Fail</a> for the overall approach. Use the official sources below for PSIRF requirements.</p>
+    <div class="cta-box">
+        <h3 style="color:#fff;margin:0 0 12px;font-size:1.2em;">Explore an outcome series</h3>
+        <p>The StepChange Analyzer is an optional aid to time-series evaluation, not an incident-response decision tool. Use appropriate, non-identifiable data and follow local information-governance requirements.</p>
+        <a href="index.html" class="cta-btn">Open the StepChange Analyzer &rarr;</a>
+    </div>
+
+    <footer class="page-footer"><p><strong>PSIRF:</strong> NHS England. <em>Patient Safety Incident Response Framework.</em> August 2022. <a href="https://www.england.nhs.uk/patient-safety/patient-safety-insight/incident-response-framework/">england.nhs.uk</a></p><p style="margin-top:8px;"><strong>HSSIB PSIRF report:</strong> HSSIB. <em>Investigating under PSIRF: sharing HSSIB learning for future development.</em> October 2025. <a href="https://www.hssib.org.uk/patient-safety-investigations/investigating-under-the-patient-safety-incident-response-framework-psirf-sharing-hssib-learning-for-future-development/investigation-report/">hssib.org.uk</a></p><p style="margin-top:12px;">&copy; Syd Stewart / StepChangeAnalysis.com &middot; June 2026</p></footer>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body>
+</html>
