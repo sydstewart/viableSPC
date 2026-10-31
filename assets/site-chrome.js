@@ -59,7 +59,7 @@ function wireSiteNavigation() {
             event.preventDefault();
         }
     });
-    const wide = window.matchMedia('(min-width: 1241px)');
+    const wide = window.matchMedia('(min-width: 1361px)');
     wide.addEventListener('change', () => { closeGroups(desktopGroups); closeMobile(); });
 }
 
