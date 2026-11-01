@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -48,7 +48,14 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <p>Choose the chart and rules to suit the data—for example, individual measurements, proportions or event counts. Check denominators, changing definitions, seasonality and dependence between successive observations. Control limits describe expected process behaviour under the method’s assumptions; they are not targets or safety limits.</p>
 <p>Step-change analysis looks for possible changes in average level. <strong>No detected step does not prove statistical stability or common-cause-only variation.</strong> A detected step does not identify its cause or prove an intervention worked. Different methods answer different questions.</p>
 <p><a href="interpret-results.html">Read your StepChange chart and decide what to check next →</a></p>
-</section>
+</section><section id="xmr-charts"><h2>What is an X-mR chart?</h2>
+<p>An <strong>X-mR chart</strong> is a pair of charts for readings collected one at a time, in time order:</p>
+<ul><li><strong>X — individual readings:</strong> shows the value recorded each time, with a centre line and calculated limits.</li><li><strong>mR — moving range:</strong> shows the size of the difference between each reading and the previous one, ignoring whether it went up or down. It helps us see whether the size of the changes is unusual.</li></ul>
+<p>Whatever suitable measure you are tracking, read the two charts together: the first shows the individual values over time; the second shows how much each value differs from the one before it.</p>
+<p><strong>What should I do with a signal?</strong> Check the measurement and investigate what was different. A signal does not identify the cause. All points inside the limits do not, by themselves, prove stability; other patterns and the chosen rules matter too.</p>
+<p>The limits describe expected process behaviour under the method’s assumptions—not a target, specification or safety boundary. Use a suitable baseline, and check changing conditions, seasonality and dependence between readings.</p>
+<p><a href="interpret-results.html">Looking at blue steps and a green CUSUM line instead? Read the step-change chart guide →</a></p>
+<details class="conditions"><summary>Optional technical explanation and formulae</summary><div class="conditions-body"><p><a href="https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc322.htm">NIST handbook: individuals and moving-range charts</a>.</p></div></details></section>
 <section id="tampering"><h2>Avoid tampering—not deliberate improvement</h2>
 <p>Tampering means adjusting a process in response to routine variation as though each result has a distinct cause. Repeated reactive adjustments can add variation and obscure what is happening.</p>
 <p>That is different from a planned test to improve an unacceptable system. Make a prediction, check implementation and possible harm, and agree when to review. Do not keep changing the intervention simply because the latest result is disappointing.</p>
