@@ -53,6 +53,7 @@ const xmrN    = document.getElementById('xmrN');
 const xmrMean = document.getElementById('xmrMean');
 const xmrSd   = document.getElementById('xmrSd');
 
+let pendingAnalysisRequest = null;
 let cachedCsvData    = null;
 let currentChartData = null;
 let currentView      = 'step';
@@ -163,7 +164,7 @@ window.addEventListener('DOMContentLoaded', function() {
  * Checks for:
  *   1. Blank values in Y column — may be read as zero, depressing stage means
  *   2. Zero values in Y column — may be missing readings recorded as 0
- *   3. Date sequence gaps in X column — missing periods cause change points to be mis-dated
+ *   3. Date sequence gaps in X column — missing periods can make change timing uncertain
  * Does not block analysis. Shows a yellow warning banner with a link to the Data Validator.
  */
 function runDataQualityCheck() {
@@ -216,7 +217,7 @@ function runDataQualityCheck() {
         const parts = [];
         if (blankCount > 0) parts.push(`<b>${blankCount} blank value${blankCount > 1 ? 's' : ''}</b> in value column (may be read as zero)`);
         if (zeroCount > 0) parts.push(`<b>${zeroCount} zero value${zeroCount > 1 ? 's' : ''}</b> in value column (may be missing readings)`);
-        if (missingPeriods > 0) parts.push(`<b>${missingPeriods} missing period${missingPeriods > 1 ? 's' : ''}</b> in date sequence (change points will be mis-dated)`);
+        if (missingPeriods > 0) parts.push(`<b>${missingPeriods} possible missing period${missingPeriods > 1 ? 's' : ''}</b> in date sequence (gaps can make change timing uncertain)`);
         msg += parts.join('; ') + '. ';
         msg += `<a href="scanner.html" target="_blank" style="color:#0056b3;font-weight:bold;">Run the Data Validator</a> to identify and fix these issues before analysing.`;
         showWarning(msg);
@@ -271,6 +272,7 @@ pythonWorker.onmessage = function(event) {
         }
 
         drawPlotlyChart();
+        document.dispatchEvent(new CustomEvent('analysis-completed', {detail: {data: message.data, request: pendingAnalysisRequest}}));
 
         if (recalcBtn) {
             recalcBtn.disabled = false;
@@ -436,6 +438,7 @@ if (csvInput) csvInput.onchange = (e) => {
 };
 
 function handleFileUpload(file) {
+    document.dispatchEvent(new Event('analysis-invalidated'));
     const ext = file.name.split('.').pop().toLowerCase();
     if (ext !== 'csv') {
         showError(
@@ -503,7 +506,7 @@ function runPythonAnalysis() {
 
     saveSettings(activeFilename);
 
-    pythonWorker.postMessage({
+    pendingAnalysisRequest = {
         command: "process_csv",
         data: cachedCsvData,
         params: {
@@ -516,7 +519,9 @@ function runPythonAnalysis() {
             start_date:  startDate,
             end_date:    endDate
         }
-    });
+    };
+    document.dispatchEvent(new Event('analysis-started'));
+    pythonWorker.postMessage(pendingAnalysisRequest);
 }
 
 // ── Build Stage Summary table ──
@@ -526,7 +531,7 @@ function buildStageTable(data) {
         <th>Stage</th><th>From</th><th>To</th>
         <th style="text-align:right;">Mean</th>
         <th style="text-align:right;">SD</th>
-        <th style="text-align:right;">Conf %</th>
+        
         <th style="text-align:right;">Change %</th>
     </tr></thead><tbody>`;
 
@@ -552,7 +557,6 @@ function buildStageTable(data) {
             <td>${start}</td><td>${end}</td>
             <td style="text-align:right;">${mean.toFixed(2)}</td>
             <td style="text-align:right;">${stageSD}</td>
-            <td style="text-align:right;">${confVal}</td>
             <td style="text-align:right;"><b>${change}</b></td>
         </tr>`;
     }
@@ -668,7 +672,7 @@ function updateSummaryBars() {
                 const turnVal  = document.getElementById('paramTurnLength')?.value || '??';
                 stageCountText.innerHTML =
                     `Found <b>${currentChartData.step_count}</b> distinct stages` +
-                    ` &nbsp;|&nbsp; CUSUM (${confVal}% Confidence)` +
+                    ` &nbsp;|&nbsp; CUSUM (${confVal}% setting)` +
                     ` &nbsp;|&nbsp; Loops = ${bootVal}` +
                     ` &nbsp;|&nbsp; Turn Length = ${turnVal}`;
             }
@@ -781,7 +785,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
         <h2>${fullTitle}</h2>
         <div class="meta-row">${buildExportMetaHTML()}</div>
         <div class="settings-bar">
-            <span>Confidence: <b>${confVal}%</b></span>
+            <span>Confidence setting: <b>${confVal}%</b></span>
             <span>Bootstrap loops: <b>${bootVal}</b></span>
             <span>Turn length: <b>${turnVal}</b></span>
             <span>Date format: <b>${fmtVal}</b></span>
@@ -821,10 +825,10 @@ function buildStageTableHTML() {
     if (!currentChartData) return '';
     const data = currentChartData;
     let html = `<table class="stage-table">
-        <caption>Statistical Evidence Table</caption>
+        <caption>Candidate Stage Summary</caption>
         <thead><tr>
             <th>Stage</th><th>From</th><th>To</th>
-            <th>Mean</th><th>SD</th><th>Conf %</th><th>Change %</th>
+            <th>Mean</th><th>SD</th><th>Change %</th>
         </tr></thead><tbody>`;
     let count = 1;
     for (let i = 0; i < data.stage_means.length; i += 2) {
@@ -846,7 +850,7 @@ function buildStageTableHTML() {
         html += `<tr>
             <td>${count++}</td><td>${start}</td><td>${end}</td>
             <td>${mean.toFixed(2)}</td><td>${stageSD}</td>
-            <td>${confVal}</td><td><b>${change}</b></td>
+            <td><b>${change}</b></td>
         </tr>`;
     }
     return html + "</tbody></table>";

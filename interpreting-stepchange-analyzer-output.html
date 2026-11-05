@@ -52,7 +52,7 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 </ul>
 </div></details>
 <details class="conditions" id="charts"><summary>2. What each chart displays</summary><div class="conditions-body">
-<p><strong>Step Change Analysis:</strong> red points show observations; the blue line shows stage averages, both on the left-hand scale. The green CUSUM uses the right-hand scale. Stage Summary lists dates, Mean, SD, Conf % and Change %.</p>
+<p><strong>Step Change Analysis:</strong> red points show observations; the blue line shows stage averages, both on the left-hand scale. The green CUSUM uses the right-hand scale. Stage Summary lists dates, Mean, SD and Change %. Individual final-stage confidence scores are not shown.</p>
 <p><strong>CUSUM:</strong> a cumulative sum—a running total of each observation’s difference from the whole-series mean. It rises for values above that mean and falls for values below it. Steeper movement means a larger difference per observation, not statistical significance. The separate CUSUM tab shows this line alone. A bend is not automatically a detected change, and “rising” does not necessarily mean “improving”.</p>
 <p><strong>Run Chart:</strong> observations in time order with a median line. This tool marks runs of six or more observations on the same side of the median, ignoring values exactly on it. It does not apply every published run-chart rule. Marked runs prompt investigation; they do not identify causes.</p>
 <p><strong>X-mR:</strong> the upper chart shows individual observations (X). The lower shows moving ranges (mR): absolute differences between successive values. There is no moving range for the first observation.</p>
@@ -66,7 +66,7 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <ul>
 <li><strong>Turn Length:</strong> controls when the algorithm stops testing short segments for further splits. It does not guarantee a minimum number of observations in every returned stage.</li>
 <li><strong>Loops:</strong> the number of random shuffles for each comparison. More loops reduce simulation variability but take longer. Small differences on rerunning can occur, especially near a threshold; extra loops do not fix unsuitable data.</li>
-<li><strong>Conf %:</strong> the minimum comparison score required for a split. Higher thresholds generally report fewer splits. The headline chart label shows this selected threshold; stage scores appear in Stage Summary. Neither is a guarantee about cause or permanence.</li>
+<li><strong>Conf %:</strong> the minimum comparison score required for a split. Higher thresholds generally report fewer splits. The headline chart label shows this selected threshold. Individual final-stage scores are not shown because a score from an earlier split is not a separate test of the final stage. The setting is not a guarantee about cause or permanence.</li>
 <li><strong>Show 3SD Limits:</strong> adds each stage mean plus or minus three stage SDs. These bands describe spread—not confidence intervals for the mean, targets or the moving-range-based X-mR limits.</li>
 <li><strong>Start / End Date:</strong> limits the observations analysed. Changing the period changes the reference statistics and may change the result.</li>
 </ul>

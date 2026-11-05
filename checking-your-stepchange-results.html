@@ -1,0 +1,64 @@
+<!doctype html>
+
+
+
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checking your StepChange results</title>
+<meta content="Read the observations, stage averages, CUSUM line and Stage Summary; understand what detected and undetected changes can—and cannot—tell you." name="description"/>
+<link href="https://stepchangeanalysis.com/checking-your-stepchange-results.html" rel="canonical"/>
+
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
+</style></head>
+<body>
+<div id="site-header"></div>
+<main class="improvement-page" id="main-content">
+<p class="summary"><strong>Use these checks as clues, not guarantees.</strong> They are exploratory and do not establish that a result is correct.</p>
+<h1>Checking your StepChange results</h1>
+<p><strong>A practical guide to reviewing your chart and checking your results</strong></p>
+<p>Start with the dots and what you know about the process. The two checks in the analyser can help you decide what needs a closer look.</p>
+<section id="start-here"><h2>Start here: how to check your result</h2>
+<ol>
+<li><strong>Check the data.</strong> Is this the right measure? Look for missing dates, unusual values and changes in how the measure was recorded. Use the Data Validator if needed.</li>
+<li><strong>Look at the dots first.</strong> Does the run chart show a pattern, a sudden change or a gradual trend? Note when the process change was introduced and allow for a possible delay before it affects the measure.</li>
+<li><strong>Compare the other views.</strong> Look at the green CUSUM line and the stages on the step-change chart. Are their timings and directions consistent with what you see in the dots? They use the same data, so agreement is not independent confirmation.</li>
+<li><strong>Think about the size and timing.</strong> Is the observed difference worthwhile in practice? Could anything else have changed at the same time? A chart can suggest a change, but cannot prove what caused it.</li>
+<li><strong>Use the checks when helpful.</strong> Run <em>Check repeatability</em> to see whether the stage dates vary, and <em>Check for autocorrelation</em> to look for a possible relationship between neighbouring measurements. The explanations below show what to do with the results.</li>
+<li><strong>Decide and keep reviewing.</strong> Consider the risk, other evidence and any balancing measure, then decide what to do next and continue monitoring. For important or unclear findings, seek suitably qualified advice.</li>
+</ol>
+<p><a href="interpret-results.html#practical-four-steps">Read the four practical steps for looking for change →</a></p></section>
+<section><h2>1. Does the answer change when repeated?</h2>
+<p>The analyser uses randomly shuffled versions of your data when looking for changes. Different shuffles can produce slightly different results, especially when a possible change is close to the selected threshold. Wayne Taylor also describes this variation in his <a href="https://variation.com/wp-content/uploads/change-point-analyzer/change-point-analysis-a-powerful-new-tool-for-detecting-changes.pdf">change-point analysis paper</a> (conclusion, pp. 17–18). Increasing the number of shuffles may make the calculation more precise, but does not remedy dependence or other data problems.</p>
+<p>The repeatability check runs the same analysis 10 times, using the same data and settings but fresh random shuffles. It reports the number of stages and the dates at which new stages start. When a date varies, it also shows the neighbouring stage averages in the runs where that boundary appears. A repeatable count alone is not enough: the dates can still differ. The averages are descriptions, not a separate significance test.</p>
+<p><strong>If the results differ:</strong> look at which boundary dates vary, compare them with the dots and what you know about the process, and treat those particular boundaries with caution. For example, if six stages appear in some runs and seven in others, the extra boundary may be borderline. The broader picture may still be useful. Check data quality and possible dependence; consider more shuffles to reduce calculation-to-calculation variation, and seek advice if the decision is important.</p>
+<p><strong>If the results agree:</strong> the result is repeatable for these 10 runs and settings—not necessarily correct, significant, or caused by your intervention. Repeating the analysis does not repair unsuitable assumptions or data.</p></section>
+<section><h2>2. Are neighbouring measurements related?</h2>
+<p><strong>Autocorrelation</strong> means that values measured at different times are related. Think of it as an echo: what you see at one time can resemble what you saw earlier. For example, this month’s waiting list can partly reflect last month’s waiting list. The relationship does not necessarily mean one observation caused another.</p>
+<p>Patterns like this can arise for several reasons:</p>
+<ul><li><strong>Momentum:</strong> large systems often take time to change, so a high waiting list may remain high for a while.</li><li><strong>Seasonal cycles:</strong> demand might rise in the same season each year.</li><li><strong>Moving averages:</strong> smoothed figures share some of the same underlying observations, linking one reported value to the next.</li></ul>
+<p>A small positive or negative estimate can occur by chance, even when observations are independent. A gradual trend or another influence on the process can also make values at different times appear related. When measurements are related, shuffling them as if their order does not matter can make the analyser’s evidence misleading.</p>
+<p><strong>Example: a gradual rise.</strong> Suppose a measure rises from 100 to 102, 104 and 106 after a process change. Each value is close to the previous one, and the gradual trend could make the check show a positive relationship. That does not mean the improvement should be dismissed, or prove that the process change caused it. Look at the dots and the timing, and keep monitoring. The estimate may differ if the analyser divides the rise into stages.</p>
+<p>Choose how often the measure is recorded. The check estimates the relationship between neighbouring observations <em>after subtracting their estimated stage averages</em>. It only pairs neighbouring observations within the same stage, and skips gaps that do not match the chosen frequency. It does not check relationships at longer intervals, such as a seasonal pattern repeating every 12 months. For monthly or yearly data, there must be one observation per calendar month or year. Daily and weekly pairs must be exactly one or seven days apart. The number shown runs from −1 to +1: positive suggests neighbours tend to move together; negative suggests alternation; a value near zero does not rule out dependence.</p>
+<p><strong>Use it as a clue, not a verdict.</strong> The result can change when the estimated stages change and can be affected by trends, seasonal patterns, changes in variation, missing data and short periods. This simple check requires 20 usable pairs, but that is a practical guardrail, not a guarantee. If the timing is irregular, it is not suitable.</p>
+<p><strong>What next?</strong> Check that dates and records are complete; look for trends or seasonal cycles. If possible, review a reasonably stable period separately, rather than assuming a relationship seen in the whole series reflects dependence. For a high-stakes decision or a persistent concern, ask a statistician about methods that account for the timing of observations. A low estimate is not permission to ignore other warning signs.</p></section>
+<section><h2>Bring the evidence together</h2>
+<p>Use the <a href="interpret-results.html#practical-four-steps">four practical steps</a> to consider the run chart, CUSUM, stage chart and data checks together. Decide what action is proportionate to the risk, record what you expect and keep monitoring. Do not delay urgent safety action just to gather more data.</p>
+<p>None of these checks alone proves that a change occurred because of your intervention, or that it will last. No detected step does not prove that nothing changed.</p>
+<p><a href="interpret-results.html">Interpret your chart →</a><br><a href="index.html">Return to the analyser →</a></p></section></main>
+<div id="site-footer"></div><script src="assets/site-chrome.js"></script></body></html>

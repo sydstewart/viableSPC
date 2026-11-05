@@ -15,6 +15,7 @@
 
 
 /**
+ * TEST-ONLY CORRECTED CANDIDATE — NOT FOR WEBSITE UPLOAD.
  * worker.js - Pure JavaScript SPC Analysis Engine
  * StepChangeAnalysis.com
  *
@@ -255,7 +256,19 @@ function parseAndClean(rawData, xCol, yCol, dateFormat) {
 // Direct translation of Python manhatten_clean()
 // ─────────────────────────────────────────────
 function manhatten(values, turnLength, bootNum, confLimit) {
+    // Reject invalid inputs rather than silently producing misleading stages.
+    if (!Array.isArray(values) || values.some(v => !Number.isFinite(v)))
+        throw new Error("Values must all be finite numbers.");
     const n = values.length;
+    if (!Number.isInteger(turnLength) || turnLength < 1)
+        throw new Error("Turn Length must be a positive whole number.");
+    if (!Number.isSafeInteger(bootNum) || bootNum < 1)
+        throw new Error("Loops must be a positive whole number.");
+    if (!Number.isFinite(confLimit) || confLimit <= 0 || confLimit >= 100)
+        throw new Error("Conf % must be greater than 0 and less than 100.");
+    const minTail = 1 / (bootNum + 1);
+    if (minTail > (1 - confLimit / 100) + 1e-15)
+        throw new Error("Too few loops for this confidence threshold with the finite-shuffle correction. Increase Loops.");
 
     // cusum_control table — mirrors Python's DataFrame structure exactly.
     // Each row represents a segment (firstIndex to lastIndex).
@@ -293,9 +306,9 @@ function manhatten(values, turnLength, bootNum, confLimit) {
         const pMean = mean(dx);
 
         // Compute CUSUM for this segment
-        const cusum = computeCUSUM(dx, pMean);
-        const cusumMax = Math.max(...cusum);
-        const cusumMin = Math.min(...cusum);
+        const cusum = computeCUSUMTestPrecision(dx, pMean);
+        const cusumMax = Math.max(0, ...cusum);
+        const cusumMin = Math.min(0, ...cusum);
         const sdiff = cusumMax - cusumMin;
 
         // Find turn point (index of most extreme CUSUM value)
@@ -355,22 +368,25 @@ function bootstrapConfidence(data, dataMean, observedRange, loops) {
 
     for (let i = 0; i < loops; i++) {
         // Create one shuffled CUSUM path per iteration.
-        const shuffledCusum = computeCUSUM(
+        const shuffledCusum = computeCUSUMTestPrecision(
             shuffle([...data]),
             dataMean
         );
 
         // Take both extremes from that same path.
         const bootstrapRange =
-            Math.max(...shuffledCusum) -
-            Math.min(...shuffledCusum);
+            Math.max(0, ...shuffledCusum) -
+            Math.min(0, ...shuffledCusum);
 
-        if (bootstrapRange > observedRange) {
+        if (testAtLeastAsExtreme(bootstrapRange, observedRange, data, dataMean)) {
             exceedances++;
         }
     }
 
-    return 100 * (loops - exceedances) / loops;
+    // Sampled permutations: include the observed arrangement once in the
+    // Monte Carlo tail estimate. This avoids treating zero sampled tail
+    // excursions as zero probability. It does not correct serial dependence.
+    return 100 * (1 - (exceedances + 1) / (loops + 1));
 }
 
 // Fisher-Yates shuffle — unbiased random permutation
@@ -380,6 +396,22 @@ function shuffle(arr) {
         [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
+}
+
+// TEST-ONLY prototype: retain full precision for statistical decisions.
+// The original display-oriented computeCUSUM remains unchanged.
+function computeCUSUMTestPrecision(values, refMean) {
+    let total = 0;
+    return values.map(v => (total += v - refMean));
+}
+
+// Experimental tolerance for floating-point comparisons; requires review.
+function testAtLeastAsExtreme(range, observed, data, dataMean) {
+    // Conservative relative tolerance guards against treating a numerical tie
+    // as smaller. This policy remains subject to independent statistical review.
+    const scale = Math.max(Math.abs(observed), ...data.map(v => Math.abs(v - dataMean)));
+    const tolerance = 64 * Number.EPSILON * data.length * scale;
+    return range >= observed - tolerance;
 }
 
 // ─────────────────────────────────────────────
@@ -411,15 +443,17 @@ function buildStageMeans(stages, values, dates) {
         const slice = values.slice(seg.firstIndex, seg.lastIndex + 1);
         if (slice.length === 0) continue;
 
-        const sMean = round2(mean(slice));
-        const sSD   = slice.length > 1 ? round2(stddev(slice)) : 0;
-        const ucl   = round2(sMean + 3 * sSD);
-        const lcl   = round2(sMean - 3 * sSD);
-        const conf  = seg.conflevel !== null ? round2(seg.conflevel) : 100.0;
+        // Calculate bands before rounding for display.
+        const rawMean = mean(slice);
+        const rawSD = slice.length > 1 ? stddev(slice) : 0;
+        const sMean = round2(rawMean);
+        const sSD = round2(rawSD);
+        const ucl = round2(rawMean + 3 * rawSD);
+        const lcl = round2(rawMean - 3 * rawSD);
 
-        const txt = i === 0
-            ? `Mean: ${sMean}<br>SD: ${sSD}`
-            : `Mean: ${sMean}<br>SD: ${sSD}<br>Conf: ${conf}%`;
+        // A child inherits its parent's split statistic; it is not an
+        // independent stage confidence. Withhold it from chart/table output.
+        const txt = `Mean: ${sMean}<br>SD: ${sSD}`;
 
         // Two points per stage (start and end) to draw horizontal step line
         outDates.push(dates[seg.firstIndex], dates[seg.lastIndex]);

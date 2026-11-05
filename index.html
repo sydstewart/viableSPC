@@ -177,6 +177,7 @@
             .article-wrap, .page-wrap { max-width: 100%; padding: 0; }
             a { color: black; }
         }
+    .trial-banner{background:#fff2df;border-left:4px solid #b56b10;padding:15px;margin:0 0 18px;line-height:1.5;color:#533617}.diagnostic-panel{margin:24px 0;padding:24px;border:1px solid #cbd9e6;border-radius:8px;background:#fff;color:#183251}.diagnostic-panel[hidden]{display:none}.diagnostic-panel h2{margin:0 0 8px}.diagnostic-panel h3{font-size:1.07em;margin:0 0 8px}.diagnostic-panel p{line-height:1.5}.optional{font-size:.65em;font-weight:400;color:#52657a}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.check-card{border:1px solid #d6e0ea;border-radius:7px;padding:17px;background:#f8fafc;min-width:0}.check-card label{display:block;font-weight:600;margin-bottom:6px}.check-card select{display:block;width:100%;max-width:270px;margin-bottom:12px;padding:9px;border:1px solid #9aadc1;border-radius:4px;background:white;color:#183251}.check-card button{background:#0056b3;color:white;border:0;border-radius:4px;padding:10px 14px;cursor:pointer;margin:0 5px 6px 0}.check-card button:disabled{opacity:.55;cursor:not-allowed}.check-card button#cancel-repeat{background:#536779}.check-result{line-height:1.5;overflow-wrap:anywhere}.check-result p{margin:10px 0}.check-result ul{padding-left:22px}.check-footer{margin-bottom:0}.diagnostic-panel a{color:#0056b3}.diagnostic-panel :focus-visible{outline:3px solid #d07b13;outline-offset:3px}@media(max-width:700px){.check-grid{grid-template-columns:1fr}.diagnostic-panel{padding:18px}}
     </style>
     <link rel="stylesheet" href="assets/styles.css">
 <style id="home-intro-styles">
@@ -215,6 +216,7 @@
         </div>
     </div>
 
+    <div class="trial-banner"><strong>Use the results to support your judgement.</strong> Charts can suggest a change, but do not prove its cause. For important decisions or unclear findings, seek advice from a suitably qualified statistician.</div>
     <!-- ── Error Banner ── -->
     <div id="error-banner">
         &#9888;&#65039; <b>Analysis Error:</b> <span id="error-message"></span>
@@ -315,11 +317,28 @@
     <div id="display-wrapper">
         <div id="chart-container"></div>
         <div id="table-view">
-            <p style="color:#666; font-size:0.85em; margin-bottom:15px;">Statistical Evidence Table</p>
+            <p style="color:#666; font-size:0.85em; margin-bottom:15px;">Candidate Stage Summary — stage-specific confidence is not shown</p>
             <table id="stageSummaryTable"></table>
         </div>
     </div>
 
+    <section id="diagnostic-panel" class="diagnostic-panel" hidden aria-labelledby="checks-title">
+      <h2 id="checks-title">Check this result</h2>
+      <p>Look at the dots and the change dates first. These checks can help you decide what needs a closer look; <strong>they cannot prove a change or its cause.</strong></p>
+      <p><a href="checking-your-stepchange-results.html#start-here">How to start checking your results →</a></p>
+      <div class="check-grid"><div class="check-card"><h3>Are neighbouring measurements related?</h3>
+      <p>Look for a possible relationship between neighbouring measurements. A trend or seasonal pattern can also affect the result.</p>
+      <label for="check-frequency">How often is the measure recorded?</label>
+      <select id="check-frequency"><option value="">Choose a frequency</option><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select>
+      <button id="check-correlation" type="button">Check for autocorrelation</button>
+      <div id="correlation-result" class="check-result" aria-live="polite"></div></div>
+      <div class="check-card"><h3>Does the answer change when repeated?</h3>
+      <p>Repeat the whole analysis 10 times using the same data and settings, with new random shuffles each time.</p>
+      <button id="check-repeat" type="button">Check repeatability · 10 runs</button>
+      <button id="cancel-repeat" type="button" hidden>Cancel</button>
+      <div id="repeat-result" class="check-result" aria-live="polite"></div></div></div>
+      <p class="check-footer"><a href="checking-your-stepchange-results.html">What do these checks mean and what should I do? →</a></p>
+    </section>
     <!-- ── Articles Section (bottom) ── -->
     <div class="articles-section">
         <h2>&#128240; Articles &amp; Case Studies</h2>
@@ -377,12 +396,12 @@
             <a href="the-grid-fixed-itself.html" class="article-card">
                 <div class="article-card-tag" style="color:#0e7490;">&#127807; Environment &amp; Policy</div>
                 <h3>The Grid Fixed Itself. Transport Didn&rsquo;t.</h3>
-                <p>The UK cut emissions 53% since 1990. Bootstrap CUSUM identifies three causes: energy market liberalisation (1998), the global financial crisis (2008), and the carbon price floor (2015). Only the last is climate policy. Transport shows no structural change at 95% confidence across 34 years.</p>
+                <p>The UK cut emissions 53% since 1990. Bootstrap CUSUM explores changes alongside major events, including energy market liberalisation (1998), the global financial crisis (2008), and the carbon price floor (2015). Timing alone does not establish cause. Transport shows no structural change at 95% confidence across 34 years.</p>
             </a>
             <a href="sepsis-six-does-public-data-show-whether-it-worked.html" class="article-card">
                 <div class="article-card-tag" style="color:#7c3aed;">&#128138; Patient Safety &middot; Clinical QI</div>
                 <h3>The Sepsis Six: Does Public Data Show Whether It Worked?</h3>
-                <p>Six bedside actions. 96% of NHS hospitals. 37 countries. Bootstrap CUSUM on 22 years of ONS mortality data finds one stage and no change point in either clinical series. But the ratio between the two series shows a structural change point in 2013 at 95.5% confidence &mdash; the year the CQUIN coding incentive was introduced. Better coding. Not better outcomes. Not worse. The study step of PDSA was never completed.</p>
+                <p>Six bedside actions. 96% of NHS hospitals. 37 countries. Bootstrap CUSUM on 22 years of ONS mortality data finds one stage and no change point in either clinical series. The ratio between the two series suggests a possible change around 2013, the year the CQUIN coding incentive was introduced. Timing alone does not establish the cause.</p>
             </a>
         </div>
     </div>
@@ -429,20 +448,21 @@
             <p>Prepare your data as a CSV file with at least two columns: a <b>date column</b> and a <b>numeric value column</b>. Then drag and drop the file onto the upload area, or click to browse.</p>
             <h3>Settings</h3>
             <ul>
-                <li><b>Turn Length:</b> Minimum number of points required in a segment before a change point can be detected. Default 5.</li>
-                <li><b>Loops:</b> Number of bootstrap resamples. 1,000 is fast; use 5,000&ndash;10,000 for governance reports.</li>
-                <li><b>Conf %:</b> Minimum confidence level required to declare a change point. 90% = sensitive; 95% = standard; 99.7% = conservative.</li>
+                <li><b>Turn Length:</b> Controls when the analyser stops searching short segments. It does not set a minimum size for each resulting stage. Default 5.</li>
+                <li><b>Loops:</b> Number of random shuffles. More shuffles can reduce variation between calculations, but cannot correct unsuitable data or dependence between observations.</li>
+                <li><b>Conf %:</b> The threshold used when exploring a possible change. A higher setting is more demanding; it is not the probability that an intervention worked.</li>
                 <li><b>Show 3SD Limits:</b> Adds &plusmn;3 standard deviation bands to the Step Change chart.</li>
             </ul>
             <h3>Privacy</h3>
             <p>Your CSV file never leaves your computer. All analysis runs entirely in your browser. No data is uploaded to any server. No login required.</p>
             <h3>About the method</h3>
-            <p>Bootstrap CUSUM step-change analysis is a distribution-free method for detecting structural changes in time series data. It does not assume normality, making it particularly suited to healthcare safety data, incident counts, and other right-skewed metrics.</p>
+            <p>Bootstrap CUSUM step-change analysis explores possible changes in time-ordered data without requiring a normal distribution. The random-shuffle comparison still depends on assumptions about the data; trends, seasonality and related observations can make it misleading.</p>
             <p style="font-size:0.85em; color:#888; margin-top:20px;">Based on Taylor (2000), building on Page (1954), Hinkley (1971), and Efron &amp; Tibshirani (1993). Implemented at StepChangeAnalysis.com.</p>
         </div>
     </div>
 
     <script src="app.js"></script>
+    <script src="diagnostics.js"></script>
     <script src="assets/site-chrome.js"></script>
 
     <!-- Google Analytics -->

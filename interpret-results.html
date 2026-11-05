@@ -10,6 +10,7 @@
 <title>Interpreting Your StepChange Chart — StepChangeAnalysis.com</title>
 <meta content="Read the observations, stage averages, CUSUM line and Stage Summary; understand what detected and undetected changes can—and cannot—tell you." name="description"/>
 <link href="https://stepchangeanalysis.com/interpret-results.html" rel="canonical"/>
+
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
 <script>
         window.dataLayer = window.dataLayer || [];
@@ -41,6 +42,21 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
     Analyser reference: terms, charts and settings →
   </a>
 </p>
+<section id="practical-four-steps"><h2>A practical way to look for change</h2>
+<p>Start with the right measure and a clear question: what change would be useful? Then use these four steps together with what you know about the process.</p>
+<h3>1. Look at the run chart</h3>
+<p>Plot the observations and note when the process change was introduced. Six consecutive points above or below a suitable baseline median suggest a possible shift worth investigating. Look at when the sequence began and whether its direction and size are useful. It is a <strong>signal, not proof</strong> that chance played no part.</p>
+<p>Keep three dates separate: when the process changed, when performance may have started to change, and when enough observations had accumulated to give a signal. They can differ.</p>
+<p><strong>In this analyser:</strong> the run-chart median is calculated from all observations in the selected period, rather than a separately chosen baseline. Check whether that is a suitable reference; record the intervention date separately. Points on the median are ignored when counting a run. Gaps can mean six consecutive recorded points are not six consecutive periods.</p>
+<h3>2. Look at the green CUSUM line</h3>
+<p>A major bend or turning point can draw attention to a possible change. Compare its timing with the run chart and what you know about the process. Both views use the same data, so agreement is useful but <strong>not independent confirmation</strong>. Not every shift produces a clear peak or trough in the overall CUSUM.</p>
+<h3>3. Explore the step-change chart</h3>
+<p>Use it to explore possible stages, their average levels and when changes might have begun. A 95% or 99.7% setting changes how demanding the test is; it does not prove that a particular change could not be due to chance. Results should be interpreted with care and do not prove what caused a change.</p>
+<h3>4. Check whether the findings are dependable</h3>
+<p>Look for missing data, changes in recording, unusual values, skewness, trends, seasonality and relationships between successive observations. A skewed distribution is not automatically a problem, but it and the other features may need closer review. The optional repeatability and autocorrelation checks can provide clues; they do not verify all assumptions.</p>
+<p><strong>Then decide and keep reviewing.</strong> Is the observed change worthwhile? What else changed? Consider risk and any balancing measure, decide what to do next, and continue monitoring.</p>
+<p><a href="checking-your-stepchange-results.html">Understand the optional result checks →</a></p>
+</section>
 <section><h2>Read the Step Change Analysis view</h2>
 <ul>
 <li><strong>Red points and line—your observations.</strong> Read these against the left-hand scale. Look at the dates, units, gaps and unusual values.</li>
@@ -49,10 +65,30 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 </ul>
 <p>If you select <strong>Show 3SD Limits</strong>, the dashed bands show each stage average plus or minus three stage standard deviations. They describe spread; they are not targets, confidence intervals for the average or the same limits as the separate X-mR chart.</p>
 </section>
+<section id="taylor-context"><h2>Wayne Taylor’s conclusions on change-point analysis</h2>
+<p><strong>A complementary tool.</strong> Taylor explains that change-point analysis does not replace control charts. Control charts are valuable for monitoring a process as new measurements arrive and for drawing attention to unusual individual points. A change-point analysis looks back over accumulated data to help explore when the average level may have changed. The charts can be used together.</p>
+<p>For a one-time review of historical data, especially a large series, Taylor argues that change-point analysis can be particularly useful. In his conclusion he describes the following potential advantages of his approach:</p>
+<ol>
+<li><strong>Finding smaller sustained changes.</strong> It may reveal a continuing change in level that is difficult to see on an individuals control chart.</li>
+<li><strong>Describing changes.</strong> It can identify more than one possible change and estimate when changes took place. Taylor’s method also reports confidence levels and intervals for change dates.</li>
+<li><strong>Addressing false detections.</strong> Taylor says his approach controls a “change-wise” error rate, contrasting it with the point-wise error rate of control charts. This is a claim about his method and its assumptions—not a guarantee for every implementation or dataset.</li>
+<li><strong>Handling unusual values.</strong> Taylor describes his approach as robust to outliers and notes that using ranks can provide additional robustness. An unusual value should still be checked; no method makes data errors irrelevant.</li>
+<li><strong>Flexibility.</strong> Taylor discusses applying the approach to different types of time-ordered data, including data that do not follow a normal distribution. That does not mean every dataset is suitable: the assumptions and the way the measure was collected still matter.</li>
+<li><strong>Making a long series easier to review.</strong> The analysis can summarise a series as stages, helping a user explore several possible changes and their timing rather than interpreting many individual signals one by one.</li>
+</ol>
+<h3>Limitations Taylor highlights</h3>
+<ul>
+<li><strong>Isolated unusual points:</strong> change-point analysis focuses on changes in the level; a control chart can complement it when individual unusual observations matter.</li>
+<li><strong>Different results on repeat runs:</strong> random bootstrap samples can produce slightly different answers. More shuffles can reduce calculation-to-calculation variation, at the cost of time; they do not fix unsuitable data or assumptions. Taylor’s paper recommends at least 1,000 bootstraps for his examples and discusses larger numbers where practical.</li>
+</ul>
+<p>Taylor also suggests software could check assumptions such as independent errors and alert users to potential problems. Such checks can be helpful, but a simple diagnostic cannot prove that observations are independent.</p>
+<p><strong>What this means for this analyser:</strong> Taylor’s conclusions describe his approach, not a guarantee that this analyser has identical properties. The analyser does not provide confidence intervals for change dates. Its error rates have not been fully validated for all data, and its repeatability and autocorrelation checks are exploratory. A detected step does not establish the cause of a change or guarantee that it will last.</p>
+<p>Reference: <a href="https://variation.com/wp-content/uploads/change-point-analyzer/change-point-analysis-a-powerful-new-tool-for-detecting-changes.pdf">Wayne A. Taylor, <em>Change-Point Analysis: A Powerful New Tool for Detecting Changes</em>, Variation.com</a>, conclusion, pp. 17–18.</p>
+</section>
 <section><h2>Use the Stage Summary</h2>
 <p>Check the stage dates, <strong>Mean</strong> (average) and <strong>SD</strong> (spread around that average). Compare the size of the difference with what matters in practice—not just whether a step appears.</p>
 <p><strong>Change %</strong> compares a stage average with the previous stage. It is a relative change, not a percentage-point difference.</p>
-<p><strong>Conf %</strong> reports the method’s score from comparing the cumulative pattern with shuffled versions of the observations. A higher score is stronger evidence against that shuffled-order comparison—not the probability that your intervention worked. It is not a guarantee against false alarms.</p>
+<p>Individual stage confidence scores are not shown: a score inherited from an earlier split is not a separate test of the final stage. The selected confidence setting is not the probability that an intervention worked.</p>
 </section>
 <section id="what-the-result-means"><h2>What does the result mean?</h2>
 <ul>
@@ -65,6 +101,7 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <p>Record the period and settings used. Do not keep changing them until a preferred result appears. Errors or inadequate data need attention before interpreting the output.</p>
 <p>Compare timing with the intervention and its expected delay, check implementation and possible harm elsewhere. Do not declare success—or automatically wait or launch another initiative—from the chart alone. Urgent safety concerns still require action.</p>
 </section>
+<section><h2>Use the optional checks</h2><p>If you need more confidence in a result, try the repeatability check and the check for related observations. Differences between runs or possible dependence are reasons to investigate, not automatic proof that the whole result is wrong.</p><p><a href="checking-your-stepchange-results.html">Understand the checks and decide what to do →</a></p></section>
 <section id="next-steps"><h2>Choose the next step</h2>
 <ul>
 <li><strong>Possible change:</strong> check its size, direction, timing and practical importance. Investigate competing explanations and whether the result continues; do not attribute it to the intervention from timing alone.</li>
