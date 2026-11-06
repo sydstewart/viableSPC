@@ -46,6 +46,7 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <p>Start with the right measure and a clear question: what change would be useful? Then use these four steps together with what you know about the process.</p>
 <h3>1. Look at the run chart</h3>
 <p>Plot the observations and note when the process change was introduced. Six consecutive points above or below a suitable baseline median suggest a possible shift worth investigating. Look at when the sequence began and whether its direction and size are useful. It is a <strong>signal, not proof</strong> that chance played no part.</p>
+<p><strong>Look at the spread as well as the average.</strong> Is the measure fairly consistent, or does it move around a lot? A small useful shift can be difficult to distinguish from wide variation; no detected shift does not prove there was no benefit. Check gaps, unusual values, trends, seasonal patterns and changes in recording. Consider whether the overall measure combines different teams, shifts, patient groups or pathways. Compare groups only where definitions, case mix and numbers make that comparison useful; differences are clues, not proof of cause. <a href="variation-and-spc.html#inspect-spread">More on inspecting variation →</a></p>
 <p>Keep three dates separate: when the process changed, when performance may have started to change, and when enough observations had accumulated to give a signal. They can differ.</p>
 <p><strong>In this analyser:</strong> the run-chart median is calculated from all observations in the selected period, rather than a separately chosen baseline. Check whether that is a suitable reference; record the intervention date separately. Points on the median are ignored when counting a run. Gaps can mean six consecutive recorded points are not six consecutive periods.</p>
 <h3>2. Look at the green CUSUM line</h3>
@@ -63,7 +64,7 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <li><strong>Blue line—stage averages.</strong> Each horizontal section shows the average for one period identified by the analysis. A step joins periods with different averages. Higher is not always better: fewer late deliveries may be good; fewer completed orders may not be.</li>
 <li><strong>Green line—CUSUM.</strong> Read this against the separate right-hand scale. It adds up each observation’s difference from the whole-series average: it rises for values above that average and falls for values below it. A rising CUSUM is <em>not</em> automatically improvement. Turning points help the method locate possible changes; not every bend is a detected change.</li>
 </ul>
-<p>If you select <strong>Show 3SD Limits</strong>, the dashed bands show each stage average plus or minus three stage standard deviations. They describe spread; they are not targets, confidence intervals for the average or the same limits as the separate X-mR chart.</p>
+<p>If you select <strong>Show 3SD Limits</strong>, the dashed bands show each stage average plus or minus three stage standard deviations. They describe spread; they are not targets, confidence intervals for the average or the same limits as the separate X-mR chart. Stage boundaries are estimates, and short stages can give unstable SDs. A small SD alone does not establish stability.</p>
 </section>
 <section id="taylor-context"><h2>Wayne Taylor’s conclusions on change-point analysis</h2>
 <p><strong>A complementary tool.</strong> Taylor explains that change-point analysis does not replace control charts. Control charts are valuable for monitoring a process as new measurements arrive and for drawing attention to unusual individual points. A change-point analysis looks back over accumulated data to help explore when the average level may have changed. The charts can be used together.</p>
@@ -117,7 +118,8 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <p><strong>What explanation could account for this result—and what evidence would help us check it?</strong></p>
 <a class="more" href="index.html">Return to the analyser →</a><br/>
 <a class="more" href="types-of-measures.html">Check your choice of measures →</a><br/>
-<a class="more" href="scanner.html">Check your CSV with the Data Validator →</a>
+<a class="more" href="scanner.html">Check your CSV with the Data Validator →</a><br/>
+<a class="more" href="analyser-validation.html">How the analyser has been tested →</a>
 </section></main>
 <div id="site-footer"></div>
 <script src="assets/site-chrome.js"></script>

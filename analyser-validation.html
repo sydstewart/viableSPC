@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How the StepChange Analyzer Has Been Tested — StepChangeAnalysis.com</title>
+<meta content="How the StepChange Analyzer was tested, what the first results showed and what remains to be checked." name="description"/>
+<link href="https://stepchangeanalysis.com/analyser-validation.html" rel="canonical"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-NZLMMS3ZGG");
+    </script>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
+
+.improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
+</style></head>
+<body>
+<div id="site-header"></div>
+<main class="improvement-page" id="main-content">
+<h1>How the StepChange Analyzer has been tested</h1>
+<p><strong>What we checked, what we found, and what still needs work.</strong></p>
+<div class="summary"><p>The first round of testing is encouraging for the cases tested. It does not establish that the analyser is reliable for every dataset. In particular, related observations can make a shuffled-data comparison misleading.</p></div>
+<p>Last reviewed: 6 November 2026. This testing was carried out during development and has not had independent statistical review.</p>
+<section><h2>Why test the analyser?</h2>
+<p>The analyser looks back over observations to explore possible changes in average level. We need to check both that the calculations work as intended and how the complete procedure behaves when the true pattern is known. A chart supports judgement: it does not establish cause, prove that an intervention worked or replace action on urgent harm.</p>
+</section>
+<section><h2>What we checked</h2>
+<ul><li><strong>Known calculations:</strong> for small examples, every possible ordering was checked, including cases with tied results. The candidate calculation matched the exact comparison in the cases tested.</li><li><strong>Basic behaviour:</strong> a constant series and a clearly constructed step produced the expected basic results. Checks also covered calculation precision, settings and the SD bands.</li><li><strong>Simulated data:</strong> we tested series with no change, known changes, skewness, trends and related successive observations.</li><li><strong>The interface:</strong> a CSV was loaded, both result checks ran, changing settings cleared previous check results, and a mobile view was checked locally.</li></ul>
+<p>The corrected worker and matching files were subsequently published. These tests cover particular examples, not every input or future software change.</p>
+</section>
+<section><h2>What did the simulations show?</h2>
+<p>For the examples below, there was <strong>no underlying change</strong>. Each series contained 60 observations. The analyser used a 99.7% setting, 1,000 shuffles and a turn length of 5. We counted series with at least one detected boundary.</p>
+<ul><li><strong>Independent normal observations:</strong> 3 of 1,000 series showed a possible change.</li><li><strong>Independent skewed observations:</strong> 0 of 600 series showed a possible change. Zero observed does not mean the true rate is zero.</li><li><strong>Moderately related neighbours:</strong> 33 of 600 series showed a possible change.</li><li><strong>Strongly related neighbours:</strong> 331 of 600 series showed a possible change.</li></ul>
+<p>The related series were deliberately constructed examples, not estimates for your data. They show why randomly shuffling related observations can give misleading confidence figures. Three signals in 1,000 is too few to estimate a rare false-signal rate precisely.</p>
+<p>In a separate example with a real one-standard-deviation shift halfway through independent normal data, a boundary was found within three observations of the true change in <strong>195 of 500</strong> series. The setting, data and change were specific to this example; the figure is not a general detection rate. A real change can be missed.</p>
+</section>
+<section><h2>What the extra checks can tell you</h2>
+<p><strong>Repeatability</strong> runs the calculation ten times with the same data and settings and shows changes in stage counts and dates. Agreement shows consistency across those runs, not proof that a boundary is correct.</p>
+<p><strong>Related observations:</strong> the exploratory check offers a clue about neighbouring values. Its estimate can fluctuate even for independent observations. A positive result is not a diagnosis, and a small estimate does not prove independence.</p>
+<p>More shuffles or repeated runs may reduce calculation-to-calculation variation; they do not fix dependence, seasonality or an unsuitable model. Use the checks alongside the observations and knowledge of the process.</p>
+<p><a href="checking-your-stepchange-results.html">Understand the result checks →</a></p>
+</section>
+<section><h2>What remains to be checked?</h2>
+<ul><li>Broader testing with multiple changes, seasonality, changing variation, short stages and missing data.</li><li>How the recursive search behaves when real changes and additional false boundaries occur.</li><li>Comparison with another method on known cases, using documented settings. Agreement would not by itself prove either method correct.</li><li>Independent statistical review, if available. The first round was carried out by the development team.</li></ul>
+<p>Turn Length controls when short segments stop being tested; it does not guarantee a minimum number of observations on both sides of each returned boundary. The analyser does not provide confidence intervals for change dates.</p>
+</section>
+<section><h2>How to use a result</h2>
+<p>Start with a clear measure, the time plot and a useful question. Check the data and the result, consider its practical importance and what else changed, and keep monitoring. Seek additional help for important or unclear decisions where possible.</p>
+<p><a class="more" href="interpret-results.html">Interpret your StepChange chart →</a><br/><a class="more" href="variation-and-spc.html">Understand variation →</a><br/><a class="more" href="index.html">Return to the analyser →</a></p>
+</section>
+<section><h2>Further reading</h2>
+<p><a href="interpreting-stepchange-analyzer-output.html">Analyser reference: terms, charts and settings</a></p>
+<p><a href="https://variation.com/wp-content/uploads/change-point-analyzer/change-point-analysis-a-powerful-new-tool-for-detecting-changes.pdf">Wayne A. Taylor: Change-Point Analysis: A Powerful New Tool for Detecting Changes</a>. Taylor’s conclusions describe his method, not a guarantee that this implementation has identical properties.</p>
+</section></main>
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+</body></html>
