@@ -109,6 +109,13 @@
     dropZone.onclick  = () => csvInput.click();
     csvInput.onchange = e => { if (e.target.files.length) handleFile(e.target.files[0]); };
 
+    // Escape text taken from the user's file before inserting it as HTML.
+    function esc(value) {
+        return String(value).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
+
     function handleFile(file) {
         Papa.parse(file, {
             header: true, skipEmptyLines: 'greedy',
@@ -129,7 +136,7 @@
                 mappingSection.style.display = 'block';
                 document.getElementById('drop-text').innerHTML =
                     '<h5 class="fw-bold text-success">&#10004; File Loaded</h5>' +
-                    '<p class="mb-0 text-secondary">' + file.name + ' &mdash; ' + rawData.length + ' rows detected</p>';
+                    '<p class="mb-0 text-secondary">' + esc(file.name) + ' &mdash; ' + rawData.length + ' rows detected</p>';
             }
         });
     }
@@ -197,7 +204,7 @@
             return v !== "" && !isNaN(parseFloat(v)) && !/[\/\-\.]/.test(v) && !is4DigitYear;
         }).length;
         if (xLooksNumeric >= 3) {
-            preCheckWarnings += '<div class="alert alert-warning mt-2">&#9888; <strong>Warning: Date column may be wrong.</strong> The X-Axis column "' + x + '" appears to contain plain numbers, not dates. Did you select the wrong column?</div>';
+            preCheckWarnings += '<div class="alert alert-warning mt-2">&#9888; <strong>Warning: Date column may be wrong.</strong> The X-Axis column "' + esc(x) + '" appears to contain plain numbers, not dates. Did you select the wrong column?</div>';
         }
 
         const yLooksLikeDate = sampleRows.filter(r => {
@@ -205,7 +212,7 @@
             return /^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{4}/.test(v) || /^\d{4}-\d{2}-\d{2}/.test(v);
         }).length;
         if (yLooksLikeDate >= 3) {
-            preCheckWarnings += '<div class="alert alert-warning mt-2">&#9888; <strong>Warning: Value column may contain dates.</strong> The Y-Axis column "' + y + '" appears to contain dates, not numbers.</div>';
+            preCheckWarnings += '<div class="alert alert-warning mt-2">&#9888; <strong>Warning: Value column may contain dates.</strong> The Y-Axis column "' + esc(y) + '" appears to contain dates, not numbers.</div>';
         }
 
         const xLooksLikeText = sampleRows.filter(r => {
@@ -216,11 +223,11 @@
             return !isDate && !isNum;
         }).length;
         if (xLooksLikeText >= 3) {
-            preCheckWarnings += '<div class="alert alert-danger mt-2">&#10060; <strong>Error: Date column appears to contain text.</strong> The X-Axis column "' + x + '" contains text values. Select a different X-Axis column or convert to dates in Excel.</div>';
+            preCheckWarnings += '<div class="alert alert-danger mt-2">&#10060; <strong>Error: Date column appears to contain text.</strong> The X-Axis column "' + esc(x) + '" contains text values. Select a different X-Axis column or convert to dates in Excel.</div>';
         }
 
         if (x === y) {
-            preCheckWarnings += '<div class="alert alert-danger mt-2">&#10060; <strong>Error: Same column selected for Date and Value.</strong> X-Axis and Y-Axis are both set to "' + x + '". Please select different columns.</div>';
+            preCheckWarnings += '<div class="alert alert-danger mt-2">&#10060; <strong>Error: Same column selected for Date and Value.</strong> X-Axis and Y-Axis are both set to "' + esc(x) + '". Please select different columns.</div>';
         }
 
         rawData.forEach(function(row, index) {
@@ -241,11 +248,11 @@
 
                 if (isFinYear) {
                     stats.badFormats++; rowHasError = true;
-                    logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Financial year format not supported: "' + dVal + '"</span>';
+                    logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Financial year format not supported: "' + esc(dVal) + '"</span>';
                     logHtml += '<span class="suggestion-tip">&#128161; Convert to a standard date: 01/04/2024 for financial year 2024/25. Excel formula: =DATE(LEFT(A2,4),4,1) converts the start year to 1 April of that year. See the Fix CSV guide for full instructions.</span>';
                 } else if (!isStdDate && !isISO && !isYearMonth && !isYearOnly) {
                     stats.badFormats++; rowHasError = true;
-                    logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Unrecognised date format: "' + dVal + '"</span>';
+                    logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Unrecognised date format: "' + esc(dVal) + '"</span>';
                     logHtml += '<span class="suggestion-tip">&#128161; Supported: DD/MM/YYYY, MM/DD/YYYY, YYYY-MM-DD, YYYY-MM, MM/YYYY, YYYY</span>';
                 }
 
@@ -261,7 +268,7 @@
                 const thisFormat = isISO ? 'iso' : isStdDate ? 'stdDate' : isYearMonth ? 'yearMonth' : isYearOnly ? 'yearOnly' : 'unknown';
                 if (dominant[1] >= 3 && thisFormat !== 'unknown' && thisFormat !== dominant[0] && formatCounts[thisFormat] <= 2) {
                     stats.mixedFormats++; rowHasError = true;
-                    logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Mixed date format: "' + dVal + '" uses a different format from most other rows (' + dominant[0] + ').</span>';
+                    logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Mixed date format: "' + esc(dVal) + '" uses a different format from most other rows (' + esc(dominant[0]) + ').</span>';
                     logHtml += '<span class="suggestion-tip">&#128161; Standardise all dates to the same format before uploading. This row will not be parsed correctly and may cause wrong change point dates.</span>';
                 }
 
@@ -270,7 +277,7 @@
                     // Out-of-order check
                     if (lastTS > 0 && ts < lastTS) {
                         stats.outOfOrder++; rowHasError = true;
-                        logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date out of order: "' + dVal + '" is earlier than the previous row "' + lastDateStr + '".</span>';
+                        logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date out of order: "' + esc(dVal) + '" is earlier than the previous row "' + esc(lastDateStr) + '".</span>';
                         logHtml += '<span class="suggestion-tip">&#128161; Bootstrap CUSUM must run oldest to newest. In Excel: select all data, Data tab &rarr; Sort &rarr; your date column &rarr; Oldest to Newest. In Google Sheets: Data &rarr; Sort range &rarr; A to Z on the date column. Then re-save as CSV.</span>';
                     } else if (lastTS > 0) {
                         const gap = ts - lastTS;
@@ -281,8 +288,8 @@
                             if (gap > detectedFreqMs + tolerance) {
                                 const expectedCount = Math.round(gap / detectedFreqMs) - 1;
                                 stats.missingDates += expectedCount; rowHasError = true;
-                                logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date gap detected: ' + expectedCount + ' expected period' + (expectedCount > 1 ? 's' : '') + ' missing between "' + lastDateStr + '" and "' + dVal + '".</span>';
-                                logHtml += '<span class="suggestion-tip">&#128161; Missing periods affect the stage mean as well as the change point date. A period with no readings is still a data point — add it with an interpolated value or genuine zero. See the Fix CSV guide for how to handle this correctly.</span>';
+                                logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date gap detected: ' + expectedCount + ' expected period' + (expectedCount > 1 ? 's' : '') + ' missing between "' + esc(lastDateStr) + '" and "' + esc(dVal) + '".</span>';
+                                logHtml += '<span class="suggestion-tip">&#128161; Missing periods affect the stage mean as well as the change point date. If the period genuinely had a value of zero (for example no incidents), add a row with 0. If the reading is missing, leave the gap rather than inventing a value: change dates near a gap are less certain. See the Fix CSV guide.</span>';
                             }
                         }
                     }
@@ -290,7 +297,7 @@
                     // ── Duplicate date check ──
                     if (seenDates.has(ts)) {
                         stats.duplicateDates++;
-                        logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Duplicate date: "' + dVal + '" appears more than once.</span>';
+                        logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Duplicate date: "' + esc(dVal) + '" appears more than once.</span>';
                         logHtml += '<span class="suggestion-tip">&#128161; If your data has multiple readings per day (e.g. hourly or shift data) this is expected — ignore this warning. If each row should represent a unique period (monthly, weekly), remove or merge duplicate rows. In Excel: Data &rarr; Remove Duplicates on the date column.</span>';
                     }
                     seenDates.add(ts);
@@ -304,18 +311,18 @@
             if (rawM === "") {
                 stats.badNumbers++; rowHasError = true;
                 logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; Value is blank (missing reading).</span>';
-                logHtml += '<span class="suggestion-tip">&#128161; Delete this row entirely. A blank value may be treated as zero by the analyser.</span>';
+                logHtml += '<span class="suggestion-tip">&#128161; This row is left out of the analysis; blanks are not treated as zero. If a reading exists, add it. If the period genuinely had no reading, you can leave it blank.</span>';
             } else {
                 let cleanM = rawM.replace(/\s+/g,'');
                 if (cleanM.includes(',')) cleanM = isEuro ? cleanM.replace(/\./,'').replace(',','.') : cleanM.replace(/,/g,'');
                 if (isNaN(parseFloat(cleanM))) {
                     stats.badNumbers++; rowHasError = true;
-                    logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; "' + rawM + '" is not a valid number.</span>';
+                    logHtml += '<span class="error-text">[ROW ' + rowNum + '] &#10060; "' + esc(rawM) + '" is not a valid number.</span>';
                     logHtml += '<span class="suggestion-tip">&#128161; Remove units, symbols, or text from the value column.</span>';
                 } else if (parseFloat(cleanM) === 0) {
                     stats.zeroValues++; rowHasError = true;
-                    logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Value is zero &mdash; possible missing reading recorded as 0.</span>';
-                    logHtml += '<span class="suggestion-tip">&#128161; If this is a monitoring outage, delete this row. Zero values depress the stage mean.</span>';
+                    logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Value is zero &mdash; check it is a genuine measurement.</span>';
+                    logHtml += '<span class="suggestion-tip">&#128161; Keep genuine zeros: they are real results, and removing them biases the stage mean upwards. Only if the zero stands for a missing reading (for example an outage) should you replace it with the true value or leave the cell blank so the row is left out.</span>';
                 }
             }
 
@@ -346,7 +353,7 @@
         if (stats.outOfOrder > 0)   warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.outOfOrder + ' out-of-order date' + (stats.outOfOrder > 1 ? 's' : '') + ' detected.</strong> Bootstrap CUSUM requires dates to run oldest to newest. In Excel: Data &rarr; Sort &rarr; Oldest to Newest on the date column. In Google Sheets: Data &rarr; Sort range &rarr; A to Z. Re-save as CSV before analysing.</div>';
         if (stats.missingDates > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.missingDates + ' missing period' + (stats.missingDates > 1 ? 's' : '') + ' detected</strong> — gaps cause change points to be dated incorrectly.</div>';
         if (stats.columnErrors > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.columnErrors + ' column structure errors</strong> — unquoted commas in numeric values.</div>';
-        if (stats.zeroValues > 0)   warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.zeroValues + ' zero values detected</strong> — may be missing readings recorded as 0.</div>';
+        if (stats.zeroValues > 0)   warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.zeroValues + ' zero values detected</strong> — check they are genuine measurements. Keep genuine zeros.</div>';
 
         summaryArea.className = 'summary-box shadow-sm' + (isClean && !preCheckWarnings ? ' clean' : '');
         summaryArea.innerHTML =

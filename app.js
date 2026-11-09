@@ -162,8 +162,8 @@ window.addEventListener('DOMContentLoaded', function() {
  * DATA QUALITY PRE-FLIGHT CHECK
  * Runs after upload and whenever X or Y column selection changes.
  * Checks for:
- *   1. Blank values in Y column — may be read as zero, depressing stage means
- *   2. Zero values in Y column — may be missing readings recorded as 0
+ *   1. Blank values in Y column — these rows are left out of the analysis
+ *   2. Zero values in Y column — check they are genuine; genuine zeros must stay in
  *   3. Date sequence gaps in X column — missing periods can make change timing uncertain
  * Does not block analysis. Shows a yellow warning banner with a link to the Data Validator.
  */
@@ -215,8 +215,8 @@ function runDataQualityCheck() {
     if (issues > 0) {
         let msg = `⚠️ <b>Data quality warning</b> &mdash; `;
         const parts = [];
-        if (blankCount > 0) parts.push(`<b>${blankCount} blank value${blankCount > 1 ? 's' : ''}</b> in value column (may be read as zero)`);
-        if (zeroCount > 0) parts.push(`<b>${zeroCount} zero value${zeroCount > 1 ? 's' : ''}</b> in value column (may be missing readings)`);
+        if (blankCount > 0) parts.push(`<b>${blankCount} blank value${blankCount > 1 ? 's' : ''}</b> in value column (these rows are left out of the analysis; blanks are not treated as zero)`);
+        if (zeroCount > 0) parts.push(`<b>${zeroCount} zero value${zeroCount > 1 ? 's' : ''}</b> in value column (check they are genuine measurements; keep genuine zeros)`);
         if (missingPeriods > 0) parts.push(`<b>${missingPeriods} possible missing period${missingPeriods > 1 ? 's' : ''}</b> in date sequence (gaps can make change timing uncertain)`);
         msg += parts.join('; ') + '. ';
         msg += `<a href="scanner.html" target="_blank" style="color:#0056b3;font-weight:bold;">Run the Data Validator</a> to identify and fix these issues before analysing.`;
@@ -288,6 +288,13 @@ pythonWorker.onmessage = function(event) {
     }
 };
 
+// ── Escape text taken from the user's file before inserting it as HTML ──
+function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+}
+
 // ── Error banner helpers ──
 function showError(msg) {
     statusText.innerText = "❌ Error — see details above.";
@@ -297,7 +304,7 @@ function showError(msg) {
         if (msg && msg.toLowerCase().includes('too small after cleaning')) {
             hint = ' 💡 <b>Tip:</b> Check that you have selected the correct <b>Y-Axis (Value)</b> column — choosing a text or date column instead of a numeric one will cause this error.';
         }
-        errorMessage.innerHTML = msg + hint;
+        errorMessage.innerHTML = escapeHtml(msg) + hint;
     }
 }
 function hideError() {
@@ -372,7 +379,7 @@ function generateDynamicTitle() {
     const viewName    = viewNames[currentView] || 'Analysis';
     const yCol        = document.getElementById('yColSelect')?.value || '';
     const titleString = `${activeFilename} - ${viewName} - ${analysisDateTime}`;
-    const fullTitle   = yCol ? `${titleString}<br><span style="font-size:0.75em;color:#666;">Y: ${yCol}</span>` : titleString;
+    const fullTitle   = yCol ? `${escapeHtml(titleString)}<br><span style="font-size:0.75em;color:#666;">Y: ${escapeHtml(yCol)}</span>` : escapeHtml(titleString);
 
     if (chartTitleInput) chartTitleInput.value = titleString;
     if (chartFileInfo)   chartFileInfo.innerText = `File: ${activeFilename}   |   Y: ${yCol}   |   Generated: ${analysisDateTime}`;
@@ -417,8 +424,8 @@ function buildExportMetaHTML() {
                  <span>LNPL = <b>${currentChartData.xmr_lnpl}</b></span>
                  <span>URL = <b>${currentChartData.mr_url}</b></span>`;
     }
-    html += `<span>Y-Axis: <b>${yCol || activeFilename}</b></span>
-             <span>File: <b>${activeFilename}</b></span>`;
+    html += `<span>Y-Axis: <b>${escapeHtml(yCol || activeFilename)}</b></span>
+             <span>File: <b>${escapeHtml(activeFilename)}</b></span>`;
     return html;
 }
 
@@ -463,13 +470,13 @@ function handleFileUpload(file) {
             if (xS && yS) {
                 xS.innerHTML = ''; yS.innerHTML = '';
                 headers.forEach(h => {
-                    xS.innerHTML += `<option value="${h}">${h}</option>`;
-                    yS.innerHTML += `<option value="${h}">${h}</option>`;
+                    xS.appendChild(new Option(h, h));
+                    yS.appendChild(new Option(h, h));
                 });
                 if (headers.length >= 2) yS.selectedIndex = 1;
             }
             const restored = loadSettings(activeFilename);
-            statusText.innerHTML = `📊 <b>${activeFilename}</b> loaded.` +
+            statusText.innerHTML = `📊 <b>${escapeHtml(activeFilename)}</b> loaded.` +
                 (restored ? ' <span style="color:#198754">✓ Previous settings restored.</span>' : ' Configure settings and click Recalculate.');
 
             // Run data quality pre-flight check on the selected columns
@@ -569,12 +576,12 @@ function buildRawDataTable() {
     const headers = Object.keys(cachedCsvData[0]);
     let html = '<table style="width:100%;border-collapse:collapse;font-size:0.9em;">';
     html += '<thead><tr>' + headers.map(h =>
-        `<th style="background:#f0f4f8;padding:10px;border-bottom:2px solid #0056b3;text-align:left;">${h}</th>`
+        `<th style="background:#f0f4f8;padding:10px;border-bottom:2px solid #0056b3;text-align:left;">${escapeHtml(h)}</th>`
     ).join('') + '</tr></thead><tbody>';
     cachedCsvData.forEach((row, i) => {
         const bg = i % 2 === 0 ? 'white' : '#f8f9fa';
         html += `<tr style="background:${bg}">` + headers.map(h =>
-            `<td style="padding:8px 10px;border-bottom:1px solid #eee;">${row[h] !== undefined ? row[h] : ''}</td>`
+            `<td style="padding:8px 10px;border-bottom:1px solid #eee;">${row[h] !== undefined ? escapeHtml(row[h]) : ''}</td>`
         ).join('') + '</tr>';
     });
     html += '</tbody></table>';
@@ -754,7 +761,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
     const fullTitle = title + (yCol ? ` — ${yCol}` : '');
 
     const pdfHeader = `<!DOCTYPE html><html><head>
-        <title>${fullTitle}</title>
+        <title>${escapeHtml(fullTitle)}</title>
         <style>
             body { font-family: system-ui, sans-serif; margin: 30px; color: #1e293b; font-size: 13pt; }
             .brand-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #002d5b; padding-bottom: 10px; margin-bottom: 18px; }
@@ -782,7 +789,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
             </div>
             <div class="brand-tag">Generated: ${analysisDateTime}<br>Privacy: no data uploaded &#128274;</div>
         </div>
-        <h2>${fullTitle}</h2>
+        <h2>${escapeHtml(fullTitle)}</h2>
         <div class="meta-row">${buildExportMetaHTML()}</div>
         <div class="settings-bar">
             <span>Confidence setting: <b>${confVal}%</b></span>
@@ -794,6 +801,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
 
     const pdfFooter = `<div class="pdf-footer">
             <b style="color:#002d5b;">📊 StepChangeAnalysis.com — Free Edition</b> &nbsp;|&nbsp; <a href="https://stepchangeanalysis.com" style="color:#0056b3;">stepchangeanalysis.com</a> &nbsp;|&nbsp; Analysis performed entirely in browser — no data uploaded<br>
+            <span style="color:#555;font-size:0.85em;">Intended use: supporting process improvement and retrospective analysis of business, operational and service-level data. Not a medical device; not for diagnosis, treatment or decisions about individual patients.</span><br>
             <span style="color:#aaa;font-size:0.85em;">Bootstrap CUSUM method: Taylor (2000), building on Page (1954), Hinkley (1971), Efron &amp; Tibshirani (1993)</span>
         </div>
         <script>window.onload = function() { window.print(); }<\/script>
@@ -815,7 +823,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
     .then(function(imgData) {
         const win = window.open('', '_blank');
         const stageTable = currentView === 'step' ? buildStageTableHTML() : '';
-        win.document.write(pdfHeader + `<img src="${imgData}" alt="${title}" />` + stageTable + pdfFooter);
+        win.document.write(pdfHeader + `<img src="${imgData}" alt="${escapeHtml(title)}" />` + stageTable + pdfFooter);
         win.document.close();
     });
 };
@@ -862,10 +870,10 @@ function buildRawDataTableHTML(maxRows) {
     const headers = Object.keys(cachedCsvData[0]);
     const rows = maxRows ? cachedCsvData.slice(0, maxRows) : cachedCsvData;
     let html = `<table class="stage-table"><thead><tr>` +
-        headers.map(h => `<th>${h}</th>`).join('') +
+        headers.map(h => `<th>${escapeHtml(h)}</th>`).join('') +
         `</tr></thead><tbody>`;
     rows.forEach((row, i) => {
-        html += `<tr>` + headers.map(h => `<td>${row[h] !== undefined ? row[h] : ''}</td>`).join('') + `</tr>`;
+        html += `<tr>` + headers.map(h => `<td>${row[h] !== undefined ? escapeHtml(row[h]) : ''}</td>`).join('') + `</tr>`;
     });
     return html + `</tbody></table>`;
 }

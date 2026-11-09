@@ -266,6 +266,12 @@ function manhatten(values, turnLength, bootNum, confLimit) {
         throw new Error("Loops must be a positive whole number.");
     if (!Number.isFinite(confLimit) || confLimit <= 0 || confLimit >= 100)
         throw new Error("Conf % must be greater than 0 and less than 100.");
+    if (confLimit <= 1)
+        throw new Error(`Conf % is a percentage: enter 95 for 95%, not ${confLimit}.`);
+    if (confLimit < 50)
+        throw new Error("Conf % must be at least 50. Values below 50% would report most random variation as change.");
+    if (turnLength >= n - 1)
+        throw new Error(`Turn Length (${turnLength}) must be smaller than the number of data points minus one (${n - 1}); otherwise no change can be tested.`);
     const minTail = 1 / (bootNum + 1);
     if (minTail > (1 - confLimit / 100) + 1e-15)
         throw new Error("Too few loops for this confidence threshold with the finite-shuffle correction. Increase Loops.");
@@ -307,17 +313,13 @@ function manhatten(values, turnLength, bootNum, confLimit) {
 
         // Compute CUSUM for this segment
         const cusum = computeCUSUMTestPrecision(dx, pMean);
-        const cusumMax = Math.max(0, ...cusum);
-        const cusumMin = Math.min(0, ...cusum);
+        const ext = cusumExtremes(cusum);          // includes S0 = 0 explicitly
+        const cusumMax = ext.max;
+        const cusumMin = ext.min;
         const sdiff = cusumMax - cusumMin;
 
-        // Find turn point (index of most extreme CUSUM value)
-        let turnOffset;
-        if (Math.abs(cusumMax) >= Math.abs(cusumMin)) {
-            turnOffset = cusum.indexOf(cusumMax);
-        } else {
-            turnOffset = cusum.indexOf(cusumMin);
-        }
+        // Find turn point (index of most extreme CUSUM value; -1 means S0)
+        const turnOffset = Math.abs(cusumMax) >= Math.abs(cusumMin) ? ext.maxIndex : ext.minIndex;
         // Convert local offset back to absolute index in full dataset
         const turnPt = idxStart + turnOffset;
 
@@ -373,10 +375,9 @@ function bootstrapConfidence(data, dataMean, observedRange, loops) {
             dataMean
         );
 
-        // Take both extremes from that same path.
-        const bootstrapRange =
-            Math.max(0, ...shuffledCusum) -
-            Math.min(0, ...shuffledCusum);
+        // Take both extremes from that same path (S0 = 0 included).
+        const e = cusumExtremes(shuffledCusum);
+        const bootstrapRange = e.max - e.min;
 
         if (testAtLeastAsExtreme(bootstrapRange, observedRange, data, dataMean)) {
             exceedances++;
@@ -409,7 +410,8 @@ function computeCUSUMTestPrecision(values, refMean) {
 function testAtLeastAsExtreme(range, observed, data, dataMean) {
     // Conservative relative tolerance guards against treating a numerical tie
     // as smaller. This policy remains subject to independent statistical review.
-    const scale = Math.max(Math.abs(observed), ...data.map(v => Math.abs(v - dataMean)));
+    let scale = Math.abs(observed);
+    for (const v of data) { const d = Math.abs(v - dataMean); if (d > scale) scale = d; }
     const tolerance = 64 * Number.EPSILON * data.length * scale;
     return range >= observed - tolerance;
 }
@@ -538,8 +540,32 @@ function detectShifts(values, dates) {
 // STATISTICS UTILITIES
 // ─────────────────────────────────────────────
 function mean(arr) {
+    // Shifted, compensated mean: accurate for values with a large common
+    // offset (e.g. around 1e9), where a plain running sum loses digits.
     if (arr.length === 0) return 0;
-    return arr.reduce((a, b) => a + b, 0) / arr.length;
+    const shift = arr[0];
+    let sum = 0, comp = 0;
+    for (const v of arr) {
+        const y = (v - shift) - comp;
+        const t = sum + y;
+        comp = (t - sum) - y;
+        sum = t;
+    }
+    return shift + sum / arr.length;
+}
+
+// Maximum and minimum of a CUSUM path S1..Sn with S0 = 0 included explicitly.
+// maxIndex / minIndex give the first position in S1..Sn holding that value,
+// or -1 when the extreme is S0 alone. Uses loops, not array spreads, so it
+// works for series of any length.
+function cusumExtremes(S) {
+    let max = 0, min = 0, maxIndex = -1, minIndex = -1;
+    for (let i = 0; i < S.length; i++) {
+        const v = S[i];
+        if (v > max || (v === max && maxIndex === -1 && v === 0)) { max = v; maxIndex = i; }
+        if (v < min || (v === min && minIndex === -1 && v === 0)) { min = v; minIndex = i; }
+    }
+    return { max, min, maxIndex, minIndex };
 }
 
 function median(arr) {
