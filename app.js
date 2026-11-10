@@ -337,6 +337,18 @@ pythonWorker.onmessage = function(event) {
     }
 };
 
+// ── Number display: same rule as roundDisplay() in worker.js ──
+// Never fewer decimal places than the data typically has (display_decimals,
+// returned with each analysis), never fewer than 2, at least 3 significant figures.
+function formatDisplay(v, minDec) {
+    if (!Number.isFinite(v)) return String(v);
+    if (minDec === undefined)
+        minDec = (typeof currentChartData !== 'undefined' && currentChartData && currentChartData.display_decimals) || 2;
+    let dec = minDec;
+    if (v !== 0) dec = Math.min(10, Math.max(minDec, 2 - Math.floor(Math.log10(Math.abs(v)))));
+    return v.toFixed(dec);
+}
+
 // ── Escape text taken from the user's file before inserting it as HTML ──
 function escapeHtml(value) {
     return String(value).replace(/[&<>"']/g, c => ({
@@ -463,7 +475,7 @@ function buildExportStatsLine() {
     } else if (currentView === 'cusum') {
         return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}`;
     } else if (currentView === 'run') {
-        const med = currentChartData.run_median !== undefined ? currentChartData.run_median.toFixed(2) : '—';
+        const med = currentChartData.run_median !== undefined ? formatDisplay(currentChartData.run_median) : '—';
         return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  Median = ${med}`;
     } else if (currentView === 'xmr') {
         return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  UNPL = ${currentChartData.xmr_unpl}  |  LNPL = ${currentChartData.xmr_lnpl}  |  URL = ${currentChartData.mr_url}`;
@@ -484,7 +496,7 @@ function buildExportMetaHTML() {
         html += `<span>Stages = <b>${currentChartData.step_count}</b></span>
                  <span>Conf = <b>${confVal}%</b></span>`;
     } else if (currentView === 'run') {
-        const med = currentChartData.run_median !== undefined ? currentChartData.run_median.toFixed(2) : '—';
+        const med = currentChartData.run_median !== undefined ? formatDisplay(currentChartData.run_median) : '—';
         html += `<span>Median = <b>${med}</b></span>`;
     } else if (currentView === 'xmr') {
         html += `<span>UNPL = <b>${currentChartData.xmr_unpl}</b></span>
@@ -618,7 +630,7 @@ function buildStageTable(data) {
         // Use the stage SD already supplied by the worker, not the global SD.
         const sdMatch = confText.match(/\bSD:\s*([^<]+)/);
         const sdValue = sdMatch ? Number(sdMatch[1]) : NaN;
-        const stageSD = Number.isFinite(sdValue) ? sdValue.toFixed(2) : "—";
+        const stageSD = Number.isFinite(sdValue) ? formatDisplay(sdValue) : "—";
         const confMatch = confText.match(/Conf: ([\d.]+)%/);
         const confVal   = confMatch ? confMatch[1] + "%" : (i === 0 ? "Baseline" : "---");
         let change = "Baseline";
@@ -629,7 +641,7 @@ function buildStageTable(data) {
         html += `<tr>
             <td>${count++}</td>
             <td>${start}</td><td>${end}</td>
-            <td style="text-align:right;">${mean.toFixed(2)}</td>
+            <td style="text-align:right;">${formatDisplay(mean)}</td>
             <td style="text-align:right;">${stageSD}</td>
             <td style="text-align:right;"><b>${change}</b></td>
         </tr>`;
@@ -752,7 +764,7 @@ function updateSummaryBars() {
             }
         } else if (currentView === 'run') {
             if (stageCountText) stageCountText.innerHTML =
-                `Median = <b>${currentChartData.run_median !== undefined ? currentChartData.run_median.toFixed(2) : '—'}</b> &nbsp;|&nbsp; Run Chart (6+ consecutive points above/below median flagged)`;
+                `Median = <b>${currentChartData.run_median !== undefined ? formatDisplay(currentChartData.run_median) : '—'}</b> &nbsp;|&nbsp; Run Chart (6+ consecutive points above/below median flagged)`;
         } else if (currentView === 'cusum') {
             if (stageCountText) stageCountText.innerHTML = '';
         }
@@ -915,7 +927,7 @@ function buildStageTableHTML() {
         // Use the stage SD already supplied by the worker, not the global SD.
         const sdMatch = confText.match(/\bSD:\s*([^<]+)/);
         const sdValue = sdMatch ? Number(sdMatch[1]) : NaN;
-        const stageSD = Number.isFinite(sdValue) ? sdValue.toFixed(2) : "—";
+        const stageSD = Number.isFinite(sdValue) ? formatDisplay(sdValue) : "—";
         const confMatch = confText.match(/Conf: ([\d.]+)%/);
         const confVal   = confMatch ? confMatch[1] + "%" : (i === 0 ? "Baseline" : "---");
         let change = "Baseline";
@@ -925,7 +937,7 @@ function buildStageTableHTML() {
         }
         html += `<tr>
             <td>${count++}</td><td>${start}</td><td>${end}</td>
-            <td>${mean.toFixed(2)}</td><td>${stageSD}</td>
+            <td>${formatDisplay(mean)}</td><td>${stageSD}</td>
             <td><b>${change}</b></td>
         </tr>`;
     }

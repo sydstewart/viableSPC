@@ -57,7 +57,17 @@ self.onmessage = function(event) {
 // ─────────────────────────────────────────────
 // MAIN ENTRY POINT
 // ─────────────────────────────────────────────
+// The data's display precision applies only within one analysis: it is reset
+// afterwards, however the analysis ends, so nothing carries over to the next.
 function processCSV(rawData, params) {
+    try {
+        return processCSVInner(rawData, params);
+    } finally {
+        DISPLAY_MIN_DEC = 2;
+    }
+}
+
+function processCSVInner(rawData, params) {
     const {
         x_col,
         y_col,
@@ -86,6 +96,7 @@ function processCSV(rawData, params) {
         throw new Error("Dataset too small after cleaning or filtering (Need at least 5 points).");
     }
 
+    setDisplayDecimals(rows);
     const dates = rows.map(r => formatDateISO(r.date));
     const rawValues = rows.map(r => r.value);
 
@@ -120,8 +131,9 @@ function processCSV(rawData, params) {
         step_count: cusumResult.stages.length,
         run_median: median(rawValues),
         global_count: rawValues.length,
-        global_mean: round2(globalMean),
-        global_sd: round2(globalSD),
+        display_decimals: DISPLAY_MIN_DEC,
+        global_mean: roundDisplay(globalMean),
+        global_sd: roundDisplay(globalSD),
         shift_above_dates: runResult.aboveDates,
         shift_above_values: runResult.aboveValues,
         shift_below_dates: runResult.belowDates,
@@ -243,7 +255,9 @@ function parseAndClean(rawData, xCol, yCol, dateFormat) {
         const v = parseFloat(valStr);
         if (isNaN(v)) continue;
 
-        rows.push({ date: d, value: v });
+        // Decimal places as recorded, used to set display precision
+        const decMatch = /e/i.test(valStr) ? null : valStr.match(/\.(\d+)$/);
+        rows.push({ date: d, value: v, decimals: decMatch ? decMatch[1].length : 0 });
     }
 
     // Sort chronologically
@@ -424,7 +438,7 @@ function computeCUSUM(values, refMean) {
     let cumSum = 0;
     for (const v of values) {
         cumSum += (v - refMean);
-        result.push(round2(cumSum));
+        result.push(roundDisplay(cumSum));
     }
     return result;
 }
@@ -448,10 +462,10 @@ function buildStageMeans(stages, values, dates) {
         // Calculate bands before rounding for display.
         const rawMean = mean(slice);
         const rawSD = slice.length > 1 ? stddev(slice) : 0;
-        const sMean = round2(rawMean);
-        const sSD = round2(rawSD);
-        const ucl = round2(rawMean + 3 * rawSD);
-        const lcl = round2(rawMean - 3 * rawSD);
+        const sMean = roundDisplay(rawMean);
+        const sSD = roundDisplay(rawSD);
+        const ucl = roundDisplay(rawMean + 3 * rawSD);
+        const lcl = roundDisplay(rawMean - 3 * rawSD);
 
         // A child inherits its parent's split statistic; it is not an
         // independent stage confidence. Withhold it from chart/table output.
@@ -478,20 +492,18 @@ function buildStageMeans(stages, values, dates) {
 // X-mR CHART CALCULATIONS
 // ─────────────────────────────────────────────
 function computeXmR(values, globalMean) {
-    const mrValues = [null]; // First point has no moving range
-    for (let i = 1; i < values.length; i++) {
-        mrValues.push(round2(Math.abs(values[i] - values[i - 1])));
-    }
-
-    const mrNonNull = mrValues.filter(v => v !== null);
-    const mrMean = mean(mrNonNull);
+    // Moving ranges are averaged unrounded (FMEA OUT-02); rounding is for display only.
+    const mrRaw = [];
+    for (let i = 1; i < values.length; i++) mrRaw.push(Math.abs(values[i] - values[i - 1]));
+    const mrMean = mean(mrRaw);
+    const mrValues = [null].concat(mrRaw.map(roundDisplay)); // First point has no moving range
 
     return {
-        unpl:     round2(globalMean + 2.66 * mrMean),
-        lnpl:     round2(globalMean - 2.66 * mrMean),
+        unpl:     roundDisplay(globalMean + 2.66 * mrMean),
+        lnpl:     roundDisplay(globalMean - 2.66 * mrMean),
         mrValues: mrValues,
-        mrMean:   round2(mrMean),
-        mrUrl:    round2(3.267 * mrMean)
+        mrMean:   roundDisplay(mrMean),
+        mrUrl:    roundDisplay(3.267 * mrMean)
     };
 }
 
@@ -584,6 +596,28 @@ function stddev(arr) {
     return Math.sqrt(variance);
 }
 
-function round2(v) {
-    return Math.round(v * 100) / 100;
+// Rounding for display (FMEA CU-03, OUT-01). A result is shown with:
+//   - never fewer decimal places than the data typically has (DISPLAY_MIN_DEC,
+//     the median decimal places of the values as recorded, capped at 6);
+//   - never fewer than 2 decimal places;
+//   - at least 3 significant figures.
+// Data with 0-2 decimal places therefore looks exactly as before (23.22);
+// small values keep their digits (0.0803, not 0.08); values recorded to
+// 3 decimals (10.004) are shown to at least 3.
+let DISPLAY_MIN_DEC = 2;
+function setDisplayDecimals(rows) {
+    const d = rows.map(r => r.decimals || 0).sort((a, b) => a - b);
+    DISPLAY_MIN_DEC = d.length ? Math.min(6, Math.max(2, d[Math.floor(d.length / 2)])) : 2;
+    return DISPLAY_MIN_DEC;
 }
+function displayDecimals(v) {
+    if (!Number.isFinite(v) || v === 0) return DISPLAY_MIN_DEC;
+    const mag = Math.floor(Math.log10(Math.abs(v)));
+    return Math.min(10, Math.max(DISPLAY_MIN_DEC, 2 - mag));
+}
+function roundDisplay(v) {
+    if (!Number.isFinite(v)) return v;
+    const f = Math.pow(10, displayDecimals(v));
+    return Math.round(v * f) / f;
+}
+
