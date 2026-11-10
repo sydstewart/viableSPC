@@ -187,6 +187,19 @@
         // ── Stats object — includes duplicateDates and rowCount ──
         let stats = { blanks:0, badFormats:0, badNumbers:0, zeroValues:0, outOfOrder:0, missingDates:0, columnErrors:0, duplicateDates:0, mixedFormats:0, rowCount:0, clean:0 };
         let lastTS = 0, lastDateStr = "", detectedFreqMs = 0, logHtml = "";
+        const gapList = [];
+
+        // Typical interval between dates (median gap), worked out before the
+        // row-by-row checks, so a real gap at the start of a series is not
+        // mistaken for the normal interval (FMEA IN-26). Same rule as the analyser.
+        (function () {
+            const t = rawData.map(function (r) { return parseRowDate(String(r[x] == null ? '' : r[x]).trim(), dateFmt); })
+                             .filter(function (v) { return !isNaN(v); })
+                             .sort(function (a, b) { return a - b; });
+            const d = [];
+            for (let i = 1; i < t.length; i++) if (t[i] > t[i - 1]) d.push(t[i] - t[i - 1]);
+            if (d.length >= 2) { d.sort(function (a, b) { return a - b; }); detectedFreqMs = d[Math.floor(d.length / 2)]; }
+        })();
         let preCheckWarnings = "";
 
         // ── Duplicate date tracking ──
@@ -288,6 +301,7 @@
                             if (gap > detectedFreqMs + tolerance) {
                                 const expectedCount = Math.round(gap / detectedFreqMs) - 1;
                                 stats.missingDates += expectedCount; rowHasError = true;
+                                gapList.push({ from: lastDateStr, to: dVal, n: expectedCount });
                                 logHtml += '<span class="warning-text">[ROW ' + rowNum + '] &#9888; Date gap detected: ' + expectedCount + ' expected period' + (expectedCount > 1 ? 's' : '') + ' missing between "' + esc(lastDateStr) + '" and "' + esc(dVal) + '".</span>';
                                 logHtml += '<span class="suggestion-tip">&#128161; Missing periods affect the stage mean as well as the change point date. If the period genuinely had a value of zero (for example no incidents), add a row with 0. If the reading is missing, leave the gap rather than inventing a value: change dates near a gap are less certain. See the Fix CSV guide.</span>';
                             }
@@ -351,9 +365,12 @@
         else if (stats.rowCount < 30) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.rowCount + ' rows — borderline.</strong> 30+ rows is recommended for confident Bootstrap CUSUM results at 95% confidence.</div>';
 
         if (stats.outOfOrder > 0)   warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.outOfOrder + ' out-of-order date' + (stats.outOfOrder > 1 ? 's' : '') + ' detected.</strong> Bootstrap CUSUM requires dates to run oldest to newest. In Excel: Data &rarr; Sort &rarr; Oldest to Newest on the date column. In Google Sheets: Data &rarr; Sort range &rarr; A to Z. Re-save as CSV before analysing.</div>';
-        if (stats.missingDates > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.missingDates + ' missing period' + (stats.missingDates > 1 ? 's' : '') + ' detected</strong> — gaps cause change points to be dated incorrectly.</div>';
+        if (stats.missingDates > 0) warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.missingDates + ' missing period' + (stats.missingDates > 1 ? 's' : '') + ' detected</strong> (' +
+            gapList.slice(0, 3).map(function (g) { return g.n + ' between ' + esc(g.from) + ' and ' + esc(g.to); }).join(', ') +
+            (gapList.length > 3 ? ', and ' + (gapList.length - 3) + ' more gap' + (gapList.length - 3 > 1 ? 's' : '') : '') +
+            ') — gaps can make change dates less certain. See the row-by-row log below.</div>';
         if (stats.columnErrors > 0) warnings += '<div class="alert alert-danger mt-3">&#10060; <strong>' + stats.columnErrors + ' column structure errors</strong> — unquoted commas in numeric values.</div>';
-        if (stats.zeroValues > 0)   warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.zeroValues + ' zero values detected</strong> — check they are genuine measurements. Keep genuine zeros.</div>';
+        if (stats.zeroValues > 0)   warnings += '<div class="alert alert-warning mt-3">&#9888; <strong>' + stats.zeroValues + ' zero value' + (stats.zeroValues > 1 ? 's' : '') + ' detected</strong> — check they are genuine measurements. Keep genuine zeros.</div>';
 
         summaryArea.className = 'summary-box shadow-sm' + (isClean && !preCheckWarnings ? ' clean' : '');
         summaryArea.innerHTML =
@@ -374,7 +391,10 @@
             '</div><hr>' +
             '<div class="fw-bold fs-5" style="color:' + (isClean ? '#198754' : '#444') + '">' +
             (isClean && !preCheckWarnings ? '&#9989; All ' + rawData.length + ' rows passed &mdash; ready for analysis.' :
-                stats.clean + ' / ' + rawData.length + ' rows are clean. Fix the issues above before analysing.') +
+                stats.clean + ' / ' + rawData.length + ' rows have no issues. ' +
+                ((stats.blanks + stats.badFormats + stats.badNumbers + stats.columnErrors + stats.mixedFormats) > 0
+                    ? 'Fix the errors above before analysing.'
+                    : 'No errors: review the warnings above. Keep genuine values, such as real zeros.')) +
             '</div>' +
             (isClean ? '' : '<div class="mt-3"><a href="fix-csv-date-format.html" class="btn btn-outline-primary btn-sm me-2">&#128214; Fix CSV guide</a><a href="index.html" class="btn btn-primary btn-sm">&#8592; Return to Analyzer</a></div>');
 

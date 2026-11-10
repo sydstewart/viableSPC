@@ -156,6 +156,13 @@ window.addEventListener('DOMContentLoaded', function() {
             runDataQualityCheck(); // re-check when Y column changes
         });
     }
+
+    const dateFormatSelect = document.getElementById('dateFormatSelect');
+    if (dateFormatSelect) {
+        dateFormatSelect.addEventListener('change', function() {
+            runDataQualityCheck(); // re-check when the date format changes
+        });
+    }
 });
 
 /**
@@ -185,30 +192,15 @@ function runDataQualityCheck() {
         else if (!isNaN(parseFloat(v)) && parseFloat(v) === 0) zeroCount++;
     });
 
-    // Check X column for date sequence gaps
-    // Detect frequency from first two parseable timestamps, then flag gaps > 1.4x expected
-    let missingPeriods = 0;
-    let lastTS = 0, detectedFreqMs = 0;
-    cachedCsvData.forEach(row => {
-        const dVal = row[xCol] ? row[xCol].toString().trim() : "";
-        if (!dVal) return;
-        const ts = parseDateForCheck(dVal);
-        if (isNaN(ts)) return;
-        if (lastTS > 0) {
-            const gap = ts - lastTS;
-            if (gap > 0) {
-                if (detectedFreqMs === 0) {
-                    detectedFreqMs = gap;
-                } else {
-                    const tolerance = detectedFreqMs * 0.4;
-                    if (gap > detectedFreqMs + tolerance) {
-                        missingPeriods += Math.round(gap / detectedFreqMs) - 1;
-                    }
-                }
-            }
-        }
-        lastTS = ts;
-    });
+    // Check X column for date sequence gaps.
+    // Dates are read exactly as the analysis reads them (same rules, same
+    // date format setting), sorted, and compared with the typical interval.
+    const dateFmtForCheck = document.getElementById('dateFormatSelect')?.value || 'auto';
+    const gapReport = findDateGaps(
+        cachedCsvData.map(row => row[xCol] ? row[xCol].toString().trim() : ''),
+        dateFmtForCheck
+    );
+    const missingPeriods = gapReport.missing;
 
     // Build warning message if any issues found
     const issues = blankCount + zeroCount + missingPeriods;
@@ -217,14 +209,22 @@ function runDataQualityCheck() {
         const parts = [];
         if (blankCount > 0) parts.push(`<b>${blankCount} blank value${blankCount > 1 ? 's' : ''}</b> in value column (these rows are left out of the analysis; blanks are not treated as zero)`);
         if (zeroCount > 0) parts.push(`<b>${zeroCount} zero value${zeroCount > 1 ? 's' : ''}</b> in value column (check they are genuine measurements; keep genuine zeros)`);
-        if (missingPeriods > 0) parts.push(`<b>${missingPeriods} possible missing period${missingPeriods > 1 ? 's' : ''}</b> in date sequence (gaps can make change timing uncertain)`);
+        if (missingPeriods > 0) {
+            const where = gapReport.gaps.slice(0, 3).map(g =>
+                `${g.missing} between ${escapeHtml(g.from)} and ${escapeHtml(g.to)}`).join(', ');
+            const more = gapReport.gaps.length > 3 ? `, and ${gapReport.gaps.length - 3} more gap${gapReport.gaps.length - 3 > 1 ? 's' : ''}` : '';
+            parts.push(`<b>${missingPeriods} possible missing period${missingPeriods > 1 ? 's' : ''}</b> in date sequence (${where}${more}; gaps can make change timing uncertain)`);
+        }
         msg += parts.join('; ') + '. ';
         msg += `<a href="scanner.html" target="_blank" style="color:#0056b3;font-weight:bold;">Run the Data Validator</a> to identify and fix these issues before analysing.`;
-        showWarning(msg);
-    } else if (cachedCsvData.length > 500) {
-        showWarning(`This file has ${cachedCsvData.length} rows. Free Edition is optimised for up to 500 rows. Results may be slower.`);
+        showDataWarning(msg);
     } else {
-        hideWarning();
+        hideDataWarning();
+    }
+    if (cachedCsvData.length > 500) {
+        showNotice(`This file has ${cachedCsvData.length} rows. Free Edition is optimised for up to 500 rows. Results may be slower.`);
+    } else {
+        hideNotice();
     }
 }
 
@@ -232,20 +232,69 @@ function runDataQualityCheck() {
  * Simple date parser for the pre-flight check.
  * Handles the most common formats: ISO, UK/EU, US, year-month, year-only.
  */
-function parseDateForCheck(str) {
-    if (!str) return NaN;
+// ── Dates for the upload check ──
+// INTERIM (FMEA IN-27, IN-26): mirrors parseDate() in worker.js rule for
+// rule, so the upload check reads dates exactly as the analysis does.
+// Test 1.40 checks the two agree. To be replaced by the shared data
+// module (action A1), which removes the duplication.
+function parseDateForCheck(str, format = 'auto') {
+    if (!str || str.trim() === '') return NaN;
     str = str.trim();
-    if (/^\d{4}$/.test(str)) return new Date(parseInt(str), 0, 1).getTime();
-    if (/^\d{4}-\d{2}$/.test(str)) { const p = str.split('-'); return new Date(parseInt(p[0]), parseInt(p[1])-1, 1).getTime(); }
-    if (/^\d{4}-\d{2}-\d{2}/.test(str)) return new Date(str).getTime();
-    const parts = str.split(/[\/\-\.]/);
-    if (parts.length >= 3) {
-        const p0 = parseInt(parts[0]), p1 = parseInt(parts[1]), p2 = parseInt(parts[2]);
-        if (parts[0].length === 4) return new Date(p0, p1-1, p2).getTime(); // YYYY-MM-DD
-        if (p0 > 12) return new Date(p2 < 100 ? p2 + 2000 : p2, p1-1, p0).getTime(); // DD/MM
-        return new Date(p2 < 100 ? p2 + 2000 : p2, p0-1, p1).getTime(); // MM/DD fallback
+    if (/^\d{4}$/.test(str) && (format === 'yyyy' || format === 'auto'))
+        return new Date(parseInt(str, 10), 0, 1).getTime();
+    if (/^\d{4}-\d{2}$/.test(str) && (format === 'yyyy-mm' || format === 'auto')) {
+        const p = str.split('-');
+        return new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, 1).getTime();
     }
-    return NaN;
+    if (/^\d{1,2}[\/\-]\d{4}$/.test(str) && (format === 'mm/yyyy' || format === 'auto')) {
+        const p = str.split(/[\/\-]/);
+        return new Date(parseInt(p[1], 10), parseInt(p[0], 10) - 1, 1).getTime();
+    }
+    if (/^\d{4}-\d{2}-\d{2}/.test(str)) {
+        const d = new Date(str);
+        return isNaN(d) ? NaN : d.getTime();
+    }
+    const parts = str.split(/[\/\-\.\s]/);
+    if (parts.length < 3) return NaN;
+    let day, month, year;
+    if (format === 'dd/mm/yyyy') {
+        day = parseInt(parts[0], 10); month = parseInt(parts[1], 10) - 1; year = parseInt(parts[2], 10);
+    } else if (format === 'mm/dd/yyyy') {
+        month = parseInt(parts[0], 10) - 1; day = parseInt(parts[1], 10); year = parseInt(parts[2], 10);
+    } else if (format === 'yyyy-mm-dd') {
+        year = parseInt(parts[0], 10); month = parseInt(parts[1], 10) - 1; day = parseInt(parts[2], 10);
+    } else {
+        const p0 = parseInt(parts[0], 10), p1 = parseInt(parts[1], 10);
+        if (p0 > 12)      { day = p0; month = p1 - 1; }   // unambiguously DD/MM
+        else if (p1 > 12) { month = p0 - 1; day = p1; }   // unambiguously MM/DD
+        else              { day = p0; month = p1 - 1; }   // ambiguous: DD/MM (UK)
+        year = parseInt(parts[2], 10);
+    }
+    if (year < 100) year += year < 50 ? 2000 : 1900;
+    const d = new Date(year, month, day);
+    return isNaN(d.getTime()) ? NaN : d.getTime();
+}
+
+// Find gaps in the dates: sort them, take the typical (median) interval as the
+// recording frequency, and report each larger gap with the dates either side
+// and how many periods it skips.
+function findDateGaps(dateStrings, format = 'auto') {
+    const pts = dateStrings.map(s => ({ s, t: parseDateForCheck(s, format) }))
+                           .filter(p => !isNaN(p.t))
+                           .sort((a, b) => a.t - b.t);
+    const steps = [];
+    for (let i = 1; i < pts.length; i++)
+        if (pts[i].t > pts[i - 1].t) steps.push({ d: pts[i].t - pts[i - 1].t, from: pts[i - 1].s, to: pts[i].s });
+    if (steps.length < 2) return { missing: 0, gaps: [] };
+    const sorted = steps.map(x => x.d).sort((a, b) => a - b);
+    const typical = sorted[Math.floor(sorted.length / 2)];
+    const gaps = [];
+    for (const x of steps)
+        if (x.d > typical * 1.4) gaps.push({ from: x.from, to: x.to, missing: Math.round(x.d / typical) - 1 });
+    return { missing: gaps.reduce((a, g) => a + g.missing, 0), gaps };
+}
+function countMissingPeriods(dateStrings, format = 'auto') {
+    return findDateGaps(dateStrings, format).missing;
 }
 
 // ── Worker message handler ──
@@ -313,19 +362,37 @@ function hideError() {
 
 // ── Warning banner helpers ──
 let warningBanner = null;
-function showWarning(msg) {
-    if (!warningBanner) {
-        warningBanner = document.createElement('div');
-        warningBanner.id = 'warning-banner';
-        warningBanner.style.cssText = 'display:none;background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:12px 16px;margin-bottom:15px;font-size:0.9em;color:#664d03;';
-        const eb = document.getElementById('error-banner');
-        if (eb && eb.parentNode) eb.parentNode.insertBefore(warningBanner, eb.nextSibling);
-    }
-    warningBanner.innerHTML = `⚠️ <b>Free Edition Notice:</b> ${msg}`;
-    warningBanner.style.display = 'block';
+// Data quality warnings and edition notices are kept in separate banners
+// (FMEA IN-28). A data warning stays visible, through Recalculate, until the
+// file, a column or the date format changes and the check runs again; its
+// text is also included in PDF exports. Edition notices are shown separately.
+let noticeBanner = null;
+let currentDataWarningText = '';
+function makeBanner(id, css) {
+    const b = document.createElement('div');
+    b.id = id;
+    b.style.cssText = 'display:none;border-radius:6px;padding:12px 16px;margin-bottom:15px;font-size:0.9em;' + css;
+    const eb = document.getElementById('error-banner');
+    if (eb && eb.parentNode) eb.parentNode.insertBefore(b, eb.nextSibling);
+    return b;
 }
-function hideWarning() {
+function showDataWarning(msg) {
+    if (!warningBanner) warningBanner = makeBanner('warning-banner', 'background:#fff3cd;border:1px solid #ffc107;color:#664d03;');
+    warningBanner.innerHTML = msg;
+    warningBanner.style.display = 'block';
+    currentDataWarningText = warningBanner.textContent.replace(/\s+/g, ' ').trim();
+}
+function hideDataWarning() {
     if (warningBanner) warningBanner.style.display = 'none';
+    currentDataWarningText = '';
+}
+function showNotice(msg) {
+    if (!noticeBanner) noticeBanner = makeBanner('notice-banner', 'background:#eef4fa;border:1px solid #9fbcd9;color:#183251;');
+    noticeBanner.innerHTML = `ℹ️ <b>Free Edition Notice:</b> ${msg}`;
+    noticeBanner.style.display = 'block';
+}
+function hideNotice() {
+    if (noticeBanner) noticeBanner.style.display = 'none';
 }
 
 // ── Export button state — update per tab ──
@@ -500,9 +567,9 @@ function runPythonAnalysis() {
     const confLim = document.getElementById('paramConfLimit')?.value   || 95;
 
     if (bootNum > 1000) {
-        showWarning(`Bootstrap loops set to ${bootNum}. Free Edition is optimised for up to 1,000 loops. Higher values may be slow. Pro Edition will support up to 10,000.`);
+        showNotice(`Bootstrap loops set to ${bootNum}. Free Edition is optimised for up to 1,000 loops. Higher values may be slow. Pro Edition will support up to 10,000.`);
     } else {
-        hideWarning();
+        hideNotice();
     }
 
     const xCol      = document.getElementById('xColSelect')?.value;
@@ -797,7 +864,8 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
             <span>Turn length: <b>${turnVal}</b></span>
             <span>Date format: <b>${fmtVal}</b></span>
             <span>Date range: <b>${startVal || 'All'}</b> to <b>${endVal || 'All'}</b></span>
-        </div>`;
+        </div>${currentDataWarningText ? `
+        <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:8px 12px;margin:8px 0;font-size:0.85em;color:#664d03;">${escapeHtml(currentDataWarningText)}</div>` : ''}`;
 
     const pdfFooter = `<div class="pdf-footer">
             <b style="color:#002d5b;">📊 StepChangeAnalysis.com — Free Edition</b> &nbsp;|&nbsp; <a href="https://stepchangeanalysis.com" style="color:#0056b3;">stepchangeanalysis.com</a> &nbsp;|&nbsp; Analysis performed entirely in browser — no data uploaded<br>
