@@ -195,7 +195,7 @@ function runDataQualityCheck() {
     // Check X column for date sequence gaps.
     // Dates are read exactly as the analysis reads them (same rules, same
     // date format setting), sorted, and compared with the typical interval.
-    const dateFmtForCheck = document.getElementById('dateFormatSelect')?.value || 'auto';
+    const dateFmtForCheck = usedSetting('dateFormatSelect', 'auto');
     const gapReport = findDateGaps(
         cachedCsvData.map(row => row[xCol] ? row[xCol].toString().trim() : ''),
         dateFmtForCheck
@@ -349,6 +349,40 @@ function formatDisplay(v, minDec) {
     return v.toFixed(dec);
 }
 
+// ── Settings shown with a result ──
+// Results are labelled with the settings the analysis actually used (returned
+// by the worker), not whatever the boxes say now: a setting changed after the
+// run must not relabel an existing result (FMEA OUT-04).
+const SETTING_KEYS = { paramConfLimit: 'conf_limit', paramBootNum: 'boot_num', paramTurnLength: 'turn_length',
+                       dateFormatSelect: 'date_format', startDate: 'start_date', endDate: 'end_date' };
+function usedSetting(boxId, fallback) {
+    const s = currentChartData && currentChartData.settings;
+    if (s && SETTING_KEYS[boxId] in s) {
+        const v = s[SETTING_KEYS[boxId]];
+        return v === '' || v === null || v === undefined ? fallback : v;
+    }
+    return document.getElementById(boxId)?.value || fallback;
+}
+function reproLine() {
+    if (!currentChartData || currentChartData.seed === undefined) return '';
+    return `Seed: ${currentChartData.seed}  |  Data: ${currentChartData.data_fingerprint}  |  ${currentChartData.analyser_version}`;
+}
+
+// ── Lower natural process limit ──
+// When every value is zero or more and the calculated LNPL is below zero,
+// there is no lower limit (FMEA OUT-07).
+const NO_LNPL_NOTE = 'None: the calculated limit is below zero, and all values are zero or more';
+function lnplApplies(d) { return !d || d.xmr_lnpl_applies !== false; }
+function lnplText(d)    { return lnplApplies(d) ? String(d.xmr_lnpl) : 'none (would be below zero)'; }
+
+// ── Chart hover labels at the same precision as the results (FMEA OUT-06) ──
+function hoverFormatFor(values, minDec) {
+    const nz = (values || []).filter(v => Number.isFinite(v) && v !== 0).map(Math.abs).sort((x, y) => x - y);
+    let dec = minDec || 2;
+    if (nz.length) dec = Math.min(10, Math.max(dec, 2 - Math.floor(Math.log10(nz[Math.floor(nz.length / 2)]))));
+    return ',.' + dec + 'f';
+}
+
 // ── Escape text taken from the user's file before inserting it as HTML ──
 function escapeHtml(value) {
     return String(value).replace(/[&<>"']/g, c => ({
@@ -469,7 +503,7 @@ function generateDynamicTitle() {
 // ── Build tab-specific stats line for PNG export annotation ──
 function buildExportStatsLine() {
     if (!currentChartData) return '';
-    const confVal = document.getElementById('paramConfLimit')?.value || '—';
+    const confVal = usedSetting('paramConfLimit', '—');
     if (currentView === 'step' || currentView === 'stages') {
         return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  Stages = ${currentChartData.step_count}  |  Conf = ${confVal}%`;
     } else if (currentView === 'cusum') {
@@ -478,7 +512,7 @@ function buildExportStatsLine() {
         const med = currentChartData.run_median !== undefined ? formatDisplay(currentChartData.run_median) : '—';
         return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  Median = ${med}`;
     } else if (currentView === 'xmr') {
-        return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  UNPL = ${currentChartData.xmr_unpl}  |  LNPL = ${currentChartData.xmr_lnpl}  |  URL = ${currentChartData.mr_url}`;
+        return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}  |  UNPL = ${currentChartData.xmr_unpl}  |  LNPL = ${lnplText(currentChartData)}  |  URL = ${currentChartData.mr_url}`;
     } else {
         return `N = ${currentChartData.global_count}  |  Mean = ${currentChartData.global_mean}  |  SD = ${currentChartData.global_sd}`;
     }
@@ -488,7 +522,7 @@ function buildExportStatsLine() {
 function buildExportMetaHTML() {
     if (!currentChartData) return '';
     const yCol    = document.getElementById('yColSelect')?.value || '';
-    const confVal = document.getElementById('paramConfLimit')?.value || '—';
+    const confVal = usedSetting('paramConfLimit', '—');
     let html = `<span>N = <b>${currentChartData.global_count}</b></span>
                 <span>Mean = <b>${currentChartData.global_mean}</b></span>
                 <span>SD = <b>${currentChartData.global_sd}</b></span>`;
@@ -500,7 +534,7 @@ function buildExportMetaHTML() {
         html += `<span>Median = <b>${med}</b></span>`;
     } else if (currentView === 'xmr') {
         html += `<span>UNPL = <b>${currentChartData.xmr_unpl}</b></span>
-                 <span>LNPL = <b>${currentChartData.xmr_lnpl}</b></span>
+                 <span>LNPL = <b>${lnplText(currentChartData)}</b></span>
                  <span>URL = <b>${currentChartData.mr_url}</b></span>`;
     }
     html += `<span>Y-Axis: <b>${escapeHtml(yCol || activeFilename)}</b></span>
@@ -603,7 +637,10 @@ function runPythonAnalysis() {
             y_col:       yCol,
             date_format: dateFmt,
             start_date:  startDate,
-            end_date:    endDate
+            end_date:    endDate,
+            // Optional: a seed from an earlier result reproduces it exactly;
+            // blank means a new seed, which the result reports.
+            seed:        (document.getElementById('paramSeed')?.value || '').trim() || undefined
         }
     };
     document.dispatchEvent(new Event('analysis-started'));
@@ -733,7 +770,10 @@ function updateSummaryBars() {
         if (summaryBar)    summaryBar.style.display    = "none";
         if (xmrSummaryBar) xmrSummaryBar.style.display = "flex";
         if (xmrUnpl)  xmrUnpl.innerText  = currentChartData.xmr_unpl;
-        if (xmrLnpl)  xmrLnpl.innerText  = currentChartData.xmr_lnpl;
+        if (xmrLnpl) {
+            xmrLnpl.innerText = lnplText(currentChartData);
+            xmrLnpl.title = lnplApplies(currentChartData) ? '' : NO_LNPL_NOTE;
+        }
         if (xmrUrl)   xmrUrl.innerText   = currentChartData.mr_url;
         if (xmrN)     xmrN.innerText     = currentChartData.global_count;
         if (xmrMean)  xmrMean.innerText  = currentChartData.global_mean;
@@ -753,14 +793,15 @@ function updateSummaryBars() {
 
         if (currentView === 'step') {
             if (stageCountText) {
-                const confVal  = document.getElementById('paramConfLimit')?.value  || '??';
-                const bootVal  = document.getElementById('paramBootNum')?.value    || '??';
-                const turnVal  = document.getElementById('paramTurnLength')?.value || '??';
+                const confVal  = usedSetting('paramConfLimit',  '??');
+                const bootVal  = usedSetting('paramBootNum',    '??');
+                const turnVal  = usedSetting('paramTurnLength', '??');
                 stageCountText.innerHTML =
                     `Found <b>${currentChartData.step_count}</b> distinct stages` +
                     ` &nbsp;|&nbsp; CUSUM (${confVal}% setting)` +
                     ` &nbsp;|&nbsp; Loops = ${bootVal}` +
-                    ` &nbsp;|&nbsp; Turn Length = ${turnVal}`;
+                    ` &nbsp;|&nbsp; Turn Length = ${turnVal}` +
+                    (currentChartData.seed !== undefined ? ` &nbsp;|&nbsp; Seed = ${currentChartData.seed}` : '');
             }
         } else if (currentView === 'run') {
             if (stageCountText) stageCountText.innerHTML =
@@ -793,13 +834,14 @@ if (exportPngBtn) exportPngBtn.onclick = function() {
 
     const title      = chartTitleInput ? chartTitleInput.value : activeFilename;
     const yCol       = document.getElementById('yColSelect')?.value || '';
-    const bootVal    = document.getElementById('paramBootNum')?.value    || '—';
-    const turnVal    = document.getElementById('paramTurnLength')?.value || '—';
-    const fmtVal     = document.getElementById('dateFormatSelect')?.value || '—';
-    const startVal   = document.getElementById('startDate')?.value       || 'All';
-    const endVal     = document.getElementById('endDate')?.value         || 'All';
+    const bootVal    = usedSetting('paramBootNum',    '—');
+    const turnVal    = usedSetting('paramTurnLength', '—');
+    const fmtVal     = usedSetting('dateFormatSelect', '—');
+    const startVal   = usedSetting('startDate',       'All');
+    const endVal     = usedSetting('endDate',         'All');
     const statsLine    = buildExportStatsLine();
-    const settingsLine = `Loops: ${bootVal}  |  Turn Length: ${turnVal}  |  Date Format: ${fmtVal}  |  Range: ${startVal || 'All'} – ${endVal || 'All'}`;
+    const settingsLine = `Loops: ${bootVal}  |  Turn Length: ${turnVal}  |  Date Format: ${fmtVal}  |  Range: ${startVal || 'All'} – ${endVal || 'All'}` +
+                         (reproLine() ? `  |  ${reproLine()}` : '');
     const brandLine    = `📊 stepchangeanalysis.com — Bootstrap CUSUM SPC Tool — Free Edition`;
 
     const exportTitle =
@@ -831,12 +873,12 @@ if (exportPngBtn) exportPngBtn.onclick = function() {
 if (exportPdfBtn) exportPdfBtn.onclick = function() {
     const title     = chartTitleInput ? chartTitleInput.value : activeFilename;
     const yCol      = document.getElementById('yColSelect')?.value || '';
-    const confVal   = document.getElementById('paramConfLimit')?.value  || '—';
-    const bootVal   = document.getElementById('paramBootNum')?.value    || '—';
-    const turnVal   = document.getElementById('paramTurnLength')?.value || '—';
-    const fmtVal    = document.getElementById('dateFormatSelect')?.value || '—';
-    const startVal  = document.getElementById('startDate')?.value       || 'All';
-    const endVal    = document.getElementById('endDate')?.value         || 'All';
+    const confVal   = usedSetting('paramConfLimit',  '—');
+    const bootVal   = usedSetting('paramBootNum',    '—');
+    const turnVal   = usedSetting('paramTurnLength', '—');
+    const fmtVal    = usedSetting('dateFormatSelect', '—');
+    const startVal  = usedSetting('startDate',       'All');
+    const endVal    = usedSetting('endDate',         'All');
     const fullTitle = title + (yCol ? ` — ${yCol}` : '');
 
     const pdfHeader = `<!DOCTYPE html><html><head>
@@ -876,7 +918,13 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
             <span>Turn length: <b>${turnVal}</b></span>
             <span>Date format: <b>${fmtVal}</b></span>
             <span>Date range: <b>${startVal || 'All'}</b> to <b>${endVal || 'All'}</b></span>
-        </div>${currentDataWarningText ? `
+        </div>${currentChartData && currentChartData.seed !== undefined ? `
+        <div class="settings-bar">
+            <span>Seed: <b>${currentChartData.seed}</b></span>
+            <span>Data fingerprint: <b>${currentChartData.data_fingerprint}</b></span>
+            <span>Analyser: <b>${currentChartData.analyser_version}</b></span>
+            <span>Enter the seed with the same file and settings to reproduce this result exactly.</span>
+        </div>` : ''}${currentDataWarningText ? `
         <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:8px 12px;margin:8px 0;font-size:0.85em;color:#664d03;">${escapeHtml(currentDataWarningText)}</div>` : ''}`;
 
     const pdfFooter = `<div class="pdf-footer">
@@ -1062,7 +1110,8 @@ function drawPlotlyChart() {
         layout.yaxis2 = { overlaying: 'y', side: 'right', showgrid: false, title: 'Cusum' };
 
     } else if (currentView === 'xmr') {
-        activeTraces = [xTrace, xMeanTrace, unplTrace, lnplTrace, mrTrace, mrMeanTrace, mrUrlTrace];
+        activeTraces = [xTrace, xMeanTrace, unplTrace, mrTrace, mrMeanTrace, mrUrlTrace];
+        if (lnplApplies(data)) activeTraces.splice(3, 0, lnplTrace);
         layout.yaxis.domain = [0.35, 1];
         layout.yaxis.title  = 'Individual Value (X)';
         layout.yaxis2 = { domain: [0, 0.25], anchor: 'x', title: 'Moving Range (mR)' };
@@ -1077,6 +1126,12 @@ function drawPlotlyChart() {
     } else if (currentView === 'raw') {
         activeTraces = [rawTrace];
     }
+
+    // Hover labels show values at the results' precision, with thousands
+    // separators, instead of Plotly's abbreviations such as 106.588k.
+    const minDec = data.display_decimals || 2;
+    layout.yaxis.hoverformat = hoverFormatFor(currentView === 'cusum' ? data.cusum_values : data.raw_values, minDec);
+    if (layout.yaxis2) layout.yaxis2.hoverformat = hoverFormatFor(currentView === 'xmr' ? data.mr_values : data.cusum_values, minDec);
 
     Plotly.newPlot(chartContainer, activeTraces, layout);
 }

@@ -64,7 +64,73 @@ function processCSV(rawData, params) {
         return processCSVInner(rawData, params);
     } finally {
         DISPLAY_MIN_DEC = 2;
+        clearRandomSeed();
     }
+}
+
+// ─────────────────────────────────────────────
+// REPRODUCIBLE RANDOM NUMBERS (FMEA BS-02, OUT-04)
+// ─────────────────────────────────────────────
+// Every analysis uses its own seeded generator, so any result can be
+// regenerated exactly from its seed and settings. Generator: xoshiro128**
+// (Blackman and Vigna), seeded through a SplitMix-style mixer.
+// Outside an analysis (for example in tests calling functions directly)
+// Math.random is used.
+const ANALYSER_VERSION = 'R4';
+let seededRandom = null;
+
+// xoshiro128** core: returns 32-bit unsigned integers from state (a, b, c, d).
+function makeXoshiro128ss(a, b, c, d) {
+    a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
+    return function () {
+        const result = Math.imul(rotl(Math.imul(b, 5) >>> 0, 7), 9) >>> 0;
+        const t = (b << 9) >>> 0;
+        c = (c ^ a) >>> 0; d = (d ^ b) >>> 0; b = (b ^ c) >>> 0; a = (a ^ d) >>> 0;
+        c = (c ^ t) >>> 0;
+        d = rotl(d, 11);
+        return result;
+    };
+}
+// Seeded generator of numbers on [0, 1): the 32-bit seed is expanded into the
+// four state words with a SplitMix-style mixer (MurmurHash3 finaliser).
+function makeSeededRandom(seed) {
+    let x = seed >>> 0;
+    function mix() {
+        x = (x + 0x9E3779B9) >>> 0;
+        let z = x;
+        z = Math.imul(z ^ (z >>> 16), 0x85EBCA6B) >>> 0;
+        z = Math.imul(z ^ (z >>> 13), 0xC2B2AE35) >>> 0;
+        return (z ^ (z >>> 16)) >>> 0;
+    }
+    const next = makeXoshiro128ss(mix(), mix(), mix(), mix());
+    return () => next() / 4294967296;
+}
+function rotl(v, k) { return ((v << k) | (v >>> (32 - k))) >>> 0; }
+
+function newSeed() {
+    if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+        return crypto.getRandomValues(new Uint32Array(1))[0];
+    }
+    return Math.floor(Math.random() * 4294967296);
+}
+function validSeed(s) {
+    const n = typeof s === 'string' && s.trim() !== '' ? Number(s) : s;
+    return Number.isInteger(n) && n >= 0 && n <= 4294967295 ? n : null;
+}
+function setRandomSeed(seed) { seededRandom = makeSeededRandom(seed); return seed; }
+function clearRandomSeed() { seededRandom = null; }
+function random() { return seededRandom ? seededRandom() : Math.random(); }
+
+// Short fingerprint of the data actually analysed (dates and values after
+// cleaning and filtering): FNV-1a, 32-bit, shown as 8 hex digits.
+function dataFingerprint(dates, values) {
+    let h = 0x811C9DC5;
+    const text = dates.map((d, i) => d + '=' + values[i]).join('|');
+    for (let i = 0; i < text.length; i++) {
+        h ^= text.charCodeAt(i);
+        h = Math.imul(h, 0x01000193) >>> 0;
+    }
+    return h.toString(16).padStart(8, '0');
 }
 
 function processCSVInner(rawData, params) {
@@ -78,6 +144,12 @@ function processCSVInner(rawData, params) {
         boot_num,
         conf_limit
     } = params;
+
+    // 0. Random seed: the one supplied, or a new one, always returned
+    if (params.seed !== undefined && params.seed !== null && params.seed !== '' && validSeed(params.seed) === null)
+        throw new Error("Seed must be a whole number from 0 to 4294967295, or left blank.");
+    const seed = validSeed(params.seed) !== null ? validSeed(params.seed) : newSeed();
+    setRandomSeed(seed);
 
     // 1. Parse and clean data
     let rows = parseAndClean(rawData, x_col, y_col, date_format);
@@ -140,9 +212,17 @@ function processCSVInner(rawData, params) {
         shift_below_values: runResult.belowValues,
         xmr_unpl: xmrResult.unpl,
         xmr_lnpl: xmrResult.lnpl,
+        xmr_lnpl_applies: xmrResult.lnplApplies,
         mr_values: xmrResult.mrValues,
         mr_mean: xmrResult.mrMean,
-        mr_url: xmrResult.mrUrl
+        mr_url: xmrResult.mrUrl,
+        stage_confidence: [...cusumResult.stages].sort((p, q) => p.firstIndex - q.firstIndex).map(st => st.conflevel),
+        // Everything needed to reproduce this result exactly
+        seed,
+        settings: { x_col, y_col, date_format, start_date: start_date || '', end_date: end_date || '',
+                    turn_length, boot_num, conf_limit },
+        data_fingerprint: dataFingerprint(dates, rawValues),
+        analyser_version: ANALYSER_VERSION
     };
 }
 
@@ -407,7 +487,7 @@ function bootstrapConfidence(data, dataMean, observedRange, loops) {
 // Fisher-Yates shuffle — unbiased random permutation
 function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+        const j = Math.floor(random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
@@ -498,9 +578,14 @@ function computeXmR(values, globalMean) {
     const mrMean = mean(mrRaw);
     const mrValues = [null].concat(mrRaw.map(roundDisplay)); // First point has no moving range
 
+    // A lower limit below zero has no meaning when every value is zero or more
+    // (counts, totals, times): report that there is no lower limit (FMEA OUT-07).
+    const lnplRaw = globalMean - 2.66 * mrMean;
+    const lnplApplies = !(lnplRaw < 0 && values.every(v => v >= 0));
     return {
         unpl:     roundDisplay(globalMean + 2.66 * mrMean),
-        lnpl:     roundDisplay(globalMean - 2.66 * mrMean),
+        lnpl:     roundDisplay(lnplRaw),
+        lnplApplies,
         mrValues: mrValues,
         mrMean:   roundDisplay(mrMean),
         mrUrl:    roundDisplay(3.267 * mrMean)

@@ -129,14 +129,17 @@
     let runs=[],request=completed.request;runBtn.disabled=true;cancelBtn.hidden=false;repeat.textContent='Starting repeatability check…';
     try{repeatWorker=new Worker('worker.js');}catch(e){stopRepeat();repeat.textContent='Could not start the repeatability check. '+e.message;return;}
     const w=repeatWorker;
+    // Each repeat must use fresh random numbers: drop any seed the user entered,
+    // otherwise all 10 runs would be identical and the check meaningless.
+    const freshRequest=()=>({...request,params:{...request.params,seed:undefined}});
     w.onerror=()=>{if(repeatWorker!==w)return;stopRepeat();repeat.textContent='Repeatability check stopped because the worker encountered an error.';};
     w.onmessage=e=>{
       if(repeatWorker!==w)return;
-      if(e.data.status==='ready'){repeat.textContent='Running analysis 1 of 10…';w.postMessage(request);}
+      if(e.data.status==='ready'){repeat.textContent='Running analysis 1 of 10…';w.postMessage(freshRequest());}
       else if(e.data.status==='error'){stopRepeat();repeat.textContent='Repeatability check stopped: '+e.data.data;}
       else if(e.data.status==='result'){
         runs.push(e.data.data); if(runs.length===10){stopRepeat();showSummary(runs);}
-        else {repeat.textContent=`Completed ${runs.length} of 10 runs. Running ${runs.length+1}…`;w.postMessage(request);}
+        else {repeat.textContent=`Completed ${runs.length} of 10 runs. Running ${runs.length+1}…`;w.postMessage(freshRequest());}
       }
     };
   };
