@@ -456,6 +456,7 @@
                 <li><b>Turn Length:</b> Controls when the analyser stops searching short segments. It does not set a minimum size for each resulting stage. Default 5.</li>
                 <li><b>Loops:</b> Number of random shuffles. More shuffles can reduce variation between calculations, but cannot correct unsuitable data or dependence between observations.</li>
                 <li><b>Conf %:</b> The threshold used when exploring a possible change. A higher setting is more demanding; it is not the probability that an intervention worked.</li>
+                <li><b>Seed (optional):</b> The analyser judges each possible change by shuffling your data many times; the seed fixes the sequence of those shuffles. Leave it blank and each run uses a new seed, which is shown with the result (under the step-change chart and in exports). To reproduce a result exactly, for a report, an audit or a colleague, enter its seed with the same file and settings. Use a seed only to reproduce a result, never to search for the one you would prefer: if different seeds give different results, the change is borderline, so run <i>Check repeatability</i> to see how often it appears. The repeatability check always uses fresh shuffles, even when a seed is entered. <a href="checking-your-stepchange-results.html#reproducing">More on reproducing a result</a>.</li>
                 <li><b>Show 3SD Limits:</b> Adds &plusmn;3 standard deviation bands to the Step Change chart.</li>
             </ul>
             <h3>Privacy</h3>

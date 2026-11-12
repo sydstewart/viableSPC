@@ -106,7 +106,7 @@
     const mainKey=JSON.stringify(boundaries(completed.data));
     const matching=runs.filter(d=>JSON.stringify(boundaries(d))===mainKey).length;
     const main=document.createElement('p');main.textContent=`The chart currently displayed matches ${matching} of the 10 runs exactly.${matching<10?' Review differences before relying on its boundaries.':''}`;repeat.append(main);
-    const c=document.createElement('p');c.textContent='Stage counts: '+Object.entries(s.counts).sort((a,b)=>Number(a[0])-Number(b[0])).map(([n,k])=>`${n} stages in ${k} of 10`).join('; ')+'.';repeat.append(c);
+    const c=document.createElement('p');c.textContent='Stage counts: '+Object.entries(s.counts).sort((a,b)=>Number(a[0])-Number(b[0])).map(([n,k])=>`${n} ${Number(n)===1?'stage':'stages'} in ${k} of 10`).join('; ')+'.';repeat.append(c);
     const details=varyingBoundaryDetails(runs);
     if(details.length){
       const title=document.createElement('p');title.textContent='Look more closely at the varying dates (each date is the first observation in a new stage):';repeat.append(title);
