@@ -96,6 +96,7 @@ function saveSettings(filename) {
         bootNum:    document.getElementById('paramBootNum')?.value    || '1000',
         turnLength: document.getElementById('paramTurnLength')?.value || '5',
         dateFmt:    document.getElementById('dateFormatSelect')?.value || 'auto',
+        numberFmt:  document.getElementById('numberFormatSelect')?.value || 'auto',
         xCol:       document.getElementById('xColSelect')?.value      || '',
         yCol:       document.getElementById('yColSelect')?.value      || '',
         startDate:  document.getElementById('startDate')?.value       || '',
@@ -115,6 +116,7 @@ function loadSettings(filename) {
             if (document.getElementById('paramBootNum'))    document.getElementById('paramBootNum').value    = s.bootNum    || '1000';
             if (document.getElementById('paramTurnLength')) document.getElementById('paramTurnLength').value = s.turnLength || '5';
             if (document.getElementById('dateFormatSelect')) document.getElementById('dateFormatSelect').value = s.dateFmt  || 'auto';
+            if (document.getElementById('numberFormatSelect')) document.getElementById('numberFormatSelect').value = s.numberFmt || 'auto';
             if (document.getElementById('startDate') && s.startDate) document.getElementById('startDate').value = s.startDate;
             if (document.getElementById('endDate')   && s.endDate)   document.getElementById('endDate').value   = s.endDate;
             const xS = document.getElementById('xColSelect');
@@ -237,49 +239,19 @@ function runDataQualityCheck() {
 // rule, so the upload check reads dates exactly as the analysis does.
 // Test 1.40 checks the two agree. To be replaced by the shared data
 // module (action A1), which removes the duplication.
-function parseDateForCheck(str, format = 'auto') {
-    if (!str || str.trim() === '') return NaN;
-    str = str.trim();
-    if (/^\d{4}$/.test(str) && (format === 'yyyy' || format === 'auto'))
-        return new Date(parseInt(str, 10), 0, 1).getTime();
-    if (/^\d{4}-\d{2}$/.test(str) && (format === 'yyyy-mm' || format === 'auto')) {
-        const p = str.split('-');
-        return new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, 1).getTime();
-    }
-    if (/^\d{1,2}[\/\-]\d{4}$/.test(str) && (format === 'mm/yyyy' || format === 'auto')) {
-        const p = str.split(/[\/\-]/);
-        return new Date(parseInt(p[1], 10), parseInt(p[0], 10) - 1, 1).getTime();
-    }
-    if (/^\d{4}-\d{2}-\d{2}/.test(str)) {
-        const d = new Date(str);
-        return isNaN(d) ? NaN : d.getTime();
-    }
-    const parts = str.split(/[\/\-\.\s]/);
-    if (parts.length < 3) return NaN;
-    let day, month, year;
-    if (format === 'dd/mm/yyyy') {
-        day = parseInt(parts[0], 10); month = parseInt(parts[1], 10) - 1; year = parseInt(parts[2], 10);
-    } else if (format === 'mm/dd/yyyy') {
-        month = parseInt(parts[0], 10) - 1; day = parseInt(parts[1], 10); year = parseInt(parts[2], 10);
-    } else if (format === 'yyyy-mm-dd') {
-        year = parseInt(parts[0], 10); month = parseInt(parts[1], 10) - 1; day = parseInt(parts[2], 10);
-    } else {
-        const p0 = parseInt(parts[0], 10), p1 = parseInt(parts[1], 10);
-        if (p0 > 12)      { day = p0; month = p1 - 1; }   // unambiguously DD/MM
-        else if (p1 > 12) { month = p0 - 1; day = p1; }   // unambiguously MM/DD
-        else              { day = p0; month = p1 - 1; }   // ambiguous: DD/MM (UK)
-        year = parseInt(parts[2], 10);
-    }
-    if (year < 100) year += year < 50 ? 2000 : 1900;
-    const d = new Date(year, month, day);
-    return isNaN(d.getTime()) ? NaN : d.getTime();
+function parseDateForCheck(str, format = 'auto', conv) {
+    // Reads dates with the shared data module (datacore.js): the same rules as the analysis.
+    const r = DataCore.parseDate(str, format, conv);
+    return r.date ? r.date.getTime() : NaN;
 }
 
 // Find gaps in the dates: sort them, take the typical (median) interval as the
 // recording frequency, and report each larger gap with the dates either side
 // and how many periods it skips.
 function findDateGaps(dateStrings, format = 'auto') {
-    const pts = dateStrings.map(s => ({ s, t: parseDateForCheck(s, format) }))
+    // One date convention for the whole file, as in the analysis
+    const conv = format === 'auto' && DataCore.detectDateConvention(dateStrings).convention === 'mdy' ? 'mdy' : 'dmy';
+    const pts = dateStrings.map(s => ({ s, t: parseDateForCheck(s, format, conv) }))
                            .filter(p => !isNaN(p.t))
                            .sort((a, b) => a.t - b.t);
     const steps = [];
@@ -315,6 +287,7 @@ pythonWorker.onmessage = function(event) {
         if (exportPdfBtn) exportPdfBtn.style.display = "inline-block";
 
         buildStageTable(message.data);
+        showDataReadNote(message.data);
 
         if (!userHasEditedTitle) {
             generateDynamicTitle();
@@ -354,7 +327,42 @@ function formatDisplay(v, minDec) {
 // by the worker), not whatever the boxes say now: a setting changed after the
 // run must not relabel an existing result (FMEA OUT-04).
 const SETTING_KEYS = { paramConfLimit: 'conf_limit', paramBootNum: 'boot_num', paramTurnLength: 'turn_length',
-                       dateFormatSelect: 'date_format', startDate: 'start_date', endDate: 'end_date' };
+                       dateFormatSelect: 'date_format', startDate: 'start_date', endDate: 'end_date',
+                       numberFormatSelect: 'number_format' };
+
+// ── How the data was read (shown with every result; FMEA IN-15, A1) ──
+function dataReadSummary(d) {
+    const r = d && d.data_report;
+    if (!r) return '';
+    const nf = { uk: 'UK numbers (1,234.5)', eu: 'European numbers (1.234,5)' }[r.number_format] || r.number_format;
+    const dc = r.date_convention === 'mdy' ? 'dates month first' : r.date_convention === 'dmy' ? 'dates day first' : 'dates as set';
+    return `Data read as: ${nf}${r.number_format_source === 'detected' ? ' (detected)' : ''}, ${dc}  |  ${d.global_count} rows used` +
+           (r.rejected_count ? `, ${r.rejected_count} left out` : '');
+}
+function showDataReadNote(d) {
+    const anchor = document.getElementById('stageCountText');
+    if (!anchor || !anchor.parentNode) return;
+    let note = document.getElementById('dataReadNote');
+    if (!note) {
+        note = document.createElement('div');
+        note.id = 'dataReadNote';
+        note.style.cssText = 'font-size:0.85em;color:#475569;margin:6px 0 10px;';
+        anchor.parentNode.insertBefore(note, anchor.nextSibling);
+    }
+    const r = d && d.data_report;
+    if (!r) { note.textContent = ''; return; }
+    note.textContent = '';
+    const line = document.createElement('div'); line.textContent = dataReadSummary(d); note.appendChild(line);
+    for (const w of r.warnings || []) { const p = document.createElement('div'); p.textContent = '• ' + w; note.appendChild(p); }
+    if (r.rejected_count) {
+        const det = document.createElement('details'), sum = document.createElement('summary');
+        sum.textContent = `Rows left out (${r.rejected_count})`; det.appendChild(sum);
+        const ul = document.createElement('ul');
+        for (const x of r.rejected_examples || []) { const li = document.createElement('li'); li.textContent = `Row ${x.row}: ${x.reason}`; ul.appendChild(li); }
+        if (r.rejected_count > (r.rejected_examples || []).length) { const li = document.createElement('li'); li.textContent = `…and ${r.rejected_count - r.rejected_examples.length} more`; ul.appendChild(li); }
+        det.appendChild(ul); note.appendChild(det);
+    }
+}
 function usedSetting(boxId, fallback) {
     const s = currentChartData && currentChartData.settings;
     if (s && SETTING_KEYS[boxId] in s) {
@@ -636,6 +644,7 @@ function runPythonAnalysis() {
             x_col:       xCol,
             y_col:       yCol,
             date_format: dateFmt,
+            number_format: document.getElementById('numberFormatSelect')?.value || 'auto',
             start_date:  startDate,
             end_date:    endDate,
             // Optional: a seed from an earlier result reproduces it exactly;
@@ -923,6 +932,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
             <span>Seed: <b>${currentChartData.seed}</b></span>
             <span>Data fingerprint: <b>${currentChartData.data_fingerprint}</b></span>
             <span>Analyser: <b>${currentChartData.analyser_version}</b></span>
+            ${currentChartData.data_report ? `<span>${escapeHtml(dataReadSummary(currentChartData))}</span>` : ''}
             <span>Enter the seed with the same file and settings to reproduce this result exactly.</span>
         </div>` : ''}${currentDataWarningText ? `
         <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:8px 12px;margin:8px 0;font-size:0.85em;color:#664d03;">${escapeHtml(currentDataWarningText)}</div>` : ''}`;

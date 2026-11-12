@@ -258,6 +258,14 @@
                     <option value="yyyy">YYYY (Year only)</option>
                 </select>
             </div>
+            <div class="control-group">
+                <label for="numberFormatSelect">Number Style:</label>
+                <select id="numberFormatSelect" title="Auto-detect works out from your values whether 1,234 means one thousand two hundred and thirty-four (UK) or 1.234 (European), and asks when it cannot tell.">
+                    <option value="auto">Auto-detect</option>
+                    <option value="uk">UK (1,234.5)</option>
+                    <option value="eu">European (1.234,5)</option>
+                </select>
+            </div>
             <div class="control-group"><label>Start Date:</label><input type="date" id="startDate"></div>
             <div class="control-group"><label>End Date:</label><input type="date" id="endDate"></div>
             <div class="control-group"><label>Turn Length:</label><input type="number" id="paramTurnLength" class="num-input" value="5"></div>
@@ -467,6 +475,7 @@
         </div>
     </div>
 
+    <script src="datacore.js"></script>
     <script src="app.js"></script>
     <script src="diagnostics.js"></script>
     <script src="assets/site-chrome.js"></script>

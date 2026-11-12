@@ -35,6 +35,9 @@
  */
 
 // Signal ready immediately — no download needed
+// Shared data module: the same rules for reading values and dates as the page.
+if (typeof DataCore === 'undefined' && typeof importScripts === 'function') importScripts('datacore.js');
+
 self.postMessage({ status: "ready" });
 
 // ─────────────────────────────────────────────
@@ -144,6 +147,7 @@ function processCSVInner(rawData, params) {
         boot_num,
         conf_limit
     } = params;
+    const number_format = params.number_format || 'auto';
 
     // 0. Random seed: the one supplied, or a new one, always returned
     if (params.seed !== undefined && params.seed !== null && params.seed !== '' && validSeed(params.seed) === null)
@@ -151,16 +155,22 @@ function processCSVInner(rawData, params) {
     const seed = validSeed(params.seed) !== null ? validSeed(params.seed) : newSeed();
     setRandomSeed(seed);
 
-    // 1. Parse and clean data
-    let rows = parseAndClean(rawData, x_col, y_col, date_format);
+    // 1. Read values and dates with the shared data module (one set of rules
+    //    for the page and the analysis; FMEA A1, A2)
+    const prepared = DataCore.prepareRows(rawData, x_col, y_col, { dateFormat: date_format, numberFormat: number_format });
+    if (prepared.error) throw new Error(prepared.error.message);
+    let rows = prepared.rows;
 
-    // 2. Apply date filters
+    // 2. Apply date filters, as whole local dates, read by the same rules
+    //    (fixes the first or last day being lost in some time zones; IN-14)
     if (start_date && start_date.trim() !== "") {
-        const sd = new Date(start_date);
+        const sd = DataCore.parseDate(start_date, 'yyyy-mm-dd').date;
+        if (!sd) throw new Error(`Start date "${start_date}" is not a valid date.`);
         rows = rows.filter(r => r.date >= sd);
     }
     if (end_date && end_date.trim() !== "") {
-        const ed = new Date(end_date);
+        const ed = DataCore.parseDate(end_date, 'yyyy-mm-dd').date;
+        if (!ed) throw new Error(`End date "${end_date}" is not a valid date.`);
         rows = rows.filter(r => r.date <= ed);
     }
 
@@ -219,9 +229,17 @@ function processCSVInner(rawData, params) {
         stage_confidence: [...cusumResult.stages].sort((p, q) => p.firstIndex - q.firstIndex).map(st => st.conflevel),
         // Everything needed to reproduce this result exactly
         seed,
-        settings: { x_col, y_col, date_format, start_date: start_date || '', end_date: end_date || '',
+        settings: { x_col, y_col, date_format, number_format, start_date: start_date || '', end_date: end_date || '',
                     turn_length, boot_num, conf_limit },
         data_fingerprint: dataFingerprint(dates, rawValues),
+        data_report: {
+            number_format: prepared.numberFormat,
+            number_format_source: prepared.numberFormatSource,
+            date_convention: prepared.dateConvention,
+            rejected_count: prepared.rejected.length,
+            rejected_examples: prepared.rejected.slice(0, 20),
+            warnings: prepared.warnings.map(w => w.message)
+        },
         analyser_version: ANALYSER_VERSION
     };
 }
@@ -229,80 +247,9 @@ function processCSVInner(rawData, params) {
 // ─────────────────────────────────────────────
 // DATE PARSING
 // ─────────────────────────────────────────────
+// Kept for compatibility: reading dates is done by the shared data module.
 function parseDate(str, format) {
-    if (!str || str.trim() === "") return null;
-    str = str.trim();
-
-    // ── Year only: "1949", "2024" ──
-    // Treat as 1st January of that year
-    if (/^\d{4}$/.test(str) && (format === "yyyy" || format === "auto")) {
-        const y = parseInt(str, 10);
-        const d = new Date(y, 0, 1);
-        return isNaN(d.getTime()) ? null : d;
-    }
-
-    // ── Year-Month ISO: "2024-04" ──
-    // Treat as 1st day of that month
-    if (/^\d{4}-\d{2}$/.test(str) && (format === "yyyy-mm" || format === "auto")) {
-        const parts = str.split('-');
-        const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, 1);
-        return isNaN(d.getTime()) ? null : d;
-    }
-
-    // ── Year-Month UK: "04/2024" or "04-2024" ──
-    // Treat as 1st day of that month
-    if (/^\d{1,2}[\/\-]\d{4}$/.test(str) && (format === "mm/yyyy" || format === "auto")) {
-        const parts = str.split(/[\/\-]/);
-        const d = new Date(parseInt(parts[1], 10), parseInt(parts[0], 10) - 1, 1);
-        return isNaN(d.getTime()) ? null : d;
-    }
-
-    // ── ISO format YYYY-MM-DD (always unambiguous) ──
-    if (/^\d{4}-\d{2}-\d{2}/.test(str)) {
-        const d = new Date(str);
-        return isNaN(d) ? null : d;
-    }
-
-    // ── Full date: DD/MM/YYYY, MM/DD/YYYY, or auto-detect ──
-    const parts = str.split(/[\/\-\.\s]/);
-    if (parts.length < 3) return null;
-
-    let day, month, year;
-
-    if (format === "dd/mm/yyyy") {
-        day   = parseInt(parts[0], 10);
-        month = parseInt(parts[1], 10) - 1;
-        year  = parseInt(parts[2], 10);
-    } else if (format === "mm/dd/yyyy") {
-        month = parseInt(parts[0], 10) - 1;
-        day   = parseInt(parts[1], 10);
-        year  = parseInt(parts[2], 10);
-    } else if (format === "yyyy-mm-dd") {
-        year  = parseInt(parts[0], 10);
-        month = parseInt(parts[1], 10) - 1;
-        day   = parseInt(parts[2], 10);
-    } else {
-        // Auto-detect: if first part > 12 it must be day (DD/MM)
-        const p0 = parseInt(parts[0], 10);
-        const p1 = parseInt(parts[1], 10);
-        if (p0 > 12) {
-            // Unambiguously DD/MM/YYYY
-            day = p0; month = p1 - 1;
-        } else if (p1 > 12) {
-            // Unambiguously MM/DD/YYYY
-            month = p0 - 1; day = p1;
-        } else {
-            // Ambiguous — default to DD/MM/YYYY (UK convention)
-            day = p0; month = p1 - 1;
-        }
-        year = parseInt(parts[2], 10);
-    }
-
-    // Handle 2-digit years
-    if (year < 100) year += year < 50 ? 2000 : 1900;
-
-    const d = new Date(year, month, day);
-    return isNaN(d.getTime()) ? null : d;
+    return DataCore.parseDate(str, format).date;
 }
 
 function formatDateISO(d) {
@@ -316,33 +263,10 @@ function formatDateISO(d) {
 // ─────────────────────────────────────────────
 // DATA PARSING AND CLEANING
 // ─────────────────────────────────────────────
+// Kept for compatibility: reading a file is done by the shared data module.
 function parseAndClean(rawData, xCol, yCol, dateFormat) {
-    const rows = [];
-    for (const row of rawData) {
-        const rawDate = row[xCol];
-        const rawVal  = row[yCol];
-        if (!rawDate || !rawVal) continue;
-
-        const d = parseDate(String(rawDate), dateFormat);
-        if (!d) continue;
-
-        // Handle European comma decimals and thousands separators
-        let valStr = String(rawVal).trim()
-            .replace(/\s/g, '')
-            .replace(/,(?=\d{3})/g, '')  // thousands comma: 1,234
-            .replace(',', '.');           // European decimal: 1,5 → 1.5
-
-        const v = parseFloat(valStr);
-        if (isNaN(v)) continue;
-
-        // Decimal places as recorded, used to set display precision
-        const decMatch = /e/i.test(valStr) ? null : valStr.match(/\.(\d+)$/);
-        rows.push({ date: d, value: v, decimals: decMatch ? decMatch[1].length : 0 });
-    }
-
-    // Sort chronologically
-    rows.sort((a, b) => a.date - b.date);
-    return rows;
+    const p = DataCore.prepareRows(rawData, xCol, yCol, { dateFormat, numberFormat: 'uk' });
+    return p.error ? [] : p.rows;
 }
 
 // ─────────────────────────────────────────────
