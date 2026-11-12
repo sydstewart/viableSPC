@@ -50,7 +50,8 @@ self.onmessage = function(event) {
                 event.data.data,
                 event.data.params
             );
-            self.postMessage({ status: "result", data: result });
+            if (result.needs_choices) self.postMessage({ status: "choices", data: result });
+            else self.postMessage({ status: "result", data: result });
         } catch (err) {
             self.postMessage({ status: "error", data: err.message });
         }
@@ -148,6 +149,9 @@ function processCSVInner(rawData, params) {
         conf_limit
     } = params;
     const number_format = params.number_format || 'auto';
+    // Data choices (stage 5.1): 'ask' until the user has chosen
+    const choiceParams = { censored: params.censored || 'ask', combine: params.combine || 'ask',
+                           combine_period: params.combine_period || 'date', missing: params.missing || 'ask' };
 
     // 0. Random seed: the one supplied, or a new one, always returned
     if (params.seed !== undefined && params.seed !== null && params.seed !== '' && validSeed(params.seed) === null)
@@ -157,8 +161,13 @@ function processCSVInner(rawData, params) {
 
     // 1. Read values and dates with the shared data module (one set of rules
     //    for the page and the analysis; FMEA A1, A2)
-    const prepared = DataCore.prepareRows(rawData, x_col, y_col, { dateFormat: date_format, numberFormat: number_format });
+    const prepared = DataCore.prepareRows(rawData, x_col, y_col, { dateFormat: date_format, numberFormat: number_format,
+        censored: choiceParams.censored, combine: choiceParams.combine, combinePeriod: choiceParams.combine_period, missing: choiceParams.missing });
     if (prepared.error) throw new Error(prepared.error.message);
+    if (prepared.choicesNeeded.length) {
+        return { needs_choices: prepared.choicesNeeded, settings_so_far: choiceParams,
+                 data_report: { number_format: prepared.numberFormat, date_convention: prepared.dateConvention } };
+    }
     let rows = prepared.rows;
 
     // 2. Apply date filters, as whole local dates, read by the same rules
@@ -178,6 +187,9 @@ function processCSVInner(rawData, params) {
         throw new Error("Dataset too small after cleaning or filtering (Need at least 5 points).");
     }
 
+    // Counts describe what is analysed, after any date filter
+    if (prepared.counts.zeroFilled !== undefined) prepared.counts.zeroFilled = rows.filter(r => r.filled).length;
+    if (prepared.counts.censored !== undefined) prepared.counts.censored = rows.filter(r => r.censored).length;
     setDisplayDecimals(rows);
     const dates = rows.map(r => formatDateISO(r.date));
     const rawValues = rows.map(r => r.value);
@@ -230,7 +242,7 @@ function processCSVInner(rawData, params) {
         // Everything needed to reproduce this result exactly
         seed,
         settings: { x_col, y_col, date_format, number_format, start_date: start_date || '', end_date: end_date || '',
-                    turn_length, boot_num, conf_limit },
+                    turn_length, boot_num, conf_limit, ...choiceParams },
         data_fingerprint: dataFingerprint(dates, rawValues),
         data_report: {
             number_format: prepared.numberFormat,
@@ -238,8 +250,12 @@ function processCSVInner(rawData, params) {
             date_convention: prepared.dateConvention,
             rejected_count: prepared.rejected.length,
             rejected_examples: prepared.rejected.slice(0, 20),
-            warnings: prepared.warnings.map(w => w.message)
+            warnings: prepared.warnings.map(w => w.message),
+            choices: prepared.choices,
+            counts: prepared.counts
         },
+        // Per point: 'censored-below', 'censored-above', 'zero-filled', 'combined' or null
+        point_flags: rows.map(r => r.filled ? 'zero-filled' : r.censored ? 'censored-' + r.censored : null),
         analyser_version: ANALYSER_VERSION
     };
 }

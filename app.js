@@ -56,6 +56,9 @@ const xmrSd   = document.getElementById('xmrSd');
 let pendingAnalysisRequest = null;
 let cachedCsvData    = null;
 let currentChartData = null;
+// Data choices (stage 5.1): 'ask' until the user chooses; saved with the file's settings
+const DEFAULT_CHOICES = { censored: 'ask', combine: 'ask', combine_period: 'date', missing: 'ask' };
+let currentChoices = { ...DEFAULT_CHOICES };
 let currentView      = 'step';
 let activeFilename   = "Data";
 let analysisDateTime = "";
@@ -97,6 +100,7 @@ function saveSettings(filename) {
         turnLength: document.getElementById('paramTurnLength')?.value || '5',
         dateFmt:    document.getElementById('dateFormatSelect')?.value || 'auto',
         numberFmt:  document.getElementById('numberFormatSelect')?.value || 'auto',
+        choices:    { ...currentChoices },
         xCol:       document.getElementById('xColSelect')?.value      || '',
         yCol:       document.getElementById('yColSelect')?.value      || '',
         startDate:  document.getElementById('startDate')?.value       || '',
@@ -117,6 +121,7 @@ function loadSettings(filename) {
             if (document.getElementById('paramTurnLength')) document.getElementById('paramTurnLength').value = s.turnLength || '5';
             if (document.getElementById('dateFormatSelect')) document.getElementById('dateFormatSelect').value = s.dateFmt  || 'auto';
             if (document.getElementById('numberFormatSelect')) document.getElementById('numberFormatSelect').value = s.numberFmt || 'auto';
+            currentChoices = { ...DEFAULT_CHOICES, ...(s.choices || {}) };
             if (document.getElementById('startDate') && s.startDate) document.getElementById('startDate').value = s.startDate;
             if (document.getElementById('endDate')   && s.endDate)   document.getElementById('endDate').value   = s.endDate;
             const xS = document.getElementById('xColSelect');
@@ -286,6 +291,7 @@ pythonWorker.onmessage = function(event) {
         if (exportPngBtn) exportPngBtn.style.display = "inline-block";
         if (exportPdfBtn) exportPdfBtn.style.display = "inline-block";
 
+        hideChoicesPanel();
         buildStageTable(message.data);
         showDataReadNote(message.data);
 
@@ -301,6 +307,11 @@ pythonWorker.onmessage = function(event) {
             recalcBtn.innerText = "Recalculate Chart";
         }
 
+    } else if (message.status === "choices") {
+        hideError();
+        statusText.innerText = "A few questions about your data before the analysis runs.";
+        showChoicesPanel(message.data.needs_choices);
+        if (recalcBtn) { recalcBtn.disabled = false; recalcBtn.innerText = "Recalculate Chart"; }
     } else if (message.status === "error") {
         showError(message.data);
         if (recalcBtn) {
@@ -330,6 +341,86 @@ const SETTING_KEYS = { paramConfLimit: 'conf_limit', paramBootNum: 'boot_num', p
                        dateFormatSelect: 'date_format', startDate: 'start_date', endDate: 'end_date',
                        numberFormatSelect: 'number_format' };
 
+// ── Data choices panel (stage 5.1; FMEA IN-05, IN-34, IN-35) ──
+// Shown only when a choice applies: missing periods, rows sharing a date,
+// or censored values. The analysis runs once the user has chosen.
+function hideChoicesPanel() { const p = document.getElementById('choicesPanel'); if (p) p.style.display = 'none'; }
+function showChoicesPanel(needed) {
+    let p = document.getElementById('choicesPanel');
+    if (!p) {
+        p = document.createElement('div');
+        p.id = 'choicesPanel';
+        p.style.cssText = 'background:#eef4fa;border:1px solid #9fbcd9;border-radius:8px;padding:14px 18px;margin-bottom:15px;color:#183251;line-height:1.5;';
+        const eb = document.getElementById('error-banner');
+        if (eb && eb.parentNode) eb.parentNode.insertBefore(p, eb.nextSibling); else document.body.prepend(p);
+    }
+    p.textContent = '';
+    const h = document.createElement('div'); h.style.fontWeight = '700'; h.textContent = 'Before the analysis runs: how should these be treated?'; p.appendChild(h);
+    const radio = (name, value, label, checked, disabled) => {
+        const l = document.createElement('label'); l.style.cssText = 'display:block;margin:2px 0 2px 8px;' + (disabled ? 'color:#94a3b8;' : '');
+        const i = document.createElement('input'); i.type = 'radio'; i.name = name; i.value = value; i.checked = !!checked; i.disabled = !!disabled;
+        l.appendChild(i); l.appendChild(document.createTextNode(' ' + label)); return l;
+    };
+    for (const n of needed) {
+        const box = document.createElement('fieldset'); box.style.cssText = 'border:0;margin:10px 0 0;padding:0;';
+        const lg = document.createElement('legend'); lg.style.fontWeight = '600';
+        if (n.type === 'missing') {
+            lg.textContent = `${n.count} period${n.count > 1 ? 's are' : ' is'} missing (${n.examples.join('; ')}). What do they mean?`;
+            box.appendChild(lg);
+            box.appendChild(radio('choice-missing', 'zero', 'No activity: enter them as 0 (for example months with no sales)', false, !n.canFill));
+            box.appendChild(radio('choice-missing', 'leave', 'No data: leave them out (for example readings that were not recorded)', false));
+            if (!n.canFill) { const s = document.createElement('div'); s.style.cssText = 'font-size:0.85em;margin-left:8px;'; s.textContent = 'The dates are irregular, so missing periods cannot be filled.'; box.appendChild(s); }
+        } else if (n.type === 'combine') {
+            lg.textContent = `${n.count} date${n.count > 1 ? 's have' : ' has'} more than one row (for example ${n.example}). This often means one row per transaction.`;
+            box.appendChild(lg);
+            box.appendChild(radio('choice-combine', 'sum', 'Total the rows in each period', false));
+            box.appendChild(radio('choice-combine', 'mean', 'Average the rows in each period', false));
+            box.appendChild(radio('choice-combine', 'keep', 'Keep every row as a separate point', false));
+            const per = document.createElement('label'); per.style.cssText = 'display:block;margin:4px 0 0 8px;'; per.textContent = 'Period: ';
+            const sel = document.createElement('select'); sel.id = 'choice-combine-period';
+            for (const [v, t] of [['date', 'each date'], ['week', 'each week (Monday to Sunday)'], ['month', 'each month']]) sel.appendChild(new Option(t, v));
+            per.appendChild(sel); box.appendChild(per);
+        } else if (n.type === 'censored') {
+            lg.textContent = `${n.count} value${n.count > 1 ? 's are' : ' is'} below or above a limit (${n.examples.join('; ')}).`;
+            box.appendChild(lg);
+            box.appendChild(radio('choice-censored', 'exclude', 'Leave them out', false));
+            box.appendChild(radio('choice-censored', 'limit', 'Use the limit value (for example <5 as 5)', false));
+            box.appendChild(radio('choice-censored', 'half', 'Use half the limit for values below a limit (for example <5 as 2.5)', false));
+            const s = document.createElement('div'); s.style.cssText = 'font-size:0.85em;margin-left:8px;';
+            s.textContent = 'Values treated this way are marked on the chart. A change in the limit itself can create a step that is not in the process.';
+            box.appendChild(s);
+        }
+        p.appendChild(box);
+    }
+    const msg = document.createElement('div'); msg.style.cssText = 'color:#b42318;margin-top:8px;display:none;'; msg.textContent = 'Please answer each question.'; p.appendChild(msg);
+    const btn = document.createElement('button'); btn.id = 'choicesContinue'; btn.textContent = 'Run the analysis with these choices';
+    btn.style.cssText = 'margin-top:10px;padding:8px 14px;background:#0056b3;color:#fff;border:0;border-radius:6px;cursor:pointer;';
+    btn.onclick = () => {
+        const pick = name => { const c = p.querySelector(`input[name="${name}"]:checked`); return c ? c.value : null; };
+        for (const n of needed) {
+            const v = pick('choice-' + n.type);
+            if (!v) { msg.style.display = 'block'; return; }
+            currentChoices[n.type] = v;
+            if (n.type === 'combine') currentChoices.combine_period = document.getElementById('choice-combine-period').value;
+        }
+        hideChoicesPanel();
+        if (typeof saveSettings === 'function') saveSettings(activeFilename);
+        runPythonAnalysis();
+    };
+    p.appendChild(btn);
+    p.style.display = 'block';
+}
+function choicesSummary(d) {
+    const c = d && d.data_report && d.data_report.choices, k = (d && d.data_report && d.data_report.counts) || {};
+    if (!c || !Object.keys(c).length) return '';
+    const parts = [];
+    if (c.missing) parts.push(c.missing === 'zero' ? `missing periods entered as 0 (${k.zeroFilled || 0})` : 'missing periods left out');
+    if (c.combine) parts.push(c.combine === 'keep' ? 'rows sharing a date kept separate' :
+        `rows ${c.combine.startsWith('sum') ? 'totalled' : 'averaged'} by ${c.combine.split(' by ')[1] === 'date' ? 'date' : c.combine.split(' by ')[1]}${k.combined ? ` (${k.combined.from} rows to ${k.combined.to})` : ''}`);
+    if (c.censored) parts.push({ exclude: 'censored values left out', limit: `censored values at the limit (${k.censored || 0})`, half: `censored values at half the limit (${k.censored || 0})` }[c.censored]);
+    return 'Data choices: ' + parts.join('; ');
+}
+
 // ── How the data was read (shown with every result; FMEA IN-15, A1) ──
 function dataReadSummary(d) {
     const r = d && d.data_report;
@@ -353,6 +444,14 @@ function showDataReadNote(d) {
     if (!r) { note.textContent = ''; return; }
     note.textContent = '';
     const line = document.createElement('div'); line.textContent = dataReadSummary(d); note.appendChild(line);
+    const cs = choicesSummary(d);
+    if (cs) {
+        const c = document.createElement('div'); c.textContent = cs + '  '; note.appendChild(c);
+        const b = document.createElement('button'); b.id = 'changeChoices'; b.textContent = 'Change data choices';
+        b.style.cssText = 'font-size:0.9em;margin-left:4px;padding:1px 8px;cursor:pointer;';
+        b.onclick = () => { currentChoices = { ...DEFAULT_CHOICES }; if (typeof saveSettings === 'function') saveSettings(activeFilename); runPythonAnalysis(); };
+        c.appendChild(b);
+    }
     for (const w of r.warnings || []) { const p = document.createElement('div'); p.textContent = '• ' + w; note.appendChild(p); }
     if (r.rejected_count) {
         const det = document.createElement('details'), sum = document.createElement('summary');
@@ -585,6 +684,8 @@ function handleFileUpload(file) {
         header: true, skipEmptyLines: true,
         complete: function(results) {
             cachedCsvData = results.data;
+            currentChoices = { ...DEFAULT_CHOICES };   // new file: ask again unless saved settings restore choices
+            hideChoicesPanel();
             const headers = results.meta.fields;
             const xS = document.getElementById('xColSelect');
             const yS = document.getElementById('yColSelect');
@@ -645,6 +746,7 @@ function runPythonAnalysis() {
             y_col:       yCol,
             date_format: dateFmt,
             number_format: document.getElementById('numberFormatSelect')?.value || 'auto',
+            ...currentChoices,
             start_date:  startDate,
             end_date:    endDate,
             // Optional: a seed from an earlier result reproduces it exactly;
@@ -933,6 +1035,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
             <span>Data fingerprint: <b>${currentChartData.data_fingerprint}</b></span>
             <span>Analyser: <b>${currentChartData.analyser_version}</b></span>
             ${currentChartData.data_report ? `<span>${escapeHtml(dataReadSummary(currentChartData))}</span>` : ''}
+            ${choicesSummary(currentChartData) ? `<span>${escapeHtml(choicesSummary(currentChartData))}</span>` : ''}
             <span>Enter the seed with the same file and settings to reproduce this result exactly.</span>
         </div>` : ''}${currentDataWarningText ? `
         <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:8px 12px;margin:8px 0;font-size:0.85em;color:#664d03;">${escapeHtml(currentDataWarningText)}</div>` : ''}`;
@@ -1103,6 +1206,16 @@ function drawPlotlyChart() {
         line: { color: 'black', width: 1, dash: 'dash' }
     };
 
+    // Points adjusted by a data choice are marked (FMEA IN-05, IN-35, CR-04)
+    const flagTraces = [];
+    const flags = data.point_flags || [];
+    for (const [kind, name, symbol, color] of [['zero-filled', 'Entered as 0 (missing period)', 'x', '#64748b'],
+                                               ['censored', 'Censored value (at or from limit)', 'circle-open', '#b56b10']]) {
+        const idx = flags.map((f, i) => f && f.startsWith(kind) ? i : -1).filter(i => i >= 0);
+        if (idx.length) flagTraces.push({ x: idx.map(i => data.dates[i]), y: idx.map(i => data.raw_values[i]), mode: 'markers', name,
+                                          marker: { symbol, size: 11, color, line: { width: 2, color } }, hoverinfo: 'x+y+name' });
+    }
+
     let activeTraces = [];
     const layout = {
         title:    (userHasEditedTitle && chartTitleInput)
@@ -1136,6 +1249,8 @@ function drawPlotlyChart() {
     } else if (currentView === 'raw') {
         activeTraces = [rawTrace];
     }
+
+    if (flagTraces.length && ['step', 'xmr', 'run', 'raw'].includes(currentView)) activeTraces.push(...flagTraces);
 
     // Hover labels show values at the results' precision, with thousands
     // separators, instead of Plotly's abbreviations such as 106.588k.
