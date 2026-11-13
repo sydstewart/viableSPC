@@ -104,7 +104,8 @@ function saveSettings(filename) {
         xCol:       document.getElementById('xColSelect')?.value      || '',
         yCol:       document.getElementById('yColSelect')?.value      || '',
         startDate:  document.getElementById('startDate')?.value       || '',
-        endDate:    document.getElementById('endDate')?.value         || ''
+        endDate:    document.getElementById('endDate')?.value         || '',
+        headers:    cachedCsvData && cachedCsvData.length ? Object.keys(cachedCsvData[0]) : []
     };
     try {
         localStorage.setItem(SETTINGS_KEY_PREFIX + filename, JSON.stringify(settings));
@@ -116,6 +117,10 @@ function loadSettings(filename) {
         const saved = localStorage.getItem(SETTINGS_KEY_PREFIX + filename);
         if (saved) {
             const s = JSON.parse(saved);
+            // Restore only when this file has the same columns as the one the
+            // settings were saved for, not just the same name (FMEA IN-29)
+            const headers = cachedCsvData && cachedCsvData.length ? Object.keys(cachedCsvData[0]) : [];
+            if (s.headers && JSON.stringify(s.headers) !== JSON.stringify(headers)) return 'mismatch';
             if (document.getElementById('paramConfLimit'))  document.getElementById('paramConfLimit').value  = s.confLimit  || '99.7';
             if (document.getElementById('paramBootNum'))    document.getElementById('paramBootNum').value    = s.bootNum    || '1000';
             if (document.getElementById('paramTurnLength')) document.getElementById('paramTurnLength').value = s.turnLength || '5';
@@ -170,6 +175,12 @@ window.addEventListener('DOMContentLoaded', function() {
             runDataQualityCheck(); // re-check when the date format changes
         });
     }
+    const numberFormatSelect = document.getElementById('numberFormatSelect');
+    if (numberFormatSelect) {
+        numberFormatSelect.addEventListener('change', function() {
+            runDataQualityCheck(); // re-check when the number style changes
+        });
+    }
 });
 
 /**
@@ -179,7 +190,7 @@ window.addEventListener('DOMContentLoaded', function() {
  *   1. Blank values in Y column — these rows are left out of the analysis
  *   2. Zero values in Y column — check they are genuine; genuine zeros must stay in
  *   3. Date sequence gaps in X column — missing periods can make change timing uncertain
- * Does not block analysis. Shows a yellow warning banner with a link to the Data Validator.
+ * Does not block analysis. Shows a yellow data-check panel listing what the analysis will do with the file.
  */
 function runDataQualityCheck() {
     if (!cachedCsvData || cachedCsvData.length === 0) return;
@@ -190,40 +201,50 @@ function runDataQualityCheck() {
     const yCol = yColSelect ? yColSelect.value : null;
 
     if (!xCol || !yCol) return;
+    showDataPreview(xCol, yCol);
 
-    // Check Y column for blanks and zeros
-    let blankCount = 0, zeroCount = 0;
-    cachedCsvData.forEach(row => {
-        const v = row[yCol] !== undefined ? row[yCol].toString().trim() : "";
-        if (v === "") blankCount++;
-        else if (!isNaN(parseFloat(v)) && parseFloat(v) === 0) zeroCount++;
-    });
-
-    // Check X column for date sequence gaps.
-    // Dates are read exactly as the analysis reads them (same rules, same
-    // date format setting), sorted, and compared with the typical interval.
-    const dateFmtForCheck = usedSetting('dateFormatSelect', 'auto');
-    const gapReport = findDateGaps(
-        cachedCsvData.map(row => row[xCol] ? row[xCol].toString().trim() : ''),
-        dateFmtForCheck
-    );
-    const missingPeriods = gapReport.missing;
-
-    // Build warning message if any issues found
-    const issues = blankCount + zeroCount + missingPeriods;
-    if (issues > 0) {
-        let msg = `⚠️ <b>Data quality warning</b> &mdash; `;
-        const parts = [];
-        if (blankCount > 0) parts.push(`<b>${blankCount} blank value${blankCount > 1 ? 's' : ''}</b> in value column (these rows are left out of the analysis; blanks are not treated as zero)`);
-        if (zeroCount > 0) parts.push(`<b>${zeroCount} zero value${zeroCount > 1 ? 's' : ''}</b> in value column (check they are genuine measurements; keep genuine zeros)`);
+    // The data check (FMEA IN-21): the shared data module reads the file
+    // exactly as the analysis will, with the current settings, and reports
+    // what will happen before anything is run.
+    const dateFmt = document.getElementById('dateFormatSelect')?.value || 'auto';
+    const numFmt  = document.getElementById('numberFormatSelect')?.value || 'auto';
+    const p = DataCore.prepareRows(cachedCsvData, xCol, yCol,
+        { dateFormat: dateFmt, numberFormat: numFmt, censored: 'exclude', combine: 'keep', missing: 'leave' });
+    const lines = [];   // { icon, html }
+    const esc = escapeHtml;
+    if (p.error) {
+        lines.push({ icon: '⛔', html: `<b>The analysis will stop here:</b> ${esc(p.error.message)}` });
+    } else {
+        const zeroCount = p.rows.filter(r => r.value === 0).length;
+        if (zeroCount > 0) lines.push({ icon: '⚠️', html: `<b>${zeroCount} zero value${zeroCount > 1 ? 's' : ''}</b> in value column (check they are genuine measurements; keep genuine zeros)` });
+        // Missing periods: dates absent from the file (rows that are present but left out do not count)
+        const present = p.rows.map(r => r.row).concat(p.rejected.filter(x => x._date).map(x => x.row)).sort((m, n) => m - n);
+        const gapReport = findDateGaps(present.map(i => String(cachedCsvData[i - 1][xCol]).trim()), dateFmt);
+        const missingPeriods = gapReport.missing;
         if (missingPeriods > 0) {
-            const where = gapReport.gaps.slice(0, 3).map(g =>
-                `${g.missing} between ${escapeHtml(g.from)} and ${escapeHtml(g.to)}`).join(', ');
+            const where = gapReport.gaps.slice(0, 3).map(g => `${g.missing} between ${esc(g.from)} and ${esc(g.to)}`).join(', ');
             const more = gapReport.gaps.length > 3 ? `, and ${gapReport.gaps.length - 3} more gap${gapReport.gaps.length - 3 > 1 ? 's' : ''}` : '';
-            parts.push(`<b>${missingPeriods} possible missing period${missingPeriods > 1 ? 's' : ''}</b> in date sequence (${where}${more}; gaps can make change timing uncertain)`);
+            lines.push({ icon: '⚠️', html: `<b>${missingPeriods} possible missing period${missingPeriods > 1 ? 's' : ''}</b> in date sequence (${where}${more}; gaps can make change timing uncertain). You will be asked whether they mean no activity or no data.` });
         }
-        msg += parts.join('; ') + '. ';
-        msg += `<a href="scanner.html" target="_blank" style="color:#0056b3;font-weight:bold;">Run the Data Validator</a> to identify and fix these issues before analysing.`;
+        const censored = p.rejected.filter(x => /censored/.test(x.reason)).length;
+        if (censored) lines.push({ icon: '⚠️', html: `<b>${censored} censored value${censored > 1 ? 's' : ''}</b> (below or above a limit). You will be asked how to treat them.` });
+        const other = p.rejected.filter(x => !/censored/.test(x.reason));
+        if (other.length) {
+            const ex = other.slice(0, 3).map(x => `row ${x.row}: ${esc(x.reason)}`).join('; ');
+            lines.push({ icon: '⚠️', html: `<b>${other.length} row${other.length > 1 ? 's' : ''} will be left out</b> (${ex}${other.length > 3 ? '; …' : ''}). Blank values are left out, not treated as zero.` });
+        }
+        const perDate = new Map();
+        for (const r of p.rows) { const k = r.date.getTime(); perDate.set(k, (perDate.get(k) || 0) + 1); }
+        const shared = [...perDate.values()].filter(n => n > 1).length;
+        if (shared) lines.push({ icon: '⚠️', html: `<b>${shared} date${shared > 1 ? 's have' : ' has'} more than one row.</b> You will be asked whether to total or average them.` });
+        if (p.rows.length >= 5 && p.rows.length < 20)
+            lines.push({ icon: '⚠️', html: `<b>Only ${p.rows.length} values.</b> With fewer than about 20, the analysis can miss real changes, so "no change found" is weak evidence (FMEA IN-17).` });
+        for (const w of p.warnings) lines.push({ icon: 'ℹ️', html: esc(w.message) });
+    }
+    if (lines.length) {
+        const nf = p.error ? '' : ` &middot; ${p.numberFormat === 'eu' ? 'European' : 'UK'} numbers${p.numberFormatSource === 'detected' ? ' (detected)' : ''}`;
+        let msg = `⚠️ <b>Data check</b> (<a href="data-check.html" target="_blank" style="color:#0056b3;">what this shows</a>) &mdash; ${cachedCsvData.length} rows${p.error ? '' : `, ${p.rows.length} will be analysed`}${nf}` +
+                  '<ul style="margin:6px 0 0 0;padding-left:20px;">' + lines.map(l => `<li>${l.icon} ${l.html}</li>`).join('') + '</ul>';
         showDataWarning(msg);
     } else {
         hideDataWarning();
@@ -280,7 +301,8 @@ pythonWorker.onmessage = function(event) {
 
     if (message.status === "ready") {
         if (csvInput) csvInput.disabled = false;
-        statusText.innerHTML = "📁 <b>Ready!</b> Click or drop a CSV file to begin.";
+        // Only before a file is loaded: a late "ready" must not overwrite the status of a file
+        if (!cachedCsvData) statusText.innerHTML = "📁 <b>Ready!</b> Click or drop a CSV file to begin.";
 
     } else if (message.status === "result") {
         hideError();
@@ -340,6 +362,20 @@ function formatDisplay(v, minDec) {
 const SETTING_KEYS = { paramConfLimit: 'conf_limit', paramBootNum: 'boot_num', paramTurnLength: 'turn_length',
                        dateFormatSelect: 'date_format', startDate: 'start_date', endDate: 'end_date',
                        numberFormatSelect: 'number_format' };
+
+// ── Column preview (FMEA IN-19): the first values of the chosen columns ──
+function showDataPreview(xCol, yCol) {
+    let el = document.getElementById('dataPreview');
+    if (!el) {
+        el = document.createElement('div');
+        el.id = 'dataPreview';
+        el.style.cssText = 'font-size:0.85em;color:#475569;margin:0 0 10px;';
+        const eb = document.getElementById('error-banner');
+        if (eb && eb.parentNode) eb.parentNode.insertBefore(el, eb.nextSibling); else document.body.prepend(el);
+    }
+    const first = col => cachedCsvData.slice(0, 4).map(r => String(r[col] == null ? '' : r[col]).trim() || '(blank)').join(', ');
+    el.textContent = `Preview: date column "${xCol}": ${first(xCol)}, …  |  value column "${yCol}": ${first(yCol)}, …`;
+}
 
 // ── Data choices panel (stage 5.1; FMEA IN-05, IN-34, IN-35) ──
 // Shown only when a choice applies: missing periods, rows sharing a date,
@@ -409,6 +445,13 @@ function showChoicesPanel(needed) {
     };
     p.appendChild(btn);
     p.style.display = 'block';
+    // Bring the questions to the user, wherever they asked from (for example the
+    // Change data choices button below the chart): scroll, highlight briefly, focus.
+    if (p.scrollIntoView) p.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    p.style.boxShadow = '0 0 0 4px #9fbcd9';
+    setTimeout(() => { p.style.boxShadow = ''; }, 2000);
+    const firstChoice = p.querySelector('input:not([disabled])');
+    if (firstChoice) firstChoice.focus({ preventScroll: true });
 }
 function choicesSummary(d) {
     const c = d && d.data_report && d.data_report.choices, k = (d && d.data_report && d.data_report.counts) || {};
@@ -426,7 +469,8 @@ function dataReadSummary(d) {
     const r = d && d.data_report;
     if (!r) return '';
     const nf = { uk: 'UK numbers (1,234.5)', eu: 'European numbers (1.234,5)' }[r.number_format] || r.number_format;
-    const dc = r.date_convention === 'mdy' ? 'dates month first' : r.date_convention === 'dmy' ? 'dates day first' : 'dates as set';
+    const setFmt = (d.settings && d.settings.date_format && d.settings.date_format !== 'auto') ? d.settings.date_format.toUpperCase() : null;
+    const dc = r.date_convention === 'mdy' ? 'dates month first' : r.date_convention === 'dmy' ? 'dates day first' : setFmt ? `dates ${setFmt} (as set)` : 'dates as set';
     return `Data read as: ${nf}${r.number_format_source === 'detected' ? ' (detected)' : ''}, ${dc}  |  ${d.global_count} rows used` +
            (r.rejected_count ? `, ${r.rejected_count} left out` : '');
 }
@@ -699,7 +743,9 @@ function handleFileUpload(file) {
             }
             const restored = loadSettings(activeFilename);
             statusText.innerHTML = `📊 <b>${escapeHtml(activeFilename)}</b> loaded.` +
-                (restored ? ' <span style="color:#198754">✓ Previous settings restored.</span>' : ' Configure settings and click Recalculate.');
+                (restored === true ? ' <span style="color:#198754">✓ Previous settings restored.</span>'
+                 : restored === 'mismatch' ? ' Settings saved for a file of this name were <b>not</b> restored, because its columns are different. Configure settings and click Recalculate.'
+                 : ' Configure settings and click Recalculate.');
 
             // Run data quality pre-flight check on the selected columns
             runDataQualityCheck();

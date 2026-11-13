@@ -210,7 +210,6 @@
         <p class="app-tagline">Plot performance over time. Investigate possible changes. Evaluate improvement carefully.</p>
         <div class="header-buttons">
             <button class="btn-scanner" onclick="window.location.href='start-here.html'" style="background:#7c3aed;">&#128161; Analyzer introduction</button>
-            <button class="btn-scanner" onclick="window.open('scanner.html', '_blank')">&#128269; Data Validator</button>
             <button class="btn-articles" onclick="document.getElementById('articlesModal').classList.add('active')">&#128240; Articles</button>
             <button class="btn-feedback" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeM9hZ75140SEKR0Mex4JvLEEdp9E8hq9w5Ug5ItDH9Qx5fkg/viewform?usp=publish-editor', '_blank')">&#128172; Feedback</button>
             <button class="btn-help" onclick="document.getElementById('helpModal').classList.add('active')">&#10067; Help</button>
@@ -222,7 +221,7 @@
     <div id="error-banner">
         &#9888;&#65039; <b>Analysis Error:</b> <span id="error-message"></span>
         <br><br>
-        &#128161; <b>Tip:</b> Run the <a onclick="window.open('scanner.html', '_blank')">Data Validator</a> on your CSV file to check for date format issues, missing values, or out-of-order rows before re-analysing.
+        &#128161; <b>Tip:</b> The data check above the chart lists what was found in your file, such as dates in two formats, values that could not be read, or missing periods. Help explains how to fix common CSV problems.
     </div>
 
     <!-- ── Upload Box ── -->
@@ -445,9 +444,10 @@
             <h3>Preparing your CSV file</h3>
             <p>Your CSV must have at least two columns: a date column and a numeric value column. The analyser runs an automatic data quality check when you upload &mdash; if it detects blanks, zeros, or missing date periods it will show a yellow warning banner. A few common issues to avoid:</p>
             <ul>
-                <li><b>Numeric values with comma separators</b> (e.g. 1,234,567) &mdash; these can break the CSV structure if not properly quoted. Before saving as CSV from Excel, format your value column as a plain number with no thousands separator, or ensure values are wrapped in quotes. Run the Data Validator to check for this.</li>
+                <li><b>Numeric values with comma separators</b> (e.g. 1,234,567) &mdash; these can break the CSV structure if not properly quoted. Before saving as CSV from Excel, format your value column as a plain number with no thousands separator, or ensure values are wrapped in quotes. The data check reports rows that could not be read.</li>
                 <li><b>Merged cells in Excel</b> &mdash; merged date cells leave blank rows in the CSV. Unmerge all cells and fill each row with its own date before saving.</li>
-                <li><b>Mixed date formats</b> &mdash; ensure all dates in the date column use the same format throughout. The Data Validator will flag inconsistencies.</li>
+                <li><b>Mixed date formats</b> &mdash; ensure all dates in the date column use the same format throughout. The data check flags a file that mixes day-first and month-first dates.</li>
+                <li><b>The data check</b> &mdash; every file is checked when you load it. <a href="data-check.html" target="_blank">What the data check shows and the choices it asks for</a>.</li>
                 <li><b>Unsupported date formats</b> &mdash; financial year formats like "2004-05" are not supported. Convert to a proper date (e.g. 01/04/2004) before uploading.</li>
             </ul>
             <h3>&#9888;&#65039; Missing data: zeros and blanks</h3>

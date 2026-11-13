@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checking your data: the StepChange Analyzer data check</title>
+<meta content="How the StepChange Analyzer checks every file automatically when it is loaded: what the data check shows and the choices it asks you to make." name="description"/>
+<link href="https://stepchangeanalysis.com/data-check.html" rel="canonical"/>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .example-figure{margin:24px 0}.improvement-page .example-figure img{display:block;max-width:100%;height:auto;border:1px solid #dededc;border-radius:8px}
+.improvement-page figcaption{font-size:15px;color:#5f5e5a;margin-top:8px}
+.improvement-page .not{padding:20px 24px;background:#fff6eb;border-left:4px solid #b56b10;margin:16px 0}.improvement-page .not p:last-child{margin:0}
+.improvement-page .updated{color:#64748b;font-size:15px}
+.improvement-page h3{font:700 19px/1.35 system-ui,sans-serif;color:#002d5b;margin:20px 0 8px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
+</style></head>
+<body>
+<div id="site-header"></div>
+<main class="improvement-page" id="main-content">
+<h1>Checking your data</h1>
+<p class="summary"><strong>Every file is checked automatically.</strong> When you load a file into the StepChange Analyzer, it is checked before anything is analysed, using exactly the same rules as the analysis itself. (This replaces the separate Data Validator.)</p>
+<section><h2>What the data check shows</h2>
+<ul>
+<li>How your numbers and dates will be read (UK or European numbers; day-first or month-first dates), and a preview of the columns you have chosen.</li>
+<li>Rows that will be left out, and why: blank values, text, impossible dates.</li>
+<li>Missing periods, and where they are. You choose whether they mean no activity (entered as 0) or no data.</li>
+<li>Dates with more than one row, and censored values such as &lt;5. You choose how to treat them.</li>
+<li>Zero values to check, and series too short to give strong evidence.</li>
+</ul>
+<p>If a file cannot be read one way, for example it mixes day-first and month-first dates, the analyser stops and shows example rows, so nothing is analysed under the wrong assumption.</p>
+<p><a class="more" href="index.html">Open the StepChange Analyzer &rarr;</a></p>
+</section>
+</main>
+<div id="site-footer"></div><script src="assets/site-chrome.js"></script></body></html>
