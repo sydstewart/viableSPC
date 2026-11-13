@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Release notes: StepChange Analyzer</title>
+<meta content="What has changed in the StepChange Analyzer, release by release." name="description"/>
+<link href="https://stepchangeanalysis.com/release-notes.html" rel="canonical"/>
+<link href="assets/styles.css" rel="stylesheet"/>
+<style>
+main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
+.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
+.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
+.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
+.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
+.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
+.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
+.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
+.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
+.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
+.improvement-page .example-figure{margin:24px 0}.improvement-page .example-figure img{display:block;max-width:100%;height:auto;border:1px solid #dededc;border-radius:8px}
+.improvement-page figcaption{font-size:15px;color:#5f5e5a;margin-top:8px}
+.improvement-page .not{padding:20px 24px;background:#fff6eb;border-left:4px solid #b56b10;margin:16px 0}.improvement-page .not p:last-child{margin:0}
+.improvement-page .updated{color:#64748b;font-size:15px}
+.improvement-page h3{font:700 19px/1.35 system-ui,sans-serif;color:#002d5b;margin:20px 0 8px}
+.improvement-page .when{color:#64748b;font-size:15px;margin:-8px 0 8px}
+@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
+</style></head>
+<body>
+<div id="site-header"></div>
+<main class="improvement-page" id="main-content">
+<h1>Release notes</h1>
+<p class="summary"><strong>What has changed in the StepChange Analyzer, newest first.</strong> Every release is tested before it goes live; <a href="how-the-analyser-is-tested.html">how the analyser is tested</a> explains how.</p>
+<section id="r5-3"><h2>A guide to using the analyser</h2><p class="when">Release 5.3 &middot; 13 November 2026</p><ul><li>New page, <a href="how-to-use-the-analyser.html">How to use the StepChange Analyzer</a>, in six steps from preparing a file to using the result with care. The button on the analyser page now opens it.</li></ul></section>
+<section id="r5-2"><h2>Your file is checked as soon as you load it</h2><p class="when">Release 5.2 &middot; 13 November 2026</p><ul><li>A data check runs automatically when you load a file, and again when you change a column or a setting. Before anything is analysed, it shows how your numbers and dates will be read, rows that will be left out and why, missing periods and where they are, and anything that needs a decision.</li><li>A preview of the chosen columns makes a wrong choice easy to spot.</li><li>Series too short to give strong evidence are flagged.</li><li>Saved settings are reused only for a file with the same columns.</li><li>The separate Data Validator is no longer needed; <a href="data-check.html">Checking your data</a> explains the built-in check.</li></ul></section>
+<section id="r5-1"><h2>You decide how special cases are treated</h2><p class="when">Release 5.1 &middot; 12 November 2026</p><ul><li>When periods are missing, you are asked whether they mean no activity (entered as 0) or no data (left out).</li><li>When several rows share a date, for example one row per sale, you can total or average them by date, week or month.</li><li>Values recorded as below or above a limit (such as &lt;5) can be left out, set to the limit or set to half the limit; they are marked on the chart, and a change of limit is pointed out.</li><li>Daily working-day data is recognised, so weekends are not treated as missing.</li></ul></section>
+<section id="r5"><h2>Numbers and dates read more reliably</h2><p class="when">Release 5 &middot; 12 November 2026</p><ul><li>UK (1,234.5) and European (1.234,5) number styles are detected; when a file could be read either way, the analyser asks. A new Number Style setting lets you choose.</li><li>Currency symbols, percent signs and negatives in brackets are read correctly.</li><li>Each file is read under one date convention; a file that mixes day-first and month-first dates stops with examples instead of being misread. Impossible dates are rejected.</li><li>Dates are no longer shifted by time zones, and the date range no longer loses its first or last day.</li><li>Every result says how the data was read and lists any rows left out.</li></ul></section>
+<section id="r4-2"><h2>Clearer advice with every result</h2><p class="when">Release 4.2 &middot; 12 November 2026</p><ul><li>The note above the chart now explains that a detected change shows that the data shifted, not why, and that &ldquo;no change found&rdquo; does not prove nothing changed.</li></ul></section>
+<section id="r4-1"><h2>The seed explained</h2><p class="when">Release 4.1 &middot; 12 November 2026</p><ul><li>Help and <a href="checking-your-stepchange-results.html#reproducing">Checking your StepChange results</a> explain what the seed is and how to use it.</li></ul></section>
+<section id="r4"><h2>Results you can reproduce exactly</h2><p class="when">Release 4 &middot; 11 November 2026</p><ul><li>Every result records a seed; entering it with the same file and settings reproduces the result exactly. Exports also record the settings, a fingerprint of the data and the analyser version.</li><li>Results are always labelled with the settings actually used.</li></ul></section>
+<section id="r3-1"><h2>Clearer charts</h2><p class="when">Release 3.1 &middot; 11 November 2026</p><ul><li>Hover labels show full values instead of abbreviations such as 106.6k.</li><li>For data that cannot be negative, a lower limit below zero is no longer shown.</li></ul></section>
+<section id="r3"><h2>Numbers shown to the precision of your data</h2><p class="when">Release 3 &middot; 10 November 2026</p><ul><li>Results are never shown with fewer decimal places than your data, so small values (such as 0.0803) keep their meaning.</li></ul></section>
+<section id="r2"><h2>More accurate data warnings</h2><p class="when">Release 2 &middot; 10 November 2026</p><ul><li>False warnings about missing periods for UK dates have been corrected, and warnings now say where any gaps are.</li><li>Data warnings stay visible after recalculating and are included in PDF exports.</li></ul></section>
+<section id="r1"><h2>Reliability and guidance</h2><p class="when">Release 1 &middot; 9 November 2026</p><ul><li>Very long files no longer cause an error.</li><li>File contents are always displayed safely.</li><li>Advice on blanks and zeros corrected: blank values are left out, not treated as zero, and genuine zeros should be kept.</li><li><a href="intended-use.html">Intended use</a> statement added, and a section on telling one gradual change from several steps.</li></ul></section>
+</main>
+<div id="site-footer"></div><script src="assets/site-chrome.js"></script></body></html>
