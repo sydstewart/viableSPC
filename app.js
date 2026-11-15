@@ -316,6 +316,7 @@ pythonWorker.onmessage = function(event) {
         hideChoicesPanel();
         buildStageTable(message.data);
         showDataReadNote(message.data);
+        showWhatChanged(message.data);
 
         if (!userHasEditedTitle) {
             generateDynamicTitle();
@@ -462,6 +463,71 @@ function choicesSummary(d) {
         `rows ${c.combine.startsWith('sum') ? 'totalled' : 'averaged'} by ${c.combine.split(' by ')[1] === 'date' ? 'date' : c.combine.split(' by ')[1]}${k.combined ? ` (${k.combined.from} rows to ${k.combined.to})` : ''}`);
     if (c.censored) parts.push({ exclude: 'censored values left out', limit: `censored values at the limit (${k.censored || 0})`, half: `censored values at half the limit (${k.censored || 0})` }[c.censored]);
     return 'Data choices: ' + parts.join('; ');
+}
+
+// ── What changed: one plain sentence per change (FMEA LO-02, UI-02, CL-02) ──
+// Answers the manager's questions: did something change, when, and by how
+// much, with how sure the analysis is. No technical terms in the sentences.
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function typicalIntervalDays(d) {
+    const t = (d.dates || []).map(x => Date.parse(String(x).slice(0, 10))).filter(Number.isFinite).sort((p, q) => p - q);
+    const gaps = [];
+    for (let i = 1; i < t.length; i++) if (t[i] > t[i - 1]) gaps.push((t[i] - t[i - 1]) / 86400000);
+    gaps.sort((p, q) => p - q);
+    return gaps.length ? gaps[Math.floor(gaps.length / 2)] : 1;
+}
+function changeDateLabel(iso, unitDays) {
+    const [y, m, day] = String(iso).slice(0, 10).split('-').map(Number);
+    if (unitDays >= 360) return String(y);
+    if (unitDays >= 27) return `${MONTH_NAMES[m - 1]} ${y}`;
+    return `${day} ${MONTH_NAMES[m - 1]} ${y}`;
+}
+function plainNumber(v) {
+    const s = formatDisplay(v);
+    const dec = (s.split('.')[1] || '').length;
+    return Number(s).toLocaleString('en-GB', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+}
+function certaintyWords(c) {
+    return c >= 99 ? 'Very sure' : c >= 95 ? 'Sure' : c >= 90 ? 'Fairly sure' : 'Not very sure';
+}
+const WIDE_RANGE_POINTS = 12;   // more than this: "sometime between", with a note
+function changeSentences(d) {
+    if (!d || !Array.isArray(d.changes)) return [];
+    const unit = typicalIntervalDays(d), L = iso => changeDateLabel(iso, unit);
+    return d.changes.map(ch => {
+        const at = L(ch.first_date), lo = L(ch.range_from), hi = L(ch.range_to);
+        const wide = ch.range_points > WIDE_RANGE_POINTS;
+        let between = `${lo} and ${hi}`;
+        const ly = String(ch.range_from).slice(0, 4), hy = String(ch.range_to).slice(0, 4);
+        if (unit >= 27 && unit < 360 && ly === hy) between = `${lo.split(' ')[0]} and ${hi}`;
+        const lead = lo === hi ? `In ${at}` : wide ? `Sometime between ${between} (possibly gradual)` : `Around ${at} (between ${between})`;
+        const rose = ch.to_mean > ch.from_mean;
+        return `${lead}, the average ${rose ? 'rose' : 'fell'} by ${plainNumber(Math.abs(ch.to_mean - ch.from_mean))}, ` +
+               `from ${plainNumber(ch.from_mean)} to ${plainNumber(ch.to_mean)}. ` +
+               `${certaintyWords(ch.confidence)} this is a real change (${ch.confidence.toFixed(1)}%).`;
+    });
+}
+// Said once, below the sentences, when any change has a wide date range
+const WIDE_RANGE_NOTE = 'A wide date range means the change may have been gradual, or the data too variable to date it closely.';
+function anyWideRange(d) { return !!(d && Array.isArray(d.changes) && d.changes.some(ch => ch.range_points > WIDE_RANGE_POINTS)); }
+function showWhatChanged(d) {
+    const anchor = document.getElementById('stageCountText');
+    if (!anchor || !anchor.parentNode) return;
+    let box = document.getElementById('whatChanged');
+    if (!box) {
+        box = document.createElement('div');
+        box.id = 'whatChanged';
+        box.style.cssText = 'background:#f5f9fd;border-left:4px solid #185fa5;border-radius:4px;padding:10px 14px;margin:8px 0 10px;color:#183251;line-height:1.5;';
+        anchor.parentNode.insertBefore(box, anchor.nextSibling);
+    }
+    box.textContent = '';
+    const h = document.createElement('div'); h.style.fontWeight = '700'; h.textContent = 'What changed'; box.appendChild(h);
+    const sentences = changeSentences(d);
+    if (!sentences.length) {
+        const p = document.createElement('div'); p.textContent = 'No step change was found at this setting.'; box.appendChild(p);
+    }
+    for (const s of sentences) { const p = document.createElement('div'); p.style.marginTop = '4px'; p.textContent = s; box.appendChild(p); }
+    if (anyWideRange(d)) { const n = document.createElement('div'); n.style.cssText = 'margin-top:6px;font-size:0.88em;color:#475569;'; n.textContent = WIDE_RANGE_NOTE; box.appendChild(n); }
 }
 
 // ── How the data was read (shown with every result; FMEA IN-15, A1) ──
@@ -1041,22 +1107,27 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
     const pdfHeader = `<!DOCTYPE html><html><head>
         <title>${escapeHtml(fullTitle)}</title>
         <style>
-            body { font-family: system-ui, sans-serif; margin: 30px; color: #1e293b; font-size: 13pt; }
-            .brand-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #002d5b; padding-bottom: 10px; margin-bottom: 18px; }
-            .brand-name { font-size: 1.3em; font-weight: bold; color: #002d5b; }
-            .brand-url  { font-size: 1em; color: #0056b3; }
-            .brand-tag  { font-size: 0.95em; color: #666; text-align: right; }
-            h2   { color: #002d5b; font-size: 1.2em; margin: 0 0 6px 0; }
-            .meta-row { display: flex; flex-wrap: wrap; gap: 16px; font-size: 1em; color: #555; margin-bottom: 8px; }
+            /* Report scale: 10.5pt text (FMEA UI-02: readable results on one or two A4 pages) */
+            body { font-family: system-ui, sans-serif; margin: 24px; color: #1e293b; font-size: 10.5pt; line-height: 1.35; }
+            .brand-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #002d5b; padding-bottom: 6px; margin-bottom: 10px; }
+            .brand-name { font-size: 1.2em; font-weight: bold; color: #002d5b; }
+            .brand-url  { font-size: 0.85em; color: #0056b3; }
+            .brand-tag  { font-size: 0.8em; color: #666; text-align: right; }
+            h2   { color: #002d5b; font-size: 1.15em; margin: 0 0 4px 0; }
+            .meta-row { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 0.9em; color: #555; margin-bottom: 4px; }
             .meta-row b { color: #002d5b; }
             .settings-bar { background: #f0f4f8; border: 1px solid #cce5ff; border-radius: 6px; padding: 10px 16px; font-size: 0.95em; color: #444; display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; }
             .settings-bar span b { color: #002d5b; }
-            img { width: 100%; border: 1px solid #eee; margin-bottom: 20px; }
-            .stage-table { width: 100%; border-collapse: collapse; font-size: 1em; margin-top: 10px; }
-            .stage-table th { background: #f0f4f8; padding: 10px; border-bottom: 2px solid #0056b3; text-align: left; }
-            .stage-table td { padding: 9px 10px; border-bottom: 1px solid #eee; }
-            .stage-table caption { font-weight: bold; color: #002d5b; text-align: left; margin-bottom: 8px; font-size: 1.1em; }
-            .pdf-footer { margin-top: 24px; font-size: 0.88em; color: #999; border-top: 1px solid #eee; padding-top: 8px; }
+            img { width: 100%; border: 1px solid #eee; margin-bottom: 12px; }
+            .stage-table { width: 100%; border-collapse: collapse; font-size: 0.9em; margin-top: 4px; }
+            .stage-table th { background: #f0f4f8; padding: 6px 8px; border-bottom: 2px solid #0056b3; text-align: left; }
+            .stage-table td { padding: 5px 8px; border-bottom: 1px solid #eee; }
+            .stage-table caption { font-weight: bold; color: #002d5b; text-align: left; margin-bottom: 4px; font-size: 1em; }
+            .pdf-footer { margin-top: 12px; font-size: 0.8em; color: #999; border-top: 1px solid #eee; padding-top: 6px; break-inside: avoid; page-break-inside: avoid; }
+            .pdf-details { margin-top: 12px; font-size: 0.85em; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+            .pdf-details .details-title { font-weight: bold; color: #002d5b; margin-bottom: 6px; font-size: 1.05em; break-after: avoid; page-break-after: avoid; }
+            .pdf-details .settings-bar { padding: 6px 10px; gap: 10px; margin-bottom: 6px; font-size: 1em; }
+            .settings-bar, img, .stage-table tr, .pdf-details > div { break-inside: avoid; page-break-inside: avoid; }
             @media print { body { margin: 15px; } }
         </style>
         </head><body>
@@ -1069,6 +1140,15 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
         </div>
         <h2>${escapeHtml(fullTitle)}</h2>
         <div class="meta-row">${buildExportMetaHTML()}</div>
+        ${currentChartData && Array.isArray(currentChartData.changes) ? `
+        <div style="background:#f5f9fd;border-left:3px solid #185fa5;padding:5px 10px;margin:6px 0 8px;font-size:1em;line-height:1.35;color:#183251;">
+            <b>What changed</b>${(changeSentences(currentChartData).length ? changeSentences(currentChartData) : ['No step change was found at this setting.']).map(s => `<div style="margin-top:2px;">${escapeHtml(s)}</div>`).join('')}${anyWideRange(currentChartData) ? `<div style="margin-top:3px;color:#475569;">${escapeHtml(WIDE_RANGE_NOTE)}</div>` : ''}
+        </div>` : ''}
+        `;
+    // Details (settings, reproducibility, how the data was read, data check)
+    // follow the results, in a compact section (results first for the reader).
+    const pdfDetails = `<div class="pdf-details">
+        <div class="details-title">Details</div>
         <div class="settings-bar">
             <span>Confidence setting: <b>${confVal}%</b></span>
             <span>Bootstrap loops: <b>${bootVal}</b></span>
@@ -1084,7 +1164,8 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
             ${choicesSummary(currentChartData) ? `<span>${escapeHtml(choicesSummary(currentChartData))}</span>` : ''}
             <span>Enter the seed with the same file and settings to reproduce this result exactly.</span>
         </div>` : ''}${currentDataWarningText ? `
-        <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:8px 12px;margin:8px 0;font-size:0.85em;color:#664d03;">${escapeHtml(currentDataWarningText)}</div>` : ''}`;
+        <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:8px 12px;margin:8px 0;font-size:0.85em;color:#664d03;">${escapeHtml(currentDataWarningText)}</div>` : ''}
+        </div>`;
 
     const pdfFooter = `<div class="pdf-footer">
             <b style="color:#002d5b;">📊 StepChangeAnalysis.com — Free Edition</b> &nbsp;|&nbsp; <a href="https://stepchangeanalysis.com" style="color:#0056b3;">stepchangeanalysis.com</a> &nbsp;|&nbsp; Analysis performed entirely in browser — no data uploaded<br>
@@ -1100,7 +1181,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
         const tableContent = currentView === 'stages'
             ? buildStageTableHTML()
             : `<p style="color:#666;font-size:0.9em;margin-bottom:12px;">Raw Data — ${cachedCsvData ? cachedCsvData.length : 0} rows </p>` + buildRawDataTableHTML(null);
-        win.document.write(pdfHeader + tableContent + pdfFooter);
+        win.document.write(pdfHeader + tableContent + pdfDetails + pdfFooter);
         win.document.close();
         return;
     }
@@ -1110,7 +1191,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
     .then(function(imgData) {
         const win = window.open('', '_blank');
         const stageTable = currentView === 'step' ? buildStageTableHTML() : '';
-        win.document.write(pdfHeader + `<img src="${imgData}" alt="${escapeHtml(title)}" />` + stageTable + pdfFooter);
+        win.document.write(pdfHeader + `<img src="${imgData}" alt="${escapeHtml(title)}" />` + stageTable + pdfDetails + pdfFooter);
         win.document.close();
     });
 };

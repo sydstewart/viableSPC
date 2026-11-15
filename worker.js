@@ -80,7 +80,7 @@ function processCSV(rawData, params) {
 // (Blackman and Vigna), seeded through a SplitMix-style mixer.
 // Outside an analysis (for example in tests calling functions directly)
 // Math.random is used.
-const ANALYSER_VERSION = 'R4';
+const ANALYSER_VERSION = 'R6.0';
 let seededRandom = null;
 
 // xoshiro128** core: returns 32-bit unsigned integers from state (a, b, c, d).
@@ -239,6 +239,20 @@ function processCSVInner(rawData, params) {
         mr_mean: xmrResult.mrMean,
         mr_url: xmrResult.mrUrl,
         stage_confidence: [...cusumResult.stages].sort((p, q) => p.firstIndex - q.firstIndex).map(st => st.conflevel),
+        // One entry per change, for the plain-language summary (unrounded means)
+        changes: (() => {
+            const st = [...cusumResult.stages].sort((p, q) => p.firstIndex - q.firstIndex);
+            const avg = s => mean(rawValues.slice(s.firstIndex, s.lastIndex + 1));
+            return st.slice(1).map((s, k) => ({
+                first_date: dates[s.firstIndex],
+                range_from: dates[s.rangeFirst],
+                range_to: dates[s.rangeLast],
+                range_points: s.rangeLast - s.rangeFirst + 1,
+                confidence: s.conflevel,
+                from_mean: avg(st[k]),
+                to_mean: avg(s)
+            }));
+        })(),
         // Everything needed to reproduce this result exactly
         seed,
         settings: { x_col, y_col, date_format, number_format, start_date: start_date || '', end_date: end_date || '',
@@ -389,11 +403,128 @@ function manhatten(values, turnLength, bootNum, confLimit) {
     }
 
     // Final stages = all non-expanded rows, sorted chronologically
-    const finalSegs = cusumControl
+    const firstPass = cusumControl
         .filter(s => s.expanded !== 'y')
         .sort((a, b) => a.firstIndex - b.firstIndex);
 
-    return { stages: finalSegs };
+    // Taylor's backward elimination (FMEA BE-01, BE-02)
+    const refined = refineChanges(values, firstPass.slice(0, -1).map(st => st.lastIndex), bootNum, confLimit);
+    // Date range for each remaining change (FMEA LO-02), after elimination
+    const cps = refined.changes;
+    const ranges = cps.map((cp, j) => changeRange(values, j ? cps[j - 1] + 1 : 0, j < cps.length - 1 ? cps[j + 1] : n - 1, cp, bootNum));
+    const bounds = [-1, ...cps, n - 1];
+    const stages = bounds.slice(1).map((last, k) => ({
+        firstIndex: bounds[k] + 1,
+        lastIndex: last,
+        // Each stage carries the confidence of the change at its start; the first
+        // stage carries that of the first change (none when there is no change).
+        conflevel: refined.confs.length ? refined.confs[Math.max(0, k - 1)] : null,
+        // For stages after a change: the range of likely first points of the stage
+        rangeFirst: k ? ranges[k - 1][0] : null,
+        rangeLast:  k ? ranges[k - 1][1] : null,
+        expanded: ''
+    }));
+    return { stages, firstPass, refinement: { rounds: refined.iterations, eliminated: refined.eliminated } };
+}
+
+// ─────────────────────────────────────────────
+// CHANGE-DATE RANGES (Taylor 2000)
+// ─────────────────────────────────────────────
+// "Just the two intervals each side of the change up to the closest changes
+// are used. A bootstrap is a random reordering of the data on each side of the
+// change point. The change-point is then re-estimated. The 2.5% and 97.5%
+// percentiles of the estimates are used to construct the 95% confidence
+// interval." (W. Taylor, quoted in the ChangePointTaylor R package.)
+// Re-estimation uses the CUSUM estimator, as everywhere in the analyser.
+// Returns [first, last] index of the likely first point of the new stage;
+// the range always includes the reported change.
+function changeRange(values, a, b, cp, loops) {
+    const left = values.slice(a, cp + 1), right = values.slice(cp + 1, b + 1);
+    const starts = [];
+    for (let t = 0; t < loops; t++) {
+        const xs = shuffle(left.slice()).concat(shuffle(right.slice()));
+        const k = cusumSplit(xs);
+        if (k >= 0) starts.push(a + k + 1);
+    }
+    if (!starts.length) return [cp + 1, cp + 1];
+    starts.sort((p, q) => p - q);
+    const N = starts.length;
+    const lo = starts[Math.floor(0.025 * N)], hi = starts[Math.min(N - 1, Math.floor(0.975 * N))];
+    return [Math.min(lo, cp + 1), Math.max(hi, cp + 1)];
+}
+
+// ─────────────────────────────────────────────
+// BACKWARD ELIMINATION (Taylor 2000)
+// ─────────────────────────────────────────────
+// After the first pass, every change is retested using only the data between
+// its neighbouring changes. The weakest change below the confidence threshold
+// is removed, and the remaining changes are retested, until all pass.
+// Documented deviation: Taylor also re-estimates (moves) each change; that was
+// found to be unstable on real data with gradual changes (a confirmed change
+// was lost), so dates are kept from the first pass. Their uncertainty is to be
+// shown as a date range instead. mseSplit and cusumSplit are kept for that.
+// The order of steps is fixed so tests/method_check.py can reproduce it.
+
+// MSE estimator: the last index of the first part that minimises the total
+// within-part sum of squares. Values are centred first for precision. The
+// first part keeps at least 2 points and the second at least 1, as in the
+// first pass.
+function mseSplit(x) {
+    const n = x.length;
+    if (n < 3) return -1;
+    const m = mean(x);
+    const c = x.map(v => v - m);
+    let sT = 0, qT = 0;
+    for (const v of c) { sT += v; qT += v * v; }
+    let sL = 0, qL = 0, best = -1, bestSS = Infinity;
+    for (let k = 0; k < n - 1; k++) {
+        sL += c[k]; qL += c[k] * c[k];
+        if (k < 1) continue;
+        const nL = k + 1, nR = n - nL, sR = sT - sL, qR = qT - qL;
+        const ss = (qL - sL * sL / nL) + (qR - sR * sR / nR);
+        if (ss < bestSS - 1e-12 * qT) { bestSS = ss; best = k; }
+    }
+    return best;
+}
+
+// CUSUM estimator, as in the first pass: the most extreme point of the
+// segment's CUSUM. Used for re-estimation because, unlike the MSE estimator,
+// it is not pulled towards an isolated extreme value (FMEA LO-01; a real
+// monthly file had a 2015 change replaced by a single 2008 value under MSE).
+// The first part keeps at least 2 points and the second at least 1.
+function cusumSplit(x) {
+    const n = x.length;
+    if (n < 3) return -1;
+    const m = mean(x);
+    const e = cusumExtremes(computeCUSUMTestPrecision(x, m));
+    const k = Math.abs(e.max) >= Math.abs(e.min) ? e.maxIndex : e.minIndex;
+    return k >= 1 && k <= n - 2 ? k : -1;
+}
+
+function changeConfidence(values, a, b, bootNum) {
+    const dx = values.slice(a, b + 1);
+    const m = mean(dx);
+    const e = cusumExtremes(computeCUSUMTestPrecision(dx, m));
+    return bootstrapConfidence(dx, m, e.max - e.min, bootNum);
+}
+
+function refineChanges(values, changes, bootNum, confLimit) {
+    // Backward elimination only: change dates are not moved (relocation proved
+    // unstable for gradual changes on real data). Retest every change on the
+    // data between its neighbours; remove the weakest if it is below the
+    // threshold; repeat until every remaining change passes.
+    let cps = changes.slice();
+    const n = values.length;
+    const span = (j, list) => [j ? list[j - 1] + 1 : 0, j < list.length - 1 ? list[j + 1] : n - 1];
+    let rounds = 0;
+    for (;;) {
+        rounds++;
+        const confs = cps.map((_, j) => { const [a, b] = span(j, cps); return changeConfidence(values, a, b, bootNum); });
+        let w = -1;
+        for (let j = 0; j < confs.length; j++) if (w < 0 || confs[j] < confs[w]) w = j;
+        if (w >= 0 && confs[w] < confLimit) { cps.splice(w, 1); continue; }
+        return { changes: cps, confs, iterations: rounds, settled: true, eliminated: changes.length - cps.length };
+    }
 }
 
 // ─────────────────────────────────────────────
