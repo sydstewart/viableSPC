@@ -53,6 +53,12 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <p>A major bend or turning point can draw attention to a possible change. Compare its timing with the run chart and what you know about the process. Both views use the same data, so agreement is useful but <strong>not independent confirmation</strong>. Not every shift produces a clear peak or trough in the overall CUSUM.</p>
 <h3>3. Explore the step-change chart</h3>
 <p>Use it to explore possible stages, their average levels and when changes might have begun. A 95% or 99.7% setting changes how demanding the test is; it does not prove that a particular change could not be due to chance. Results should be interpreted with care and do not prove what caused a change.</p>
+<p><strong>Choosing the confidence setting:</strong></p>
+<ul>
+<li><strong>99.7%</strong> asks &ldquo;is there anything I can be almost certain of?&rdquo; It reports only the biggest changes, and may blur smaller ones together.</li>
+<li><strong>90&ndash;95%</strong> asks &ldquo;what&rsquo;s the more detailed story?&rdquo; It finds smaller changes, at a somewhat higher risk that one of them is chance.</li>
+</ul>
+<p>Lower settings work best when you can check each change against what you know, such as when a change was made. A change that lines up with a known event is far more convincing than the percentage alone.</p>
 <h3>4. Check whether the findings are dependable</h3>
 <p>Look for missing data, changes in recording, unusual values, skewness, trends, seasonality and relationships between successive observations. A skewed distribution is not automatically a problem, but it and the other features may need closer review. The optional repeatability and autocorrelation checks can provide clues; they do not verify all assumptions.</p>
 <p><strong>Then decide and keep reviewing.</strong> Is the observed change worthwhile? What else changed? Consider risk and any balancing measure, decide what to do next, and continue monitoring.</p>
@@ -60,6 +66,7 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 </section>
 <section><h2>Read the Step Change Analysis view</h2>
 <ul>
+<li><strong>What changed&mdash;the summary under the chart.</strong> One sentence per change: roughly when it happened, how much the average rose or fell, and how sure the analysis is. A wide date range means the change may have been gradual, the data too variable to date it closely, or there may be a smaller change nearby that is not reported at this setting.</li>
 <li><strong>Red points and line—your observations.</strong> Read these against the left-hand scale. Look at the dates, units, gaps and unusual values.</li>
 <li><strong>Blue line—stage averages.</strong> Each horizontal section shows the average for one period identified by the analysis. A step joins periods with different averages. Higher is not always better: fewer late deliveries may be good; fewer completed orders may not be.</li>
 <li><strong>Green line—CUSUM.</strong> Read this against the separate right-hand scale. It adds up each observation’s difference from the whole-series average: it rises for values above that average and falls for values below it. A rising CUSUM is <em>not</em> automatically improvement. Turning points help the method locate possible changes; not every bend is a detected change.</li>
@@ -83,7 +90,7 @@ main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:
 <li><strong>Different results on repeat runs:</strong> random bootstrap samples can produce slightly different answers. More shuffles can reduce calculation-to-calculation variation, at the cost of time; they do not fix unsuitable data or assumptions. Taylor’s paper recommends at least 1,000 bootstraps for his examples and discusses larger numbers where practical.</li>
 </ul>
 <p>Taylor also suggests software could check assumptions such as independent errors and alert users to potential problems. Such checks can be helpful, but a simple diagnostic cannot prove that observations are independent.</p>
-<p><strong>What this means for this analyser:</strong> Taylor’s conclusions describe his approach, not a guarantee that this analyser has identical properties. The analyser does not provide confidence intervals for change dates. Its error rates have not been fully validated for all data, and its repeatability and autocorrelation checks are exploratory. A detected step does not establish the cause of a change or guarantee that it will last.</p>
+<p><strong>What this means for this analyser:</strong> Taylor’s conclusions describe his approach, not a guarantee that this analyser has identical properties. The analyser gives a likely range for each change date, following Taylor&rsquo;s method, but it locates changes slightly differently from Taylor&rsquo;s own software, so a date can differ by a period or so. Its error rates have not been fully validated for all data, and its repeatability and autocorrelation checks are exploratory. A detected step does not establish the cause of a change or guarantee that it will last.</p>
 <p>Reference: <a href="https://variation.com/wp-content/uploads/change-point-analyzer/change-point-analysis-a-powerful-new-tool-for-detecting-changes.pdf">Wayne A. Taylor, <em>Change-Point Analysis: A Powerful New Tool for Detecting Changes</em>, Variation.com</a>, conclusion, pp. 17–18.</p>
 </section>
 <section><h2>Use the Stage Summary</h2>

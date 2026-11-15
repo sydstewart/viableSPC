@@ -508,7 +508,7 @@ function changeSentences(d) {
     });
 }
 // Said once, below the sentences, when any change has a wide date range
-const WIDE_RANGE_NOTE = 'A wide date range means the change may have been gradual, or the data too variable to date it closely.';
+const WIDE_RANGE_NOTE = 'A wide date range means the change may have been gradual, the data too variable to date it closely, or there may be a smaller change nearby that is not reported at this setting. Running at a lower confidence setting, such as 95% or 90%, will show it if so.';
 function anyWideRange(d) { return !!(d && Array.isArray(d.changes) && d.changes.some(ch => ch.range_points > WIDE_RANGE_POINTS)); }
 function showWhatChanged(d) {
     const anchor = document.getElementById('stageCountText');
@@ -1127,7 +1127,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
             .pdf-details { margin-top: 12px; font-size: 0.85em; border-top: 1px solid #e2e8f0; padding-top: 6px; }
             .pdf-details .details-title { font-weight: bold; color: #002d5b; margin-bottom: 6px; font-size: 1.05em; break-after: avoid; page-break-after: avoid; }
             .pdf-details .settings-bar { padding: 6px 10px; gap: 10px; margin-bottom: 6px; font-size: 1em; }
-            .settings-bar, img, .stage-table tr, .pdf-details > div { break-inside: avoid; page-break-inside: avoid; }
+            .settings-bar, img, .stage-table, .stage-table tr, .pdf-details > div { break-inside: avoid; page-break-inside: avoid; }
             @media print { body { margin: 15px; } }
         </style>
         </head><body>
