@@ -80,7 +80,7 @@ function processCSV(rawData, params) {
 // (Blackman and Vigna), seeded through a SplitMix-style mixer.
 // Outside an analysis (for example in tests calling functions directly)
 // Math.random is used.
-const ANALYSER_VERSION = 'R6.0';
+const ANALYSER_VERSION = 'R6.1';
 let seededRandom = null;
 
 // xoshiro128** core: returns 32-bit unsigned integers from state (a, b, c, d).
@@ -238,6 +238,10 @@ function processCSVInner(rawData, params) {
         mr_values: xmrResult.mrValues,
         mr_mean: xmrResult.mrMean,
         mr_url: xmrResult.mrUrl,
+        // Neighbouring values moving together, measured within the stages of a
+        // strict (99.7%) analysis so that over-splitting cannot hide it (FMEA BS-03).
+        // Shown as a caution only; results are not changed.
+        neighbour_correlation: strictNeighbourCorrelation(rawValues, dates, cusumResult, turn_length, boot_num, conf_limit),
         stage_confidence: [...cusumResult.stages].sort((p, q) => p.firstIndex - q.firstIndex).map(st => st.conflevel),
         // One entry per change, for the plain-language summary (unrounded means)
         changes: (() => {
@@ -425,6 +429,43 @@ function manhatten(values, turnLength, bootNum, confLimit) {
         expanded: ''
     }));
     return { stages, firstPass, refinement: { rounds: refined.iterations, eliminated: refined.eliminated } };
+}
+
+// ─────────────────────────────────────────────
+// NEIGHBOURING VALUES (FMEA BS-03)
+// ─────────────────────────────────────────────
+// Lag-1 correlation of consecutive values within stages, about each stage's
+// average. Stages come from a 99.7% analysis (the user's own stages if the
+// setting is already 99.7% or higher): runs can fool a less strict analysis
+// into many short stages, which would hide the runs from the measurement.
+// Pairs further apart than 1.5 x the typical interval (a missing period) are
+// skipped. At least 20 pairs are needed. Run after the main analysis, so the
+// reported results are unaffected.
+function strictNeighbourCorrelation(values, dates, mainResult, turnLength, bootNum, confLimit) {
+    const n = values.length;
+    if (n < 21) return null;
+    // A 99.7% analysis needs enough shuffles to resolve it; use at least 1,000.
+    const stages = confLimit >= 99.7 ? mainResult.stages : manhatten(values, turnLength, Math.max(bootNum, 1000), 99.7).stages;
+    const t = dates.map(x => Date.parse(String(x).slice(0, 10)));
+    const gaps = [];
+    for (let i = 1; i < n; i++) if (t[i] > t[i - 1]) gaps.push(t[i] - t[i - 1]);
+    gaps.sort((p, q) => p - q);
+    const typical = gaps.length ? gaps[gaps.length >> 1] : 0;
+    const xs = [], ys = [];
+    for (const st of [...stages].sort((p, q) => p.firstIndex - q.firstIndex)) {
+        const seg = values.slice(st.firstIndex, st.lastIndex + 1), m = mean(seg);
+        for (let i = st.firstIndex + 1; i <= st.lastIndex; i++) {
+            if (typical > 0 && !(t[i] - t[i - 1] <= 1.5 * typical)) continue;
+            xs.push(values[i - 1] - m); ys.push(values[i] - m);
+        }
+    }
+    const k = xs.length;
+    if (k < 20) return null;
+    const mx = mean(xs), my = mean(ys);
+    let xy = 0, xx = 0, yy = 0;
+    for (let i = 0; i < k; i++) { const a = xs[i] - mx, b = ys[i] - my; xy += a * b; xx += a * a; yy += b * b; }
+    if (!(xx > 0 && yy > 0)) return null;
+    return { r: xy / Math.sqrt(xx * yy), pairs: k, strict_stages: stages.length };
 }
 
 // ─────────────────────────────────────────────

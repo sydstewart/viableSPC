@@ -510,6 +510,40 @@ function changeSentences(d) {
 // Said once, below the sentences, when any change has a wide date range
 const WIDE_RANGE_NOTE = 'A wide date range means the change may have been gradual, the data too variable to date it closely, or there may be a smaller change nearby that is not reported at this setting. Running at a lower confidence setting, such as 95% or 90%, will show it if so.';
 function anyWideRange(d) { return !!(d && Array.isArray(d.changes) && d.changes.some(ch => ch.range_points > WIDE_RANGE_POINTS)); }
+// Neighbouring values moving together (FMEA BS-03). Uses the same check as
+// "Are neighbouring measurements related?" (diagnostics.js), run automatically
+// with the recording frequency inferred from the dates. Shown only when the
+// within-stage correlation is at least NEIGHBOUR_NOTE_R.
+const NEIGHBOUR_NOTE_R = 0.2;
+const NEIGHBOUR_CAUTION_R = 0.4;   // strong: prominent caution at the top of What changed
+// Where the correlation often comes from, and where to look
+const NEIGHBOUR_CLUES = 'This often comes from a trend or a seasonal pattern: look for peaks at the same time each year in the Run Chart, and regular waves in the CUSUM line.';
+function inferredFrequency(d) {
+    const u = typicalIntervalDays(d);
+    return u >= 360 ? 'yearly' : u >= 27 ? 'monthly' : u >= 6 ? 'weekly' : 'daily';
+}
+function correlationWord(r) { return r >= 0.6 ? 'very strong' : r >= 0.4 ? 'strong' : 'noticeable'; }
+function neighbourNote(d) {
+    const utils = window.diagnosticUtils;
+    if (!d || !utils || typeof utils.calculateCorrelation !== 'function') return null;   // the page check must be loaded
+    const f = inferredFrequency(d);
+    // Use the larger of: the check on the user's own stages, and the
+    // measurement within the stages of a strict 99.7% analysis (worker), which
+    // over-splitting cannot hide.
+    let out = null;
+    try { out = utils.calculateCorrelation(d, f); } catch (e) { out = null; }
+    const strict = d.neighbour_correlation;
+    const r = Math.max(out && !out.error && Number.isFinite(out.r) ? out.r : -1, strict && Number.isFinite(strict.r) ? strict.r : -1);
+    if (!(r >= NEIGHBOUR_NOTE_R)) return null;
+    out = { r };
+    const unit = { yearly: 'years', monthly: 'months', weekly: 'weeks', daily: 'days' }[f];
+    const strong = out.r >= NEIGHBOUR_CAUTION_R;
+    return { frequency: f, r: out.r, strong,
+             text: strong
+                ? `Caution: neighbouring ${unit} move together strongly (correlation ${out.r.toFixed(2)}, ${correlationWord(out.r)}). With data like this, the analysis can report changes that are not real, and the \u201chow sure\u201d figures below are overstated. Before relying on any change, run the analysis at 99.7%, use the repeatability check, and compare each change with what you know happened. ${NEIGHBOUR_CLUES}`
+                : `Neighbouring ${unit} tend to move together (correlation ${out.r.toFixed(2)}, ${correlationWord(out.r)}), so changes may look stronger than they are. Treat borderline changes with caution. ${NEIGHBOUR_CLUES}` };
+}
+
 function showWhatChanged(d) {
     const anchor = document.getElementById('stageCountText');
     if (!anchor || !anchor.parentNode) return;
@@ -522,12 +556,29 @@ function showWhatChanged(d) {
     }
     box.textContent = '';
     const h = document.createElement('div'); h.style.fontWeight = '700'; h.textContent = 'What changed'; box.appendChild(h);
+    const nbTop = neighbourNote(d);
+    if (nbTop && nbTop.strong) {
+        const c = document.createElement('div'); c.id = 'neighbourCaution';
+        c.style.cssText = 'margin:6px 0 8px;padding:8px 10px;background:#fff4e0;border:1px solid #e0a040;border-radius:4px;color:#5a3500;font-weight:600;';
+        c.textContent = nbTop.text; box.appendChild(c);
+    }
     const sentences = changeSentences(d);
     if (!sentences.length) {
         const p = document.createElement('div'); p.textContent = 'No step change was found at this setting.'; box.appendChild(p);
     }
     for (const s of sentences) { const p = document.createElement('div'); p.style.marginTop = '4px'; p.textContent = s; box.appendChild(p); }
     if (anyWideRange(d)) { const n = document.createElement('div'); n.style.cssText = 'margin-top:6px;font-size:0.88em;color:#475569;'; n.textContent = WIDE_RANGE_NOTE; box.appendChild(n); }
+    const nb = neighbourNote(d);
+    if (nb && !nb.strong) {
+        const n = document.createElement('div'); n.id = 'neighbourNote';
+        n.style.cssText = 'margin-top:6px;font-size:0.88em;color:#7a4a00;';
+        n.textContent = nb.text + ' The check \u201cAre neighbouring measurements related?\u201d below explains more.';
+        box.appendChild(n);
+    }
+    if (nb) {
+        const sel = document.getElementById('check-frequency');
+        if (sel && !sel.value) sel.value = nb.frequency;   // ready for the user to run the full check
+    }
 }
 
 // ── How the data was read (shown with every result; FMEA IN-15, A1) ──
@@ -1142,7 +1193,7 @@ if (exportPdfBtn) exportPdfBtn.onclick = function() {
         <div class="meta-row">${buildExportMetaHTML()}</div>
         ${currentChartData && Array.isArray(currentChartData.changes) ? `
         <div style="background:#f5f9fd;border-left:3px solid #185fa5;padding:5px 10px;margin:6px 0 8px;font-size:1em;line-height:1.35;color:#183251;">
-            <b>What changed</b>${(changeSentences(currentChartData).length ? changeSentences(currentChartData) : ['No step change was found at this setting.']).map(s => `<div style="margin-top:2px;">${escapeHtml(s)}</div>`).join('')}${anyWideRange(currentChartData) ? `<div style="margin-top:3px;color:#475569;">${escapeHtml(WIDE_RANGE_NOTE)}</div>` : ''}
+            <b>What changed</b>${neighbourNote(currentChartData) && neighbourNote(currentChartData).strong ? `<div style="margin:4px 0 6px;padding:5px 8px;background:#fff4e0;border:1px solid #e0a040;color:#5a3500;font-weight:bold;">${escapeHtml(neighbourNote(currentChartData).text)}</div>` : ''}${(changeSentences(currentChartData).length ? changeSentences(currentChartData) : ['No step change was found at this setting.']).map(s => `<div style="margin-top:2px;">${escapeHtml(s)}</div>`).join('')}${anyWideRange(currentChartData) ? `<div style="margin-top:3px;color:#475569;">${escapeHtml(WIDE_RANGE_NOTE)}</div>` : ''}${neighbourNote(currentChartData) && !neighbourNote(currentChartData).strong ? `<div style="margin-top:3px;color:#7a4a00;">${escapeHtml(neighbourNote(currentChartData).text)}</div>` : ''}
         </div>` : ''}
         `;
     // Details (settings, reproducibility, how the data was read, data check)
