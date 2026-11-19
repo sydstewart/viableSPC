@@ -1,2 +1,3 @@
 site: .
 glob: "*.html"
+glob: "{*.html,assets/queue-waiting.html}"

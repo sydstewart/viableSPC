@@ -1,377 +1,1197 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://stepchangeanalysis.com/root-cause-analysis.html" rel="canonical"/>
-<title>Root Cause Analysis: Diagrams, Templates and Practical Investigation — StepChangeAnalysis.com</title>
-<meta content="Investigate what contributed to a problem: five practical steps, fishbone diagrams, a free blank template, worked examples and evidence checks before testing a change." name="description"/>
-<meta content="root cause analysis diagram, fishbone diagram template, root cause analysis template, fishbone diagram example, Ishikawa diagram, cause and effect diagram, root cause analysis explained, root cause analysis methods, root cause analysis tools, fault tree analysis, root cause analysis verification, root cause analysis NHS, RCA healthcare" name="keywords"/>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
-<script>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="https://stepchangeanalysis.com/root-cause-analysis.html" rel="canonical"/>
+    <title>Root Cause Analysis: Diagrams, Templates and Practical Investigation — StepChangeAnalysis.com</title>
+    <meta content="Investigate what contributed to a problem: five practical steps, fishbone diagrams, a free blank template, worked examples and evidence checks before testing a change."
+          name="description"/>
+    <meta content="root cause analysis diagram, fishbone diagram template, root cause analysis template, fishbone diagram example, Ishikawa diagram, cause and effect diagram, root cause analysis explained, root cause analysis methods, root cause analysis tools, fault tree analysis, root cause analysis verification, root cause analysis NHS, RCA healthcare"
+          name="keywords"/>
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NZLMMS3ZGG"></script>
+    <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag("js", new Date());
         gtag("config", "G-NZLMMS3ZGG");
     </script>
-<link href="assets/styles.css" rel="stylesheet"/>
-<style>
-main.improvement-page{max-width:760px;margin:0 auto;padding:40px 24px 56px;font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2c2c2b}
-.improvement-page h1{font-size:clamp(30px,5vw,42px);line-height:1.15;margin:0 0 20px;color:#002d5b}
-.improvement-page h2{font:700 25px/1.3 system-ui,sans-serif;color:#002d5b;margin:0 0 16px}
-.improvement-page p{margin:0 0 16px}.improvement-page section{margin-top:36px;padding-top:28px;border-top:1px solid #dededc}
-.improvement-page ul{padding-left:24px;margin:12px 0 16px}.improvement-page li{margin-bottom:8px}
-.improvement-page a{color:#185fa5;text-underline-offset:3px;overflow-wrap:anywhere}.improvement-page .more{display:inline-block;padding:10px 0;min-height:44px;box-sizing:border-box}
-.improvement-page .summary{padding:20px 24px;background:#eef4fa;border-left:4px solid #185fa5;margin:32px 0 0}
-.improvement-page .conditions{margin:24px 0 12px;border:1px solid #cbd5df;border-radius:8px;background:#f1f5f9}
-.improvement-page .conditions summary{padding:14px 16px;min-height:48px;box-sizing:border-box;cursor:pointer;font-weight:650;color:#002d5b}
-.improvement-page .conditions-body{padding:0 16px 8px}.improvement-page summary:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
-.improvement-page .summary p{margin:0}.improvement-page a:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
-@media(max-width:600px){main.improvement-page{padding:28px 20px 40px;font-size:16px}.improvement-page h2{font-size:23px}}
+    <link href="assets/styles.css" rel="stylesheet"/>
+    <style>
+        main.improvement-page {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 40px 24px 56px;
+            font: 17px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: #2c2c2b
+        }
 
-.improvement-page ol{padding-left:24px;margin:12px 0 16px}.improvement-page ol li{padding-left:4px;margin-bottom:16px}
+        .improvement-page h1 {
+            font-size: clamp(30px, 5vw, 42px);
+            line-height: 1.15;
+            margin: 0 0 20px;
+            color: #002d5b
+        }
 
-.improvement-page h3{font-size:20px;line-height:1.35;color:#002d5b;margin:24px 0 12px}
-.improvement-page nav{margin:24px 0;padding:16px 20px;background:#eef4fa;border:1px solid #cbd5df;border-radius:8px}
-.improvement-page nav ul{margin:8px 0}.improvement-page figure{margin:20px 0}
-.improvement-page .diagram-scroll{overflow-x:auto;border:1px solid #cbd5df;border-radius:8px;background:white;padding:16px}
-.improvement-page .diagram-scroll svg{display:block;width:1260px;max-width:none;height:auto}
-.improvement-page figcaption{font-size:16px;line-height:1.55;margin-top:12px}
-.improvement-page .hint{font-size:15px;color:#4e5965}.improvement-page .table-scroll{overflow-x:auto;margin:20px 0}
-.improvement-page table{border-collapse:collapse;width:100%;font-size:16px;line-height:1.5;min-width:600px}
-.improvement-page th,.improvement-page td{padding:12px;border:1px solid #cbd5df;vertical-align:top;text-align:left}
-.improvement-page th{background:#eef4fa;color:#002d5b}.improvement-page .step-list>li{margin-bottom:20px}
-.improvement-page .check{padding:20px;background:#eef4fa;border-left:4px solid #185fa5;margin:24px 0}
-@media print{#site-header,#site-footer,nav{display:none}.improvement-page .diagram-scroll{overflow:visible}.improvement-page .diagram-scroll svg{width:100%}main.improvement-page{max-width:none;padding:0}.improvement-page details>*{display:block}}
+        .improvement-page h2 {
+            font: 700 25px/1.3 system-ui, sans-serif;
+            color: #002d5b;
+            margin: 0 0 16px
+        }
 
-.improvement-page .diagram-scroll{box-sizing:border-box;width:calc(100vw - 48px);max-width:1292px;position:relative;left:50%;transform:translateX(-50%)}
-.improvement-page .diagram-scroll svg{width:100%;min-width:1200px}
-@media(max-width:600px){.improvement-page .diagram-scroll{width:100%;left:0;transform:none}.improvement-page .table-scroll table,.improvement-page .table-scroll tbody,.improvement-page .table-scroll tr,.improvement-page .table-scroll td{display:block;min-width:0;width:auto}.improvement-page .table-scroll thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.improvement-page .table-scroll tr{border:1px solid #cbd5df;border-radius:8px;margin-bottom:16px;padding:8px;background:white}.improvement-page .table-scroll td{border:0;padding:8px}.improvement-page .table-scroll td::before{content:attr(data-label);display:block;color:#002d5b;font-weight:700;margin-bottom:4px}}
-</style><style>
-.improvement-page .resource .conditions-body{padding:0 16px 16px}
-.improvement-page .resource{margin:12px 0}.improvement-page .resource summary{font-size:17px}
-.improvement-page .diagram-overview{background:white;padding:12px;border:1px solid #cbd5df;border-radius:8px}
-.improvement-page .diagram-overview svg{display:block;width:100%;height:auto}
-.improvement-page .diagram-actions{font-size:16px;margin:12px 0}
-.improvement-page .text-button{font:inherit;border:0;background:none;color:#185fa5;padding:8px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;min-height:44px}
-.improvement-page button:focus-visible,.diagram-viewer button:focus-visible{outline:3px solid #185fa5;outline-offset:4px}
-.diagram-viewer{margin:auto;box-sizing:border-box;width:calc(100vw - 32px);max-width:1400px;max-height:calc(100dvh - 32px);padding:20px;border:1px solid #8ca7c1;border-radius:8px;background:#fff;color:#2c2c2b;font:16px/1.5 system-ui,sans-serif}
-.diagram-viewer::backdrop{background:rgba(0,25,50,.65)}
-.diagram-viewer .viewer-top{display:flex;gap:16px;justify-content:space-between;align-items:center;margin-bottom:12px}
-.diagram-viewer h2{font:700 20px/1.3 system-ui,sans-serif;margin:0;color:#002d5b}
-.diagram-viewer button{font:inherit;min-height:44px;padding:8px 16px;border:1px solid #8ca7c1;border-radius:6px;cursor:pointer;background:#eef4fa;color:#002d5b}
-.diagram-viewer .viewer-canvas{overflow:auto;max-height:calc(100dvh - 220px);border:1px solid #cbd5df;border-radius:6px;background:#fff}
-.diagram-viewer .viewer-canvas svg{display:block;min-width:1200px;width:1200px;height:auto}
-.diagram-viewer .viewer-help{font-size:15px;margin:0 0 12px}.diagram-viewer .viewer-download{display:inline-block;margin-top:12px;color:#185fa5;min-height:44px}
-@media(max-width:600px){.diagram-viewer{padding:16px}.diagram-viewer .viewer-top{align-items:flex-start}.diagram-viewer h2{font-size:18px}.improvement-page .resource summary{font-size:16px}}
-</style></head>
-<body><div id="site-header"></div><main class="improvement-page" id="main-content"><h1>Root cause analysis: investigate causes with evidence</h1>
-<p><strong>What contributed to this problem—and what evidence supports that explanation?</strong></p>
-<p>Root cause analysis (RCA) helps investigate the conditions behind an event or recurring problem. There may be several interacting contributors, not one definitive “root cause”. A diagram organises possible explanations; it does not prove them.</p>
-<nav aria-label="Page shortcuts"><a href="#diagrams-and-templates"><strong>Jump to diagrams and templates →</strong></a> · <a href="#section-blank">Blank fishbone template →</a></nav>
-<section id="investigation-guide"><h2>Five practical investigation steps</h2>
-<ol class="step-list"><li id="section-what"><strong>Define the problem.</strong> Establish what happened, where and when, and how it differed from what was expected. Build a timeline without assuming a cause.</li>
-<li id="section-psychological"><strong>Gather evidence with the people involved.</strong> Review records, observe work and listen across team boundaries. Make it safe to explain what made sense at the time.</li>
-<li><strong>Choose a useful tool.</strong> Use a fishbone to organise possible contributors, <a href="five-whys.html">5 Whys</a> to explore a causal path, or specialist analysis where the risk and question justify it.</li>
-<li id="section-system"><strong>Check explanations.</strong> Separate observations, assumptions and unanswered questions. Look for supporting and conflicting evidence. Branch when several contributors are plausible; pause when information is missing.<p style="margin-top:12px"><strong>Have we stopped at the obvious explanation?</strong> “Someone made a mistake” or “the procedure wasn’t followed” may describe what happened without explaining the conditions behind it. Would another person face the same difficulty? <a href="joiner-levels-of-fix.html">Explore Joiner’s levels of fix →</a> Follow the evidence—not a prescribed level or a search for someone to blame. Remember to think about the systems conditions that might have been the deep root causes -  <a href="why-improvements-fail.html#system-conditions">
-  See - What are system conditions? → </a></p></li>
-<li><strong>Choose and test a change.</strong> Address a supported explanation. Agree responsibilities, expected effects, measures and a review date. Check implementation and possible harm, then adapt.</li></ol>
-<p id="section-when"><strong>Respond according to risk—not a count of occurrences.</strong> Serious concerns may warrant action and investigation after one event. Three occurrences do not confirm common-cause variation.</p></section>
-<section id="diagrams-and-templates"><h2>Diagrams and templates</h2>
-<p>Open only what you need. Full-size views and SVG downloads are built into this page. The examples are <strong>illustrative hypotheses, not verified incident findings or clinical recommendations</strong>.</p>
-<details class="conditions resource" id="section-blank"><summary>Blank fishbone template</summary><div class="conditions-body"><p>Put a specific problem in the head box. Add possible contributors to the branches; adapt the categories to the work. Mark what is supported, assumed or unknown and assign evidence checks.</p><figure><p class="diagram-actions"><button class="text-button" type="button" data-open-diagram="diagram-1">Open full-size diagram</button> · <a data-download-diagram="diagram-1" download="blank-fishbone-template.svg" href="#section-blank">Download SVG</a></p><div class="diagram-overview"><svg id="diagram-1" tabindex="0" width="100%" viewBox="0 0 720 340" role="img" xmlns="http://www.w3.org/2000/svg">
-        <title>Blank fishbone root cause analysis diagram template with six categories</title>
-        <defs>
-            <marker id="arrowf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                <path d="M2 1L8 5L2 9" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </marker>
-        </defs>
+        .improvement-page p {
+            margin: 0 0 16px
+        }
 
-        <line x1="60" y1="170" x2="620" y2="170" stroke="#185FA5" stroke-width="2.5" marker-end="url(#arrowf)"/>
+        .improvement-page section {
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid #dededc
+        }
 
-        <rect x="622" y="138" width="90" height="64" rx="8" fill="#001a3a" stroke="#185FA5" stroke-width="1.5"/>
-        <text x="667" y="163" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="white">Problem</text>
-        <text x="667" y="179" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#94b8d4">(effect)</text>
-        <text x="667" y="194" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#94b8d4">write here</text>
+        .improvement-page ul {
+            padding-left: 24px;
+            margin: 12px 0 16px
+        }
 
-        <line x1="160" y1="170" x2="210" y2="80" stroke="#185FA5" stroke-width="1.8"/>
-        <rect x="105" y="44" width="110" height="40" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-        <text x="160" y="60" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#0C447C">People</text>
-        <text x="160" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#185FA5">skills &middot; training &middot; fatigue</text>
-        <line x1="175" y1="138" x2="205" y2="108" stroke="#185FA5" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="185" y1="150" x2="207" y2="124" stroke="#185FA5" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page li {
+            margin-bottom: 8px
+        }
 
-        <line x1="340" y1="170" x2="390" y2="80" stroke="#0F6E56" stroke-width="1.8"/>
-        <rect x="285" y="44" width="110" height="40" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
-        <text x="340" y="60" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#085041">Process</text>
-        <text x="340" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#0F6E56">method &middot; steps &middot; protocol</text>
-        <line x1="355" y1="138" x2="385" y2="108" stroke="#0F6E56" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="365" y1="150" x2="387" y2="124" stroke="#0F6E56" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page a {
+            color: #185fa5;
+            text-underline-offset: 3px;
+            overflow-wrap: anywhere
+        }
 
-        <line x1="510" y1="170" x2="560" y2="80" stroke="#BA7517" stroke-width="1.8"/>
-        <rect x="455" y="44" width="110" height="40" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.2"/>
-        <text x="510" y="60" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#633806">Equipment</text>
-        <text x="510" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#BA7517">tools &middot; devices &middot; systems</text>
-        <line x1="525" y1="138" x2="555" y2="108" stroke="#BA7517" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="535" y1="150" x2="557" y2="124" stroke="#BA7517" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page .more {
+            display: inline-block;
+            padding: 10px 0;
+            min-height: 44px;
+            box-sizing: border-box
+        }
 
-        <line x1="160" y1="170" x2="210" y2="260" stroke="#534AB7" stroke-width="1.8"/>
-        <rect x="105" y="256" width="110" height="40" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.2"/>
-        <text x="160" y="272" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#3C3489">Environment</text>
-        <text x="160" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#534AB7">culture &middot; place &middot; workload</text>
-        <line x1="175" y1="202" x2="205" y2="232" stroke="#534AB7" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="185" y1="190" x2="207" y2="216" stroke="#534AB7" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page .summary {
+            padding: 20px 24px;
+            background: #eef4fa;
+            border-left: 4px solid #185fa5;
+            margin: 32px 0 0
+        }
 
-        <line x1="340" y1="170" x2="390" y2="260" stroke="#5F5E5A" stroke-width="1.8"/>
-        <rect x="285" y="256" width="110" height="40" rx="6" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.2"/>
-        <text x="340" y="272" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#2C2C2A">Materials</text>
-        <text x="340" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">supplies · information</text>
-        <line x1="355" y1="202" x2="385" y2="232" stroke="#5F5E5A" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="365" y1="190" x2="387" y2="216" stroke="#5F5E5A" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page .conditions {
+            margin: 24px 0 12px;
+            border: 1px solid #cbd5df;
+            border-radius: 8px;
+            background: #f1f5f9
+        }
 
-        <line x1="510" y1="170" x2="560" y2="260" stroke="#c0392b" stroke-width="1.8"/>
-        <rect x="455" y="256" width="110" height="40" rx="6" fill="#FDECEA" stroke="#c0392b" stroke-width="1.2"/>
-        <text x="510" y="272" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#a02020">Management</text>
-        <text x="510" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b">policy · oversight</text>
-        <line x1="525" y1="202" x2="555" y2="232" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="535" y1="190" x2="557" y2="216" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page .conditions summary {
+            padding: 14px 16px;
+            min-height: 48px;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-weight: 650;
+            color: #002d5b
+        }
 
-        <text x="40" y="174" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#5F5E5A">causes</text>
-        </svg></div><figcaption>Six adaptable categories. Download to print or edit in a compatible vector editor; this is not an online fill-in form.</figcaption></figure></div></details><details class="conditions resource" id="section-fishbone"><summary>How a fishbone diagram works</summary><div class="conditions-body"><p>Branches group possible contributors across people, processes, equipment, environment, management and materials. They are prompts—not a ranking of importance. A factor may belong in more than one category.</p><figure><p class="diagram-actions"><button class="text-button" type="button" data-open-diagram="diagram-0">Open full-size diagram</button> · <a data-download-diagram="diagram-0" download="fishbone-categories.svg" href="#section-blank">Download SVG</a></p><div class="diagram-overview"><svg id="diagram-0" tabindex="0" viewBox="0 0 720 320" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
-            <!-- Spine -->
-            <line x1="80" y1="160" x2="620" y2="160" stroke="#002d5b" stroke-width="3"/>
-            <!-- Problem box -->
-            <rect x="620" y="130" width="90" height="60" rx="6" fill="#002d5b"/>
-            <text x="665" y="153" text-anchor="middle" fill="white" font-size="10" font-weight="700">PROBLEM</text>
-            <text x="665" y="167" text-anchor="middle" fill="white" font-size="10" font-weight="700">STATEMENT</text>
-            <text x="665" y="181" text-anchor="middle" fill="#93c5fd" font-size="9">Effect</text>
-            <!-- Arrow head -->
-            <polygon points="618,155 608,148 608,162" fill="#002d5b"/>
+        .improvement-page .conditions-body {
+            padding: 0 16px 8px
+        }
 
-            <!-- Top branches -->
-            <line x1="180" y1="160" x2="240" y2="80" stroke="#0e7490" stroke-width="2.5"/>
-            <rect x="148" y="55" width="90" height="32" rx="5" fill="#f0fdfa" stroke="#0e7490" stroke-width="2"/>
-            <text x="193" y="68" text-anchor="middle" fill="#0e7490" font-size="11" font-weight="700">People</text>
-            <text x="193" y="82" text-anchor="middle" fill="#0e7490" font-size="9">Skills, staffing</text>
-            <line x1="200" y1="135" x2="240" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="220" y1="148" x2="240" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
+        .improvement-page summary:focus-visible {
+            outline: 3px solid #185fa5;
+            outline-offset: 4px
+        }
 
-            <line x1="340" y1="160" x2="380" y2="80" stroke="#198754" stroke-width="2.5"/>
-            <rect x="308" y="55" width="90" height="32" rx="5" fill="#f0fdf4" stroke="#198754" stroke-width="2"/>
-            <text x="353" y="68" text-anchor="middle" fill="#198754" font-size="11" font-weight="700">Process</text>
-            <text x="353" y="82" text-anchor="middle" fill="#198754" font-size="9">Steps, procedures</text>
-            <line x1="355" y1="135" x2="380" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="365" y1="148" x2="380" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
+        .improvement-page .summary p {
+            margin: 0
+        }
 
-            <line x1="500" y1="160" x2="530" y2="80" stroke="#7c3aed" stroke-width="2.5"/>
-            <rect x="468" y="55" width="90" height="32" rx="5" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
-            <text x="513" y="68" text-anchor="middle" fill="#7c3aed" font-size="11" font-weight="700">Equipment</text>
-            <text x="513" y="82" text-anchor="middle" fill="#7c3aed" font-size="9">Tools, technology</text>
-            <line x1="510" y1="135" x2="530" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="518" y1="148" x2="530" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
+        .improvement-page a:focus-visible {
+            outline: 3px solid #185fa5;
+            outline-offset: 4px
+        }
 
-            <!-- Bottom branches -->
-            <line x1="180" y1="160" x2="240" y2="240" stroke="#e67e22" stroke-width="2.5"/>
-            <rect x="148" y="235" width="90" height="32" rx="5" fill="#fff8f0" stroke="#e67e22" stroke-width="2"/>
-            <text x="193" y="248" text-anchor="middle" fill="#e67e22" font-size="11" font-weight="700">Environment</text>
-            <text x="193" y="262" text-anchor="middle" fill="#e67e22" font-size="9">Workplace, culture</text>
-            <line x1="200" y1="185" x2="240" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="220" y1="172" x2="240" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
+        @media (max-width: 600px) {
+            main.improvement-page {
+                padding: 28px 20px 40px;
+                font-size: 16px
+            }
 
-            <line x1="340" y1="160" x2="380" y2="240" stroke="#c0392b" stroke-width="2.5"/>
-            <rect x="308" y="235" width="90" height="32" rx="5" fill="#fff5f5" stroke="#c0392b" stroke-width="2"/>
-            <text x="353" y="248" text-anchor="middle" fill="#c0392b" font-size="11" font-weight="700">Management</text>
-            <text x="353" y="262" text-anchor="middle" fill="#c0392b" font-size="9">Rules, resources</text>
-            <line x1="355" y1="185" x2="380" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="365" y1="172" x2="380" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
+            .improvement-page h2 {
+                font-size: 23px
+            }
+        }
 
-            <line x1="500" y1="160" x2="530" y2="240" stroke="#0056b3" stroke-width="2.5"/>
-            <rect x="468" y="235" width="90" height="32" rx="5" fill="#e9f2ff" stroke="#0056b3" stroke-width="2"/>
-            <text x="513" y="248" text-anchor="middle" fill="#0056b3" font-size="11" font-weight="700">Materials</text>
-            <text x="513" y="262" text-anchor="middle" fill="#0056b3" font-size="9">Supplies, data</text>
-            <line x1="510" y1="185" x2="530" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
-            <line x1="518" y1="172" x2="530" y2="192" stroke="#94a3b8" stroke-width="1.5"/>
+        .improvement-page ol {
+            padding-left: 24px;
+            margin: 12px 0 16px
+        }
 
-            <text x="70" y="155" text-anchor="middle" fill="#64748b" font-size="10">Start</text>
-            <text x="70" y="168" text-anchor="middle" fill="#64748b" font-size="10">here</text>
+        .improvement-page ol li {
+            padding-left: 4px;
+            margin-bottom: 16px
+        }
 
-            <text x="360" y="16" text-anchor="middle" fill="#002d5b" font-size="12" font-weight="700">Fishbone (Ishikawa) Diagram &mdash; Example Categories</text>
-            <text x="360" y="30" text-anchor="middle" fill="#64748b" font-size="10">Each branch is a category of potential causes. Sub-bones are specific causes within that category.</text>
+        .improvement-page h3 {
+            font-size: 20px;
+            line-height: 1.35;
+            color: #002d5b;
+            margin: 24px 0 12px
+        }
 
-            <text x="80" y="305" fill="#64748b" font-size="9">&#9650; Top branches: above the spine &nbsp;&nbsp; &#9660; Bottom branches: below the spine &nbsp;&nbsp; Each sub-bone is a specific hypothesis to investigate</text>
-        </svg></div><figcaption>Each sub-branch is a possible contributor to investigate, not an established cause.</figcaption></figure></div></details><details class="conditions resource" id="section-example1"><summary>Worked example: wrong-route medication event</summary><div class="conditions-body"><figure><p class="diagram-actions"><button class="text-button" type="button" data-open-diagram="diagram-2">Open full-size diagram</button> · <a data-download-diagram="diagram-2" download="fishbone-medication-example.svg" href="#section-blank">Download SVG</a></p><div class="diagram-overview"><svg id="diagram-2" tabindex="0" width="100%" viewBox="0 0 720 360" role="img" xmlns="http://www.w3.org/2000/svg">
-        <title>Completed fishbone diagram for wrong-route medication never event</title>
-        <line x1="60" y1="180" x2="610" y2="180" stroke="#c0392b" stroke-width="2.5"/>
-        <polygon points="608,174 622,180 608,186" fill="#c0392b"/>
-        <rect x="622" y="148" width="90" height="64" rx="8" fill="#c0392b" stroke="#8b1a1a" stroke-width="1.5"/>
-        <text x="667" y="171" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="white">Wrong-route</text>
-        <text x="667" y="185" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="white">medication</text>
-        <text x="667" y="199" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="white">administered</text>
+        .improvement-page nav {
+            margin: 24px 0;
+            padding: 16px 20px;
+            background: #eef4fa;
+            border: 1px solid #cbd5df;
+            border-radius: 8px
+        }
 
-        <line x1="155" y1="180" x2="195" y2="95" stroke="#185FA5" stroke-width="1.8"/>
-        <rect x="95" y="52" width="130" height="48" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-        <text x="160" y="71" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#0C447C">People</text>
-        <text x="160" y="86" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#185FA5">Locum unfamiliar with ward</text>
-        <text x="160" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#185FA5">Tired end of shift</text>
-        <line x1="168" y1="148" x2="192" y2="120" stroke="#185FA5" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="178" y1="160" x2="194" y2="134" stroke="#185FA5" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page nav ul {
+            margin: 8px 0
+        }
 
-        <line x1="340" y1="180" x2="380" y2="95" stroke="#0F6E56" stroke-width="1.8"/>
-        <rect x="270" y="52" width="145" height="48" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
-        <text x="342" y="71" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#085041">Process</text>
-        <text x="342" y="86" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#0F6E56">No independent check required</text>
-        <text x="342" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#0F6E56">Verbal handover only</text>
-        <line x1="352" y1="148" x2="378" y2="120" stroke="#0F6E56" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="362" y1="160" x2="379" y2="134" stroke="#0F6E56" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page figure {
+            margin: 20px 0
+        }
 
-        <line x1="510" y1="180" x2="550" y2="95" stroke="#BA7517" stroke-width="1.8"/>
-        <rect x="445" y="52" width="145" height="48" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.2"/>
-        <text x="517" y="71" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#633806">Equipment</text>
-        <text x="517" y="86" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#BA7517">Similar connector design</text>
-        <text x="517" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#BA7517">No NRFit connector fitted</text>
-        <line x1="522" y1="148" x2="548" y2="120" stroke="#BA7517" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="532" y1="160" x2="549" y2="134" stroke="#BA7517" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page .diagram-scroll {
+            overflow-x: auto;
+            border: 1px solid #cbd5df;
+            border-radius: 8px;
+            background: white;
+            padding: 16px
+        }
 
-        <line x1="155" y1="180" x2="195" y2="265" stroke="#534AB7" stroke-width="1.8"/>
-        <rect x="90" y="262" width="140" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.2"/>
-        <text x="160" y="281" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#3C3489">Environment</text>
-        <text x="160" y="296" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#534AB7">High pressure, busy ward</text>
-        <text x="160" y="308" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#534AB7">Poor lighting in bay</text>
-        <line x1="168" y1="212" x2="192" y2="240" stroke="#534AB7" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="178" y1="200" x2="194" y2="226" stroke="#534AB7" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page .diagram-scroll svg {
+            display: block;
+            width: 1260px;
+            max-width: none;
+            height: auto
+        }
 
-        <line x1="510" y1="180" x2="550" y2="265" stroke="#c0392b" stroke-width="1.8"/>
-        <rect x="440" y="262" width="155" height="48" rx="6" fill="#FDECEA" stroke="#c0392b" stroke-width="1.2"/>
-        <text x="517" y="281" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#a02020">Management</text>
-        <text x="517" y="296" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b">NRFit rollout incomplete</text>
-        <text x="517" y="308" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b">No mandatory double-check policy</text>
-        <line x1="522" y1="212" x2="548" y2="240" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="532" y1="200" x2="549" y2="226" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page figcaption {
+            font-size: 16px;
+            line-height: 1.55;
+            margin-top: 12px
+        }
 
-        <text x="36" y="184" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">causes</text>
-        </svg></div><figcaption>Possible contributors span familiarity, checking, equipment, workload and oversight. No branch establishes a root cause.</figcaption></figure><p><strong>Investigate:</strong> reconstruct the sequence using records and accounts. Check the actual equipment, safeguards, information and working conditions. Do not infer a policy failure from the event alone.</p><p><strong>Test:</strong> use appropriate clinical and safety expertise to develop a safeguard for a supported vulnerability. Check reliable use, remaining risks and unintended effects.</p></div></details><details class="conditions resource" id="section-example2"><summary>Worked example: delayed discharge</summary><div class="conditions-body"><figure><p class="diagram-actions"><button class="text-button" type="button" data-open-diagram="diagram-3">Open full-size diagram</button> · <a data-download-diagram="diagram-3" download="fishbone-discharge-example.svg" href="#section-blank">Download SVG</a></p><div class="diagram-overview"><svg id="diagram-3" tabindex="0" width="100%" viewBox="0 0 720 360" role="img" xmlns="http://www.w3.org/2000/svg">
-        <title>Completed fishbone diagram for delayed hospital discharge</title>
-        <line x1="60" y1="180" x2="610" y2="180" stroke="#0F6E56" stroke-width="2.5"/>
-        <polygon points="608,174 622,180 608,186" fill="#0F6E56"/>
-        <rect x="622" y="148" width="90" height="64" rx="8" fill="#0F6E56" stroke="#085041" stroke-width="1.5"/>
-        <text x="667" y="168" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="white">Discharge</text>
-        <text x="667" y="182" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="white">delayed beyond</text>
-        <text x="667" y="196" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="white">clinical date</text>
+        .improvement-page .hint {
+            font-size: 15px;
+            color: #4e5965
+        }
 
-        <line x1="155" y1="180" x2="195" y2="95" stroke="#185FA5" stroke-width="1.8"/>
-        <rect x="90" y="52" width="145" height="48" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-        <text x="162" y="71" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#0C447C">People</text>
-        <text x="162" y="86" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#185FA5">Family not involved in planning</text>
-        <text x="162" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#185FA5">No named coordinator</text>
-        <line x1="168" y1="148" x2="192" y2="120" stroke="#185FA5" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page .table-scroll {
+            overflow-x: auto;
+            margin: 20px 0
+        }
 
-        <line x1="340" y1="180" x2="380" y2="95" stroke="#534AB7" stroke-width="1.8"/>
-        <rect x="268" y="52" width="152" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.2"/>
-        <text x="344" y="71" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#3C3489">Process</text>
-        <text x="344" y="86" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#534AB7">No EDD set at admission</text>
-        <text x="344" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#534AB7">Ward round after midday</text>
-        <line x1="352" y1="148" x2="378" y2="120" stroke="#534AB7" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 16px;
+            line-height: 1.5;
+            min-width: 600px
+        }
 
-        <line x1="510" y1="180" x2="550" y2="95" stroke="#BA7517" stroke-width="1.8"/>
-        <rect x="443" y="52" width="150" height="48" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.2"/>
-        <text x="518" y="71" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#633806">System boundary</text>
-        <text x="518" y="86" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#BA7517">Social care package not arranged</text>
-        <text x="518" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#BA7517">No Transfer of Care Hub</text>
-        <line x1="522" y1="148" x2="548" y2="120" stroke="#BA7517" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page th, .improvement-page td {
+            padding: 12px;
+            border: 1px solid #cbd5df;
+            vertical-align: top;
+            text-align: left
+        }
 
-        <line x1="155" y1="180" x2="195" y2="265" stroke="#5F5E5A" stroke-width="1.8"/>
-        <rect x="87" y="262" width="150" height="48" rx="6" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.2"/>
-        <text x="162" y="281" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#2C2C2A">Environment</text>
-        <text x="162" y="296" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">Beds needed, pressure to fill</text>
-        <text x="162" y="308" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">Red/Green system not in use</text>
-        <line x1="168" y1="212" x2="192" y2="240" stroke="#5F5E5A" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page th {
+            background: #eef4fa;
+            color: #002d5b
+        }
 
-        <line x1="510" y1="180" x2="550" y2="265" stroke="#c0392b" stroke-width="1.8"/>
-        <rect x="437" y="262" width="162" height="48" rx="6" fill="#FDECEA" stroke="#c0392b" stroke-width="1.2"/>
-        <text x="518" y="281" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#a02020">Management</text>
-        <text x="518" y="296" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b">No criteria-led discharge policy</text>
-        <text x="518" y="308" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c0392b">Discharge not owned at exec level</text>
-        <line x1="522" y1="212" x2="548" y2="240" stroke="#c0392b" stroke-width="1" stroke-dasharray="3 2"/>
+        .improvement-page .step-list > li {
+            margin-bottom: 20px
+        }
 
-        <text x="36" y="184" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5F5E5A">causes</text>
-        </svg></div><figcaption>Possible contributors span the hospital and receiving services. The absence of a named organisational model does not establish the cause.</figcaption></figure><p><strong>Investigate:</strong> build a timeline of readiness, decisions, medication, transport and support arrangements. Compare cases and involve receiving services; do not assume all delay is internal—or external.</p><p><strong>Test:</strong> address a supported source of waiting. Check safety, readmissions, workload and effects on receiving services alongside discharge time.</p></div></details><details class="conditions resource" id="section-five-whys"><summary>A 5 Whys diagram: one possible path</summary><div class="conditions-body"><figure><p class="diagram-actions"><button class="text-button" type="button" data-open-diagram="diagram-4">Open full-size diagram</button> · <a data-download-diagram="diagram-4" download="five-whys-medication-example.svg" href="#section-blank">Download SVG</a></p><div class="diagram-overview"><svg id="diagram-4" tabindex="0" width="100%" viewBox="0 0 680 180" role="img" xmlns="http://www.w3.org/2000/svg">
-        <title>5 Whys diagram showing chain from problem to root cause</title>
-        <defs>
-            <marker id="arrow5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                <path d="M2 1L8 5L2 9" fill="none" stroke="#185FA5" stroke-width="1.5"/>
-            </marker>
-        </defs>
+        .improvement-page .check {
+            padding: 20px;
+            background: #eef4fa;
+            border-left: 4px solid #185fa5;
+            margin: 24px 0
+        }
 
-        <rect x="5" y="65" width="100" height="50" rx="6" fill="#FDECEA" stroke="#c0392b" stroke-width="1.2"/>
-        <text x="55" y="85" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="#a02020">Problem</text>
-        <text x="55" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#c0392b">Wrong-route</text>
-        <text x="55" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#c0392b">medication</text>
+        @media print {
+            #site-header, #site-footer, nav {
+                display: none
+            }
 
-        <line x1="106" y1="90" x2="126" y2="90" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrow5)"/>
-        <text x="116" y="84" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#185FA5">Why?</text>
+            .improvement-page .diagram-scroll {
+                overflow: visible
+            }
 
-        <rect x="128" y="65" width="110" height="50" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-        <text x="183" y="85" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#0C447C">Spinal and IV</text>
-        <text x="183" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#0C447C">connectors look</text>
-        <text x="183" y="109" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#0C447C">the same</text>
+            .improvement-page .diagram-scroll svg {
+                width: 100%
+            }
 
-        <line x1="239" y1="90" x2="259" y2="90" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrow5)"/>
-        <text x="249" y="84" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#185FA5">Why?</text>
+            main.improvement-page {
+                max-width: none;
+                padding: 0
+            }
 
-        <rect x="261" y="65" width="110" height="50" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-        <text x="316" y="85" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#0C447C">NRFit connectors</text>
-        <text x="316" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#0C447C">not fitted on this</text>
-        <text x="316" y="109" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#0C447C">ward</text>
+            .improvement-page details > * {
+                display: block
+            }
+        }
 
-        <line x1="372" y1="90" x2="392" y2="90" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrow5)"/>
-        <text x="382" y="84" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#185FA5">Why?</text>
+        .improvement-page .diagram-scroll {
+            box-sizing: border-box;
+            width: calc(100vw - 48px);
+            max-width: 1292px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%)
+        }
 
-        <rect x="394" y="65" width="110" height="50" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-        <text x="449" y="85" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#0C447C">Rollout programme</text>
-        <text x="449" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#0C447C">not completed</text>
-        <text x="449" y="109" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#0C447C">trust-wide</text>
+        .improvement-page .diagram-scroll svg {
+            width: 100%;
+            min-width: 1200px
+        }
 
-        <line x1="505" y1="90" x2="525" y2="90" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrow5)"/>
-        <text x="515" y="84" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#185FA5">Why?</text>
+        @media (max-width: 600px) {
+            .improvement-page .diagram-scroll {
+                width: 100%;
+                left: 0;
+                transform: none
+            }
 
-        <rect x="527" y="55" width="148" height="70" rx="6" fill="#001a3a" stroke="#185FA5" stroke-width="1.5"/>
-        <text x="601" y="78" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="white">To check</text>
-        <text x="601" y="92" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94b8d4">No executive</text>
-        <text x="601" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94b8d4">accountable for</text>
-        <text x="601" y="116" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94b8d4">NRFit completion</text>
-        </svg></div><figcaption>Check every arrow and branch for other contributors. Executive accountability is a hypothesis, not a conclusion.</figcaption></figure><p>Five is a prompt, not a guaranteed route to one root cause. Use the <a href="five-whys.html#section-example">5 Whys guide</a> for a non-clinical example with evidence checks.</p></div></details></section>
-<section id="section-tools"><h2>When another approach helps</h2>
-<p>A timeline or process map can establish the sequence. <a href="causal-loop-diagrams.html">Feedback loops</a> help explore how consequences sustain a pattern. For specialist safety investigations, follow the applicable framework and use trained support, such as the relevant <a href="psirf-analytical-framework.html">PSIRF approach</a>.</p>
-<details class="conditions resource" id="section-fault-tree"><summary>Optional: fault tree logic</summary><div class="conditions-body"><p>Fault trees examine combinations of conditions behind a defined failure. An <strong>OR</strong> gate means any modelled condition can produce the event; an <strong>AND</strong> gate requires the specified conditions together. Check other pathways and dependencies. Do not assume the model is exhaustive or multiply probabilities without justifying the assumptions.</p></div></details>
-</section>
-<section id="section-verify"><h2>Test the response—not just the explanation</h2>
-<span id="section-necessary"></span><span id="section-structural-fix"></span>
-<p>Agree what should change, by roughly how much and when. Check whether the intervention is being used and measure both the intended result and possible harm elsewhere.</p>
-<p>A suitable chart or Bootstrap CUSUM analysis may identify a performance change. <strong>It does not, by itself, confirm the cause or prove the intervention worked.</strong> Consider implementation, data quality, timing and alternative explanations. No detected change is not automatically proof of no benefit.</p>
-<a class="more" href="why-improvements-fail.html#right-intervention">Right intervention? →</a><br><a class="more" href="why-improvements-fail.html#right-measures">Right measures? →</a></section>
-<section id="section-nhs"><h2>Complementary tools—not mandatory stages</h2>
-<p><a href="systems-thinking.html">Systems thinking</a> examines parts and relationships; RCA investigates contributors with evidence; <a href="five-whys.html">5 Whys</a> explores a particular causal path; <a href="causal-loop-diagrams.html">feedback loops</a> examine how consequences return to influence what happens next.</p>
-<a class="more" href="why-improvements-fail.html#right-problem">Return to Right problem? →</a></section></main><dialog class="diagram-viewer" id="diagram-viewer" aria-labelledby="viewer-title"><div class="viewer-top"><h2 id="viewer-title">Full-size diagram</h2><button type="button" id="close-viewer">Close</button></div><p class="viewer-help">Scroll sideways or down to explore the diagram at a readable size.</p><div class="viewer-canvas" tabindex="0" role="region" aria-label="Scrollable full-size diagram"></div><a class="viewer-download" download>Download this diagram as SVG</a></dialog><div id="site-footer"></div><script src="assets/site-chrome.js"></script><script>
-(function(){
- const viewer=document.getElementById('diagram-viewer');
- const files=new Map();
- document.querySelectorAll('svg[id^="diagram-"]').forEach(svg=>{
-   const clone=svg.cloneNode(true);clone.removeAttribute('id');clone.removeAttribute('tabindex');clone.setAttribute('xmlns','http://www.w3.org/2000/svg');clone.setAttribute('width','1260');
-   const vb=svg.viewBox.baseVal;clone.setAttribute('height',String(Math.round(1260*vb.height/vb.width)));
-   const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)],{type:'image/svg+xml;charset=utf-8'}));
-   const a=document.querySelector('[data-download-diagram="'+svg.id+'"]');a.href=url;files.set(svg.id,{url,name:a.download});
- });
- document.querySelectorAll('[data-open-diagram]').forEach(button=>button.addEventListener('click',()=>{
-   const id=button.dataset.openDiagram;const original=document.getElementById(id);const copy=original.cloneNode(true);copy.removeAttribute('id');
-   const renamed=new Map();copy.querySelectorAll('[id]').forEach(el=>{renamed.set(el.id,'viewer-'+el.id);el.id='viewer-'+el.id;});
-   copy.querySelectorAll('*').forEach(el=>{for(const a of [...el.attributes]){let value=a.value;renamed.forEach((n,o)=>{value=value.replaceAll('url(#'+o+')','url(#'+n+')');});if(value!==a.value)el.setAttribute(a.name,value);}});
-   viewer.querySelector('.viewer-canvas').replaceChildren(copy);
-   const resource=original.closest('details');document.getElementById('viewer-title').textContent=resource.querySelector('summary').textContent;
-   const file=files.get(id);const a=viewer.querySelector('.viewer-download');a.href=file.url;a.download=file.name;
-   viewer.showModal();viewer.querySelector('.viewer-canvas').scrollTo(0,0);
- }));
- document.getElementById('close-viewer').addEventListener('click',()=>viewer.close());
- function revealHash(){if(!location.hash)return;const target=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(!target)return;let node=target;while(node){if(node.tagName==='DETAILS')node.open=true;node=node.parentElement;}requestAnimationFrame(()=>target.scrollIntoView());}
- addEventListener('hashchange',revealHash);revealHash();
-})();
-</script></body></html>
+            .improvement-page .table-scroll table, .improvement-page .table-scroll tbody, .improvement-page .table-scroll tr, .improvement-page .table-scroll td {
+                display: block;
+                min-width: 0;
+                width: auto
+            }
+
+            .improvement-page .table-scroll thead {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                clip-path: inset(50%)
+            }
+
+            .improvement-page .table-scroll tr {
+                border: 1px solid #cbd5df;
+                border-radius: 8px;
+                margin-bottom: 16px;
+                padding: 8px;
+                background: white
+            }
+
+            .improvement-page .table-scroll td {
+                border: 0;
+                padding: 8px
+            }
+
+            .improvement-page .table-scroll td::before {
+                content: attr(data-label);
+                display: block;
+                color: #002d5b;
+                font-weight: 700;
+                margin-bottom: 4px
+            }
+        }
+    </style>
+    <style>
+        .improvement-page .resource .conditions-body {
+            padding: 0 16px 16px
+        }
+
+        .improvement-page .resource {
+            margin: 12px 0
+        }
+
+        .improvement-page .resource summary {
+            font-size: 17px
+        }
+
+        .improvement-page .diagram-overview {
+            background: white;
+            padding: 12px;
+            border: 1px solid #cbd5df;
+            border-radius: 8px
+        }
+
+        .improvement-page .diagram-overview svg {
+            display: block;
+            width: 100%;
+            height: auto
+        }
+
+        .improvement-page .diagram-actions {
+            font-size: 16px;
+            margin: 12px 0
+        }
+
+        .improvement-page .text-button {
+            font: inherit;
+            border: 0;
+            background: none;
+            color: #185fa5;
+            padding: 8px 0;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            min-height: 44px
+        }
+
+        .improvement-page button:focus-visible, .diagram-viewer button:focus-visible {
+            outline: 3px solid #185fa5;
+            outline-offset: 4px
+        }
+
+        .diagram-viewer {
+            margin: auto;
+            box-sizing: border-box;
+            width: calc(100vw - 32px);
+            max-width: 1400px;
+            max-height: calc(100dvh - 32px);
+            padding: 20px;
+            border: 1px solid #8ca7c1;
+            border-radius: 8px;
+            background: #fff;
+            color: #2c2c2b;
+            font: 16px/1.5 system-ui, sans-serif
+        }
+
+        .diagram-viewer::backdrop {
+            background: rgba(0, 25, 50, .65)
+        }
+
+        .diagram-viewer .viewer-top {
+            display: flex;
+            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px
+        }
+
+        .diagram-viewer h2 {
+            font: 700 20px/1.3 system-ui, sans-serif;
+            margin: 0;
+            color: #002d5b
+        }
+
+        .diagram-viewer button {
+            font: inherit;
+            min-height: 44px;
+            padding: 8px 16px;
+            border: 1px solid #8ca7c1;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #eef4fa;
+            color: #002d5b
+        }
+
+        .diagram-viewer .viewer-canvas {
+            overflow: auto;
+            max-height: calc(100dvh - 220px);
+            border: 1px solid #cbd5df;
+            border-radius: 6px;
+            background: #fff
+        }
+
+        .diagram-viewer .viewer-canvas svg {
+            display: block;
+            min-width: 1200px;
+            width: 1200px;
+            height: auto
+        }
+
+        .diagram-viewer .viewer-help {
+            font-size: 15px;
+            margin: 0 0 12px
+        }
+
+        .diagram-viewer .viewer-download {
+            display: inline-block;
+            margin-top: 12px;
+            color: #185fa5;
+            min-height: 44px
+        }
+
+        @media (max-width: 600px) {
+            .diagram-viewer {
+                padding: 16px
+            }
+
+            .diagram-viewer .viewer-top {
+                align-items: flex-start
+            }
+
+            .diagram-viewer h2 {
+                font-size: 18px
+            }
+
+            .improvement-page .resource summary {
+                font-size: 16px
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="improvement-page" id="main-content"><h1>Root cause analysis: investigate causes with evidence</h1>
+    <p><strong>What contributed to this problem—and what evidence supports that explanation?</strong></p>
+    <p>Root cause analysis (RCA) helps investigate the conditions behind an event or recurring problem. There may be
+        several interacting contributors, not one definitive “root cause”. A diagram organises possible explanations; it
+        does not prove them.</p>
+    <nav aria-label="Page shortcuts"><a href="#diagrams-and-templates"><strong>Jump to diagrams and templates →</strong></a>
+        · <a href="#section-blank">Blank fishbone template →</a></nav>
+    <section id="investigation-guide"><h2>Five practical investigation steps</h2>
+        <ol class="step-list">
+            <li id="section-what"><strong>Define the problem.</strong> Establish what happened, where and when, and how
+                it differed from what was expected. Build a timeline without assuming a cause.
+            </li>
+            <li id="section-psychological"><strong>Gather evidence with the people involved.</strong> Review records,
+                observe work and listen across team boundaries. Make it safe to explain what made sense at the time.
+            </li>
+            <li><strong>Choose a useful tool.</strong> Use a fishbone to organise possible contributors, <a
+                    href="five-whys.html">5 Whys</a> to explore a causal path, or specialist analysis where the risk and
+                question justify it.
+            </li>
+            <li id="section-system"><strong>Check explanations.</strong> Separate observations, assumptions and
+                unanswered questions. Look for supporting and conflicting evidence. Branch when several contributors are
+                plausible; pause when information is missing.<p style="margin-top:12px"><strong>Have we stopped at the
+                    obvious explanation?</strong> “Someone made a mistake” or “the procedure wasn’t followed” may
+                    describe what happened without explaining the conditions behind it. Would another person face the
+                    same difficulty? <a href="joiner-levels-of-fix.html">Explore Joiner’s levels of fix →</a> Follow the
+                    evidence—not a prescribed level or a search for someone to blame. Remember to think about the
+                    systems conditions that might have been the deep root causes - <a
+                            href="why-improvements-fail.html#system-conditions">
+                        See - What are system conditions? → </a></p></li>
+            <li><strong>Choose and test a change.</strong> Address a supported explanation. Agree responsibilities,
+                expected effects, measures and a review date. Check implementation and possible harm, then adapt.
+            </li>
+        </ol>
+        <p id="section-when"><strong>Respond according to risk—not a count of occurrences.</strong> Serious concerns may
+            warrant action and investigation after one event. Three occurrences do not confirm common-cause variation.
+        </p></section>
+    <section id="diagrams-and-templates"><h2>Diagrams and templates</h2>
+        <p>Open only what you need. Full-size views and SVG downloads are built into this page. The examples are
+            <strong>illustrative hypotheses, not verified incident findings or clinical recommendations</strong>.</p>
+        <details class="conditions resource" id="section-blank">
+            <summary>Blank fishbone template</summary>
+            <div class="conditions-body"><p>Put a specific problem in the head box. Add possible contributors to the
+                branches; adapt the categories to the work. Mark what is supported, assumed or unknown and assign
+                evidence checks.</p>
+                <figure>
+                    <p class="diagram-actions">
+                        <button class="text-button" data-open-diagram="diagram-1" type="button">Open full-size diagram
+                        </button>
+                        · <a data-download-diagram="diagram-1" download="blank-fishbone-template.svg"
+                             href="#section-blank">Download SVG</a></p>
+                    <div class="diagram-overview">
+                        <svg id="diagram-1" role="img" tabindex="0" viewBox="0 0 720 340" width="100%"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <title>Blank fishbone root cause analysis diagram template with six categories</title>
+                            <defs>
+                                <marker id="arrowf" markerHeight="5" markerWidth="5" orient="auto" refX="8"
+                                        refY="5" viewBox="0 0 10 10">
+                                    <path d="M2 1L8 5L2 9" fill="none" stroke="#185FA5" stroke-linecap="round"
+                                          stroke-linejoin="round" stroke-width="1.5"/>
+                                </marker>
+                            </defs>
+
+                            <line marker-end="url(#arrowf)" stroke="#185FA5" stroke-width="2.5" x1="60" x2="620" y1="170"
+                                  y2="170"/>
+
+                            <rect fill="#001a3a" height="64" rx="8" stroke="#185FA5" stroke-width="1.5" width="90" x="622"
+                                  y="138"/>
+                            <text fill="white" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="667" y="163">Problem
+                            </text>
+                            <text fill="#94b8d4" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle" x="667"
+                                  y="179">(effect)
+                            </text>
+                            <text fill="#94b8d4" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="667"
+                                  y="194">write here
+                            </text>
+
+                            <line stroke="#185FA5" stroke-width="1.8" x1="160" x2="210" y1="170" y2="80"/>
+                            <rect fill="#E6F1FB" height="40" rx="6" stroke="#185FA5" stroke-width="1.2" width="110" x="105"
+                                  y="44"/>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle"
+                                  x="160" y="60">People
+                            </text>
+                            <text fill="#185FA5" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="160"
+                                  y="76">skills &middot; training &middot; fatigue
+                            </text>
+                            <line stroke="#185FA5" stroke-dasharray="3 2" stroke-width="1" x1="175" x2="205" y1="138"
+                                  y2="108"/>
+                            <line stroke="#185FA5" stroke-dasharray="3 2" stroke-width="1" x1="185" x2="207" y1="150"
+                                  y2="124"/>
+
+                            <line stroke="#0F6E56" stroke-width="1.8" x1="340" x2="390" y1="170" y2="80"/>
+                            <rect fill="#E1F5EE" height="40" rx="6" stroke="#0F6E56" stroke-width="1.2" width="110" x="285"
+                                  y="44"/>
+                            <text fill="#085041" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle"
+                                  x="340" y="60">Process
+                            </text>
+                            <text fill="#0F6E56" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="340"
+                                  y="76">method &middot; steps &middot; protocol
+                            </text>
+                            <line stroke="#0F6E56" stroke-dasharray="3 2" stroke-width="1" x1="355" x2="385" y1="138"
+                                  y2="108"/>
+                            <line stroke="#0F6E56" stroke-dasharray="3 2" stroke-width="1" x1="365" x2="387" y1="150"
+                                  y2="124"/>
+
+                            <line stroke="#BA7517" stroke-width="1.8" x1="510" x2="560" y1="170" y2="80"/>
+                            <rect fill="#FAEEDA" height="40" rx="6" stroke="#BA7517" stroke-width="1.2" width="110" x="455"
+                                  y="44"/>
+                            <text fill="#633806" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle"
+                                  x="510" y="60">Equipment
+                            </text>
+                            <text fill="#BA7517" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="510"
+                                  y="76">tools &middot; devices &middot; systems
+                            </text>
+                            <line stroke="#BA7517" stroke-dasharray="3 2" stroke-width="1" x1="525" x2="555" y1="138"
+                                  y2="108"/>
+                            <line stroke="#BA7517" stroke-dasharray="3 2" stroke-width="1" x1="535" x2="557" y1="150"
+                                  y2="124"/>
+
+                            <line stroke="#534AB7" stroke-width="1.8" x1="160" x2="210" y1="170" y2="260"/>
+                            <rect fill="#EEEDFE" height="40" rx="6" stroke="#534AB7" stroke-width="1.2" width="110" x="105"
+                                  y="256"/>
+                            <text fill="#3C3489" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle"
+                                  x="160" y="272">Environment
+                            </text>
+                            <text fill="#534AB7" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="160"
+                                  y="288">culture &middot; place &middot; workload
+                            </text>
+                            <line stroke="#534AB7" stroke-dasharray="3 2" stroke-width="1" x1="175" x2="205" y1="202"
+                                  y2="232"/>
+                            <line stroke="#534AB7" stroke-dasharray="3 2" stroke-width="1" x1="185" x2="207" y1="190"
+                                  y2="216"/>
+
+                            <line stroke="#5F5E5A" stroke-width="1.8" x1="340" x2="390" y1="170" y2="260"/>
+                            <rect fill="#F1EFE8" height="40" rx="6" stroke="#5F5E5A" stroke-width="1.2" width="110" x="285"
+                                  y="256"/>
+                            <text fill="#2C2C2A" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle"
+                                  x="340" y="272">Materials
+                            </text>
+                            <text fill="#5F5E5A" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="340"
+                                  y="288">supplies · information
+                            </text>
+                            <line stroke="#5F5E5A" stroke-dasharray="3 2" stroke-width="1" x1="355" x2="385" y1="202"
+                                  y2="232"/>
+                            <line stroke="#5F5E5A" stroke-dasharray="3 2" stroke-width="1" x1="365" x2="387" y1="190"
+                                  y2="216"/>
+
+                            <line stroke="#c0392b" stroke-width="1.8" x1="510" x2="560" y1="170" y2="260"/>
+                            <rect fill="#FDECEA" height="40" rx="6" stroke="#c0392b" stroke-width="1.2" width="110" x="455"
+                                  y="256"/>
+                            <text fill="#a02020" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle"
+                                  x="510" y="272">Management
+                            </text>
+                            <text fill="#c0392b" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="510"
+                                  y="288">policy · oversight
+                            </text>
+                            <line stroke="#c0392b" stroke-dasharray="3 2" stroke-width="1" x1="525" x2="555" y1="202"
+                                  y2="232"/>
+                            <line stroke="#c0392b" stroke-dasharray="3 2" stroke-width="1" x1="535" x2="557" y1="190"
+                                  y2="216"/>
+
+                            <text fill="#5F5E5A" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle" x="40"
+                                  y="174">causes
+                            </text>
+                        </svg>
+                    </div>
+                    <figcaption>Six adaptable categories. Download to print or edit in a compatible vector editor; this
+                        is not an online fill-in form.
+                    </figcaption>
+                </figure>
+            </div>
+        </details>
+        <details class="conditions resource" id="section-fishbone">
+            <summary>How a fishbone diagram works</summary>
+            <div class="conditions-body"><p>Branches group possible contributors across people, processes, equipment,
+                environment, management and materials. They are prompts—not a ranking of importance. A factor may belong
+                in more than one category.</p>
+                <figure>
+                    <p class="diagram-actions">
+                        <button class="text-button" data-open-diagram="diagram-0" type="button">Open full-size diagram
+                        </button>
+                        · <a data-download-diagram="diagram-0" download="fishbone-categories.svg" href="#section-blank">Download
+                        SVG</a></p>
+                    <div class="diagram-overview">
+                        <svg font-family="system-ui,sans-serif" id="diagram-0" tabindex="0" viewBox="0 0 720 320"
+                             width="100%" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Spine -->
+                            <line stroke="#002d5b" stroke-width="3" x1="80" x2="620" y1="160" y2="160"/>
+                            <!-- Problem box -->
+                            <rect fill="#002d5b" height="60" rx="6" width="90" x="620" y="130"/>
+                            <text fill="white" font-size="10" font-weight="700" text-anchor="middle" x="665" y="153">
+                                PROBLEM
+                            </text>
+                            <text fill="white" font-size="10" font-weight="700" text-anchor="middle" x="665" y="167">
+                                STATEMENT
+                            </text>
+                            <text fill="#93c5fd" font-size="9" text-anchor="middle" x="665" y="181">Effect</text>
+                            <!-- Arrow head -->
+                            <polygon fill="#002d5b" points="618,155 608,148 608,162"/>
+
+                            <!-- Top branches -->
+                            <line stroke="#0e7490" stroke-width="2.5" x1="180" x2="240" y1="160" y2="80"/>
+                            <rect fill="#f0fdfa" height="32" rx="5" stroke="#0e7490" stroke-width="2" width="90" x="148"
+                                  y="55"/>
+                            <text fill="#0e7490" font-size="11" font-weight="700" text-anchor="middle" x="193" y="68">
+                                People
+                            </text>
+                            <text fill="#0e7490" font-size="9" text-anchor="middle" x="193" y="82">Skills, staffing
+                            </text>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="200" x2="240" y1="135" y2="110"/>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="220" x2="240" y1="148" y2="130"/>
+
+                            <line stroke="#198754" stroke-width="2.5" x1="340" x2="380" y1="160" y2="80"/>
+                            <rect fill="#f0fdf4" height="32" rx="5" stroke="#198754" stroke-width="2" width="90" x="308"
+                                  y="55"/>
+                            <text fill="#198754" font-size="11" font-weight="700" text-anchor="middle" x="353" y="68">
+                                Process
+                            </text>
+                            <text fill="#198754" font-size="9" text-anchor="middle" x="353" y="82">Steps, procedures
+                            </text>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="355" x2="380" y1="135" y2="110"/>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="365" x2="380" y1="148" y2="130"/>
+
+                            <line stroke="#7c3aed" stroke-width="2.5" x1="500" x2="530" y1="160" y2="80"/>
+                            <rect fill="#faf5ff" height="32" rx="5" stroke="#7c3aed" stroke-width="2" width="90" x="468"
+                                  y="55"/>
+                            <text fill="#7c3aed" font-size="11" font-weight="700" text-anchor="middle" x="513" y="68">
+                                Equipment
+                            </text>
+                            <text fill="#7c3aed" font-size="9" text-anchor="middle" x="513" y="82">Tools, technology
+                            </text>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="510" x2="530" y1="135" y2="110"/>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="518" x2="530" y1="148" y2="130"/>
+
+                            <!-- Bottom branches -->
+                            <line stroke="#e67e22" stroke-width="2.5" x1="180" x2="240" y1="160" y2="240"/>
+                            <rect fill="#fff8f0" height="32" rx="5" stroke="#e67e22" stroke-width="2" width="90" x="148"
+                                  y="235"/>
+                            <text fill="#e67e22" font-size="11" font-weight="700" text-anchor="middle" x="193" y="248">
+                                Environment
+                            </text>
+                            <text fill="#e67e22" font-size="9" text-anchor="middle" x="193" y="262">Workplace, culture
+                            </text>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="200" x2="240" y1="185" y2="210"/>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="220" x2="240" y1="172" y2="192"/>
+
+                            <line stroke="#c0392b" stroke-width="2.5" x1="340" x2="380" y1="160" y2="240"/>
+                            <rect fill="#fff5f5" height="32" rx="5" stroke="#c0392b" stroke-width="2" width="90" x="308"
+                                  y="235"/>
+                            <text fill="#c0392b" font-size="11" font-weight="700" text-anchor="middle" x="353" y="248">
+                                Management
+                            </text>
+                            <text fill="#c0392b" font-size="9" text-anchor="middle" x="353" y="262">Rules, resources
+                            </text>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="355" x2="380" y1="185" y2="210"/>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="365" x2="380" y1="172" y2="192"/>
+
+                            <line stroke="#0056b3" stroke-width="2.5" x1="500" x2="530" y1="160" y2="240"/>
+                            <rect fill="#e9f2ff" height="32" rx="5" stroke="#0056b3" stroke-width="2" width="90" x="468"
+                                  y="235"/>
+                            <text fill="#0056b3" font-size="11" font-weight="700" text-anchor="middle" x="513" y="248">
+                                Materials
+                            </text>
+                            <text fill="#0056b3" font-size="9" text-anchor="middle" x="513" y="262">Supplies, data
+                            </text>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="510" x2="530" y1="185" y2="210"/>
+                            <line stroke="#94a3b8" stroke-width="1.5" x1="518" x2="530" y1="172" y2="192"/>
+
+                            <text fill="#64748b" font-size="10" text-anchor="middle" x="70" y="155">Start</text>
+                            <text fill="#64748b" font-size="10" text-anchor="middle" x="70" y="168">here</text>
+
+                            <text fill="#002d5b" font-size="12" font-weight="700" text-anchor="middle" x="360" y="16">
+                                Fishbone (Ishikawa) Diagram &mdash; Example Categories
+                            </text>
+                            <text fill="#64748b" font-size="10" text-anchor="middle" x="360" y="30">Each branch is a
+                                category of potential causes. Sub-bones are specific causes within that category.
+                            </text>
+
+                            <text fill="#64748b" font-size="9" x="80" y="305">&#9650; Top branches: above the spine
+                                &nbsp;&nbsp; &#9660; Bottom branches: below the spine &nbsp;&nbsp; Each sub-bone is a
+                                specific hypothesis to investigate
+                            </text>
+                        </svg>
+                    </div>
+                    <figcaption>Each sub-branch is a possible contributor to investigate, not an established cause.
+                    </figcaption>
+                </figure>
+            </div>
+        </details>
+        <details class="conditions resource" id="section-example1">
+            <summary>Worked example: wrong-route medication event</summary>
+            <div class="conditions-body">
+                <figure>
+                    <p class="diagram-actions">
+                        <button class="text-button" data-open-diagram="diagram-2" type="button">Open full-size diagram
+                        </button>
+                        · <a data-download-diagram="diagram-2" download="fishbone-medication-example.svg"
+                             href="#section-blank">Download SVG</a></p>
+                    <div class="diagram-overview">
+                        <svg id="diagram-2" role="img" tabindex="0" viewBox="0 0 720 360" width="100%"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <title>Completed fishbone diagram for wrong-route medication never event</title>
+                            <line stroke="#c0392b" stroke-width="2.5" x1="60" x2="610" y1="180" y2="180"/>
+                            <polygon fill="#c0392b" points="608,174 622,180 608,186"/>
+                            <rect fill="#c0392b" height="64" rx="8" stroke="#8b1a1a" stroke-width="1.5" width="90" x="622"
+                                  y="148"/>
+                            <text fill="white" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="middle"
+                                  x="667" y="171">Wrong-route
+                            </text>
+                            <text fill="white" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle" x="667"
+                                  y="185">medication
+                            </text>
+                            <text fill="white" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle" x="667"
+                                  y="199">administered
+                            </text>
+
+                            <line stroke="#185FA5" stroke-width="1.8" x1="155" x2="195" y1="180" y2="95"/>
+                            <rect fill="#E6F1FB" height="48" rx="6" stroke="#185FA5" stroke-width="1.2" width="130" x="95"
+                                  y="52"/>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="160" y="71">People
+                            </text>
+                            <text fill="#185FA5" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="160"
+                                  y="86">Locum unfamiliar with ward
+                            </text>
+                            <text fill="#185FA5" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="160"
+                                  y="98">Tired end of shift
+                            </text>
+                            <line stroke="#185FA5" stroke-dasharray="3 2" stroke-width="1" x1="168" x2="192" y1="148"
+                                  y2="120"/>
+                            <line stroke="#185FA5" stroke-dasharray="3 2" stroke-width="1" x1="178" x2="194" y1="160"
+                                  y2="134"/>
+
+                            <line stroke="#0F6E56" stroke-width="1.8" x1="340" x2="380" y1="180" y2="95"/>
+                            <rect fill="#E1F5EE" height="48" rx="6" stroke="#0F6E56" stroke-width="1.2" width="145" x="270"
+                                  y="52"/>
+                            <text fill="#085041" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="342" y="71">Process
+                            </text>
+                            <text fill="#0F6E56" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="342"
+                                  y="86">No independent check required
+                            </text>
+                            <text fill="#0F6E56" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="342"
+                                  y="98">Verbal handover only
+                            </text>
+                            <line stroke="#0F6E56" stroke-dasharray="3 2" stroke-width="1" x1="352" x2="378" y1="148"
+                                  y2="120"/>
+                            <line stroke="#0F6E56" stroke-dasharray="3 2" stroke-width="1" x1="362" x2="379" y1="160"
+                                  y2="134"/>
+
+                            <line stroke="#BA7517" stroke-width="1.8" x1="510" x2="550" y1="180" y2="95"/>
+                            <rect fill="#FAEEDA" height="48" rx="6" stroke="#BA7517" stroke-width="1.2" width="145" x="445"
+                                  y="52"/>
+                            <text fill="#633806" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="517" y="71">Equipment
+                            </text>
+                            <text fill="#BA7517" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="517"
+                                  y="86">Similar connector design
+                            </text>
+                            <text fill="#BA7517" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="517"
+                                  y="98">No NRFit connector fitted
+                            </text>
+                            <line stroke="#BA7517" stroke-dasharray="3 2" stroke-width="1" x1="522" x2="548" y1="148"
+                                  y2="120"/>
+                            <line stroke="#BA7517" stroke-dasharray="3 2" stroke-width="1" x1="532" x2="549" y1="160"
+                                  y2="134"/>
+
+                            <line stroke="#534AB7" stroke-width="1.8" x1="155" x2="195" y1="180" y2="265"/>
+                            <rect fill="#EEEDFE" height="48" rx="6" stroke="#534AB7" stroke-width="1.2" width="140" x="90"
+                                  y="262"/>
+                            <text fill="#3C3489" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="160" y="281">Environment
+                            </text>
+                            <text fill="#534AB7" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="160"
+                                  y="296">High pressure, busy ward
+                            </text>
+                            <text fill="#534AB7" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="160"
+                                  y="308">Poor lighting in bay
+                            </text>
+                            <line stroke="#534AB7" stroke-dasharray="3 2" stroke-width="1" x1="168" x2="192" y1="212"
+                                  y2="240"/>
+                            <line stroke="#534AB7" stroke-dasharray="3 2" stroke-width="1" x1="178" x2="194" y1="200"
+                                  y2="226"/>
+
+                            <line stroke="#c0392b" stroke-width="1.8" x1="510" x2="550" y1="180" y2="265"/>
+                            <rect fill="#FDECEA" height="48" rx="6" stroke="#c0392b" stroke-width="1.2" width="155" x="440"
+                                  y="262"/>
+                            <text fill="#a02020" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="517" y="281">Management
+                            </text>
+                            <text fill="#c0392b" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="517"
+                                  y="296">NRFit rollout incomplete
+                            </text>
+                            <text fill="#c0392b" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="517"
+                                  y="308">No mandatory double-check policy
+                            </text>
+                            <line stroke="#c0392b" stroke-dasharray="3 2" stroke-width="1" x1="522" x2="548" y1="212"
+                                  y2="240"/>
+                            <line stroke="#c0392b" stroke-dasharray="3 2" stroke-width="1" x1="532" x2="549" y1="200"
+                                  y2="226"/>
+
+                            <text fill="#5F5E5A" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="36"
+                                  y="184">causes
+                            </text>
+                        </svg>
+                    </div>
+                    <figcaption>Possible contributors span familiarity, checking, equipment, workload and oversight. No
+                        branch establishes a root cause.
+                    </figcaption>
+                </figure>
+                <p><strong>Investigate:</strong> reconstruct the sequence using records and accounts. Check the actual
+                    equipment, safeguards, information and working conditions. Do not infer a policy failure from the
+                    event alone.</p>
+                <p><strong>Test:</strong> use appropriate clinical and safety expertise to develop a safeguard for a
+                    supported vulnerability. Check reliable use, remaining risks and unintended effects.</p></div>
+        </details>
+        <details class="conditions resource" id="section-example2">
+            <summary>Worked example: delayed discharge</summary>
+            <div class="conditions-body">
+                <figure>
+                    <p class="diagram-actions">
+                        <button class="text-button" data-open-diagram="diagram-3" type="button">Open full-size diagram
+                        </button>
+                        · <a data-download-diagram="diagram-3" download="fishbone-discharge-example.svg"
+                             href="#section-blank">Download SVG</a></p>
+                    <div class="diagram-overview">
+                        <svg id="diagram-3" role="img" tabindex="0" viewBox="0 0 720 360" width="100%"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <title>Completed fishbone diagram for delayed hospital discharge</title>
+                            <line stroke="#0F6E56" stroke-width="2.5" x1="60" x2="610" y1="180" y2="180"/>
+                            <polygon fill="#0F6E56" points="608,174 622,180 608,186"/>
+                            <rect fill="#0F6E56" height="64" rx="8" stroke="#085041" stroke-width="1.5" width="90" x="622"
+                                  y="148"/>
+                            <text fill="white" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="middle"
+                                  x="667" y="168">Discharge
+                            </text>
+                            <text fill="white" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle" x="667"
+                                  y="182">delayed beyond
+                            </text>
+                            <text fill="white" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle" x="667"
+                                  y="196">clinical date
+                            </text>
+
+                            <line stroke="#185FA5" stroke-width="1.8" x1="155" x2="195" y1="180" y2="95"/>
+                            <rect fill="#E6F1FB" height="48" rx="6" stroke="#185FA5" stroke-width="1.2" width="145" x="90"
+                                  y="52"/>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="162" y="71">People
+                            </text>
+                            <text fill="#185FA5" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="162"
+                                  y="86">Family not involved in planning
+                            </text>
+                            <text fill="#185FA5" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="162"
+                                  y="98">No named coordinator
+                            </text>
+                            <line stroke="#185FA5" stroke-dasharray="3 2" stroke-width="1" x1="168" x2="192" y1="148"
+                                  y2="120"/>
+
+                            <line stroke="#534AB7" stroke-width="1.8" x1="340" x2="380" y1="180" y2="95"/>
+                            <rect fill="#EEEDFE" height="48" rx="6" stroke="#534AB7" stroke-width="1.2" width="152" x="268"
+                                  y="52"/>
+                            <text fill="#3C3489" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="344" y="71">Process
+                            </text>
+                            <text fill="#534AB7" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="344"
+                                  y="86">No EDD set at admission
+                            </text>
+                            <text fill="#534AB7" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="344"
+                                  y="98">Ward round after midday
+                            </text>
+                            <line stroke="#534AB7" stroke-dasharray="3 2" stroke-width="1" x1="352" x2="378" y1="148"
+                                  y2="120"/>
+
+                            <line stroke="#BA7517" stroke-width="1.8" x1="510" x2="550" y1="180" y2="95"/>
+                            <rect fill="#FAEEDA" height="48" rx="6" stroke="#BA7517" stroke-width="1.2" width="150" x="443"
+                                  y="52"/>
+                            <text fill="#633806" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="518" y="71">System boundary
+                            </text>
+                            <text fill="#BA7517" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="518"
+                                  y="86">Social care package not arranged
+                            </text>
+                            <text fill="#BA7517" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="518"
+                                  y="98">No Transfer of Care Hub
+                            </text>
+                            <line stroke="#BA7517" stroke-dasharray="3 2" stroke-width="1" x1="522" x2="548" y1="148"
+                                  y2="120"/>
+
+                            <line stroke="#5F5E5A" stroke-width="1.8" x1="155" x2="195" y1="180" y2="265"/>
+                            <rect fill="#F1EFE8" height="48" rx="6" stroke="#5F5E5A" stroke-width="1.2" width="150" x="87"
+                                  y="262"/>
+                            <text fill="#2C2C2A" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="162" y="281">Environment
+                            </text>
+                            <text fill="#5F5E5A" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="162"
+                                  y="296">Beds needed, pressure to fill
+                            </text>
+                            <text fill="#5F5E5A" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="162"
+                                  y="308">Red/Green system not in use
+                            </text>
+                            <line stroke="#5F5E5A" stroke-dasharray="3 2" stroke-width="1" x1="168" x2="192" y1="212"
+                                  y2="240"/>
+
+                            <line stroke="#c0392b" stroke-width="1.8" x1="510" x2="550" y1="180" y2="265"/>
+                            <rect fill="#FDECEA" height="48" rx="6" stroke="#c0392b" stroke-width="1.2" width="162" x="437"
+                                  y="262"/>
+                            <text fill="#a02020" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle"
+                                  x="518" y="281">Management
+                            </text>
+                            <text fill="#c0392b" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="518"
+                                  y="296">No criteria-led discharge policy
+                            </text>
+                            <text fill="#c0392b" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="518"
+                                  y="308">Discharge not owned at exec level
+                            </text>
+                            <line stroke="#c0392b" stroke-dasharray="3 2" stroke-width="1" x1="522" x2="548" y1="212"
+                                  y2="240"/>
+
+                            <text fill="#5F5E5A" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle" x="36"
+                                  y="184">causes
+                            </text>
+                        </svg>
+                    </div>
+                    <figcaption>Possible contributors span the hospital and receiving services. The absence of a named
+                        organisational model does not establish the cause.
+                    </figcaption>
+                </figure>
+                <p><strong>Investigate:</strong> build a timeline of readiness, decisions, medication, transport and
+                    support arrangements. Compare cases and involve receiving services; do not assume all delay is
+                    internal—or external.</p>
+                <p><strong>Test:</strong> address a supported source of waiting. Check safety, readmissions, workload
+                    and effects on receiving services alongside discharge time.</p></div>
+        </details>
+        <details class="conditions resource" id="section-five-whys">
+            <summary>A 5 Whys diagram: one possible path</summary>
+            <div class="conditions-body">
+                <figure>
+                    <p class="diagram-actions">
+                        <button class="text-button" data-open-diagram="diagram-4" type="button">Open full-size diagram
+                        </button>
+                        · <a data-download-diagram="diagram-4" download="five-whys-medication-example.svg"
+                             href="#section-blank">Download SVG</a></p>
+                    <div class="diagram-overview">
+                        <svg id="diagram-4" role="img" tabindex="0" viewBox="0 0 680 180" width="100%"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <title>5 Whys diagram showing chain from problem to root cause</title>
+                            <defs>
+                                <marker id="arrow5" markerHeight="5" markerWidth="5" orient="auto" refX="8"
+                                        refY="5" viewBox="0 0 10 10">
+                                    <path d="M2 1L8 5L2 9" fill="none" stroke="#185FA5" stroke-width="1.5"/>
+                                </marker>
+                            </defs>
+
+                            <rect fill="#FDECEA" height="50" rx="6" stroke="#c0392b" stroke-width="1.2" width="100" x="5"
+                                  y="65"/>
+                            <text fill="#a02020" font-family="system-ui,sans-serif" font-size="9" font-weight="700" text-anchor="middle"
+                                  x="55" y="85">Problem
+                            </text>
+                            <text fill="#c0392b" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="55"
+                                  y="99">Wrong-route
+                            </text>
+                            <text fill="#c0392b" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="55"
+                                  y="110">medication
+                            </text>
+
+                            <line marker-end="url(#arrow5)" stroke="#185FA5" stroke-width="1.5" x1="106" x2="126" y1="90"
+                                  y2="90"/>
+                            <text fill="#185FA5" font-family="system-ui,sans-serif" font-size="7" text-anchor="middle" x="116"
+                                  y="84">Why?
+                            </text>
+
+                            <rect fill="#E6F1FB" height="50" rx="6" stroke="#185FA5" stroke-width="1.2" width="110" x="128"
+                                  y="65"/>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="183"
+                                  y="85">Spinal and IV
+                            </text>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="183"
+                                  y="97">connectors look
+                            </text>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="183"
+                                  y="109">the same
+                            </text>
+
+                            <line marker-end="url(#arrow5)" stroke="#185FA5" stroke-width="1.5" x1="239" x2="259" y1="90"
+                                  y2="90"/>
+                            <text fill="#185FA5" font-family="system-ui,sans-serif" font-size="7" text-anchor="middle" x="249"
+                                  y="84">Why?
+                            </text>
+
+                            <rect fill="#E6F1FB" height="50" rx="6" stroke="#185FA5" stroke-width="1.2" width="110" x="261"
+                                  y="65"/>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="316"
+                                  y="85">NRFit connectors
+                            </text>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="316"
+                                  y="97">not fitted on this
+                            </text>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="316"
+                                  y="109">ward
+                            </text>
+
+                            <line marker-end="url(#arrow5)" stroke="#185FA5" stroke-width="1.5" x1="372" x2="392" y1="90"
+                                  y2="90"/>
+                            <text fill="#185FA5" font-family="system-ui,sans-serif" font-size="7" text-anchor="middle" x="382"
+                                  y="84">Why?
+                            </text>
+
+                            <rect fill="#E6F1FB" height="50" rx="6" stroke="#185FA5" stroke-width="1.2" width="110" x="394"
+                                  y="65"/>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="449"
+                                  y="85">Rollout programme
+                            </text>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="449"
+                                  y="97">not completed
+                            </text>
+                            <text fill="#0C447C" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="449"
+                                  y="109">trust-wide
+                            </text>
+
+                            <line marker-end="url(#arrow5)" stroke="#185FA5" stroke-width="1.5" x1="505" x2="525" y1="90"
+                                  y2="90"/>
+                            <text fill="#185FA5" font-family="system-ui,sans-serif" font-size="7" text-anchor="middle" x="515"
+                                  y="84">Why?
+                            </text>
+
+                            <rect fill="#001a3a" height="70" rx="6" stroke="#185FA5" stroke-width="1.5" width="148" x="527"
+                                  y="55"/>
+                            <text fill="white" font-family="system-ui,sans-serif" font-size="9" font-weight="700" text-anchor="middle"
+                                  x="601" y="78">To check
+                            </text>
+                            <text fill="#94b8d4" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="601"
+                                  y="92">No executive
+                            </text>
+                            <text fill="#94b8d4" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="601"
+                                  y="104">accountable for
+                            </text>
+                            <text fill="#94b8d4" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle" x="601"
+                                  y="116">NRFit completion
+                            </text>
+                        </svg>
+                    </div>
+                    <figcaption>Check every arrow and branch for other contributors. Executive accountability is a
+                        hypothesis, not a conclusion.
+                    </figcaption>
+                </figure>
+                <p>Five is a prompt, not a guaranteed route to one root cause. Use the <a
+                        href="five-whys.html#section-example">5 Whys guide</a> for a non-clinical example with evidence
+                    checks.</p></div>
+        </details>
+    </section>
+    <section id="section-tools"><h2>When another approach helps</h2>
+        <p>A timeline or process map can establish the sequence. <a href="causal-loop-diagrams.html">Feedback loops</a>
+            help explore how consequences sustain a pattern. For specialist safety investigations, follow the applicable
+            framework and use trained support, such as the relevant <a href="psirf-analytical-framework.html">PSIRF
+                approach</a>.</p>
+        <details class="conditions resource" id="section-fault-tree">
+            <summary>Optional: fault tree logic</summary>
+            <div class="conditions-body"><p>Fault trees examine combinations of conditions behind a defined failure. An
+                <strong>OR</strong> gate means any modelled condition can produce the event; an <strong>AND</strong>
+                gate requires the specified conditions together. Check other pathways and dependencies. Do not assume
+                the model is exhaustive or multiply probabilities without justifying the assumptions.</p></div>
+        </details>
+    </section>
+    <section id="section-verify"><h2>Test the response—not just the explanation</h2>
+        <span id="section-necessary"></span><span id="section-structural-fix"></span>
+        <p>Agree what should change, by roughly how much and when. Check whether the intervention is being used and
+            measure both the intended result and possible harm elsewhere.</p>
+        <p>A suitable chart or Bootstrap CUSUM analysis may identify a performance change. <strong>It does not, by
+            itself, confirm the cause or prove the intervention worked.</strong> Consider implementation, data quality,
+            timing and alternative explanations. No detected change is not automatically proof of no benefit.</p>
+        <a class="more" href="why-improvements-fail.html#right-intervention">Right intervention? →</a><br><a
+                class="more" href="why-improvements-fail.html#right-measures">Right measures? →</a></section>
+    <section id="section-nhs"><h2>Complementary tools—not mandatory stages</h2>
+        <p><a href="systems-thinking.html">Systems thinking</a> examines parts and relationships; RCA investigates
+            contributors with evidence; <a href="five-whys.html">5 Whys</a> explores a particular causal path; <a
+                    href="causal-loop-diagrams.html">feedback loops</a> examine how consequences return to influence
+            what happens next.</p>
+        <a class="more" href="why-improvements-fail.html#right-problem">Return to Right problem? →</a></section>
+</main>
+<dialog aria-labelledby="viewer-title" class="diagram-viewer" id="diagram-viewer">
+    <div class="viewer-top"><h2 id="viewer-title">Full-size diagram</h2>
+        <button id="close-viewer" type="button">Close</button>
+    </div>
+    <p class="viewer-help">Scroll sideways or down to explore the diagram at a readable size.</p>
+    <div aria-label="Scrollable full-size diagram" class="viewer-canvas" role="region" tabindex="0"></div>
+    <a class="viewer-download" download>Download this diagram as SVG</a></dialog>
+<div id="site-footer"></div>
+<script src="assets/site-chrome.js"></script>
+<script>
+    (function () {
+        const viewer = document.getElementById('diagram-viewer');
+        const files = new Map();
+        document.querySelectorAll('svg[id^="diagram-"]').forEach(svg => {
+            const clone = svg.cloneNode(true);
+            clone.removeAttribute('id');
+            clone.removeAttribute('tabindex');
+            clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            clone.setAttribute('width', '1260');
+            const vb = svg.viewBox.baseVal;
+            clone.setAttribute('height', String(Math.round(1260 * vb.height / vb.width)));
+            const url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)], {type: 'image/svg+xml;charset=utf-8'}));
+            const a = document.querySelector('[data-download-diagram="' + svg.id + '"]');
+            a.href = url;
+            files.set(svg.id, {url, name: a.download});
+        });
+        document.querySelectorAll('[data-open-diagram]').forEach(button => button.addEventListener('click', () => {
+            const id = button.dataset.openDiagram;
+            const original = document.getElementById(id);
+            const copy = original.cloneNode(true);
+            copy.removeAttribute('id');
+            const renamed = new Map();
+            copy.querySelectorAll('[id]').forEach(el => {
+                renamed.set(el.id, 'viewer-' + el.id);
+                el.id = 'viewer-' + el.id;
+            });
+            copy.querySelectorAll('*').forEach(el => {
+                for (const a of [...el.attributes]) {
+                    let value = a.value;
+                    renamed.forEach((n, o) => {
+                        value = value.replaceAll('url(#' + o + ')', 'url(#' + n + ')');
+                    });
+                    if (value !== a.value) el.setAttribute(a.name, value);
+                }
+            });
+            viewer.querySelector('.viewer-canvas').replaceChildren(copy);
+            const resource = original.closest('details');
+            document.getElementById('viewer-title').textContent = resource.querySelector('summary').textContent;
+            const file = files.get(id);
+            const a = viewer.querySelector('.viewer-download');
+            a.href = file.url;
+            a.download = file.name;
+            viewer.showModal();
+            viewer.querySelector('.viewer-canvas').scrollTo(0, 0);
+        }));
+        document.getElementById('close-viewer').addEventListener('click', () => viewer.close());
+
+        function revealHash() {
+            if (!location.hash) return;
+            const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+            if (!target) return;
+            let node = target;
+            while (node) {
+                if (node.tagName === 'DETAILS') node.open = true;
+                node = node.parentElement;
+            }
+            requestAnimationFrame(() => target.scrollIntoView());
+        }
+
+        addEventListener('hashchange', revealHash);
+        revealHash();
+    })();
+</script>
+</body>
+</html>
