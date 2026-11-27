@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1385" width="1700" height="1385" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" xmlns:c2pa="http://c2pa.org/manifest">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f4d5a"/></marker></defs>
+<rect width="1700" height="1385" fill="#fff"/>
+<text x="50" y="56" font-size="30" font-weight="700" fill="#002d5b">Why leaders struggle with improvement: the capability trap</text>
+<text x="50" y="88" font-size="18" fill="#3f4d5a">How the struggles feed each other, and how the green actions turn the vicious circle into a virtuous one</text>
+<path d="M1036,356 Q1059,363 1151,502" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="1120" cy="456" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="1120" y="462" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M1150,588 Q1057,722 1003,737" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="1024" cy="728" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="1024" y="734" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">−</text>
+<path d="M697,737 Q643,722 550,588" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="582" cy="632" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="582" y="638" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M549,502 Q641,363 664,356" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="654" cy="363" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="654" y="369" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">−</text>
+<text x="850" y="520" font-size="30" font-weight="700" fill="#c0392b" text-anchor="middle">R1</text><text x="850" y="550" font-size="17" fill="#c0392b" text-anchor="middle">The capability trap</text><text x="850" y="573" font-size="14" fill="#64748b" text-anchor="middle">(a vicious circle)</text>
+<path d="M664,262 Q638,257 551,281" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="580" cy="274" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="580" y="280" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M318,358 Q290,369 229,437" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="250" cy="414" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="250" y="420" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">−</text>
+<path d="M284,523 Q347,552 364,551" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="356" cy="551" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="356" y="557" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<text x="335" y="410" font-size="22" font-weight="700" fill="#7f56c2" text-anchor="middle">R2</text><text x="335" y="432" font-size="14" fill="#7f56c2" text-anchor="middle">No one else can do it</text>
+<path d="M296,171 Q518,189 682,244" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="621" cy="225" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="621" y="231" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M1000,193 Q955,225 928,244" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="939" cy="237" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="939" y="243" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M977,244 Q1050,212 1152,257" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="1116" cy="243" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="1116" y="249" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M1152,343 Q1050,388 977,356" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="1004" cy="365" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="1004" y="371" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<text x="1250" y="372" font-size="20" font-weight="700" fill="#7f56c2" text-anchor="middle">R4</text><text x="1250" y="392" font-size="13" fill="#7f56c2" text-anchor="middle">Fixes that fail</text>
+<text x="1250" y="410" font-size="13" font-style="italic" fill="#7f56c2" text-anchor="middle">(problems come back after a delay)</text>
+<path d="M1393,428 Q1337,448 1250,502" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="1280" cy="484" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="1280" y="490" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M1397,697 Q1320,658 1234,588" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="1264" cy="612" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="1264" y="618" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M316,793 Q520,813 694,796" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="630" cy="801" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="630" y="807" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M886,823 Q978,933 1049,954" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="1023" cy="944" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="1023" y="950" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M1049,961 Q850,913 651,961" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="723" cy="947" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="723" y="953" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M651,954 Q722,933 814,823" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="781" cy="860" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="781" y="866" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M1291,984 Q1342,982 1404,936" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="1382" cy="951" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="1382" y="957" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<path d="M1339,840 Q1171,792 1006,786" fill="none" stroke="#3f4d5a" stroke-width="2.4" marker-end="url(#ah)"/>
+<circle cx="1065" cy="790" r="12" fill="#fff" stroke="#3f4d5a" stroke-width="1.5"/><text x="1065" y="796" font-size="18" font-weight="700" fill="#3f4d5a" text-anchor="middle">+</text>
+<text x="1480" y="962" font-size="14" font-style="italic" font-weight="600" fill="#1d9e75" text-anchor="middle">lock in the gains</text>
+<text x="850" y="985" font-size="22" font-weight="700" fill="#1d9e75" text-anchor="middle">R3</text><text x="850" y="1007" font-size="14" fill="#1d9e75" text-anchor="middle">Success breeds success</text><text x="850" y="1027" font-size="14" fill="#64748b" text-anchor="middle">(a virtuous circle)</text>
+<rect x="670.0" y="250.0" width="360" height="100" rx="12" fill="#eef4fa" stroke="#185fa5" stroke-width="2"/>
+<text x="850" y="280.0" font-size="17" font-weight="700" fill="#1f2937" text-anchor="middle">Fire-fighting: rework, delays,</text>
+<text x="850" y="306.0" font-size="17" font-weight="700" fill="#1f2937" text-anchor="middle">struggling with deadlines,</text>
+<text x="850" y="332.0" font-size="17" font-weight="700" fill="#1f2937" text-anchor="middle">inaccurate and missing information</text>
+<rect x="1030.0" y="508.0" width="300" height="74" rx="12" fill="#eef4fa" stroke="#185fa5" stroke-width="2"/>
+<text x="1180" y="538.0" font-size="17" font-weight="700" fill="#1f2937" text-anchor="middle">Time pressure:</text>
+<text x="1180" y="564.0" font-size="17" font-weight="700" fill="#1f2937" text-anchor="middle">no slack</text>
+<rect x="700.0" y="743.0" width="300" height="74" rx="12" fill="#eef4fa" stroke="#185fa5" stroke-width="2"/>
+<text x="850" y="773.0" font-size="17" font-weight="700" fill="#1f2937" text-anchor="middle">Time spent</text>
+<text x="850" y="799.0" font-size="17" font-weight="700" fill="#1f2937" text-anchor="middle">improving</text>
+<rect x="370.0" y="508.0" width="300" height="74" rx="12" fill="#eef4fa" stroke="#185fa5" stroke-width="2"/>
+<text x="520" y="538.0" font-size="17" font-weight="700" fill="#1f2937" text-anchor="middle">Capability: processes,</text>
+<text x="520" y="564.0" font-size="17" font-weight="700" fill="#1f2937" text-anchor="middle">people and skills</text>
+<rect x="315.0" y="278.0" width="230" height="74" rx="12" fill="#f6f1fb" stroke="#7f56c2" stroke-width="2"/>
+<text x="430" y="308.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">&quot;Quicker to do</text>
+<text x="430" y="334.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">it myself&quot;</text>
+<rect x="75.0" y="443.0" width="230" height="74" rx="12" fill="#f6f1fb" stroke="#7f56c2" stroke-width="2"/>
+<text x="190" y="473.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">Delegation and</text>
+<text x="190" y="499.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">written routines</text>
+<rect x="50.0" y="110.0" width="240" height="100" rx="12" fill="#f3f4f6" stroke="#64748b" stroke-width="2"/>
+<text x="170" y="140.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">Variation coming in:</text>
+<text x="170" y="166.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">delays, changes,</text>
+<text x="170" y="192.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">new requests</text>
+<rect x="1390.0" y="348.0" width="240" height="74" rx="12" fill="#f3f4f6" stroke="#64748b" stroke-width="2"/>
+<text x="1510" y="378.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">Belief: keep</text>
+<text x="1510" y="404.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">everyone busy</text>
+<rect x="1360.0" y="703.0" width="240" height="74" rx="12" fill="#f3f4f6" stroke="#64748b" stroke-width="2"/>
+<text x="1480" y="733.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">Wrong market,</text>
+<text x="1480" y="759.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">products or organisation</text>
+<rect x="945.0" y="113.0" width="230" height="74" rx="12" fill="#f6f1fb" stroke="#7f56c2" stroke-width="2"/>
+<text x="1060" y="143.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">Problems hidden:</text>
+<text x="1060" y="169.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">fear, not listening</text>
+<rect x="1135.0" y="263.0" width="230" height="74" rx="12" fill="#f6f1fb" stroke="#7f56c2" stroke-width="2"/>
+<text x="1250" y="293.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">Quick fixes and</text>
+<text x="1250" y="319.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">workarounds</text>
+<rect x="1055.0" y="953.0" width="230" height="74" rx="12" fill="#f6f1fb" stroke="#7f56c2" stroke-width="2"/>
+<text x="1170" y="983.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">Visible results,</text>
+<text x="1170" y="1009.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">measured over time</text>
+<rect x="415.0" y="953.0" width="230" height="74" rx="12" fill="#f6f1fb" stroke="#7f56c2" stroke-width="2"/>
+<text x="530" y="983.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">Belief that</text>
+<text x="530" y="1009.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">improvement pays</text>
+<rect x="70.0" y="743.0" width="240" height="74" rx="12" fill="#f3f4f6" stroke="#64748b" stroke-width="2"/>
+<text x="190" y="773.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">Support from</text>
+<text x="190" y="799.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">bosses</text>
+<rect x="1345.0" y="830.0" width="270" height="100" rx="12" fill="#f6f1fb" stroke="#7f56c2" stroke-width="2"/>
+<text x="1480" y="860.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">Gains built into the</text>
+<text x="1480" y="886.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">conditions: routines,</text>
+<text x="1480" y="912.0" font-size="17" font-weight="400" fill="#1f2937" text-anchor="middle">measures and roles</text>
+<line x1="620" y1="175" x2="760" y2="258" stroke="#1d9e75" stroke-width="1.6" stroke-dasharray="5 4"/>
+<rect x="483" y="145" width="274" height="60" rx="8" fill="#e6f4ef" stroke="#1d9e75" stroke-width="1.6"/>
+<text x="620" y="169" font-size="15" fill="#0f6e56" text-anchor="middle">Limit work in progress; focus</text>
+<text x="620" y="191" font-size="15" fill="#0f6e56" text-anchor="middle">until you see progress</text>
+<line x1="170" y1="268" x2="170" y2="218" stroke="#1d9e75" stroke-width="1.6" stroke-dasharray="5 4"/>
+<rect x="33" y="238" width="274" height="60" rx="8" fill="#e6f4ef" stroke="#1d9e75" stroke-width="1.6"/>
+<text x="170" y="262" font-size="15" fill="#0f6e56" text-anchor="middle">Think prevention (e.g. FMEA);</text>
+<text x="170" y="284" font-size="15" fill="#0f6e56" text-anchor="middle">limit the variation coming in</text>
+<line x1="1340" y1="120" x2="1182" y2="140" stroke="#1d9e75" stroke-width="1.6" stroke-dasharray="5 4"/>
+<rect x="1241" y="90" width="198" height="60" rx="8" fill="#e6f4ef" stroke="#1d9e75" stroke-width="1.6"/>
+<text x="1340" y="114" font-size="15" fill="#0f6e56" text-anchor="middle">Make it safe to</text>
+<text x="1340" y="136" font-size="15" fill="#0f6e56" text-anchor="middle">speak up; go and see</text>
+<line x1="1470" y1="215" x2="1340" y2="268" stroke="#1d9e75" stroke-width="1.6" stroke-dasharray="5 4"/>
+<rect x="1316" y="185" width="308" height="60" rx="8" fill="#e6f4ef" stroke="#1d9e75" stroke-width="1.6"/>
+<text x="1470" y="209" font-size="15" fill="#0f6e56" text-anchor="middle">Quality over speed: fix it</text>
+<text x="1470" y="231" font-size="15" fill="#0f6e56" text-anchor="middle">properly, even if it takes longer</text>
+<line x1="1480" y1="540" x2="1336" y2="545" stroke="#1d9e75" stroke-width="1.6" stroke-dasharray="5 4"/>
+<rect x="1338" y="510" width="283" height="60" rx="8" fill="#e6f4ef" stroke="#1d9e75" stroke-width="1.6"/>
+<text x="1480" y="534" font-size="15" fill="#0f6e56" text-anchor="middle">Create slack deliberately,</text>
+<text x="1480" y="556" font-size="15" fill="#0f6e56" text-anchor="middle">even if it costs more at first</text>
+<line x1="850" y1="665" x2="850" y2="740" stroke="#1d9e75" stroke-width="1.6" stroke-dasharray="5 4"/>
+<rect x="755" y="635" width="190" height="60" rx="8" fill="#e6f4ef" stroke="#1d9e75" stroke-width="1.6"/>
+<text x="850" y="659" font-size="15" fill="#0f6e56" text-anchor="middle">Protect improvement</text>
+<text x="850" y="681" font-size="15" fill="#0f6e56" text-anchor="middle">time first</text>
+<line x1="190" y1="605" x2="190" y2="516" stroke="#1d9e75" stroke-width="1.6" stroke-dasharray="5 4"/>
+<rect x="78" y="575" width="224" height="60" rx="8" fill="#e6f4ef" stroke="#1d9e75" stroke-width="1.6"/>
+<text x="190" y="599" font-size="15" fill="#0f6e56" text-anchor="middle">Write the routine down;</text>
+<text x="190" y="621" font-size="15" fill="#0f6e56" text-anchor="middle">delegate</text>
+<line x1="1170" y1="1074" x2="1170" y2="1034" stroke="#1d9e75" stroke-width="1.6" stroke-dasharray="5 4"/>
+<rect x="1071" y="1044" width="198" height="60" rx="8" fill="#e6f4ef" stroke="#1d9e75" stroke-width="1.6"/>
+<text x="1170" y="1068" font-size="15" fill="#0f6e56" text-anchor="middle">Measure over time;</text>
+<text x="1170" y="1090" font-size="15" fill="#0f6e56" text-anchor="middle">test for real change</text>
+<rect x="80" y="1120" width="1540" height="146" rx="12" fill="#e6f4ef" stroke="#1d9e75" stroke-width="2"/>
+<text x="104" y="1152" font-size="18" font-weight="700" fill="#0f6e56">Feed the virtuous circle (R3)</text>
+<circle cx="112" cy="1175" r="0" fill="none"/>
+<circle cx="112" cy="1175" r="0" fill="none"/>
+<circle cx="112" cy="1175" r="0" fill="none"/>
+<text x="104" y="1180" font-size="15" fill="#0f6e56">&#9679; Use the slack: appoint someone to do the improvement legwork, and help people adapt to new routines</text>
+<text x="104" y="1204" font-size="15" fill="#0f6e56">&#9679; Learn from the past and from outside: bright spots and dark spots. Appoint a remembrancer to record what was learned, and why, in the organisation&#8217;s records, not just people&#8217;s heads</text>
+<text x="104" y="1228" font-size="15" fill="#0f6e56">&#9679; Think long term: improvements take years, and the market keeps changing</text>
+<text x="104" y="1252" font-size="15" fill="#0f6e56">&#9679; Let the improvement helper use AI to draft productivity tools, procedures, checklists and rules, checked with the people who do the work</text>
+<line x1="850" y1="1120" x2="850" y2="1040" stroke="#1d9e75" stroke-width="1.6" stroke-dasharray="5 4"/>
+<rect x="80" y="1283" width="1540" height="44" rx="8" fill="#1d9e75"/>
+<text x="850" y="1312" font-size="19" font-weight="700" fill="#fff" text-anchor="middle">Flip the vicious circle (R1) into a virtuous one (R3): work on the green actions</text>
+<g font-size="14" fill="#3f4d5a"><circle cx="92" cy="1359" r="10" fill="#fff" stroke="#3f4d5a"/><text x="92" y="1364" text-anchor="middle" font-weight="700">+</text><text x="110" y="1364">more leads to more</text><circle cx="292" cy="1359" r="10" fill="#fff" stroke="#3f4d5a"/><text x="292" y="1364" text-anchor="middle" font-weight="700">−</text><text x="310" y="1364">more leads to less</text><rect x="482" y="1349" width="22" height="18" rx="4" fill="#e6f4ef" stroke="#1d9e75"/><text x="512" y="1364">an action that breaks the vicious circle</text><text x="1620" y="1364" text-anchor="end" fill="#64748b">Core loop after Repenning and Sterman (2001) &#183; stepchangeanalysis.com</text></g>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpkYTdmNjliZi1mNTZkLTQxMTUtOTA3ZC00NzcxMTI5NjZjNjAAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaAsETWVKuHkIjQSt4nW0hDwAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDpiOGFmZTI1MS0yMjc2LTQyNjEtOTFlMy00OWI5ODZjM2Q5OTRscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoE0guNgBwFG+C+PU0qQ2W+QAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggYVoWQuvGrOkT3+Au/X0tcEz2Tj9dc3weNh92/hwH7gWkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaGsBbwEzWokad3z0WeIjIS4AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIKTE0rNTqmwQDyQT/r9vpvIjvhG/A9DDypv2h7w5W3a6ZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GUjIZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmRhN2Y2OWJmLWY1NmQtNDExNS05MDdkLTQ3NzExMjk2NmM2MC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjJkNGZlM2ZjLTgxNmYtNGZlZS05NTZiLWQ2MGUxZmEwYTAyNnJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCBhWhZC68as6RPf4C79fS1wTPZOP11zfB42H3b+HAfuBaJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggKl3xU3OKanoA3at8DT72+yul3XVsTHkhfwwiGsBHYKiiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggMPRDTwNqi81o6rP58ZsN2vEA/BwGnkKO34du3w/RWAl0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQM/8AC7+oQRpPSt6yXBKGENgI+KHuopDsFKpnGXB8UkTrp8bS56+e2ByUx7L3Q3ryWkvcZmgu3vlf2ucOarcMAw=</c2pa:manifest></metadata></svg>
